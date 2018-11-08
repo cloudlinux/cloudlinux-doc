@@ -17,7 +17,7 @@ jobs:
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths: node_modules
-  deploy-develop:
+  deploy-dev:
     docker:
       - image: circleci/node:9.11.1
     working_directory: ~/repo
@@ -25,7 +25,7 @@ jobs:
       - checkout
       - add_ssh_keys:  # add SSH key with write access
           fingerprints:
-            - "e6:c1:02:7d:3c:26:12:c4:ed:e3:95:43:46:29:66:0a"
+            - "f6:7e:6e:47:cb:85:ae:02:f5:97:72:bb:37:bd:7e:7f"
       - restore_cache:
           keys:
             - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -34,18 +34,6 @@ jobs:
       - run:
           name: Install dependencies
           command: sudo npm install -g vuepress
-      # - run:
-      #     name: Update Git to use worktree feature
-      #     command: |
-      #       sudo apt-get remove git -y
-      #       sudo apt-get install software-properties-common
-      #       sudo sudo apt-get install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev -y
-      #       cd /tmp
-      #       curl -L --progress https://github.com/git/git/archive/v2.17.0.tar.gz | tar xz
-      #       cd git-2.17.0/
-      #       make configure
-      #       ./configure --prefix=/usr
-      #       sudo make install
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
@@ -54,9 +42,9 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy-develop:
+      - deploy-dev:
           requires:
             - build
           filters:
             branches:
-              only: develop
+              only: dev

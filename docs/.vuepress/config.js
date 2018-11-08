@@ -1,6 +1,7 @@
 module.exports = {
   title: 'Template for documentation',
   description: "A demo documentation using VuePress",
+  base: "/vuepress-template/",
   themeConfig:{
     nav: [
       // TODO: example
