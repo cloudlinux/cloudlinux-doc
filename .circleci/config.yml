@@ -13,7 +13,7 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: sudo yarn add -D vuepress
+          command: sudo npm install -g vuepress
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths: node_modules
@@ -33,23 +33,19 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: sudo yarn add -D vuepress
+          command: sudo npm install -g vuepress
       # - run:
-      #     name: Install Gulp
-      #     command: | 
-      #       sudo npm install -g gulp
-      - run:
-          name: Update Git to use worktree feature
-          command: |
-            sudo apt-get remove git -y
-            sudo apt-get install software-properties-common
-            sudo sudo apt-get install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev -y
-            cd /tmp
-            curl -L --progress https://github.com/git/git/archive/v2.17.0.tar.gz | tar xz
-            cd git-2.17.0/
-            make configure
-            ./configure --prefix=/usr
-            sudo make install
+      #     name: Update Git to use worktree feature
+      #     command: |
+      #       sudo apt-get remove git -y
+      #       sudo apt-get install software-properties-common
+      #       sudo sudo apt-get install dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev -y
+      #       cd /tmp
+      #       curl -L --progress https://github.com/git/git/archive/v2.17.0.tar.gz | tar xz
+      #       cd git-2.17.0/
+      #       make configure
+      #       ./configure --prefix=/usr
+      #       sudo make install
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
