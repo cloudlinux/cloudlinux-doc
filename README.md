@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/telepenin/vuepress-template.svg?style=svg)](https://circleci.com/gh/telepenin/vuepress-template)
+
 # Install dependencies
 
 ```
