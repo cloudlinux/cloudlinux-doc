@@ -19,9 +19,8 @@ To disable the patch, set the corresponding kcare option to 1.
 
 Patches that can be disabled:
 
-| | |
-|-|-|
 |Patch |  _sysctl_ option|
+|-|-|
 |CVE-2015-5157 | kcare_modify_ldt|
 
 

@@ -36,8 +36,6 @@ _/usr/bin/kcarectl_ - Manage KernelCare patches for your kernel.
 |`--set-patch-type free` | To enable free patches.|
 |`--set-sticky-patch SET_STICKY_PATCH` | Set patch to stick to date in format DDMMYY or retrieve it from KEY if set to KEY (no support for ePortal). Empty to unstick.   More info at [Sticky Patches](/sticky_patches/) .|
 |`--tag COMMAND` | Adds an extra _Tag_ field for a server. COMMAND is a user-defined parameter. More info at [Managing Servers](/managing_servers.htm#addingextratagfield/) .|
-| | |
-| | |
 
 ## kcare-uname
 

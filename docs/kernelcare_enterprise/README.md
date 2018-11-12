@@ -94,20 +94,10 @@ You can manage portal using /usr/bin/kc.eportal utility:
 
 ```
 -l | --list-users      : list all users
-```
-```
 -a | --add-user        : add a user
-```
-```
 -d | --delete-user     : delete a user
-```
-```
 -c | --change-password : change a user password
-```
-```
 -p | --password        : provide a password for a user
-```
-```
 -h | --help            : show this help
 ```
 
@@ -147,7 +137,7 @@ To access KernelCare.eportal management console, connect to:
 And enter your login & password
 
 ![](https://docs.kernelcare.com/access_eportal.png)
-You can manage your login information using [kc.eportal tool](/managing_users/) .
+You can manage your login information using [kc.eportal tool](/kernelcare_enterprise/#managing-users) .
 
 ## PatchSet Deployment
 
@@ -178,13 +168,13 @@ Click _Add_ button, so a new registration key will be automatically generated an
 The key itself will be used as part of the registration command on individual server. You can provide a description for the key, as well as max servers that can be registered under that key.
 Removing the key would remove all servers under the key.
 
-Clicking on the key would let you see the information about [servers registered](/managing_servers/) under that key, as well as remove servers.
+Clicking on the key would let you see the information about [servers registered](/kernelcare_enterprise#managing-servers) under that key, as well as remove servers.
 
 
 ## Managing Servers
 
 
-You can see servers belonging to the key by clicking on the key itself in [Managing Keys](/managing_keys/) interface.
+You can see servers belonging to the key by clicking on the key itself in [Managing Keys](/kernelcare_enterprise#managing-keys) interface.
 
 ![](https://docs.kernelcare.com/server_list.png)
 The screen shows servers registered under the key, their IP, hostname, effective kernel as well as the time of registration and last check in.
@@ -225,13 +215,12 @@ To see pairs of key/number of servers run:
 
 ```
 > kc.eportal --list-servers
+
+Count | Key
+----- + --------------------------------
+    0 | 2shcolu7Y1x6885Q
+    2 | 6J89aS44j6OmTr05
 ```
-
-`Count | Key`
-`----- + --------------------------------`
-`   0 | 2shcolu7Y1x6885Q`
-`   2 | 6J89aS44j6OmTr05`
-
 
 ### Script to automatically install latest patchsets
 
@@ -262,19 +251,18 @@ The number of servers for each key is listed in the _Key Inventory_ table.
 
 ### Ability to create read-only users
 
+```
+[root@localhost ~]# kc.eportal -l
+Num | Username
+--- + --------------------------------
+  1 | admin
+  2 | user
+[root@localhost ~]# kc.eportal -r user
+User 'user' is now readonly
+```
 
- 
-`[root@localhost ~]# kc.eportal -l`
-`Num | Username`
-`--- + --------------------------------`
-`  1 | admin`
-`  2 | user`
-`[root@localhost ~]# kc.eportal -r user`
-`User 'user' is now readonly`
 
 ### Feed Management
-
-
 
 Feeds are intended to manage patchsets on the server, and they provide a possibility to bind a set of patches to a specific key. Possible use cases: for preliminary testing of patches, for applying updates to groups of servers with the similar hardware, etc.
 
@@ -402,9 +390,8 @@ $ /usr/bin/kcarectl --register key_from_your_eportal
 
 To deploy kernelcare client software to use ePortal, following enviornment variables should be setup prior to RPM install:
 
-| |  | |
+|Environment Variable | Value | Description|
 |-|--|-|
-|**Environment Variable** | **Value** | **Description**|
 |KCARE_PATCH_SERVER | http://eportal_ip/ | URL to a server from which patches will be downloaded|
 |KCARE_REGISTRATION_URL | http://eportal_ip/admin/api/kcare | URL to ePortal's api|
 |KCARE_MAILTO [2.5+] | email@address | Email to receive all notifications related to failed KernelCare updates. Used in /etc/cron.d/kcare-cron|
@@ -434,10 +421,13 @@ PATCH_SERVER=http://10.1.10.115/
 REGISTRATION_URL=http://10.1.10.115/admin/api/kcare
 ```
 
-`If AUTO_UPDATE set to true, KernelCare client will check in every 4 hours, and try to download and apply latest patches`
-`PATCH_SERVER -- server from which patches will be downloaded`
-`REGISTRATION_URL -- URL used to register/unregister server`
+::: tip
+If `AUTO_UPDATE` set to true, KernelCare client will check in every 4 hours, and try to download and apply latest patches
+:::
 
+PATCH_SERVER -- server from which patches will be downloaded
+
+REGISTRATION_URL -- URL used to register/unregister server
 
 ## Changing ePortal IP
 
@@ -525,8 +515,9 @@ nginx error log:
 
 ## ePortal API
 
-
+::: tip Note
 [version 0.9+]
+:::
 
 KernelCare.ePortal provides limited API to remove servers based on key & IP.
 

@@ -1,62 +1,40 @@
 # KernelCare WHMCS Plugin
 
 
-[Overview](/overview/)
-[Installation & Configuration](/installation_configuration/)
-`o` [Installation and Update](/installation_and_update/)
-`o` [Configuration of Product](/configuration_of_produc/)
-`o` [Configuration of Add-on](/configuration_of_addon/)
-[Management](/managemen/)
-`o` [Link Via Add-on. Optional License](/link_via_addon_optional_lice/)
-`o` [Link Products Directly](/link_products_directly/)
-`o` [Link Via Configurable Options](/link_via_configurable_options/)
-`o` [Link Add-ons Directly](/link_addons_directly/) (for WHMCS 7.2.x and later)
-`o` [KernelCare Key Licenses](/kernelcare_key_licenses/)
-`o` [Order](/order/)
-`o` [Admin Area](/admin_area/)
-`o` [Client Area](/client_area/)
-`o` [Licenses List](/licenses_lis/)
-`o` [Add-on Licenses List](/add-on_licenses_lis/) (for WHMCS 7.2.x and later)
-[Common Problems](/common_problems/)
-
 ## Overview
 
 
 CloudLinux Licenses For WHMCS allows you to automatically provision KernelCare, Imunify360, and CloudLinux licenses along with selected products. You can provision them for free or as a paid add-on to your product. Owing to CloudLinux Licenses add-on, all module commands on your main product are automatically reproduced on the license product.
 
 **Admin Area Functionality**
-Create License
-Terminate License
-Suspend/Unsuspend License (only IP based licenses)
-Change License IP Address
-View License Details
+- Create License
+- Terminate License
+- Suspend/Unsuspend License (only IP based licenses)
+- Change License IP Address
+- View License Details
 
 **Client Area Functionality**
-View License Details
-Change License IP Address
+- View License Details
+- Change License IP Address
 
 **Add-on Functionality**
-Manage Relations Between Add-on And License Product
-Manage Relations Between Server And License Product
-Automatically Add License Product To Order When Relation Is Triggered
-View Existing Licenses
-Dependencies Between Module Actions - Every Action: Create, Terminate, Suspend Or Unsuspend Called On The Server Product Will Result With The Same Action Performed On The Licensed Products
-Flexible Filtering Of Existing Licenses
+- Manage Relations Between Add-on And License Product
+- Manage Relations Between Server And License Product
+- Automatically Add License Product To Order When Relation Is Triggered
+- View Existing Licenses
+- Dependencies Between Module Actions - Every Action: Create, Terminate, Suspend Or Unsuspend Called On The Server Product Will Result With The Same Action Performed On The Licensed Products
+- Flexible Filtering Of Existing Licenses
 
 **Additionally**
-Multi-Language Support – Only Provisioning Module
-Supports CloudLinux, KernelCare, and Imunify360 Licenses
-Supports WHMCS V6 and Later
+- Multi-Language Support – Only Provisioning Module
+- Supports CloudLinux, KernelCare, and Imunify360 Licenses
+- Supports WHMCS V6 and Later
 
 
 ## Installation & Configuration
 
 
 In this section we will show you how to set up our products.
-
-[Installation and Update](/installation_and_update/)
-[Configuration of Product](/configuration_of_produc/)
-[Configuration of Add-on](/configuration_of_addon/)
 
 ### Installation and Update
 
@@ -74,14 +52,14 @@ php <whmcs_root>/clDeploy.php --migrate
 ### Configuration of Product
 
 
-Log into your WHMCS admin area and go to _Setup → Products/Services → Products/Services_ . Click _Create a New Group_ .
-Fill _Product Group Name_ (product group will be visible under that name in your WHMCS system) and click _Save Changes_ .
-Click _Create a New Product_ . Choose _Other_ from _Product Type_ drop-down menu and previously created product group from _Product Group_ drop-down menu.
-Fill _Product Name_ and click _Continue_ .
-Set up this product as hidden by ticking _Hidden_ checkbox at _Details_ tab. Do not set up pricing for this product. Pricing will be done in another way.
-Go to the _Module Settings_ tab and select **_CloudLinux Licenses_** from _Module Name_ drop-down.
-Fill _Username_ and _Password_ with your CloudLinux API access details and select **_KernelCare_** from _License Type_ drop-down.
-Click _Save Changes_ to confirm.
+1. Log into your WHMCS admin area and go to _Setup → Products/Services → Products/Services_ . Click _Create a New Group_ .
+2. Fill _Product Group Name_ (product group will be visible under that name in your WHMCS system) and click _Save Changes_ .
+3. Click _Create a New Product_ . Choose _Other_ from _Product Type_ drop-down menu and previously created product group from _Product Group_ drop-down menu.
+4. Fill _Product Name_ and click _Continue_ .
+5. Set up this product as hidden by ticking _Hidden_ checkbox at _Details_ tab. Do not set up pricing for this product. Pricing will be done in another way.
+6. Go to the _Module Settings_ tab and select **_CloudLinux Licenses_** from _Module Name_ drop-down.
+6. Fill _Username_ and _Password_ with your CloudLinux API access details and select **_KernelCare_** from _License Type_ drop-down.
+7. Click _Save Changes_ to confirm.
 
 
 ### Configuration of Add-on
@@ -101,17 +79,6 @@ _Fig 2: KernelCare License For WHMCS add-on module main page._
 
 
 In this section you can find two ways of linking license product with your server product as well as other possibilities of the module.
-
-[Link Via Add-on. Optional License](/link_via_addon_optional_lice/)
-[Link Products Directly](/link_products_directly/)
-[Link Via Configurable Options](/link_via_configurable_options/)
-[Link Add-ons Directly](/link_addons_directly/) (for WHMCS 7.2.x and later)
-[KernelCare Key Licenses](/kernelcare_key_licenses/)
-[Order](/order/)
-[Admin Area](/admin_area/)
-[Client Area](/client_area/)
-[Licenses List](/licenses_lis/)
-[Add-on Licenses List](/add-on_licenses_lis/) (for WHMCS 7.2.x and later)
 
 ### Link Via Add-on. Optional License
 
@@ -142,9 +109,11 @@ _Fig 4: Creating relation between product add-on and provisioning module._
 
 If you want to offer server along with the license, perform the following steps.
 
-**_Note. _** _Please do_ _ not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product._
+::: tip Note
+Please do not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product.
+:::
 
-Prepare license provisioning product as described in the [Configuration of Product](/configuration_of_produc/) section of this documentation.
+Prepare license provisioning product as described in the [Configuration of Product](/kernelcare_whmcs_plugin/#configuration-of-product) section of this documentation.
 Go to _Add-ons → CloudLinux Licenses Add-on → Products Relations_ and click _Add Relation_ .
 Select server provisioning product from the Main _ product_ drop-down list and license provisioning product from _Linked Product With License_ and click _Add Relation_ .
 
@@ -284,8 +253,9 @@ _Fig 19: Licenses List._
 
 ### Add-on Licenses List
 
-
-_[for WHMCS 7.2.x and later]_
+::: tip
+for WHMCS 7.2.x and later
+:::
 
 You can view a list of all product add-on with _Provisioning Modules_ licenses owned by your client at our add-on → _Licenses List_ .
 
@@ -296,9 +266,12 @@ _Fig 20: Add-on Licenses List._
 
 
 After activating the server provisioning product, license provisioning product bounded to it is still pending.
+
 **Reason** : License IP address may be already taken.
+
 **Solution** : Change server IP address.
 
-**_Note_** _. Currently, only key-based licenses are available for Imunify360. Support of IP-based licenses will be added soon._
-
+::: tip
+Currently, only key-based licenses are available for Imunify360. Support of IP-based licenses will be added soon
+:::
 

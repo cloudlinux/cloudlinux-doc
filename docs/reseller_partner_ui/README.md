@@ -3,9 +3,9 @@
 
 Once you have got the reseller partner access, in IP Reseller Partner UI you can view and manage IP licenses, billing options, profile details. Here you can track your money balance, licenses count and licenses prices as well as using IP address search to find customers.
 
-**Server Section**
+## Server Section
 
-As soon as you have added funds ( _See _ **_Billing Info/Add Funds _** _below_ **)** to your account you can immediately add new licenses for clients. To add IP KernelCare license:
+As soon as you have added funds (_See_ [Billing Info/Add Funds](/reseller_partner_ui/#billing-info-add-funds)) to your account you can immediately add new licenses for clients. To add IP KernelCare license:
 
 1. Enter IP address in ** Add IP License ** field, choose license type in pull-down menu (KernelCare) and click **Add license** .
 
@@ -18,7 +18,7 @@ In the Operations List you are able to edit or delete the key.
 
 ![](https://docs.kernelcare.com/reseller007_zoom96.png)
 
-**Billing Info/Add Funds**
+## Billing Info/Add Funds
 
 To add funds:
 
@@ -37,7 +37,7 @@ If you choose **Auto repay** , your card will be automatically charged when your
 
 _Note: If your balance is shown as negative, it means that you have to deposit more funds_ .
 
-**API Section**
+## API Section
 
 CloudLinux and KernelCare IP licenses adding and removing is compatible with different hosting and domain management and billing systems and platforms. You can find comprehensive information on all possible CloudLinux modules and plug-ins APIs in API Section.
 
@@ -45,7 +45,7 @@ CloudLinux and KernelCare IP licenses adding and removing is compatible with dif
 
 
 
-**Profile**
+## Profile
 
 You can edit your profile information by clicking on ** Profile** section. Edit the necessary info and click **Update Account.**
 

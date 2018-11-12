@@ -26,8 +26,9 @@ The software will automatically check for new patches every 4 hours, but if you 
 ```
 $ /usr/bin/kcarectl --update
 ```
-
-**Note:**  _‘Free’ patches are changed to ‘default’ now. If you still need symlink protection, you would need to apply ‘extra’ patches - they include symlink protection plus the security fixes for CentOS 6 and CentOS 7 (there are no extra charges for extra patches)._ 
+::: tip Note
+Free’ patches are changed to ‘default’ now. If you still need symlink protection, you would need to apply ‘extra’ patches - they include symlink protection plus the security fixes for CentOS 6 and CentOS 7 (there are no extra charges for extra patches).
+:::
 
 To enable extra patches and apply patch, run:
 
@@ -51,34 +52,33 @@ kcarectl --patch-info
 
 You should see something similar to:
 
-`OS: centos6`
-`kernel: kernel-2.6.32-696.6.3.el6`
-`time: 2017-07-31 22:46:22`
-`uname: 2.6.32-696.6.3.el6`
-
-`kpatch-name: 2.6.32/symlink-protection.patch`
-`kpatch-description: symlink protection // If you see this patch, it means that you can enable symlink protection.`
-`kpatch-kernel: kernel-2.6.32-279.2.1.el6`
-`kpatch-cve: N/A`
-`kpatch-cvss: N/A`
-`kpatch-cve-url: N/A`
-`kpatch-patch-url: https://gerrit.cloudlinux.com/#/c/16508/`
-
-`kpatch-name: 2.6.32/symlink-protection.kpatch-1.patch`
-`kpatch-description: symlink protection (kpatch adaptation)`
-`kpatch-kernel: kernel-2.6.32-279.2.1.el6`
-`kpatch-cve: N/A`
-`kpatch-cvss: N/A`
-`kpatch-cve-url: N/A`
-`kpatch-patch-url: https://gerrit.cloudlinux.com/#/c/16508/`
-
-`kpatch-name: 2.6.32/ipset-fix-list-shrinking.patch`
-`kpatch-description: fix ipset list shrinking for no reason`
-`kpatch-kernel: N/A`
-`kpatch-cve: N/A`
-`kpatch-cvss:N/A`
-`kpatch-cve-url: N/A`
-`kpatch-patch-url: https://bugs.centos.org/view.php?id=13499`
+```
+OS: centos6
+kernel: kernel-2.6.32-696.6.3.el6
+time: 2017-07-31 22:46:22
+uname: 2.6.32-696.6.3.el6
+kpatch-name: 2.6.32/symlink-protection.patch
+kpatch-description: symlink protection // If you see this patch, it means that you can enable symlink protection.
+kpatch-kernel: kernel-2.6.32-279.2.1.el6
+kpatch-cve: N/A
+kpatch-cvss: N/A
+kpatch-cve-url: N/A
+kpatch-patch-url: https://gerrit.cloudlinux.com/#/c/16508/
+kpatch-name: 2.6.32/symlink-protection.kpatch-1.patch
+kpatch-description: symlink protection (kpatch adaptation)
+kpatch-kernel: kernel-2.6.32-279.2.1.el6
+kpatch-cve: N/A
+kpatch-cvss: N/A
+kpatch-cve-url: N/A
+kpatch-patch-url: https://gerrit.cloudlinux.com/#/c/16508/
+kpatch-name: 2.6.32/ipset-fix-list-shrinking.patch
+kpatch-description: fix ipset list shrinking for no reason
+kpatch-kernel: N/A
+kpatch-cve: N/A
+kpatch-cvss:N/A
+kpatch-cve-url: N/A
+kpatch-patch-url: https://bugs.centos.org/view.php?id=13499
+```
 
 To enable Symlink Owner Match Protection, add the following line:
 
