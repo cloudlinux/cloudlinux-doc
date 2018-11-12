@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/telepenin/vuepress-template.svg?style=svg)](https://circleci.com/gh/telepenin/vuepress-template)
+[![CircleCI](https://circleci.com/gh/telepenin/kernelcare-doc.svg?style=svg)](https://circleci.com/gh/telepenin/kernelcare-doc)
 
 # Install dependencies
 
