@@ -126,7 +126,7 @@ _Fig 5: Creating relations directly between server and license provisioning modu
 In order to allow your client  to decide whether he wants to order server with or without license we can use Configurable Options ( [https://docs.whmcs.com/Addons_and_Configurable_Options](https://docs.whmcs.com/Addons_and_Configurable_Options) ).
 
 Below we will show you what steps to proceed to prepare such connection:
-Configure CloudLinuxLicenses product as described [here](/configuration_of_produc/) .
+Configure CloudLinuxLicenses product as described [here](/kernelcare_whmcs_plugin/#configuration-of-product) .
 Go to _Setup → Products/Services → Configurable Options_ and click _Create a New Group_ .
 Fill group name and add _New Configurable Option_ , set up billing cycle, price and option type. Then save changes.
 Go to _Add-ons → CloudLinux Licenses Add-on → Configurable Options Relations_ and click _Add Relation_ .
