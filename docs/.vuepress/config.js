@@ -8,6 +8,7 @@ module.exports = {
     ],
     sidebar: [
       {
+        title: 'Content',
         collapsable: false,
         children: [
           "/installation/",
