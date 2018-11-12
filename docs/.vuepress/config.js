@@ -1,32 +1,35 @@
 module.exports = {
-  title: 'Template for documentation',
+  title: 'Kernelcare documentation',
   description: "A demo documentation using VuePress",
-  base: "/vuepress-template/",
+  base: "/kernelcare-doc/",
   themeConfig:{
     nav: [
-      // TODO: example
-      // { text: 'COUNTER', link: '/foo1/' },
-      // { text: 'GUIDE', link: '/foo/' },
+      { text: 'Kernelcare', link: 'https://kernelcare.com'}
     ],
     sidebar: [
       {
-        title: 'Counter',
         collapsable: false,
         children: [
-        // TODO: example
-        // '/counter/counter-app'
-        ]
-      },
-      {
-        title: 'API Guide',
-        collapsable: false,
-        children: [
-          // TODO:
-          // example
-        	// '',
-          // '/foo/',
-          // '/foo/two',
-          // '/foo/one'
+          "/installation/",
+          "/settings/",
+          "/command_line/",
+          "/config_options/",
+          "/disabling_some_patches/",
+          "/delayed_feed/",
+          "/extra_patchse/",
+          "/sticky_patches/",
+          "/nagios_plugin/",
+          "/zabbix_template/",
+          "/upgrade/",
+          "/uninsta/",
+          "/technology/",
+          "/reseller_partner_ui/",
+          "/kernelcare_enterprise/",
+          "/kcare-nexpose/",
+          "/kernelcare_whmcs_plugin/",
+          "/proxy_settings/",
+          "/eol_ubuntu_lts_kernels_suppor/",
+          "/downloading_documentation/"
         ]
       }
     ]
