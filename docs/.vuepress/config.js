@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Kernelcare documentation',
   description: "A demo documentation using VuePress",
-  base: "/kernelcare-doc/",
+  base: "/",
   themeConfig:{
     nav: [
       { text: 'Kernelcare', link: 'https://kernelcare.com'}
