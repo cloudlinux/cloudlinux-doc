@@ -4,12 +4,15 @@ import Vue from "vue";
 export default {
   name: "gtranslate-io",
   render() {
+    if (!process.browser) { // failed build with error: location is undefined
+      return;
+    }
+
     var self = this;
 
     const proto = location.protocol;
     const path = location.pathname.split(this.$localePath).join("");
     const host = location.host;
-    debugger;
 
     const url = `${proto}//${this.$lang}.${host}/${path}`;
     debugger;
