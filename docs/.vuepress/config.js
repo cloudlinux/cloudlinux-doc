@@ -88,7 +88,7 @@ module.exports = {
             title: 'Содержание',
             collapsable: false,
             children: [
-              ["/ru/installation/", "Установка KernelCare"],
+              "/ru/installation/",
               ["/ru/settings/", "Настройки"],
               ["/ru/command_line/", "Командная строка"],
               ["/ru/config_options/", "Опции конфига"],
