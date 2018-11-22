@@ -4,8 +4,10 @@ import Vue from "vue";
 export default {
   name: "gtranslate-io",
   render() {
-    if (typeof process !== "undefined" && !process.browser) {
+    debugger;
+    if ((typeof process !== "undefined") && !process.browser) {
       // failed build with error: location is undefined
+      debugger
       return;
     }
 
@@ -13,7 +15,7 @@ export default {
 
     const proto = location.protocol;
     const path = location.pathname.split(this.$localePath).join("");
-    const host = location.host;
+    const host = "docs-test.kernelcare.com";
 
     const url = `${proto}//${this.$lang}.${host}/${path}`;
     debugger;
