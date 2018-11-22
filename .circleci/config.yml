@@ -33,7 +33,7 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: sudo npm install -g vuepress
+          command: sudo npm install -g vuepress yarn
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
