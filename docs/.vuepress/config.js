@@ -16,6 +16,9 @@ module.exports = {
       description: 'Документация Kernelcare'
     }
   },
+  chainWebpack(config) {
+    config.resolve.alias.set('vue', 'vue/dist/vue.common.js')
+  },
   themeConfig:{
     locales: {
       '/': {
@@ -82,29 +85,29 @@ module.exports = {
         algolia: {},
         sidebar: [
           {
-            title: 'Content',
+            title: 'Содержание',
             collapsable: false,
             children: [
-              "/ru/installation/",
-              "/ru/settings/",
-              "/ru/command_line/",
-              "/ru/config_options/",
-              "/ru/disabling_some_patches/",
-              "/ru/delayed_feed/",
-              "/ru/extra_patchse/",
-              "/ru/sticky_patches/",
-              "/ru/nagios_plugin/",
-              "/ru/zabbix_template/",
-              "/ru/upgrade/",
-              "/ru/uninsta/",
-              "/ru/technology/",
-              "/ru/reseller_partner_ui/",
-              "/ru/kernelcare_enterprise/",
-              "/ru/kcare-nexpose/",
-              "/ru/kernelcare_whmcs_plugin/",
-              "/ru/proxy_settings/",
-              "/ru/eol_ubuntu_lts_kernels_suppor/",
-              "/ru/downloading_documentation/"
+              ["/ru/installation/", "Установка KernelCare"],
+              ["/ru/settings/", "Настройки"],
+              ["/ru/command_line/", "Командная строка"],
+              ["/ru/config_options/", "Опции конфига"],
+              ["/ru/disabling_some_patches/", "Отключение патчей"],
+              ["/ru/delayed_feed/", "Отложенные рассылки"],
+              ["/ru/extra_patchse/", "Дополнительные патчи"],
+              ["/ru/sticky_patches/", "Sticky патчи"],
+              ["/ru/nagios_plugin/", "Плагин для Nagios"],
+              ["/ru/zabbix_template/", "Плагин для Zabbix"],
+              ["/ru/upgrade/", "Обновление"],
+              ["/ru/uninsta/", "Удаление"],
+              ["/ru/technology/", "Технология"],
+              ["/ru/reseller_partner_ui/", "UI для реселлеров"],
+              ["/ru/kernelcare_enterprise/", "Kernelcare Eportal"],
+              ["/ru/kcare-nexpose/", "Kernelcare nexpose"],
+              ["/ru/kernelcare_whmcs_plugin/", "WHMS плагин для Kernelcare"],
+              ["/ru/proxy_settings/", "Настройки прокси"],
+              ["/ru/eol_ubuntu_lts_kernels_suppor/", "Поддержка Ubuntu"],
+              ["/ru/downloading_documentation/", "Скачать документацию"],
             ]
           }
         ]
