@@ -4,7 +4,8 @@ import Vue from "vue";
 export default {
   name: "gtranslate-io",
   render() {
-    if (process && !process.browser) { // failed build with error: location is undefined
+    if (typeof process !== "undefined" && !process.browser) {
+      // failed build with error: location is undefined
       return;
     }
 

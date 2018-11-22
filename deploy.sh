@@ -4,7 +4,7 @@
 set -e
 
 # build
-npm run docs:build --debug
+vuepress build --debug
 
 # navigate into the build output directory
 cd docs/.vuepress/dist
