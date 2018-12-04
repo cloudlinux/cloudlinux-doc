@@ -6,6 +6,15 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
+    "timeago": "^1.6.3",
+    "vuepress-theme-cloudlinux": "https://github.com/telepenin/cloudlinux-doc-theme.git",
     "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.0",
+    "@vuepress/plugin-i18n-ui": "^1.0.0-alpha.0",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "1.15.3"
   }
 }

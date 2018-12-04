@@ -3,5 +3,5 @@
 <GTranslateIO>
 # Установка KernelCare
 
-## Переход от Ksplice
+## Переход от Ksplice {#custom-id} 
 </GtranslateIO>

@@ -139,10 +139,7 @@ And enter your login & password
 ![](https://docs.kernelcare.com/access_eportal.png)
 You can manage your login information using [kc.eportal tool](/kernelcare_enterprise/#managing-users) .
 
-## PatchSet Deployment
-
-
-[ePortal v0.8+]
+## PatchSet Deployment <Badge text="ePortal 0.8+"/>
 
 KernelCare.ePortal has built-in mechanism to download latest patches. To start using it, click on ‘Patch Source’ link in KernelCare.ePortal navigational bar. Your patch source access info will be provided by your KernelCare representative.
 
@@ -513,11 +510,7 @@ nginx error log:
 /var/log/nginx/error_log
 
 
-## ePortal API
-
-::: tip Note
-[version 0.9+]
-:::
+## ePortal API <Badge text="ePortal 0.9+"/>
 
 KernelCare.ePortal provides limited API to remove servers based on key & IP.
 

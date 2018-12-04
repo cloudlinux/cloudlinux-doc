@@ -1,7 +1,5 @@
 # Installation of KernelCare
 
-<Foo/>
-
 KernelCare is compatible with 64-bit versions of CentOS/RHEL 6.x and 7.x, CloudLinux 6.x and 7.x, Virtuozzo/PCS/OpenVZ 2.6.32, Debian 8 and 9, Proxmox VE 4, Virt-SIG/Xen4CentOS 6 and 7, Ubuntu 14.04, 15.04 and 16.04 kernels. The list of compatible kernels can be found on the following link: [https://patches.kernelcare.com/](https://patches.kernelcare.com/) .
 
 To install KernelCare run:

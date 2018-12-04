@@ -14,7 +14,7 @@ export default {
 
       const url = `${proto}//${this.$lang}.${host}/${path}`;
 
-      debugger;
+      // debugger;
 
       // gtranslate.io has ability to work via dns
       fetch(url)
@@ -29,7 +29,7 @@ export default {
           const htmlDoc = parser.parseFromString(text, "text/html");
           const el = htmlDoc.getElementsByClassName("content")[0];
 
-          debugger
+          // debugger
 
           const res = Vue.compile("<div>" + el.innerHTML + "</div>");
           self.$options.render = res.render;

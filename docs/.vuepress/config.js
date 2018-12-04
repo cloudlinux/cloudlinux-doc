@@ -1,34 +1,70 @@
 module.exports = {
+  plugins: [
+    ['@vuepress/i18n-ui', true],
+    ['@vuepress/back-to-top', true],
+    ['@vuepress/pwa', {
+      serviceWorker: true,
+      updatePopup: true
+    }],
+    ['@vuepress/medium-zoom', true],
+    ['@vuepress/notification', true]
+  ],
   // title: 'Kernelcare documentation',
   // description: "A demo documentation using VuePress",
   base: "/",
   locales: {
     // The key is the path for the locale to be nested under.
     // As a special case, the default locale can use '/' as its path.
-    '/': {
-      lang: 'en-US', // this will be set as the lang attribute on <html>
-      title: 'Kernelcare documentation',
-      description: 'Kernelcare documentation'
+    "/": {
+      lang: "en-US", // this will be set as the lang attribute on <html>
+      title: "Documentation",
+      description: "Kernelcare documentation"
     },
-    '/ru/': {
-      lang: 'ru',
-      title: 'Документация Kernelcare',
-      description: 'Документация Kernelcare'
+    "/ru/": {
+      lang: "ru",
+      title: "Документация Kernelcare",
+      description: "Документация Kernelcare"
     }
   },
   chainWebpack(config) {
-    config.resolve.alias.set('vue', 'vue/dist/vue.common.js')
+    config.resolve.alias.set("vue", "vue/dist/vue.common.js");
   },
-  themeConfig:{
+  // FIXME: need to use english text for slug (for correct translation)
+  // markdown: {
+  //   anchor(){...},
+  //   slugify(src) {
+  //     return src
+  //   },
+  // },
+
+
+  theme: 'cloudlinux',
+  themeConfig: {
+    sidebarDepth: 2,
+    logo: '/kc-logo.svg',
+    try_free: 'https://cloudlinux.com/kernelcare-free-trial5',
+    bottomLinks: [
+      {text: 'How to', url: ''},
+      {text: 'Getting started', url: ''},
+      {text: 'Contact support', url: ''},
+      {text: 'Blog', url: ''}
+    ],
+    social: [
+      {url: '#', logo: '/fb.svg'},
+      {url: '#', logo: '/tw.svg'},
+      {url: '#', logo: '/in.svg'},
+      {url: '#', logo: '/ytube.svg'}
+
+    ],
     locales: {
-      '/': {
+      "/": {
         // text for the language dropdown
-        selectText: 'Languages',
+        selectText: "Languages",
         // label for this locale in the language dropdown
-        label: 'English',
+        label: "English",
         // text for the edit-on-github link
-        editLinkText: 'Edit this page on GitHub',
-        // config for Service Worker 
+        editLinkText: "Edit this page on GitHub",
+        // config for Service Worker
         serviceWorker: {
           updatePopup: {
             message: "New content is available.",
@@ -37,12 +73,11 @@ module.exports = {
         },
         // algolia docsearch options for current locale
         algolia: {},
-        nav: [
-          { text: 'Kernelcare', link: 'https://kernelcare.com'}
-        ],
+        // nav: [],
+
         sidebar: [
           {
-            title: 'Content',
+            title: "Content",
             collapsable: false,
             children: [
               "/installation/",
@@ -69,23 +104,20 @@ module.exports = {
           }
         ]
       },
-      '/ru/': {
-        selectText: 'Выберите язык',
-        label: 'Русский',
-        editLinkText: 'Отредактировать на GitHub',
+      "/ru/": {
+        selectText: "Выберите язык",
+        label: "Русский",
+        editLinkText: "Отредактировать на GitHub",
         serviceWorker: {
           updatePopup: {
             message: "Новый контент доступен",
             buttonText: "Обновить"
           }
         },
-        nav: [
-          { text: 'Kernelcare', link: 'https://kernelcare.com'}
-        ],
         algolia: {},
         sidebar: [
           {
-            title: 'Содержание',
+            title: "Содержание",
             collapsable: false,
             children: [
               "/ru/installation/",
@@ -107,43 +139,43 @@ module.exports = {
               ["/ru/kernelcare_whmcs_plugin/", "WHMS плагин для Kernelcare"],
               ["/ru/proxy_settings/", "Настройки прокси"],
               ["/ru/eol_ubuntu_lts_kernels_suppor/", "Поддержка Ubuntu"],
-              ["/ru/downloading_documentation/", "Скачать документацию"],
+              ["/ru/downloading_documentation/", "Скачать документацию"]
             ]
           }
         ]
       }
     }
-  },
-    // nav: [
-    //   { text: 'Kernelcare', link: 'https://kernelcare.com'}
-    // ],
-    // sidebar: [
-    //   {
-    //     title: 'Content',
-    //     collapsable: false,
-    //     children: [
-    //       "/installation/",
-    //       "/settings/",
-    //       "/command_line/",
-    //       "/config_options/",
-    //       "/disabling_some_patches/",
-    //       "/delayed_feed/",
-    //       "/extra_patchse/",
-    //       "/sticky_patches/",
-    //       "/nagios_plugin/",
-    //       "/zabbix_template/",
-    //       "/upgrade/",
-    //       "/uninsta/",
-    //       "/technology/",
-    //       "/reseller_partner_ui/",
-    //       "/kernelcare_enterprise/",
-    //       "/kcare-nexpose/",
-    //       "/kernelcare_whmcs_plugin/",
-    //       "/proxy_settings/",
-    //       "/eol_ubuntu_lts_kernels_suppor/",
-    //       "/downloading_documentation/"
-    //     ]
-    //   }
-    // ]
+  }
+  // nav: [
+  //   { text: 'Kernelcare', link: 'https://kernelcare.com'}
+  // ],
+  // sidebar: [
+  //   {
+  //     title: 'Content',
+  //     collapsable: false,
+  //     children: [
+  //       "/installation/",
+  //       "/settings/",
+  //       "/command_line/",
+  //       "/config_options/",
+  //       "/disabling_some_patches/",
+  //       "/delayed_feed/",
+  //       "/extra_patchse/",
+  //       "/sticky_patches/",
+  //       "/nagios_plugin/",
+  //       "/zabbix_template/",
+  //       "/upgrade/",
+  //       "/uninsta/",
+  //       "/technology/",
+  //       "/reseller_partner_ui/",
+  //       "/kernelcare_enterprise/",
+  //       "/kcare-nexpose/",
+  //       "/kernelcare_whmcs_plugin/",
+  //       "/proxy_settings/",
+  //       "/eol_ubuntu_lts_kernels_suppor/",
+  //       "/downloading_documentation/"
+  //     ]
+  //   }
+  // ]
   // }
-}
+};

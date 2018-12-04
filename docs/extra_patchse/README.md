@@ -1,8 +1,4 @@
-# Extra Patchset
-
-::: tip REQUIREMENTS
-KernelCare 2.12-5 or higher
-:::
+# Extra Patchset <Badge text="2.12-5+"/>
 
 KernelCare Extra patchset includes all the security fixes from KernelCare for CentOS 6 & CentOS 7 as well as symlink protection and IPSet bugfix for CentOS 6.
 
