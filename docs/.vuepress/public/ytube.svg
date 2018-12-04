@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="84" height="45" viewBox="0 0 84 45">
+    <defs>
+        <rect id="b" width="70" height="31" rx="15.5"/>
+        <filter id="a" width="134.3%" height="177.4%" x="-17.1%" y="-29%" filterUnits="objectBoundingBox">
+            <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="3.5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.227411685 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(7 4)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#D55347" xlink:href="#b"/>
+        </g>
+        <text fill="#FFF" font-family="FacebookLetterFaces, Facebook Letter Faces" font-weight="bold" font-size="12" transform="translate(7 4)">
+            <tspan x="12" y="19">youtube</tspan>
+        </text>
+    </g>
+</svg>

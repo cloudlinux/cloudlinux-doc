@@ -1,5 +1,5 @@
 node_modules/
-public/
+# public/
 DS_Store
 dist/
 dist-admin/
