@@ -11,18 +11,19 @@ jobs:
             - "9d:d7:ca:e3:c1:08:79:2f:2d:b3:c3:95:06:4e:70:a8"
       - restore_cache:
           keys:
-            - npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - npm-cache-{{ .Branch }}
-            - npm-cache-
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
-          command: sudo npm install -g vuepress yarn && sudo yarn global
+          command: npm install -g vuepress yarn && yarn
       - run:
           name: Publish update to GitHub
-          command: sudo bash ./deploy.sh
+          command: bash ./deploy.sh
       - save_cache:
-          key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths: node_modules
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
 workflows:
   version: 2
   build-deploy:
