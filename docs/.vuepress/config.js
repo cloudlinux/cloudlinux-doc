@@ -56,6 +56,7 @@ module.exports = {
       {url: '#', logo: '/ytube.svg'}
 
     ],
+    cloudlinuxSite: 'https://cloudlinux.com',
     locales: {
       "/": {
         // text for the language dropdown
