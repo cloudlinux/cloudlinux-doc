@@ -44,16 +44,16 @@ module.exports = {
     logo: '/kc-logo.svg',
     try_free: 'https://cloudlinux.com/kernelcare-free-trial5',
     bottomLinks: [
-      {text: 'How to', url: ''},
-      {text: 'Getting started', url: ''},
-      {text: 'Contact support', url: ''},
-      {text: 'Blog', url: ''}
+      {text: 'How to', url: '#'},
+      {text: 'Getting started', url: '#'},
+      {text: 'Contact support', url: 'https://cloudlinux.zendesk.com/hc/en-us/requests/new'},
+      {text: 'Blog', url: 'https://www.cloudlinux.com/kernelcare-blog'}
     ],
     social: [
-      {url: '#', logo: '/fb.svg'},
-      {url: '#', logo: '/tw.svg'},
-      {url: '#', logo: '/in.svg'},
-      {url: '#', logo: '/ytube.svg'}
+      {url: 'https://www.facebook.com/kernelcare/', logo: '/fb.svg'},
+      {url: 'https://twitter.com/kernelcare', logo: '/tw.svg'},
+      {url: 'https://linkedin.com/company/cloudlinux', logo: '/in.svg'},
+      {url: 'https://www.youtube.com/channel/UCZ3YMHWnMP7TaxlXVay5-aw', logo: '/ytube.svg'}
 
     ],
     cloudlinuxSite: 'https://cloudlinux.com',
