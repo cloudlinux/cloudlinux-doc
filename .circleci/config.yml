@@ -21,8 +21,8 @@ jobs:
           name: Publish update to GitHub
           command: bash ./deploy.sh
       - save_cache:
-        key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        paths: node_modules
+          key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths: node_modules
 workflows:
   version: 2
   build-deploy:
