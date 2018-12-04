@@ -38,7 +38,7 @@ module.exports = {
   // },
 
 
-  // theme: 'cloudlinux',
+  theme: 'cloudlinux',
   themeConfig: {
     sidebarDepth: 2,
     logo: '/kc-logo.svg',
