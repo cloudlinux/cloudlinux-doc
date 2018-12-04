@@ -16,10 +16,10 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: npm install vuepress yarn && yarn
+          command: sudo npm install -g vuepress yarn && sudo npm install
       - run:
           name: Publish update to GitHub
-          command: bash ./deploy.sh
+          command: sudo bash ./deploy.sh
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths: node_modules
