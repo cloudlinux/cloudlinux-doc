@@ -8,14 +8,14 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - npm-cache-{{ .Branch }}
             - npm-cache-
       - run:
           name: Install dependencies
           command: sudo npm install -g vuepress
       - save_cache:
-          key: npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths: node_modules
   deploy-dev:
     docker:
@@ -28,12 +28,12 @@ jobs:
             - "9d:d7:ca:e3:c1:08:79:2f:2d:b3:c3:95:06:4e:70:a8"
       - restore_cache:
           keys:
-            - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - npm-cache-{{ .Branch }}
             - npm-cache-
       - run:
           name: Install dependencies
-          command: npm install -g vuepress yarn
+          command: npm install vuepress yarn
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
