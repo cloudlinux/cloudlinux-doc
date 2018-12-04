@@ -13,9 +13,7 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: 
-            - npm install vuepress yarn
-            - yarn
+          command: npm install vuepress yarn && yarn
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths: node_modules
@@ -35,9 +33,7 @@ jobs:
             - npm-cache-
       - run:
           name: Install dependencies
-          command: 
-            - npm install vuepress yarn
-            - yarn
+          command: npm install vuepress yarn && yarn
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
