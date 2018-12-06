@@ -15,7 +15,7 @@ module.exports = {
     //   description: "Документация Kernelcare"
     // }
   },
-  theme: "vuepress-theme-cloudlinux",
+  theme: "cloudlinux",
   // theme: '/Users/prefer/src/cloudlinux-doc-theme', # local path
 
   themeConfig: {
