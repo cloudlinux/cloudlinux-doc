@@ -8,7 +8,7 @@ jobs:
       - checkout
       - add_ssh_keys: # add SSH key with write access
           fingerprints:
-            - "9d:d7:ca:e3:c1:08:79:2f:2d:b3:c3:95:06:4e:70:a8"
+            - "c1:85:d5:ec:7b:8e:41:65:fc:a7:ec:32:ac:93:19:e3"
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
