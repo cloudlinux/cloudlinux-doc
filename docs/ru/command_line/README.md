@@ -1,3 +1,0 @@
-<GTranslateIO>
-
-</GTranslateIO>
