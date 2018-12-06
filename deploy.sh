@@ -3,6 +3,9 @@
 # abort on errors
 set -e
 
+# FIXME: need to use theme from cloudlinux.github.com!
+yarn add https://github.com/telepenin/cloudlinux-doc-theme
+
 # build
 yarn docs:build
 
