@@ -696,7 +696,7 @@ Actions — allows to view details and perform actions on the file.
 2. Create a file with the following content:
 
 ```
-<?php system('wget -V');?>  
+\<?php system('wget -V');?\>  
 ```
 ```
  
