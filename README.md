@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/telepenin/kernelcare-doc.svg?style=svg)](https://circleci.com/gh/telepenin/kernelcare-doc)
-
 # Install dependencies
 
 ```
