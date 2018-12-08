@@ -1,6 +1,0 @@
----
-title: Captcha
----
-
-# Captcha
-
