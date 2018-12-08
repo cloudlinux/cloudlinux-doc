@@ -21,7 +21,7 @@ module.exports = {
   themeConfig: {
     sidebarDepth: 2,
     logo: "/logo.svg",
-    try_free: "https://www.imunify360.com/trial",
+    try_free: "https://cloudlinux.com/trial",
     bottomLinks: [
       { text: "How to", url: "#" },
       { text: "Getting started", url: "#" },
@@ -29,14 +29,14 @@ module.exports = {
         text: "Contact support",
         url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
       },
-      { text: "Blog", url: "https://www.imunify360.com/blog" }
+      { text: "Blog", url: "https://www.cloudlinux.com/blog" }
     ],
     social: [
-      { url: "https://www.facebook.com/imunify360/", logo: "/fb.svg" },
-      { url: "https://twitter.com/imunify360/", logo: "/tw.svg" },
+      { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.svg" },
+      { url: "https://twitter.com/cloudlinuxos/", logo: "/tw.svg" },
       { url: "https://linkedin.com/company/cloudlinux", logo: "/in.svg" },
       {
-        url: "https://www.youtube.com/channel/UCcW6dDJjcy41c7Hl_5LdLZQ",
+        url: "https://www.youtube.com/channel/UCZ3YMHWnMP7TaxlXVay5-aw",
         logo: "/ytube.svg"
       }
     ],
