@@ -1,40 +1,6 @@
 # Installation
 
-
-[Converting existing servers](/converting_existing_servers/)
-
-`o` [Advanced Options for cldeploy](/advanced_options_for_cldeploy/)
-
-`o` [Explanation Of Changes](/changes/)
-
-[Installing new servers](/installing_new_servers/)
-
-[CloudLinux OS Images](/cloudlinux_os_images/)
-
-`o` [Xen Images](/xen_images/)
-
-[Net Install](/net_install/)
-
-[Installing on H-Sphere Server](/h-sphere_server/)
-
-`o` [Converting from mod_fastcgi to mod_fcgid](/mod_fastcgi_to_mod_fcgid/)
-
-[Virtuozzo and OpenVZ](/virtuozzo_and_openvz/)
-
-[Getting Trial License](/trial_license/)
-
-[Registering CloudLinux Server](/registering/)
-
-[CloudLinux on DigitalOcean](/digitalocean/)
-
-[CloudLinux on Linode](/linode_kvm/)
-
-[Servers with LILO boot loader](/lilo_boot_loader/)
-
-[cPanel EasyApache 4](/cpanel_easyapache_4/)
-
-[Uninstalling CloudLinux](/uninstall/)
-
+[[toc]]
 
 ## Converting Existing Servers
 
