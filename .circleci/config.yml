@@ -14,8 +14,7 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
-          # 1.0.0-alpha.27 still is not stable
-          command: npm install vuepress@^1.0.0-alpha.27 yarn && yarn
+          command: yarn install --frozen-lockfile
       - run:
           name: Publish update to GitHub
           command: bash ./deploy.sh
