@@ -3,4 +3,12 @@ export default ({
   options, // the options for the root Vue instance
   router, // the router instance for the app
   siteData // site metadata
-}) => {};
+}) => {
+  router.beforeEach((to, from, next) => {
+    if(to.path === "/") {
+      router.push(siteData.themeConfig.defaultURL);
+    } else {
+      next();
+    }
+  });
+};
