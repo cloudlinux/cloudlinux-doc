@@ -6,7 +6,7 @@ export default ({
 }) => {
   router.beforeEach((to, from, next) => {
     if(to.path === "/") {
-      router.push(siteData.themeConfig.defaultURL);
+      next(siteData.themeConfig.defaultURL);
     } else {
       next();
     }
