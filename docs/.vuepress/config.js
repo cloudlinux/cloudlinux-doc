@@ -60,7 +60,11 @@ module.exports = {
           }
         },
         // algolia docsearch options for current locale
-        algolia: {},
+        algolia: {
+          apiKey: 'c81913402fd913c6851439a56d3ad963',
+          indexName: 'cloudlinux',
+          appId: 'HU6RMR9IB4'
+        },
 
         sidebar: [
           {
