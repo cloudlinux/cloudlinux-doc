@@ -2,6 +2,11 @@ const urls = require("./urls-mapping.js");
 
 module.exports = {
   base: "/",
+  head: [
+    ['link', {
+      rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
+    }]
+  ],
   locales: {
     // The key is the path for the locale to be nested under.
     // As a special case, the default locale can use '/' as its path.
@@ -35,12 +40,12 @@ module.exports = {
       { text: "Blog", url: "https://www.cloudlinux.com/blog" }
     ],
     social: [
-      { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.svg" },
-      { url: "https://twitter.com/cloudlinuxos/", logo: "/tw.svg" },
-      { url: "https://linkedin.com/company/cloudlinux", logo: "/in.svg" },
+      { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.png" },
+      { url: "https://twitter.com/cloudlinuxos/", logo: "/tw.png" },
+      { url: "https://linkedin.com/company/cloudlinux", logo: "/in.png" },
       {
         url: "https://www.youtube.com/channel/UCZ3YMHWnMP7TaxlXVay5-aw",
-        logo: "/ytube.svg"
+        logo: "/ytube.png"
       }
     ],
     cloudlinuxSite: "https://cloudlinux.com",
