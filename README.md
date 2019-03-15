@@ -4,9 +4,7 @@
 # Install dependencies
 
 ```
-$ yarn add -D vuepress
-# FIXME: need to use theme from cloudlinux.github.com
-$ yarn add -D https://github.com/cloudlinux/cloudlinux-doc-theme.git
+$ yarn
 ```
 
 # Start local server
