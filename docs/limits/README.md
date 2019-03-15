@@ -8,13 +8,13 @@ CloudLinux has support for the following limits:
 |Limits | Units | Default Value | Description | Supported Kernels / OS|
 | | % of a core, or HZ | 100% | speed limit, relative to a single core, or specified in HZ (portable across s) | all|
 |[deprecated] | % of | 25% | Limit (smallest of & NCPU is used) | all|
-|[NCPU](/cpu_limits/) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of & NCPU used) | all|
-|[PMEM](/memory_limits/) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
-|[VMEM](/memory_limits/) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
-|[IO](/io_limits/) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel, CL5 hybrid kernel|
+|[NCPU](/limits/#cpu-limits) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of & NCPU used) | all|
+|[PMEM](/limits/#memory-limits) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|[VMEM](/limits/#memory-limits) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
+|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel, CL5 hybrid kernel|
 |IOPS [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7, CL6 and CL5 hybrid kernels lve1.3+|
-|[NPROC](/number_of_processes_limit/) | number | 100 | Max number of processes within LVE | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
-|[EP](/entry_processes_limit/) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
+|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|[EP](/limits/#entry-processes) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
 
 Note. It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
 
@@ -51,7 +51,7 @@ LVE is a kernel level technology developed by the CloudLinux team. The technolog
 
 Today, a single site can consume all , IO, Memory resources or Apache processes - and bring the server to a halt. LVE prevents that. It is done via collaboration of Apache module, PAM module and kernel.
 
-[mod_hostinglimits](/hostinglimits_module_for_apache/) is Apache module that:
+[mod_hostinglimits](/limits/#hostinglimits) is Apache module that:
 
 ·        detects VirtualHost from which the request came;
 ·        detects if it was meant for CGI or PHP script;
@@ -124,7 +124,7 @@ Sets limit to 25%, IO limit to 1024KB/s, virtual memory limit to 1GB (memory lim
 
 
 
-One of the best way to monitor current usage is [lvetop](/lvetop/) :
+One of the best way to monitor current usage is [lvetop](/limits/#lvetop) :
 
 ```
 $ lvetop
@@ -147,55 +147,53 @@ Additionally you can use tool lveps to see usage, and processes within LVE.
 ## Command-line Tools
 
 
-[lvectl](/lvectl/)
+[lvectl](/limits/#lvectl)
 
-[lveps](/lveps/)
+[lveps](/limits/#lveps)
 
-[lvetop](/lvetop/)
+[lvetop](/limits/#lvetop)
 
-[cldetect](/cldetect/)
+[cldetect](/limits/#cldetect)
 
-[lve-stats](/lve_stats_old/)
+[lve-stats](/deprecated/#lve-stats-0-x)
 
-`o` [Storing statistics in MySQL](/storing_statistics_in_mysql/)
+`o` [Storing statistics in MySQL](/deprecated/#storing-statistics-in-mysql)
 
-`o` [Storing statistics in PostgreSQL](/storing_statistics_in_postgres/)
+`o` [Storing statistics in PostgreSQL](/deprecated/#storing-statistics-in-postgresql)
 
-`o` [Compacting in multi-server settings](/compacting_in_multi-server/)
+`o` [Compacting in multi-server settings](/deprecated/#compacting-in-multi-server-settings)
 
 [lve-stats 2](/lve-stats_2/)
 
-`o` [Installation](/lve-stats_2_installation/)
+`o` [Installation](/lve-stats_2/#installation)
 
-`o` [Configuration](/lve-stats_2_configuration/)
+`o` [Configuration](/lve-stats_2/#configuration)
 
-`o` [Command Line Tools](/lve-stats_2_command_line_tools/)
+`o` [Command Line Tools](/lve-stats_2/#command-line-tools)
 
-[lveinfo](/lveinfo/)
+[lveinfo](/lve-stats_2/#lveinfo)
 
-[lvechart](/lvechart/)
+[lvechart](/lve-stats_2/#lvechart)
 
-[dbgovchart](/mysql_governor_dbgovchart/)
+[dbgovchart](/mysql_governor/#dbgovchart)
 
-[lve-read-snapshot](/lve-read-snapshot/)
+[lve-read-snapshot](/lve-stats_2/#lve-read-snapshot)
 
-[lve-create-db](/lve-create-db/)
+[lve-create-db](/lve-stats_2/#lve-create-db)
 
-`o` [Plugins](/lve-stats_2_plugins/)
+`o` [Plugins](/lve-stats_2/#plugins)
 
-`o` [Creating a Plugin for LVE Stats 2](/creating_a_plugin/)
+`o` [Creating a Plugin for LVE Stats 2](/lve-stats_2/#creating-a-plugin-for)
 
-[Introduction](/lve-stats_2_plugin_introduction/)
+[Introduction](/lve-stats_2/#introduction)
 
-[Server Plugin Arrangement](/server_plugin_arrangement/)
+[Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
 
-[Plugin Configuration](/plugin_configuration/)
+[Plugin Configuration](/lve-stats_2/#plugin-configuration)
 
-[Types of Plugins](/types_of_plugins/)
+[Types of Plugins](/lve-stats_2/#types-of-plugins)
 
-[Examples of Plugins](/plugins_examples/)
-
-
+[Examples of Plugins](/lve-stats_2/#examples-of-plugins)
 
 
 
@@ -203,9 +201,11 @@ Additionally you can use tool lveps to see usage, and processes within LVE.
 
 
 
-`o` [/var/lve/info file](/var_lve_info_file/)
 
-`o` [Troubleshooting](/lve-stats_2_troubleshooting/)
+
+`o` [/var/lve/info file](/lve-stats_2/#file-info-and-format-for-var-lve-info-file)
+
+`o` [Troubleshooting](/lve-stats_2/#troubleshooting)
 
 
 ### lvectl
@@ -760,12 +760,12 @@ mod_hostinglimits works with existing modules, to put them into LVE context. In 
 
 This can be overwritten via LVEId or LVEUser parameter on the Directory level. Note that those parameters will not work with mod_fcgid and mod_cgid. The order of detection looks as follows:
 
-·         LVEId
-·        LVEUser
-·        SuexecUserGroup
+LVEId
+LVEUser
+SuexecUserGroup
 suPHP_UserGroup
-·        RUidGid
-·        AssignUserID
+RUidGid
+AssignUserID
 
 
 
@@ -909,7 +909,7 @@ Match all requests, but
 
 ```
 AllowedHandlers *
-DenyHandler %text/*%
+DenyHandlers %text/*%
 ```
 
 LVEErrorCode
@@ -1199,7 +1199,7 @@ LVERedisTimeout 120
 ### cPanel/WHM JSON API
 
 
-CloudLinux offers JSON API for [lvectl](/lvectl/) via WHM. You can access it using the following URL:
+CloudLinux offers JSON API for [lvectl](/limits/#lvectl) via WHM. You can access it using the following URL:
 
 _https:/IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list_
 
@@ -1211,7 +1211,7 @@ The output will look as follows:
 
 
 always
-should match [lvectl](/lvectl/) command
+should match [lvectl](/limits/#lvectl) command
 
 For commands like where you need to specify LVE (user) ID, like lveid=500 (matches user ID 500).
 

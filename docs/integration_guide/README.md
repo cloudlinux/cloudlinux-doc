@@ -3,11 +3,11 @@
 
 Here you will find the instructions and common techniques used to integrate your software with CloudLinux.
 
-[Detecting and Working with CloudLinux](/detecting/) .
+[Detecting and Working with CloudLinux](/integration_guide/#detecting-and-working-with-cloudlinux) .
 
-[Displaying ](/cpu_memory_iolimits/) [ limits.](/cpu_memory_iolimits/)
+[Displaying ](/integration_guide/#displaying-cpu-memory-io-limits) [ limits.](/integration_guide/#displaying-cpu-memory-io-limits)
 
-[Integrating LVE Limits with Packages.](/lve_limits_with_packages/)
+[Integrating LVE Limits with Packages.](/integration_guide/#integrating-lve-limits-with-packages)
 
 
 

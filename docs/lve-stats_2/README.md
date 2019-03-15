@@ -1334,13 +1334,13 @@ service lvestats restart
 ## Creating a Plugin for 
 
 
-[Introduction](/lve-stats_2_plugin_introduction/)
+[Introduction](/lve-stats_2/#introduction)
 
-[Server Plugin Arrangement](/server_plugin_arrangement/)
+[Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
 
-[Plugin Configuration](/plugin_configuration/)
+[Plugin Configuration](/lve-stats_2/#plugin-configuration)
 
-[Types of Plugins](/types_of_plugins/)
+[Types of Plugins](/lve-stats_2/#types-of-plugins)
 
 
 

@@ -1,9 +1,31 @@
 # Deprecated
 
 
-[LVE-Stats 0.x](/lve_stats_old/)
+[Git for cPanel](/deprecated/#git-for-cpanel)
+[LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
+[OptimumCache](/deprecated/#optimumcache)
 
-[OptimumCache](/optimumcache/)
+## Git for cPanel
+
+
+
+
+
+_Please note that this package is no longer needed, as since cPanel 11.38, you can install git without any issues on cPanel by running:_
+
+
+```
+$ yum install git
+```
+
+
+To install [git](http://git-scm.com/) on cPanel servers:
+
+
+```
+$ yum install git-cpanel
+```
+
 
 ## LVE-Stats 0.x
 

@@ -27,8 +27,8 @@ At the same time, user's environment will be fully functional, and user should n
 
 Minimum Requirements:
 
-·        kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
-·        7GB of disk space.
+kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
+7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
 Up to 8MB per customer in /var directory (to store custom /etc directory)
@@ -52,27 +52,30 @@ $ mkdir /home/cagefs-skeleton
 $ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
 ```
 
-On cPanel servers, if you will be placing skeleton into /home directory, you must configure the following option in:
-cPanel WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories
-Change the value to blank  (not default "home")
-Without changing this option, cPanel will create new accounts in incorrect places.
+
+
+
 
 CageFS will automatically detect and configure all necessary files for:
-·        cPanel
-·        Plesk
-·        DirectAdmin
-·        ISPmanager
-·        Interworx
-·        MySQL
-·        PostgreSQL
-·        LiteSpeed
+cPanel
+Plesk
+DirectAdmin
+ISPmanager
+Interworx
+MySQL
+PostgreSQL
+LiteSpeed
 
 Web interface to manage CageFS is available for cPanel, Plesk 10+, DirectAdmin, ISPmanager & Interworx. Command line tool would need to be used for other control panels.
 
 Once you initialized the template you can start enabling users. By default CageFS is disabled for all users.
 
-When installing/upgrading, the fs.proc_can_see_other_uid parameter is set to 0 if it is available in /etc/sysctl.conf, but then it will be written to /etc/sysctl.d/90-cloudlinux.conf.
-We recommend set fs.proc_can_see_other_uid=0 to activate protection with hidepid option.
+Starting from **cagefs-6.1-27**  _fs.proc_can_see_other_uid_ will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
+
+It is strongly advised against setting this variable in _90-cloudlinux.conf_ . Define it in _/etc/sysctl.conf_ or in some other config file with an index number greater than _90-cloudlinux.conf_ , e.g. _/etc/sysctl.d/95-custom.conf_ .
+
+You can find more information on _fs.proc_can_see_other_uid_ automatic migration in [Kernel Config Variables](/kernel_settings/#kernel-config-variables) .
+
 
 ## Unistalling CageFS
 
@@ -303,7 +306,7 @@ _/bin/cagefs_enter.proxied_ can be executed instead of _/bin/cagefs_enter_ to en
 
 CageFS utility allows to check CageFS configuration consistency, so that an administrator can save the time investigating issues with CageFS and ensure that custom configuration is correct.
 
-To start run the command:
+To start, run the command:
 
 ```
 cagefsctl --sanity-check
@@ -321,11 +324,15 @@ _Check cagefs disable.etcfs exists_ - checks if exists.
 
 _Check cagefs users can enter cagefs_ - chooses two users in the system with enabled CageFS (the first and the second ones in the unsorted list) and tries to log in to CageFS under their credentials and see what happens. It runs and compares the output with the and command retcode estimation.
 
-**Note.**  _If log in fails, it can be on different reasons, that can only be determined in manual mode. The checker only gives the output of the command._
 
-_Check cagefs proxy commands configs are parsable_ - tries to load files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more visit [https://docs.cloudlinux.com/index.html?executing_by_proxy.html](https://docs.cloudlinux.com/index.html?executing_by_proxy.html) .
 
-_Check cagefs virt.mp files syntax_ - reads all files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more visit [https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html](https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html)
+
+
+_Check cagefs proxy commands configs are parsable_ - tries to load files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [https://docs.cloudlinux.com/index.html?executing_by_proxy.html](https://docs.cloudlinux.com/index.html?executing_by_proxy.html) .
+
+_Check cagefs virt.mp files syntax_ - reads all files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html](https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html)
+
+_Check MultiPHP system default PHP version – _ checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means PHP Selector should work properly. If MultiPHP system default PHP version is Alt-PHP, PHP Selector does not work and should be disabled. To learn more on how to disable PHP Selector, visit [https://docs.cloudlinux.com/cpanel_lve_manager.html](https://docs.cloudlinux.com/cpanel_lve_manager.html) 
 
 Possible results of the checks:
 
@@ -355,37 +362,37 @@ CageFS installation changes jailshell to regular bash on cPanel - [read why](htt
 ## Configuration
 
 
-[File System Templates](/file_system_templates/)
+[File System Templates](/cagefs/#file-system-templates)
 
-[Excluding Files](/excluding_files/)
+[Excluding Files](/cagefs/#excluding-files)
 
-[Excluding Users](/excluding_users/)
+[Excluding Users](/cagefs/#excluding-users)
 
-[Mount Points](/mount_points/)
+[Mount Points](/cagefs/#mount-points)
 
-`o` [Per user virtual mount points](/per_user_virtual_mount_points/)
+`o` [Per user virtual mount points](/cagefs/#per-user-virtual-mount-points)
 
-`o` [Split by Username](/split_by_username/)
+`o` [Split by Username](/cagefs/#split-by-username)
 
-[Base Home Directory](/base_home_directory/)
+[Base Home Directory](/cagefs/#base-home-directory)
 
-[PostgreSQL support](/postgresql_support/)
+[PostgreSQL support](/cagefs/#postgresql-support)
 
-[PAM Configuration](/pam_configuration/)
+[PAM Configuration](/cagefs/#pam-configuration)
 
-[Executing By Proxy](/executing_by_proxy/)
+[Executing By Proxy](/cagefs/#executing-by-proxy)
 
-[Custom /etc directory](/custom__etc_directory/)
+[Custom /etc directory](/cagefs/#custom-etc-files-per-customer)
 
-[Moving cagefs-skeleton directory](/moving_cagefs-skeleton_directory/)
+[Moving cagefs-skeleton directory](/cagefs/#moving-cagefs-skeleton-directory)
 
-[Moving /var/cagefs directory](/moving__var_cagefs_directory/)
+[Moving /var/cagefs directory](/cagefs/#moving-var-cagefs-directory)
 
-[TMP directories](/tmp_directories/)
+[TMP directories](/cagefs/#tmp-directories)
 
-[Syslog](/syslog/)
+[Syslog](/cagefs/#syslog)
 
-[Excluding mount points](/excluding_mount_points/)
+[Excluding mount points](/cagefs/#excluding-mount-points)
 
 
 ### File System Templates
@@ -497,7 +504,7 @@ a.        list of such directories is defined in /etc/cagefs/cagefs.mp
 4.        Separate /etc directory is created and populated for each user inside
 5.        /tmp directory is mounted for each user separately into
 6.        Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
-7. You can define custom directories per user using [virt.mp](/per_user_virtual_mount_points/) files [CageFS 5.1 and higher]
+7. You can define custom directories per user using [virt.mp](/cagefs/#per-user-virtual-mount-points) files [CageFS 5.1 and higher]
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
 
@@ -1018,7 +1025,7 @@ After that directories and _ _ inside CageFS  will be cleaned automatically.
 
 Note that actual location of those directories in real file system is and .
 
-**Cleanup of PHP sessions**
+**Cleanup PHP sessions**
 
 For cPanel servers, CageFS version 6.0-42 or higher performs cleaning of PHP sessions based on and directives specified in proper files.
 
@@ -1057,7 +1064,7 @@ The cleaning script cleans php sessions for all PHP versions ( and ) regardless 
 
 Users can define custom value of _ _ via PHP Selector in order to configure PHP's garbage collector, but that will not affect the script for cleaning PHP sessions. The script cleans PHP sessions based on global values of and directives taken from files mentioned above. Settings in custom users’ files are ignored.
 
-**Cleanup of PHP session files in Plesk**
+**Cleanup PHP session files in Plesk**
 
 For Plesk servers, version 6.0-52 or higher is provided with a special cron job for removing obsolete PHP session files. Cleanup script runs once an hour (similar to how it is done in Plesk).
 
@@ -1078,6 +1085,12 @@ in all the detected directories, all the files with the names that correspond to
 the files older than specified lifetime are removed.
 
 all non-fatal errors (lack of rights, missing directory) are ignored and do not affect the further work of the script.
+
+**Disable PHP sessions cleanup on cPanel and Plesk**
+
+Here is a possible workaround for PHP session expiration problem (session lives longer than it is possible in a control panel). To use your own custom PHP sessions cleanup scripts - you can turn off built-in sessions cleanup implementation in the following way: 
+add **clean_user_php_sessions=false** line to **/etc/sysconfig/cloudlinux** .
+
 
 
 ### Syslog
@@ -1134,7 +1147,7 @@ The plugin allows to:
 
 ·        Initialize CageFS;
 
-·        Select [mode of operation](/managing_users/) ;
+·        Select [mode of operation](/cagefs/#managing-users) ;
 
 ·        See and modify the list of enabled/disabled users;
 

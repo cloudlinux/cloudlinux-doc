@@ -3,9 +3,13 @@ const urls = require("./urls-mapping.js");
 module.exports = {
   base: "/",
   head: [
-    ['link', {
-      rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
-    }]
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/icon?family=Material+Icons"
+      }
+    ]
   ],
   locales: {
     // The key is the path for the locale to be nested under.
@@ -14,7 +18,7 @@ module.exports = {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
       description: "Kernelcare documentation"
-    },
+    }
     // TODO: temporary!
     // "/ru/": {
     //   lang: "ru",
@@ -30,15 +34,7 @@ module.exports = {
     sidebarDepth: 2,
     logo: "/logo.svg",
     try_free: "https://cloudlinux.com/trial",
-    bottomLinks: [
-      { text: "How to", url: "#" },
-      { text: "Getting started", url: "#" },
-      {
-        text: "Contact support",
-        url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
-      },
-      { text: "Blog", url: "https://www.cloudlinux.com/blog" }
-    ],
+
     social: [
       { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.png" },
       { url: "https://twitter.com/cloudlinuxos/", logo: "/tw.png" },
@@ -51,6 +47,16 @@ module.exports = {
     cloudlinuxSite: "https://cloudlinux.com",
     locales: {
       "/": {
+        bottomLinks: [
+          { text: "How to", url: "#" },
+          { text: "Getting started", url: "#" },
+          {
+            text: "Contact support",
+            url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
+          },
+          { text: "Blog", url: "https://www.cloudlinux.com/blog" }
+        ],
+
         // text for the language dropdown
         selectText: "Languages",
         // label for this locale in the language dropdown
@@ -65,11 +71,11 @@ module.exports = {
           }
         },
         // algolia docsearch options for current locale
-        algolia: {
-          apiKey: 'c81913402fd913c6851439a56d3ad963',
-          indexName: 'cloudlinux',
-          appId: 'HU6RMR9IB4'
-        },
+        // algolia: {
+        //   apiKey: 'c81913402fd913c6851439a56d3ad963',
+        //   indexName: 'cloudlinux',
+        //   appId: 'HU6RMR9IB4'
+        // },
 
         sidebar: [
           {

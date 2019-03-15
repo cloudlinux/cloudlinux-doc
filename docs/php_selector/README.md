@@ -11,7 +11,7 @@ It is **not compatible** with , including and
 
 
 
-## Installation
+## Installation and Update
 
 
 The installation of
@@ -47,10 +47,37 @@ Those are default locations for .
 
 If you need custom PHP settings per user, please change them via " " feature of .
 
+If a list of default modules is absent on the server in the _/etc/cl.selector/defaults.cfg_ file for some alt-PHP version and there is _nd_mysqli_ extension in this version, then on installation/update of the LVE Manager, the _mysqli_ extension will be disabled and _nd_mysqli_ extension will be enabled automatically.
+
+If _ nd_mysqli_ module is absent or a list of enabled modules is available, then they won't be changed automatically.
+If alt-PHP is not installed on LVE Manager installation/update, then they won’t be changed automatically.
+
+To change the modules status (enabled/disabled) manually, run the following command in a console:
+
+```
+# /usr/sbin/cloudlinux-selector make-defaults-config --json --interpreter=php
+```
+
+
+To update PHP Selector, run the following command:
+
+```
+yum groupupdate
+```
+
+This command allows to install newly released versions in PHP Selector.
+
 ### LiteSpeed support
 
 
-To enable with follow [installation guide](/php_selector_installation/) , and then adjust following settings in :
+
+
+
+If the settings were not applied, you can use the following steps to set up LiteSpeed to use PHP Selector.
+
+
+
+To enable with follow [installation guide](/php_selector/#installation-and-update) , and then adjust following settings in :
 
 
 Enable
@@ -76,6 +103,17 @@ Go to tab. For required suffixes change the to .
 
 
 ![](/images/litespeed5_zoom70.png)
+
+
+Go to tab. Click in the section. We recommend to set up the following settings:
+
+Set in the
+Make sure to set  _ _  ![](/images/litespeed_4_zoom70.png)
+
+
+
+
+
 
 
 
@@ -131,21 +169,21 @@ You might need to edit/modify wrappers for existing users if you want them to be
 ## Configuration
 
 
-[Setting default version and modules](/default_version_and_modules/)
+[Setting default version and modules](/php_selector/#setting-default-version-and-modules)
 
-[Individual PHP.ini files](/individual_php_ini_files/)
+[Individual PHP.ini files](/php_selector/#individual-php-ini-files)
 
-[Substitute global php.ini for individual customer](/substitute_global_php_ini/)
+[Substitute global php.ini for individual customer](/php_selector/#substitute-global-php-ini-for-individual-customer)
 
-[Managing interpreter version](/managing_interpretor_version/)
+[Managing interpreter version](/php_selector/#managing-interpreter-version)
 
-[Including ](/php_selector_only_with_some_packages/) [ only with some packages (](/php_selector_only_with_some_packages/) [)](/php_selector_only_with_some_packages/)
+[Including ](/php_selector/#including) [ only with some packages (](/php_selector/#including) [)](/php_selector/#including)
 
-[PHP Extensions](/php_extensions/)
+[PHP Extensions](/php_selector/#php-extensions)
 
-[FFmpeg](/ffmpeg/)
+[FFmpeg](/php_selector/#ffmpeg)
 
-[Native PHP Configuration](/native_php_configuration/)
+[Native PHP Configuration](/php_selector/#native-php)
 
 
 
@@ -618,13 +656,27 @@ echo $OPTIONS
 ## Removing 
 
 
-Once alternative versions of PHP are removed, will be disabled.
+It is not possible to remove PHP Selector from the system completely as it is an essential part of LVE Manager and CageFS packages. However, you can make PHP Selector unavailable for cPanel and Plesk users.
 
-To do that, run:
+To do so, go to _LVE Manager → PHP Selector_ and check _Disabled_ as PHP Selector status. Doing so allows you to disable web-interface of the PHP Selector in the user interface but does not reset custom settings (choosing a version of PHP and modules).
+
+To disable PHP Selector and make it has no effect on a PHP version on the sites, run the following command:
+
+this command resets PHP versions to Native:
 
 ```
-$ yum groupremove alt-php
+cagefsctl --cl-selector-reset-versions
 ```
+
+this command resets PHP modules to Default:
+
+```
+cagefsctl --cl-selector-reset-modules
+```
+
+
+
+
 
 
 ## Using 
@@ -719,20 +771,21 @@ Sometimes you might want to compile your own PHP extension for your users to use
 
 If you have decided that you want to build it on your own, you would need to build it for each and every supported version of PHP that you have installed. The module installation process is a bit different from standard - you would need to use the version of phpize and php-config binaries that come with particular version.
 
-The full process for PHP 5.X looks as follows:
+The full process for PHP 5.X and 7.X looks as follows:
 
 1. Download and unpack extension, cd into it's directory.
 
 2. Execute our version of phpize if necessary:
 
 ```
-/opt/alt/php5X/usr/bin/phpize
+/opt/alt/phpXX/usr/bin/phpize
 ```
+
 
 3. Execute configure with our binary:
 
 ```
-./configure --with-php-config=/opt/alt/php5X/usr/bin/php-config
+./configure --with-php-config=/opt/alt/phpXX/usr/bin/php-config
 ```
 
 4. Make the file:
@@ -744,7 +797,7 @@ make
 5. Copy it to the modules directory (on 32-bit server, use ).
 
 ```
-cp -rp modules/*.so /opt/alt/php5X/usr/lib64/php/modules/
+cp -rp modules/*.so /opt/alt/phpXX/usr/lib64/php/modules/
 ```
 
 6. Add ini file for module to
@@ -980,16 +1033,17 @@ The latter command has the same effect as
 
 Large number of PHP extensions are bundled with each version of PHP:
 
-[PHP 4.4](/php_4_4_extensions/)
-[PHP 5.1](/php_5_1_extensions/)
-[PHP 5.2](/php_5_2_extensions/)
-[PHP 5.3](/php_5_3_extensions/)
-[PHP 5.4](/php_5_4_extensions/)
-[PHP 5.5](/php_5_5_extensions/)
-[PHP 5.6](/php_5_6_extensions/)
-[PHP 7.0](/php_7_0_extensions/)
-[PHP 7.1](/php_7_1_extensions/) 
-[PHP 7.2](/php_7_2_extensions/)
+[PHP 4.4](/php_selector/#php-4-4-extensions)
+[PHP 5.1](/php_selector/#php-5-1-extensions)
+[PHP 5.2](/php_selector/#php-5-2-extensions)
+[PHP 5.3](/php_selector/#php-5-3-extensions)
+[PHP 5.4](/php_selector/#php-5-4-extensions)
+[PHP 5.5](/php_selector/#php-5-5-extensions)
+[PHP 5.6](/php_selector/#php-5-6-extensions)
+[PHP 7.0](/php_selector/#php-7-0-extensions)
+[PHP 7.1](/php_selector/#php-7-1-extensions) 
+[PHP 7.2](/php_selector/#php-7-2-extensions)
+[PHP 7.3](/php_selector/#php-7-3-extensions)
 
 
 
@@ -1113,6 +1167,18 @@ Please find more info about in the [ documentation](https://docs.newrelic.com/do
 
 
 
+### PHP 7.3 Extensions
+
+
+
+| |  |  |  | |
+|-|--|--|--|-|
+|apcu bcmath dba dbase dom eio enchant fileinfo gd gender geoip gmagick gnupg grpc http  | igbinary imagick imap inotify interbase intl json ldap lzf mailparse mbstring memcached mongodb mysqlnd nd_mysqli | nd_pdo_mysql newrelic oauth oci8 odbc opcache pdf pdo pdo_dblib pdo_firebird pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pdo_sqlsrv pgsql | phar posix propro pspell raphf redis snmp soap sockets sqlsrv ssh2 stats sysvmsg sysvsem sysvshm tidy | timezonedb trader uploadprogress uuid vips wddx xdebug xmlreader xmlrpc xmlwriter xsl yaf yaml zip zmq|
+
+
+* Please note that to use extension you should set your own in your own file.
+Please find more info about in the [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) .
+
 ## Disabling PHP extension globally
 
 
@@ -1126,7 +1192,7 @@ Reinstalling of packages will not reset settings (will not enable extension agai
 ## Control Panel Integration
 
 
-[cPanel](/php_selector_cpanel/)
+[cPanel](/php_selector/#php-selector)
 
 ### PHP Selector
 

@@ -1,6 +1,42 @@
 # Installation
 
-[[toc]]
+
+[Converting existing servers](/cloudlinux_installation/#converting-existing-servers)
+
+`o` [Advanced Options for cldeploy](/cloudlinux_installation/#advanced-options-for-cldeploy)
+
+`o` [Explanation Of Changes](/cloudlinux_installation/#explanation-of-changes)
+
+[Installing new servers](/cloudlinux_installation/#installing-new-servers)
+
+[CloudLinux OS Images](/cloudlinux_installation/#cloudlinux-os-images)
+
+`o` [Xen Images](/cloudlinux_installation/#xen-images)
+
+[Net Install](/cloudlinux_installation/#net-install)
+
+[Installing on H-Sphere Server](/cloudlinux_installation/#)
+
+`o` [Converting from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid)
+
+[Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
+
+[Getting Trial License](/cloudlinux_installation/#getting-trial-license)
+
+[Registering CloudLinux Server](/cloudlinux_installation/#registering-cloudlinux-server)
+
+[CloudLinux on DigitalOcean](/cloudlinux_installation/#cloudlinux-on-digitalocean)
+
+[CloudLinux on Linode](/cloudlinux_installation/#cloudlinux-on-linode)
+
+[Servers with LILO boot loader](/cloudlinux_installation/#servers-with-lilo-boot-loader)
+
+[cPanel EasyApache 4](/cloudlinux_installation/#migrating-to-easyapache-4)
+
+[Uninstalling CloudLinux](/cloudlinux_installation/#uninstalling-cloudlinux)
+
+Updated: 15/03/19
+
 
 ## Converting Existing Servers
 
@@ -27,7 +63,7 @@ $ reboot
 
 Once you have rebooted, you are running CloudLinux kernel with LVE enabled.
 
-The script automatically detects and supports the following control panels: cPanel with EA3, Plesk, DirectAdmin, InterWorx. It will install CloudLinux kernel, [Apache module](/hostinglimits_module_for_apache/) , [PAM module](/pam_configuration/) , [command line tools](/advanced_options_for_cldeploy/) as well as LVE Manager.
+The script automatically detects and supports the following control panels: cPanel with EA3, Plesk, DirectAdmin, InterWorx. It will install CloudLinux kernel, [Apache module](/limits/#hostinglimits) , [PAM module](/cagefs/#pam-configuration) , [command line tools](/cloudlinux_installation/#advanced-options-for-cldeploy) as well as LVE Manager.
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
@@ -129,18 +165,18 @@ On DirectAdmin servers, rebuild of Apache with custombuild will complete the con
 You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
 
 
-x86_64 version: [http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.5.iso](http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.5.iso)
-_Last Updated: May 14, 2018_
+x86_64 version: [http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso](http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso)
+_Last Updated: November 13, 2018_
 
 
-x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.9-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.9-x86_64-DVD.iso)
-i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.9-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.9-i386-DVD.iso)
-Last Updated: April 6, 2017
+x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
+i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
+_Last Updated: July 05, 2018_
 
 
 x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
 i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-Last Updated: Oct 10, 2014
+_Last Updated: Oct 10, 2014_
 
 
 
@@ -159,7 +195,7 @@ Last Updated: Oct 10, 2014
 
 [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
 
-[Xen](/xen_images/)
+[Xen](/cloudlinux_installation/#xen-images)
 
 ### Xen Images
 
@@ -241,7 +277,7 @@ To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cl
 2. Apache 2.2.x or 1.3.
 3. mod_suexec should be enabled.
 
-To achieve optimal performance, we recommend to [convert from mod_fastcgi to mod_fcgid](/mod_fastcgi_to_mod_fcgid/)
+To achieve optimal performance, we recommend to [convert from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid)
 
 
 
@@ -284,7 +320,7 @@ fi
 strings. Restart Apache afterward.
 
 
-* don't forget to [convert from mod_fastcgi to mod_fcgid](/mod_fastcgi_to_mod_fcgid/)
+* don't forget to [convert from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid)
 
 ### Converting from mod_fastcgi to mod_fcgid
 
@@ -529,7 +565,7 @@ To get the activation key:
 
 You will get a key that looks like: 12314-d34463a182fede4f4d7e140f1841bcf2
 
-Use it to register your system or to [convert CentOS server to CloudLinux](/converting_existing_servers/) server.
+Use it to register your system or to [convert CentOS server to CloudLinux](/cloudlinux_installation/#converting-existing-servers) server.
 
 
 ## Registering CloudLinux Server
@@ -780,7 +816,7 @@ To restore EA3 with mod_lsapi:
 sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 ```
 
-[Frequently asked questions (FAQ)](/faq/)
+[Frequently asked questions (FAQ)](/cloudlinux_installation/#faq)
 
 ### FAQ
 

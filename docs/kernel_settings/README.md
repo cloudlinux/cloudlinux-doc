@@ -1,39 +1,39 @@
 # Kernel Settings
 
 
-[Kernel Config Variables](/kernel_config_variables/)
+[Kernel Config Variables](/kernel_settings/#kernel-config-variables)
  
-[Virtualized /proc filesystem](/virtualized_proc_filesystem/)
+[Virtualized /proc filesystem](/kernel_settings/#virtualized-proc-filesystem)
 
-[SecureLinks](/securelinks/)
+[SecureLinks](/kernel_settings/#securelinks)
 
-`o` [Symlink Owner Match Protection](/symlink_owner_match_protection/)
+`o` [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection)
 
-`o` [Link Traversal Protection](/link_traversal_protection/)
+`o` [Link Traversal Protection](/kernel_settings/#link-traversal-protection)
 
-[ptrace Block](/ptrace_block/)
+[ptrace Block](/kernel_settings/#ptrace-block)
 
-[Xen XVDA detection](/xen_xvda_detection/)
+[Xen XVDA detection](/kernel_settings/#xen-xvda)
 
-[TPE Extension](/tpe_extension/)
+[TPE Extension](/kernel_settings/#tpe-extension-deprecated)
 
-[IO Limits latency](/iolimits_latency/)
+[IO Limits latency](/kernel_settings/#io)
 
-[Hybrid Kernel](/hybrid_kernel/)
+[Hybrid Kernel](/kernel_settings/#hybrid-kernel)
 
-[Reading LVE usage](/reading_lve_usage/)
+[Reading LVE usage](/kernel_settings/#reading)
 
-[flashcache](/flashcache/)
+[flashcache](/kernel_settings/#flashcache)
 
-[OOM Killer for LVE Processes](/oom_killer_for_lve_processes/)
+[OOM Killer for LVE Processes](/kernel_settings/#oom-killer)
 
-[File System Quotas](/file_system_quotas/)
+[File System Quotas](/kernel_settings/#file-system-quotas)
 
 
 ## Kernel Config Variables
 
 
-Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config _/etc/sysctl.d/90-cloudlinux.conf _ (earlier, the parameters were read/written only from _sysctl.conf_ ).
+Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config _ _ (earlier, the parameters were read/written only from ).
 
 CloudLinux OS utilities get parameter by using _sysctl_ system utility. So for now, even if a config variable is not set in the _sysctl.conf_ and in the _/etc/sysctl.d_ config files, this variable will be read by _sysctl_ utility directly from _/proc/sys_ .
 
@@ -44,6 +44,15 @@ sysctl --system
 ```
 
 to apply the parameters before reading and after writing.
+
+Starting from ** cagefs-6.1-27**  will be migrated (one time) from into . If this variable is not set in either file, it will default to 0.
+It is strongly advised against setting this variable in . Define it in or in some other config file with an index number greater than , e.g. .
+
+Starting from **lve-utils-3.0-23.7**  and will be migrated (one time) from into .
+
+For **lve-utils** versions from 3.0-21.2 to 3.0-23.7 the migration was performed the same way, but during every package install/update.
+Variables setting guidelines are the same as for CageFS (see above).
+
 
 
 ## Virtualized /proc filesystem
@@ -70,7 +79,7 @@ If fs.proc_can_see_other_uid is set to 0, users will not be able to see special 
 
 fs.proc_super_gid=XX
 
-The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/cldetect/) can configure few most commonly used monitoring software automatically.
+The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/limits/#cldetect) can configure few most commonly used monitoring software automatically.
 
 Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
 

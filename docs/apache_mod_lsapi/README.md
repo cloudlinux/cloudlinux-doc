@@ -1,386 +1,799 @@
-# Apache mod_lsapi
+# Apache mod_lsapi PRO
 
 
-Apache mod_lsapi is a module based on LiteSpeed Technologies API for PHP. It offers excellent PHP performance, low memory footprint coupled with great security and support for opcode caching.
+mod_lsapi PRO is an [Apache HTTP Server](https://httpd.apache.org/) module based on [LiteSpeed Technologies API](https://www.litespeedtech.com/open-source/litespeed-sapi) . It serves to execute PHP scripts on a web-server by analogy with other modules like mod_suphp, php-fpm, mod_php. However, mod_lsapi PRO usage offers excellent PHP performance, low memory footprint coupled with great security and support for opcode caching.
 
 
-
-mod_lsapi is a part of Apache;
-Apache passes handling for PHP request to mod_lsapi;
-mod_lsapi uses liblsapi to transfers request lsphp daemon;
-lsphp processes request and return data to mod_lsapi;
-each user has lsphp processes in separate CageFS/LVE;
-If there is no requests for lsapi_backend_pgrp_max_idle seconds, lsphp process is terminated;
-If no lsphp processes available when new request comes, new lsphp process is created;
-lsphp can process lsapi_backend_children requests simultaneously.
-
-
+Apache passes handling for PHP request to mod_lsapi PRO;
+mod_lsapi PRO use liblsapi to transfer request to lsphp parent process;
+lsphp is forking child process which executes the request and returns data to mod_lsapi PRO;
 ![](/images/mod_lsapidiagrammnew.jpg)
+_mod_lsapi PRO integrates with Apache, allows to handle concurrent requests and manages the lsphp processes_
+
+If there are no requests for lsapi_backend_pgrp_max_idle seconds, lsphp parent process will be  terminated;
+If there are no lsphp child processes available when a new request comes, the new lsphp child process will be created;
+lsphp childs process concurrent requests simultaneously;
+The maximum number of simultaneously running lsphp child processes can be set by the lsapi_backend_children directive.
+
+
+lsphp - PHP + LSAPI. What is PHP LSAPI? [LiteSpeed Server Application Programming Interface](https://www.litespeedtech.com/open-source/litespeed-sapi/php) (LSAPI) is designed specifically for seamless, optimized communication between LiteSpeed Web Server and third-party web applications. Now with mod_lsapi PRO this protocol is available for Apache 2.2/2.4.
+
+Using mod_lsapi PRO, we have seen the higher performance than Apache with mod_php, easier installation than php-fpm and easier integration with any control panel. mod_lsapi PRO means faster and more stable dynamic web pages.
 
 
 
-lsphp - PHP + LSAPI. What is LSAPI? LiteSpeed Server Application Programming Interface (LSAPI) is designed specifically for seamless, optimized communication between LiteSpeed Web Server and third party web applications. Now this protocol is available for Apache 2.2/2.4.
+Currently, the mod_lsapi is not compatible with:
 
-Using LSAPI, we have seen higher performance than Apache with mod_php, easier installation than php-fpm and easier integration with any control panel. LSAPI means faster and more stable dynamic web pages.
-
-
-
-CageFS (installed and initialized) - optional, mod_lsapi can work without CageFS
-Alt-PHP (optional for EasyApache 4 and for DirectAdmin)
-ea-php (for EasyApache 4 only)
-Apache with SuExecuUserGroup directive for each user's VirtualHost
-mod_ruid2 disabled
-apache itk disabled
+Apache mod_ruid2 - should be disabled;
+Apache mod_itk - should be disabled;
 
 
 
-| |  | |
-|-|--|-|
-|**Options** | **Description** | **Level**|
-| | mod_php emulation | httpd.conf, virtualhost, htaccess|
-| | Switching mod_lsapi handler on or off | httpd.conf|
-| | number of usec to wait while lsPHP starts (if not started on request) | httpd.conf|
-| | number of retries to connects to lsPHP daemon | httpd.conf|
-| | httpd.conf, On - stop lsphp services on apache restart, Off - leave live started lsphp services on apache restart (for php+opcache). The lsphp will not restart, even if Apache gets restarted. | httpd.conf|
-| | sets env variable LSAPI_CHILDREN # Maximum number of simultaneously running child backend processes. # Optional, a default value is equal to EP. # min value is 2; max value is 10000. If var value is more, 10000 will be used. | httpd.conf|
-| | sets env variable LSAPI_MAX_PROCESS_TIME # Optional. Default value is 300. # Timeout to kill runaway processes | httpd.conf|
-| | sets env variable LSAPI_PGRP_MAX_IDLE, in seconds. # Controls how long a control process will wait for a new request before it exits. # 0 stands for infinite. # Optional, default value is 30. # Should be more or equal to 0. | httpd.conf|
-| | enable debugging for mod_lsapi, acceptable values: on/off | httpd.conf|
-| | Path to back end lsphp sockets. By default /var/run/mod_lsapi  | httpd.conf|
-| | Invoke master lsPHP process not per VirtualHost but per account | httpd.conf|
-| | Sets PHPRC env variaable | httpd.conf, virtualhost|
-| | Set user & group for requests  | httpd.conf, virtualhost, directory |
-| | Set user id & group id for requests  | httpd.conf, virtualhost, directory|
-| | Use default apache UID/GID if no uid/gid set. Values: On/Off. If Off, and no UID/GID set, error 503 will be returned. Default - Off   | httpd.conf|
-| | check target PHP script permissions. If set to On, lsapi will check that script is owned by the same user, as user under which it is being executed. Return 503 error if they don't match. Default: Off | httpd.conf|
-| | Time to wait for response from the lsphp daemon, in seconds. 0 stands for infinity. For preventing long running processes which can use EP (limit number of entry processes). Default value is 300.  | httpd.conf|
-| | env variable LSAPI_ALLOW_CORE_DUMP (On or Off). Pass LSAPI_ALLOW_CORE_DUMP to lsphp or not. If it will be passed - core dump on lsphp crash will be created. # Off by default # By default a LSAPI application will not leave a core dump file when crashed. If you want to have # LSAPI PHP dump a core file, you should set this environment variable. If set, regardless the # value has been set to, core files will be created under the directory that the PHP script in. LSAPI_ALLOW_CORE_DUMP | httpd.conf|
-| | On/Off - disable php_* directives, default On. | httpd.conf, virtualhost, htaccess|
-| | On/Off - disable enable connect pool, default Off | httpd.conf|
-| | It is relevant only with lsapi_with_connection_pool option switched on. Controls how long a worker process will wait for a new request before it exits. | httpd.conf|
-| | It is relevant only with lsapi_with_connection_pool option switched on. Controls how many requests a worker process will process before it exits. | httpd.conf|
-| | Pass env variable to lsphp. By default lsphp environment have only TEMP, TMP and PATH variables set. Example: lsapi_set_env TMP "/var/lsphp-tmp" Note: PATH env var default "/usr/local/bin:/usr/bin:/bin" cannot be changed because of security reasons. To change it, use explicitly lsapi_set_env_path option | httpd.conf|
-| | Change PATH variable in the environment of lsPHP processes. | httpd.conf|
-| | Check or not permissions of target php scripts | httpd.conf|
-| | Check or not the owner of DOCUMENT ROOT | httpd.conf|
-| | Enable .user.ini files for backend. Same as suphp, php-fpm and fcgid mechanism of .user.ini. Default value is Off | httpd.conf, virtualhost|
-| | On/Off. If lsapi_enable_user_ini option is set to On, then enable/disable processing .user.ini file in home directory also. Default value is Off | httpd.conf, virtualhost|
-| | Enable/disable CRIU for lsphp freezing. Can be: On/Off. Default: Off | httpd.conf|
-| | Set path to socket for communication with criu service [should be path] - default: /var/run/criu/criu_service.socket | httpd.conf|
-| | Enable/disable flag for notification about lsphp started. This method avoid cycles of waiting for lsphp start/ Can be: On/Off. Default: On | httpd.conf|
-| | Number of request when lsphp should be freezed. Should be [number] - default 0 | httpd.conf|
-| | Method of requests counting. Off - use shared memory. Signals - use signals from child processes to parent. Default: Off | httpd.conf|
-| | Path to folder where imgs of freezed PHP will be stored. Should be path. Default: /var/run/mod_lsapi/ | httpd.conf|
-| | Disabling HTTP responses buffering on Apache level. On - enable buffering. Off - disable buffering | httpd.conf, virtualhost, htaccess|
-| | can be used only when lsapi_backend_use_own_log is On. On - backend processes of the all virtual hosts will share the common log file. Off - every virtual host will have its own backend log file. | httpd.conf, virtualhost|
-| | Redirecting log output of backend processes from Apache error_log to dedicated log file or files, depending on value of lsapi_backend_common_own_log option. | httpd.conf, virtualhost|
-| | Enable or disable phpini_* directive processing. Default value is Off | httpd.conf, virtualhost, directory|
-| | When lsapi_process_phpini option switched to Off, these values will be silently ignored. lsapi_phpini values with absolute filename of php.ini file can be inserted into .htaccess files in order to set custom php.ini which will override/complement settings from system default php.ini. | httpd.conf, virtualhost, directory|
-| | Acceptable values: on/off: If a new HTTP request is coming to LSPHP daemon when all LSPHP workers are still busy, it can process this situation in two different ways. In REJECT mode LSPHP daemon will reject such request immediately. Otherwise, in legacy mode LSPHP daemon will put this request into infinite queue, until one or more LSPHP daemon becomes free. When HTTP request is rejected in REJECT mode, mod_lsapi will write into Apache error_log the following message: Connect to backend rejected, and client will receive 507 HTTP response.  By default LSPHP daemon in CloudLinux uses REJECT mode. It can be switched off with this option. | httpd.conf, virtualhost|
-| | Enable or disable a mechanism to avoid creation of zombie processes by lsphp. Default value is Off. | httpd.conf, virtualhost|
-| | To disable addition of PWD variable. Default value is Off. If set to On, the PWD variable will not be added into a backend environment. | httpd.conf, virtualhost|
+Configured [LVE](/limits/#understanding-lve) containers for end-users ( **recommended - higher security level** );
+Installed and configured [mod_hostinglimits](/limits/#hostinglimits) for Apache ( **recommended - higher security level** );
+Installed mod_suexec for Apache and configured [SuExecUserGroup](https://httpd.apache.org/docs/2.4/mod/mod_suexec.html#page-header) directive for each virtual host ( **recommended - higher security level** );
+Enabled [CageFS](/cagefs/) for end-users ( **recommended - higher security level** );
+[PHP Selector](/php_selector/) with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
+ea-php - alternative to alt-php provided by cPanel (for cPanel only);
 
 
 
+
+In order to get mod_lsapi PRO work properly, you'll need to configure Apache. To do this, we use a separate _lsapi.conf_ file.
+
+First of all, for the mod_lsapi PRO work, you need to ensure that the module is loaded. In your lsapi.conf you need to make sure the [LoadModule](http://httpd.apache.org/docs/current/mod/mod_so.html#loadmodule) directive has not been commented out. A correctly configured directive may look like this:
 
 ```
 LoadModule lsapi_module modules/mod_lsapi.so
- 
+```
+
+
+In order to enable the module to process requests, you need to add the lsapi_engine directive to your _lsapi.conf_ file as follows:
+
+```
+lsapi_engine On
+```
+
+
+The mod_lsapi PRO handler can be enabled using the [AddType](https://httpd.apache.org/docs/2.4/mod/mod_mime.html#addtype) directive. The AddType directive tells Apache that a given filename extension should be handled by mod_lsapi PRO. Apache will assume that and will attempt to execute it when that particular resource is requested by a client.
+
+```
+AddType application/x-httpd-lsphp .php
+```
+
+
+If no handler is explicitly set for a request, the specified content type will be used as the handler name, therefore, please disable php.conf or any other PHP handler for using mod_lsapi PRO. In this example application/x-httpd-lsphp is a default handler by which mod_lsapi PRO process requests with lsphp binary from _/usr/local/bin/_ directory.
+
+The final lsapi.conf configuration might look like this:
+
+```
+LoadModule lsapi_module modules/mod_lsapi.so
+```
+```
 <IfModule lsapi_module>
-         AddType application/x-httpd-lsphp .php
-lsapi_backend_connect_timeout 100000
-          lsapi_backend_connect_tries 10
-          lsapi_backend_children 20
-          lsapi_backend_pgrp_max_idle 30
-          lsapi_backend_max_process_time 300
-          lsapi_debug Off
+      lsapi_engine On
+      AddType application/x-httpd-lsphp .php
+      lsapi_backend_connect_timeout 100000
+      lsapi_backend_connect_tries 10
+      lsapi_backend_children 20
+      lsapi_backend_pgrp_max_idle 30
+      lsapi_backend_max_process_time 300
+      lsapi_debug Off
 </IfModule>
 ```
 
 
+In order to mod_lsapi PRO work lsapi.conf should be loaded to Apache through [Include](https://httpd.apache.org/docs/2.4/mod/core.html#include) directive.
+
+For more detailed description of the module directives please visit [Configuration reference](/apache_mod_lsapi/#configuration-references) .
+For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsapi/#installation) .
+
+## Configuration References
 
 
-When installed, liblsapi will automatically create secret file used by mod_lsapi to communicate with backend:
+**None** :
+[lsapi_engine](/.html#lsapi_engine/)
+[lsapi_socket_path](/.html#lsapi_socket_path/)
+[lsapi_poll_timeout](/.html#lsapi_poll_timeout/)
+[lsapi_per_user](/.html#lsapi_per_user/)
+[lsapi_output_buffering](/.html#lsapi_output_buffering/)
+[lsapi_disable_reject_mode](/.html#lsapi_disable_reject_mode/)
+[lsapi_terminate_backends_on_exit](/.html#lsapi_terminate_backends_on_exit/)
+[lsapi_avoid_zombies](/.html#lsapi_avoid_zombies/)
+[lsapi_use_req_hostname](/.html#lsapi_use_req_hostname/)
+[lsapi_debug](/.html#lsapi_debug/)
 
+**None** :
+[lsapi_set_env](/.html#lsapi_set_env/)
+[lsapi_set_env_path](/.html#lsapi_set_env_path/)
+[lsapi_backend_children](/.html#lsapi_backend_children/)
+[lsapi_backend_connect_tries](/.html#lsapi_backend_connect_tries/)
+[lsapi_backend_connect_timeout](/.html#lsapi_backend_connect_timeout/)
+[lsapi_backend_max_process_time](/.html#lsapi_backend_max_process_time/)
+[lsapi_backend_pgrp_max_idle](/.html#lsapi_backend_pgrp_max_idle/)
+[lsapi_backend_use_own_log](/.html#lsapi_backend_use_own_log/)
+[lsapi_backend_common_own_log](/.html#lsapi_backend_common_own_log/)
+[lsapi_backend_coredump](/.html#lsapi_backend_coredump/)
+[lsapi_backend_accept_notify](/.html#lsapi_backend_accept_notify/) 
+**None** :
+[lsapi_with_connection_pool](/.html#lsapi_with_connection_pool/)
+[lsapi_backend_max_idle](/.html#lsapi_backend_max_idle/)
+[lsapi_backend_max_reqs](/.html#lsapi_backend_max_reqs/)
 
-owner root:root
-perms: 400
+**None** :
+[lsapi_criu](/.html#lsapi_criu/)
+[lsapi_criu_socket_path](/.html#lsapi_criu_socket_path/)
+[lsapi_criu_imgs_dir_path](/.html#lsapi_criu_imgs_dir_path/)
+[lsapi_backend_initial_start](/.html#lsapi_backend_initial_start/)
+[lsapi_criu_use_shm](/.html#lsapi_criu_use_shm/)
+[lsapi_backend_semtimedwait](/.html#lsapi_backend_semtimedwait/)
+[lsapi_reset_criu_on_apache_restart](/.html#lsapi_reset_criu_on_apache_restart/)
 
-for making security pass PHPRC and UID|GID on start lsphp
+**None** :
+[lsapi_process_phpini](/.html#lsapi_process_phpini/)
+[lsapi_phpini](/.html#lsapi_phpini/)
+[lsapi_phprc](/.html#lsapi_phprc/)
+[lsapi_tmpdir](/.html#lsapi_tmpdir/)
+[lsapi_enable_user_ini](/.html#lsapi_enable_user_ini/)
+[lsapi_user_ini_homedir](/.html#lsapi_user_ini_homedir/)
+[lsapi_keep_http200](/.html#lsapi_keep_http200/)
+[lsapi_mod_php_behaviour](/.html#lsapi_mod_php_behaviour/)
+[php_value, php_admin_value, php_flag, php_admin_flag](/.html#php_valuephp_admin_valuephp_flagphp_admin_flag/)
 
-Algorithm of creating:
-
-/bin/dd if=/dev/random of=/etc/sysconfig/modlsapi.secret bs=16 count=1
-
-
-
-
-Use the following syntax to manage MODLSAPI install utility:
-
-```
-/usr/bin/switch_mod_lsapi [OPTIONS]
-```
-
-Options:
-
-| | |
-|-|-|
-| | setup _mod_lsapi_ configurations for Apache|
-| | only EasyApache 4 feature|
-| | uninstall _mod_lsapi_ from Apache|
-| | enable _ mod_lsapi_ for individual domain|
-| | disable _mod_lsapi_ for individual domain|
-| | sets up _mod_lsapi_ as a default way to serve PHP, making it enabled for all domains. Once that mode is enabled, you cannot disable _mod_lsapi_ for individual domain|
-| | disable _mod_lsapi_ as a default way to serve PHP, disabling _mod_lsapi_ for all domains, including those selected earlier using _--enable-domain_|
-| | build native lsphp for cPanel EA3|
-| | build native lsphp for cPanel EA3 (with custom PHP source path)|
-| | check PHP configuration|
-| | switch verbose level on|
-| | only with setup option (EA4)|
-| | return usage statistics in JSON format;  the following statistics metrics are collected: control panel name; mod_lsapi version; liblsapi version; criu version and status; whether mod_lsapi is enabled; lsapi configuration options; number of domains, that use _mod_lsapi_ , per each installed PHP version (only supported for cPanel EA4, Plesk, and DirectAdmin).|
-
-This tool:
-
-Creates native _lsphp_ (if it doesn't exist) by doing:
-Removes config template for _mod_ruid2_
-Configures Apache handler _application/x-httpd-lsphp_
-Switches domain to _lsphp_ or enable global _lsphp_
-For cPanel EA3 can build native lsphp
-
-What commands are available for different control panels:
-
-| |  |  |  |  |  |  | |
-|-|--|--|--|--|--|--|-|
-| | No Control Panel | cPanel EA3 | cPanel EA4 | DirectAdmin | Plesk | InterWorx | ISPManager|
-| | + | + | + | + (no need in manual calling) | + | + | +|
-| | - | - | + | - | - | - | -|
-| | + | + | + | - | + | + | +|
-| | - | + | - | - | - | - | -|
-| | - | + | - | - | - | - | -|
-| | - | + | + | +/-(custombuild) | - | - | -|
-| | - | + | + | - | - | - | -|
-| | - | + | - | +/-(custombuild) | - | - | -|
-| | - | + | - | - | - | - | -|
-| | + | + | + | + | + | + | +|
-| | + | + | + | + | + | + | +|
-| | - | - | + | - | - | - | -|
-| | +(without domain info) | +(without domain info) | +(with domain info) | +(with domain info) | +(with domain info) | +(without domain info) | +(without domain info)|
-
-
-
-mod_lsapi allows to use different handlers for different php versions. For example, a file with extension .php53 can be handled by php5.3 and a file with extension .php55 handled by php5.5 without PHP Selector.
-Here is an extra config file which allows to set handlers and php binaries for these handlers - _ /etc/container/php.handler_ . Example of this file:
-
-```
-# cat /etc/container/php.handler
-application/x-lsphp53 /opt/alt/php53/usr/bin/lsphp
-application/x-lsphp55 /opt/alt/php55/usr/bin/lsphp
-```
-
-Default handler for lsphp is - _ application/x-httpd-lsphp_ , if I set in .htaccess such options:
-
-```
-<FilesMatch "\.(php4|php5|php3|php2|php|phtml)$">
-SetHandler application/x-httpd-lsphp
-</FilesMatch>
-<FilesMatch "\.php53$">
-SetHandler application/x-lsphp53</FilesMatch>
-```
-
-File index.php53 will be processed by php 5.3, but index.php processed by php standard, placed at /usr/local/bin/lsphp.
-
-**Important:**
-
-All custom PHP for _phpperdir_ mechanizm should be located in any place in the directory _ /opt/alt/, _ because before start _lsphp_ mod_lsapi checks as follows: _/usr/local/bin/lsphp_ or _/opt/alt/*/lsphp_ . Such location and binary file are allowed to execute. Use the folder _/opt/alt/[any path]_ for installing custom php.
-
-For example:
-
-_/opt/alt/php.perdir/php55/bin/lsphp_ - it will work with mod_lsapi.
-
-But if the server has custom php in another location (for example _ /usr/local/php55/bin/lsphp_ ), then just make symlink to lsphp:
-
-ln _-sf /usr/local/php55/bin/lsphp /opt/alt/php.perdir/php55/bin/lsphp_
-
-and add it to php.handler:
-
-_myhandler-php55 /opt/alt/php.perdir/php55/bin/lsphp_
-
-
-
-mod_lsapi is a drop in replacement for suPHP. No configuration changes required. To switch from suPHP to mod_lsapi:
-
-
-
-```
-/usr/bin/switch_mod_lsapi --enable-global 
-```
- Switch individual domains:
-
-```
-/usr/bin/switch_mod_lsapi --enable-domain test.example.tst - enablesmod_lsapi [only for domain test.example.tst]
-```
+**None** :
+[lsapi_use_suexec](/.html#lsapi_use_suexec/)
+[lsapi_user_group](/.html#lsapi_user_group/)
+[lsapi_uid_gid](/.html#lsapi_uid_gid/)
+[lsapi_use_default_uid](/.html#lsapi_use_default_uid/)
+[lsapi_target_perm](/.html#lsapi_target_perm/)
+[lsapi_paranoid](/.html#lsapi_paranoid/)
+[lsapi_check_document_root](/.html#lsapi_check_document_root/)
+[lsapi_disable_forced_pwd_var](/.html#lsapi_disable_forced_pwd_var/)
+[lsapi_max_resend_buffer](/.html#lsapi_max_resend_buffer/)
 
 
 
 
 
+**Syntax** : lsapi_engine on/off
+**Default** : lsapi_engine off
+**Context** : httpd.conf, htaccess
+
+**Description** :
+Switching mod_lsapi handler on or off.
+
+
+
+
+
+**Syntax** : lsapi_socket_path [path]
+**Default** : lsapi_socket_path
+**Context** : httpd.conf
+
+**Description:**
+Path to backend lsphp sockets. By default
+
+
+
+
+
+**Syntax** : lsapi_poll_timeout [number]
+**Default** : lsapi_poll_timeout 300
+**Context** : httpd.conf, htaccess
+
+**Description** :
+Time to wait for response from the lsphp daemon, in seconds. 0 stands for infinity. For preventing long running processes which can use EP (limit number of entry processes). Default value is 300. Should be more or equal to 0. In the case of wrong format, the default value will be used.
+
+
+
+
+
+**Syntax** : lsapi_per_user On/Off
+**Default** : lsapi_per_user Off
+**Context** : httpd.conf
+
+**Description** :
+Invoke master lsPHP process not per VirtualHost but per account.
+# When On, invoke backend not per VirtualHost but per account.
+# Default value is Off.
+# It is possible, for example, to set it to On in global config file and to Off in config files of some particular Virtual Hosts.
+# Then these Virtual Hosts will have a dedicated backend process, while others will have backend processes shared on account basis.
+
+
+
+
+
+**Syntax** : lsapi_output_buffering On/Off
+**Default** : lsapi_output_buffering On
+**Context** : httpd.conf, virtualhost, htaccess
+
+**Description** :
+Enable or disable output buffering on Apache level. Default value is On.
+
+
+
+
+
+**Syntax** : lsapi_disable_reject_mode On/Off
+**Default** : lsapi_disable_reject_mode Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+If a new HTTP request is coming to LSPHP daemon when all LSPHP workers are still busy, it can process this situation in two different ways. In REJECT mode LSPHP daemon will reject such request immediately. Otherwise, in legacy mode, LSPHP daemon will put this request into infinite queue, until one or more LSPHP daemon becomes free. When HTTP request is rejected in REJECT mode, mod_lsapi will write into Apache error_log the following message: Connect to backend rejected, and the client will receive 507 HTTP response.
+By default LSPHP daemon in CloudLinux uses REJECT mode. It can be switched off with this option.
+
+
+
+
+
+**Syntax** : lsapi_terminate_backends_on_exit On/Off
+**Default** : lsapi_terminate_backends_on_exit On
+**Context** : httpd.conf
+
+**Description** :
+httpd.conf, On - stop lsphp services on apache restart, Off - leave live started lsphp services on apache restart (for php+opcache). The lsphp will not restart, even if Apache gets restarted.
+
+
+
+
+
+**Syntax** : lsapi_avoid_zombies On/Off
+**Default** : lsapi_avoid_zombies Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Enable or disable a mechanism to avoid creation of zombie processes by lsphp. Default value is Off.
+
+
+
+
+
+**Syntax** : lsapi_use_req_hostname On/Off
+**Default** : lsapi_use_req_hostname Off
+**Context** : httpd.conf, virtualhosts
+
+**Description** :
+By default, we are using hostname from the server_rec structure (off), it means that mod_lsapi takes hostname from the VirtualHost section of the configuration file. Using hostname from the request_rec structure (On) means that mod_lsapi takes hostname from the HOST section of the request. It could be useful for those who use dynamically generated configs for virtual hosts for example with mod_lua.
+
+
+
+
+
+**Syntax** : lsapi_debug On/Off
+**Default** : lsapi_debug Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Extended debug logging.
+
+
+
+
+
+**Syntax** : lsapi_set_env VAR_NAME [VAR_VALUE]
+**Default** : -
+**Context** : httpd.conf
+
+**Description** :
+Pass env variable to lsphp. By default lsphp environment have only TEMP, TMP and PATH variables set.
+Example: lsapi_set_env TMP "/var/lsphp-tmp"
+Note: PATH env var default "/usr/local/bin:/usr/bin:/bin" cannot be changed because of security reasons.
+To change it, use explicitly lsapi_set_env_path option.
+
+
+
+
+
+**Syntax** : lsapi_set_env_path [path(s)]
+**Default** : lsapi_set_env_path /usr/local/bin:/usr/bin:/bin
+**Context** : httpd.conf
+
+**Description** :
+Change PATH variable in the environment of lsPHP processes. Default path /usr/local/bin:/usr/bin:/bin will be used if not set.
+
+
+
+
+
+**Syntax** : lsapi_backend_children [number]
+**Default** : lsapi_backend_children [EP]
+**Context** : httpd.conf
+
+**Description** :
+Sets env variable LSAPI_CHILDREN
+# Maximum number of simultaneously running child backend processes.
+# Optional, a default value is equal to EP.
+# min value is 2; max value is 10000. If var value is more, 10000 will be used.
+
+
+
+
+
+**Syntax** : lsapi_backend_connect_tries [number]
+**Default** : lsapi_backend_connect_tries 20
+**Context** : httpd.conf
+
+**Description** :
+Number of retries to connects to lsPHP daemon.
+
+
+
+
+
+**Syntax** : lsapi_backend_connect_timeout [number]
+**Default** : lsapi_backend_connect_timeout 500000
+**Context** : httpd.conf
+
+**Description** :
+Number of usec to wait while lsPHP starts (if not started on request).
+
+
+
+
+
+**Syntax** : lsapi_backend_max_process_time [number]
+**Default** : lsapi_backend_max_process_time 300
+**Context** : httpd.conf
+
+**Description** :
+Sets env variable LSAPI_MAX_PROCESS_TIME
+# Optional. Default value is 300.
+# Timeout to kill runaway processes.
+
+
+
+
+
+**Syntax** : lsapi_backend_pgrp_max_idle [number]
+**Default** : lsapi_backend_pgrp_max_idle 30
+**Context** : httpd.conf
+
+**Description** :
+Sets env variable LSAPI_PGRP_MAX_IDLE, in seconds.
+# Controls how long a control process will wait for a new request before it exits. # 0 stands for infinite.
+# Optional, default value is 30.
+# Should be more or equal to 0.
+
+
+
+
+
+**Syntax** : lsapi_backend_use_own_log On/Off
+**Default** : lsapi_backend_use_own_log Off
+**Context** : httpd.conf, virtualhost, htaccess
+
+**Description** :
+Redirecting log output of backend processes from Apache error_log to dedicated log file or files, depending on value of lsapi_backend_common_own_log option. If Off, use Apache error log file for backend output, or separate file otherwise.
+
+
+
+
+
+**Syntax** : lsapi_backend_common_own_log On/Off
+**Default** : lsapi_backend_common_own_log Off
+**Context** : httpd.conf, virtualhost, htaccess
+
+**Description** :
+It will be used only when lsapi_backend_use_own_log set to On. On - backend processes of the all virtual hosts will share the common log file. Off - every virtual host will have its own backend log file.
+
+
+
+
+
+**Syntax** : lsapi_backend_coredump On/Off
+**Default** : lsapi_backend_coredump Off
+**Context** : httpd.conf, htaccess
+
+**Description** :
+env variable LSAPI_ALLOW_CORE_DUMP (On or Off). Pass LSAPI_ALLOW_CORE_DUMP to lsphp or not. If it will be passed - core dump on lsphp crash will be created.
+# Off by default.
+# By default LSAPI application will not leave a core dump file when crashed. If you want to have LSAPI PHP dump a core file, you should set this environment variable. If set, regardless the value has been set to, core files will be created under the directory that the PHP script in.
+
+
+
+
+
+**Syntax** : lsapi_backend_accept_notify On/Off
+**Default** : lsapi_backend_accept_notify On
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Switch LSAPI_ACCEPT_NOTIFY mode for lsphp. This option can be used both in Global and VirtualHost scopes.This mode is incompatible with PHP 4.4.
+
+
+
+
+
+**Syntax** : lsapi_with_connection_pool On/Off
+**Default** : lsapi_with_connection_pool Off
+**Context** : httpd.conf
+
+**Description** :
+On/Off - disable enable connect pool, default is Off.
+
+
+
+
+
+**Syntax** : lsapi_backend_max_idle [number]
+**Default** : lsapi_backend_max_idle 300
+**Context** : httpd.conf
+
+**Description** :
+It is relevant only with lsapi_with_connection_pool option switched on. Controls how long a worker process will wait for a new request before it exits. 0 stands for infinite. Should be more or equal to 0. In the case of wrong format default value will be used. Optional, default value is 300.
+
+
+
+
+
+**Syntax** : lsapi_backend_max_reqs [number]
+**Default** : lsapi_backend_max_reqs 10000
+**Context** : httpd.conf
+
+**Description** :
+It is relevant only with lsapi_with_connection_pool option switched on. Controls how many requests a worker process will process before it exits. Should be more than 0. In the case of wrong format default value will be used. Optional, default value is 10000.
+
+
+
+
+
+**Syntax** : lsapi_criu On/Off
+**Default** : lsapi_criu Off
+**Context** : httpd.conf
+
+**Description** :
+Enable/disable CRIU for lsphp freezing. Default: Off.
+
+
+
+
+
+**Syntax** : lsapi_criu_socket_path [path]
+**Default** : lsapi_criu_socket_path /var/run/criu/criu_service.socket
+**Context** : httpd.conf
+
+**Description** :
+Set path to socket for communication with criu service. Default: /var/run/criu/criu_service.socket.
+
+
+
+
+
+**Syntax** : lsapi_criu_imgs_dir_path [path]
+**Default** : lsapi_criu_imgs_dir_path /var/run/mod_lsapi/
+**Context** : httpd.conf
+
+**Description** :
+Path to folder where images of freezed PHP will be stored. Should be path. Default: /var/run/mod_lsapi/
+
+
+
+
+
+**Syntax** : lsapi_backend_initial_start [number]
+**Default** : lsapi_backend_initial_start 0
+**Context** : httpd.conf
+
+**Description** :
+Number of requests to virtualhost, when lsphp will be freezed.  Default: 0 - means disable freezing.
+
+
+
+
+
+**Syntax** : lsapi_criu_use_shm Off/Signals
+**Default** : lsapi_criu_use_shm Off
+**Context** : httpd.conf
+
+**Description** :
+Method of requests counting. Off - use shared memory. Signals - use signals from child processes to parent. Default: Off
+
+
+
+
+
+**Syntax** : lsapi_backend_semtimedwait On/Off
+**Default** : lsapi_backend_semtimedwait On
+**Context** : httpd.conf
+
+**Description** :
+Use semaphore for checking when lsphp process will be started. Speed of start lsphp increased with semaphore using. This method avoid cycles of waiting for lsphp start. Default: On.
+
+
+
+
+
+**Syntax** : lsapi_reset_criu_on_apache_restart On/Off
+**Default** : lsapi_reset_criu_on_apache_restart Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+This option allows cleaning all CRIU images on Apache restart.
+Setting lsapi_reset_criu_on_apache_restart to On means that on each Apache restart the CRIU images which are stored in directory specified by lsapi_criu_imgs_dir_path directive will be recreated on new request to domain(only after restart).
+If this option set to Off then CRIU images won’t be recreated on Apache restart.
+
+
+
+
+**Syntax** : lsapi_process_phpini On/Off
+**Default** : lsapi_process_phpini Off
+**Context** : httpd.conf, virtualhost, directory
+
+**Description** :
+Enable or disable phpini_* directive processing. Default value is Off.
+
+
+
+
+
+**Syntax** : lsapi_phpini [path]
+**Default** : lsapi_phpini -
+**Context** : httpd.conf, virtualhost, htaccess
+
+**Description** :
+When lsapi_process_phpini option switched to Off, these values will be silently ignored. lsapi_phpini values with absolute filename of php.ini file can be inserted into .htaccess files in order to set custom php.ini which will override/complement settings from system default php.ini.
+
+
+
+
+
+**Syntax** : lsapi_phprc [No | Env | Auto | DocRoot]
+**Default** : lsapi_phprc No
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+# The value of PHPRC env variable.
+# Special values are "No", "Env", "Auto" and "DocRoot".
+# Default value is "No" - without PHPRC at all.
+# "Auto" value stands for php.ini from DocumentRoot of the corresponding VirtualHost if it is present, or from user's home directory otherwise "DocRoot" value stands for php.ini from DocumentRoot of the corresponding VirtualHost.
+# "Env" value for using PHPRC from the environment, to set it with SetEnv config option, for example
+# lsapi_phprc No
+# lsapi_phprc Auto
+# lsapi_phprc DocRoot
+# lsapi_phprc Env
+# lsapi_phprc /etc/
+
+
+
+
+
+**Syntax** : lsapi_tmpdir [path]
+**Default** : lsapi_tmpdir /tmp
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Set alternate request body temporary files directory.
+
+
+
+
+
+**Syntax** : lsapi_enable_user_ini On/Off
+**Default** : lsapi_enable_user_ini Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Enable .user.ini files for backend. Same as suphp, php-fpm and fcgid mechanism of .user.ini. Default value is Off.
+
+
+
+
+
+**Syntax** : lsapi_user_ini_homedir On/Off
+**Default** : lsapi_user_ini_homedir Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+If lsapi_enable_user_ini option is set to On, then enable/disable processing .user.ini file in home directory also. Default value is Off.
+
+
+
+
+
+**Syntax** : lsapi_keep_http200 On/Off
+**Default** : lsapi_keep_http200 Off
+**Context** : httpd.conf, .htaccess
+
+**Description** :
+If set to On, always keep backend's response status as mod_php do. If set to Off, response status can be overridden by Apache as suphp do (in case of call via ErrorDocument directive).
+
+
+
+
+
+**Syntax** : lsapi_mod_php_behaviour On/Off
+**Default** : lsapi_mod_php_behaviour On
+**Context** : httpd.conf, virtualhost, directory
+
+**Description** :
+On/Off - disable php_* directives, default On.
+
+
+
+
+
+**Syntax** : [php_value|php_admin_value|php_flag|php_admin_flag]
+**Default** :
+**Context** : httpd.conf, virtualhost, htaccess
+
+**Description** :
+mod_php emulation.
+
+
+
+
+
+**Syntax** : lsapi_use_suexec On/Off
+**Default** : lsapi_use_suexec On
+**Context** : httpd.conf
+
+**Description** :
+Use or not suexec to a target user.
+
+
+
+
+
+**Syntax** : lsapi_user_group [user_name] [group_name]
+**Default** : -
+**Context** : httpd.conf, virtualhost, directory
+
+**Description** :
+Set user & group for requests.
+
+
+
+
+
+**Syntax** : lsapi_uid_gid [uid] [gid]
+**Default** : -
+**Context** : httpd.conf, virtualhost, directory
+
+**Description** :
+Set user & group for request.
+
+
+
+
+
+**Syntax** : lsapi_use_default_uid On/Off
+**Default** : lsapi_use_default_uid On
+**Context** : httpd.conf
+
+**Description** :
+Use default Apache UID/GID if no uid/gid set. Values: On/Off. If Off, and no UID/GID set, error 503 will be returned.
+
+
+
+
+
+**Syntax** : lsapi_target_perm On/Off
+**Default** : lsapi_target_perm Off
+**Context** : httpd.conf
+
+**Description** :
+Check target PHP script permissions. If set to On, lsapi will check that script is owned by the same user, as user under which it is being executed. Return 503 error if they don't match. Default: Off.
+
+
+
+
+
+**Syntax** : lsapi_paranoid On/Off
+**Default** : lsapi_paranoid Off
+**Context** : httpd.conf
+
+**Description** :
+Check or not permissions of target php scripts. Optional, default value is Off.
+
+
+
+
+
+**Syntax** : lsapi_check_document_root On/Off
+**Default** : lsapi_check_document_root On
+**Context** : httpd.conf
+
+**Description** :
+Check or not owner of DOCUMENT_ROOT. Optional, default value is On.
+
+
+
+
+
+**Syntax** : lsapi_disable_forced_pwd_var On/Off
+**Default** : lsapi_disable_forced_pwd_var Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+To disable addition of PWD variable. Default value is Off. If set to On, the PWD variable will not be added into a backend environment.
+
+
+
+
+
+**Syntax** : lsapi_max_resend_buffer [number]tmp
+**Default** : lsapi_max_resend_buffer 200
+**Context** : httpd.conf, virtualhost
+
+**Description** :
+Maximum buffer in KiB to resend for request that has a body (like POST request body).
 
 
 ## Installation
 
 
-For all control panels - SuExecUserGroup should be present for each virtual host.
-CageFS and will be installed by dependencies (for lsphp binaries).
+mod_lsapi PRO can be installed through YUM package manager, however, the installation process varies depending on the control panel.
+
+Select the control panel you are using:
+[cPanel](/apache_mod_lsapi/#cpanel)
+[Plesk](/apache_mod_lsapi/#plesk)
+[DirectAdmin](/apache_mod_lsapi/#directadmin)
+[No control panel](/apache_mod_lsapi/#no-control-panel)
+
+### cPanel
 
 
 
 
-```
-$ yum install liblsapi liblsapi-devel 
-$ yum install mod_lsapi 
-```
-
-If CageFS is not initialized:
-
-
-```
-$ cagefsctl --init
-$ cagefsctl --enable-all
-```
- 
-```
-$ /usr/bin/switch_mod_lsapi --setup
-# Enable for a single domain:
-$ /usr/bin/switch_mod_lsapi --enable-domain [domain]
-# or globally
-$  /usr/bin/switch_mod_lsapi --enable-global
-$ service httpd restart
-```
-
-
-
-How to convert EasyApache 4 for CloudLinux:
-
-[https://www.cloudlinux.com/blog/entry/beta-easyapache-4-released-for-cloudlinux](https://www.cloudlinux.com/blog/entry/beta-easyapache-4-released-for-cloudlinux)
-
+Install mod_lsapi PRO and related packages through YUM package manager as follows:
 
 ```
 $ yum install liblsapi liblsapi-devel
-$ yum install ea-apache24-mod_lsapi 
+$ yum install ea-apache24-mod_lsapi
 ```
 
-Alternatively you can install mod_lsapi through EasyApache 4 web interface, just set of ea-apache24-mod_lsapi in the list of available modules.
-
-If CageFS is not initialized:
-
+After installing mod_lsapi PRO packages run the next command to setup mod_lsapi to cPanel:
 
 ```
-$ cagefsctl --init
-$ cagefsctl --enable-all
 $ /usr/bin/switch_mod_lsapi --setup
 ```
 
-
-
-
-After updating ea-apache24-mod_lsapi all the domains are switched to the default handler and to turn on mod_lsapi back, it was necessary to enable lsapi handler through .
-
-We noticed that it is not very convenient to enable lsapi handler through after update and automated this process.
-
-So, if you update ea-apache24-mod_lsapi from stable or ea-apache24-mod_lsapi-1.1-9 or lower from beta, after the update you need to run to add lsapi handler to .
-
-After this, you will be asked to enable lsapi handler for proper PHP versions, depending on how you used mod_lsapi before ( , and then restart Apache.
-
-Please note that the following options were disabled for ea-apache24-mod_lsapi:
-
-
-
-
-You can manage your domains with PHP version and lsapi handler from .
-
-_Please note that lsapi PHP handler is only available for beta version_ .
-
-_Example 1:_
-
-1. ea-apache24-mod_lsapi-1.0-30 was installed and globally enabled.
-
-2. The command was executed.
-
-3. While is not called, mod_lsapi will work as before.
-
-4. will return:
+Now, when the module is installed, restart Apache to ensure that the mod_lsapi PRO is enabled:
 
 ```
-Instruction: 
-patching file apache.pm
-Patch was applied correctly...
-Added hook for System::upcp to hooks registry
-mod_lsapi switched to turning on and off through the MultiPHP                                                 Manager(/Home/Software/MultiPHP Manager)
-You are using enabled globally mod_lsapi. Do you want to enable mod_lsapi through                 MultiPHP Manager?
-Current PHP will be switched to lsapi handler:
-ea-php53 SAPI: suphp
-ea-php54 SAPI: suphp
-ea-php55 SAPI: cgi
-ea-php56 SAPI: suphp
-ea-php70 SAPI: cgi
-ea-php71 SAPI: suphp
-If you type no then mod_lsapi will be disabled and you can enable it again from                 MultiPHP Manager.
-Do you want to proceed? [y/N]
+$ service httpd restart
 ```
 
-5. If N is chosen, then mod_lsapi moves to the new type of integration with cPanel and restores files . Mod_lsapi will be disabled.
+Now the lsapi handler is available for managing through cPanel MultiPHP Manager.
 
-6. If Y is chosen, then all installed versions will move to lsapi handler.
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
-```
-Setting ea-php53 to lsapi handler...
-Setting ea-php54 to lsapi handler...
-Setting ea-php55 to lsapi handler...
-Setting ea-php56 to lsapi handler...
-Setting ea-php70 to lsapi handler...
-Setting ea-php71 to lsapi handler...
-```
 
-![](/images/mod_lsapi_handler.jpg)
+### Plesk
 
-_Example 2:_
 
-1. ea-apache24-mod_lsapi-1.0-30 was installed and enabled only for one domain but all other domains have the same ea-php56 version.
 
-2. The command was executed.
 
-3. While is not called, mod_lsapi will work as before.
-
-4. will return:
+Install mod_lsapi PRO and related packages through YUM package manager as follows:
 
 ```
-Instruction: 
-patching file apache.pm
-Patch was applied correctly...
-Added hook for System::upcp to hooks registry
-Domains that handled by ea-php56:
-tstdomain01.com - lsapi
-tstdomain02.com - suphp
-There are domains which are using mod_lsapi through --enable-domain option.
-This option is deprecated for EA4 and mod_lsapi switched to turning on and off through
-the MultiPHP Manager(/Home/Software/MultiPHP Manager)
-Do you want to enable mod_lsapi through MultiPHP Manager for ea-php56?
-Domains which are using suphp will be switched to lsapi handler too.
-If you type N then mod_lsapi will remain enabled on these domains.
-However, enabling mod_lsapi for new domains is now possible only through MultiPHP
-Manager.
-Do you want to proceed? [y/N] y
-Setting ea-php56 to lsapi handler...
-Built /etc/apache2/conf/httpd.conf OK
-Reconfiguration completed
+$ yum install liblsapi liblsapi-devel
+$ yum install mod_lsapi
 ```
 
-5. If N is chosen, then mod_lsapi will move to the new type of integration with cPanel and will restore files . Mod_lsapi still will be enabled for domains like in example file.
+Once completed, run the command to setup mod_lsapi PRO and register LSPHP handlers to Plesk Panel:
 
-6. If Y is chosen, then displayed PHP version will move to lsapi handler. According to the example, using ea-php56, will be switched to lsapi handler.
+```
+$ /usr/bin/switch_mod_lsapi --setup
+```
+
+Now, when the module is installed, restart Apache to ensure that mod_lsapi PRO is enabled:
+
+```
+$ service httpd restart
+```
+
+Now LSPHPXY alt-php PHP handlers are available for managing through Plesk PHP Settings.
+
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
+
+
+### DirectAdmin
 
 
 
+
+Installation process is done with custombuild script:
 
 ```
 $ cd /usr/local/directadmin/custombuild
@@ -390,172 +803,252 @@ $ ./build php n
 $ ./build apache
 ```
 
-
-
-
-```
-$ yum install liblsapi liblsapi-devel 
-$ yum install mod_lsapi 
-$ /usr/bin/switch_mod_lsapi --setup
-```
-
-
-
-
-
-
-```
-<Directory /var/www/*/data/>
-php_admin_flag engine off
-</Directory
-```
-
-
-
-
-
-```
-<Directory /var/www/[username]/data/www/[domain]>
-Options -ExecCGI -Includes
-php_admin_flag engine on
-</Directory>
-```
-
-
-
-
-
-
-
-
-```
-$ yum install liblsapi liblsapi-devel 
-$ yum install mod_lsapi 
-$ /usr/bin/switch_mod_lsapi --setup
-```
-
-Disable php.conf or any other PHP handler and uncomment in and restart Apache.
-
+Restart Apache afterwards:
 
 ```
 $ service httpd restart
 ```
 
+Now all domains under php1_mode are using lsphp handler and no further actions are required to enable mod_lsapi PRO on DirectAdmin.
+
+### No control panel
 
 
-Follow these steps to install lsphp binaries needed for mod_lsapi:
 
 
-```
-$ yum install cagefs lvemanager cmake gcc httpd-devel apr-devel
-$ yum groupinstall alt-php
-$ cagefsctl --init
-$ cagefsctl --enable-all
-```
-
-If lsphp already exists, copy it to (this step allows you to avoid installing alt-php).
-
-Compile mod_lsapi:
-
+Install mod_lsapi PRO and related packages through YUM package manager as follows:
 
 ```
 $ yum install liblsapi liblsapi-devel
-$ cd ~
-$ wget 
-$ tar zxvf mod_lsapi.tar.gz
-$ cd mod_lsapi-0.2-7
-$ cmake .
-$ make
-$ make install
+$ yum install mod_lsapi
 ```
 
-This will:
--- Install: (or to another correct httpd modules path)
--- Install:
-```
-$ cp conf/mod_lsapi.conf /etc/httpd/conf/extra/ #(or another httpd conf directory)
-```
-
-If you want lsapi as global PHP handler, uncomment and disable current PHP handler. If server uses suPHP, you can enable lsphp for single hosts. Just add to site's .htaccess.
+Once completed, run a command to setup mod_lsapi PRO:
 
 ```
-$ install/da_cb_install
+$ /usr/bin/switch_mod_lsapi --setup
 ```
 
-For last preparation of CageFS and PHP Selector should be created by script `n`
-
+Now, when the module is installed, restart Apache to ensure that mod_lsapi PRO is enabled:
 
 ```
 $ service httpd restart
 ```
 
-
-
-
-Native PHP - PHP installed and used before alt-php packages were installed. Usualy lsphp binary is not available on the servers without LiteSpeed, which means that it should be created (build from php sources with such options as usual php binary file but with LSAPI protocol built-in).
-
-There are two ways to make native lsphp:
-
-1) The quick one (supports all type of panels).
-
-Native lsphp is made from alt-php56:
-
+If you are using an alternative Apache - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6) , then install mod_lsapi as follows:
 
 ```
-switch_mod_lsapi --setup
-cp /opt/alt/php56/usr/bin/lsphp /usr/local/bin/
+$ yum install liblsapi liblsapi-devel
+$ yum install httpd24-mod_lsapi
 ```
 
-
-
-
+Once completed, run a command to setup mod_lsapi PRO:
 
 ```
-switch_mod_lsapi --build-native-lsphp
+$ /usr/bin/switch_mod_lsapi --setup
 ```
 
-
-
-
+Now, when the module is installed, restart Apache to ensure that mod_lsapi PRO is enabled:
 
 ```
-/usr/local/directadmin/custombuild/build set php1_mode lsphp
-/usr/local/directadmin/custombuild/build php n
+$ service httpd24 restart
 ```
+
+For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
 
 ## Uninstall
 
 
+Uninstall mod_lsapi PRO is performed depending on your control panel.
+
+Select the control panel you are using:
+[cPanel](/apache_mod_lsapi/#cpanel)
+[Plesk](/apache_mod_lsapi/#plesk)
+[DirectAdmin](/apache_mod_lsapi/#directadmin)
+[No control panel](/apache_mod_lsapi/#no-control-panel)
+
+### cPanel
 
 
+
+
+To remove lsapi handler from cPanel MultiPHP Manager and uninstall mod_lsapi PRO, run a command:
 
 ```
 $ /usr/bin/switch_mod_lsapi --uninstall
 ```
 
+Then remove packages with YUM package manager:
+
+```
+$ yum erase liblsapi liblsapi-devel ea-apache24-mod_lsapi
+```
+
+Restart Apache afterwards:
+
+```
+$ service httpd restart
+```
+
+Now mod_lsapi PRO is fully uninstalled.
+
+
+### Plesk
 
 
 
+
+To unregister LSPHP handlers and uninstall mod_lsapi PRO, run the command:
+
+```
+$ /usr/bin/switch_mod_lsapi --uninstall
+```
+
+Then remove packages with YUM package manager:
+
+```
+$ yum erase liblsapi liblsapi-devel mod_lsapi
+```
+
+Restart Apache afterwards:
+
+```
+$ service httpd restart
+```
+
+Now LSPHPXY alt-php PHP handlers and mod_lsapi PRO are fully uninstalled.
+
+
+### DirectAdmin
+
+
+
+
+Uninstall is done with custombuild script:
 
 ```
 $ cd /usr/local/directadmin/custombuild
 $ ./build update
-$ ./build set php1_release [any other php type]
+$ ./build set php1_release [any other php mode]
 $ ./build php n
 $ ./build apache
 ```
 
+The following PHP modes are available for DirectAdmin:
+mod_php
+fastcgi
+php-fpm
+suphp
 
-
-
+Restart Apache afterwards:
 
 ```
-$ yum erase mod_lsapi
-$ rm [path to mod_lsapi.conf]
-# restore standard php handler
 $ service httpd restart
 ```
+
+Now all domains under php1_mode are using the chosen handler and mod_lsapi PRO is fully uninstalled.
+
+### No control panel
+
+
+
+
+To uninstall mod_lsapi PRO, run the command:
+
+```
+$ /usr/bin/switch_mod_lsapi --uninstall
+```
+
+Then remove packages with YUM package manager:
+
+```
+$ yum erase liblsapi liblsapi-devel mod_lsapi
+$ rm [path to mod_lsapi.conf]
+```
+
+Restart Apache to restore the standard PHP handler:
+
+```
+$ service httpd restart
+```
+
+If you are using an alternative Apache - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6) , then uninstall mod_lsapi PRO as follows:
+
+```
+$ /usr/bin/switch_mod_lsapi --uninstall
+```
+
+Then remove packages with YUM package manager:
+
+```
+$ yum erase liblsapi liblsapi-devel httpd24-mod_lsapi
+$ rm [path to mod_lsapi.conf]
+```
+
+Restart Apache afterwards:
+
+```
+$ service httpd24 restart
+```
+
+Now mod_lsapi PRO is fully uninstalled.
+
+
+## switch_mod_lsapi tool
+
+
+switch_mod_lsapi is the command line tool used to manage mod_lsapi PRO.
+
+It has the following syntax:
+
+
+
+can be the main and an additional (for usage together with any other main option).
+
+
+
+| | |
+|-|-|
+|**Option** | **Description**|
+| | setup _mod_lsapi_ configurations for Apache, including PHP handlers setup; create native lsphp (if it doesn't exist) by doing: _* NOT supported for DirectAdmin_ |
+| | setup PHP handlers only _* supported for cPanel EasyApache 4 only_|
+| | uninstall _mod_lsapi_ from Apache _* supported for cPanel (EasyApache 3 and EasyApache 4), Plesk, and servers without control panel_|
+| | enable _mod_lsapi_ for individual domain _* supported for cPanel EasyApache 3 only_|
+| | disable _mod_lsapi_ for individual domain _* supported for cPanel EasyApache 3 only_|
+| | sets up _mod_lsapi_ as a default way to serve PHP, making it enabled for all domains. Once that mode is enabled, you cannot disable _mod_lsapi_ for an individual domain. _* supported for cPanel only (EasyApache 3 and EasyApache 4)_|
+| | disable _mod_lsapi_ as a default way to serve PHP, disabling _mod_lsapi_ for all domains, including those selected earlier using _--enable-domain_ _* supported for cPanel EasyApache 3 only_|
+| | build native _lsphp_ for cPanel EasyApache 3 _* supported for cPanel EasyApache 3 only_|
+| | build native _lsphp_ for cPanel EasyApache 3 (with custom PHP source path) _* supported for cPanel EasyApache 3 only_|
+| | check PHP configuration _* NOT supported for DirectAdmin_|
+| | return usage statistics in JSON format; the following statistics metrics are collected: • control panel name; • mod_lsapi version; • liblsapi version; • criu version and status; • whether mod_lsapi is enabled; • lsapi configuration options; • number of domains, that use _mod_lsap_ i, per each installed PHP version including those set in PHP Selector _(this metric is supported for cPanel EasyApache 4, Plesk and DirectAdmin)_ .|
+
+
+
+| | |
+|-|-|
+|**Option** | **Description**|
+| | switch verbose level on|
+| | switch force mode on|
+
+The following table presents which are supported for various panels:
+
+| |  |  |  |  |  |  | |
+|-|--|--|--|--|--|--|-|
+| | No Control Panel | cPanel EA3 | cPanel EA4 | DirectAdmin | Plesk | InterWorx | ISPManager|
+| | + | + | + | custombuild | + | + | +|
+| | - | - | + | - | - | - | -|
+| | + | + | + | custombuild | + | + | +|
+| | - | + | - | - | - | - | -|
+| | - | + | - | - | - | - | -|
+| | - | + | + | custombuild | - | - | -|
+| | - | + | - | custombuild | - | - | -|
+| | - | + | - | - | - | - | -|
+| | - | + | - | - | - | - | -|
+| | + | + | + | - | + | + | +|
+| | + | + | + | - | + | + | +|
+| | + | + | + | - | + | + | +|
+| | +  _*without domain info_ | +  _*without domain info_ | + | + | + | +  _*without domain info_ | +  _*without domain info_|
 
 
 
@@ -864,7 +1357,7 @@ A: When  lsapi_with_connection_pool mode is , then the new backend lsphp process
 
 With
 
-Alternatively, we have another accelerating technology - [CRIU](/criu_support/) , which is faster and uses less memory. But it is in Beta so far and available for CL7 only (stable version will appear in the near future).
+Alternatively, we have another accelerating technology - [CRIU](/apache_mod_lsapi/#criu-support) , which is faster and uses less memory. But it is in Beta so far and available for CL7 only (stable version will appear in the near future).
 
 Q: **_Your PHP installation appears to be missing the… How to manage native PHP with mod_lsapi under EasyApache 3?_**
 
@@ -943,7 +1436,7 @@ The command builds the lsphp of the same version, it will be used as native via 
 
 ![](/images/mod_lsapi_faq_05.jpg)
 
-We do not recommend to use this native PHP because it does not support [CRIU](/criu_support/) .
+We do not recommend to use this native PHP because it does not support [CRIU](/apache_mod_lsapi/#criu-support) .
 
 To revert alt-php56 to the native PHP, execute the following command:
 
@@ -953,64 +1446,13 @@ To revert alt-php56 to the native PHP, execute the following command:
 ```
 
 
+Q: **_ Is there any difference in using lsphp binaries from alt-php or ea-php packages with Litespeed Web Server compared to lsphp _**
 
-## Installing mod_lsapi for Plesk
+A: In this case, there is no difference. Our binaries fully correspond to the native behavior when used with Litespeed Web Server.
 
+Q: **_Is it possible to use CRIU with Litespeed Web Server?_**
 
-Installation process is done with :
-
-
-```
-yum install liblsapi liblsapi-devel
-yum install mod_lsapi
-```
-
-When completed - run a command to setup mod_lsapi and register LSPHP handlers in Plesk Panel:
-
-/usr/bin/switch_mod_lsapi --setup
-
-The command adds handlers to Plesk Panel so they become available for domains.
-
-Managing PHP handlers is fully done with according to their documentation: [http://download1.parallels.com/Plesk/PP12/12.0/Doc/en-US/online/plesk-administrator-guide/70669.htm](http://download1.parallels.com/Plesk/PP12/12.0/Doc/en-US/online/plesk-administrator-guide/70669.htm)
-
-Quick reference:
-
-Enabling lsapi for single domain is done with , select desired LSPHP handler for domain.
-
-Enabling lsapi for multiple domains is done with , select desired LSPHP handler to be used by all users under a plan. If a subscription is not locked (user changed nothing in it), after clicking domains will start using lsapi.
-
-![](/images/screenshot_20161029_132208_zoom84.png)
-
-There is no way to switch all plans to lsapi - it should be done one-by-one .
-
-
-
-1. Chose 
-
-From the dialog box, select PHP version.
-
-![](/images/php_settings_zoom94.png)
-
-
-Click _ _ and to confirm.
-
-2. Now you can manage your PHP (versions and modules) from .
-
-Chose .
-
-From the dialog box select proper PHP version and PHP modules (or defaults).
-
-![](/images/php_version_zoom94.png)
-Click and to apply your choice _._
-
-From now on, on your domain will be applied PHP with version and modules which are set by handled by mod_lsapi.
-
-3. Summary.
-
-1. For correct work of - chose for domain .
-2. If any other LSPHP version is chosen in Plesk, then will not be available anymore.
-3. For enabling native PHP from the vendor, select on the management page.
-
+A: Yes, Litespeed Web Server officially supports CRIU on the servers with CloudLinux. For detailed information on setting up CRIU with a Litespeed Web Server, follow the [link](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:lsphp_criu_enable) . You can also use lsphp binaries from alt-php or ea-php packages for that purpose.
 
 
 ## CRIU Support

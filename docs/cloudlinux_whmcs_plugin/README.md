@@ -1,22 +1,22 @@
 # CloudLinux WHMCS Plugin
 
 
-[Overview](/overview/)
-[Installation & Configuration](/installation_configuration/)
+[Overview](/cloudlinux_whmcs_plugin/#overview)
+[Installation & Configuration](/cloudlinux_whmcs_plugin/#installation-configuration)
 `o` [Installation and Update](/installation_and_update.html#installationupdate/)
-`o` [Configuration of Product](/configuration_of_product/)
-`o` [Configuration of Add-on](/configuration_of_addon/)
-[Management](/management/)
-`o` [Link Via Add-on. Optional License](/link_via_add-on_optional_lice/)
-`o` [Link Products Directly](/link_products_directly/)
-`o` [Link Via Configurable Options](/link_via_configurable_options/)
-`o` [Link Add-ons Directly](/link_add-ons_directly/) (for WHMCS 7.2.x and later)
-`o` [Order](/order/)
-`o` [Admin Area](/admin_area/)
-`o` [Client Area](/client_area/)
-`o` [Licenses List](/licenses_list/)
-`o` [Addon Licenses List](/addon_licenses_list/) (for WHMCS 7.2.x and later)
-[Common Problems](/common_problems/)
+`o` [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)
+`o` [Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)
+[Management](/cloudlinux_whmcs_plugin/#management)
+`o` [Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)
+`o` [Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)
+`o` [Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)
+`o` [Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)
+`o` [Order](/cloudlinux_whmcs_plugin/#order)
+`o` [Admin Area](/cloudlinux_whmcs_plugin/#admin-area)
+`o` [Client Area](/cloudlinux_whmcs_plugin/#client-area)
+`o` [Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)
+`o` [Addon Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)
+[Common Problems](/cloudlinux_whmcs_plugin/#common-problems)
 
 
 ## Overview
@@ -54,9 +54,9 @@ Supports WHMCS V6 and Later
 
 In this section we will show you how to set up our products.
 
-[Installation and Update](/installation_and_update/)
-[Configuration of Product](/configuration_of_product/)
-[Configuration of Add-on](/configuration_of_addon/)
+[Installation and Update](/cloudlinux_whmcs_plugin/#installation-and-update)
+[Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)
+[Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)
 
 
 ### Installation and Update
@@ -103,15 +103,15 @@ _Fig 2: CloudLinux License For WHMCS add-on module main page._
 
 In this section you can find two ways of linking license product with your server product as well as other possibilities of the module.
 
-[Link Via Add-on. Optional License](/link_via_add-on_optional_lice/)
-[Link Products Directly](/link_products_directly/)
-[Link Via Configurable Options](/link_via_configurable_options/)
-[Link Add-ons Directly](/link_add-ons_directly/) (for WHMCS 7.2.x and later)
-[Order](/order/)
-[Admin Area](/admin_area/)
-[Client Area](/client_area/)
-[Licenses List](/licenses_list/)
-[Add-on Licenses List](/addon_licenses_list/) (for WHMCS 7.2.x and later)
+[Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)
+[Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)
+[Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)
+[Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)
+[Order](/cloudlinux_whmcs_plugin/#order)
+[Admin Area](/cloudlinux_whmcs_plugin/#admin-area)
+[Client Area](/cloudlinux_whmcs_plugin/#client-area)
+[Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)
+[Add-on Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)
 
 
 ### Link Via Add-on. Optional License
@@ -146,7 +146,7 @@ If you want to offer server along with the license, perform the following steps.
 
 **_Note._** _ Please do not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product._
 
-Prepare license provisioning product as described in the [Configuration of Product](/configuration_of_product/) section of this documentation.
+Prepare license provisioning product as described in the [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product) section of this documentation.
 Go to and click .
 Select server provisioning product from the drop-down list and license provisioning product from and click .
 

@@ -2,15 +2,15 @@
 
 
 
-[General Information](/general/)
+[General Information](/cloudlinux-fchange/#general)
 
-[Usage and Integration](/usage_and_integration/)
+[Usage and Integration](/cloudlinux-fchange/#usage-and-integration)
 
-[Installation and Configuration](/installation_and_configuration/)
+[Installation and Configuration](/cloudlinux-fchange/#installation-and-configuration)
 
-[Configuration Details](/configuration_details/)
+[Configuration Details](/cloudlinux-fchange/#configuration-details)
 
-[Low-level access](/low-level_access/)
+[Low-level access](/cloudlinux-fchange/#low-level-access)
 
 
 

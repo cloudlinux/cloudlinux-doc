@@ -4,6 +4,8 @@ title: Deprecated
 
 # Deprecated
 
+## Git for cPanel
+
 ## LVE-Stats 0.x
 
 ### Storing statistics in MySQL

@@ -17,7 +17,7 @@ allows to restrict customers who use too much resources. It supports following l
 | | bytes | bytes read. Cached reads are not counted, only those that were actually read from disk will be counted|
 | | bytes | bytes written. Cached writes are not counted, only once data is written to disk, it is counted|
 
-You can set different limits for different periods: current, short, med, long. By default those periods are defined as 1 second, 5 seconds, 1 minute and 5 minutes. They can be re-defined using [configuration file](/mysql_governor_configuration/) . The idea is to use larger acceptable values for shorter periods. Like you could allow a customer to use two cores (200%) for one second, but only 1 core (on average) for 1 minute, and only 70% within 5 minutes. That would make sure that customer can burst for short periods of time.
+You can set different limits for different periods: current, short, med, long. By default those periods are defined as 1 second, 5 seconds, 1 minute and 5 minutes. They can be re-defined using [configuration file](/mysql_governor/#configuration) . The idea is to use larger acceptable values for shorter periods. Like you could allow a customer to use two cores (200%) for one second, but only 1 core (on average) for 1 minute, and only 70% within 5 minutes. That would make sure that customer can burst for short periods of time.
 
 When customer is restricted, the customer will be placed into special LVE with ID 3. All restricted customers will be placed into that LVE, and you can control amount of resources available to restricted customers. Restricted customers will also be limited to only 30 concurrent connections. This is done so they wouldn't use up all the MySQL connections to the server.
 
@@ -30,6 +30,7 @@ When customer is restricted, the customer will be placed into special LVE with I
 
 
 **_ _**
+**_MySQL Governor is compatible only with MySQL 5.x, 8.0; MariaDB & Percona Server 5.6._**
 
 To install on your server install package at first:
 
@@ -50,6 +51,7 @@ Please make sure to specify your current MySQL version instead of XX as follows:
 55 — MySQL v5.5
 56 — MySQL v5.6
 57 — MySQL v5.7
+80 — MySQL v8.0 [requires 1.2-37+; database packages are available in only, so, please use flag instead of ]
 
 If you are installing on a server running already, do instead:
 
@@ -62,7 +64,8 @@ Please make sure to specify your current version instead of as follows:
 100 — MariaDB v10.0
 101 — MariaDB v10.1
 102 — MariaDB v10.2
-103 — MariaDB v10.3
+103 — MariaDB v10.3 [requires 1.2-36+; database packages are available in only, so, please use flag instead of ]
+
 
 Installation for [requires 1.1-22+ or 1.2-21+]:
 
@@ -126,7 +129,7 @@ If file is absent on the server, " " mode works emulate " ".
 
 With and mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
 
-You can specify modes of operation using or by changing [configuration file](/mysql_governor_configuration/) .
+You can specify modes of operation using or by changing [configuration file](/mysql_governor/#configuration) .
 file is located in
 
 ## Configuration
@@ -323,22 +326,20 @@ If you would like to change to a different MySQL version, or switch to you have 
 
 
 
-
-
-
-
 ```
 $ /usr/share/lve/dbgovernor/mysqlgovernor.py --mysql-version=MYSQL_VERSION
 $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 ```
 
-* If you are using or -- recompile .
+
+* If you are using or - recompile .
 
 To install beta version of MySQL:
 
 ```
 $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install-beta
 ```
+
 
 can be one of the following:
 
@@ -350,34 +351,28 @@ can be one of the following:
 |mysql55 | MySQL v5.5|
 |mysql56 | MySQL v5.6|
 |mysql57 | MySQL v5.7|
+|mysql80 | MySQL v8.0 [requires MySQL Governor 1.2-37+; database packages are available in Beta only, so, please use flag instead of ]|
 |mariadb55 | MariaDB v5.5|
 |mariadb100 | MariaDB v10.0|
 |mariadb101 | MariaDB v10.1|
 |mariadb102 | MariaDB v 10.2|
-|mariadb103 | MariaDB v 10.3|
+|mariadb103 | MariaDB v 10.3 [requires 1.2-36+; database packages are available in only, so, please use flag instead of ]|
 |percona56 | Percona v 5.6|
 
-* We don't recommend to downgrade from MySQL v5.6,
+
+* We don't recommend to downgrade from MySQL v5.6, MariaDB 10.x
 
 
 
-
-
-
-
-
-
-MySQL Governor starting from version 1.2-36 (for now, July 4th, 2018 in Beta) supports MariaDB 10.3 installation.
-
-
+MySQL Governor starting from version 1.2-37 (in Beta since December 11th 2018) supports MySQL 8.0 installation.
 
 ## Command-line Tools
 
 
 -- monitor MySQL usage on per user bases. More info...
 -- command line tool to manage
--- provides historical information about usage and customer restrictions. [More info...](/dbgov_lveinfo/)
--- generate charts for MySQL usage. [More info...](/mysql_governor_dbgovchart/)
+-- provides historical information about usage and customer restrictions. [More info...](/mysql_governor/#lveinfo-dbgov)
+-- generate charts for MySQL usage. [More info...](/mysql_governor/#dbgovchart)
 
 
 ### dbtop
@@ -745,5 +740,22 @@ touch /etc/systemd/system/mariadb.service.d/limits.conf
 [Service] 
 LimitNOFILE=99999
 ```
+
+
+
+
+This may be caused by changing root/administrator credentials without updating MySQL configuration file.
+
+When you change root or administrator credentials in Plesk or DirectAdmin, you also need to update MySQL configuration file. This could be done with the following command (available since governor-mysql 1.2-38):
+
+
+```
+/usr/share/lve/dbgovernor/mysqlgovernor.py --update-config-auth
+```
+
+The command updates credentials in MySQL configuration file and restarts service afterwards.
+
+After applying the command MySQL successfully connects to MySQL.
+
 
 

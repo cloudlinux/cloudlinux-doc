@@ -4,7 +4,7 @@ title: PHP Selector
 
 # PHP Selector
 
-## Installation
+## Installation and Update
 
 ### LiteSpeed support
 
@@ -73,6 +73,8 @@ title: PHP Selector
 ### PHP 7.1 Extensions
 
 ### PHP 7.2 Extensions
+
+### PHP 7.3 Extensions
 
 ## Disabling PHP extension globally
 

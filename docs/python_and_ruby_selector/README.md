@@ -3,41 +3,32 @@
 
 We have the ability to deploy and applications via application server. and uses to host and .
 
-This feature is available for CloudLinux 6 or later and requires 0.9-1 or later. It supports only cPanel servers.
+This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
 
-Supported versions:
+You can find a list of supported alt-python and alt-ruby versions using the following commands.
 
-, supported by CloudLinux 6, CloudLinux 7;
+For alt-python:
 
-, supported by CloudLinux 6, CloudLinux 7;
-
-, supported by CloudLinux 6, CloudLinux 7;
-
-, supported by CloudLinux 6, CloudLinux 7.
-
-Supported versions _(supported by CloudLinux 6 and CloudLinux 7_ ):
-
-1.8;
-
-1.9;
-
-2.0;
-
-2.1;
-
-2.2;
-
-2.3;
-
-2.4.
+```
+yum grouplist | grep alt-python
+```
 
 
+For alt-ruby:
+
+```
+yum grouplist | grep alt-ruby
+```
 
 
 ## Python and Ruby Selector Installation
 
 
-Install a tools to create isolated environments and module. For servers with EasyApache3:
+
+
+
+
+Install tools to create isolated environments and module. For servers with EasyApache3:
 
 ```
 yum install lvemanager alt-python-virtualenv alt-mod-passenger
@@ -75,7 +66,6 @@ yum install alt-python27-devel
 
 
 
-
 ## End User Access
 
 
@@ -92,7 +82,7 @@ After a little while a new application entry will be appended to the web-page.
 
 ![](/images/clip000255.jpg)
 
-3. You can edit path (folder name in homedir, for example ), for application, handler. If you click - the value is converted to input field and thus becomes editable. When editing is complete, click .
+3. You can edit path (folder name of the project in the home directory, for example, ), for application, handler. If you click - the value is converted to input field and thus becomes editable. When editing is complete, click .
 
 ![](/images/clip000256.jpg)
 

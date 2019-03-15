@@ -1,22 +1,22 @@
 # Node.js Selector
 
 
-[Overview & Requirements](/overview__requirements/)
+[Overview & Requirements](/node_js_selector/#overview-requirements)
 [Requirements](/overview__requirements.html#requirements/)
-[Installation](/installation/)
-[Command Line Interface](/command_line_interface2/)
+[Installation](/node_js_selector/#installation)
+[Command Line Interface](/node_js_selector/#command-line-interface)
 [Hoster](/command_line_interface2.html#hoster/)
 [End User](/command_line_interface2.html#enduser/)
-[User Interface](/user_interface/)
+[User Interface](/node_js_selector/#user-interface)
 [Hoster](/user_interface.html#hoster/)
 `o` [How to enable/disable Node.js](/user_interface.html#howtoenabledisablenodejs/)
 `o` [How to manage Node.js](/user_interface.html#howtomanagenodejs/)
 `o` [Applications column](/user_interface.html#applicationscolumn/)
 [End User](/user_interface.html#enduser/)
 `o` [How to manage application](/user_interface.html#howtomanageapplication/)
-[Node.js Deployment](/node_js_deployment/)
-`o` [Remote Usage of Node.js Interpreters](/remote_usage_of_node_js_interp/)
-`o` [Remote Usage of the cloudlinux-selector Utility](/remote_usage_of_the_cloudlinux/)
+[Node.js Deployment](/node_js_selector/#node-js-deployment)
+`o` [Remote Usage of Node.js Interpreters](/node_js_selector/#remote-usage-of-node-js-interpreters)
+`o` [Remote Usage of the cloudlinux-selector Utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)
 
 
 ## Overview & Requirements
@@ -633,14 +633,14 @@ Add Environment variables — click and specify a name and a value.
 ## Node.js Deployment
 
 
-The first approach - [remote usage of Node.js Interpreters of different versions](/remote_usage_of_node_js_interp/) .
-The second approach - [remote usage of the ](/remote_usage_of_the_cloudlinux/) .
+The first approach - [remote usage of Node.js Interpreters of different versions](/node_js_selector/#remote-usage-of-node-js-interpreters) .
+The second approach - [remote usage of the ](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
 
 ### Remote Usage of Node.js Interpreters
 
 
 1. Create a Node.js project in . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
-2. Install packages on the server in use. See [installation instructions](/installation/) .
+2. Install packages on the server in use. See [installation instructions](/node_js_selector/#installation) .
 3. Create an application on the server. You can do it by three ways:
 `o` Via UI of the Node.js plugin.
 `o` Using the following command to create an application:

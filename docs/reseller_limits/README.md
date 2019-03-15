@@ -133,12 +133,12 @@ Hoster credentials allow to control limits for hosters’ end users and reseller
 
 Log in as Hoster to get access to the following functionality.
 
-[ ](/current_usage_tab/) tab allows to monitor users and resellers resource usage at the moment.
-[ ](/users_tab/) tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
-[ ](/statistics_tab/) tab displays the statistics of resource usage for particular timeframe or particular user.
-[ ](/options_tab/) tab allows to set LVE faults email notifications for hoster, users, and resellers.
-[ ](/packages_tab/) tab allows to manage resellers packages limits;
-[ ](/selector_tab/) tab allows to control settings.
+[ ](/reseller_limits/#current-usage) tab allows to monitor users and resellers resource usage at the moment.
+[ ](/reseller_limits/#users) tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
+[ ](/reseller_limits/#statistics) tab displays the statistics of resource usage for particular timeframe or particular user.
+[ ](/reseller_limits/#options) tab allows to set LVE faults email notifications for hoster, users, and resellers.
+[ ](/reseller_limits/#packages) tab allows to manage resellers packages limits;
+[ ](/reseller_limits/#selector) tab allows to control settings.
 
 
 ### Current Usage
@@ -331,12 +331,12 @@ Reseller interface is designed to manage limits for resellers’ end users, to m
 
 Log in under a particular reseller credentials to have access to the following functionality:
 
-[ ](/current_usage_tab2/) tab - allows to monitor resellers’ end users resource usage at the moment;
-[ ](/historical_usage_tab/) tab - allows to control resellers’ end users resource usage history;
-[ ](/users_tab2/) tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
-[ ](/statistics_tab2/) tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
-[ ](/options_tab2/) tab allows to set LVE Faults email notifications.
-[ ](/packages_tab2/) tab allows to manage reseller’s end user packages limits.
+[ ](/reseller_limits/#current-usage) tab - allows to monitor resellers’ end users resource usage at the moment;
+[ ](/reseller_limits/#historical-usage) tab - allows to control resellers’ end users resource usage history;
+[ ](/reseller_limits/#users) tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
+[ ](/reseller_limits/#statistics) tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
+[ ](/reseller_limits/#options) tab allows to set LVE Faults email notifications.
+[ ](/reseller_limits/#packages) tab allows to manage reseller’s end user packages limits.
 
 Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage or limits, neither his own nor for his users.
 

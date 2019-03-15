@@ -71,6 +71,137 @@ If statistics for server is absent for any reasons, you can update it by pressin
 If statistics collection is turned off it is not displayed. If you wish to get daily statistics for your server, please turn it on by adding parameter to the file.
 Data for dashboard is collected once per day. If you want to update data manually, press _Refresh_ . This process can last from 10 seconds to one hour depending on your server's performance, number of users and applications.
 
+## CloudLinux Installation Wizard
+
+
+
+allows you to easily install and set up CloudLinux OS components on your server with cPanel, Plesk or DirectAdmin.
+
+As you have CloudLinux OS installed, navigate to in your control panel. CloudLinux Installation Wizard starts automatically if package is installed for the first time (not updated).
+
+![](/images/installationwizardmain_zoom70.png)
+
+To start setting up your CloudLinux OS, click button, otherwise click , and you will be redirected to the .
+
+
+
+
+
+![](/images/wizard-dashboard_zoom60.png)
+
+The next step is selecting required components to be installed.
+![](/images/installationwizardstep1_zoom70.png)
+Click to complete installation or click to go back to the .
+Find a complete description of the CloudLinux components below.
+
+
+
+
+
+A virtualized per-user file system encapsulates each customer into a ‘cage’ preventing them from seeing each other files and viewing sensitive information (e.g., system files)
+
+![](/images/wizardcagefs_zoom90.png)
+Toggle the sliders to enable CageFS by default for new and/or existing users. 
+
+
+
+
+
+It is the fastest and most reliable way to serve PHP pages for Apache web-servers, a drop-in replacement for SuPHP, FCGID, RUID2, and ITK.
+
+![](/images/wizard_lsapi_zoom90.png)
+
+LSAPI requires CRIU to operate and we also recommend you to use mod_suexec. You can find details in our [documentation](/apache_mod_lsapi/) .
+
+
+
+Monitors MySQL usage to throttle abusers, preventing server overload and improving overall performance.
+
+![](/images/wizard_mysqlgovernor_zoom90.png)
+
+
+
+We recommend you to create a full database backup before the installation.
+
+
+
+Allows end users to create Node.js applications and select the specific version of Node.js and other parameters.
+
+![](/images/wizard_node.jsselector_zoom90.png)  Here you can choose versions to be installed and the version to be used as default.
+
+
+
+Allows end users to select the specific version of they need. 
+![](/images/wizard_ruby_selector_zoom90.png)  Here you can choose versions to be installed.
+
+
+
+Allows end users to select the default version of and set the required versions for installation.   ![](/images/wizard_python_selector_zoom90.png) 
+Here you can choose versions to be installed.
+
+
+
+Allows end users to select the specific version of PHP they need, with over 120 PHP extensions to choose from.
+
+![](/images/wizard_php_selector_zoom90.png)
+
+Go to settings to set up options and parameters. Read more in the [ PHP Selector documentation](/php_selector/#installation-and-update) . 
+
+
+When the components to be installed are selected and configured, and installation is started, you will be redirected to the .
+
+
+
+Installation status is displayed throughout the process in the . Click to show modules installation state.
+
+![](/images/wizard_installation_status_zoom70.png)
+
+All installed modules are displayed on the .
+When installation is completed successfully, you will see the following status.
+
+
+![](/images/wizardsuccess_zoom90.png)
+
+If you decide to remove failed module or a module to be installed by clicking the (X) button, a confirmation dialog will appear. After confirming the action, the module will disappear from the list.
+
+![](/images/wizardinstallremove_zoom90.png)
+
+If module installation fails, the Installing button changes to and the module indicator will turn red.
+
+![](/images/wizard_warning_zoom70.png)
+
+
+Click ![](/images/wizard_download_btn.png) to download the error log.
+Click ![](/images/wizard_try_again_btn.png) to try to install a module again.
+Click ![](/images/wizard_close_btn.png) to remove a specific module from the installation queue. The module will be displayed on the but will not be installed.
+
+If module auto-installation fails, you will see that the module indicator turns yellow.
+![](/images/wizardautoinstallationfails_zoom80.png)
+In this case, you can download a log for details and try to install the module again.
+
+
+
+In case of a fatal error, you will see the following warning.
+
+![](/images/wizardbroken_zoom70.png)
+
+
+Click ![](/images/wizard_download_btn.png) to download the error log.
+Click ![](/images/wizard_try_again_btn.png) to try to install module(s) again.
+Click ![](/images/wizard_close_btn.png) to cancel installation. The canceled modules will be removed from the installation process.
+
+You can contact our support team for further assistance anytime by [submitting a ticket in our helpdesk system](https://cloudlinux.zendesk.com/hc/requests/new) .
+
+
+
+
+
+
+
+
+
+
+
 ## cPanel LVE Manager
 
 
@@ -245,7 +376,7 @@ When you need to change options in cPanel config file on big amount of servers, 
 ### Server Processes Snapshots
 
 
-In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/lve_stats_old/) package generates Server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
+In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates Server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
 
 Snapshots allow users to investigate the reason of account hitting its limits. Several snapshots are generated for each incident. An incident is a state when faults are generated in a close time period. The time period is configurable. By default, if faults are generated in 300 seconds time period, we consider them as a single incident.
 

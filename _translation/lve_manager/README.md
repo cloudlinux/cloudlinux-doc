@@ -6,6 +6,8 @@ title: LVE Manager
 
 ## Dashboard
 
+## CloudLinux Installation Wizard
+
 ## cPanel LVE Manager
 
 ### LVE Manager Options

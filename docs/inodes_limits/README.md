@@ -56,17 +56,17 @@ Automatic inheritance of panel limits to all appropriate users.
 
 
 
-[General Provisions](/cl-quota_general/)
+[General Provisions](/inodes_limits/#general-provisions)
 
-[Setting Limits and Integration with Panel Packages](/set_limits_and_integration/)
+[Setting Limits and Integration with Panel Packages](/inodes_limits/#setting-limits-and-integration-with-panel-packages)
 
-[Limits Inheritance](/inheritance/)
+[Limits Inheritance](/inodes_limits/#limits-inheritance)
 
-[Caching and Synchronizing the Limits](/cache_synchronize/)
+[Caching and Synchronizing the Limits](/inodes_limits/#caching-and-synchronizing-the-limits)
 
-[ File](/db_file/)
+[ File](/inodes_limits/#quotas-db-file)
 
-[CLI Options/Examples](/cli_examples/)
+[CLI Options/Examples](/inodes_limits/#cli-options-examples)
 
 
 

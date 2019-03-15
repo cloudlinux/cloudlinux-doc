@@ -3,32 +3,13 @@
 
 CloudLinux will package additional software needed by hosters for your convenience.
 
-[Git for cPanel](/git_for_cpanel/)
+[Git for cPanel](/deprecated/#git-for-cpanel) (deprecated)
 
-[alt-suexec](/alt-suexec/)
+[alt-suexec](/additional_packages/#alt-suexec)
 
 
 
 [cloudlinux-fchange](/cloudlinux-fchange/)
-
-## Git for cPanel
-
-
-_Please note that this package is no longer needed, as since cPanel 11.38, you can install git without any issues on cPanel by running:_
-
-
-```
-$ yum install git
-```
-
-
-To install [git](http://git-scm.com/) on cPanel servers:
-
-
-```
-$ yum install git-cpanel
-```
-
 
 ## alt-suexec
 
@@ -43,11 +24,6 @@ alt-suexec package brings suEXEC binaries pre-compiled for specific locations, l
 Based on httpd 2.2 basic for 6 and httpd 2.4 basic for CloudLinux 7, the package brings to server a set of suEXECs with different s and parameters. The first set of suEXECs is listed by such modes:
 
 
-```
-# switch_suexec -l
-USE_HOME - DOCUMENT ROOT /home/ MIN_UID 500 MIN_GID 100 CALLER apache
-USE_WWW - DOCUMENT ROOT /var/www/ MIN_UID 500 MIN_GID 100 CALLER apache
-```
 
 
 The package also brings its own utility for installing specific suEXEC:
@@ -126,13 +102,10 @@ List of pre-built suEXEC binary files stored without suid bit and not executable
 For installation run the command:
 
 
-```
-yum install alt-suexec --enablerepo=cloudlinux-updates-testing
-```
 
 
 
-If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://helpdesk.cloudlinux.com/](https://helpdesk.cloudlinux.com/) and we will add new suEXEC with needed parameters.
+If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com/) and we will add new suEXEC with needed parameters.
 
 ## tuned-profiles-cloudlinux
 
