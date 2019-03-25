@@ -7,26 +7,22 @@
 
 cPanel EasyApache 3 and non cPanel ( _CloudLinux 7 only for non cPanel_ ):
 
-
+<span class="notranslate"> </span>
 ```
-# yum install mod_proctitle --enablerepo=cloudlinux-updates-testing
-# service httpd restart
+# yum install mod_proctitle --enablerepo=cloudlinux-updates-testing# service httpd restart
 ```
 
 
 cPanel EasyApache 4:
 
-
+<span class="notranslate"> </span>
 ```
-# yum install ea-apache24-mod_proctitle
-# service httpd restart
+# yum install ea-apache24-mod_proctitle# service httpd restart
 ```
 
 DirectAdmin: 
 ```
-# cd /usr/local/directadmin/custombuild
-# ./build update
-# ./build mod_procticle
+# cd /usr/local/directadmin/custombuild# ./build update# ./build mod_procticle
 ```
 
 
@@ -36,32 +32,13 @@ DirectAdmin:
 
 
 For reading information saved by module use the following script (the script is not in the package):
-
+<span class="notranslate"> </span>
 ```
-# CAT PROCTITLES_INFO.SH
-#!/BIN/BASH
-
-HTTPD=HTTPD
- 
-FOR PID IN `/USR/BIN/PGREP $HTTPD`; DO
-    FOR TID IN `LS /PROC/$PID/TASK`; DO
-        FOUND=NO
-        FOR SHM IN `LS /DEV/SHM/APACHE_TITLE_SHM_${PID}_${TID}_* 2>/DEV/NULL`; DO
-            FOUND=YES
-            TITLE=`/USR/BIN/TR -D '\0' < $SHM`
-            THREAD_ID=`/BIN/BASENAME "${SHM}" | SED "S/APACHE_TITLE_SHM_${PID}_${TID}_//"`
-            ECHO "$PID.$TID - $THREAD_ID - $TITLE"
-            BREAK
-        DONE
-        IF [ "$FOUND" = "NO" ]; THEN
-            ECHO "$PID.$TID NOT FOUND"
-        FI
-    DONE
-DONE
+# CAT PROCTITLES_INFO.SH#!/BIN/BASHHTTPD=HTTPD FOR PID IN `/USR/BIN/PGREP $HTTPD`; DO    FOR TID IN `LS /PROC/$PID/TASK`; DO        FOUND=NO        FOR SHM IN `LS /DEV/SHM/APACHE_TITLE_SHM_${PID}_${TID}_* 2>/DEV/NULL`; DO            FOUND=YES            TITLE=`/USR/BIN/TR -D '\0' < $SHM`            THREAD_ID=`/BIN/BASENAME "${SHM}" | SED "S/APACHE_TITLE_SHM_${PID}_${TID}_//"`            ECHO "$PID.$TID - $THREAD_ID - $TITLE"            BREAK        DONE        IF [ "$FOUND" = "NO" ]; THEN            ECHO "$PID.$TID NOT FOUND"        FI    DONEDONE
 ```
 
 Here are the examples of saved by module:
-
+<span class="notranslate"> </span>
 _# sh proctitles_info.sh_
 _571258.571258 NOT FOUND_
 _571300.571300 NOT FOUND_
@@ -78,9 +55,9 @@ _[pid].[tid] - [posix thread id] - [request info]_
 
 Request information can contain:
 
-- means that process of Apache doesn't handle requests.
-- request is active and waiting for new connection.
-
+<span class="notranslate"> _NOT FOUND_ </span> - means that process of Apache doesn't handle requests.
+<span class="notranslate"> _httpd_ </span> - request is active and waiting for new connection.
+<span class="notranslate"> _[seconds].[tenths of second] [host] [METHOD] [URL] [PROTOCOL]_ </span>
 
 ## Tuning Parameters
 
@@ -90,6 +67,6 @@ Request information can contain:
 | | |
 |-|-|
 | | List of handlers for monitoring (httpd.conf, virtualhost).|
-| | Use old method of cleaning information or new via filter (for prefork better to use )|
+| | Use old method of cleaning information or new via filter (for prefork better to use <span class="notranslate"> Off </span> )|
 
 

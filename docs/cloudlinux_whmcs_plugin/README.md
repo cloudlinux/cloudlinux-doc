@@ -3,19 +3,19 @@
 
 [Overview](/cloudlinux_whmcs_plugin/#overview)
 [Installation & Configuration](/cloudlinux_whmcs_plugin/#installation-configuration)
-`o` [Installation and Update](/installation_and_update.html#installationupdate/)
-`o` [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)
-`o` [Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)
+[Installation and Update](/installation_and_update.html#installationupdate/)
+[Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)
+[Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)
 [Management](/cloudlinux_whmcs_plugin/#management)
-`o` [Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)
-`o` [Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)
-`o` [Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)
-`o` [Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)
-`o` [Order](/cloudlinux_whmcs_plugin/#order)
-`o` [Admin Area](/cloudlinux_whmcs_plugin/#admin-area)
-`o` [Client Area](/cloudlinux_whmcs_plugin/#client-area)
-`o` [Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)
-`o` [Addon Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)
+[Link Via Add-on. Optional License](/cloudlinux_whmcs_plugin/#link-via-add-on-optional-license)
+[Link Products Directly](/cloudlinux_whmcs_plugin/#link-products-directly)
+[Link Via Configurable Options](/cloudlinux_whmcs_plugin/#link-via-configurable-options)
+[Link Add-ons Directly](/cloudlinux_whmcs_plugin/#link-add-ons-directly) (for WHMCS 7.2.x and later)
+[Order](/cloudlinux_whmcs_plugin/#order)
+[Admin Area](/cloudlinux_whmcs_plugin/#admin-area)
+[Client Area](/cloudlinux_whmcs_plugin/#client-area)
+[Licenses List](/cloudlinux_whmcs_plugin/#licenses-list)
+[Addon Licenses List](/cloudlinux_whmcs_plugin/#add-on-licenses-list) (for WHMCS 7.2.x and later)
 [Common Problems](/cloudlinux_whmcs_plugin/#common-problems)
 
 
@@ -67,7 +67,7 @@ Download CloudLinux Licenses For WHMCS:
 **Beta** : [http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-beta.zip](http://repo.cloudlinux.com/plugins/whmcs-cl-plugin-beta.zip)
 Upload archive to your WHMCS root folder and extract it. Files should automatically jump into their places.
 Run the following script:
-
+<span class="notranslate"> </span>
 ```
 php <whmcs_root>/clDeploy.php --migrate
 ```
@@ -76,20 +76,20 @@ php <whmcs_root>/clDeploy.php --migrate
 ### Configuration of Product
 
 
-Log into your WHMCS admin area and go to the . Click .
-Fill (product group will be visible under that name in your WHMCS system) and click .
-Click . Choose from drop-down menu and previously created product group from drop-down menu.
-Fill and click .
-Set up this product as hidden by ticking checkbox at tab. Do not set up pricing for this product. Pricing will be done in another way.
-Go to the tab and select from drop-down.
-Fill and with your CloudLinux API access details and select **_CloudLinux_** from drop-down.
-Click to confirm.
+Log into your WHMCS admin area and go to the <span class="notranslate"> _Setup → Products/Services → Products/Services_ </span> . Click <span class="notranslate">   _Create a New Group_ </span> .
+Fill <span class="notranslate"> _Product Group Name_ </span> (product group will be visible under that name in your WHMCS system) and click <span class="notranslate"> _Save Changes_ </span> .
+Click <span class="notranslate"> _Create a New Product_ </span> . Choose <span class="notranslate"> _Other_ </span> from <span class="notranslate"> _Product Type_ </span> drop-down menu and previously created product group from <span class="notranslate"> _Product Group_ </span> drop-down menu.
+Fill <span class="notranslate"> _Product Name_ </span> and click <span class="notranslate"> _Continue_ </span> .
+Set up this product as hidden by ticking <span class="notranslate"> _Hidden_ </span> checkbox at <span class="notranslate"> _Details_ </span> tab. Do not set up pricing for this product. Pricing will be done in another way.
+Go to the <span class="notranslate"> _Module Settings_ </span> tab and select <span class="notranslate"> **_CloudLinux Licenses_** </span> from <span class="notranslate"> _Module Name_ </span> drop-down.
+Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access details and select **_CloudLinux_** from <span class="notranslate"> _License Type_ </span> drop-down.
+Click <span class="notranslate"> _Save Changes_ </span> to confirm.
 
 ### Configuration of Add-on
 
 
-Go to , find and click next to it.
-The next step is permitting access to this module. Click , select admin role and confirm by clicking .
+Go to <span class="notranslate"> _Setup → Add-on Modules_ </span> , find <span class="notranslate"> _CloudLinux Licenses Add-on_ </span> and click <span class="notranslate"> _Activate_ </span> next to it.
+The next step is permitting access to this module. Click <span class="notranslate"> _Configure_ </span> , select admin role and confirm by clicking <span class="notranslate"> _Save Changes_ </span> .
 
 ![](/images/provisioningmoduleconfiguration_zoom90.png)
 _Fig 1: CloudLinux License For WHMCS provisioning module configuration._
@@ -121,9 +121,9 @@ In order to allow your client to decide whether he wants to order server with or
 
 The following steps must be performed to prepare such connection:
 
-Go to and click .
+Go to <span class="notranslate"> _Setup → Products/Services → Products Add-ons_ </span> and click <span class="notranslate"> _Add New Add-on_ </span> .
 Fill add-on name, set up billing cycle and price.
-Then tick on checkbox, assign add-on to the product and click .
+Then tick <span class="notranslate"> _Show_ </span> on <span class="notranslate"> _Order_ </span> checkbox, assign add-on to the product and click <span class="notranslate"> _Save Changes_ </span> .
 
 ![](/images/configurationofproductaddon0_zoom70.png)
 
@@ -133,8 +133,8 @@ Then tick on checkbox, assign add-on to the product and click .
 _Fig 3: Configuration of product add-on, which will trigger license product adding._
 
 
-Go to and click .
-Select previously created product add-on and license product as shown below  and click .
+Go to <span class="notranslate"> _Add-ons → CloudLinux Licenses Add-on → Add-on Relations_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
+Select previously created product add-on and license product as shown below  and click <span class="notranslate"> _Add Relation_ </span> .
 
 ![](/images/fig4creatingrelationbetweenproductaddonandprovisioningmodule_zoom70.png)
 _Fig 4: Creating relations between product add-on and provisioning module._
@@ -147,8 +147,8 @@ If you want to offer server along with the license, perform the following steps.
 **_Note._** _ Please do not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product._
 
 Prepare license provisioning product as described in the [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product) section of this documentation.
-Go to and click .
-Select server provisioning product from the drop-down list and license provisioning product from and click .
+Go to <span class="notranslate"> _Add-ons → CloudLinux Licenses Add-on → Products Relations_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
+Select server provisioning product from the <span class="notranslate"> _Main Product_ </span> drop-down list and license provisioning product from <span class="notranslate"> _Linked Product With License_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
 
 ![](/images/fig5creatingrelationdirectlybetweenserverandlicenseprovisioningmodules_zoom70.png)
 _Fig 5: Creating relations directly between server and license provisioning modules_ .
@@ -177,17 +177,17 @@ _Fig 6: Creating relations directly between server and license provisioning modu
 
 _[for WHMCS 7.2.x and later]_
 
-WHMCS 7.2 introduces the ability to associate with .
+WHMCS 7.2 introduces the ability to associate <span class="notranslate"> Product Add-ons </span> with <span class="notranslate"> Provisioning Modules </span> .
 
 In order to allow your client to decide whether he wants to order server with or without license we will use product add-on. Below we will show you what steps to proceed to prepare such connection.
 
-Go to _ _ and click .
-Fill add-on name, set up billing cycle and price. Then tick on checkbox, assign an add-on to the product.
-Go to tab and select from drop-down.
-Fill and with your CloudLinux API access (API secret key) details and select CloudLinux from drop-down.
-Click to confirm.
+Go to _ _ <span class="notranslate"> Setup → Products/Services → Products Add-ons </span> and click <span class="notranslate"> _Add New Addon_ </span> .
+Fill add-on name, set up billing cycle and price. Then tick <span class="notranslate"> _Show_ </span> on <span class="notranslate"> _Order_ </span> checkbox, assign an add-on to the product.
+Go to <span class="notranslate"> _Module Settings_ </span> tab and select <span class="notranslate"> _CloudLinuxLicenses_ </span> from <span class="notranslate"> _Module Name_ </span> drop-down.
+Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access (API secret key) details and select CloudLinux from <span class="notranslate"> _LicenseType_ </span> drop-down.
+Click <span class="notranslate"> _Save Changes_ </span> to confirm.
 ![](/images/configurationofproductaddon_zoom70.png)
-_Fig 7: Configuration of product add-on with _
+_Fig 7: Configuration of product add-on with _ <span class="notranslate"> Provisioning Modules </span> _._
 
 
 
@@ -222,7 +222,7 @@ The clients are also able to view their servers license details. And as well as 
 ![](/images/cloudlinuxlicensesforwhmcsclientarea_zoom70.png)
 _Fig 11: CloudLinux Licenses For WHMCS Client Area._
 
-To change IP address click as shown on the screen above. Then specify IP address and click .
+To change IP address click <span class="notranslate"> _Change_ </span> as shown on the screen above. Then specify IP address and click <span class="notranslate"> _Save_ </span> .
 
 ![](/images/changinglicenseipaddress_zoom80.png)
 _Fig 12: Changing License IP Address_ .
@@ -230,7 +230,7 @@ _Fig 12: Changing License IP Address_ .
 ### Licenses List
 
 
-You can view the list of all licenses owned by your client at our addon → .
+You can view the list of all licenses owned by your client at our addon → <span class="notranslate"> _Licenses List_ </span> .
 You can filter the list of licenses by client name, server provisioning products, license provisioning products and license IP address.
 
  ![](/images/fig13licenseslist_zoom70.png)
@@ -241,7 +241,7 @@ _Fig 13: Licenses list._
 
 _ [for WHMCS 7.2.x and later]_
 
-You can view a list of all product add-on with licenses owned by your client at our add-on → .
+You can view a list of all product add-on with <span class="notranslate"> _Provisioning Modules_ </span> licenses owned by your client at our add-on → <span class="notranslate"> _Licenses List_ </span> .
 
 ![](/images/fig14addonlicenseslist_zoom70.png)
 _Fig 14: Add-on Licenses List._
