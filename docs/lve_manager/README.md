@@ -439,7 +439,7 @@ When done, the branding script will be executed while every update of lvemanager
 
 Since version 1.0-4 <span class="notranslate">  LVE Manager </span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate"> _/opt/alt/phpXX/name_modifier_ </span> with a message that you want to be shown to a user.
 
-For example, if you need to add the following message <span class="notranslate"> "Don`t use this php version" </span> to PHP version 4.4, you should create the following file:
+For example, if you need to add the following message <span class="notranslate">"Don't use this php version"</span> to PHP version 4.4, you should create the following file:
 <span class="notranslate"> </span>
 _/opt/alt/php44/name_modifier:_
 _echo 'Don`t use this php version' > /opt/alt/php44/name_modifier_

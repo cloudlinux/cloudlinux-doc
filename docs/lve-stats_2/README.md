@@ -700,7 +700,7 @@ Subject: Customized subject exampleDear {{TONAME}},
 | | `IOPSf` | `Out Of ` <span class="notranslate"> I/O </span> ` Operations Faults (LVE version >= 8)`|
 | | |
 |-|-|
-|<span class="notranslate"> `--time-unit TIME_UNIT` </span> | `time step for grouping statistic in minutes; 1 min., by default; can use ` <span class="notranslate"> m|h|d </span> ` suffixes; for example: 1h or 1h30m or 1d12h`|
+|<span class="notranslate"> `--time-unit TIME_UNIT` </span> | `time step for grouping statistic in minutes; 1 min., by default; can use ` <span class="notranslate"> m\|h\|d </span> ` suffixes; for example: 1h or 1h30m or 1d12h`|
 |<span class="notranslate"> `-m {v1,v2}, --compat {v1,v2}` </span> | `v1 - return old output mode; v2 - new mode; default v1; you can change default in config`|
 |<span class="notranslate"> `--blank-value [BLANK_VALUE]` </span> | `Use to fill unsupported limits; default "-"`|
 |<span class="notranslate"> `-f YYYY-MM-DD[ HH:MM], ` </span> `--from YYYY-MM-DD[ HH:MM]` |  `run report from date and time in ` <span class="notranslate"> [YY]YY-MM-DD[ HH:MM] </span> ` format; if not present last 10 minutes are assumed`|
