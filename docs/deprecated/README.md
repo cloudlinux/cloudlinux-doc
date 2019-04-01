@@ -1,4 +1,4 @@
-# Deprecated
+﻿# Deprecated
 
 
 [Git for cPanel](/deprecated/#git-for-cpanel)
@@ -7,9 +7,9 @@
 
 ## Git for cPanel
 
-
-
-
+:::tip Note
+This package is no longer supported as it may cause dependency issues
+:::
 
 _Please note that this package is no longer needed, as since cPanel 11.38, you can install git without any issues on cPanel by running:_
 
@@ -29,7 +29,9 @@ $ yum install git-cpanel
 
 ## LVE-Stats 0.x
 
-
+:::tip Note
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+:::
 
 
  lve-stats package collects LVE usage statistics and allows to query the data.
@@ -67,61 +69,133 @@ Package consists of lveinfo utility to query LVE usage, and lvechart that allows
 
 To query historical LVE info, lveinfo command provided. It is located at <span class="notranslate"> /usr/sbin/lveinfo: 
   </span>
-```
-# /usr/sbin/lveinfo [OPTIONS]-h --help              : this help screen-v, --version          : version number-d, --display-username : try to convert LVE id into username when possible-f, --from=            : run report from date and time in YYYY-MM-DD HH:MM format      if not present last 10 minutes are assumed-t, --to=              : run report up to date and time in YYYY-MM-DD HH:MM format      if not present, reports results up to now-o, --order-by=        : orders results by one of the following:      cpu_avg          : average CPU usage      cpu_max          : max CPU usage      mep_avg          : average number of entry processes (concurrent connections)      mep_max          : max number of entry processes (concurrent connections)      vmem_avg         : average virtual memory usage      vmem_max         : max virtual memory usage      pmem_avg         : average physical memory usage      pmem_max         : max physical memory usage      nproc_avg        : average number of processes usage      nproc_max        : max number of processes usage      io_avg           : average IO usage      io_max           : max IO usage      total_mem_faults : total number of out of virtual memory faults (deprecated since 0.8-6)      total_vmem_faults: total number of out of virtual memory faults (since 0.8-6)      total_pmem_faults: total number of out of physical memory faults (since 0.8-6)      total_mep_faults : total number of entry processes faults (deprecated since 0.8-6)      total_ep_faults  : total number of entry processes faults (since 0.8-6)      total_nproc_faults: total number of number of processes faults (since 0.8-6)      any_faults       : total number of any types of faults (since 0.8-6)    --id=              : LVE id -- will display record only for that LVE id-u, --user=            : Use username instead of LVE id, and show only record for that user-l, --limit=           : max number of results to display, 10 by default-c, --csv              : display output in CSV format-b, --by-usage         : show LVEs with usage (averaged or max) within 90% percent of the limit      available values:      cpu_avg          : average CPU usage      cpu_max          : max CPU usage      mep_avg          : average number of entry processes (concurrent connections)      ep_avg           : average number of entry processes (since 0.8-6)      mep_max          : max number of entry processes (concurrent connections)      ep_max           : max number of entry processes (since 0.8-6)            mem_avg          : average virtual memory usage      mem_max          : max virtual memory usage      vmem_avg         : average virtual memory usage      vmem_max         : max virtual memory usage      pmem_avg         : average physical memory usage      pmem_max         : max physical memory usage      nproc_avg        : average number of processes      nproc_max        : max number of processes      io_avg           : average IO usage      io_max           : max IO usage-p, --percentage       : defines percentage for --by-usage option-f, --by-fault         : show LVEs which failed on max entry processes limit or memory limit      available values: mem, mep.       since 0.8-6      : vmem, pmem, ep, nproc    --show-all         : since 0.8-6 only columns for enabled limits will show up. -r, --threshold        : in combination with --by-fault, shows only LVEs with number of faults above threshold specified    --server_id        : used in combination with centralized storage, to access info from any server    --show-all         : full output (show all limits); brief output by default
-```
+<div class="notranslate">
 
+```
+# /usr/sbin/lveinfo [OPTIONS]
+-h --help              : this help screen
+-v, --version          : version number
+-d, --display-username : try to convert LVE id into username when possible
+-f, --from=            : run report from date and time in YYYY-MM-DD HH:MM format
+      if not present last 10 minutes are assumed
+-t, --to=              : run report up to date and time in YYYY-MM-DD HH:MM format
+      if not present, reports results up to now
+-o, --order-by=        : orders results by one of the following:
+      cpu_avg          : average CPU usage
+      cpu_max          : max CPU usage
+      mep_avg          : average number of entry processes (concurrent connections)
+      mep_max          : max number of entry processes (concurrent connections)
+      vmem_avg         : average virtual memory usage
+      vmem_max         : max virtual memory usage
+      pmem_avg         : average physical memory usage
+      pmem_max         : max physical memory usage
+      nproc_avg        : average number of processes usage
+      nproc_max        : max number of processes usage
+      io_avg           : average IO usage
+      io_max           : max IO usage
+      total_mem_faults : total number of out of virtual memory faults (deprecated since 0.8-6)
+      total_vmem_faults: total number of out of virtual memory faults (since 0.8-6)
+      total_pmem_faults: total number of out of physical memory faults (since 0.8-6)
+      total_mep_faults : total number of entry processes faults (deprecated since 0.8-6)
+      total_ep_faults  : total number of entry processes faults (since 0.8-6)
+      total_nproc_faults: total number of number of processes faults (since 0.8-6)
+      any_faults       : total number of any types of faults (since 0.8-6)
+    --id=              : LVE id -- will display record only for that LVE id
+-u, --user=            : Use username instead of LVE id, and show only record for that user
+-l, --limit=           : max number of results to display, 10 by default
+-c, --csv              : display output in CSV format
+-b, --by-usage         : show LVEs with usage (averaged or max) within 90% percent of the limit
+      available values:
+      cpu_avg          : average CPU usage
+      cpu_max          : max CPU usage
+      mep_avg          : average number of entry processes (concurrent connections)
+      ep_avg           : average number of entry processes (since 0.8-6)
+      mep_max          : max number of entry processes (concurrent connections)
+      ep_max           : max number of entry processes (since 0.8-6)
+      mem_avg          : average virtual memory usage
+      mem_max          : max virtual memory usage
+      vmem_avg         : average virtual memory usage
+      vmem_max         : max virtual memory usage
+      pmem_avg         : average physical memory usage
+      pmem_max         : max physical memory usage
+      nproc_avg        : average number of processes
+      nproc_max        : max number of processes
+      io_avg           : average IO usage
+      io_max           : max IO usage
+-p, --percentage       : defines percentage for --by-usage option
+-f, --by-fault         : show LVEs which failed on max entry processes limit or memory limit
+      available values: mem, mep.
+      since 0.8-6      : vmem, pmem, ep, nproc
+    --show-all         : since 0.8-6 only columns for enabled limits will show up. 
+-r, --threshold        : in combination with --by-fault, shows only LVEs with number of faults above threshold specified
+    --server_id        : used in combination with centralized storage, to access info from any server
+    --show-all         : full output (show all limits); brief output by default
+```
+</div>
 
+## Output
 
 | | |
 |-|-|
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
+|ID |LVE Id or username |
+|aCPU |Average CPU usage |
+|mCPU |Max CPU usage |
+|lCPU |CPU Limit |
+|aEP |CPU Limit |
+|mEP |Max Entry Processes |
+|lEP |Entry Proc limit |
+|aNPROC |Average Number of Processes |
+|mNPROC |Max Number of Processes |
+|lNPROC |Number of Processes limit |
+|aVMEM |Average virtual Memory Usage |
+|mVMEM |Max virtual Memory Usage |
+|lVMEM |Virtual Memory Limit |
+|aPMEM |Average physical Memory Usage |
+|mPMEM |Max physical Memory Usage |
+|lPMEM |Physical Memory Limit |
+|aIO |Average IO usage |
+|mIO |Max IO usage |
+|lIO |IO Limit |
+|fVMEM |Out Of Virtual Memory Faults |
+|fPMEM |Out Of Physical Memory Faults |
+|fEP |Entry processes faults |
+|fNPROC |Number of processes faults |
 
 * only enabled limits will show up
 
-
+## Examples
 
 Display top 10 users, by max <span class="notranslate"> CPU </span> usage, from Oct 10, 2010 to Oct 15, 2010. Display username if possible:
 
 <span class="notranslate"> </span>
-```
-$ lveinfo --from='2010-10-10' --to='2010-10-15' -o cpu_max --display-username ID        aCPU        mCPU        lCPU        aEP        mEP        lEP        aMem        mMem        lMem        MemF        MepF 777        7        9        10        0        0        25        10M        15M        1G        0        0 300        2        8        10        0        1        25        1M        3M        1G        0        0 web2        1        6        10        0        0        25        17K        18M        1G        0        0 web1        0        0        10        0        0        25        204K        1M        1G        0        0 
-```
+<div class="notranslate">
 
+```
+$ lveinfo --from='2010-10-10' --to='2010-10-15' -o cpu_max --display-username 
+ID        aCPU       mCPU     lCPU      aEP      mEP      lEP       aMem       mMem      lMem      MemF     MepF 
+777         7        9        10        0        0        25        10M        15M       1G        0        0 
+300         2        8        10        0        1        25        1M         3M        1G        0        0 
+web2        1        6        10        0        0        25        17K        18M       1G        0        0 
+web1        0        0        10        0        0        25        204K       1M        1G        0        0 
+```
+</div>
 Display LVE info about user <span class="notranslate"> web2 </span> , from Oct 10, 2010 to Oct 15, 2010:
 
 <span class="notranslate"> </span>
-```
-$ lveinfo --from='2010-10-10' --to='2010-10-15' --user=web2 --display-usernameID        aCPU        mCPU        lCPU        aEP        mEP        lEP        aMem        mMem        lMem        MemF        MepF web2        1        6        10        0        0        25        10M        15M        1G        0        0
-```
+<div class="notranslate">
 
+```
+$ lveinfo --from='2010-10-10' --to='2010-10-15' --user=web2 --display-username
+ID        aCPU       mCPU     lCPU      aEP      mEP      lEP       aMem       mMem       lMem      MemF     MepF 
+web2        1        6        10        0        0        25        10M        15M        1G        0        0
+```
+</div>
 
 ### Storing statistics in MySQL
 
-
-
+:::tip Note
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+:::
 
  You have to install MySQL-python rpm to store lve-stats on centralized server. Run:
 
@@ -144,51 +218,128 @@ A typical procedure to configure the MySQL database for storing information abou
 Create database and user. You can do it by executing the following commands:
 
 <span class="notranslate"> </span>
-```
-create database <database>;grant all on <database>.* to <user> identified by 'password';flush privileges;
-```
+<div class="notranslate">
 
+```
+create database <database>;
+grant all on <database>.* to <user> identified by 'password';
+flush privileges;
+```
+</div>
 
 Create database schema:
 
 <span class="notranslate"> </span>
-```
-CREATE TABLE history (id INTEGER,        cpu INTEGER, cpu_limit INTEGER,        cpu_max INTEGER,        ncpu INTEGER,        mep INTEGER, mep_limit INTEGER,        mep_max INTEGER,        io INTEGER, io_limit INTEGER,        mem INTEGER, mem_limit INTEGER,        mem_max INTEGER,        mem_fault INTEGER, mep_fault INTEGER,        created TIMESTAMP, weight INTEGER, server_id CHAR(10),        lmemphy INTEGER, memphy INTEGER, memphy_max INTEGER, memphy_fault INTEGER,        lnproc INTEGER, nproc INTEGER, nproc_max INTEGER, nproc_fault INTEGER,        lcpuw INTEGER, io_max INTEGER,        iops INTEGER, liops INTEGER, iops_max INTEGER );CREATE INDEX idx_history_id ON history(id);CREATE INDEX idx_history_created ON history(created);CREATE INDEX idx_history_weight ON history(weight);CREATE INDEX idx_history_server_id ON history(server_id);CREATE TABLE last_run (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);CREATE TABLE users (server_id CHAR(10), id INTEGER, username CHAR(20));CREATE INDEX idx_users_server_id ON users(server_id);CREATE INDEX idx_users_id ON users(id); CREATE TABLE history_gov ( ts INTEGER,                           username CHAR(64),                           max_simultaneous_requests INTEGER,                           sum_cpu FLOAT,                           sum_write FLOAT,                           sum_read FLOAT,                           number_of_iterations INTEGER,                           max_cpu FLOAT,                           max_write FLOAT,                           max_read FLOAT,                           number_of_restricts INTEGER,                           limit_cpu_on_period_end INTEGER,                           limit_read_on_period_end INTEGER,                           limit_write_on_period_end INTEGER,                           cause_of_restrict INTEGER,                           weight INTEGER,                           server_id char(10)); CREATE INDEX idx_history_gov_ts ON history_gov(ts);CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts); CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);CREATE INDEX idx_history_gov_weight ON history_gov(weight); CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);  * Execute following SQL command for each remote server for which you want to storestatistics in this database (make sure you substitute _SERVER_NAME_ with the sameservername as used in lvestats config file on remote server: INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), '_SERVER_NAME_', 4);
-```
+<div class="notranslate">
 
+```
+CREATE TABLE history (id INTEGER,
+        cpu INTEGER, cpu_limit INTEGER,
+        cpu_max INTEGER,
+        ncpu INTEGER,
+        mep INTEGER, mep_limit INTEGER,
+        mep_max INTEGER,
+        io INTEGER, io_limit INTEGER,
+        mem INTEGER, mem_limit INTEGER,
+        mem_max INTEGER,
+        mem_fault INTEGER, mep_fault INTEGER,
+        created TIMESTAMP, weight INTEGER, server_id CHAR(10),
+        lmemphy INTEGER, memphy INTEGER, memphy_max INTEGER, memphy_fault INTEGER,
+        lnproc INTEGER, nproc INTEGER, nproc_max INTEGER, nproc_fault INTEGER,
+        lcpuw INTEGER, io_max INTEGER,
+        iops INTEGER, liops INTEGER, iops_max INTEGER );
+CREATE INDEX idx_history_id ON history(id);
+CREATE INDEX idx_history_created ON history(created);
+CREATE INDEX idx_history_weight ON history(weight);
+CREATE INDEX idx_history_server_id ON history(server_id);
+CREATE TABLE last_run (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+CREATE TABLE users (server_id CHAR(10), id INTEGER, username CHAR(20));
+CREATE INDEX idx_users_server_id ON users(server_id);
+CREATE INDEX idx_users_id ON users(id); 
+
+CREATE TABLE history_gov ( ts INTEGER,
+                           username CHAR(64),
+                           max_simultaneous_requests INTEGER,
+                           sum_cpu FLOAT,
+                           sum_write FLOAT,
+                           sum_read FLOAT,
+                           number_of_iterations INTEGER,
+                           max_cpu FLOAT,
+                           max_write FLOAT,
+                           max_read FLOAT,
+                           number_of_restricts INTEGER,
+                           limit_cpu_on_period_end INTEGER,
+                           limit_read_on_period_end INTEGER,
+                           limit_write_on_period_end INTEGER,
+                           cause_of_restrict INTEGER,
+                           weight INTEGER,
+                           server_id char(10)); 
+
+CREATE INDEX idx_history_gov_ts ON history_gov(ts);
+CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);
+CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts); 
+CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);
+CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);
+CREATE INDEX idx_history_gov_weight ON history_gov(weight);
+
+CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+
+
+* Execute following SQL command for each remote server for which you want to store
+statistics in this database (make sure you substitute _SERVER_NAME_ with the same
+servername as used in lvestats config file on remote server: 
+
+INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), '_SERVER_NAME_', 4);
+```
+</div>
 On each server edit file <span class="notranslate"> /etc/sysconfig/lvestats & /etc/sysconfig/lvestats.readonly </span> as follows:
 
 <span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-db_type = mysqlconnect_string = host:database:user:passwordserver_id = _SERVER_NAME_db_port = _port_
+db_type = mysql
+connect_string = host:database:user:password
+server_id = _SERVER_NAME_
+db_port = _port_
 ```
- 
+</div> 
 
+:::tip Note
+lvestats.readonly should have a user that has read only access to all tables from lvestats database.
+:::
 
+:::tip Note
+_SERVER_NAME_ should be at most 10 characters
+:::
 
+:::tip Note
+db_port is an optional parameter. Default port would be used.
+:::
 
-
-  Select server responsible for compacting database on regular bases by setting <span class="notranslate"> COMPACT=master </span> in <span class="notranslate"> /etc/sysconfig/lvestats </span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
+Select server responsible for compacting database on regular bases by setting <span class="notranslate"> COMPACT=master </span> in <span class="notranslate"> /etc/sysconfig/lvestats </span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
 
 Make sure that <span class="notranslate"> /etc/sysconfig/lvestats </span> is readable only by <span class="notranslate"> root (chmod 600 /etc/sysconfig/lvestats), lvestats.readonly </span> should be readable by anyone
 
 Restart service:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
-
+</div>
 If you use central database to store lvestats data, on each server, execute:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/share/lve-stats/save_users_to_database.py 
 ```
-
+</div>
 You just need to execute it once, as it will be later executed via <span class="notranslate"> cron job </span> . That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
 
-
+## Updating MySQL & PostgreSQL schema for lve-stats 0.8+
 
 If you are using MySQL or PostgreSQL server for lve-stats older then 0.8, make sure to do the following steps to upgrade to latest version:
 
@@ -196,40 +347,87 @@ Stop lvestats service on all your servers.
 
 Connect to your database server, and execute following commands:
 
-<span class="notranslate"> </span>
-```
-ALTER TABLE history ADD lmemphy INTEGER;ALTER TABLE history ADD memphy INTEGER;ALTER TABLE history ADD memphy_max INTEGER;ALTER TABLE history ADD memphy_fault INTEGER;ALTER TABLE history ADD lnproc INTEGER;ALTER TABLE history ADD nproc INTEGER;ALTER TABLE history ADD nproc_max INTEGER;ALTER TABLE history ADD nproc_fault INTEGER;ALTER TABLE history ADD lcpuw INTEGER;ALTER TABLE history ADD io_max INTEGER;UPDATE history SET lmemphy = 0, memphy = 0, memphy_max = 0, memphy_fault = 0,       lnproc = 0, nproc = 0, nproc_max = 0, nproc_fault = 0,       lcpuw = 0, io_max = 0; ALTER TABLE last_run ADD lve_version INTEGER;UPDATE last_run SET lve_version = 4;CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
-```
+<div class="notranslate">
 
+```
+ALTER TABLE history ADD lmemphy INTEGER;
+ALTER TABLE history ADD memphy INTEGER;
+ALTER TABLE history ADD memphy_max INTEGER;
+ALTER TABLE history ADD memphy_fault INTEGER;
+ALTER TABLE history ADD lnproc INTEGER;
+ALTER TABLE history ADD nproc INTEGER;
+ALTER TABLE history ADD nproc_max INTEGER;
+ALTER TABLE history ADD nproc_fault INTEGER;
+ALTER TABLE history ADD lcpuw INTEGER;
+ALTER TABLE history ADD io_max INTEGER;
+UPDATE history SET lmemphy = 0, memphy = 0, memphy_max = 0, memphy_fault = 0,
+       lnproc = 0, nproc = 0, nproc_max = 0, nproc_fault = 0,
+       lcpuw = 0, io_max = 0;
+
+ALTER TABLE last_run ADD lve_version INTEGER;
+UPDATE last_run SET lve_version = 4;
+CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+```
+</div>
 To upgrade scheme to support <span class="notranslate"> MySQL Governor: </span>
 
-```
-CREATE TABLE history_gov ( ts INTEGER,    username char(64),    max_simultaneous_requests INTEGER,    sum_cpu float,    sum_write float,    sum_read float,    number_of_iterations INTEGER,    max_cpu float,    max_write float,    max_read float,    number_of_restricts INTEGER,    limit_cpu_on_period_end INTEGER,    limit_read_on_period_end INTEGER,    limit_write_on_period_end INTEGER,    cause_of_restrict INTEGER,    server_id char(10)); CREATE INDEX idx_history_gov_ts ON history_gov(ts);CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts);CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);
-```
+<div class="notranslate">
 
+```
+CREATE TABLE history_gov ( ts INTEGER,
+    username char(64),
+    max_simultaneous_requests INTEGER,
+    sum_cpu float,
+    sum_write float,
+    sum_read float,
+    number_of_iterations INTEGER,
+    max_cpu float,
+    max_write float,
+    max_read float,
+    number_of_restricts INTEGER,
+    limit_cpu_on_period_end INTEGER,
+    limit_read_on_period_end INTEGER,
+    limit_write_on_period_end INTEGER,
+    cause_of_restrict INTEGER,
+    server_id char(10));
+
+CREATE INDEX idx_history_gov_ts ON history_gov(ts);
+CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);
+CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts);
+CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);
+CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);
+```
+</div>
 Upgrading from lve-stats < 0.9-20:
 
-<span class="notranslate"> </span>
-```
-ALTER TABLE history_gov ADD weight INTEGER;CREATE INDEX idx_history_gov_weight ON history_gov(weight);CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
-```
+<div class="notranslate">
 
+```
+ALTER TABLE history_gov ADD weight INTEGER;
+CREATE INDEX idx_history_gov_weight ON history_gov(weight);
+CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+```
+</div>
 Update lve-stats RPM on all your servers.
 
 If you use central database to store lvestats data, execute the following commands:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 CREATE TABLE users (server_id CHAR(10), id INTEGER, username CHAR(20));CREATE INDEX idx_users_server_id ON users(server_id);CREATE INDEX idx_users_id ON users(id);
 ```
-
+</div>
 On each server execute:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/share/lve-stats/save_users_to_database.py 
 ```
- You just need to execute it once, as it will be later executed via cron job. That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
+</div>
+
+You just need to execute it once, as it will be later executed via cron job. That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
 
 ### Storing statistics in PostgreSQL
 
@@ -238,59 +436,131 @@ $ /usr/share/lve-stats/save_users_to_database.py
 
  You have to install <span class="notranslate"> postgresql-python rpm </span> to store lve-stats on centralized server. Run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install postgresql-python
 ```
-
+</div>
 A typical procedure to configure the PostgreSQL database for storing information about multiple servers for lve-stats services looks as follows:
 
 Create a database and a user. You can do it by executing the following commands:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 createdb <database>createuser <user>
 ```
-
+</div>
 Create database schema:
 
-<span class="notranslate"> </span>
-```
-CREATE TABLE history (id INTEGER,        cpu INTEGER, cpu_limit INTEGER,        cpu_max INTEGER,        ncpu INTEGER,        mep INTEGER, mep_limit INTEGER,        mep_max INTEGER,        io INTEGER, io_limit INTEGER,        mem INTEGER, mem_limit INTEGER,        mem_max INTEGER,        mem_fault INTEGER, mep_fault INTEGER,        created TIMESTAMP, weight INTEGER, server_id CHAR(10),        lmemphy INTEGER, memphy INTEGER, memphy_max INTEGER, memphy_fault INTEGER,        lnproc INTEGER, nproc INTEGER, nproc_max INTEGER, nproc_fault INTEGER,        lcpuw INTEGER, io_max INTEGER,
-```
-```
-        iops_max: INTEGER, liops: INTEGER, iops: INTEGER); CREATE INDEX idx_history_id ON history(id);CREATE INDEX idx_history_created ON history(created);CREATE INDEX idx_history_weight ON history(weight);CREATE INDEX idx_history_server_id ON history(server_id);CREATE TABLE last_run (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);CREATE TABLE users (server_id CHAR(10), id INTEGER, username CHAR(20));CREATE INDEX idx_users_server_id ON users(server_id);CREATE INDEX idx_users_id ON users(id); CREATE TABLE history_gov ( ts INTEGER,    username char(64),    max_simultaneous_requests INTEGER,    sum_cpu float,    sum_write float,    sum_read float,    number_of_iterations INTEGER,    max_cpu float,    max_write float,    max_read float,    number_of_restricts INTEGER,    limit_cpu_on_period_end INTEGER,    limit_read_on_period_end INTEGER,    limit_write_on_period_end INTEGER,    cause_of_restrict INTEGER,    weight INTEGER,    server_id char(10)); CREATE INDEX idx_history_gov_ts ON history_gov(ts);CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts);CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);CREATE INDEX idx_history_gov_weight ON history_gov(weight); CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);     * Execute following SQL command for each remote server for which you want to store      statistics in this database (make sure you substitute _SERVER_NAME_ with the same      servername as used in lvestats config file on remote server: INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (now() AT TIME ZONE 'UTC', now() AT TIME ZONE 'UTC', '_SERVER_NAME_', 4);
-```
+<div class="notranslate">
 
+```
+CREATE TABLE history (id INTEGER,
+        cpu INTEGER, cpu_limit INTEGER,
+        cpu_max INTEGER,
+        ncpu INTEGER,
+        mep INTEGER, mep_limit INTEGER,
+        mep_max INTEGER,
+        io INTEGER, io_limit INTEGER,
+        mem INTEGER, mem_limit INTEGER,
+        mem_max INTEGER,
+        mem_fault INTEGER, mep_fault INTEGER,
+        created TIMESTAMP, weight INTEGER, server_id CHAR(10),
+        lmemphy INTEGER, memphy INTEGER, memphy_max INTEGER, memphy_fault INTEGER,
+        lnproc INTEGER, nproc INTEGER, nproc_max INTEGER, nproc_fault INTEGER,
+        lcpuw INTEGER, io_max INTEGER,
+
+
+
+        iops_max: INTEGER, liops: INTEGER, iops: INTEGER);
+
+CREATE INDEX idx_history_id ON history(id);
+CREATE INDEX idx_history_created ON history(created);
+CREATE INDEX idx_history_weight ON history(weight);
+CREATE INDEX idx_history_server_id ON history(server_id);
+CREATE TABLE last_run (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+CREATE TABLE users (server_id CHAR(10), id INTEGER, username CHAR(20));CREATE INDEX idx_users_server_id ON users(server_id);
+CREATE INDEX idx_users_id ON users(id);
+
+CREATE TABLE history_gov ( ts INTEGER,
+    username char(64),
+    max_simultaneous_requests INTEGER,
+    sum_cpu float,
+    sum_write float,
+    sum_read float,
+    number_of_iterations INTEGER,
+    max_cpu float,
+    max_write float,
+    max_read float,
+    number_of_restricts INTEGER,
+    limit_cpu_on_period_end INTEGER,
+    limit_read_on_period_end INTEGER,
+    limit_write_on_period_end INTEGER,
+    cause_of_restrict INTEGER,
+    weight INTEGER,
+    server_id char(10));
+
+CREATE INDEX idx_history_gov_ts ON history_gov(ts);
+CREATE INDEX idx_history_gov_cause_of_restrict ON history_gov(cause_of_restrict);
+CREATE INDEX idx_history_gov_number_of_restricts ON history_gov(number_of_restricts);
+CREATE INDEX idx_history_gov_max_simultaneous_requests ON history_gov(max_simultaneous_requests);
+CREATE INDEX idx_history_gov_server_id ON history_gov(server_id);
+CREATE INDEX idx_history_gov_weight ON history_gov(weight);
+
+CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10), lve_version INTEGER);
+
+     * Execute following SQL command for each remote server for which you want to store
+      statistics in this database (make sure you substitute _SERVER_NAME_ with the same
+      servername as used in lvestats config file on remote server:
+
+INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (now() AT TIME ZONE 'UTC', now() AT TIME ZONE 'UTC', '_SERVER_NAME_', 4);
+```
+</div>
 On each server edit file <span class="notranslate"> /etc/sysconfig/lvestats </span> and <span class="notranslate"> /etc/sysconfig/lvestats </span> as follows:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-db_type = postgresqlconnect_string = host:database:user:passwordserver_id = _SERVER_NAME_db_port = _port_
+db_type = postgresql
+connect_string = host:database:user:password
+server_id = _SERVER_NAME_db_port = _port_
 ```
-   
+</div>   
 
+:::tip Note
+lvestats.readonly should have a user that has read only access to history table.
+:::
 
+:::tip Note
+_SERVER_NAME_ should be at most 10 characters
+:::
 
+:::tip Note
+db_port is optional, default PostgreSQL port will be used
+:::
 
- Select server responsible for compacting database on regular bases by setting <span class="notranslate"> COMPACT=master </span> in <span class="notranslate"> /etc/sysconfig/lvestats </span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
+Select server responsible for compacting database on regular bases by setting <span class="notranslate"> COMPACT=master </span> in <span class="notranslate"> /etc/sysconfig/lvestats </span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
 
 Make sure that <span class="notranslate"> /etc/sysconfig/lvestats </span> is readable only by <span class="notranslate"> root (chmod 600 /etc/sysconfig/lvestats), lvestats.readonly </span> should be readable by anyone.
 
 Restart service:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
-
+</div>
 If you use central database to store lvestats data, on each server, execute:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/share/lve-stats/save_users_to_database.py 
 ```
-
+</div>
 You just need to execute it once, as it will be later executed via <span class="notranslate"> cron job </span> . That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
 
 You are done!
@@ -298,9 +568,11 @@ You are done!
 
 ### Compacting in multi-server settings
 
+:::tip Note
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+:::
 
-
-  [lve-stats 0.10+]
+[lve-stats 0.10+]
 
 When you have multiple servers storing LVE statistics to a central database, then you will need to pick one server responsible for compacting data.
 
@@ -312,7 +584,9 @@ Default: <span class="notranslate"> **single** </span> -- should be used when lv
 
 ## OptimumCache
 
-
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED.
+:::
 
    **OptimumCache 0.2+**
 
