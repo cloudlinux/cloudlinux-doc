@@ -1,10 +1,9 @@
 # Limits
 
-
 CloudLinux has support for the following limits:
 
 | |  |  |  | |
-|-|--|--|--|-|
+|--|---|--|--|--|
 |Limits | Units | Default Value | Description | Supported Kernels / OS|
 |<span class="notranslate"> [SPEED](/limits/#speed-limits) </span> | % of a core, or HZ | 100% | <span class="notranslate"> CPU </span> speed limit, relative to a single core, or specified in HZ (portable across <span class="notranslate"> CPU </span> s) | all|
 |<span class="notranslate"> CPU </span> [deprecated] | % of <span class="notranslate"> CPU </span> | 25% | <span class="notranslate"> CPU </span> Limit (smallest of <span class="notranslate"> CPU </span> & NCPU is used) | all|
@@ -16,99 +15,144 @@ CloudLinux has support for the following limits:
 |[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
 |[EP](/limits/#entry-processes) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
 
-Note. It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
+::: tip Note
+It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
+:::
 
 Bellow you can find recommendations for your typical shared hosting setup. The recommendations don't depend on the power of your server. They only depend on how "fast" you want your hosting accounts to be.
 
 **Typical Hosting Account**
 
-```
-PMEM=512MBVMEM=0IO=1024KB/sIOPS=1024NPROC=100EP=20
-```
+* <span class="notranslate">SPEED=100%</span>
+* <span class="notranslate">PMEM=512MB</span>
+* <span class="notranslate">VMEM=0</span>
+* <span class="notranslate">IO=1024KB/s</span>
+* <span class="notranslate">IOPS=1024</span>
+* <span class="notranslate">NPROC=100</span>
+* <span class="notranslate">EP=20</span>
 
 **High End Hosting Account**
 
-```
-PMEM=1GBVMEM=0IO=4096KB/sIOPS=1024NPROC=100EP=40
-```
+* <span class="notranslate">SPEED=200%</span>
+* <span class="notranslate">PMEM=1GB</span>
+* <span class="notranslate">VMEM=0</span>
+* <span class="notranslate">IO=4096KB/s</span>
+* <span class="notranslate">IOPS=1024</span>
+* <span class="notranslate">NPROC=100</span>
+* <span class="notranslate">EP=40</span>
 
 ## Understanding LVE
 
-
 LVE is a kernel level technology developed by the CloudLinux team. The technology has common roots with container based virtualization and uses cgroups in its latest incarnation. It is lightweight and transparent. The goal of LVE is to make sure that no single web site can bring down your web server.
 
-Today, a single site can consume all <span class="notranslate"> CPU </span> , IO, Memory resources or Apache processes - and bring the server to a halt. LVE prevents that. It is done via collaboration of Apache module, PAM module and kernel.
+Today, a single site can consume all <span class="notranslate"> CPU, IO, Memory</span> resources or Apache processes - and bring the server to a halt. LVE prevents that. It is done via collaboration of Apache module, PAM module and kernel.
 
 [mod_hostinglimits](/limits/#hostinglimits) is Apache module that:
 
-·        detects VirtualHost from which the request came;
-·        detects if it was meant for CGI or PHP script;
-·        puts Apache process used to serve that request into LVE for the user determined via SuexecUserGroup directive for that virtual host;
-·        lets Apache to serve the request;
-·        removes Apache process from user's LVE.
+* detects VirtualHost from which the request came;
+* detects if it was meant for CGI or PHP script;
+* puts Apache process used to serve that request into LVE for the user determined via SuexecUserGroup directive for that virtual host;
+* lets Apache to serve the request;
+* removes Apache process from user's LVE.
 
 The kernel makes sure that all LVEs get fair share of the server's resources, and that no customer can use more then the limits set for that customer.
-Today we can limit <span class="notranslate"> CPU </span> , <span class="notranslate"> Memory </span> (virtual and physical), IO, number of processes as well as the number of entry processes (concurrent connections to apache).
+Today we can limit <span class="notranslate">CPU </span>, <span class="notranslate"> Memory </span> (virtual and physical), IO, number of processes as well as the number of entry processes (concurrent connections to apache).
 
-Each LVE limits amount of entry processes (Apache processes entering into LVE) to prevent single site exhausting all Apache processes. If the limit is reached, then mod_hostinglimits will not be able to place Apache process into LVE, and will return error code 508. This way very heavy site would slow down and start returning 508 errors, without affecting other users.
+Each LVE limits amount of entry processes (Apache processes entering into LVE) to prevent single site exhausting all Apache processes. If the limit is reached, then <span class="notranslate">mod_hostinglimits</span> will not be able to place Apache process into LVE, and will return error code 508. This way very heavy site would slow down and start returning 508 errors, without affecting other users.
 
-If the site is limited by <span class="notranslate"> CPU </span> or IO, then the site will start responding slower.
-If the site is limited by memory or number of processes limits, then the user will recieve 500 or 503 errors that server cannot execute the script.
+* If the site is limited by <span class="notranslate"> CPU </span> or <span class="notranslate">IO</span>, then the site will start responding slower.
+* If the site is limited by memory or number of processes limits, then the user will receive 500 or 503 errors that server cannot execute the script.
 
-
+### Checking if LVE is installed
 
 To use LVE you should have CloudLinux kernel installed, and LVE module loaded. You can check the kernel by running the following command:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ uname -r
 ```
+</div>
 
 You should see something like 2.6.18-294.8.1.el5.lve0.8.60. The kernel should have lve in its name. To see if lve kernel module is loaded run:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-$ lsmod|grep lvelve                    46496  0 
+$ lsmod|grep lve
+lve                    46496  0
 ```
+</div>
 
 Starting from kernels lve1.4.x iolimits module is a part of kmod-lve and could not be used separately.
 
-You can toggle LVE on/ff by editing <span class="notranslate"> /etc/sysconfig/lve </span> and setting LVE_ENABLE variable to <span class="notranslate"> yes </span> or <span class="notranslate"> no </span> .
+* You can toggle LVE on/ff by editing <span class="notranslate">`/etc/sysconfig/lve`</span> and setting <span class="notranslate">`LVE_ENABLE`</span> variable to <span class="notranslate">`yes`</span> or <span class="notranslate">`no`</span>.
 
-Setting it to <span class="notranslate"> yes </span> will enable LVE, setting it to <span class="notranslate"> no </span> will disable LVE.
+    Setting it to <span class="notranslate">`yes`</span> will enable LVE, setting it to <span class="notranslate">`no`</span> will disable LVE.
 
-You can toggle IO limits by editing <span class="notranslate"> /etc/sysconfig/iolimits </span> and setting IO_LIMITS_ENABLED variable to <span class="notranslate"> yes </span> or <span class="notranslate"> no </span> .
+* You can toggle IO limits by editing <span class="notranslate">`/etc/sysconfig/iolimits`</span> and setting <span class="notranslate">`IO_LIMITS_ENABLED`</span> variable to <span class="notranslate">`yes`</span> or <span class="notranslate">`no`</span>.
 
 You need to reboot the server, after you set this option to make the changes live.
 
+### Controlling LVE Limits
 
-
-The best way to control LVE limits is using LVE Manager in your favorite control panel. Alternatively, you can use command line tool lvectl to control limits.
-The limits are saved in <span class="notranslate"> /etc/container/ve.cfg </span> 
+The best way to control LVE limits is using <span class="notranslate">LVE Manager</span> in your favorite control panel. Alternatively, you can use command line tool `lvectl` to control limits.
+The limits are saved in <span class="notranslate">`/etc/container/ve.cfg`</span> 
 
 Example:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-<?xml version="1.0" ?><lveconfig><defaults><cpu limit="25"/><ncpu limit="1"/><io limit="1024"/><mem limit="262144"/><other maxentryprocs="200"/><pmem limit="262144"/><nproc limit="0"/></defaults><lve id="532"><cpu limit="30"/><ncpu limit="5"/></lve></lveconfig>
+<?xml version="1.0" ?>
+<lveconfig>
+ <defaults>
+         <cpu limit="25"/>
+         <ncpu limit="1"/>
+         <io limit="1024"/>
+         <mem limit="262144"/>
+         <other maxentryprocs="200"/>
+         <pmem limit="262144"/>
+         <nproc limit="0"/>
+ </defaults>
+ <lve id="532">
+         <cpu limit="30"/>
+         <ncpu limit="5"/>
+ </lve>
+</lveconfig>
 ```
+</div>
+
+Sets <span class="notranslate">CPU</span> limit to 25%, <span class="notranslate">IO</span> limit to 1024KB/s, <span class="notranslate">virtual memory</span> limit to 1GB (memory limit is set as a number of 4096 bytes pages), <span class="notranslate">physical memory</span> limit to 1GB, <span class="notranslate"> CPU</span> cores per LVE to 1, maximum entry processes to 200 and no limit for number of processes for all LVEs. It also sets the limit of 30% and number of processes limit to 5 for LVE with ID 532.
+
+### Checking LVE Usage
 
 
-Sets <span class="notranslate"> CPU </span> limit to 25%, IO limit to 1024KB/s, virtual memory limit to 1GB (memory limit is set as a number of 4096 bytes pages), physical memory limit to 1GB, <span class="notranslate"> CPU </span> cores per LVE to 1, maximum entry processes to 200 and no limit for number of processes for all LVEs. It also sets the limit of 30% and number of processes limit to 5 for LVE with ID 532.
+One of the best way to monitor current usage is [lvetop](/limits/#lvetop):
 
+<div class="notranslate">
 
-
-
-One of the best way to monitor current usage is [lvetop](/limits/#lvetop) :
-<span class="notranslate"> </span>
 ```
-$ lvetopID     EP    PNO    TNO    CPU    MEM    I/Otest    1     2            2     2%    728     0   
+$ lvetop
+         ID     EP    PNO    TNO    CPU    MEM    I/O
+         test    1     2            2     2%    728     0   
 ```
+</div>
 
-You can also check the content of <span class="notranslate"> /proc/lve/list </span> file that has all the data about LVE usage for all LVEs:
-<span class="notranslate"> </span>
-```
-[root@localhost tests]$ cat /proc/lve/list 4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP0        0        75        25        0        0        0        262144        20        2        0        0500        0        75        25        0        0        0        4294967 20        3        2        1        700        1        75        25        1403247        202        0        262144        20        2        0        0
-```
+You can also check the content of <span class="notranslate">`/proc/lve/list`</span> file that has all the data about LVE usage for all LVEs:
 
-Additionally you can use tool lveps to see <span class="notranslate"> CPU </span> usage, and processes within LVE.
+<div class="notranslate">
+
+```
+[root@localhost tests]$ cat /proc/lve/list 
+4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP
+0        0        75        25        0        0        0        262144        20        2        0        0
+500        0        75        25        0        0        0        4294967 20        3        2        1        
+700        1        75        25        1403247        202        0        262144        20        2        0        0
+```
+</div>
+
+Additionally you can use tool lveps to see <span class="notranslate">CPU</span> usage, and processes within LVE.
 
 ## Command-line Tools
 
