@@ -156,292 +156,344 @@ Additionally you can use tool lveps to see <span class="notranslate">CPU</span> 
 
 ## Command-line Tools
 
-
-[lvectl](/limits/#lvectl)
-
-[lveps](/limits/#lveps)
-
-[lvetop](/limits/#lvetop)
-
-[cldetect](/limits/#cldetect)
-
-[lve-stats](/deprecated/#lve-stats-0-x)
-
-[Storing statistics in MySQL](/deprecated/#storing-statistics-in-mysql)
-
-[Storing statistics in PostgreSQL](/deprecated/#storing-statistics-in-postgresql)
-
-[Compacting in multi-server settings](/deprecated/#compacting-in-multi-server-settings)
-
-[lve-stats 2](/lve-stats_2/)
-
-[Installation](/lve-stats_2/#installation)
-
-[Configuration](/lve-stats_2/#configuration)
-
-[Command Line Tools](/lve-stats_2/#command-line-tools)
-
-[lveinfo](/lve-stats_2/#lveinfo)
-
-[lvechart](/lve-stats_2/#lvechart)
-
-[dbgovchart](/mysql_governor/#dbgovchart)
-
-[lve-read-snapshot](/lve-stats_2/#lve-read-snapshot)
-
-[lve-create-db](/lve-stats_2/#lve-create-db)
-
-[Plugins](/lve-stats_2/#plugins)
-
-[Creating a Plugin for LVE Stats 2](/lve-stats_2/#creating-a-plugin-for)
-
-[Introduction](/lve-stats_2/#introduction)
-
-[Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
-
-[Plugin Configuration](/lve-stats_2/#plugin-configuration)
-
-[Types of Plugins](/lve-stats_2/#types-of-plugins)
-
-[Examples of Plugins](/lve-stats_2/#examples-of-plugins)
-
-<span class="notranslate"> [Collector](/lve-stats_2/#collector) </span>
-
-<span class="notranslate"> [Analizer](/lve-stats_2/#analizer) </span>
-
-<span class="notranslate"> [Persistor](/lve-stats_2/#persistor) </span>
-
-<span class="notranslate"> [Notifier](/lve-stats_2/#notifier) </span>
-
-[/var/lve/info file](/lve-stats_2/#file-info-and-format-for-var-lve-info-file)
-
-[Troubleshooting](/lve-stats_2/#troubleshooting)
-
-
 ### lvectl
-
 
 lvectl is the primary tool for LVE management. To use it, you have to have administrator access. lvectl is a part of lve-utils package.
 
-The syntax of lvectl is:
+**lvectl syntax**
 
-Usage: <span class="notranslate"> `lvectl command [veid] [options]` </span>
+**Usage**: <span class="notranslate">`lvectl command [veid] [options]`</span>
 
-| |  | |
-|-|--|-|
-|`Commands:` |  | |
-| | <span class="notranslate"> `apply`   </span> | `apply config settings to specified LVE`|
-| | <span class="notranslate"> `apply all`   </span> | `apply config settings to all the LVEs`|
-| | <span class="notranslate"> `apply-many` </span> | `to apply LVE limits to multiple distinct LVEs (uids of users are read from stdin)`|
-| | <span class="notranslate"> `set`   </span> | `set parameters for a LVE and/or create a LVE`|
-| | <span class="notranslate"> `set-user`   </span> | `set parameters for a LVE and/or create a LVE using username instead of ID`|
-| | <span class="notranslate"> `list` </span> | `list loaded LVEs`|
-| | <span class="notranslate"> `list-user`   </span> | `list loaded LVEs, display username instead of user id`|
-| | <span class="notranslate"> `limits` </span> | `show limits for loaded LVEs`|
-| | <span class="notranslate"> `delete` </span> | `delete LVE and set configuration for that LVE to defaults`|
-| | <span class="notranslate"> `delete-user` </span> | `delete LVE and set configuration for that user to defaults`|
-| | <span class="notranslate"> `destroy` </span> | `destroy LVE (configuration file remains unchanged)`|
-| | <span class="notranslate"> `destroy all` </span> | `destroy all LVE (configuration file remains unchanged)`|
-| | <span class="notranslate"> `destroy-many` </span> | `to destroy LVE limits to multiple distinct LVEs (uids of users are read from stdin)`|
-| | <span class="notranslate"> `package-set` </span> | `set LVE parameters for a package`|
-| | <span class="notranslate"> `package-list` </span> | `list LVE parameters for packages`|
-| | <span class="notranslate"> `package-delete` </span> | `delete LVE parameters for a package`|
-| | <span class="notranslate"> `paneluserslimits` </span> | `show current user's limits for control panel`|
-| | <span class="notranslate"> `limit` </span> | `limit PID into specified LVE. Parameters PID LVE_ID`|
-| | <span class="notranslate"> `release` </span> | `release PID from LVE. Parameters PID`|
-| | <span class="notranslate"> `set-binary` </span> | `add binary to be run inside LVE on execution`|
-| | <span class="notranslate"> `del-binary` </span> | `remove binary from being run inside LVE on execution`|
-| | <span class="notranslate"> `list-binaries` </span> | `list all binaries to be run inside LVE on execution`|
-| | <span class="notranslate"> `load-binaries` </span> | `load binaries (used on startup) from config file`|
-| | <span class="notranslate"> `reload-binaries` </span> | `re-load list of binaries from config file`|
-| | <span class="notranslate"> `help (-h)` </span> | `show this message`|
-| | <span class="notranslate"> `version (-v)` </span> | `version number`|
-| | <span class="notranslate"> `lve-version` </span> | `LVE version number`|
-| | <span class="notranslate"> `set-reseller` </span> | `create LVE container and set LVE parameters for a reseller`|
-| | <span class="notranslate"> `set-reseller-default` </span> | `set default limits for resellers users`|
-|`Options:` |  | |
-| | <span class="notranslate"> `--cpu=N`   </span> | `limit ` <span class="notranslate"> CPU </span> ` usage; (deprecated. Use ` <span class="notranslate"> --speed </span> `)`|
-| | <span class="notranslate"> `--speed=N%` </span> | `limit ` <span class="notranslate"> CPU </span> ` usage in percentage; 100% is one core`|
-| | <span class="notranslate"> `--speed=Nmhz\ghz` </span> | `limit ` <span class="notranslate"> CPU </span> ` usage in mhz\ghz`|
-| | <span class="notranslate"> `--ncpu=N`    </span> | `limit VCPU usage (deprecated)`|
-| | <span class="notranslate"> `--io=N` </span> | `define io limits (KB/s)`|
-| | <span class="notranslate"> `--nproc=N` </span> | `limit number of processes`|
-| | <span class="notranslate"> `--pmem=N`   </span> | `limit physical memory usage for aplications inside LVE`|
-| | <span class="notranslate"> `--iops=N` </span> | `limit io per second`|
-| | <span class="notranslate"> `--mem=N` </span> | `mem alias for vmem (deprecated)`|
-| | <span class="notranslate"> `--vmem=N` </span> | `limit virtual memory for applications inside LVE`|
-| | <span class="notranslate"> `--maxEntryProcs=N` </span> | `limit number of entry processes`|
-| | <span class="notranslate"> `--save` </span> | `save configuration settings (use with set) (deprecated)`|
-| | <span class="notranslate"> `--save-all-parameters` </span> | `save all parameters even if they match with defaults settings`|
-| | <span class="notranslate"> `--json` </span> | `returns result of command json formatted`|
-| | <span class="notranslate"> `--unlimited` </span> | `set all limits to unlimited`|
-| | <span class="notranslate"> `--save-username` </span> | `save username in the config file. This parameter is used in conjunction with ` <span class="notranslate"> set-user </span>|
+**Commands**
 
+|  |  |
+|--|--|
+| <span class="notranslate"> `apply`   </span> |apply config settings to specified LVE|
+| <span class="notranslate"> `apply all`   </span> |apply config settings to all the LVEs|
+| <span class="notranslate"> `apply-many` </span> |to apply LVE limits to multiple distinct LVEs (uids of users are read from stdin)|
+| <span class="notranslate"> `set`   </span> |set parameters for a LVE and/or create a LVE|
+| <span class="notranslate"> `set-user`   </span> |set parameters for a LVE and/or create a LVE using username instead of ID|
+| <span class="notranslate"> `list` </span> |list loaded LVEs|
+| <span class="notranslate"> `list-user`   </span> |list loaded LVEs, display username instead of user id|
+| <span class="notranslate"> `limits` </span> |show limits for loaded LVEs|
+| <span class="notranslate"> `delete` </span> |delete LVE and set configuration for that LVE to defaults|
+| <span class="notranslate"> `delete-user` </span> |delete LVE and set configuration for that user to defaults|
+| <span class="notranslate"> `destroy` </span> |destroy LVE (configuration file remains unchanged)|
+| <span class="notranslate"> `destroy all` </span> |destroy all LVE (configuration file remains unchanged)|
+| <span class="notranslate"> `destroy-many` </span> |to destroy LVE limits to multiple distinct LVEs (uids of users are read from stdin)|
+| <span class="notranslate"> `package-set` </span> | set LVE parameters for a package|
+| <span class="notranslate"> `package-list` </span> |list LVE parameters for packages|
+| <span class="notranslate"> `package-delete` </span> |delete LVE parameters for a package|
+| <span class="notranslate"> `paneluserslimits` </span> |show current user's limits for control panel|
+| <span class="notranslate"> `limit` </span> |limit PID into specified LVE. Parameters PID LVE_ID|
+| <span class="notranslate"> `release` </span> |release PID from LVE. Parameters PID|
+| <span class="notranslate"> `set-binary` </span> |add binary to be run inside LVE on execution|
+| <span class="notranslate"> `del-binary` </span> |remove binary from being run inside LVE on execution|
+| <span class="notranslate"> `list-binaries` </span> |list all binaries to be run inside LVE on execution|
+| <span class="notranslate"> `load-binaries` </span> |load binaries (used on startup) from config file|
+| <span class="notranslate"> `reload-binaries` </span> |re-load list of binaries from config file|
+| <span class="notranslate"> `help (-h)` </span> |show this message|
+| <span class="notranslate"> `version (-v)` </span> |version number|
+| <span class="notranslate"> `lve-version` </span> |LVE version number|
+| <span class="notranslate"> `set-reseller` </span> |create LVE container and set LVE parameters for a reseller|
+| <span class="notranslate"> `set-reseller-default` </span> |set default limits for resellers users|
 
+**Options**
 
+|  |  |
+|--|--|
+|<span class="notranslate"> `--cpu=N`   </span> |limit <span class="notranslate">`CPU`</span> usage; (deprecated. Use <span class="notranslate">`--speed`</span>)|
+| <span class="notranslate"> `--speed=N%` </span> |limit <span class="notranslate">`CPU`</span> usage in percentage; 100% is one core|
+| <span class="notranslate"> `--speed=Nmhz\ghz` </span> |limit <span class="notranslate">`CPU`</span> usage in mhz\ghz|
+| <span class="notranslate"> `--ncpu=N` </span> |limit VCPU usage (deprecated)|
+| <span class="notranslate"> `--io=N` </span> |define io limits (KB/s)|
+| <span class="notranslate"> `--nproc=N` </span> |limit number of processes|
+| <span class="notranslate"> `--pmem=N`   </span> |limit physical memory usage for applications inside LVE|
+| <span class="notranslate"> `--iops=N` </span> |limit io per second|
+| <span class="notranslate"> `--mem=N` </span> | mem alias for vmem (deprecated)|
+| <span class="notranslate"> `--vmem=N` </span> |limit virtual memory for applications inside LVE|
+| <span class="notranslate"> `--maxEntryProcs=N` </span> |limit number of entry processes|
+| <span class="notranslate"> `--save` </span> |save configuration settings (use with set) (deprecated)|
+| <span class="notranslate"> `--save-all-parameters` </span> |save all parameters even if they match with defaults settings|
+| <span class="notranslate"> `--json` </span> |returns result of command json formatted|
+| <span class="notranslate"> `--unlimited` </span> |set all limits to unlimited|
+| <span class="notranslate"> `--save-username` </span> |save username in the config file. This parameter is used in conjunction with <span class="notranslate">`set-user`</span>|
 
-Reset all LVEs settings based on configuration in <span class="notranslate"> /etc/container/ve.cfg </span> :
-<span class="notranslate"> </span>
-```
-$ lvectl apply all
-```
+**Examples**
 
-Set new default <span class="notranslate"> CPU </span> & Physical memory limit:
-<span class="notranslate"> </span>
-```
-$ lvectl set default --speed=100% --pmem=256m
-```
+* Reset all LVEs settings based on configuration in <span class="notranslate">`/etc/container/ve.cfg`</span>:
+  
+    <div class="notranslate">
 
-Reset all LVE's killing processes inside them:
-<span class="notranslate"> </span>
-```
-$ lvectl destroy all
-```
+    ```
+    $ lvectl apply all
+    ```
+    </div>
 
-Show list of LVEs and their limits:
-<span class="notranslate"> </span>
-```
-$ lvectl list
-```
+* Set new default <span class="notranslate">CPU & Physical memory</span> limit:
+  
+    <div class="notranslate">
 
+    ```
+    $ lvectl set default --speed=100% --pmem=256m
+    ```
+    </div>
+
+* Reset all LVE's killing processes inside them:
+  
+    <div class="notranslate">
+
+    ```
+    $ lvectl destroy all
+    ```
+    </div>
+
+* Show list of LVEs and their limits:
+  
+    <div class="notranslate">
+
+    ```
+    $ lvectl list
+    ```
+    </div>
 
 ### lveps
 
-
 **lveps** tool shows information about running LVEs, processes and threads belonging to them, <span class="notranslate"> CPU/memory/IO </span> usage consumed by LVEs and their individual processes/threads. LVE is only reported if it is considered active (at least one thread belongs to that LVE or was running during measurement in dynamic mode).
 
-**Usage** : <span class="notranslate"> lveps [-p] [-n] [-o <fmt1:width1,...>] [-d] [-c &lt;time&gt;] [-s &lt;style&gt;] [-t] [-h] </span>
+**Usage**:
 
-Options:
+<div class="notranslate"> 
 
+```
+lveps [-p] [-n] [-o <fmt1:width1,...>] [-d] [-c <time>] [-s <style>] [-t] [-h]
+```
+</div>
 
-
-
-
-
-
-
-
-
-Command like <span class="notranslate"> lveps -p </span> will display processes running inside 'active' LVEs.
+**Options**:
 
 | | |
 |-|-|
-|<span class="notranslate"> CPU </span> | The number of seconds LVE/process/thread has been running (each <span class="notranslate"> CPU </span> /core is counted separately), or the average CPU load (100% is all <span class="notranslate"> CPU </span> resources) if used with <span class="notranslate"> -d </span> .|
-|MEM | The number of megabytes of resident memory in use by LVE/process/thread (shared memory is not included).|
-|IO | The number of kilobytes read and written in sum by LVE, or kb/sec if used with -d.|
-|ID | LVE ID or username.|
-|EP | The number of entry processes inside  LVE.|
-|COM | Command name for this process.|
-|PID | PID of the process.|
-|PNO | The number of processes belonging to the LVE.|
-|TID | TID of the thread.|
-|TNO | The number of threads belonging to the LVE.|
-|DO | The number of disk operations belonging to the LVE from the time it was created.|
-|DT | Total amount of disk transfer in megabytes from LVE creation time.|
-|IOPS | The number of I/O operations per second|
+|`-p`| to print per-process/per-thread statistics|
+|`-n`| to print LVE ID instead of username|
+|`-o`| to use formatted output (fmt=id,ep,pid,tid,cpu,mem,io)|
+|`-d`| to show dynamic cpu usage instead of total cpu usage|
+|`-c`| to calculate average cpu usage for &lt;time&gt; seconds (used with `-d`)|
+|`-r`| to run under realtime priority for more accuracy (needs privileges)|
+|`-s`| to sort LVEs in output (cpu, process, thread, mem, io)|
+|`-t`| to run in the top-mode|
+|`-h`| to print this brief help message|
 
 
+Command like <span class="notranslate">`lveps -p`</span> will display processes running inside 'active' LVEs.
 
-
-
+| | |
+|-|-|
+|<span class="notranslate"> CPU </span> | The number of seconds LVE/process/thread has been running (each <span class="notranslate"> CPU </span> /core is counted separately), or the average CPU load (100% is all <span class="notranslate"> CPU </span> resources) if used with <span class="notranslate">`-d`</span>.|
+|<span class="notranslate">MEM</span>| The number of megabytes of resident memory in use by LVE/process/thread (shared memory is not included).|
+|<span class="notranslate">IO</span> | The number of kilobytes read and written in sum by LVE, or kb/sec if used with `-d`.|
+|<span class="notranslate">ID</span> | LVE ID or username.|
+|<span class="notranslate">EP</span> | The number of entry processes inside  LVE.|
+|<span class="notranslate">COM</span> | Command name for this process.|
+|<span class="notranslate">PID</span> | <span class="notranslate">PID</span> of the process.|
+|<span class="notranslate">PNO</span> | The number of processes belonging to the LVE.|
+|<span class="notranslate">TID</span> | <span class="notranslate">TID</span> of the thread.|
+|<span class="notranslate">TNO</span> | The number of threads belonging to the LVE.|
+|<span class="notranslate">DO</span> | The number of disk operations belonging to the LVE from the time it was created.|
+|<span class="notranslate">DT</span> | Total amount of disk transfer in megabytes from LVE creation time.|
+|<span class="notranslate">IOPS</span> | The number of I/O operations per second|
 
 ### lvetop
 
+**lvetop** utility allows to monitor LVE usage:
 
-lvetop utility allows to monitor LVE usage:
-<span class="notranslate"> </span>
-| |  |  |  |  |  |  | |
-|-|--|--|--|--|--|--|-|
-|`ID` | `EP` | `PNO` | `TNO` | `SPEED` | `MEM` | `IO` | `IPOS`|
-|`testuser1` | `0` | `1` | `1` | `0%` | `7` | `0` | `0`|
-|`testuser2` | `0` | `0` | `0` | `5%` | `0` | `3` | `0`|
-|`testuser3` | `1` | `2` | `2` | `0%` | `102` | `2727` | `0`|
-|`testuser4` | `0` | `1` | `1` | `0%` | `12` | `84` | `1`|
-|`testuser5` | `0` | `2` | `2` | `1%` | `52` | `0` | `0`|
+<div class="notranslate">
 
-lvetop fields:
+```
+ID        EP PNO TNO SPEED MEM  IO   IPOS
+testuser1 0  1   1   0%    7    0    0
+testuser2 0  0   0   5%    0    3    0
+testuser3 1  2   2   0%    102  2727 0
+testuser4 0  1   1   0%    12   84   1
+testuser5 0  2   2   1%    52   0    0
+```
+</div>
 
-<span class="notranslate"> `ID`         user name if LVE id matches user id in  <span class="notranslate"> /etc/passwd </span> , or LVE id </span>
-<span class="notranslate"> `EP`         number of entry processes (concurrent scripts executed) </span>
-<span class="notranslate"> `PNO`         number of processes within LVE </span>
-<span class="notranslate"> `TNO`         number of threads within LVE </span>
-<span class="notranslate"> `CPU`          <span class="notranslate"> CPU </span>  usage by LVE, relative to total  <span class="notranslate"> CPU </span>  resources of the server </span>
-<span class="notranslate"> `MEM`         Memory usage by LVE, in KB </span>
-<span class="notranslate"> `I/O`          <span class="notranslate"> I/O </span>  usage  </span>
-<span class="notranslate"> `IOPS`     number of read/write operations per second </span>
+**lvetop fields**:
+
+| | |
+|--|--|
+|<span class="notranslate"> `ID`</span>|user name if LVE id matches user id in <span class="notranslate">`/etc/passwd`</span>, or LVE id|
+|<span class="notranslate"> `EP`</span>|number of entry processes (concurrent scripts executed)|
+|<span class="notranslate"> `PNO`</span>|number of processes within LVE|
+|<span class="notranslate"> `TNO`</span>|number of threads within LVE|
+|<span class="notranslate"> `CPU`</span>|<span class="notranslate"> CPU</span> usage by LVE, relative to total <span class="notranslate"> CPU </span>  resources of the server|
+|<span class="notranslate"> `MEM`</span>|Memory usage by LVE, in KB|
+|<span class="notranslate"> `I/O`</span>|<span class="notranslate"> I/O </span> usage|
+|<span class="notranslate"> `IOPS`</span>|number of read/write operations per second|
 
 
 ### cldetect
 
-
-<span class="notranslate"> _[lve-utils 1.2-10+]_ </span>
+:::tip Note
+<span class="notranslate">lve-utils 1.2-10+</span>
+:::
 
 **cldetect** is used to detect installed software, and adjust CloudLinux options accordingly.
 
-**Usage** : /usr/bin/cldetect [--options]
+**Usage**:
+<div class="notranslate">
 
-`cldetect -h`
-`     -h | --help                             show this message                        `
-`     --detect-cp                      prints control panel and its version (CP_NAME,CP_VERSION)`
-`     --detect-cp-full                 prints control panel, version and panel specific data (CP_NAME,CP_VERSION,...).`
-`                                      Specific data: for ISP Manager5 - Master/Node`
-`     --detect-cp-nameonly             prints control panel name (CP_NAME)`
-`     --get-admin-email                prints control panel admin email (CP_ADMIN_EMAIL)`
-`     --cxs-installed                  check if CXS is installed. Returns 0 if installed, 1 otherwise`
-`     --cpanel-suphp-enabled           check if suPHP is enabled in cPanel.Returns 0 if enabled, 1 otherwise`
-`     --detect-litespeed               check if LiteSpeed is installed. Returns 0 if installed, 1 otherwise`
-`     --detect-postgresql              check if PostGreSQL is installed. Returns 0 if installed, 1 otherwise`
-`     --print-apache-gid               prints current apache gid`
-`     --print-da-admin                 prints DirectAdmin admin user`
-`     --set-securelinks-gid            changes /etc/sysctl.conf if apache gid != 48 (default)`
-`     --set-nagios                     do some adjustments to make nagios work correctly if it's installed. Called as a part of “--setup-supergids”`
-`     --setup-supergids                do some adjustments to make special users/software (nagios, cPanel’s mailman) work correctly if it is installed to the system`
-`     --cl-setup                       check if CloudLinux is installing. Returns 0 if installing, 1 otherwise`
-`     --update-license                 updates license`
-`     --update-new-key                 updates license with new key`
-`     --check-license                  :check license. Returns OK if license is not older than 3 days, error message otherwise`
-`                                   -q :check license. Returns 0 if license is not older than 3 days, 1 otherwise`
-`     --no-valid-license-screen        Returns no valid license found screen.`
-`     --license-out-of-date-email      Returns License out of Date Email.`
-`     --check-openvz                   Returns enviroment id.`
+```
+/usr/bin/cldetect [--options]
+```
+</div>
 
 
+|||
+|----|--|
+|<span class="notranslate">`cldetect -h`/`-h`/`--help`</span>|show this message|
+|<span class="notranslate">`--detect-cp`</span>|prints control panel and its version (<span class="notranslate">CP_NAME,CP_VERSION</span>)|
+|<span class="notranslate">`--detect-cp-full`</span>|prints control panel, version and panel specific data (<span class="notranslate">CP_NAME,CP_VERSION</span>,...). Specific data: for <span class="notranslate">ISP Manager5 - Master/Node</span>|
+|<span class="notranslate">`--detect-cp-nameonly`</span>|prints control panel name (<span class="notranslate">CP_NAME</span>)|
+|<span class="notranslate">`--get-admin-email`</span>|prints control panel admin email (<span class="notranslate">CP_ADMIN_EMAIL</span>)|
+|<span class="notranslate">`--cxs-installed`</span>|check if CXS is installed. Returns 0 if installed, 1 otherwise|
+|<span class="notranslate">`--cpanel-suphp-enabled`</span>|check if suPHP is enabled in cPanel.Returns 0 if enabled, 1 otherwise|
+|<span class="notranslate">`--detect-litespeed`</span>|check if LiteSpeed is installed. Returns 0 if installed, 1 otherwise|
+|<span class="notranslate">`--detect-postgresql`</span>|check if PostGreSQL is installed. Returns 0 if installed, 1 otherwise|
+|<span class="notranslate">`--print-apache-gid`</span>|prints current apache gid|
+|<span class="notranslate">`--print-da-admin`</span>|prints DirectAdmin admin user|
+|<span class="notranslate">`--set-securelinks-gid`</span>|changes `/etc/sysctl.conf` if apache gid != 48 (default)|
+|<span class="notranslate">`--set-nagios`</span>|do some adjustments to make nagios work correctly if it's installed. Called as a part of `--setup-supergids`|
+|<span class="notranslate">`--setup-supergids`</span>|do some adjustments to make special users/software (nagios, cPanel’s mailman) work correctly if it is installed to the system|
+|<span class="notranslate">`--cl-setup`</span>|check if CloudLinux is installing. Returns 0 if installing, 1 otherwise|
+|<span class="notranslate">`--update-license`</span>|updates license|
+|<span class="notranslate">`--update-new-key`</span>|updates license with new key|
+|<span class="notranslate">`--check-license`</span>|check license. Returns OK if license is not older than 3 days, error message otherwise|
+|<span class="notranslate">`-q`</span>|check license. Returns 0 if license is not older than 3 days, 1 otherwise|
+|<span class="notranslate">`--no-valid-license-screen`</span>|returns no valid license found screen|
+|<span class="notranslate">`--license-out-of-date-email`</span>|returns License out of Date Email.|
+|<span class="notranslate">`--check-openvz`</span>|returns enviroment id|
 
 
-Each time _lve-utils_ package is installed or upgraded it does some automatic system re-configuration to make some software (like nagios) work correctly, if it’s installed, by calling _cldetect --setup-supergids_ command.
+#### **clsupergid auto-configuration**
 
-Starting from **_lve-utils 3.0-21_** a behaviour of _cldetect --set-nagios_ (now, it’s a part of _cldetect --setup-supergids_ ) command slightly changed.
+Each time `lve-utils` package is installed or upgraded it does some automatic system re-configuration to make some software (like nagios) work correctly, if it’s installed, by calling `cldetect --setup-supergids` command.
+
+Starting from **_lve-utils 3.0-21_** a behaviour of `cldetect --set-nagios` (now, it’s a part of `cldetect --setup-supergids`) command slightly changed.
 
 | |  | |
-|-|--|-|
+|-|--|--|
 | | **Old behavior** | **New behavior**|
-|If **fs.proc_super_gid** is 0 (which means it’s not configured) or it’s set to some GID that doesn’t exist in the system. | Command will set _sysctl fs.proc_super_gid_ to point to Nagios GID. | Command will create special _clsupergid_ group, setup _sysctl fs.proc_super_gid_ to point to it’s GID and add Nagios user to this group.|
+|If **fs.proc_super_gid** is 0 (which means it’s not configured) or it’s set to some GID that doesn’t exist in the system.| Command will set `sysctl fs.proc_super_gid` to point to Nagios GID. | Command will create special `clsupergid` group, setup `sysctl fs.proc_super_gid` to point to it’s GID and add Nagios user to this group.|
 
 If **fs.proc_super_gid** was configured by an admin to some existing group, the command will just add Nagios user to this group.
+
+## LVE Limits Validation
+
+Starting from <span class="notranslate">**lve-utils**</span> **version 3.1-1**, the validation of EP and NPROC limits is supported. If an administrator sets the NPROC limit less than (EP + 15), the following warning is shown:
+
+<div class="notranslate">
+
+```
+error: You're trying to set invalid LVE limits.
+NPROC limit must be greater than EP + 15 limit, because number of processes and threads within LVE includes
+also Apache processes/threads, SSH sessions and etc, which enter into LVE.
+```
+ </div>
+
+Validation does not affect limits operation in any way. Even if invalid limits have been set, they will be applied for users/resellers.
+
+Commands that support validation:
+
+1. <span class="notranslate">`lvectl set`</span>
+
+This command allows validation of an LVE ID which does not have a corresponding UID in the system. I.e., you can set limits for any LVE ID and they can be validated.
+
+
+2. <span class="notranslate">`lvectl set-user`</span>
+
+This command allows validation when setting limits using a user name instead of LVE ID.
+
+
+3. <span class="notranslate">`lvectl set-reseller`</span>
+
+This command supports limits validation both for inactive reseller and active one.
+
+4. <span class="notranslate">`lvectl set-reseller-default`</span>
+
+This command supports validation when setting default limits for a reseller.
+
+
+5. <span class="notranslate">`lvectl package-set`</span>
+
+This command supports limits validation both for packages existing in the system and nonexisting ones.
+
+
+6. The <span class="notranslate">`cloudlinux-package`</span> and <span class="notranslate">`cloudlinux-limits`</span> commands support all validation types described above, and support limits validation and exceptions lists as described below.
+
+### Exceptions List (validation is not supported)
+
+
+1.    a) When EP limit for a package is greater than a custom NPROC limit for a user included in this package.
+
+ **OR**
+ 
+ b) when NPROC limit for a package is less than a custom EP limit for a user included in this package.
+ 
+
+2.    a) When default EP limit for a hoster is greater than a custom NPROC limit for a user/package which inherits        the default limit.
+
+ **OR**
+ 
+ b) When default NPROC limit for a hoster is less than a custom EP limit for a user/package which inherits the default limit.
+ 
+
+3. When using the following commands:
+
+ a) <span class="notranslate">`lvectl set-reseller --all`</span>
+
+ b) <span class="notranslate">`cloudlinux-limits --json enable-reseller-limits --all`</span>
+
+
+### Existing Limits Validation
+
+ 
+The automatic validation using <span class="notranslate">`cldiag`</span> utility by cron job is enabled on a server by default. You can disable it in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> config file using <span class="notranslate">`ENABLE_CLDIAG`</span> option (**Warning!** This option disables all automatic checks using cldiag!) When calling this utility automatically by cron, it checks all limits existing on the server and send an administrator a report with limits check results. You can use the following command to validate existing limits: <span class="notranslate">`cldiag --check-lve-limits`</span>.
+
+
+The important difference between checking existing and setting limits is that even if validation fails when setting limits (see exceptions list above), checking existing limits will catch invalid limits in any case. I.e. even if a server administrator set invalid limits, validation of existing limits will catch invalid limit in any case.
+
+### Best Practice
+
+Set NPROC limit greater than (EP + 15).
 
 
 ## SPEED Limits
 
+:::tip Note
+<span class="notranslate">lve-utils 1.4+</span>
+:::
 
-<span class="notranslate"> [lve-utils 1.4+] </span>
+<span class="notranslate">CPU SPEED</span> limit allows to set <span class="notranslate">CPU</span> limit in terms of % of a single core, or as a fixed number of Hz.
 
-<span class="notranslate"> CPU SPEED </span> limit allows to set <span class="notranslate"> CPU </span> limit in terms of % of a single core, or as a fixed number of Hz.
+<span class="notranslate">`--speed=XX%`</span> would set performance relative to one core.
 
-<span class="notranslate"> --speed=XX% </span> would set performance relative to one core. For example:
+For example:
 
-<span class="notranslate"> --speed=50% </span> would mean 1/2 core.
-<span class="notranslate"> --speed=100% </span> would mean 1 core,
-<span class="notranslate"> --speed=150% </span> would mean 1.5 cores
+* <span class="notranslate"> `--speed=50%` </span> would mean 1/2 core.
+* <span class="notranslate"> `--speed=100%` </span> would mean 1 core,
+* <span class="notranslate"> `--speed=150%` </span> would mean 1.5 cores
 
-<span class="notranslate"> --speed=XXmhz </span> would automatically detect <span class="notranslate"> CPU </span> speed of each core, and adjust the <span class="notranslate"> CPU </span> scheduler to make sure user cannot go over that limit.
+<span class="notranslate"> `--speed=XXmhz` </span> would automatically detect <span class="notranslate"> CPU </span> speed of each core, and adjust the <span class="notranslate"> CPU </span> scheduler to make sure user cannot go over that limit.
 
-For example, on 1ghz <span class="notranslate"> CPU </span> , setting of <span class="notranslate"> --speed=2ghz </span> would mean 2 cores, while on 4ghz <span class="notranslate"> CPU </span> same setting would mean 1/2 of a core.
+For example, on 1ghz <span class="notranslate"> CPU </span> , setting of <span class="notranslate"> `--speed=2ghz` </span> would mean 2 cores, while on 4ghz <span class="notranslate"> CPU </span> same setting would mean 1/2 of a core.
 
 This should allow hosting companies to set same approximate performance level limits across different hardware using single setting.
 
-
-
+:::tip Note
+Note. We strongly recommend setting <span class="notranslate">CPU</span> speed limits not less than 100%. As such limits cause <span class="notranslate">CPU</span> context switching which leads to increased `%sys`.
+:::
 
 ## CPU Limits
 
