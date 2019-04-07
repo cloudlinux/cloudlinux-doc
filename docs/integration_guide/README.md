@@ -18,32 +18,35 @@ Here you will find the instructions and common techniques used to integrate your
 Detecting if system is running CloudLinux/CloudLinux kernel:
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ uname -r|grep lve 
 ```
+</div>
+If you get an output, it means the system is running CloudLinux kernel. CloudLinux kernels have lve in its name, like: <span class="notranslate"> 2.6.32-458.18.1.lve1.2.44.el6.x86_64 </span>
 
-If you get an output, it means the system is running CloudLinux kernel. CloudLinux kernels have lve in its name, like: <span class="notranslate"> 2.6.32-458.18.1. **lve** 1.2.44.el6.x86_64 </span>
-
-Alternatively you can check for the presence of <span class="notranslate"> </span> file.
+Alternatively you can check for the presence of <span class="notranslate">/proc/lve/list </span> file.
 
 Check if CageFS is enabled (as <span class="notranslate"> root </span> ):
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --cagefs-status
 ```
-
+</div>
 Check if CageFS is enabled for a particular user (as <span class="notranslate"> root </span> ):
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --user-status _USER_NAME_
 ```
-
+</div>
 Check if you are inside CageFS:
 
-Check for the presence of <span class="notranslate"> </span> file - if present, it means that you are inside CageFS.
+Check for the presence of <span class="notranslate">/var/.cagefs/.cagefs.token </span> file - if present, it means that you are inside CageFS.
 
 
 
@@ -52,7 +55,7 @@ Check for the presence of <span class="notranslate"> </span> file - if present, 
 
 Most control panels choose to display CloudLinux usage & limits to end customers. To simplify that, we lve-stats exports a file that can be easily read and processed by a control panel to display the necessary information.
 
-The information is located in the <span class="notranslate"> </span> file. This information is updated every 5 minutes, and contains default limits (first line), as well as usage and limits for all customers. If a customer is not present in the file, it means that customer is not active (no scripts were executed recently for the customer), and a customer has default limits (so you can display no usage, and default limits in the control panel for that customer.
+The information is located in the <span class="notranslate">/var/lve/info </span> file. This information is updated every 5 minutes, and contains default limits (first line), as well as usage and limits for all customers. If a customer is not present in the file, it means that customer is not active (no scripts were executed recently for the customer), and a customer has default limits (so you can display no usage, and default limits in the control panel for that customer.
 
 The data is stored in a form of one line per customer, with coma separated values.
 
@@ -77,11 +80,11 @@ The data is stored in a form of one line per customer, with coma separated value
 |16 | <span class="notranslate"> IO </span> Usage|
 |17 | <span class="notranslate"> IO </span> Limit|
 
-With LVE version 4 (CloudLinux lve0.x) only the first 9 parameters are available. You can check the the version by reading the first byte of <span class="notranslate"> </span>
+With LVE version 4 (CloudLinux lve0.x) only the first 9 parameters are available. You can check the the version by reading the first byte of <span class="notranslate">/proc/lve/list. </span>
 
-On the version 6 all 15 parameters should be available.
+In the version 6 all 15 parameters should be available.
 
-There is only 2 LVE versions currently used in production. Future versions might add more fields, but will not alter order of existing fields.
+There are only 2 LVE versions currently used in production. Future versions might add more fields, but will not alter order of existing fields.
 
 Memory is defined in 4KB pages (so, 1024 would mean 1024 4KB pages, or 4MB).
 
@@ -101,61 +104,72 @@ If you have a custom made control panel, with your own 'package' implementation,
 
 To do that, you would need:
 
-Implement script that would map users <-> packages.
+Implement script that would map users to packages.
 
 Configure lvectl to use your script.
 
+**Implementing script**
 
- A script can be written in any language, and it has to be executable.
+A script can be written in any language, and it has to be executable.
 
 It should accept the following arguments:
 
-
+--list-all                        prints [userid package] pairs
 
 Output should look like a list of space separate pairs of user Linux IDs and package names.
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-100 package1101 package1102 package2103 package3
+100 package1
+101 package1
+102 package2
+103 package3
 ```
+</div>
 
-
-
+<span class="notranslate">--userid=id prints package for a user specified </span>
 
 Output should contain package name, like:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 package1
 ```
+</div>
 
-
-
+<span class="notranslate">--package="package"    prints users for a package specified. </span>
 
 Output should look like a list of user Linux IDs.
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-100101
+100
+101
 ```
+</div>
 
-
-
+<span class="notranslate">--list-packages prints the list of packages </span>
 
 Output contains a list of names of packages, like:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-package1package2package3
+package1
+package2
+package3
 ```
+</div>
 
+**Configuring lvectl to use your custom script**
 
+Edit <span class="notranslate">/etc/sysconfig/cloudlinux </span> file.
 
-
-Edit <span class="notranslate"> </span> file.
-
-Edit or modify parameter <span class="notranslate"> </span> , and set it to point to your script, like:
-<span class="notranslate"> </span>
+Edit or modify parameter <span class="notranslate">CUSTOM_GETPACKAGE_SCRIPT </span> , and set it to point to your script, like:
+<span class="notranslate">CUSTOM_GETPACKAGE_SCRIPT=/absolute/path/to/your/script </span>
 
 
 For the script example please check the following article: [http://kb.cloudlinux.com/2015/02/integrating-lve-limits-with-packages-for-unsupported-control-panel/](http://kb.cloudlinux.com/2015/02/integrating-lve-limits-with-packages-for-unsupported-control-panel/)

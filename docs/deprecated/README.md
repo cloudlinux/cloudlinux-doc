@@ -133,7 +133,7 @@ To query historical LVE info, lveinfo command provided. It is located at <span c
 ```
 </div>
 
-#### Output
+**Output**
 
 | | |
 |-|-|
@@ -163,7 +163,7 @@ To query historical LVE info, lveinfo command provided. It is located at <span c
 
 * only enabled limits will show up
 
-#### Examples
+**Examples**
 
 Display top 10 users, by max <span class="notranslate"> CPU </span> usage, from Oct 10, 2010 to Oct 15, 2010. Display username if possible:
 
@@ -339,7 +339,7 @@ $ /usr/share/lve-stats/save_users_to_database.py
 </div>
 You just need to execute it once, as it will be later executed via <span class="notranslate"> cron job </span> . That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
 
-#### Updating MySQL & PostgreSQL schema for lve-stats 0.8+
+**Updating MySQL & PostgreSQL schema for lve-stats 0.8+**
 
 If you are using MySQL or PostgreSQL server for lve-stats older then 0.8, make sure to do the following steps to upgrade to latest version:
 
