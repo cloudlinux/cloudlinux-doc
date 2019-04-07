@@ -84,6 +84,7 @@ module.exports = {
             children: [
               "/cloudlinux_installation/",
               "/limits/",
+              "/command-line_tools/",
               "/lve_manager/",
               "/reseller_limits/",
               "/lve-stats_2/",
@@ -128,6 +129,7 @@ module.exports = {
             children: [
               "/ru/cloudlinux_installation/",
               "/ru/limits/",
+              "/ru/command-line_tools/",
               "/ru/lve_manager/",
               "/ru/reseller_limits/",
               "/ru/lve-stats_2/",
