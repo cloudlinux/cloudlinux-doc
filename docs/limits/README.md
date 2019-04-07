@@ -262,15 +262,16 @@ Note. We strongly recommend setting <span class="notranslate">CPU</span> speed l
 
 ## CPU Limits
 
-
-[deprecated]
+:::tip Note
+Deprecated
 
 This limit is no longer used, and <span class="notranslate"> [SPEED](/limits/#speed-limits) </span> is used instead
+:::
 
+### CPU limits before lve-utils 1.4
 
+<span class="notranslate"> CPU </span> Limits are set by <span class="notranslate"> CPU </span> and <span class="notranslate"> NCPU </span> parameters. <span class="notranslate"> CPU </span> specifies the % of total <span class="notranslate"> CPU </span> of the server available to LVE. <span class="notranslate"> NCPU </span> specifies the number of cores available to LVE. The smallest of the two is used to define how much <span class="notranslate"> CPU </span> power will be accessible to the customer.
 
-<span class="notranslate"> CPU </span> Limits are set by <span class="notranslate"> CPU </span> and <span class="notranslate"> NCPU </span> parameters. <span class="notranslate"> CPU </span> specifies the % of total <span class="notranslate"> CPU </span> of the server available to LVE. <span class="notranslate"> NCPU </span> specifies the number of cores available to LVE. The smallest of the two is used to define how much <span class="notranslate"> CPU </span> power will be accessible to the customer. For example:
-1 core,
 | |  |  | |
 |-|--|--|-|
 |Cores Per Server | <span class="notranslate"> CPU </span> Limit | <span class="notranslate"> NCPU </span> Limit | Real limit|
@@ -288,149 +289,204 @@ This limit is no longer used, and <span class="notranslate"> [SPEED](/limits/#sp
 
 When user hits <span class="notranslate"> CPU </span> limit, processes within that limit are slowed down. For example, if you set your <span class="notranslate"> CPU </span> limit to 10%, and processes inside LVE want to use more then 10% they will be throttled (put to sleep) to make sure they don't use more then 10%. In reality, processes don't get <span class="notranslate"> CPU </span> time above the limit, and it happens much more often then 1 second interval, but the end result is that processes are slowed down so that their usage is never above the <span class="notranslate"> CPU </span> limit set.
 
-
-
 ## Memory Limits
-
 
 Memory is controlled using virtual (VMEM) and physical (PMEM) memory limits.
 
-
+### Virtual Memory Limit
 
 Virtual memory limit corresponds to the amount of memory processes can allocate within LVE. You can see individual process virtual memory usage by monitoring <span class="notranslate"> VIRT </span> column in <span class="notranslate"> top </span> output for the process.
 
 When process tries to allocate more memory, CloudLinux checks if the new total virtual memory used by all processes within LVE is more then a limit set. In such case CloudLinux will prevent memory from being allocated and increments fVMEM counter. In most cases, but not all of them - this causes process to fail. For CGI/PHP scripts it will usually cause 500 and 503 error.
 
+:::tip Note
+It is recommended to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6 and 7 system and can cause unexpected issues.
+:::
 
-
-
-
-
+### Physical Memory Limit
 
 Physical memory limit corresponds to the amount of memory actually used by end customer's processes. You can see individual process physical memory usage by monitoring RES column in top output for the process. Because similar processes (like PHP) share a lot of their memory, physical memory usage is often much lower then virtual memory usage.
 
 Additionally physical memory includes shared memory used by the customer, as well as disk cache.
-In case of disk cache -- if user is starting to lack physical memory, the memory used for disk cache will be freed up, without causing any memory faults.
+In case of disk cache – if a user is starting to lack physical memory, the memory used for disk cache will be freed up, without causing any memory faults.
+
 When LVE goes over physical memory limit, CloudLinux will first free up memory used for disk cache, and if that is not enough, it will kill some of the processes within that LVE, and increment fPMEM counter. This will usually cause web server to serve 500 and 503 errors. Physical memory limit is a much better way to limit memory for shared hosting.
 
+### Troubleshooting
 
-
-
+#### **Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)**
 
 If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there):
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cat /proc/bc/XXX/meminfo
 ```
+</div>
 
 …
+
 Cached: 67300 kB
+
 …
+
 where XXX is user id, could be taken with:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 id username
 ```
+</div>
 
-
+<div class="notranslate">
 
 ## IO
 
+</div>
 
-IO limits restrict the data throughput for the customer. They are in KB/s. When limit is reached, the processes are throttled (put to sleep). This makes sure that processes within LVE cannot go over the limit,. Yet don't stop working, nor getting killed -- they just work slower when the limit is reached.
+IO limits restrict the data throughput for the customer. They are in KB/s. When limit is reached, the processes are throttled (put to sleep). This makes sure that processes within LVE cannot go over the limit,. Yet don't stop working, nor getting killed – they just work slower when the limit is reached.
 
-IO limits are available with kernels el6.lve1.x and higher.
+IO limits are available with kernels **el6.lve1.x** and higher.
 
-The IO limits will only affect <span class="notranslate"> DISK IO </span> , and will have no effect on network. It also doesn't take into consideration any disk cache accesses. So, even if file is loaded from disk cache 1000 times -- it will not be counted towards <span class="notranslate"> IO </span> limits.
+The IO limits will only affect <span class="notranslate"> DISK IO</span>, and will have no effect on network. It also doesn't take into consideration any disk cache accesses. So, even if file is loaded from disk cache 1000 times – it will not be counted towards <span class="notranslate">IO</span> limits.
+
+<div class="notranslate">
 
 ## IOPS
 
+</div>
 
-<span class="notranslate"> IOPS </span> limits restrict the total number of read/write operations per second. When the limit is reached the read/write operations stop until current second expires.
+<span class="notranslate">IOPS</span> limits restrict the total number of read/write operations per second. When the limit is reached the read/write operations stop until current second expires.
+
+<div class="notranslate">
 
 ## Entry Processes
 
+</div>
 
-<span class="notranslate"> Entry processes </span> limit control the number of entries into LVE. Each time a process 'enters' into LVE, we increment the counter. Each time process exits LVE, we decrement the counter. We don't count processes that are created inside LVE itself. It is also know as <span class="notranslate"> 'Apache concurrent connections' </span> limit.
+<span class="notranslate"> Entry processes </span> limit controls the number of entries into LVE. Each time a process 'enters' into LVE, we increment the counter. Each time process exits LVE, we decrement the counter. We don't count processes that are created inside LVE itself. It is also know as <span class="notranslate"> 'Apache concurrent connections' </span> limit.
 
 The process enter's into LVE when there is a new HTTP request for CGI/PHP.
 
-This limit was created to prevent DoS attacks against web server. One of the fairly popular attacks is to tie up all the Apache connections by hitting some slow page on a server. Once all Apache slots are used up, no one else will be able to connect to the web server, causing it to appear to be down. The issue is worsened by <span class="notranslate"> CPU </span> limits, as once site starts to get slow due to <span class="notranslate"> CPU </span> limit -- it will respond to requests slower and slower, causing more and more connections to be tied up.
+This limit was created to prevent DoS attacks against web server. One of the fairly popular attacks is to tie up all the Apache connections by hitting some slow page on a server. Once all Apache slots are used up, no one else will be able to connect to the web server, causing it to appear to be down. The issue is worsened by <span class="notranslate"> CPU </span> limits, as once site starts to get slow due to <span class="notranslate"> CPU </span> limit – it will respond to requests slower and slower, causing more and more connections to be tied up.
 
-To solve that, we have created entry processes (often called concurrent connections) limit. It will limit the number of concurrent connections to Apache, causing web server to serve error 508 page ( <span class="notranslate"> Resource Limit Reached </span> ), once there number of concurrent requests for the site goes above the limit.
+To solve that, we have created entry processes (often called concurrent connections) limit. It will limit the number of concurrent connections to Apache, causing web server to serve error 508 page (<span class="notranslate"> Resource Limit Reached</span>), once there number of concurrent requests for the site goes above the limit.
 
+<div class="notranslate">
 
 ## Number of Processes
 
+</div>
 
 <span class="notranslate"> NPROC </span> controls the total number of processes and threads within LVE. Once the limit is reached, no new process can be created (until another one dies). When that happens <span class="notranslate"> NPROC </span> counter is incremented. Apache might return 500 or 503 errors in such case.
 
 
-
 ## Network Traffic Bandwidth Control and Accounting System
 
-
-_[Requires kernel lve1.4.4.el6 or higher, or lve1.4.56.el7 or higher]_
+:::tip Note
+Requires kernel lve1.4.4.el6 or higher, or lve1.4.56.el7 or higher
+:::
 
 Network traffic bandwidth control and accounting systems in CloudLinux 6 allows for each LVE container:
 
-Limiting outgoing network traffic bandwidth
-Accounting incoming and outgoing network traffic
+* Limiting outgoing network traffic bandwidth
+* Accounting incoming and outgoing network traffic
 
-_The system supports IPv4 only protocol._
+:::tip Note
+The system supports IPv4 only protocol.
+:::
 
-
+### How to limit outgoing network traffic
 
 All outgoing IP packets generated inside LVE container and marked with LVE identifier. Traffic control utility tc from iproute2 package uses this marker to set required bandwidth.
 
-**_Note._** _ CloudLinux doesn’t limit the network traffic itself, it only marks IP packets with specific LVE id._
+:::tip Note
+CloudLinux doesn’t limit the network traffic itself, it only marks IP packets with specific LVE id.
+:::
 
 **Example 1:**
 
-1. We create class with <span class="notranslate"> HTB qdiscs </span> and rate <span class="notranslate"> 10kbit </span> :
+1. We create class with <span class="notranslate"> HTB qdiscs </span> and rate <span class="notranslate"> 10kbit </span>:
 
-<span class="notranslate"> **_tc qdisc add dev eth1 root handle 1: htb_** </span>
-<span class="notranslate"> **_tc class add dev eth1 parent 1: classid 1:1 htb rate 10kbit_** </span>
+<div class="notranslate">
 
-2. All packets marked with LVE id will be processed by class 1:1 (rate <span class="notranslate"> 10kbit </span> ).
+```
+tc qdisc add dev eth1 root handle 1: htb
 
-<span class="notranslate"> **_tc filter add dev eth1 parent 1: handle 2121 fw flowid 1:1_** </span>
+tc class add dev eth1 parent 1: classid 1:1 htb rate 10kbit
+```
+</div>
+
+2. All packets marked with LVE id will be processed by class 1:1 (rate <span class="notranslate"> 10kbit </span>).
+
+<div class="notranslate">
+
+```
+tc filter add dev eth1 parent 1: handle 2121 fw flowid 1:1
+```
+</div>
 
 **Example 2:**
 
-1. As an example we create class with <span class="notranslate"> HTB qdiscs </span> and rate <span class="notranslate"> 100mbit </span> and class 1:10 will be used by default:
+1. As an example we create class with <span class="notranslate"> HTB qdiscs </span> and rate <span class="notranslate">100mbit</span> and class 1:10 will be used by default:
 
-<span class="notranslate"> **_tc qdisc add dev eth3 root handle 1: htb default 10_** </span>
-<span class="notranslate"> **_tc class add dev eth3 parent 1: classid 1:1 htb rate 100mbit_** </span>
+<div class="notranslate">
+
+```
+tc qdisc add dev eth3 root handle 1: htb default 10
+
+tc class add dev eth3 parent 1: classid 1:1 htb rate 100mbit
+```
+</div>
 
 2. For class 1:1 we create two branches with rate 5 <span class="notranslate"> mbit </span> and 10 <span class="notranslate"> kbit </span> accordingly, with classid 1:10 and 1:20.
 
-<span class="notranslate"> **_tc class add dev eth3 parent 1:1 classid 1:10 htb rate 5mbit_** </span>
-<span class="notranslate"> **_tc class add dev eth3 parent 1:1 classid 1:20 htb rate 10kbit_** </span>
+<div class="notranslate">
+
+```
+tc class add dev eth3 parent 1:1 classid 1:10 htb rate 5mbit
+
+tc class add dev eth3 parent 1:1 classid 1:20 htb rate 10kbit
+```
+</div>
 
 3. All packets marked with LVE id=2121 are processed by 10 kbit class.
 
-<span class="notranslate"> **_tc filter add dev eth3 protocol ip parent 1: prio 1 handle 2121 fw flowid 1:20_** </span>
+<div class="notranslate">
 
-More info about tc and its syntax can be found on the link [http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html](http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html)
+```
+tc filter add dev eth3 protocol ip parent 1: prio 1 handle 2121 fw flowid 1:20
 
+```
+</div>
 
+More info about `tc` and its syntax can be found on the link [http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html](http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html)
 
-Traffic accounting is performed for each LVE container. Network statistics is collected at /proc/lve/list file. Network-related data found at fields:
+### Traffic accounting
 
-<span class="notranslate"> lNETO </span> - output traffic limit by volume, equals 0*
-<span class="notranslate"> lNETI </span> - input traffic limit by volume, equals 0*
-<span class="notranslate"> NETO </span> - current outgoing traffic value
-<span class="notranslate"> NETI </span> - current incoming traffic value
+Traffic accounting is performed for each LVE container. Network statistics is collected at <span class="notranslate">`/proc/lve/list`</span> file. Network-related data found at fields:
 
-The data is also collected at /proc/lve/per-lve/&lt;id&gt/net_stat, where id is an LVE container identifier. net_stat file contains 4 values in one row:
+* <span class="notranslate">`lNETO`</span> - output traffic limit by volume, equals 0*
+* <span class="notranslate">`lNETI`</span> - input traffic limit by volume, equals 0*
+* <span class="notranslate">`NETO`</span> - current outgoing traffic value
+* <span class="notranslate">`NETI`</span> - current incoming traffic value
 
-Outgoing traffic limit by volume, equals 0*
-Incoming traffic limit by volume, equals 0*
-current outgoing traffic value
-current incoming traffic value
+The data is also collected at <span class="notranslate">`/proc/lve/per-lve/<id>/net_stat`</span>, where `id` is an LVE container identifier.
 
+<span class="notranslate">`net_stat`</span> file contains 4 values in one row:
 
+* Outgoing traffic limit by volume, equals 0*
+* Incoming traffic limit by volume, equals 0*
+* Current outgoing traffic value
+* Current incoming traffic value
+
+:::tip Note
+The current version of CloudLinux network control system doesn’t limit network traffic volume for a specific period of time (for example 3GB per day), it limits only network bandwidth.
+
+Network limits are supported only for processes inside LVE. By default it does not limit static content, but only PHP/cgi scripts processed by Apache and processes launched over ssh etc.
+:::
 
 
 
@@ -444,125 +500,154 @@ current incoming traffic value
 |Apache / suPHP | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / FCGID | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / CGI | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
-|Apache / PHP-FPM | Yes3 | Yes | Yes | Yes | Yes | Yes3 | No|
-|Apache / mod_php | Yes | No | Yes | Yes | Yes | no | No|
-|Apache / mod_ruid2 | Yes | No | Yes | Yes | Yes | no | No|
-|Apache / MPM ITK | Yes | No | Yes | Yes | Yes | Yes1 | No|
-|LiteSpeed | Yes | Yes2 | Yes | Yes | Yes | Yes | Yes|
-|NGINX / PHP-FPM | Yes3 | Yes | No | Yes | Yes | Yes | No|
-|SSH | Yes | Yes | Yes | Yes | Yes | Yes3 | Yes|
+|Apache / PHP-FPM | Yes<sup> 3</sup> | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | No|
+|Apache / mod_php | Yes | No | Yes | Yes | Yes | No | No|
+|Apache / mod_ruid2 | Yes | No | Yes | Yes | Yes | No | No|
+|Apache / MPM ITK | Yes | No | Yes | Yes | Yes | Yes<sup> 1</sup> | No|
+|LiteSpeed | Yes | Yes<sup> 2</sup> | Yes | Yes | Yes | Yes | Yes|
+|NGINX / PHP-FPM | Yes<sup> 3</sup> | Yes | No | Yes | Yes | Yes | No|
+|SSH | Yes | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | Yes|
 |<span class="notranslate"> Cron Jobs </span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 
 1. Requires patched version of MPM-ITK. CL httpd RPM has ITK worker with the patch. Patch is also available at: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
-2. CloudLinux 7 and CloudLinux 6 kernels only. 3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please, use patches available here: http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz
+2. CloudLinux 7 and CloudLinux 6 kernels only. 3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
 ## Integration Components
 
-
 CloudLinux uses various ways to integrate with existing system. By default we can integrate with:
 
-·        PAM - using pam_lve
-·        Apache - using mod_hostinglimits, apr library, patched suexec
-·        LiteSpeed - built in integration
+* PAM - using pam_lve
+* Apache - using mod_hostinglimits, apr library, patched suexec
+* LiteSpeed - built in integration
 
 ### LVE PAM module
 
+pam_lve.so is a PAM module that sets up LVE environment. It provides easy way to setup LVE for SSH sessions, as well as other PAM enabled applications, such as crontab, su, etc.
 
-pam_lve.so is a PAM module that sets up LVE environment. It provides easy way to setup LVE for SSH sessions, as well as other PAM enabled applications, such as crontab, su, etc...
 pam_lve.so is installed by default when you convert existing server.
 
 Installation:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 # yum install pam_lve
 ```
+</div>
 
-After you install <span class="notranslate"> RPM </span> , add following line to PAM config file for the required application:
-<span class="notranslate"> </span>
+After you install <span class="notranslate"> RPM </span>, add the following line to the PAM config file for the required application:
+
+<div class="notranslate">
+
 ```
 session    required     pam_lve.so 500 1 wheel,other
 ```
+</div>
 
 In this line:
-·        500 stands for minimum UID for which LVE will be setup. For any user with UID < 500, LVE will not be setup.  If CageFS is installed, use:
-<span class="notranslate"> cagefsctl --set-min-uid UID to setup minimum UID. The parameter in PAM files will be ignored in that case. </span>
-·        1 stands for CageFS enabled (0 -- cagefs disabled)
-·        3rd optional argument defines group of users that will not be placed into LVE or CageFS. Starting with pam_lve 0.3-7 you can specify multiple groups, comma separated
+* 500 stands for minimum UID for which LVE will be setup. For any user with UID < 500, LVE will not be setup. If <span class="notranslate">CageFS</span> is installed, use:
+<span class="notranslate">`cagefsctl --set-min-uid UID`</span> to setup minimum UID. The parameter in PAM files will be ignored in that case.
+* 1 stands for <span class="notranslate">CageFS</span> enabled (0 – <span class="notranslate">CageFS</span> disabled)
+* 3rd optional argument defines group of users that will not be placed into LVE or <span class="notranslate">CageFS</span>. Starting with **pam_lve 0.3-7** you can specify multiple groups, comma separated.
 
+:::tip Warning
+It is crucial to place all users that su or sudo to root into that group. Otherwise, once such user gains root, user will be inside LVE, and all applications restarted by that user will be inside that user LVE as well.
+:::
 
+For example, to enable LVE for SSH access, add that line to the `/etc/pam.d/sshd`. To enable LVE for SU, add that line to the `/etc/pam.d/su`.
 
+By default, module will not place users with group wheel into lve. If you want to use different group to define users that will not be placed into LVE by pam_lve - pass it as the 3rd argument.
 
-
-For example, to enable LVE for SSH access, add that line to /etc/pam.d/sshd. To enable LVE for SU, add that line to /etc/pam.d/su
-By default module will not place users with group wheel into lve. If you want to use different group to define users that will not be placed into LVE by pam_lve - pass it as 3rd argument.
-
-
-
-
+:::tip Warning
+Be careful when you test it, as if you incorrectly add this line to the `/etc/pam.d/sshd`, it will lock you out ssh. Don't log out of your current SSH session, until you sure it works.
+:::
 
 For preventing cases when user enters under usual user (using ssh) and then tries to enter as super user (via sudo or su) - pam_sulve was created, which tries to enter to LVE=1 and leaves it right away. If action fails, user gets message:
 
+<div class="notranslate">
 
-
-
+```
+!!!!  WARNING: YOU ARE INSIDE LVE !!!!
+```
+</div>
 
 To check if pam_sulve is enabled on the server:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 grep pam_sulve.so /etc/pam.d/*
 ```
+</div>
 
 should not be empty.
 
 ### LVE Wrappers
 
-
 LVE Wrappers are the set of tools that allow system administrator to run various users, programs & daemons within Lightweight Virtual Environment. This allows system administrator to have control over system resources such program can have. Additionally it prevents misbehaving programs running within LVE to drain system resources and slow down or take down the whole system. The tools are provided by lve-wrappers RPM.
 
 You can install them by running:
 
+<div class="notranslate">
+
 ```
 $ yum install lve-wrappers
 ```
+</div>
 
+#### **Placing programs inside LVE**
 
+LVE Wrappers provide two tools for placing programs inside LVE: <span class="notranslate">`lve_wrapper`</span> and `lve_suwrapper`.
 
-LVE Wrappers provide two tools for placing programs inside LVE: lve_wrapper and lve_suwrapper.
+`/bin/lve_wrapper` can be used by any non-root user, as long as that user is in group lve (see `/etc/groups` file).
 
-**/bin/lve_wrapper** – can be used by any non-root user, as long as that user is in group lve (see /etc/groups file).
+**Syntax**
 
-Syntax:
+<div class="notranslate">
 
+```
 lve_wrapper <command_to_run>
+```
+</div>
 
-Example:
+**Example**
+
+<div class="notranslate">
 
 ```
 $ lve_wrapper make install
 ```
+</div>
 
 The program will be executed within LVE with ID matching user's id.
 
-**/bin/lve_suwrapper** – can be used by root user or any user in group lve (see /etc/groupsfile) to execute command within specified LVE
+`/bin/lve_suwrapper` can be used by root user or any user in group lve (see `/etc/groups` file) to execute command within specified LVE.
 
-Syntax:
+**Syntax**
 
+<div class="notranslate">
+
+```
 lve_suwrapper LVE_ID <command_to_run>
+```
+</div>
 
-Example:
+**Example**
+
+<div class="notranslate">
 
 ```
 # lve_suwrapper 10000 /etc/init.d/postgresql start
 ```
+</div>
 
-**Switches** :
+**Switches**
 
--f - force namespace
--n - without namespace
+* `-f` - force namespace
+* `-n` - without namespace
 
 ### MPM ITK
-
 
 CloudLinux <span class="notranslate"> httpd RPM </span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
 
