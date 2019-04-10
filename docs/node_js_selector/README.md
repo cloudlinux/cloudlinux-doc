@@ -484,39 +484,52 @@ cloudlinux-selector install-modules --json --interpreter nodejs --user user1 --a
 All replies from web application to get request will be checked in Node.js Selector (before and after modules installation). HTTP response codes and MIME type are comparing. So, make sure application is available via http(s) at least locally.
 :::
 
-Run a script from <span class="notranslate"> package.json </span> file of a user application, arguments <span class="notranslate"> &lt;args&gt;> </span> are passed to the script
-<span class="notranslate"> </span>
+Run a script from <span class="notranslate"> package.json </span> file of a user application, arguments <span class="notranslate"> _args_ </span> are passed to the script
+<div class="notranslate">
+
 ```
 cloudlinux-selector run-script [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> --script-name <str> [-- <args>...]
 ```
+</div>
 
 **Example** :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector run-script --json --interpreter nodejs --user user1 --app-root my_apps/app --script-name test_script -- --script_opt1 --script_opt2 script_arg1 script_arg2
 ```
+</div>
 
 <span class="notranslate"> JSON </span> output:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-{          "result": "success",           "timestamp": 1508666792.863358           "data": "script output as Base64 encoded string"}
+{
+          "result": "success",
+		  "timestamp": 1508666792.863358
+		  "data": "script output as Base64 encoded string"
+}
 ```
+</div>
 
 Activate virtual environment of NodeJS:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 source <home_of_user>/nodevenv/<app_root>/<nodejs_version>/bin/activate
 ```
-
+</div>
 
 This command changes prompt to
-**Example** :
-<span class="notranslate"> </span>
-```
-[newusr@192-168-245-108 ~]$ source /home/newusr/nodevenv/newapp4/newapp3/8/bin/activate[newapp4/newapp3 (8)] [newusr@192-168-245-108 ~]$
-```
+**Example** :  
+<div class="notranslate">
 
+```
+[newusr@192-168-245-108 ~]$ source /home/newusr/nodevenv/newapp4/newapp3/8/bin/activate
+[newapp4/newapp3 (8)] [newusr@192-168-245-108 ~]$
+```
+</div>
 
 After ativation user can use <span class="notranslate"> _npm_ </span> and node from a virtual environment without full paths.
 
@@ -687,7 +700,44 @@ Specify Application startup file — specify as <span class="notranslate"> NAME.
 Run npm install command — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
 Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
 
+**Application error log**
 
+Since <span class="notranslate"> alt-mod-passenger </span> version 5.3.7-3 we have included support for the PassengerAppLogFile directive.
+<div class="notranslate">
+
+``` 
+Syntax: PassengerAppLogFile path
+Default: PassengerAppLogFile path-to-passenger-log-file
+Context: virtual host, htaccess
+```
+</div>
+ 
+By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
+
+### Debugging Errors
+
+Since <span class="notranslate"> alt-mod-passenger-5.3.7-2,</span> directives such as PassengerFriendlyErrorPages and PassengerAppEnv are available for use from htaccess file. This allows end users to see errors from their application during the development process. For example, if you add one of the following lines to the htaccess file on the application page, you will see the information (if there was an error) similar to one on the picture.
+<div class="notranslate">
+
+```
+PassengerAppEnv development
+```
+</div>
+or
+<div class="notranslate">
+
+```
+PassengerFriendlyErrorPages on
+```
+</div>
+
+![](/images/errorapplog.png)
+
+This is a much more convenient approach to developing an application and debugging errors. On the other hand, if these directives are turned off you will see:
+
+![](/images/errorapplogsorry.png)
+
+In this case, there is no useful information for debugging errors and this is suitable for production mode. More information about [PassengerFriendlyErrorPages](https://www.phusionpassenger.com/library/config/apache/reference/#passengerfriendlyerrorpages) and [PassengerAppEnv](https://www.phusionpassenger.com/library/config/apache/reference/#passengerappenv) .
 
 ## Node.js Deployment
 
