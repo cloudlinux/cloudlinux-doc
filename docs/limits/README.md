@@ -649,339 +649,600 @@ lve_suwrapper LVE_ID <command_to_run>
 
 ### MPM ITK
 
-CloudLinux <span class="notranslate"> httpd RPM </span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
+CloudLinux <span class="notranslate">httpd RPM</span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
 
-Download file: <span class="notranslate"> http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz </span>
-Extract: <span class="notranslate"> apache2.2-mpm-itk-seculrelve12.patch </span>
-And apply this patch to your Apache source code.
+* Download file: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+* Extract: <span class="notranslate">apache2.2-mpm-itk-seculrelve12.patch</span>
+* And apply this patch to your Apache source code.
 
-When running <span class="notranslate"> MPM ITK </span> , you should disable mod_hostinglimits. All the functionality needed by <span class="notranslate"> MPM ITK </span> is already built into the patch.
+When running <span class="notranslate"> MPM ITK </span>, you should disable <span class="notranslate">mod_hostinglimits</span>. All the functionality needed by <span class="notranslate"> MPM ITK </span> is already built into the patch.
 
 Directives which can be used by Apache with <span class="notranslate"> ITK </span> patch:
 
- <span class="notranslate"> AssignUserID </span> - uses ID as LVE ID
- <span class="notranslate"> LVEErrorCodeITK </span> - Error code to display on LVE error (508 by default)
- <span class="notranslate"> LVERetryAfterITK </span> - same as <span class="notranslate"> LVERetryAfter </span> - respond with <span class="notranslate"> Retry-After header </span> when LVE error 508 occurs
- <span class="notranslate"> LVEId </span> - ovverides id used for LVE ID instead of <span class="notranslate"> AssignUserID </span>
- <span class="notranslate"> LVEUser </span> - overrides user to use to retrieve LVE ID, instead of AssignUserID
+* <span class="notranslate">`AssignUserID`</span> - uses ID as LVE ID
+* <span class="notranslate">`LVEErrorCodeITK`</span> - error code to display on LVE error (508 by default)
+* <span class="notranslate">`LVERetryAfterITK`</span> - same as <span class="notranslate">`LVERetryAfter`</span> - respond with <span class="notranslate">`Retry-After`</span> header when LVE error 508 occurs
+* <span class="notranslate">`LVEId`</span> - ovverides id used for LVE ID instead of <span class="notranslate">`AssignUserID`</span>
+* <span class="notranslate">`LVEUser`</span> - overrides user to use to retrieve LVE ID, instead of AssignUserID
 
-### HostingLimits
+### HostingLimits module for Apache
+
+mod_hostinglimits works with existing <span class="notranslate"> CGI/PHP </span> modules, to put them into LVE context. In most cases the <span class="notranslate"> CGI/PHP </span> process will be placed into LVE with the ID of the user that sites belongs to. mod_hostinglimits detects the user from `SuexecUserGroup` (<span class="notranslate">suexec</span> module), <span class="notranslate">`SuPHP_UserGroup`</span> (from mod_suphp), `AssignUserID` (<span class="notranslate">MPM ITK</span>), <span class="notranslate">`RUidGid` (mod_ruid2 </span> ) directives.
+
+This can be overwritten via LVEId or LVEUser parameter on the Directory level.
+
+:::tip Note
+Those parameters will not work with mod_fcgid and mod_cgid.
+:::
+
+The order of detection looks as follows:
+
+* LVEId
+* LVEUser
+* SuexecUserGroup
+* suPHP_UserGroup
+* RUidGid
+* AssignUserID
 
 
-mod_hostinglimits works with existing <span class="notranslate"> CGI/PHP </span> modules, to put them into LVE context. In most cases the <span class="notranslate"> CGI/PHP </span> process will be placed into LVE with the ID of the user that sites belongs to. mod_hostinglimits detects the user from SuexecUserGroup ( <span class="notranslate"> suexec </span> module), <span class="notranslate"> SuPHP_UserGroup </span> (from mod_suphp), AssignUserID ( <span class="notranslate"> MPM ITK </span> ), <span class="notranslate"> RUidGid (mod_ruid2 </span> ) directives.
-
-This can be overwritten via LVEId or LVEUser parameter on the Directory level. Note that those parameters will not work with mod_fcgid and mod_cgid. The order of detection looks as follows:
-
-LVEId
-LVEUser
-SuexecUserGroup
-suPHP_UserGroup
-RUidGid
-AssignUserID
-
-
-
-
+:::tip Note
+LVE doesn't work for mod_include #include due to its "filter" nature.
+:::
 
 Example:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-LoadModule hostinglimits_module modules/mod_hostinglimits.so<IfModule mod_hostinglimits.c>AllowedHandlers cgi-script php5-script php4-scriptSecureLinks On</IfModule>
+LoadModule hostinglimits_module modules/mod_hostinglimits.so
+<IfModule mod_hostinglimits.c>
+ AllowedHandlers cgi-script php5-script php4-script
+ SecureLinks On
+</IfModule>
 ```
+</div>
 
+#### **Additional notes**
 
+**mod_hostinglimits** (since version 1.0-22) supports <span class="notranslate">`min-uid - cagefsctl --set-min-uid=600`</span>.
 
-**mod_hostinglimits** (since version 1.0-22) supports <span class="notranslate"> min-uid - cagefsctl --set-min-uid=600 </span> . Min UID is read on Apache start/restart and stored in the memory during apache runtime. If min UID has changed, you should restart Apache for ** ** **mod_hostinglimits** applying new min UID value. Full min UID is supported only with APR.
+Min UID is read on Apache start/restart and stored in the memory during apache runtime.
 
-The following message should appear: _[notice] mod_hostinglimits: found apr extention version 3_ . This means that the correct APR is installed with mod_hostinglimits.
+If the min UID has changed, you should restart Apache for **mod_hostinglimits** applying new min UID value. Full min UID is supported only with APR.
 
-mod_hostinglimist has variable for Apache CustomLog format string <span class="notranslate"> - _ %{LVE_ID}y_ </span> . How to use:
+The following message should appear:
 
-LogFormat <span class="notranslate"> "%h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-Agent}i" req for lve %{LVE_ID}y" </span> combined
+<div class="notranslate">
+
+```
+[notice] mod_hostinglimits: found apr extention version 3.
+```
+</div>
+
+This means that the correct APR is installed with mod_hostinglimits.
+
+mod_hostinglimist has variable for Apache CustomLog format string <span class="notranslate">`%{LVE_ID}y`</span>.
+
+**How to use**:
+
+LogFormat 
+
+<div class="notranslate">
+
+```
+"%h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-Agent}i" req for lve "%{LVE_ID}y"
+```
+</div>
+
+combined
 
 shows in access_log the following info:
 
+<div class="notranslate">
+
 ```
 *.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php HTTP/1.1" 200 43435 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
-```
-```
+
 *.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php?=PHPE9568F34-D428-11d2-A769-00AA001ACF42 HTTP/1.1" 200 2524 "************/1.php""Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
-```
-```
+
 *.*.*.* - - [09/Apr/2015:07:17:06 -0400] "GET /1.php?=PHPE9568F35-D428-11d2-A769-00AA001ACF42 HTTP/1.1" 200 2146 "************/1.php""Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0" req for lve 500
 ```
+</div>
+
+### Installation
+
+**cPanel**
+
+Installed by default during EasyApache build. Requires <span class="notranslate">`lve-stats`</span> & <span class="notranslate">`lve-utils`</span> packages to be installed.
+
+**DirectAdmin**
+
+Can be built using <span class="notranslate"> custombuild</span>:
+
+<div class="notranslate">
+
+```
+$ yum install liblve-devel
+$ cd /usr/local/directadmin/custombuild
+$ ./build update
+$ ./build set cloudlinux yes
+$ ./build apache
+$ ./build rewrite_confs
+```
+</div>
+
+If you run `suphp`, then run the following:
+
+<div class="notranslate">
+
+```
+$ ./build suphp
+```
+</div>
+
+**Plesk**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**ISPmanager**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**InterWorx**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**H-Sphere**
+
+Included by default in H-Sphere 3.5+
+
+**Standard Apache from RPM**
+
+<div class="notranslate">
+
+```
+$ yum install mod_hostinglimits
+```
+</div>
+
+**Custom Apache installation**
+
+Compile from the source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
+
+<div class="notranslate">
+
+```
+$ wget http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz
+$ yum install cmake
+$ tar -zxvf mod_hostinglimits*.tar.gz
+$ cd mod_hostinglimits*
+$ cmake .
+$ make
+$ make install
+```
+</div>
+
+* Apache Module Identifier: `hostinglimits_module`
+* Source Files: `mod_hostinglimits.c`
+* Compatibility: MPM prefork, worker, event, ITK
 
 
+### Directives
+
+<div class="notranslate">
+
+#### **SecureLinks**
+
+</div>
 
 | | |
 |-|-|
-|cPanel | Installed by default during EasyApache build. Requires lve-stats & lve-utils packages to be installed.|
-|DirectAdmin | Can be built using <span class="notranslate"> custombuild </span> : <span class="notranslate"> </span>|
-|Plesk | <span class="notranslate"> </span>|
-|ISPmanager | <span class="notranslate"> </span>|
-|InterWorx | <span class="notranslate"> </span>|
-|H-Sphere | Included by default in H-Sphere 3.5+|
-|Standard Apache from <span class="notranslate"> RPM </span> | <span class="notranslate"> </span>|
-|Custom Apache installation | Compile from the source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz) <span class="notranslate"> </span>|
-
-| | |
-|-|-|
-|Apache Module Identifier: | hostinglimits_module|
-|Source Files: | mod_hostinglimits.c|
-|Compatibility: | MPM prefork, worker, event, ITK|
-
-
-
-SecureLinks
-
-| | |
-|-|-|
-|Description: | Makes sure that for any virtual hosts, only files owned by user specified via SuexecUserGroup or other ways as described above are served. For files owned by any other user apache will return <span class="notranslate"> Access Denied </span> error. The directive will not affect VirtualHost without user id specified, or with uid < 100|
-|Syntax: | <span class="notranslate"> SecureLinks On </span>|
-|Default: | <span class="notranslate"> SecureLinks Off </span>|
-|Context: | server config|
+|**Description**| Makes sure that for any virtual hosts, only files owned by user specified via SuexecUserGroup or other ways as described above are served. For files owned by any other user apache will return <span class="notranslate">`Access Denied`</span> error. The directive will not affect VirtualHost without user id specified, or with uid < 100|
+|**Syntax**| <span class="notranslate">`SecureLinks On`</span>|
+|**Default**| <span class="notranslate">`SecureLinks Off`</span>|
+|**Context**| server config|
 
 Prevents apache from serving files not owned by user, stopping symlink attacks against php config files.
 
-Example:
-<span class="notranslate"> </span>
+**Example**
+
+<div class="notranslate">
+
 ```
 SecureLinks On
 ```
+</div>
 
-SkipErrors
+***
+
+<div class="notranslate">
+
+#### **SkipErrors**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Allow apache to continue if LVE is not available|
-|Syntax: | <span class="notranslate"> SkipErrors On </span>|
-|Default: | <span class="notranslate"> SkipErrors On </span>|
-|Context: | server config|
+|**Description**| Allow apache to continue if LVE is not available|
+|**Syntax**| <span class="notranslate">`SkipErrors On`</span>|
+|**Default**| <span class="notranslate">`SkipErrors On`</span>|
+|**Context**| server config|
 
 Prevents Apache from exiting if LVE is not available.
 
-Example:
-<span class="notranslate"> </span>
+**Example**
+
+<div class="notranslate">
+
 ```
 SkipErrors Off
 ```
+</div>
 
-AllowedHandlers
+***
+
+<div class="notranslate">
+
+#### **AllowedHandlers**
+
+</div>
 
 | | |
 |-|-|
-|Description: | List of handlers that should be placed into LVE, support regexp|
-|Syntax: | AllowedHandlers cgi-script %^php%  my-script|
-|Default: | none|
-|Context: | server config|
+|**Description**| List of handlers that should be placed into LVE, support regexp|
+|**Syntax**|`AllowedHandlers cgi-script %^php%  my-script`|
+|**Default**| none|
+|**Context**| server config|
 
 This directive allows to list handlers which will be intercepted and placed into LVE.
 
-Example:
+**Examples**
 
-Match requests handled by cgi-script handler:
-<span class="notranslate"> </span>
-```
-AllowedHandlers cgi-script 
-```
-Match all requests:
-<span class="notranslate"> </span>
-```
-AllowedHandlers *
-```
-Match all requests that handled by handler that contains PHP:
-<span class="notranslate"> </span>
-```
-AllowedHandlers %php%
-```
-Match all requests handled by handler that starts with PHP:
-<span class="notranslate"> </span>
-```
-AllowedHandlers %^php%
-```
+* Match requests handled by cgi-script handler:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers cgi-script 
+  ```
+  </div>
 
-DenyHandlers
+* Match all requests:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers *
+  ```
+  </div>
+  
+* Match all requests that handled by handler that contains PHP:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers %php%
+  ```
+  </div>
+* Match all requests handled by handler that starts with PHP:
+  
+  <div class="notranslate">
+  
+  ```
+  AllowedHandlers %^php%
+  ```
+  </div>
+
+***
+
+<div class="notranslate">
+
+#### **DenyHandlers**
+
+</div>
 
 | | |
 |-|-|
-|Description: | List of handlers that should not be placed into LVE, support regexp|
-|Syntax: | <span class="notranslate"> DenyHandlers text/html </span>|
-|Default: | none|
-|Context: | server config|
+|**Description**| List of handlers that should not be placed into LVE, support regexp|
+|**Syntax**| <span class="notranslate">`DenyHandlers text/html`</span>|
+|**Default**| none|
+|**Context**| server config|
 
 This directive works together with AllowHandlers, to exclude some handlers from being allowed in LVE.
 
-Example:
+**Example**:
 
-Match all requests, but <span class="notranslate"> text/* </span>
-<span class="notranslate"> </span>
+Match all requests, but <span class="notranslate">`text/*`</span>
+
+<div class="notranslate">
+
 ```
 AllowedHandlers *DenyHandlers %text/*%
 ```
+</div>
 
-LVEErrorCode
+***
+
+<div class="notranslate">
+
+#### **LVEErrorCode**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Error code to display once entry is rejected due to maxEntryProcs|
-|Syntax: | values from 500 to 510|
-|Default: | 508|
-|Context: | directory config|
+|**Description**| Error code to display once entry is rejected due to maxEntryProcs|
+|**Syntax**| values from 500 to 510|
+|**Default**| 508|
+|**Context**| directory config|
 
-Specifies ErrorCode to use on LVE error (like too many concurrent processes running). The message that will be displayed by default is:
-<span class="notranslate"> </span>
-Resource Limit Is Reached The website is temporarily unable to server your request as it exceeded resource limit. Please try again later. You can redefine error message using ErrorDocument directive
+Specifies ErrorCode to use on LVE error (like too many concurrent processes running).
+
+The message that will be displayed by default is:
+<div class="notranslate">
+
+```
+Resource Limit Is Reached.
+
+The website is temporarily unable to serve your request as it exceeded resource limit. 
+
+Please try again later.
+```
+</div>
+
+You can redefine error message using `ErrorDocument` directive
 
 Example:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 LVEErrorCode 508ErrorDocument 508 508.html
 ```
+</div>
 
-LVEid
+***
+
+<div class="notranslate">
+
+#### **LVEid**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Allows to setup separate LVE ID on per directory level. If not set, user ID of a corresponding user is used.|
-|Syntax: | LVEId number|
-|Default: | User Id is used|
-|Context: | directory config|
+|**Description**| Allows to setup separate LVE ID on per directory level. If not set, user ID of a corresponding user is used.|
+|**Syntax**|<span class="notranslate">`LVEId number`</span>|
+|**Default**| User Id is used|
+|**Context**| directory config|
 
 Specifies LVE id for particular directory
 
-Example:
-<span class="notranslate"> </span>
-```
-<Directory "/home/user1/domain.com/forums">LVEId 10001</Directory>
-```
+**Example**:
 
-LVEUser
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+ LVEId 10001
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEUser**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Allows to setup separate LVE ID on per directory level.|
-|Syntax: | LVEUser username|
-|Default: | none|
-|Context: | directory config|
+|**Description**| Allows to setup separate LVE ID on per directory level.|
+|**Syntax**|<span class="notranslate">`LVEUser username`</span>|
+|**Default**| none|
+|**Context**| directory config|
 
 Specifies LVE ID for particular directory.
 
-Example:
-<span class="notranslate"> </span>
-```
-<Directory "/home/user1/domain.com/forums">         LVEUser user1</Directory>
-```
+**Example**:
 
-LVEUserGroupID
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVEUser user1
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEUserGroupID**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Use group ID instead of user ID for LVE container number.|
-|Syntax: | <span class="notranslate"> LVEUserGroupID On/Off </span>|
-|Default: | User Id is used|
-|Context: | global config only|
+|**Description**| Use group ID instead of user ID for LVE container number.|
+|**Syntax**| <span class="notranslate">`LVEUserGroupID On/Off`</span>|
+|**Default**| User Id is used|
+|**Context**| global config only|
 
-If the option enabled, group ID will be used instead of a user ID. Apache will display the following string in error logs:
-<span class="notranslate"> </span>
-```
-mod_hostinglimits: use GroupID instead of UID mod_hostinglimits: found apr extension version 2 mod_hostinglimits: apr_lve_environment_init_group check ok
-```
+* If the option enabled, group ID will be used instead of a user ID. Apache will display the following string in error logs:
 
-If a compatible apr library is not found, the following error message will be display in error logs.
+<div class="notranslate">
+
+```
+mod_hostinglimits: use GroupID instead of UID 
+mod_hostinglimits: found apr extension version 2 
+mod_hostinglimits: apr_lve_environment_init_group check ok
+```
+</div>
+
+* If a compatible apr library is not found, the following error message will be display in error logs.
+
+<div class="notranslate">
 
 ```
 mod_hostinglimits:  apr_lve_* not found!!!
 ```
+</div>
 
-Example:
-_ _ <span class="notranslate"> </span>
-```
-<Directory "/home/user1/domain.com/forums">         LVEUserGroupID On</Directory>
-```
+**Example**:
 
-LVERetryAfter
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVEUserGroupID On
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVERetryAfter**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Returns Retry-After header when LVE error 508 occurs.|
-|Syntax: | LERetryAfter MINUTES|
-|Default: | 240 minutes|
-|Context: | directory config|
+|**Description**| Returns Retry-After header when LVE error 508 occurs.|
+|**Syntax**|`LERetryAfter MINUTES`|
+|**Default**| 240 minutes|
+|**Context**| directory config|
 
-Specifies interval for <span class="notranslate"> Retry-After </span> header.  The <span class="notranslate"> Retry-After </span> response-header field can be used to indicate how long the service is expected to be unavailable to the requesting client.
+Specifies interval for <span class="notranslate">`Retry-After`</span> header. The <span class="notranslate">`Retry-After`</span> response-header field can be used to indicate how long the service is expected to be unavailable to the requesting client.
 
-Example:
-<span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVERetryAfter 180
 ```
+</div>
 
-LVESitesDebug
+***
+
+<div class="notranslate">
+
+#### **LVESitesDebug**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Provides extended debug info for listed sites.|
-|Syntax: | <span class="notranslate"> LVESitesDebug test.com test2.com </span>|
-|Default: | <span class="notranslate"> none </span>|
-|Context: | directory config|
+|**Description**| Provides extended debug info for listed sites.|
+|**Syntax**|<span class="notranslate">`LVESitesDebug test.com test2.com`</span>|
+|**Default**| <span class="notranslate"> none </span>|
+|**Context**| directory config|
 
 Specifies virtual hosts to provide extra debugging information.
 
-Example: _ _
-<span class="notranslate"> </span>
-```
-<Directory "/home/user1/domain.com/forums">         LVESitesDebug abc.com yx.cnet</Directory>
-```
+**Example**:
 
-LVEParseMode
+<div class="notranslate">
+
+```
+<Directory "/home/user1/domain.com/forums">
+       LVESitesDebug abc.com yx.cnet
+</Directory>
+```
+</div>
+
+***
+
+<div class="notranslate">
+
+#### **LVEParseMode**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Determines the way LVE ID will be extraced. In Conf|
-|Syntax: | <span class="notranslate"> LVEParseMode CONF\|PATH\|OWNER\|[REDIS](/limits/#redis-support-for-hostinglimits) </span>|
-|Default: | <span class="notranslate"> CONF </span>|
+|**Description**| Determines the way LVE ID will be extraced. In Conf|
+|**Syntax**|`LVEParseMode CONF` `PATH` `OWNER` [`REDIS`](/limits/#redis-support-for-hostinglimits)|
+|Default: | <span class="notranslate">`CONF`</span>|
 |Context: | directory config|
 
-In CONF mode, standard way to extract LVE ID is used (SuexecUserGroup, LVEId, or similar directives).
+* In `CONF` mode, standard way to extract LVE ID is used (SuexecUserGroup, LVEId, or similar directives).
 
-In <span class="notranslate"> PATH </span> mode, username is extracted from the home directory path. The default way to match username is via the following regexp: <span class="notranslate"> /home/([^/]*)/ </span> . Custom regexp can be specified in LVEPathRegexp.
+* In <span class="notranslate">`PATH`</span> mode, username is extracted from the home directory path. The default way to match username is via the following regexp: <span class="notranslate">`/home/([^/]*)/`</span> . Custom regexp can be specified in LVEPathRegexp.
 
-In <span class="notranslate"> OWNER </span> mode, the owner of the file is used as an LVE ID.
+* In <span class="notranslate">`OWNER`</span> mode, the owner of the file is used as an LVE ID.
 
-In <span class="notranslate"> [REDIS](/limits/#redis-support-for-hostinglimits) </span> mode, LVE ID is retrieved from Redis database.
+* In <span class="notranslate">[`REDIS`](/limits/#redis-support-for-hostinglimits)</span> mode, LVE ID is retrieved from Redis database.
 
-Example:
+**Example**:
+
+<div class="notranslate">
 
 ```
 LVEParseMode CONF
 ```
+</div>
 
+***
 
-LVEPathRegexp
+<div class="notranslate">
+
+#### **LVEPathRegexp**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Regexp used to extract username from the path. Used in conjuction with LVEParseMode PATH|
-|Syntax: | LVEPathRegexp regexp|
-|Default: | <span class="notranslate"> /home/([^/]*)/ </span>|
-|Context: | directory config|
+|**Description**| Regexp used to extract username from the path. Used in conjuction with `LVEParseMode PATH`|
+|**Syntax**|`LVEPathRegexp regexp`|
+|**Default**| <span class="notranslate">`/home/([^/]*)/`</span>|
+|**Context**| directory config|
 
 Used to extract usersname via path.
 
-Example:
-<span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVEPathRegexp /home/([^/]*)/
 ```
+</div>
 
-LVELimitRecheckTimeout
+***
+
+<div class="notranslate">
+
+#### **LVELimitRecheckTimeout**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Timeout in milliseconds, a site will return EP without lve_enter for LA decreasing after this time|
-|Syntax: | LVELimitRecheckTimeout number|
-|Default: | 0|
-|Context: | httpd.conf, virtualhost|
+|**Description**| Timeout in milliseconds, a site will return EP without lve_enter for LA decreasing after this time|
+|**Syntax**|`LVELimitRecheckTimeout number`|
+|**Default**| 0|
+|**Context**| httpd.conf, virtualhost|
 
 Example:
 <span class="notranslate"> </span>
@@ -989,213 +1250,284 @@ Example:
 LVELimitRecheckTimeout 1000
 ```
 
-**LVEUse429**
+<div class="notranslate">
+
+#### **LVEUse429**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Use 429 error code as code returned on max entry limits ( <span class="notranslate"> on/off </span> ).|
-|Syntax: | LVEUse429 on|
-|Default: | <span class="notranslate"> off </span>|
-|Context: | httpd.conf, virtualhost|
+|**Description**| Use 429 error code as code returned on max entry limits ( <span class="notranslate"> on/off </span> ).|
+|**Syntax**|`LVEUse429 on`|
+|**Default**|<span class="notranslate">`off`</span>|
+|**Context**| httpd.conf, virtualhost|
 
-Example:
- <span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVEUse429 on
 ```
+</div>
 
 Available for RPM based panels, EasyApache 4 and DirectAdmin.
 
-#### Redis Support for HostingLimits
-
+### Redis Support for HostingLimits
 
 Redis support provides a way to query Redis database for LVE id, based on domain in the HTTP request. Given a database like:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-xyz.com 10001bla.com  10002....
+xyz.com 10001
+bla.com  10002
+....
 ```
+</div>
 
 The module will retrieve corresponding LVE id from the database.
 
 To enable Redis support, compile from source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
 
 The compilation requires hiredis library.
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-$ wget [http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz)$ yum install cmake$ tar -zxvf mod_hostinglimits*.tar.gz$ cd mod_hostinglimits*$ cmake -DREDIS:BOOL=TRUE .$ make$ make install
+$ wget http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz
+$ yum install cmake
+$ tar -zxvf mod_hostinglimits*.tar.gz
+$ cd mod_hostinglimits*
+$ cmake -DREDIS:BOOL=TRUE .
+$ make
+$ make install
 ```
+</div>
 
 To enable Redis mode, specify:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 LVEParseMode REDIS
 ```
+</div>
 
+<div class="notranslate">
 
-LVERedisSocket
+#### **LVERedisSocket**
+
+</div>
 
 | | |
 |-|-|
-|Description: | Socket to use to connect to Redis database.|
-|Syntax: | LVERedisSocket path|
-|Default: | /tmp/redis.sock|
-|Context: | server config|
+|**Description**| Socket to use to connect to Redis database.|
+|**Syntax**|<span class="notranslate">`LVERedisSocket path`</span>|
+|**Default**|<span class="notranslate">`/tmp/redis.sock`</span>|
+|**Context**| server config|
 
 Used to specify location of Redis socket.
 
-Example:
-<span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVERedisSocket /var/run/redis.sock
 ```
+</div>
 
-LVERedisAddr
+<div class="notranslate">
+
+#### **LVERedisAddr**
+
+</div>
 
 | | |
 |-|-|
-|Description: | IP/port used to connect to Redis database instead of socket.|
-|Syntax: | LVERedisAddr IP PORT|
-|Default: | <span class="notranslate"> none </span>|
-|Context: | server config|
+|**Description**| IP/port used to connect to Redis database instead of socket.|
+|**Syntax**|<span class="notranslate">`LVERedisAddr IP PORT`</span>|
+|**Default**| <span class="notranslate">`none`</span>|
+|**Context**|<span class="notranslate">server config</span>|
 
 Used to specify IP and port to connect to Redis instead of using Socket
 
-Example: _ _
-_  _ <span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVERedisAddr 127.0.0.1 6993
 ```
+</div>
 
-LVERedisTimeout
+#### **LVERedisTimeout**
 
 | | |
 |-|-|
-|Description: | Number of seconds to wait before attempting to re-connect to Redis.|
-|Syntax: | LERetryAfter SECONDS|
-|Default: | 60 seconds|
-|Context: | server config|
+|**Descriptin**| Number of seconds to wait before attempting to re-connect to Redis.|
+|**Syntax**|<span class="notranslate">`LERetryAfter SECONDS`</span>|
+|**Default**| 60 seconds|
+|**Context**|<span class="notranslate">server config</span>|
 
 Number of seconds to wait before attempting to reconnect to Redis after the last unsuccessful attempt to connect.
 
-Example:
-<span class="notranslate"> </span>
+**Example**:
+
+<div class="notranslate">
+
 ```
 LVERedisTimeout 120
 ```
-
+</div>
 
 ### cPanel/WHM JSON API
 
 
-CloudLinux offers JSON API for [lvectl](/limits/#lvectl) via WHM. You can access it using the following URL:
+CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
 
-_https:/IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list_
+<div class="notranslate">
+
+```
+https:/IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list
+```
+</div>
 
 The output will look as follows:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 {"data":[{"ID":"default","CPU":"30","NCPU":"1","PMEM":"1024M","VMEM":"1024M","EP":"28","NPROC":"0","IO":"2048"}]}
 ```
+</div>
 
+#### **Parameters**
 
-<span class="notranslate"> **cgiaction**          </span> always <span class="notranslate"> _jsonhandler_ </span>
-<span class="notranslate"> **handler**   </span> should match [lvectl](/limits/#lvectl) command
+|||
+|-|-|
+|<span class="notranslate">`cgiaction`</span>|always <span class="notranslate">`jsonhandler`</span>|
+|<span class="notranslate">`handler`</span>|should match [lvectl](/command-line_tools/#lvectl) command|
 
-For commands like <span class="notranslate">  &  , </span> where you need to specify LVE (user) ID, like lveid=500 (matches user ID 500).
+For commands like <span class="notranslate">`set`, `destroy`</span> & <span class="notranslate">`delete`</span>, where you need to specify LVE (user) ID, like `lveid=500` (matches user ID 500).
 
-Example:
+**Example**:
 
-<span class="notranslate"> _https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=30%&io=2048_ </span>
-<span class="notranslate"> _https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=300Mhz&io=2048_ </span>
-<span class="notranslate"> _https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=3Ghz&io=2048_ </span>
+<div class="notranslate">
 
-_[Note that _ **_speed_** _ limit can be specified in several units of measure - _ <span class="notranslate"> %, MHz, GHz </span> _. The figures will be different according to the unit of measure.]_
+```
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=30%&io=2048
 
-Output:
- <span class="notranslate"> </span>
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=300Mhz&io=2048
+
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=3Ghz&io=2048
+```
+</div>
+
+:::tip Note
+**Speed** limit can be specified in several units of measure - <span class="notranslate"> %, MHz, GHz </span>. The figures will be different according to the unit of measure.
+:::
+
+**Output**:
+
+<div class="notranslate">
+
 ```
 {"status":"OK"}
 ```
+</div>
 
-To do 'set default', use lveid=0, like:
+To do `set default`, use `lveid=0`, like:
 
-_https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=0&speed=30%&io=2048_
+<div class="notranslate">
 
-For commands like <span class="notranslate"> `apply all, destroy all` , </span> use:
+```
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=0&speed=30%&io=2048
+```
+</div>
 
-<span class="notranslate"> _handler=apply-all_ </span>
-<span class="notranslate"> _handler=destroy-all_ </span>
+For commands like <span class="notranslate">`apply all`, `destroy all`</span>, use:
+
+<div class="notranslate">
+
+```
+handler=apply-all
+
+handler=destroy-all
+```
+</div>
 
 You can use the following commands that allow to specify user name instead of user ID:
 
 | | |
 |-|-|
-|<span class="notranslate"> `set-user` </span> | Set parameters for a LVE and/or create a LVE using username instead of ID.|
+|<span class="notranslate">`set-user`</span> | Set parameters for a LVE and/or create a LVE using username instead of ID.|
 |<span class="notranslate"> `list-user  ` </span> | List loaded LVEs, display username instead of user ID.|
 |<span class="notranslate"> `delete-user ` </span> | Delete LVE and set configuration for that user to defaults.|
 
-If the limits for users are set with <span class="notranslate"> cPanel LVE Extension </span> , then turnkey billing solutions can be applied ( _e.g. WHMCS_ ).
-
-
+If the limits for users are set with <span class="notranslate"> cPanel LVE Extension </span>, then turnkey billing solutions can be applied (e.g. WHMCS).
 
 ### cPanel LVE Extension
 
 
-_[_ <span class="notranslate"> LVE Manager </span> _ 1.0-9.8+]_
+:::tip Note
+<span class="notranslate">LVE Manager</span> 1.0-9.8+
+:::
 
 <span class="notranslate"> cPanel LVE Extension </span> allows to control LVE limits for packages via cPanel hosting packages control interface and via <span class="notranslate"> cPanel WHM API </span> . It simplifies integration with existing billing systems for cPanel (like WHMCS for example).
 
-**Add Package Extension**
+#### **Add Package Extension**
 
-To add LVE Settings to standard cPanel package, go to <span class="notranslate"> _Packages_ </span> and choose <span class="notranslate"> _Add a Package_ </span> .
+To add LVE Settings to standard cPanel package, go to <span class="notranslate">_Packages_</span> | <span class="notranslate">_Add a Package_</span>.
 
-**Note.**  _You can find the information on how to add a package in official cPanel documentation on the link:_
-
-[https://documentation.cpanel.net/display/ALD/Add+a+Package](https://documentation.cpanel.net/display/ALD/Add+a+Package)
-
+:::tip Note
+You can find the information on how to add a package in official cPanel documentation on the link: [https://documentation.cpanel.net/display/ALD/Add+a+Package](https://documentation.cpanel.net/display/ALD/Add+a+Package)
+:::
 
 ![](/images/lve-extension_01.jpg)
 
 
-Tick <span class="notranslate"> _LVE Settings_ </span> checkbox in the bottom of the page to open <span class="notranslate"> LVE Settings </span> form.
+Tick <span class="notranslate">_LVE Settings_</span> in the bottom of the page to open <span class="notranslate">_LVE Settings_</span> form.
 
 ![](/images/lve-extension_02.jpg)
 
 You can specify the following options:
 
-Note that your changes to <span class="notranslate"> LVE Settings </span> will appear in the system after a little while.
+:::tip Note
+Your changes to <span class="notranslate">_LVE Settings_</span> will appear in the system after a little while.
+:::
 
 | | |
 |-|-|
-|<span class="notranslate"> Speed Settings </span> | Maximum CPU usage for an account. Note: Must be in range 1 - 100 (but obligatory > 0 ) if old format is used; use % or <span class="notranslate"> Mhz\Ghz </span> to set <span class="notranslate"> CPU </span> limit as speed; Type “ <span class="notranslate"> DEFAULT </span> ” to use default value.|
-|<span class="notranslate"> Memory Settings </span> | Pmem - Maximum physical memory usage for an account. Vmem - Maximum virtual memory usage for an account. Note: Must be a positive number. Postfix allowed only in [KGMT]. Type “ <span class="notranslate"> DEFAULT </span> ” to use default value. Type “0” for unlimited resource.|
-|<span class="notranslate"> Max entry proc Settings </span> | Maximum number of entry processes (concurrent connections) for an account. Note: Must be a positive number. Type “ <span class="notranslate"> DEFAULT </span> ” to use default value. Type “0” for unlimited resource.|
-|<span class="notranslate"> Nproc Settings </span> | Maximum number of processes usage for an account. Note: Must be a positive number. Type “ <span class="notranslate"> DEFAULT </span> ” to use default value. Type “0” for unlimited resource.|
-|<span class="notranslate"> IO Settings </span> | Maximum <span class="notranslate"> I/O (input/output) </span> usage speed for an account. Is measured in <span class="notranslate"> Kb/s </span> . Note: Must be a positive number. Type “ <span class="notranslate"> DEFAULT” to use default value. </span> Type “0” for unlimited resource.|
-|<span class="notranslate"> IOPS Settings </span> | Maximum <span class="notranslate"> IOPS </span> (input/output operations per second) usage for an account. Note: Must be a positive number. Type “ <span class="notranslate"> DEFAULT </span> ” to use default value. Type “0” to unlimited resource.|
+|<span class="notranslate">Speed Settings</span> | Maximum CPU usage for an account. Must be in the range 1 - 100 (but obligatory > 0 ) if old format is used; use `%` or <span class="notranslate">`Mhz\Ghz`</span> to set <span class="notranslate">`CPU`</span> limit as speed; Type <span class="notranslate">`DEFAULT`</span> to use default value.|
+|<span class="notranslate"> Memory Settings </span> |`Pmem` - Maximum physical memory usage for an account. `Vmem` - Maximum virtual memory usage for an account. Must be a positive number. Postfix allowed only in `KGMT`. Type <span class="notranslate">`DEFAULT`</span> to use default value. Type `0` for unlimited resource.|
+|<span class="notranslate"> Max entry proc Settings </span> | Maximum number of entry processes (concurrent connections) for an account. Must be a positive number. Type <span class="notranslate">`DEFAULT`</span> to use default value. Type `0` for unlimited resource.|
+|<span class="notranslate"> Nproc Settings </span> | Maximum number of processes usage for an account. Must be a positive number. Type <span class="notranslate">`DEFAULT`</span> to use default value. Type `0` for unlimited resource.|
+|<span class="notranslate"> IO Settings </span> | Maximum <span class="notranslate">I/O (input/output)</span> usage speed for an account. Is measured in <span class="notranslate">`Kb/s`</span>. Must be a positive number. Type <span class="notranslate">`DEFAULT`</span> to use default value. Type `0` for unlimited resource.|
+|<span class="notranslate"> IOPS Settings </span> | Maximum <span class="notranslate">`IOPS`</span> (input/output operations per second) usage for an account. Must be a positive number. Type <span class="notranslate">`DEFAULT`</span> to use default value. Type `0` to unlimited resource.|
 
 ![](/images/lve-extension_03.jpg) 
 
-Click _ _ <span class="notranslate"> Add </span> to apply your changes.
+Click <span class="notranslate">_Add_</span> to apply your changes.
 
-<span class="notranslate"> **Edit Package Extensions** </span>
+#### **Edit Package Extensions**
 
-You can edit limits in any convenient way for you - in <span class="notranslate"> Edit a Package </span> section, in <span class="notranslate"> LVE Manager </span> or even via WHM API.
+You can edit limits in any convenient for you way - in <span class="notranslate">_Edit a Package_</span> section, in the  <span class="notranslate">LVE Manager </span> or even via WHM API.
 
-<span class="notranslate"> _Edit a Package_ </span>
+<span class="notranslate">**Edit a Package**</span>
 
-To edit package extensions, choose <span class="notranslate"> _Packages_ </span> and click <span class="notranslate"> _Edit a Package_ </span> . Choose a package from the <span class="notranslate"> Package </span> list and click <span class="notranslate"> _Edit_ </span> .
+To edit package extensions, go to <span class="notranslate"> _Packages_</span> | <span class="notranslate">_Edit a Package_</span>. Choose a package from the <span class="notranslate">_Package_</span> list and click <span class="notranslate">_Edit_</span>.
 
 ![](/images/lve-extension_04.jpg)
 
-<span class="notranslate"> _LVE Manager_ </span>
+<span class="notranslate">**LVE Manager**</span>
 
-To edit package extensions in <span class="notranslate"> LVE Manager </span> , in <span class="notranslate"> Server Configuration </span> choose _ _ <span class="notranslate"> CloudLinux LVE Manager </span> . Open <span class="notranslate"> _Packages_ </span> tab and click pencil (edit) icon.
+To edit package extensions, go to <span class="notranslate">LVE Manager</span> | <span class="notranslate">Server Configuration</span> | <span class="notranslate"> CloudLinux LVE Manager</span> | <span class="notranslate"> Packages</span> and click pencil (edit) icon.
 
 ![](/images/lve-extension_05.jpg)
 
-<span class="notranslate"> _WHM API_ </span>
+<span class="notranslate">**WHM API**</span>
 
-To learn how to work with package extensions limits using WHM API, please read the official cPanel documentation:
-
-[https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes](https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes)
+To learn how to work with package extensions limits using WHM API, please read the official cPanel documentation: [https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes](https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes)
