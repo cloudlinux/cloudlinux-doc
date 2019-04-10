@@ -779,7 +779,7 @@ Specify <span class="notranslate"> _Path Mappings_ </span> between a local and a
 
 5. Synchronize the project directories on the local and the remote machine as per <span class="notranslate"> _Path Mappings_ </span> specified.
 6. Deploy the modules on the remote and the local machine with the <span class="notranslate"> **_npm install_** </span> command (if there are dependent modules). In the UI you can click the <span class="notranslate"> _Run NPM Install_ </span> button.
-7. Run Node.js application with the configuration set at the [4th step](/remote_usage_of_node_js_interp.html#setuprundebugconfigurations/)  <span class="notranslate"> (Main menu — Run — Run… — Select configuration) </span> .
+7. Run Node.js application with the configuration set at the [4th step](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)  <span class="notranslate"> (Main menu — Run — Run… — Select configuration) </span> .
 
 ![](/images/runapp_zoom60.png)
 
@@ -811,7 +811,7 @@ Plugin <span class="notranslate"> _Node.js Remote Interpreter_ </span> : [https:
 ### Remote Usage of the cloudlinux-selector Utility
 
 
-Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/remote_usage_of_node_js_interp.html#createapplication/) .
+Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
 2. Set up project mapping on the local machine with the created remote application _ _ <span class="notranslate"> /home/<USER_NAME>/<APP_NAME> </span> _ (Preferences → Deployments → Add)_ .
 3. Set up the remote commands of the <span class="notranslate"> cloudlinux-selector (Preferences → Remote SSH External Tools → Add) </span> for the following actions:
 Restart application;

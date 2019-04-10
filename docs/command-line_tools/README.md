@@ -4,7 +4,7 @@
 * [lveps](/command-line_tools/#lveps)
 * [lvetop](/command-line_tools/#lvetop)
 * [cldetect](/command-line_tools/#cldetect)
-* [cldiag](command-line_tools/#cldiag)
+* [cldiag](/command-line_tools/#cldiag)
 * [lve-stats](/deprecated/#lve-stats-0-x)
   * [Storing statistics in MySQL](/deprecated/#storing-statistics-in-mysql)
   * [Storing statistics in PostgreSQL](/deprecated/#storing-statistics-in-postgresql)
