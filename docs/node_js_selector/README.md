@@ -2,357 +2,487 @@
 
 
 [Overview & Requirements](/node_js_selector/#overview-requirements)
-[Requirements](/overview__requirements.html#requirements/)
+* [Requirements](/node_js_selector/#requirements/)
+
 [Installation](/node_js_selector/#installation)
+
 [Command Line Interface](/node_js_selector/#command-line-interface)
-[Hoster](/command_line_interface2.html#hoster/)
-[End User](/command_line_interface2.html#enduser/)
+* [Hoster](/node_js_selector/#hoster/)
+* [End User](/node_js_selector/#end-user/)
+
 [User Interface](/node_js_selector/#user-interface)
-[Hoster](/user_interface.html#hoster/)
-[How to enable/disable Node.js](/user_interface.html#howtoenabledisablenodejs/)
-[How to manage Node.js](/user_interface.html#howtomanagenodejs/)
-[Applications column](/user_interface.html#applicationscolumn/)
-[End User](/user_interface.html#enduser/)
-[How to manage application](/user_interface.html#howtomanageapplication/)
+* [Hoster UI](/node_js_selector/#hoster-ui/)
+  * [How to enable/disable Node.js](/node_js_selector/#how-to-enable-disable-node-js/)
+  * [How to manage Node.js](/node_js_selector/#how-to-manage-node-js/)
+  * [Applications column](/node_js_selector/#applications-column/)
+* [End User UI](/node_js_selector/#end-user-ui/)
+  * [How to manage application](/node_js_selector/#how-to-manage-application/)
+
 [Node.js Deployment](/node_js_selector/#node-js-deployment)
-[Remote Usage of Node.js Interpreters](/node_js_selector/#remote-usage-of-node-js-interpreters)
-[Remote Usage of the cloudlinux-selector Utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)
+  * [Remote Usage of Node.js Interpreters](/node_js_selector/#remote-usage-of-node-js-interpreters)
+  * [Remote Usage of the cloudlinux-selector Utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)
 
 
 ## Overview & Requirements
 
 
-<span class="notranslate"> Node.js Selector <span class="notranslate">  is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs. </span> </span>
+<span class="notranslate"> Node.js Selector </span>  is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
 
+#### **Requirements**
 
-
-<span class="notranslate"> Node.js Selector <span class="notranslate">  supports Node.js versions 6.x, 8.x, 9.x and later. </span> </span>
-This feature is available for CloudLinux 7, <span class="notranslate"> CloudLinux 6 hybrid <span class="notranslate">  and CloudLinux 6. </span> </span>
-<span class="notranslate"> Node.js Selector <span class="notranslate">  requires  <span class="notranslate"> LVE Manager 4.0 <span class="notranslate">  or later. </span> </span> </span> </span>
-It supports cPanel and DirectAdmin servers (Plesk is not supported as it already has Node.js support.) For more details, please go to Plesk & Node.js documentation [here](https://www.plesk.com/blog/product-technology/node-js-plesk-onyx/) and [here](https://docs.plesk.com/en-US/onyx/administrator-guide/website-management/nodejs-support.76652/) .
-For more details about <span class="notranslate"> mod_passenger <span class="notranslate">  and Node.js, please read documentation  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/)  and  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/ownserver/apache/oss/el7/deploy_app.html) . </span> </span>
-<span class="notranslate"> Node.js Selector <span class="notranslate">  is working with EasyApache 3 and EasyApache 4. </span> </span>
+* <span class="notranslate"> Node.js Selector </span>  supports Node.js versions 6.x, 8.x, 9.x and later.
+* This feature is available for CloudLinux 7, <span class="notranslate"> CloudLinux 6 hybridand CloudLinux 6. </span>
+* <span class="notranslate"> Node.js Selector requires LVE Manager 4.0 </span> or later.
+* It supports cPanel and DirectAdmin servers (Plesk is not supported as it already has Node.js support.) For more details, please go to Plesk & Node.js documentation [here](https://www.plesk.com/blog/product-technology/node-js-plesk-onyx/) and [here](https://docs.plesk.com/en-US/onyx/administrator-guide/website-management/nodejs-support.76652/) .
+* For more details about <span class="notranslate"> mod_passenger </span>  and Node.js, please read documentation  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/)  and  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/ownserver/apache/oss/el7/deploy_app.html) .
+* <span class="notranslate"> Node.js Selector </span> is working with EasyApache 3 and EasyApache 4.
 
 
 ## Installation
 
 
+**cPanel**
 
-
-To use Node.js Selector, please install Node.js packages by running the following command:
+To use <span class="notranslate"> Node.js Selector </span>, please install <span class="notranslate"> Node.js </span> packages by running the following command:
+<div class="notranslate">
 
 ```
 yum groupinstall alt-nodejs6 alt-nodejs8 alt-nodejs9
 ```
-
-Also, please install LVE Manager, LVE Utils and Fusion Passenger by running the following command:
+</div>
+Also, please install <span class="notranslate"> LVE Manager, LVE Utils and Fusion Passenger </span> by running the following command:
+<div class="notranslate">
 
 ```
 yum install lvemanager lve-utils ea-apache24-mod-alt-passenger
 ```
-
+</div>
 For EasyApache 3:
+<div class="notranslate">
 
 ```
 yum install lvemanager lve-utils alt-mod-passenger
 ```
-
+</div>
 And we recommend to install CageFS for better security (not mandatory) by running the following command:
+<div class="notranslate">
 
 ```
 yum install cagefs
 ```
+</div>
 
-
-
-
-
+::: tip Note
+If during Node.js Selector usage on cPanel servers you get "ENOMEM npm ERR! errno-12" error, try to increase Memory limit in <span class="notranslate"> cPanel WHM → Server Configuration → Tweak Settings → System → Max cPanel process memory, </span> then restart cPanel service with the following command to apply changes.
+:::
 
 
 CloudLinux 7:
+<div class="notranslate">
 
 ```
 systemctl restart cpanel.service
 ```
+</div>
 
 CloudLinux 6:
-
+<div class="notranslate">
 ```
 service cpanel restart
 ```
+</div>
 
+**DirectAdmin**
 
-To use Node.js Selector, please install Node.js packages by running the following command:
+To use <span class="notranslate"> Node.js Selector, please install Node.js </span> packages by running the following command:
+<div class="notranslate">
 
 ```
 yum groupinstall alt-nodejs6 alt-nodejs8 alt-nodejs9
 ```
-
-Also, please install LVE Manager, LVE Utils and Fusion Passenger by running the following command:
+</div>
+Also, please install <span class="notranslate"> LVE Manager, LVE Utils and Fusion Passenger </span> by running the following command:
+<div class="notranslate">
 
 ```
 yum install lvemanager lve-utils alt-mod-passenger
 ```
-
+</div>
 And we recommend to install CageFS for better security (not mandatory) by running the following command:
+<div class="notranslate">
 
 ```
 yum install cagefs
 ```
+</div>
 
 ## Command Line Interface
 
 
 Below is a list of commands hoster and end user can run in a command line.
 
+#### **Hoster**
+
 Get information related to Node.js: default version, list of supported versions, status of <span class="notranslate"> Node.js Selector </span> , list of users, their applications, etc:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector [get] [--json] --interpreter nodejs
 ```
-
+</div>
 
 <span class="notranslate"> JSON </span> output for <span class="notranslate"> _get_ </span> command:
-<span class="notranslate"> </span>
-```
-{  "selector_enabled": true | false,   "default_version": "6.11.3",   "result": "success",   "timestamp": 1508667174.220027  "cache_status": "ready"         //  or “updating” during automatic yum cache rebuild  "available_versions": {   //  begin of  “versions”      "6.11.3" : {   //   begin of version "6.11.3"                  "name_modifier": "",                   "status": "enabled",  //  enabled, disabled, not_installed, installing, removing                  “base_dir”: “/opt/alt/alt-nodejs6”   //  empty when version is not installed                  “users”: {   //  begin of  “users”                      “user1”: {   //  begin of “user1”“homedir”: “/home/user1”,                                         “applications”: {    //  begin of “applications”                             “apps_dir/app1” : {   //   begin of application “apps_dir/app1”                                 “domain”: “cltest1.com”,                                 “app_uri”: “apps/my-app1”,                                         “app_mode” : “development”,                                 “startup_file” : “app.js”,                                 “app_status” : “started”,   // ‘started’ or ‘stopped’                                 “config_files” : [                                     “package.json”,                                     “gruntfile.js”                                 ],                                 “env_vars” : {                                     “var1” : “value1”,                                     “var2” : “value2”                                 },                             },   // end of application “apps_dir/app1”                             “apps_dir/app2” : {    //   begin of application “apps_dir/app2”                                  << data for application “apps_dir/app2”  (same structure as for application “apps_dir/app1” above) >>                             },   //  end of application “apps_dir/app2”                         },   //  end of “applications”                      },   //  end of “user1”                      “user2”: {   //  begin of “user2”                          << data for user “user2”  (same structure as for “user1” above) >>                      },   //  end of “user2”                  },   // end of “users”                },    //  end of version “6.11.3”              "8.21.5" : {   //   begin of version "8.21.5"                    << data for version "8.21.5"  (same structure as for version “6.11.3” above) >>                },    //  end of version “8.21.5”            },    //  end of “versions”}   //   end of json
-```
+<div class="notranslate">
 
+```
+{  
+"selector_enabled": true | false,   
+"default_version": "6.11.3",   
+"result": "success",   
+"timestamp": 1508667174.220027  
+"cache_status": "ready"         //  or “updating” during automatic yum cache rebuild  
+"available_versions": {   //  begin of  “versions”
+      "6.11.3" : {   //   begin of version "6.11.3"
+		"name_modifier": "",
+		"status": "enabled",  //  enabled, disabled, not_installed, installing, removing
+		“base_dir”: “/opt/alt/alt-nodejs6”   //  empty when version is not installed
+		“users”: {   //  begin of  “users”                      
+			“user1”: {   //  begin of “user1”
+				“homedir”: “/home/user1”,
+				“applications”: {    //  begin of “applications”
+					“apps_dir/app1” : {   //   begin of application “apps_dir/app1”
+						“domain”: “cltest1.com”,
+						“app_uri”: “apps/my-app1”,
+						“app_mode” : “development”,
+						“startup_file” : “app.js”,
+						“app_status” : “started”,   // ‘started’ or ‘stopped’
+						“config_files” : [
+							“package.json”,
+							“gruntfile.js”
+						],
+						“env_vars” : {
+							“var1” : “value1”,
+							“var2” : “value2”
+						},
+					},   // end of application “apps_dir/app1”
+					“apps_dir/app2” : {    //   begin of application “apps_dir/app2”
+						<< data for application “apps_dir/app2”  (same structure as for application “apps_dir/app1” above) >>
+					},   //  end of application “apps_dir/app2”
+				},   //  end of “applications”
+			},   //  end of “user1”
+			“user2”: {   //  begin of “user2”
+				<< data for user “user2”  (same structure as for “user1” above) >>
+			},   //  end of “user2”
+		},   // end of “users”
+	},    //  end of version “6.11.3”
+	"8.21.5" : {   //   begin of version "8.21.5"
+		<< data for version "8.21.5"  (same structure as for version “6.11.3” above) >>
+	},    //  end of version “8.21.5”
+},    //  end of “versions”}   //   end of json
+```
+</div>
 
 Set default version, supported versions, and status of <span class="notranslate"> Node.js Selector </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set [--json] --interpreter nodejs (--selector-status <enabled,disabled> | --default-version <str> | --supported-versions <str>)
 ```
+</div>
 
-**Note** that <span class="notranslate"> Node.js Selector </span> is disabled by default. If an available Node.js version is not installed <span class="notranslate"> Node.js Selector </span> is always disabled and it is impossible to enable it.
+::: tip Note
+<span class="notranslate"> Node.js Selector </span> is disabled by default. If an available Node.js version is not installed <span class="notranslate"> Node.js Selector </span> is always disabled and it is impossible to enable it.
+:::
 
 To set default Node.js version, please use the following command (note that required Node.js version should be enabled):
- <span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter=nodejs --default-version=<ver>
 ```
+</div>
 
-**Examples** :
+**Examples** :  
 This command enables <span class="notranslate"> Node.js Selector </span> :
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter nodejs --selector-status enabled
 ```
-
+</div>
 
 This command sets default Node.js version as 6:
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 cloudlinux-selector set --json --interpreter nodejs --default-version 6
 ```
+</div>
 
 This command sets supported Node.js version as 8:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter nodejs --supported-versions='{"6": false, "8": true}'
 ```
+</div>
 
 Install required Node.js version:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector install-version --json --interpreter nodejs --version 8
 ```
+</div>
 
 Uninstall required Node.js version:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector uninstall-version --json --interpreter nodejs --version 8
 ```
+</div>
 
 Enable required Node.js version:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector enable-version --json --interpreter nodejs --version 8
 ```
+</div>
 
 Disable required Node.js version (note that it is impossible to disable default Node.js version):
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector disable-version --json --interpreter nodejs --version 8
 ```
+</div>
 
 Change version for application(s):
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set [--json] --interpreter nodejs ((--user <str> |  --domain <str>) --app-root <str> | --from-version <str>) --new-version <str>
 ```
+</div>
 
-**Examples** :
+**Examples** :  
 This command changes version for the specific application:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter nodejs --user user1 --app-root apps_dir/app1 --new-version 8
 ```
+</div>
 
 Common output for all <span class="notranslate"> _set_ </span> commands:
 
 **_in case of success_** :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 {  "result": "success",   "timestamp": 1508666792.863358}
 ```
+</div>
 
 **_in case of error:_**
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 {  "result": "Some error message",  "details" : "Traceback: ..." ,  "context": {},  "timestamp": 1508666792.863358}
 ```
+</div>
 
 **_in case of warning:_**
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 {  "result": "success",  "warning" : "Some warning message" ,  "context": {},  "timestamp": 1508666792.863358}
 ```
+</div>
 
 To resolve issues related to <span class="notranslate"> _install-version/uninstall-version_ </span> commands (because they are running in the background) you may use this log file <span class="notranslate"> _/var/log/cl-nodejs-last-yum.log_ </span>
 It contains full <span class="notranslate"> _yum_ </span> output from the <span class="notranslate"> **_latest_** </span> performed operation (install or uninstall) and it will be rewritten with each operation.
 
+#### **End User**
 
-
-
-
-
+::: danger
+options --user and --domain are mutually exclusive now.
+:::
 
 Get config file for the user applications
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector read-config [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)] --app-root <str> --config-file <name>
 ```
+</div>
 
-<span class="notranslate"> JSON </span> output:
-<span class="notranslate"> </span>
+JSON output:
+
+<div class="notranslate">
+
 ```
-{          "result": "success",         "timestamp": 1508666792.863358           "data": "content of config file as Base64 encoded string"}
+{
+    "result": "success",
+	"timestamp": 1508666792.863358
+	"data": "content of config file as Base64 encoded string"
+}
 ```
+
+</div>
+
 
 **Example** :
 
 This command gets config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cloudlinux-selector read-config --json --interpreter nodejs  --user user1 --app-root app_dir/app1 --config-file package.json
 ```
-
+</div>
 Save config file for the user applications
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector save-config [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> --config-file <path> --content <content of config file as Base64 encoded string>
 ```
+</div>
 
 <span class="notranslate"> JSON </span> output (the same as for all <span class="notranslate"> _set_ </span> commands):
-<span class="notranslate"> </span>
-```
-{          "result": "success",           "timestamp": 1508666792.863358}
-```
 
+<div class="notranslate">
 
-**Example** :
+```
+{
+          "result": "success",
+		  "timestamp": 1508666792.863358
+}
+```
+</div>
+
+**Example** :  
 This command saves config file for <span class="notranslate"> user1 </span> ’s application <span class="notranslate"> app1 </span> :
-=
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cloudlinux-selector save-config --json --interpreter nodejs  --user user1 --app-root app_dir/app1 --config-file package.json  --content                                         VGh1ICAyIE5vdiAxMDo0MzoxMiBFRFQgMjAxNwo=
 ```
-
+</div>
 Get a list of applications for the specific user
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector [get] [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)]
 ```
+</div>
 
-
-**Example** :
+**Example** :  
 This command gets a list of applications for the <span class="notranslate"> user1 </span> :
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cloudlinux-selector get --json --interpreter nodejs  --user user1
 ```
-
+</div>
 Create user application
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector create [--json] --interpreter nodejs [(--user <str> | --domain <str>)] --app-root <str> --app-uri <str> [--version <str>] [--app-mode <str>] [--startup-file <str>] [--env-vars <json string>]
 ```
+</div>
 
-**Example** :
+**Example** :  
 This command creates <span class="notranslate"> user1 </span> 's application for the domain <span class="notranslate"> xyz.com </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector create --json --interpreter nodejs --user user1 --app-root my_apps/app1 --app-uri apps/app1
 ```
-
+</div>
 or
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector create --json --interpreter nodejs --app-root my_apps/app1 --domain xyz.com --app-uri apps/app1
 ```
-
+</div>
 Start, restart, stop, and destroy user application
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector (start | restart | stop | destroy) [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str>
 ```
-
+</div>
 
 **Example** :
 This command starts <span class="notranslate"> user1 </span> 's application:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector start --json --interpreter nodejs --user user1 --app-root my_apps/app1
 ```
-
+</div>
 Change properties for an application
+<div class="notranslate">
 
 ```
-
+cloudlinux-selector set [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> [--app-mode <str>] [--new-app-root <str>] [--new-domain <str>] [--new-app-uri <str>] [--new-version <str>] [--startup-file <str>] [--env-vars <json string>]
 ```
-
+</div>
 
 **Example 1** :
 This command sets a production mode, new domain <span class="notranslate"> new.xyz.com </span> , new Node.js version 8, new <span class="notranslate"> URI </span> , new application <span class="notranslate"> root </span> directory and new startup file for <span class="notranslate"> user1 </span> application located on the domain <span class="notranslate"> xyz.com </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter nodejs  --user user1 --app-root my_apps/app1 --mode production  --new-app-root new_apps/new_app1  --new-domain new.xyz.com --new-app-uri new_apps/app1  --new-version 8  --startup-file new_app.js --env-vars '{ "var1" : "value1", "var2" : "value2" }'
 ```
+</div>
 
 **Example 2** :
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cloudlinux-selector set --json --interpreter nodejs  --domain xyz.com --app-root my_apps/app1 --mode production  --new-app-root new_apps/new_app1  --new-domain new.xyz.com --new-app-uri new_apps/app1  --new-version 8  --startup-file new_app.js --env-vars '{ "var1" : "value1", "var2" : "value2" }'
 ```
+</div>
 
-
-
-
-
+::: tip Note
+When changing Node.js version all replies from web application to get request will be checked in Node.js Selector (before and after version changing). HTTP response codes and MIME type are comparing. So, make sure application is available via http(s) at least locally.
+:::
 
 Run <span class="notranslate"> _npm install_ </span> command for the user application
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector install-modules [--json] --interpreter nodejs  [(--user <str> |  --domain <str>)] --app-root <str>
 ```
+</div>
 
 **Example** :
-This command runs _ _ <span class="notranslate"> npm install </span> _ _ for <span class="notranslate"> user1 </span> application:
+This command runs <span class="notranslate"> _npm install_ </span> for <span class="notranslate"> user1 </span> application:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cloudlinux-selector install-modules --json --interpreter nodejs --user user1 --app-root my_apps/app
 ```
+</div>
 
-
-
-
+::: tip Note
+All replies from web application to get request will be checked in Node.js Selector (before and after modules installation). HTTP response codes and MIME type are comparing. So, make sure application is available via http(s) at least locally.
+:::
 
 Run a script from <span class="notranslate"> package.json </span> file of a user application, arguments <span class="notranslate"> &lt;args&gt;> </span> are passed to the script
 <span class="notranslate"> </span>
