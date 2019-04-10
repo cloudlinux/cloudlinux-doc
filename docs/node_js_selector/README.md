@@ -536,85 +536,87 @@ After ativation user can use <span class="notranslate"> _npm_ </span> and node f
 
 ## User Interface
 
-
+**Hoster**
 
 Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
 
 Go to <span class="notranslate"> _LVE Manager → Options Tab → Node.js Section_ </span> . A list of installed Node.js versions is displayed. There are several columns in the list.
 
-<span class="notranslate"> Version </span> — displays Node.js version.
-<span class="notranslate"> Path </span> — Node.js package location.
-<span class="notranslate"> Applications </span> — number of applications that use this Node.js version. Click on a digit to go to the list of applications.
-<span class="notranslate"> Enabled </span> — displays if particular Node.js version is enabled.
-<span class="notranslate"> Actions </span> — allows to install, delete, and make default a particular Node.js version.
+* <span class="notranslate"> Version </span> — displays Node.js version.
+* <span class="notranslate"> Path </span> — Node.js package location.
+* <span class="notranslate"> Applications </span> — number of applications that use this Node.js version. Click on a digit to go to the list of applications.
+* <span class="notranslate"> Enabled </span> — displays if particular Node.js version is enabled.
+* <span class="notranslate"> Actions </span> — allows to install, delete, and make default a particular Node.js version.
+
 To display all changes immediately click <span class="notranslate"> _Refresh_ </span> link.
 
 ![](/images/nodejsgeneral_zoom70.png)
 
+**How to enable/disable Node.js**
 
+* To enable Node.js move the slider to <span class="notranslate"> _Enable_ </span> .
+* To disable Node.js move the slider back to <span class="notranslate"> _Disable_ </span> . 
 
-To enable Node.js move a slider to <span class="notranslate"> _Enable_ </span> .
-To disable Node.js move a slider back to <span class="notranslate"> _Disable_ </span> . 
-
-
-
+::: tip Note
+If you disable Node.js, its version for all your applications will not be changed, but you can not add a new application to this version.
+:::
 
 ![](/images/nodejsslider_zoom70.png)
 
-
-
-
-
+::: tip Note
+<span class="notranslate">Node.js Selector</span> icon in end user interface is absent when Node.js is disabled.
+:::
 
 ![](/images/nodejsselectorlogo_zoom70.png)
 
+**How to manage Node.js**
 
 The list of installed Node.js versions allows to enable and disable, install and delete, and set a particular Node.js version as a default.
 
 **Enable and disable particular Node.js version**
 
 To enable particular Node.js version do the following:
-Move a disabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* Move a disabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
 
 ![](/images/nodejsenable_zoom70.png)
 
 To disable particular Node.js version do the following:
-Move an enabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* Move an enabled slider in the <span class="notranslate"> _Enabled_ </span> column for a particular Node.js version.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
 
 **Install and delete particular Node.js version**
 
 To install particular Node.js version do the following:
-Click <span class="notranslate"> _Install_ </span> button in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* Click <span class="notranslate"> _Install_ </span> button in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
 
 To delete particular Node.js version do the following:
-Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start uninstall process.
-Or close a pop-up without changes.
+* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start uninstall process.
+* Or just close a pop-up without any changes.
 
-**Note that it is impossible** :
-to remove default Node.js version;
-to remove version with applications;
-to install or remove version if another installation/uninstall process is running.
+**Note that it is impossible**:  
+* to remove default Node.js version;
+* to remove version with applications;
+* to install or remove version if another installation/uninstall process is running.
 
 ![](/images/nodejsconfirmation_zoom70.png)
 
 **Make a particular Node.js version as a default**
 
 To make a particular Node.js version as a default do the following:
-Click <span class="notranslate"> _Double-Tick_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* Click <span class="notranslate"> _Double-Tick_ </span> icon in the <span class="notranslate"> _Actions_ </span> column for a particular Node.js version.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up.
 
-
-
-
+::: tip Note
+It is impossible to make a disabled version default.
+:::
 
 
 ![](/images/nodejsmakedefault_zoom70.png)
 
-
+**Applications column**
 
 To view and operate with the list of domains with Node.js versions click on a number in the <span class="notranslate"> _Applications_ </span> column for a particular Node.js version. A section with a list of Domains for particular Node.js version will be displayed.
 
@@ -624,20 +626,24 @@ Domains are displayed by three. To load more domains click on <span class="notra
 
 
 To change Node.js version for a particular application do the following:
-Click <span class="notranslate"> _Double-Arrow_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A confirmation pop-up will be displayed.
-In the pop-up choose Node.js version from a drop-down.
-Click <span class="notranslate"> _Change_ </span> to confirm the action or <span class="notranslate"> _Cancel_ </span> to close the pop-up.
-To refresh state of applications in current version you can click <span class="notranslate"> _Refresh_ </span> link. 
+* Click <span class="notranslate"> _Double-Arrow_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A confirmation pop-up will be displayed.
+* In the pop-up choose Node.js version from a drop-down.
+* Click <span class="notranslate"> _Change_ </span> to confirm the action or <span class="notranslate"> _Cancel_ </span> to close the pop-up.
+* To refresh state of applications in current version you can click <span class="notranslate"> _Refresh_ </span> link. 
 
+:::tip Note
+All packages of the application(s) will be re-installed.
+:::
 
+**End User**
 
-
-
-**Note** that <span class="notranslate"> Node.js Selector </span> icon in end user interface is absent when Node.js is disabled.
+:::tip Note
+<span class="notranslate"> Node.js Selector </span> icon in end user interface is absent when Node.js is disabled.
+:::
 
 ![](/images/nodejslogoenduser_zoom70.png)
 
-End User interface allows end users to setup and manage Node.js for their web applications.
+End User interface allows end users to setup and manage Node.js for their web applications.  
 Go to <span class="notranslate"> _cPanel → Software Section → Select Node.js Version_ </span> .
 
 <span class="notranslate"> _Web Applications_ </span> page is displayed.
@@ -645,60 +651,61 @@ Go to <span class="notranslate"> _cPanel → Software Section → Select Node.js
 ![](/images/nodejsusermain_zoom70.png)
 
 There are several columns in the list.
-<span class="notranslate"> App URI </span> — application URI including the domain.
-<span class="notranslate"> App Root Directory </span> —  application root directory relative to user's home.
-<span class="notranslate"> Mode </span> — can be production or development.
-<span class="notranslate"> Status </span> — started/stopped — displays if an application is running or not and version of application.
-<span class="notranslate"> Actions </span> — allows to start, restart, stop, edit, and remove a particular application.
+* <span class="notranslate"> App URI </span> — application URI including the domain.
+* <span class="notranslate"> App Root Directory </span> —  application root directory relative to user's home.
+* <span class="notranslate"> Mode </span> — can be production or development.
+* <span class="notranslate"> Status </span> — started/stopped — displays if an application is running or not and version of application.
+* <span class="notranslate"> Actions </span> — allows to start, restart, stop, edit, and remove a particular application.
 
+**How to manage application**
 
 **Start application**
 
 To start a stopped application do the following:
-Click <span class="notranslate"> _Start_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a stopped application row.
-When an action is completed a <span class="notranslate"> _Start_ </span> icon changes to <span class="notranslate"> _Stop_ </span> icon.
+* Click <span class="notranslate"> _Start_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a stopped application row.
+* When an action is completed a <span class="notranslate"> _Start_ </span> icon changes to <span class="notranslate"> _Stop_ </span> icon.
 
 **Stop application**
 
 To stop a started application do the following:
-Click <span class="notranslate"> _Stop_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row.
-When an action is completed a <span class="notranslate"> _Stop_ </span> icon changes to <span class="notranslate"> _Start_ </span> icon.
+* Click <span class="notranslate"> _Stop_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row.
+* When an action is completed a <span class="notranslate"> _Stop_ </span> icon changes to <span class="notranslate"> _Start_ </span> icon.
 
 ![](/images/nodejsuseruistartstop_zoom70.png)
 
 **Restart application**
 
 To restart started application do the following:
-Click <span class="notranslate"> _Restart_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
+* Click <span class="notranslate"> _Restart_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a started application row. A current row is blocked and when a process is completed it will be unblocked.
 
 **Remove application**
 
 To remove application do the following:
-Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row.
-In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start removing or <span class="notranslate"> _Cancel_ </span> to close pop-up.
-When an action is completed an application will be removed from the <span class="notranslate"> _Web Applications_ </span> table and a confirmation pop-up will be displayed.
+* Click <span class="notranslate"> _Bin_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row.
+* In the confirmation pop-up click <span class="notranslate"> _Agree_ </span> to start removing or <span class="notranslate"> _Cancel_ </span> to close pop-up.
+* When an action is completed an application will be removed from the <span class="notranslate"> _Web Applications_ </span> table and a confirmation pop-up will be displayed.
 
 ![](/images/nodejsuseruirestartremove_zoom70.png)
 
 **Edit application**
 
 To edit application do the following:
-Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
+* Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
 
 ![](/images/nodejseditapp_zoom70.png)
 
 The following actions are available:
-Restart application — click <span class="notranslate"> _Restart_ </span> button.
-Stop Node.js — click <span class="notranslate"> _Stop Node.js_ </span> button.
-Run JavaScript script — click <span class="notranslate"> _Run JS Script_ </span> button to run a command specified in the <span class="notranslate"> Scripts </span> section of the package.json file. Specify the name of the script to run plus any parameters then click <span class="notranslate"> Ok </span> .
-Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
-Change Node.js version — choose Node.js version from a drop-down.
-Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
-Specify Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-Specify Application URL — specify in a field an HTTP/HTTPS link to the application.
-Specify Application startup file — specify as <span class="notranslate"> NAME.js file </span> .
-Run npm install command — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
-Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
+* Restart application — click <span class="notranslate"> _Restart_ </span> button.
+* Stop Node.js — click <span class="notranslate"> _Stop Node.js_ </span> button.
+* Run JavaScript script — click <span class="notranslate"> _Run JS Script_ </span> button to run a command specified in the <span class="notranslate"> Scripts </span> section of the <span class="notranslate"> package.json </span> file. Specify the name of the script to run plus any parameters then click <span class="notranslate"> Ok </span> .
+* Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
+* Change Node.js version — choose Node.js version from a drop-down.
+* Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
+* Specify Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Specify Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Specify Application startup file — specify as <span class="notranslate"> NAME.js file </span> .
+* Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
+* Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
 
 **Application error log**
 
@@ -742,7 +749,7 @@ In this case, there is no useful information for debugging errors and this is su
 ## Node.js Deployment
 
 
-The first approach - [remote usage of Node.js Interpreters of different versions](/node_js_selector/#remote-usage-of-node-js-interpreters) .
+The first approach - [remote usage of Node.js Interpreters of different versions](/node_js_selector/#remote-usage-of-node-js-interpreters).  
 The second approach - [remote usage of the ](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) <span class="notranslate"> [cloudlinux-selector utility](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) </span> .
 
 ### Remote Usage of Node.js Interpreters
@@ -751,73 +758,83 @@ The second approach - [remote usage of the ](/node_js_selector/#remote-usage-of-
 1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
 2. Install <span class="notranslate"> alt-nodejs </span> packages on the server in use. See [installation instructions](/node_js_selector/#installation) .
 3. Create an application on the server. You can do it by three ways:
-Via UI of the Node.js plugin.
-Using the following command to create an application:
-<span class="notranslate"> </span>
+  * Via UI of the Node.js plugin.
+  * Using the following command to create an application:
+
+<div class="notranslate">
+
 ```
 cloudlinux-selector create --interprete=nodejs --json --app-root=<USER_NAME> --app-uri=<APP_NAME> --app-mode=develompent --version=<VERSION> --domain=<DOMAIN>
 ```
-  
+</div>  
 
-
-
+::: tip Note
+In the <span class="notranslate"> IntelliJ IDEA </span> you can create and run any remote script <span class="notranslate"> (Preferences — Remote SSH External Tools — Add).</span>
+:::
 
 ![](/images/createapp_zoom70.png)
 
-Choose a location of the application on the server and synchronize the files with the <span class="notranslate"> IntelliJ IDEA </span> project.
+  * Choose a location of the application on the server and synchronize the files with the <span class="notranslate"> IntelliJ IDEA </span> project.
 4. Set up <span class="notranslate"> Run/Debug Configurations </span> in the project created.
 
 ![](/images/setconfiguration_zoom70.png)
 
-Specify a path to the remote Node.js interpreter. To be able to specify the remote interpreter, you should install the <span class="notranslate"> _Node.js Remote Interpreter_ </span> plugin first. Please find more information [here](https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html) , using server access credentials for a user <span class="notranslate"> (Main menu — Run — Edit configurations...) </span> .
-Specify initial _JavaScript file_ that will be run with the <span class="notranslate"> _node_ </span> command (it is the _app.js_ file from the archive).
-Specify <span class="notranslate"> _Path Mappings_ </span> between a local and a remote project <span class="notranslate"> (Preferences — Deployments — Add) </span> . If you have created your application with the <span class="notranslate"> _cloudlinux-selector utility_ </span> or via plugin UI the <span class="notranslate"> _Path Mappings_ </span> should be as follows:
-<span class="notranslate"> </span>
+  * Specify a path to the remote Node.js interpreter. To be able to specify the remote interpreter, you should install the <span class="notranslate"> _Node.js Remote Interpreter_ </span> plugin first. Please find more information [here](https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html) , using server access credentials for a user <span class="notranslate"> _(Main menu → Run → Edit configurations...)_ </span> .
+  * Specify initial _JavaScript file_ that will be run with the <span class="notranslate"> _node_ </span> command (it is the _app.js_ file from the archive).
+  * Specify <span class="notranslate"> _Path Mappings_ </span> between a local and a remote project <span class="notranslate"> _(Preferences → Deployments → Add)_ </span> . If you have created your application with the <span class="notranslate"> _cloudlinux-selector utility_ </span> or via plugin UI the <span class="notranslate"> _Path Mappings_ </span> should be as follows:
+
+<div class="notranslate">
+
 ```
 /home/<USER_NAME>/<APP_NAME>
 ```
+</div>
 
 5. Synchronize the project directories on the local and the remote machine as per <span class="notranslate"> _Path Mappings_ </span> specified.
 6. Deploy the modules on the remote and the local machine with the <span class="notranslate"> **_npm install_** </span> command (if there are dependent modules). In the UI you can click the <span class="notranslate"> _Run NPM Install_ </span> button.
-7. Run Node.js application with the configuration set at the [4th step](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)  <span class="notranslate"> (Main menu — Run — Run… — Select configuration) </span> .
+7. Run Node.js application with the configuration set at the [4th step](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility)  <span class="notranslate"> _(Main menu → Run → Run… → Select configuration)_ </span> .
 
 ![](/images/runapp_zoom60.png)
 
-8. If you are using the application from the archive attached, you can see the running application on the 3003 port — <span class="notranslate"> _http://DOMAIN:3003_ . </span>
+8. If you are using the application from the archive attached, you can see the running application on port 3003 — <span class="notranslate"> _http://DOMAIN:3003_ . </span>
 
-**Note.** The port should be available to a server user.
+::: tip Note
+The port should be available to a server user.
+:::
 
 ![](/images/runningappdomain_zoom70.png)
 
 The following information should be displayed on this page:
-A version of the running Node.js interpreter;
-Current environment variables;
-A current time.
+* A version of the running Node.js interpreter;
+* Current environment variables;
+* The current time.
+
 So that, you can be sure that deployed modules are used properly.
 
-If you’d like to use a different version of Node.js to run an application, change a path to the interpreter in the configuration settings of the running.
+If you’d like to use a different version of Node.js to run an application, change a path to the interpreter in the configuration settings of the running.  
 To apply all changes to the project, synchronize all changes with the server and restart the running application.
 
-9. To debug a script, set breakpoints in the code and run the configuration via Main Menu <span class="notranslate"> (Main menu — Run — Debug… — Select configuration) </span> .
+9. To debug a script, set breakpoints in the code and run the configuration via Main Menu <span class="notranslate"> _(Main menu → Run → Debug… → Select configuration)_ </span> .
 
 Useful links:
-<span class="notranslate"> IntelliJ IDEA </span> : [https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html](https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html)
-Plugin <span class="notranslate"> _Node.js Remote Interpreter_ </span> : [https://plugins.jetbrains.com/plugin/8116-node-js-remote-interpreter](https://plugins.jetbrains.com/plugin/8116-node-js-remote-interpreter)
-<span class="notranslate"> WebStorm </span> : [https://www.jetbrains.com/help/webstorm/configure-node-js-remote-interpreter.html](https://www.jetbrains.com/help/webstorm/configure-node-js-remote-interpreter.html)
+* <span class="notranslate"> IntelliJ IDEA </span> : [https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html](https://www.jetbrains.com/help/idea/configure-node-js-remote-interpreter.html)
+* Plugin <span class="notranslate"> _Node.js Remote Interpreter_ </span> : [https://plugins.jetbrains.com/plugin/8116-node-js-remote-interpreter](https://plugins.jetbrains.com/plugin/8116-node-js-remote-interpreter)
+* <span class="notranslate"> WebStorm </span> : [https://www.jetbrains.com/help/webstorm/configure-node-js-remote-interpreter.html](https://www.jetbrains.com/help/webstorm/configure-node-js-remote-interpreter.html)
 
-**Note.** It is not required to install <span class="notranslate"> _Passenger_ </span> while working in <span class="notranslate"> IDE </span> if you are using this approach.
-
+::: tip Note
+It is not required to install <span class="notranslate"> _Passenger_ </span> while working in <span class="notranslate"> IDE </span> if you are using this approach.
+:::
 
 ### Remote Usage of the cloudlinux-selector Utility
 
 
-Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
-2. Set up project mapping on the local machine with the created remote application _ _ <span class="notranslate"> /home/<USER_NAME>/<APP_NAME> </span> _ (Preferences → Deployments → Add)_ .
-3. Set up the remote commands of the <span class="notranslate"> cloudlinux-selector (Preferences → Remote SSH External Tools → Add) </span> for the following actions:
-Restart application;
-Install packages;
-Run script;
-Change Node.js version for the application.
+1. Create an application via UI or with the command as described in the Remote Usage of Node.js Interpreters approach, [step 3 (a,b)](/node_js_selector/#remote-usage-of-the-cloudlinux-selector-utility) .
+2. Set up project mapping on the local machine with the created remote application <span class="notranslate"> _/home/<USER_NAME>/<APP_NAME> (Preferences → Deployments → Add)_ </span>.
+3. Set up the remote commands of <span class="notranslate"> cloudlinux-selector _(Preferences → Remote SSH External Tools → Add)_ </span> for the following actions:
+  * Restart application;
+  * Install packages;
+  * Run script;
+  * Change Node.js version for the application.
 You can see the running app at <span class="notranslate"> http://DOMAIN/APPLICATION_URL </span>
 To apply all changes, restart the application.
 
