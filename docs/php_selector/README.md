@@ -974,17 +974,17 @@ The latter command has the same effect as <span class="notranslate"> `/usr/bin/s
 
 Large number of PHP extensions are bundled with each version of PHP:
 
-[PHP 4.4](/php_selector/#php-4-4-extensions)
-[PHP 5.1](/php_selector/#php-5-1-extensions)
-[PHP 5.2](/php_selector/#php-5-2-extensions)
-[PHP 5.3](/php_selector/#php-5-3-extensions)
-[PHP 5.4](/php_selector/#php-5-4-extensions)
-[PHP 5.5](/php_selector/#php-5-5-extensions)
-[PHP 5.6](/php_selector/#php-5-6-extensions)
-[PHP 7.0](/php_selector/#php-7-0-extensions)
-[PHP 7.1](/php_selector/#php-7-1-extensions) 
-[PHP 7.2](/php_selector/#php-7-2-extensions)
-[PHP 7.3](/php_selector/#php-7-3-extensions)
+* [PHP 4.4](/php_selector/#php-4-4-extensions)
+* [PHP 5.1](/php_selector/#php-5-1-extensions)
+* [PHP 5.2](/php_selector/#php-5-2-extensions)
+* [PHP 5.3](/php_selector/#php-5-3-extensions)
+* [PHP 5.4](/php_selector/#php-5-4-extensions)
+* [PHP 5.5](/php_selector/#php-5-5-extensions)
+* [PHP 5.6](/php_selector/#php-5-6-extensions)
+* [PHP 7.0](/php_selector/#php-7-0-extensions)
+* [PHP 7.1](/php_selector/#php-7-1-extensions) 
+* [PHP 7.2](/php_selector/#php-7-2-extensions)
+* [PHP 7.3](/php_selector/#php-7-3-extensions)
 
 
 
@@ -992,133 +992,126 @@ Large number of PHP extensions are bundled with each version of PHP:
 ### PHP 4.4 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |bcmath bz2 calendar ctype curl dba dbase dbx domxml exif fileinfo | ftp gd gettext gmp iconv imap interbase ioncube_loader ioncube_loader_4 json ldap  | mbstring mcrypt mhash mysql ncurses odbc openssl overload pcntl pcre pgsql  | posix pspell readline recode session shmop snmp sockets sourceguardian standard sybase_ct sysvmsg  | sysvsem sysvshm tokenizer wddx xml xmlrpc zlib|
-
+</div>
 
 ### PHP 5.1 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
 
 | |  |  |  | |
 |-|--|--|--|-|
 |bcmath big_int bitset bz2 bz2_filter calendar coin_acceptor crack ctype curl date dba dbase dom doublemetaphone exif ftp gd geoip | gettext gmagick gmp gnupg haru hash huffman iconv idn igbinary imagick imap inclued inotify interbase ioncube_loader ioncube_loader_4 ldap libxml  | lzf mbstring mcrypt memcache msgpack mysql mysqli ncurses odbc openssl pcntl pcre pdo pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite  | pgsql posix pspell quickhash radius readline redis reflection session shmop simplexml snmp soap sockets sourceguardian spl ssh2 standard stats  | stem sybase_ct sysvmsg sysvsem sysvshm tidy timezonedb tokenizer translit wddx xdebug xml xmlreader xmlrpc xmlwriter xsl zlib |
-
+</div>
 
 ### PHP 5.2 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apc apm ares bcmath bcompiler big_int bitset bloomy bz2 bz2_filter calendar coin_acceptor crack ctype curl date dba dbase dbx dom doublemetaphone eaccelerator enchant exif ffmpeg fileinfo filter  | ftp gd gender geoip gettext gmagick gmp gnupg haru hash hidef htscanner huffman iconv idn igbinary imagick imap inclued inotify interbase intl ioncube_loader ioncube_loader_4 json ldap libxml lzf  | magickwand mailparse mbstring mcrypt memcache memcached mhash mongo msgpack mssql mysql mysqli ncurses oauth odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite  | pgsql phar posix pspell quickhash radius rar readline recode redis reflection rsync session shmop simplexml snmp soap sockets sourceguardian spl spl_types sqlite ssh2 standard stats stem stomp  | suhosin sybase_ct sysvmsg sysvsem sysvshm tidy timezonedb tokenizer translit uploadprogress uuid wddx xcache_3 xdebug xml xmlreader xmlrpc xmlwriter xrange xsl yaf yaz zend_optimizer zip zlib|
-
-
-
-
-
-
-
-
-
+</div>
 
 ### PHP 5.3 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apc apcu apm ares bcmath bcompiler big_int bitset bloomy brotli bz2 bz2_filter calendar clamav coin_acceptor core crack ctype curl date dba dbase dbx dom doublemetaphone eaccelerator eio enchant ereg exif ffmpeg fileinfo  | filter ftp functional gd gender geoip gettext gmagick gmp gnupg haru hash hidef htscanner http huffman iconv idn igbinary imagick imap inclued inotify interbase intl ioncube_loader ioncube_loader_4 jsmin json ldap libevent libxml lzf  | magickwand mailparse mbstring mcrypt memcache memcached mhash mongo msgpack mssql mysql mysqli mysqlnd ncurses nd_mysql nd_mysqli nd_pdo_mysql oauth odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phalcon phar  | posix propro pspell quickhash radius raphf rar readline recode redis reflection rsync session shmop simplexml snmp soap sockets sourceguardian spl spl_types sqlite sqlite3 ssh2 standard stats stem stomp suhosin sybase_ct sysvmsg sysvsem  | sysvshm tidy timezonedb tokenizer trader translit uploadprogress uri_template uuid wddx weakref xcache xcache_3 xdebug xml xmlreader xmlrpc xmlwriter xrange xsl yaf yaml yaz zend_guard_loader zip zlib zmq|
-
+</div>
 
 ### PHP 5.4 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apc apcu apm ares bcmath big_int bitset brotli bz2 bz2_filter calendar clamav core ctype curl date dba dbase dbx dom doublemetaphone eaccelerator eio enchant ereg exif ffmpeg fileinfo filter ftp functional gd | gender geoip gettext gmagick gmp gnupg haru hash hidef htscanner http iconv igbinary imagick imap inclued inotify interbase intl ioncube_loader ioncube_loader_4 jsmin json ldap libevent libsodium libxml lzf magickwand mailparse mbstring | mcrypt memcache memcached mhash mongo mongodb msgpack mssql mysql mysqli mysqlnd ncurses nd_mysql nd_mysqli nd_pdo_mysql oauth oci8 odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phalcon phar  | posix propro pspell quickhash radius raphf rar readline recode redis reflection rsync session shmop simplexml snmp soap sockets sourceguardian spl spl_types sqlite3 ssh2 standard stats stem stomp suhosin sybase_ct sysvmsg sysvsem sysvshm tidy | timezonedb tokenizer trader translit uploadprogress uri_template uuid wddx weakref xcache xcache_3 xdebug xml xmlreader xmlrpc xmlwriter xrange xsl yaf yaml yaz zend_guard_loader zip zlib zmq|
-
+</div>
 
 ### PHP 5.5 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu apm ares bcmath big_int bitset brotli bz2 bz2_filter calendar clamav core ctype curl date dba dbase dbx dom doublemetaphone eio enchant ereg exif ffmpeg fileinfo filter ftp gd gender geoip  | gettext gmagick gmp gnupg gRPC haru hash hidef htscanner http iconv igbinary imagick imap inotify interbase intl ioncube_loader ioncube_loader_4 jsmin json ldap libevent libsodium libxml lzf magickwand mailparse mbstring mcrypt  | memcache memcached mhash mongo mongodb msgpack mssql mysql mysqli mysqlnd ncurses nd_mysql nd_mysqli nd_pdo_mysql oauth oci8 odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql   | phalcon phalcon3 phar posix propro pspell quickhash radius raphf rar readline recode redis reflection rsync session shmop simplexml snmp soap sockets sourceguardian spl spl_types sqlite3 ssh2 standard stats stem stomp suhosin   | sybase_ct sysvmsg sysvsem sysvshm tidy timezonedb tokenizer trader translit uploadprogress uri_template uuid wddx weakref xcache_3 xdebug xml xmlreader xmlrpc xmlwriter xrange xsl yaf yaml yaz zend_guard_loader zip zlib zmq |
-
-
-
-
-
+</div>
 
 ### PHP 5.6 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu apm ares bcmath big_int bitset brotli bz2 bz2_filter calendar core ctype curl date dba dbx dom doublemetaphone eio enchant ereg exif ffmpeg fileinfo filter ftp gd gender geoip gettext | gmagick gmp gnupg gRPC haru hash htscanner http iconv igbinary imagick imap inotify interbase intl ioncube_loader ioncube_loader_4 jsmin json ldap libevent libsodium libxml lzf mailparse mbstring mcrypt memcache memcached mhash | mongo mongodb msgpack mssql mysql mysqli mysqlnd ncurses nd_mysql nd_mysqli nd_pdo_mysql oauth oci8 odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pgsql phalcon phalcon3 | phar posix propro pspell quickhash radius raphf rar readline recode redis reflection rsync session shmop simplexml snmp soap sockets sourceguardian spl spl_types sqlite3 ssh2 standard stats stem stomp | suhosin sybase_ct sysvmsg sysvsem sysvshm tidy timezonedb tokenizer trader translit uploadprogress uri_template uuid wddx weakref xcache_3 xdebug xml xmlreader xmlrpc xmlwriter xrange xsl yaml yaz zend_guard_loader zip zlib zmq|
-
+</div>
 
 ### PHP 7.0 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu bcmath bitset brotli bz2 calendar core ctype curl date dba dbase dom eio enchant exif fileinfo filter ftp gd gender | geoip gettext gmagick gmp gnupg gRPC hash htscanner http iconv igbinary imagick imap inotify interbase intl ioncube_loader json ldap libsodium libxml lzf mailparse mbstring mcrypt | memcached mongodb mysqli mysqlnd nd_mysqli nd_pdo_mysql newrelic* oauth oci8 odbc opcache openssl pcntl pcre pdf pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pdo_sqlsrv pgsql phalcon3 phar | posix propro pspell raphf rar readline redis reflection session shmop simplexml snmp soap sockets sourceguardian spl sqlite3 sqlsrv ssh2 standard stats suhosin sysvmsg | sysvsem sysvshm tidy timezonedb tokenizer trader uploadprogress uuid vips wddx xdebug xml xmlreader xmlrpc xmlwriter xsl yaml yaz zip zlib zmq|
-
+</div>
 
 * Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span> [ documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) .
-
-
-
-
+Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 
 ### PHP 7.1 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu bcmath brotli bz2 calendar core ctype curl date dba dbase dom eio enchant exif fileinfo filter ftp gd gender geoip gettext | gmagick gmp gnupg gRPC hash htscanner http iconv igbinary imagick imap inotify interbase intl ioncube_loader json ldap libsodium libxml lzf mailparse mbstring mcrypt memcached | mongodb mysqli mysqlnd nd_mysqli nd_pdo_mysql newrelic* oauth oci8 odbc opcache openssl pcntl pcre pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pdo_sqlsrv pgsql phalcon3 phar  | posix propro pspell raphf rar readline redis reflection session shmop simplexml snmp soap sockets sourceguardian spl sqlite3 sqlsrv ssh2 standard stats suhosin sysvmsg  | sysvsem sysvshm tidy timezonedb tokenizer trader uploadprogress uuid vips wddx xdebug xml xmlreader xmlrpc xmlwriter xsl yaml zip zlib zmq|
-
+</div>
 
 * Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span> [ documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) .
+Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 ### PHP 7.2 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu bcmath brotli bz2 calendar core ctype curl date dba dom eio enchant exif fileinfo filter ftp gd gender geoip gettext | gmagick gmp gnupg gRPC hash http iconv igbinary imagick imap inotify interbase intl ioncube_loader json ldap libxml lzf mailparse mbstring memcached mongodb | mysqli mysqlnd nd_mysqli nd_pdo_mysql newrelic* oauth oci8 odbc opcache openssl pcntl pcre pdo pdo_dblib pdo_firebird pdo_mysql pdo_odbc pdo_pgsql pdo_sqlite pdo_sqlsrv pgsql phalcon3 phar  | posix propro pspell raphf readline redis reflection session shmop simplexml snmp soap sockets spl sqlite3 sqlsrv ssh2 standard stats sysvmsg sysvsem | sysvshm tidy timezonedb tokenizer trader uploadprogress uuid vips wddx xml xmlreader xmlrpc xmlwriter xsl yaml zip zlib zmq|
+</div>
 
 * Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span> [ documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) .
-
-
+Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 
 ### PHP 7.3 Extensions
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 | |  |  |  | |
 |-|--|--|--|-|
 |apcu bcmath dba dbase dom eio enchant fileinfo gd gender geoip gmagick gnupg grpc http  | igbinary imagick imap inotify interbase intl json ldap lzf mailparse mbstring memcached mongodb mysqlnd nd_mysqli | nd_pdo_mysql newrelic oauth oci8 odbc opcache pdf pdo pdo_dblib pdo_firebird pdo_oci pdo_odbc pdo_pgsql pdo_sqlite pdo_sqlsrv pgsql | phar posix propro pspell raphf redis snmp soap sockets sqlsrv ssh2 stats sysvmsg sysvsem sysvshm tidy | timezonedb trader uploadprogress uuid vips wddx xdebug xmlreader xmlrpc xmlwriter xsl yaf yaml zip zmq|
-
+</div>
 
 * Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) .
+Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
 
 ## Disabling PHP extension globally
 
@@ -1133,9 +1126,9 @@ Reinstalling of <span class="notranslate"> alt-php </span> packages will not res
 ## Control Panel Integration
 
 
-[cPanel](/php_selector/#php-selector)
+[cPanel](/php_selector/#cpanel)
 
-### PHP Selector
+### cPanel
 
 
 _[Requires CageFS 5.5-6.18+]_
@@ -1151,29 +1144,43 @@ A user can change PHP version for domain in cPanel interface but can not change 
 ![](/images/cpanel_integration01.png)
 
 The following <span class="notranslate"> Alt-PHP </span> packages (and higher) provide an ability to select <span class="notranslate"> Alt-PHP </span> version in <span class="notranslate"> MultiPHP Manager </span> :
-<span class="notranslate"> </span>
-alt-php44-4.4.9-71;
-alt-php51-5.1.6-81;
-alt-php52-5.2.17-107;
-alt-php53-5.3.29-59;
-alt-php54-5.4.45-42;
-alt-php55-5.5.38-24;
-alt-php56-5.6.31-7;
-alt-php70-7.0.24-2;
-alt-php71-7.1.10-2;
-alt-php72-7.2.0-0.rc.3.2.
 
+* alt-php44-4.4.9-71;
+* alt-php51-5.1.6-81;
+* alt-php52-5.2.17-107;
+* alt-php53-5.3.29-59;
+* alt-php54-5.4.45-42;
+* alt-php55-5.5.38-24;
+* alt-php56-5.6.31-7;
+* alt-php70-7.0.24-2;
+* alt-php71-7.1.10-2;
+* alt-php72-7.2.0-0.rc.3.2.
 
 You can remove <span class="notranslate"> Alt-PHP </span> from <span class="notranslate"> cPanel MultiPHP Manager </span> .
-To do so set _'_ <span class="notranslate"> yes </span> _'_ or _'_ <span class="notranslate"> no </span> _'_ for the <span class="notranslate"> Alt-PHP </span> versions in config file <span class="notranslate"> _/opt/alt/alt-php-config/alt-php.cfg_   </span> and run <span class="notranslate"> _/opt/alt/alt-php-config/multiphp_reconfigure.py_ . </span>
-This script manages SCL prefixes for the <span class="notranslate"> Alt-PHP </span> - removes or creates prefixes in <span class="notranslate"> / _etc/scl/prefixes_ . </span>
-<span class="notranslate"> </span>
+To do so set '<span class="notranslate"> _yes_ </span>' or ' <span class="notranslate"> _no_ </span> ' for the <span class="notranslate"> Alt-PHP </span> versions in config file <span class="notranslate"> _/opt/alt/alt-php-config/alt-php.cfg_ </span> and run <span class="notranslate"> _/opt/alt/alt-php-config/multiphp_reconfigure.py_ . </span>
+This script manages SCL prefixes for the <span class="notranslate"> Alt-PHP </span> - removes or creates prefixes in <span class="notranslate"> _/etc/scl/prefixes_ . </span>
+
+<div class="notranslate">
+
 ```
-/opt/alt/alt-php-config/alt-php.cfg[MultiPHP Manager]alt-php44 = noalt-php51 = noalt-php52 = noalt-php53 = noalt-php54 = noalt-php55 = yesalt-php56 = yesalt-php70 = yesalt-php71 = yesalt-php72 = yes
+/opt/alt/alt-php-config/alt-php.cfg
+[MultiPHP Manager]
+alt-php44 = no
+alt-php51 = no
+alt-php52 = no
+alt-php53 = no
+alt-php54 = no
+alt-php55 = yes
+alt-php56 = yes
+alt-php70 = yes
+alt-php71 = yes
+alt-php72 = yes
 ```
+</div>
 
-
-
+::: tip Note
+<span class="notranslate"> PHP Selector does not work when Alt-PHP version is selected as system default in MultiPHP Manager. So, all domains will use PHP version selected via MultiPHP Manager. Settings in PHP Selector will be ignored. We recommend to disable PHP Selector </span> in such case.
+:::
 
 
 <span class="notranslate"> PHP Selector </span> works in different ways with EasyApache4 and EasyApache3. CageFS should be enabled for users who use <span class="notranslate"> PHP Selector </span> . The novation is that when using  EasyApache4, actual PHP version used depends on PHP version selected in <span class="notranslate"> MultiPHP Manager </span> . When PHP version chosen for domain in <span class="notranslate"> MultiPHP Manager </span> matches System default PHP version, then <span class="notranslate"> PHP Selector </span> is used to select actual PHP version. If PHP version chosen for domain in <span class="notranslate"> MultiPHP Manager </span> differs from System default PHP version, then PHP version from <span class="notranslate"> MultiPHP Manager </span> is used.
@@ -1190,7 +1197,7 @@ In other words, <span class="notranslate"> PHP Selector </span> deals with chang
 
 2.2. If PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> is the same as System default PHP version, then <span class="notranslate"> PHP Selector PHP </span> version is applied:
 
-2.2.1. If _ _ <span class="notranslate"> Native </span> option is selected in <span class="notranslate"> PHP Selector </span> , then <span class="notranslate"> MultiPHP Manager PHP version is applied. </span>
+2.2.1. If <span class="notranslate"> _Native_ </span> option is selected in <span class="notranslate"> PHP Selector </span> , then <span class="notranslate"> MultiPHP Manager PHP version is applied. </span>
 
 2.2.2. If PHP version chosen in <span class="notranslate"> PHP Selector </span> differs from <span class="notranslate"> _Native_ </span> , then <span class="notranslate"> PHP Selector PHP </span> version is applied.
 
@@ -1206,7 +1213,7 @@ PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> can al
 
 2. If CageFS is enabled, then:
 
-2.1. If PHP version specified in .htaccess file differs from System default, then <span class="notranslate"> _.htaccess_ </span> version is applied.
+2.1. If PHP version specified in <span class="notranslate"> .htaccess </span> file differs from System default, then <span class="notranslate"> _.htaccess_ </span> version is applied.
 
 2.2. If System default PHP version is specified in <span class="notranslate"> _.htaccess_ </span> file, then <span class="notranslate"> PHP Selector </span> version is applied:
 
@@ -1214,15 +1221,19 @@ PHP version chosen in <span class="notranslate"> MultiPHP Manager </span> can al
 
 2.2.2. If PHP version chosen in <span class="notranslate"> PHP Selector </span> differs from <span class="notranslate"> _Native_ </span> , then <span class="notranslate">  PHP Selector </span> version is applied.
 
+::: tip Note
+cPanel prior to 11.56 does not support hooks to add processing of System default PHP version changes with <span class="notranslate"> MultiPHP Manager. That is why System default PHP version changing is handled by cron job (/etc/cron.d/cagefs_cron file), which executes the command /usr/share/cagefs/setup_multiphp_integration every ten minutes, which means that all System default PHP version changes in MultiPHP Manager </span> are applied in CageFS with 10 minutes delay.
+:::
 
+::: tip Note
+In cagefs-5.5-6.25 or later, changing of System default PHP version with <span class="notranslate"> MultiPHP Manager </span> will be processed with cPanel WHM hooks.
+:::
 
-
-
-
-
+**PHP Modules**
 
 The set of PHP modules depends on PHP version used for domain or console. If <span class="notranslate"> PHP Selector </span> is active and <span class="notranslate"> Alt-PHP </span> version is chosen, then modules chosen for this <span class="notranslate"> Alt-PHP </span> version in <span class="notranslate"> PHP Selector </span> are used. If <span class="notranslate"> PHP Selector </span> is not active, then modules for PHP version chosen in cPanel MultiPHP are used.
 
+**PHP Options**
 
 cPanel has <span class="notranslate"> MultiPHP INI Editor </span> available in WHM and in cPanel user interface.
 
@@ -1234,13 +1245,15 @@ cPanel has <span class="notranslate"> MultiPHP INI Editor </span> available in W
 
 ![](/images/cpanel_integration06_zoom67.png)
 
+:::tip Note
+cPanel prior to 11.56 does not support hooks to add processing of INI options changing for PHP version with <span class="notranslate"> MultiPHP INI Editor in cPanel WHM. That is why for now the processing of PHP version changing is handled bycron job (/etc/cron.d/cagefs_cron file) which performs the command /usr/share/cagefs/ setup_multiphp_integration every 10 minutes, which means that INI options changes for PHP version in MultiPHP INI Editor </span> in cPanel WHM are being applied with up to 10 minutes delay.
+:::
 
+::: tip Note
+In cagefs-5.5-6.25 or later, INI options changes for PHP version in <span class="notranslate"> MultiPHP INI Editor </span> in cPanel WHM will be processed by cPanel WHM hooks.
+:::
 
-
-
-<span class="notranslate"> </span>
-
-MultiPHP INI Editor in cPanel user interface allows setting options for _ php.ini_ files in user home directory or in domain docroot. Changes are applied immediately without delay.
+MultiPHP INI Editor in cPanel user interface allows setting options for _php.ini_ files in user home directory or in domain docroot. Changes are applied immediately without delay.
 
 These options priority is lower than ones specified in <span class="notranslate"> MultiPHP INI Editor </span> WHM interface. <span class="notranslate"> MultiPHP INI Editor </span> in cPanel user interface looks as follows
 
