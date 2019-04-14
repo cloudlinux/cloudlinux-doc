@@ -3,87 +3,103 @@
 
 <span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
 
-<span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: _ _ <span class="notranslate"> suPHP, mod_fcgid, CGI (suexec), LiteSpeed </span> .
+<span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate"> _suPHP, mod_fcgid, CGI (suexec), LiteSpeed_ </span> .
 
 It is **not compatible** with <span class="notranslate"> _mod_php/DSO_ </span> , including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate"> _MPM ITK_ . </span>
 
-
-
-
+::: tip Note
+PHP Selector is not supported for H-Sphere.
+:::
 
 ## Installation and Update
 
 
-The installation of <span class="notranslate"> PHP Selector presumes that you already have  [CageFS](/cagefs/)  &  <span class="notranslate"> [LVE Manager](/lve_manager/)  installed. </span> </span>
+The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/)  &  <span class="notranslate"> [LVE Manager](/lve_manager/)  installed. </span>
 
-Use [compatibility matrix](http://docs.cloudlinux.com/index.html?compatiblity_matrix.html) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. If not, you need a change to one of the supported models. </span>
+Use [compatibility matrix](/limits/#compatiblity_matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
 
 Installation of different versions of PHP & modules:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum groupinstall alt-php
 ```
+</div>
 
-Update CageFS & <span class="notranslate"> LVE Manager </span> with support for PHP Alternatives:
-<span class="notranslate"> </span>
+Update CageFS & <span class="notranslate"> LVE Manager with support for PHP Alternatives: </span> 
+<div class="notranslate">
+
 ```
 $ yum update cagefs lvemanager
 ```
+</div>
 
-<span class="notranslate"> **cPanel/WHM** </span> : Make sure 'Select PHP version' is enabled in <span class="notranslate"> Feature Manager </span> .
+<span class="notranslate"> **cPanel/WHM** : Make sure 'Select PHP version' </span> is enabled in <span class="notranslate"> Feature Manager </span> .
 
 **IMPORTANT** : Please, do not use settings like <span class="notranslate"> _SuPHP_ConfigPath, PHPRC, PHP_INI_SCAN_DIR_ .  </span> Do not redefine path to <span class="notranslate"> php.ini </span> and ini-files for PHP modules. Doing that can break <span class="notranslate"> PHP Selector </span> functionality.
 
 For example, alternative php5.2 versions should load <span class="notranslate"> _/opt/alt/php52/etc/php.ini_ </span> file and scan <span class="notranslate"> _/opt/alt/php52/etc/php.d_ </span> directory for modules:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-Configuration File (php.ini) Path         /opt/alt/php52/etcLoaded Configuration File                 /opt/alt/php52/etc/php.iniScan this dir for additional .ini files   /opt/alt/php52/etc/php.dadditional .ini files parsed              /opt/alt/php52/etc/php.d/alt_php.ini
+Configuration File (php.ini) Path         /opt/alt/php52/etc
+Loaded Configuration File                 /opt/alt/php52/etc/php.ini
+Scan this dir for additional .ini files   /opt/alt/php52/etc/php.d
+additional .ini files parsed              /opt/alt/php52/etc/php.d/alt_php.ini
 ```
+</div>
 
 Those are default locations for <span class="notranslate"> alt-php </span> .
 
-If you need custom PHP settings per user, please change them via " <span class="notranslate"> Edit PHP settings </span> " feature of <span class="notranslate"> PHP Selector </span> .
+If you need custom PHP settings per user, please change them via <span class="notranslate"> "Edit PHP settings" </span> feature of <span class="notranslate"> PHP Selector </span> .
 
-If a list of default modules is absent on the server in the _/etc/cl.selector/defaults.cfg_ file for some alt-PHP version and there is _nd_mysqli_ extension in this version, then on installation/update of the LVE Manager, the _mysqli_ extension will be disabled and _nd_mysqli_ extension will be enabled automatically.
+If a list of default modules is absent on the server in the <span class="notranslate"> _/etc/cl.selector/defaults.cfg_ file for some alt-PHP version and there is _nd_mysqli_ extension in this version, then on installation/update of the LVE Manager, </span> the _mysqli_ extension will be disabled and _nd_mysqli_ extension will be enabled automatically.
 
-If _ nd_mysqli_ module is absent or a list of enabled modules is available, then they won't be changed automatically.
-If alt-PHP is not installed on LVE Manager installation/update, then they won’t be changed automatically.
+* If _nd_mysqli_ module is absent or a list of enabled modules is available, then they won't be changed automatically.
+* If alt-PHP is not installed on LVE Manager installation/update, then they won’t be changed automatically.
 
 To change the modules status (enabled/disabled) manually, run the following command in a console:
+<div class="notranslate">
 
 ```
 # /usr/sbin/cloudlinux-selector make-defaults-config --json --interpreter=php
 ```
+</div>
 
+**Update**
 
 To update PHP Selector, run the following command:
+<div class="notranslate">
 
 ```
 yum groupupdate
 ```
+</div>
 
-This command allows to install newly released versions in PHP Selector.
+This command allows to install newly released versions in <span class="notranslate"> PHP Selector. </span>
 
 ### LiteSpeed support
 
+::: tip Note
+LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
+:::
 
+If the settings were not applied, you can use the following steps to set up LiteSpeed to use <span class="notranslate"> PHP Selector. </span>
 
-
-
-If the settings were not applied, you can use the following steps to set up LiteSpeed to use PHP Selector.
-
-
+**How to set up LiteSpeed version lower than 5.3 to use PHP Selector**
 
 To enable <span class="notranslate"> PHP Selector </span> with <span class="notranslate"> LiteSpeed Web Server </span> follow <span class="notranslate"> PHP Selector  </span> [installation guide](/php_selector/#installation-and-update) , and then adjust following settings in <span class="notranslate"> LiteSpeed </span> :
 
-<span class="notranslate"> CloudLinux (Admin Console --> Configuration --> Server --> General): CageFS </span>
-Enable <span class="notranslate"> SuExec: Server--> General --> PHP SuEXEC --> Yes </span>
-Go to <span class="notranslate"> _External App_ </span> tab, the new ** ** <span class="notranslate"> lsphp_selector </span> is here.
+1. <span class="notranslate"> CloudLinux (Admin Console --> Configuration --> Server --> General): CageFS </span>
+2. Enable <span class="notranslate"> SuExec: Server--> General --> PHP SuEXEC --> Yes </span>
+3. Go to <span class="notranslate"> _External App_ </span> tab, the new <span class="notranslate"> **lsphp_selector** </span> is here.
 
 **_[Note that you can select any other application or create a custom one.]_**
 
 ![](/images/litespeed1_zoom70.png)
-The <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper** </span> on <span class="notranslate"> Plesk </span> . For other control panels, <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/usr/local/bin/lsphp** </span> .
+
+4. The <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper** </span> on <span class="notranslate"> Plesk </span> . For other control panels, <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/usr/local/bin/lsphp** </span> .
+
 <span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span> .
 
 For <span class="notranslate"> Plesk </span> :
@@ -94,32 +110,35 @@ For other control panels:
 
 ![](/images/litespeed2_zoom70.png)
 
-Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
+5. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
 
 ![](/images/litespeed4_zoom70.png)
 
 
 ![](/images/litespeed5_zoom70.png)
 
+**Additional settings for LiteSpeed version 5.3 +**
 
 Go to <span class="notranslate"> Server --> PHP </span> tab. Click <span class="notranslate"> _Edit_ </span> in the <span class="notranslate"> _PHP Handler Defaults_ </span> section. We recommend to set up the following settings:
 
-Set <span class="notranslate"> _Yes_ </span> in the <span class="notranslate"> _Run On Startup_ </span>
-Make sure to set <span class="notranslate"> _Max Idle Time_ </span>  _ _  ![](/images/litespeed_4_zoom70.png)
+* Set <span class="notranslate"> _Yes_ </span> in the <span class="notranslate"> _Run On Startup_ </span>
+* Make sure to set <span class="notranslate"> _Max Idle Time_ </span> 
 
+![](/images/litespeed_4_zoom70.png)
 
+::: tip Note
+In order to use <span class="notranslate"> PHP Selector and custom php.ini, lsphp5 </span> needs to be in SuEXEC non-daemon mode.
+:::
 
+::: tip Note
+Some PHP configurations require more memory for SuExec to work properly. If you are getting error 500 after switching suEXEC to non-daemon mode, try to increase <span class="notranslate"> Memory Soft Limit and Memory Hard Limit for external App </span> to at least 650/800M.
+:::
 
+::: tip Note
+If you have LiteSpeed installed not in standard location path, please create a symlink: <span class="notranslate"> 'ln -s /path/to/custom/lsws /usr/local/lsws' then run 'cagefsctl --setup-cl-selector'. </span>
+:::
 
-
-
-
-
-
-
-
-
-### ISPmanager
+### ISPmanager support
 
 
 As of July 2013, <span class="notranslate"> PHP Selector </span> support for <span class="notranslate"> ISPmanager </span> is limited to command line utilities. You should still be able to use it.
@@ -128,35 +147,42 @@ As always, <span class="notranslate"> PHP Selector </span> requires <span class=
 
 You will need to do following modifications:
 
-Create new file
-<span class="notranslate"> </span>
-```
-#!/bin/bash/usr/bin/php-cgi -c /etc/php.ini "$@"
-```
+Create new file <span class="notranslate"> /usr/local/bin/php-cgi-etc: </span>
+<div class="notranslate">
 
+```
+#!/bin/bash
+/usr/bin/php-cgi -c /etc/php.ini "$@"
+```
+</div>
 Make that file executable:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ chmod +x /usr/local/bin/php-cgi-etc
 ```
+</div>
+Edit file <span class="notranslate"> /usr/local/ispmgr/etc/ispmgr.conf </span>
 
-Edit file
+Add a line:
+<div class="notranslate">
 
-Add line:
-<span class="notranslate"> </span>
 ```
 path phpcgibinary /usr/local/bin/php-cgi-etc
 ```
+</div>
 
-Make sure there is no other lines with <span class="notranslate"> </span> defined in the file.
+Make sure there is no other lines with <span class="notranslate"> _path phpcgibinary_ </span> defined in the file.
 
 Restart <span class="notranslate"> ISPmanager </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ killall ispmgr
 ```
+</div>
 
-After that <span class="notranslate"> FCGID </span> wrappers <span class="notranslate"> </span> for new users will be like this:
+After that <span class="notranslate"> FCGID </span> wrappers <span class="notranslate"> (/var/www/[USER]/data/php-bin/php) </span> for new users will be like this:
 
 <span class="notranslate"> #!/usr/local/bin/php-cgi-etc </span>
 
@@ -165,62 +191,60 @@ You might need to edit/modify wrappers for existing users if you want them to be
 ## Configuration
 
 
-[Setting default version and modules](/php_selector/#setting-default-version-and-modules)
-
-[Individual PHP.ini files](/php_selector/#individual-php-ini-files)
-
-[Substitute global php.ini for individual customer](/php_selector/#substitute-global-php-ini-for-individual-customer)
-
-[Managing interpreter version](/php_selector/#managing-interpreter-version)
-
-[Including ](/php_selector/#including) <span class="notranslate"> [PHP Selector](/php_selector/#including) </span> [ only with some packages (](/php_selector/#including) <span class="notranslate"> [cPanel](/php_selector/#including) </span> [)](/php_selector/#including)
-
-[PHP Extensions](/php_selector/#php-extensions)
-
-[FFmpeg](/php_selector/#ffmpeg)
-
-[Native PHP Configuration](/php_selector/#native-php)
-
-
-
-
-
-
-
-
-
+* [Setting default version and modules](/php_selector/#setting-default-version-and-modules)
+* [Individual PHP.ini files](/php_selector/#individual-php-ini-files)
+* [Substitute global php.ini for individual customer](/php_selector/#substitute-global-php-ini-for-individual-customer)
+* [Managing interpreter version](/php_selector/#managing-interpreter-version)
+* [Including ](/php_selector/#including-php-selector-only-with-some-packages-cpanel) <span class="notranslate"> [PHP Selector](/php_selector/#including-php-selector-only-with-some-packages-cpanel) </span> [ only with some packages (cPanel)](/php_selector/#including-php-selector-only-with-some-packages-cpanel)
+* [PHP Extensions](/php_selector/#php-extensions)
+* [FFmpeg](/php_selector/#ffmpeg)
+* [Native PHP Configuration](/php_selector/#native-php-configuration)
 
 ### Setting Default Version and Modules
 
 
-Administrator can set default interpreter version and extensions for all users. All file operations are actually done by CageFS. CageFS takes settings from <span class="notranslate"> </span> Currently the <span class="notranslate"> </span> is created and handled by <span class="notranslate"> CloudLinux PHP Selector </span> scripts. It has the following format:
-<span class="notranslate"> </span>
-```
-[global]selector=enabled [versions]php=5.4 [php5.4]modules=json,phar [php5.3]modules=json,zip,fileinfo
-```
+Administrator can set default interpreter version and extensions for all users. All file operations are actually done by CageFS. CageFS takes settings from <span class="notranslate">  /etc/cl.selector/defaults.cfg. </span> Currently the <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> is created and handled by <span class="notranslate"> CloudLinux PHP Selector </span> scripts. It has the following format:
+<div class="notranslate">
 
+```
+[global]
+selector=enabled
+
+[versions]
+php=5.4
+
+[php5.4]
+modules=json,phar
+
+[php5.3]
+modules=json,zip,fileinfo
+```
+</div>
 
 ### Individual PHP.ini files
 
 
-For each customer, inside CageFS, file alt_php.ini is located in <span class="notranslate"> (XX </span> - version of PHP, like 52 or 53). The file contains PHP extension settings and extension directives selected by customer. This file exists for each customer, for each PHP version.
+For each customer, inside CageFS, file <span class="notranslate"> alt_php.ini is located in /etc/cl.php.d/alt-phpXX (XX </span> - version of PHP, like 52 or 53). The file contains PHP extension settings and extension directives selected by customer. This file exists for each customer, for each PHP version.
 
-Note, that this is 'local' to CageFS, and different users will have different files. The file is not visible in <span class="notranslate"> </span> outside CageFS. If you would like to view that file, use:
-<span class="notranslate"> </span>
+Note, that this is <span class="notranslate"> 'local' to CageFS, </span> and different users will have different files. The file is not visible in <span class="notranslate"> /etc/cl.php.d </span> outside CageFS. If you would like to view that file, use:
+<div class="notranslate">
+
 ```
 # cagefsctl -e USERNAME 
 ```
+</div>
 
 to enter into CageFS for that user. Then type: <span class="notranslate"> `exit` </span> ; to exit from CageFS
 
 This file has to be updated using <span class="notranslate"> `cagefsctl --rebuild-alt-php-ini` </span> after updating <span class="notranslate"> alt-php </span> RPMs
 
-Admin can change individual settings for PHP extensions by changing that extension's ini file, like editing <span class="notranslate"> </span> and then running:
-<span class="notranslate"> </span>
+Admin can change individual settings for PHP extensions by changing that extension's ini file, like editing <span class="notranslate"> /opt/alt/php54/etc/php.d.all/eaccelerator.ini </span> and then running:
+<div class="notranslate">
+
 ```
 cagefsctl --rebuild-alt-php-ini
 ```
-
+</div>
 to propagate the change.
 
 ### Substitute global php.ini for individual customer
@@ -228,56 +252,69 @@ to propagate the change.
 
 Sometimes you might want to have a single customer with a different php.ini, than the rest of your customers.
 
-To do that, you will use
+To do that, you will use <span class="notranslate"> [custom.etc directory functionality](/cagefs/#custom-etc-files-per-customer) </span>
 
 1. Move default php.ini into <span class="notranslate"> _/etc_ </span> directory and create a symlink to it:
-<span class="notranslate"> </span>
-```
-$ mv /usr/local/lib/php.ini /etc/php.ini$ ln -fs /etc/php.ini /usr/local/lib/php.ini
-```
 
-2. Change path to in <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> file to:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
+$ mv /usr/local/lib/php.ini /etc/php.ini
+$ ln -fs /etc/php.ini /usr/local/lib/php.ini
+```
+</div>
+
+2. Change path to php.ini in <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> file to:
+
+<div class="notranslate">
+
 ```
 php.ini=/etc/php.ini
 ```
+</div>
 
-3. For each user that needs custom file, create directory <span class="notranslate"> _/etc/cagefs/custom.etc/_ **_USER_NAME_** _/php.ini_ </span> .
+3. For each user that needs custom file, create directory <span class="notranslate"> _/etc/cagefs/custom.etc/USER_NAME/php.ini_ </span> .
 
-For example if you want to create custom for <span class="notranslate"> USER1 </span> and <span class="notranslate"> USER2 </span> you would create files:
-<span class="notranslate"> </span>
-_/etc/cagefs/custom.etc/_ **_USER1_** _/php.ini_
-_/etc/cagefs/custom.etc/_ **_USER2_** _/php.ini_
+For example if you want to create custom for <span class="notranslate"> USER1 </span> and <span class="notranslate"> USER2 </span> you would create files:  
+<span class="notranslate"> _/etc/cagefs/custom.etc/USER1/php.ini_ </span>  
+<span class="notranslate"> _/etc/cagefs/custom.etc/USER2/php.ini_ </span>
 
 Create such files for each user that should have custom file.
 
-4.Execute:
-<span class="notranslate"> </span>
+4. Execute:
+
+<div class="notranslate">
+
 ```
 $ cagefsctl --force-update 
 ```
+</div>
 
+::: tip Notes
+:::
 
+1. _Make sure that php.ini load path is set to_ <span class="notranslate"> _/etc/php.ini_ </span>
 
+2. _Users will be able to override settings of those php.ini files (global or custom) via_ <span class="notranslate"> _PHP Selector_ </span> _. If you want to prevent that, you should disable_ <span class="notranslate"> _PHP Selector_ </span> _feature._
 
+3. _Even if_ <span class="notranslate"> _PHP Selector_ </span> _is disabled, user can override php settings by using_ <span class="notranslate"> _ini_set() php_ </span> _function in php script, or by_ <span class="notranslate"> _"php -c"_ </span> _command line option._
 
-_Make sure that php.ini load path is set to _ <span class="notranslate"> /etc/php.ini </span> _._
+4. _If you modify anything in_ <span class="notranslate"> _/etc/cagefs/custom.etc_ </span> _directory, you should execute:_
 
-_Users will be able to override settings of those php.ini files (global or custom) via _ <span class="notranslate"> PHP Selector </span> _. if you want to prevent that, you should disable _ <span class="notranslate"> PHP Selector </span> _ feature._
+<div class="notranslate">
 
-_Even if _ <span class="notranslate"> PHP Selector </span> _ is disabled, user can override php settings by using _ <span class="notranslate"> ini_set() php </span> _ function in php script, or by _ <span class="notranslate"> "php -c" </span> _ command line option._
-
-_If you modify anything in _ <span class="notranslate"> /etc/cagefs/custom.etc </span> _ directory, you should execute:_
-<span class="notranslate"> </span>
 ```
 $ cagefsctl --update-etc
 ```
+</div>
 
 _in order to apply changes to CageFS for all users or:_
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cagefsctl --update-etc user1 user2
 ```
+</div>
 
 _to apply changes to CageFS for specific users._
 
@@ -287,17 +324,17 @@ _to apply changes to CageFS for specific users._
 
 Managing interpreter versions is done by means of manipulating a set of symbolic links that point to different versions of interpreter binaries. For example, if default PHP binary is <span class="notranslate"> `/usr/local/bin/php` </span> :
 
-First we move the default binary inside CageFS to <span class="notranslate"> `/usr/share/cagefs-skeleton/usr/selector` </span> , and make <span class="notranslate"> /usr/local/bin/php </span> a symlink pointing to <span class="notranslate"> /etc/cl.selector/php </span> . This operation is done as part of CageFS deployment.
-Next suppose we have additional PHP version, say 7.2.5. The information about all additional interpreter binaries and paths for them is kept in <span class="notranslate"> </span> . This config file is updated by RPM package manager each time alternative PHP package is added, removed or updated
-<span class="notranslate"> `/usr/bin/selectorctl --list --interpreter=php` </span> will get us list of all available PHP interpreter versions out of <span class="notranslate"> /etc/cl.selector/selector.conf file </span> .
+* First we move the default binary inside CageFS to <span class="notranslate"> `/usr/share/cagefs-skeleton/usr/selector` </span> , and make <span class="notranslate"> /usr/local/bin/php </span> a symlink pointing to <span class="notranslate"> /etc/cl.selector/php </span> . This operation is done as part of CageFS deployment.
+* Next suppose we have additional PHP version, say 7.2.5. The information about all additional interpreter binaries and paths for them is kept in <span class="notranslate"> /etc/cl.selector/selector.conf </span> . This config file is updated by RPM package manager each time alternative PHP package is added, removed or updated
+* <span class="notranslate"> `/usr/bin/selectorctl --list --interpreter=php` </span> will get us list of all available PHP interpreter versions out of <span class="notranslate"> /etc/cl.selector/selector.conf file </span> .
 Next we want to know which PHP version is active for a given user (to supply a selected option in options list). We type:
-<span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --user-current` </span> will retrieve PHP version set for a particular user. The script gets the path from <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector/php` </span> symlink, compares it with contents of <span class="notranslate"> /etc/cl.selector/selector.conf </span> file and if path is valid, prints out the current interpreter version.
-<span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --set-user-current=7.2` </span> sets the current PHP version for particular user by creating symlink in <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector` </span> directory. All old symlinks are removed, and new symlinks are set.
+* <span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --user-current` </span> will retrieve PHP version set for a particular user. The script gets the path from <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector/php` </span> symlink, compares it with contents of <span class="notranslate"> /etc/cl.selector/selector.conf </span> file and if path is valid, prints out the current interpreter version.
+* <span class="notranslate"> `/usr/bin/selectorctl --user USERNAME --interpreter=php --set-user-current=7.2` </span> sets the current PHP version for particular user by creating symlink in <span class="notranslate"> `/var/cagefs/LAST_TWO_DIGITS_OF_UID/USERNAME/etc/cl.selector` </span> directory. All old symlinks are removed, and new symlinks are set.
 
 
 
 
-### Including 
+### Including PHP Selector only with some packages (cPanel)
 
 
 <span class="notranslate"> cPanel </span> has a ' <span class="notranslate"> Feature Manager </span> ' in WHM that allows you to disable <span class="notranslate"> PHP Selector </span> for some of the packages that you offer.
@@ -307,18 +344,22 @@ In reality it only disables the icon in <span class="notranslate"> cPanel </span
 You can find more info on ' <span class="notranslate"> Feature Manager </span> ' here: [http://docs.cpanel.net/twiki/bin/view/11_30/WHMDocs/FeatureManager](http://docs.cpanel.net/twiki/bin/view/11_30/WHMDocs/FeatureManager)
 
 
-Once <span class="notranslate"> PHP Selector </span> is enabled, you can find it in the <span class="notranslate"> Feature Manager </span> . Disabling it in <span class="notranslate"> Feature Manager </span> , will remove the icon for users that are using that particular <span class="notranslate"> 'Feature List </span> '
+Once <span class="notranslate"> PHP Selector </span> is enabled, you can find it in the <span class="notranslate"> Feature Manager </span> . Disabling it in <span class="notranslate"> Feature Manager </span> , will remove the icon for users that are using that particular <span class="notranslate"> 'Feature List' </span>
 
 ![](/images/screen1-phpselector-featuremanager.png)
 
 ### PHP Extensions
 
-
+**Configuring Alt-PHP modules loading**
 
 
 <span class="notranslate"> CloudLinux PHP Selector </span> and Alt-PHP can be used in conjunction with <span class="notranslate"> Plesk PHP Selector </span> and <span class="notranslate"> cPanel MultiPHP </span> . To be compatible, <span class="notranslate"> CloudLinux PHP Selector </span> works as follows: modules that are selected in <span class="notranslate"> CloudLinux PHP Selector </span> are loaded for Alt-PHP version selected in <span class="notranslate"> CloudLinux PHP Selector </span> only. For the rest Alt-PHP versions default module set is loaded <span class="notranslate"> ( _/opt/alt/phpXX/etc/php.d/default.ini_ ) </span> . Described above is default behavior.
 
+::: tip Note
+If system default PHP version selected in <span class="notranslate"> cPanel MultiPHP Manager is not ea-php, then default module set is loaded for all Alt-PHP versions by default (/opt/alt/phpXX/etc/php.d/default.ini). </span>
 
+When <span class="notranslate"> "php.d.location = selector" option is in effect, modules selected via PHP Selector </span> will be loaded for all alt-php versions.
+:::
 
 
 
@@ -329,23 +370,25 @@ In <span class="notranslate"> LVE Manager </span> 1.0-9.40+ this behavior can be
 To modify it, create a file <span class="notranslate"> _/etc/cl.selector/symlinks.rules_ </span> (read-only for regular users) with the following content: <span class="notranslate"> _php.d.location = selector_ </span>
 
 And run the command to apply changes:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 /usr/bin/selectorctl --apply-symlinks-rules
 ```
-
+</div>
 To revert to the default behavior:
 
-Delete _ _ <span class="notranslate"> /etc/cl.selector/symlinks.rules </span> file.
-Alternatively remove <span class="notranslate"> _php.d.location_ </span> option from the file.
-Alternatively set _ _ <span class="notranslate"> default </span> value for <span class="notranslate"> _php.d.location_ </span> option.
+* Delete <span class="notranslate"> _/etc/cl.selector/symlinks.rules_ </span> file.
+* Alternatively remove <span class="notranslate"> _php.d.location_ </span> option from the file.
+* Alternatively set <span class="notranslate"> _default_ </span> value for <span class="notranslate"> _php.d.location_ </span> option.
 
 And run the command to apply changes:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 /usr/bin/selectorctl --apply-symlinks-rules
 ```
-
+</div>
 
 ### FFmpeg
 
@@ -355,37 +398,45 @@ Due to possible patent issues CloudLinux does not provide <span class="notransla
 For your convenience we provide <span class="notranslate"> FFMPEG PHP </span> binding. For them to work, you need to install <span class="notranslate"> FFmpeg </span> package from the “ <span class="notranslate"> Nux Dextop </span> ” repository following the [instructions](http://li.nux.ro/repos.html) .
 
 Once <span class="notranslate"> FFmpeg </span> is installed you can install PHP bindings, by running:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 yum install alt-php*ffmpeg 
 ```
+</div>
 
 Enable <span class="notranslate"> PHP-FFmpeg </span> extension via <span class="notranslate"> PHP Selector </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 selectorctl --enable-extensions=ffmpeg --user USERNAME --version X.Y
 ```
+</div>
+
+### Native PHP Configuration
 
 
-### Native PHP
+<span class="notranslate"> PHP Selector </span> requires access to the <span class="notranslate"> native PHP </span> version for proper work. It is specified in the file <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> of the following content (example):
+<div class="notranslate">
 
-
-<span class="notranslate"> PHP Selector </span> requires access to the <span class="notranslate">  native PHP </span> version for proper work. It is specified in the file <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> of the following content (example):
-<span class="notranslate"> </span>
 ```
-php=/usr/bin/php-cgiphp-cli=/usr/bin/phpphp.ini=/etc/php.ini
+php=/usr/bin/php-cgi
+php-cli=/usr/bin/php
+php.ini=/etc/php.ini
 ```
+</div>
 
-The file is created when installing CageFS on the servers with cPanel, Plesk, DA, Interworx and <span class="notranslate"> ISP Manager </span> , if it is missing. On all other servers the file is not being created at all.
+The file is created when installing CageFS on the servers with <span class="notranslate"> cPanel, Plesk, DA, Interworx and ISP Manager </span> , if it is missing. On all other servers the file is not being created at all.
 
 That is why, if the file is not created automatically, then it must be created manually and correct paths must be written to its directives.
 
 Access permission 644 must be set:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 chmod 0644 /etc/cl.selector/native.conf
 ```
-
+</div>
 
 ## Command-line Tools
 
