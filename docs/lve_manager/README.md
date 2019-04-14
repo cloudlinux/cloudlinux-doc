@@ -447,17 +447,21 @@ Choose default modules from the list for a proper PHP version or for native.
 
 ### LVE Manager Options
 
+When you need to change <span class="notranslate">LVE Manager</span> options in cPanel config file on big amount of servers, you don't have to edit file manually, therefore there is no need to login into cPanel on each server. Just go to WHM, choose CloudLinux and click <span class="notranslate">Options</span> - and you will be able to change settings from here.
 
-When you need to change <span class="notranslate"> LVE Manager </span> options in cPanel config file on big amount of servers, you don't have to edit file manually, therefore there is no need to login into cPanel on each server. Just go to WHM, choose CloudLinux and click on <span class="notranslate"> Options </span> - and you will be able to change settings from here.
+<div class="notranslate">
 
-<span class="notranslate"> root@toaster [~]# grep lve /var/cpanel/cpanel.config </span>
+```
+root@toaster [~]# grep lve /var/cpanel/cpanel.config
+```
+</div>
 
 | | |
 |-|-|
-|`lve_hideextensions` | Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version.|
-|`lve_hideuserstat  ` | Hides (when =1) LVE statistics in <span class="notranslate"> cPanel Stats Bar (UI) </span> .|
-|`lve_showinodeusage` | Displays (when =1) used inodes in cPanel (UI).|
-|`lve_hide_selector    ` | Turns off <span class="notranslate"> UI PHP Selector </span> (Select <span class="notranslate"> PHP Version </span> option).|
+|<span class="notranslate">`lve_hideextensions`</span>| Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version.|
+|<span class="notranslate">`lve_hideuserstat  `</span>| Hides (when =1) LVE statistics in <span class="notranslate"> cPanel Stats Bar (UI) </span> .|
+|<span class="notranslate">`lve_showinodeusage`</span>| Displays (when =1) used inodes in cPanel (UI).|
+|<span class="notranslate">`lve_hide_selector`</span>| Turns off <span class="notranslate">UI PHP Selector</span> (Select <span class="notranslate">PHP Version</span> option).|
 
 ### Server Processes Snapshots
 
@@ -468,19 +472,24 @@ Snapshots allow users to investigate the reason of account hitting its limits. S
 
 The snapshot configuration options are available in
 
-<span class="notranslate"> _/etc/sysconfig/lvestats.config/SnapshotSaver.cfg_ </span>
+<div class="notranslate">
 
-<span class="notranslate"> _period_between_incidents_  = 300, by default, time in seconds  </span>
-<span class="notranslate"> _snapshots_per_minute_  = 2, by default, maximum number of snapshots per minute </span>
-<span class="notranslate"> _max_snapshots_per_incident_  = 10, by default, maximum number of snapshots for an incident </span>
+```
+/etc/sysconfig/lvestats.config/SnapshotSaver.cfg
+```
+</div>
 
-To access <span class="notranslate"> Snapshots </span> perform the following steps:
+* <span class="notranslate">`period_between_incidents = 300`</span> by default, time in seconds
+* <span class="notranslate">`snapshots_per_minute = 2`</span> by default, maximum number of snapshots per minute
+* <span class="notranslate">`max_snapshots_per_incident = 10`</span> by default, maximum number of snapshots for an incident
 
-1. Go to cPanel interface, and select <span class="notranslate"> “CPU and Concurrent Connection Usage” </span> in <span class="notranslate"> **paper_latern** </span> theme:
+To access <span class="notranslate">**Snapshots**</span> perform the following steps:
+
+1. Go to cPanel | <span class="notranslate">CPU and Concurrent Connection Usage</span> in <span class="notranslate"> **paper_latern**</span> theme:
 
 ![](/images/snapshots.jpg)
 
-2. Click the <span class="notranslate"> Snapshots </span> in ** ** <span class="notranslate"> paper_latern </span> theme:
+2. Click the <span class="notranslate">**Snapshots**</span> in <span class="notranslate">**paper_latern**</span> theme:
 
 ![](/images/snapshots2.jpg)
 
@@ -488,66 +497,92 @@ To access <span class="notranslate"> Snapshots </span> perform the following ste
 
 ![](/images/snapshots3.jpg)
 
-4. Select an appropriate <span class="notranslate"> Snapshot </span> in the combobox:
+4. Select an appropriate <span class="notranslate">**Snapshot**</span> in the combobox:
 
 ![](/images/snapshots4.jpg)
 ![](/images/snapshots5.jpg)
 
 
-
+:::tip Note
+The list of processes in a snapshot is close but not similar to the real processes list when faults were generated. It happens because of delay when the faults are happened and the snapshot is taken by the system.
+:::
 
 
 The list of MySQL queries is an output of a query:
-<span class="notranslate"> </span>
-_SELECT command, time, info FROM information_schema.processlist _
-_WHERE user = '%username';_
+
+<div class="notranslate">
+
+```
+SELECT command, time, info FROM information_schema.processlist
+
+WHERE user = '%username';
+```
+</div>
 
 ### LVE Plugins Branding
 
-
-_[Requires _ <span class="notranslate"> LVE Manager </span> _ 2.0-33+]_
+:::tip Note
+Requires <span class="notranslate">LVE Manager</span> 2.0-33+
+:::
 
 It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
 
-Create a script that will patch <span class="notranslate"> LVE Manager </span> files (with branding data, for example, image and logo) after every update of <span class="notranslate"> lvemanager rpm </span> package;
+* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
 
-Locate this script in <span class="notranslate"> _/usr/share/l.v.e-manager/branding_script_ </span> ;
+* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
 
-Make this script executable by running the command:
-<span class="notranslate"> </span>
+* Make this script executable by running the command:
+
+<div class="notranslate">
+
 ```
 chmod a+x /usr/share/l.v.e-manager/branding_script
 ```
+</div>
 
-When done, the branding script will be executed while every update of lvemanager package and all branding changes will be applied in the end user’s interface.
+When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
 
-
+:::tip Note
+Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
+:::
 
 
 ## User Message for PHP version
 
+Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
 
-Since version 1.0-4 <span class="notranslate">  LVE Manager </span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate"> _/opt/alt/phpXX/name_modifier_ </span> with a message that you want to be shown to a user.
+For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
 
-For example, if you need to add the following message <span class="notranslate">"Don't use this php version"</span> to PHP version 4.4, you should create the following file:
-<span class="notranslate"> </span>
-_/opt/alt/php44/name_modifier:_
-_echo 'Don`t use this php version' > /opt/alt/php44/name_modifier_
+<div class="notranslate">
 
-As a result <span class="notranslate"> LVE Manager </span> will automatically pick up this message and will show it in web-interface to administrator ( _Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin_ ) and to user ( _Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin_ ). You can add messages to other PHP versions this way as well.
+```
+/opt/alt/php44/name_modifier:
+
+echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
+```
+</div>
+
+As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
 
 ![](/images/screen1.1lvemanfeature_zoom74.png)
+
 _Figure 1.1_
 
 
 ![](/images/screen1.2lvemanfeature_zoom76.png)
+
 _Figure 1.2_
 
 ![](/images/screen2.1lvemanfeature_zoom72.png)
+
 _Figure 2.1_
 
 
 ![](/images/screen2.2lvemanfeature_zoom75.png)
+
 _Figure 2.2_
-_*For cPanel and DirectAdmin only._
+
+:::tip Note
+*For cPanel and DirectAdmin only.
+:::
 
