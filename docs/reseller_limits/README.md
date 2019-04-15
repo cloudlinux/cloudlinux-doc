@@ -151,198 +151,231 @@ If you disable Reseller limits everything will work the same as before. All the 
 
 ## Hoster Interface
 
-
 Hoster interface allows to monitor and manage limits for hosters’ end users, resellers and resellers’ end users, and also manage packages and monitor statistics.
 
 Hoster credentials allow to control limits for hosters’ end users and resellers. To control reseller end user limits Hoster has to log in as Reseller.
 
 Log in as Hoster to get access to the following functionality.
 
-[ ](/reseller_limits/#current-usage) <span class="notranslate"> [Current Usage](/reseller_limits/#current-usage) </span> tab allows to monitor users and resellers resource usage at the moment.
-[ ](/reseller_limits/#users) <span class="notranslate"> [Users](/reseller_limits/#users) </span> tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
-[ ](/reseller_limits/#statistics) <span class="notranslate"> [Statistics](/reseller_limits/#statistics) </span> tab displays the statistics of resource usage for particular timeframe or particular user.
-[ ](/reseller_limits/#options) <span class="notranslate"> [Options](/reseller_limits/#options) </span> tab allows to set LVE faults email notifications for hoster, users, and resellers.
-[ ](/reseller_limits/#packages) <span class="notranslate"> [Packages](/reseller_limits/#packages) </span> tab allows to manage resellers packages limits;
-[ ](/reseller_limits/#selector) <span class="notranslate"> [Selector](/reseller_limits/#selector) </span> tab allows to control <span class="notranslate"> PHP Selector </span> settings.
+* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage)</span> tab allows to monitor users and resellers resource usage at the moment.
+* <span class="notranslate">[Users](/reseller_limits/#users)</span> tab with the list of all users and resellers allows viewing and managing all the users and resellers limits.
+* <span class="notranslate">[Statistics](/reseller_limits/#statistics)</span> tab displays the statistics of resource usage for particular timeframe or particular user.
+* <span class="notranslate">[Options](/reseller_limits/#options)</span> tab allows to set LVE faults email notifications for hoster, users, and resellers.
+* <span class="notranslate">[Packages](/reseller_limits/#packages)</span> tab allows to manage resellers packages limits;
+* <span class="notranslate">[Selector](/reseller_limits/#selector)</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
 
+<div class="notranslate">
 
-### Current Usage
+## Current Usage
 
+</div>
 
-Choose <span class="notranslate"> Current Usage </span> tab to monitor users, resellers and resellers’ end users resource usage at the moment displayed in the table.
+Choose <span class="notranslate">Current Usage</span> tab to monitor users, resellers and resellers’ end users resource usage at the moment displayed in the table.
 
-<span class="notranslate"> Current Usage </span> table provides information on usage of <span class="notranslate"> SPEED (All </span> and MySQL), <span class="notranslate"> memory (MEM) </span> , data throughput ( <span class="notranslate"> IO) (All </span> and MySQL), read/write operations per second ( <span class="notranslate"> IOPS </span> ), number of processes ( <span class="notranslate"> PNO </span> ), and entry processes ( <span class="notranslate"> EP </span> ).
+<span class="notranslate">Current Usage</span> table provides information on usage of the following:
+* <span class="notranslate"> SPEED (All</span> and MySQL)
+* <span class="notranslate"> memory (MEM)</span>
+* data throughput (<span class="notranslate">IO) (All</span> and MySQL)
+* read/write operations per second (<span class="notranslate">IOPS</span>)
+* number of processes (<span class="notranslate">PNO</span>)
+* entry processes (<span class="notranslate">EP</span>)
 
-Resource usage values are being refreshed every 10 seconds by default which is set in <span class="notranslate"> _Auto-refresh_ </span> field. You can set <span class="notranslate"> _Auto-refresh time_ </span> by choosing a value from the drop-down. You can refresh the table manually by clicking <span class="notranslate"> _Refresh now_ </span> or you can freeze the values by clicking <span class="notranslate"> _pause_ </span> button. Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate"> _unpause_ </span> button. The countdown will continue.
+Resource usage values are being refreshed every 10 seconds by default which is set in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing a value from the drop-down.
 
-Tick <span class="notranslate"> _Hide MySQL usage_ </span> checkbox to hide the information on MySQL usage.
+You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span>. Usage values will not change until the next manual refresh. To unfreeze click <span class="notranslate">_unpause_</span>. The countdown will continue.
 
-The list of users can be filtered by <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Domain_ </span> . Hoster can view all types of users: _End users_ , _Resellers_ , _Reseller’s end users_ , _ Reseller’s end users (no Reseller limit)_ . But hoster can only manage _End users, Resellers, _ and _ Reseller’s end users (no Reseller limit_ ). To manage Reseller’s end users hoster should login as a reseller.
+Tick <span class="notranslate">_Hide MySQL usage_</span> to hide the information on MySQL usage.
 
-In the drop-down <span class="notranslate"> _Show top_ </span> you can choose the number of user to be displayed on the page.
+The list of users can be filtered by <span class="notranslate">_Username_</span> and <span class="notranslate">_Domain_</span>.
+
+Hoster can **view** all types of users:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>.
+
+But hoster can only **manage**:
+* <span class="notranslate">End users</span>
+* <span class="notranslate">Resellers</span>
+* <span class="notranslate">Reseller’s end users (no Reseller limit)</span>
+
+To manage Reseller’s end users hoster should login as a reseller.
+
+In the drop-down <span class="notranslate">_Show top_</span> you can choose the number of user to be displayed on the page.
 
 ![](/images/currentusagetabhoster_zoom60.png)
 
+<div class="notranslate">
 
+## Users
 
-### Users
+</div>
 
+Choose <span class="notranslate">_Users_</span> tab to view the list of all users and manage their limits.
 
-Choose <span class="notranslate"> _Users_ </span> tab to view the list of all users and manage their limits.
+To filter the list by user type click <span class="notranslate">_Manage_</span> and in the drop-down choose:
 
-To filter the list by user type click <span class="notranslate"> _Manage_ </span> and in the drop-down choose:
+* <span class="notranslate">End users</span> - to manage hosts end users only.
+* <span class="notranslate">Resellers</span> - to manage resellers only.
+* <span class="notranslate">Reseller’s end users</span> - to manage resellers’ end users only.
+* <span class="notranslate">Reseller’s end users (no Reseller limits)</span> - to manage resellers’ end users that do not have limits specified by reseller (these limits are specified by the hoster).
 
-End users -  to manage hosts end users only.
-Resellers - to manage resellers only.
-Reseller’s end users - to manage resellers’ end users only.
-Reseller’s end users (no Reseller limits) - to manage resellers’ end users that do not have limits specified by reseller (these limits are specified by the hoster).
+To filter the list by <span class="notranslate">_Username_, _Domain_, _LveID_</span> click <span class="notranslate">_Filter by_</span> and choose the value in the drop-down.
 
-To filter the list by <span class="notranslate"> _Username_ ,  _Domain_ ,  _LveID_ </span> click <span class="notranslate"> _Filter by_ </span> and choose the value in the drop-down.
-
-Note that a hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
+:::tip Note
+A hoster can view the list of resellers’ end users and their limits, but can not manage resellers’ end users limits (if those are set by reseller).
+:::
 
 A hoster can view the limits of all types of users and manage the limits for hosters’ end users and resellers’ end users (only those with Reseller Limits disabled).
-Tick <span class="notranslate"> _Show users with CageFS enabled_ </span> to show users with CageFS file system enabled.
-Tick <span class="notranslate"> _Show only ignored users_ </span> to show users with ignored <span class="notranslate"> MySQL Governor </span> .
+* Tick <span class="notranslate">_Show users with CageFS enabled_</span> to show users with CageFS file system enabled.
+* Tick <span class="notranslate">_Show only ignored users_</span> to show users with ignored <span class="notranslate">MySQL Governor</span>.
 
 ![](/images/userstabhoster_zoom70.png)
 
+<div class="notrnslate">
 
+### Actions
 
-Click on a pencil icon in <span class="notranslate"> _Actions_ </span> column to edit limits for a particular user. The following actions are available:
+</div>
 
-Enable/disable CageFS;
-_ _ <span class="notranslate"> Reset </span> - to reset limits to default values;
-Apply _ _ <span class="notranslate"> Do not limit </span> to set the limits to unlimited;
-Setting the limits values:
- <span class="notranslate"> SPEED </span>
- <span class="notranslate"> SPEED MYSQL </span>
- <span class="notranslate"> VMEM </span>
- <span class="notranslate"> PMEM </span> 
- <span class="notranslate"> IO </span>
- <span class="notranslate"> MySQL IO </span>
- <span class="notranslate"> IOPS </span>
- <span class="notranslate"> EP </span>
- <span class="notranslate"> NPROC </span>
- <span class="notranslate"> INODES </span> (hard and soft) (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate"> _Initial quotas_ </span> in cPanel settings).
+Click pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
 
-Click <span class="notranslate"> _Save_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close pop-up window.
+* Enable/disable <span class="notranslate">CageFS</span>
+* <span class="notranslate">**Reset**</span> - to reset limits to default values
+* Apply <span class="notranslate">**Do not limit**</span> to set the limits to unlimited;
+* Setting the limits values:
+  * <span class="notranslate"> SPEED </span>
+  * <span class="notranslate"> SPEED MYSQL </span>
+  * <span class="notranslate"> VMEM </span>
+  * <span class="notranslate"> PMEM </span> 
+  * <span class="notranslate"> IO </span>
+  * <span class="notranslate"> MySQL IO </span>
+  * <span class="notranslate"> IOPS </span>
+  * <span class="notranslate"> EP </span>
+  * <span class="notranslate"> NPROC </span>
+  * <span class="notranslate"> INODES </span> (hard and soft) (for <span class="notranslate">end users</span> and <span class="notranslate">resellers’ end users (with no Reseller Limits)</span>, if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings).
+
+Click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
 
 ![](/images/actionshoster.png)
 
-Click on <span class="notranslate"> _History_ </span> icon to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
+Click on <span class="notranslate">_History_</span> symbol to view the history of a particular user resource usage. Choose time frame to view the history for a particular time period.
 
 ![](/images/historyhoster.jpg)
 
+<div class="notranslate">
 
+## Statistics
 
+</div>
 
-### Statistics
-
-
-Choose <span class="notranslate"> _Statistics_ </span> tab to view end users, resellers and resellers’ end users limits usage statistics.
+Choose <span class="notranslate">_Statistics_</span> tab to view end users, resellers and resellers’ end users limits usage statistics.
 
 The following parameters can be displayed in the statistics table:
 
- <span class="notranslate"> SPEED </span> usage per user;
- <span class="notranslate"> IO </span> usage per user;
- <span class="notranslate"> EP </span> usage per user;
- <span class="notranslate"> VMEM </span> usage per user;
- <span class="notranslate"> PMEM </span> usage per user;
- <span class="notranslate"> NPROC </span> usage per user;
- <span class="notranslate"> IOPS </span> usage per user;
- <span class="notranslate"> MySQL </span> usage per user.
+* <span class="notranslate"> SPEED </span> usage per user;
+* <span class="notranslate"> IO </span> usage per user;
+* <span class="notranslate"> EP </span> usage per user;
+* <span class="notranslate"> VMEM </span> usage per user;
+* <span class="notranslate"> PMEM </span> usage per user;
+* <span class="notranslate"> NPROC </span> usage per user;
+* <span class="notranslate"> IOPS </span> usage per user;
+* <span class="notranslate"> MySQL </span> usage per user.
 
-Click <span class="notranslate"> _Show_ </span> button and select columns from the drop-down to set which parameters should be displayed in the table.
+Click <span class="notranslate">_Show_</span> and select columns from the drop-down to set which parameters should be displayed in the table.
 
 Statistics table can be filtered by:
 
-_ _ <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
-_ _ <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
-_ _ <span class="notranslate"> Top LVEs </span> - to view top used limits only;
-_ _ <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
-_ _ <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
+* <span class="notranslate"> Timeframe </span> - to view the statistics for a particular period;
+* <span class="notranslate"> Limit </span> - to view a particular limit type usage only;
+* <span class="notranslate"> Top LVEs </span> - to view top used limits only;
+* <span class="notranslate"> LVE approaching limit </span> - to view the limits that are approaching maximum provided value;
+* <span class="notranslate"> Fault LVE </span> - the limits that have reached the maximum value.
 
-Click <span class="notranslate"> _Manage_ </span> to choose type of users to be displayed - End users, Resellers, Resellers’ end users or Resellers’ end users (no Reseller limit) by ticking checkbox in the drop-down.
+Click <span class="notranslate">_Manage_</span> to choose type of users to be displayed - <span class="notranslate">End users, Resellers, Resellers’ end users</span> or <span class="notranslate">Resellers’ end users (no Reseller limit)</span> by ticking checkbox in the drop-down.
 
 ![](/images/statisticstabhoster_zoom70.png)
 
-
-Click on a chart icon in <span class="notranslate"> _View_ </span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
+Click chart symbol in the <span class="notranslate">_View_</span> column to view the detailed resource usage history for a particular account. Use timeframe drop-down to view the history for a particular period of time.
 
 ![](/images/history_charts_zoom70.png)
 
+<div class="notranslate">
 
+## Options
 
-### Options
+</div>
 
+A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
 
-A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate"> _Options_ </span> tab to manage LVE Faults email notifications.
+In <span class="notranslate">_LVE Faults Email Notifications_</span> section tick the required checkboxes to set a type of notification.
 
-In <span class="notranslate"> _LVE Faults Email Notifications_ </span> section tick the required checkboxes to set a type of notification.
-
-<span class="notranslate"> _Notify Panel Administrator_ </span> - notify hoster when his end users have exceeded minimum number of faults set for particular limits.
-<span class="notranslate"> _Notify Reseller_ </span> - notify reseller when his end users have exceeded minimum number of faults set for particular limits.
-<span class="notranslate"> _Notify Customers_ </span> - notify hosters’ end users when they have exceeded limits.
-<span class="notranslate"> _Notify Reseller's customers_ </span> - notify resellers’ end users when they have exceeded limits.
+* <span class="notranslate"> _Notify Panel Administrator_ </span> - notify hoster when his end users have exceeded minimum number of faults set for particular limits.
+* <span class="notranslate"> _Notify Reseller_ </span> - notify reseller when his end users have exceeded minimum number of faults set for particular limits.
+* <span class="notranslate"> _Notify Customers_ </span> - notify hosters’ end users when they have exceeded limits.
+* <span class="notranslate"> _Notify Reseller's customers_ </span> - notify resellers’ end users when they have exceeded limits.
 
 ![](/images/optionstabemailnotifhoster.png)
 
-In <span class="notranslate"> _Faults to include_ </span> section tick the checkboxes to include required limits to the notifications.
-Set the frequency of email notifications sending in <span class="notranslate"> _Notify …. every.. days/hours/minutes/seconds_  section </span> .
+In <span class="notranslate">_Faults to include_</span> section tick the checkboxes to include required limits to the notifications.
+Set the frequency of email notifications sending in <span class="notranslate">_Notify …. every.. days/hours/minutes/seconds_</span> section.
 
 ![](/images/optionshosterfaultstoinclude.png)
 
-In <span class="notranslate"> _Minimum number of Faults to notify_ </span> section enter the number of faults required for the notification to be sent for _ _ <span class="notranslate"> Panel Admin & Reseller  </span> _and_ _ User_ .
+In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for <span class="notranslate">_Panel Admin & Reseller_</span> and <span class="notranslate">_User_</span>.
 
 ![](/images/optionstabhosterminimumftn.png)
 
-
-In <span class="notranslate"> _Inodes limits_ </span> section you can reset inode limits to default values and tick <span class="notranslate"> Show end-user inode usage </span> .
-In <span class="notranslate"> _User interface settings_ </span> section tick the required checkboxes to apply user interface settings.
-In <span class="notranslate"> _MySQL Governor settings_ </span> section you can customize <span class="notranslate"> MySQL Governor </span> .
+* In <span class="notranslate">_Inodes limits_</span> section you can reset inode limits to default values and tick <span class="notranslate">_Show end-user inode usage_</span>.
+* In <span class="notranslate">_User interface settings_</span> section tick the required checkboxes to apply user interface settings.
+* In <span class="notranslate">_MySQL Governor settings_</span> section you can customize <span class="notranslate"> MySQL Governor</span>.
 
 ![](/images/optionstabhosterinodes.png)
 
+<div class="notranslate">
 
-### Packages
+## Packages
 
+</div>
 
-<span class="notranslate"> _Packages_ </span> tab allows to set the limits for as many users as you need by editing packages of the limits. Each account belonging to a particular package adheres to those limits.
+<span class="notranslate">_Packages_</span> tab allows to set the limits for as many users as you need by editing packages of the limits. Each account belonging to a particular package adheres to those limits.
 
-Choose <span class="notranslate"> _Packages_ </span> tab to view and modify:
+Choose <span class="notranslate">_Packages_</span> tab to view and modify:
 
-limits for user packages (created by hoster);
-limits for reseller packages (created by hoster);
-limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
+* limits for user packages (created by hoster);
+* limits for reseller packages (created by hoster);
+* limits for resellers’ end users packages if reseller limits are not set for that reseller (hoster access allows identifying a particular reseller’s end user belonging to a particular reseller (created by reseller)).
+  
 ![](/images/packageshostertab_zoom70.png)
 
-To modify package limits click on a pencil icon in <span class="notranslate"> _Actions_ </span> column in a particular package row. The following limits for this package are available for setting:
+To modify package limits click on a pencil symbol in <span class="notranslate">_Actions_</span> column in a particular package row. The following limits for this package are available for setting:
 
- <span class="notranslate"> SPEED </span> in percent (%);
- <span class="notranslate"> Virtual memory (VMEM) </span> (can be set as unlimited by setting 0);
- <span class="notranslate"> Physical memory (PMEM) </span> (can be set as unlimited by setting 0);
- <span class="notranslate"> I/O limits (IO) </span> (can be set as unlimited by setting 0);
- <span class="notranslate"> IOPS </span> limits;
- <span class="notranslate"> Concurrent connections (EP) </span> ;
- <span class="notranslate"> Number of processes (NPROC) </span> (can be set as unlimited by setting 0);
- <span class="notranslate"> INODES (hard and soft) </span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate"> _Initial quotas_ </span> in cPanel settings.)
+* <span class="notranslate"> SPEED</span> in percent (%);
+* <span class="notranslate"> Virtual memory (VMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> I/O limits (IO)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> IOPS</span> limits;
+* <span class="notranslate"> Concurrent connections (EP)</span>;
+* <span class="notranslate"> Number of processes (NPROC)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
 
-When limits are set click <span class="notranslate"> _Save_ </span> to apply changes or <span class="notranslate"> _Cancel_ </span> to close the window.
+When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
 
+<div class="notranslate">
 
-### Selector
+## Selector
 
+</div>
 
-<span class="notranslate"> _Selector_ </span> tab allows to control <span class="notranslate"> PHP Selector </span> settings.
+<span class="notranslate">_Selector_</span> tab allows to control <span class="notranslate">PHP Selector</span> settings.
 
-In <span class="notranslate"> _Selector is_   </span> choose <span class="notranslate"> _Enabled_ </span> or <span class="notranslate"> _Disabled_ </span> from the drop-down to enable or disable PHP Selector.
+* In <span class="notranslate">_Selector is_</span> choose <span class="notranslate">_Enabled_</span> or <span class="notranslate">_Disabled_</span> from the drop-down to enable or disable <span class="notranslate">PHP Selector</span>.
 
-In <span class="notranslate"> _Default PHP version_ </span> choose PHP version or <span class="notranslate"> _Native_ </span> from the drop-down to apply.
+* In <span class="notranslate">_Default PHP version_</span> choose PHP version or <span class="notranslate">_Native_</span> from the drop-down to apply.
 
-In <span class="notranslate"> _Supported versions_ </span> choose required PHP versions to support.
+* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
 
-Choose default modules from the list for a particular version of PHP or for <span class="notranslate"> native </span> .
+Choose default modules from the list for a particular version of PHP or for <span class="notranslate">native</span>.
 
 ![](/images/selector01_zoom70.png)
 
@@ -350,7 +383,6 @@ Choose default modules from the list for a particular version of PHP or for <spa
 
 
 ## Reseller Interface
-
 
 Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.
 
