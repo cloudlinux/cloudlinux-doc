@@ -48,10 +48,10 @@ If you are installing <span class="notranslate"> CloudLinux </span> on a server 
 
 Please make sure to specify your current MySQL version instead of XX as follows:
 
-55 — MySQL v5.5
-56 — MySQL v5.6
-57 — MySQL v5.7
-80 — MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]
+* 55 — MySQL v5.5
+* 56 — MySQL v5.6
+* 57 — MySQL v5.7
+* 80 — MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]
 
 If you are installing <span class="notranslate"> CloudLinux </span> on a server running <span class="notranslate"> MariaDB </span> already, do instead:
 
@@ -60,11 +60,11 @@ If you are installing <span class="notranslate"> CloudLinux </span> on a server 
 
 Please make sure to specify your current <span class="notranslate"> MariaDB </span> version instead of <span class="notranslate"> XX </span> as follows:
 
-55 — MariaDB v5.5
-100 — MariaDB v10.0
-101 — MariaDB v10.1
-102 — MariaDB v10.2
-103 — MariaDB v10.3 [requires <span class="notranslate"> MySQL Governor </span> 1.2-36+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]
+* 55 — MariaDB v5.5
+* 100 — MariaDB v10.0
+* 101 — MariaDB v10.1
+* 102 — MariaDB v10.2
+* 103 — MariaDB v10.3 [requires <span class="notranslate"> MySQL Governor 1.2-36+; for cPanel - MySQL Governor 1.2-41+] </span>
 
 
 Installation for <span class="notranslate"> Percona Server 5.6 </span> [requires <span class="notranslate"> MySQL Governor </span> 1.1-22+ or 1.2-21+]:
@@ -81,8 +81,19 @@ If you are installing <span class="notranslate"> MySQL Governor </span> on a ser
 
 <span class="notranslate"> MYSQL_VERSION </span> could be chosen from the list of versions currently supported by <span class="notranslate"> MySQL Governor </span> :
 
-
-
+| | |
+|-|-|
+|mysql51 |MySQL v5.1 |  
+|mysql55 |MySQL v5.5 | 
+|mysql56 |MySQL v5.6 | 
+|mysql57 |MySQL v5.7 | 
+|mysql80 |MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages available in beta only, so use <span class="notranslate"> --install-beta flag instead of --install] </span> | 
+|mariadb55 |MariaDB v5.5 |
+|mariadb100 |MariaDB v10.0 |
+|mariadb101 |MariaDB v10.1 |
+|mariadb102 |MariaDB v 10.2 |
+|mariadb103 |MariaDB v 10.3 [requires <span class="notranslate"> MySQL Governor 1.2-36+; for cPanel - MySQL Governor 1.2-41+] </span> |
+|percona56 | <span class="notranslate"> Percona Server v 5.6 </span> |
 
 Generally, <span class="notranslate"> stable </span> and <span class="notranslate"> beta </span> channels contain different version of MySQL packages - <span class="notranslate"> beta </span> contains newer version than <span class="notranslate"> stable or the same one. If you would like to install  <span class="notranslate"> beta </span>  packages, use  <span class="notranslate"> --install-beta </span>  flag instead of  <span class="notranslate"> --install </span>  when calling installation script: </span>
 
@@ -266,7 +277,7 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install-beta
 |mariadb100 | MariaDB v10.0|
 |mariadb101 | MariaDB v10.1|
 |mariadb102 | MariaDB v 10.2|
-|mariadb103 | MariaDB v 10.3 [requires <span class="notranslate"> MySQL Governor </span> 1.2-36+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]|
+|mariadb103 | MariaDB v 10.3 [requires <span class="notranslate"> MySQL Governor 1.2-36+; for cPanel - MySQL Governor 1.2-41+ </span> ]|
 |percona56 | Percona v 5.6|
 
 
@@ -274,7 +285,6 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install-beta
 
 
 
-MySQL Governor starting from version 1.2-37 (in Beta since December 11th 2018) supports MySQL 8.0 installation.
 
 ## Command-line Tools
 
@@ -504,64 +514,78 @@ $ whmapi1 configureservice service=mysql enabled=1 monitored=1
 
 
 
-## abrt
+## abrt plugin
 
 
 We have created a plugin for <span class="notranslate"> abrt </span> tool to automatically upload core dumps in case <span class="notranslate"> MySQL Governor </span> crashes.
 
 To install the plugin:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install cl-abrt-plugin --enablerepo=cloudlinux-updates-testing
 ```
+</div>
 
 It will monitor crash reports for <span class="notranslate"> `/usr/sbin/db_governor, /usr/sbin/dbtop and /usr/sbin/dbctl` </span>
 
 You can modify <span class="notranslate"> `/etc/libreport/plugins/dropbox.conf` </span> to monitor other software as well by adding them to <span class="notranslate"> AppList </span> .
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 AppLists=/usr/sbin/db_governor,/usr/sbin/dbtop,/usr/sbin/dbctl
 ```
-
+</div>
 
 ## Troubleshooting
 
 
-
+**MariaDB 5.5 and MariaDB 10.0: How to set LimitNOFILE correctly for systemd.**
 
 <span class="notranslate"> MariaDB 5.5 </span> and <span class="notranslate"> MariaDB 10.0 </span> have only file for managing the service, but the file has <span class="notranslate"> LSB </span> functions, so it is supported by <span class="notranslate"> `systemd` </span> .
 
 For adding extra limits, do the following:
 
 1. Run:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 mkdir /etc/systemd/system/mariadb.service.d/
 ```
+</div>
 
 2. Run:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 touch /etc/systemd/system/mariadb.service.d/limits.conf
 ```
+</div>
 
 3. Add the following content to the the file <span class="notranslate"> `/etc/systemd/system/mariadb.service.d/limits.conf` </span> :
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-[Service] LimitNOFILE=99999
+[Service] 
+LimitNOFILE=99999
 ```
+</div>
 
-
-
+**MySQL Governor lost connection to MySQL - “Can't connect to mysql” messages in /var/log/dbgovernor-error.log (Plesk and DirectAdmin)**
 
 This may be caused by changing root/administrator credentials without updating MySQL <span class="notranslate"> Governor </span> configuration file.
 
-When you change root or administrator credentials in Plesk or DirectAdmin, you also need to update MySQL <span class="notranslate"> Governor </span> configuration file. This could be done with the following command (available since governor-mysql 1.2-38):
-<span class="notranslate"> </span>
+When you change root or administrator credentials in <span class="notranslate"> Plesk or DirectAdmin, </span> you also need to update MySQL <span class="notranslate"> Governor </span> configuration file. This could be done with the following command (available since <span class="notranslate"> governor-mysql 1.2-38): </span>
+
+<div class="notranslate">
 
 ```
 /usr/share/lve/dbgovernor/mysqlgovernor.py --update-config-auth
 ```
+</div>
 
 The command updates credentials in MySQL <span class="notranslate"> Governor </span> configuration file and restarts <span class="notranslate"> db_governor </span> service afterwards.
 
