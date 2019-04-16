@@ -1,167 +1,161 @@
 # LVE-Stats 2
 
+### Why is it needed?
 
+* Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will not be recorded and we need to store data with much higher precision.
+* 100% <span class="notranslate">CPU</span> usage in old lve statistics means “all cores”. On 32 core servers usage is not visible for most users (as they are limited to 1 core).
+* Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.
+* Notifications in old LVE-statistics are not accurate because they are based on average values for <span class="notranslate">CPU, IO, IOPS.</span>
+* Old LVE-statistics functionality is hard to extend.
 
-Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate"> CPU usage. If user used 100% of  <span class="notranslate"> CPU for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will not be recorded and we need to store data with much higher precision. </span> </span>
-100% <span class="notranslate"> CPU usage in old lve statistics means “all cores”. On 32 core servers usage is not visible for most users (as they are limited to 1 core).  </span>
-Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.
-Notifications in old LVE-statistics are not accurate because they are based on average values for <span class="notranslate"> CPU,  <span class="notranslate"> IO,  <span class="notranslate"> IOPS. </span> </span> </span>
-Old LVE-statistics functionality is hard to extend.
+### Major improvements and features
 
+* increased precision of statistics;
+* <span class="notranslate">CPU</span> usage is calculated  in terms of % of a single core (100% usage means one core);
+* lvestats-server emulates and tracks faults for <span class="notranslate">CPU, IO, IOPS</span>;
+* lvestats-server saves “snapshots” of user’s processes and queries for each “incident” - added new lve-read-snapshot utility;
+* improved notifications about hitting LVE limits (more informative and without false positives);
+* implemented ability to add custom plugins;
+* MySQL and <span class="notranslate">PostGreSQL</span> support;
+* more pretty, scalable, interactive charts;
+* snapshots include HTTP-requests.
 
-increased precision of statistics;
- <span class="notranslate"> CPU </span> usage is calculated  in terms of % of a single core (100% usage means one core);
-lvestats-server emulates and tracks faults for <span class="notranslate"> CPU </span> , <span class="notranslate"> IO </span> , <span class="notranslate"> IOPS </span> ;
-lvestats-server saves “snapshots” of user’s processes and queries for each “incident” - added new lve-read-snapshot utility;
-improved notifications about hitting LVE limits (more informative and without false positives);
-implemented ability to add custom plugins;
-MySQL and <span class="notranslate"> PostGreSQL </span> support;
-more pretty, scalable, interactive charts;
-snapshots include HTTP-requests.
+### What features will be implemented in the future?
 
-
-Notifications for control panels other than CPanel.
-Burstable Limits/server health: We are monitoring server health ( <span class="notranslate"> LA </span> , <span class="notranslate"> memory </span> , idle <span class="notranslate"> CPU </span> ) and automatically decreasing/increasing limits based on server health.
- <span class="notranslate"> Reseller Limits </span> : plugin would analyze usage per group of users (reseller’s usage), and do actions.
-Suspend/notify plugin: would detect that user is being throttled for 10 minutes, and suspend him (just because), or notify, or increase limits.
+* Notifications for control panels other than CPanel.
+* Burstable Limits/server health: We are monitoring server health ( <span class="notranslate"> LA </span> , <span class="notranslate"> memory </span> , idle <span class="notranslate"> CPU </span> ) and automatically decreasing/increasing limits based on server health.
+* <span class="notranslate">Reseller Limits</span>: plugin would analyze usage per group of users (reseller’s usage), and do actions.
+* Suspend/notify plugin: would detect that user is being throttled for 10 minutes, and suspend him (just because), or notify, or increase limits.
 
 
 ## Installation
 
+To install, please execute:
 
+<div class="notranslate">
 
-To install please execute:
-<span class="notranslate"> </span>
 ```
 yum install lve-stats
 ```
+</div>
 
 To update:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 yum update lve-stats
 ```
+</div>
 
-Settings of old <span class="notranslate"> lve-stats </span> (ver. 0.x) are imported automatically on the first install/update of new <span class="notranslate"> lve-stats </span> package.
+Settings of old <span class="notranslate">lve-stats</span> (ver. 0.x) are imported automatically on the first install/update of a new <span class="notranslate">lve-stats</span> package.
 
-SQLite database file is located in <span class="notranslate"> _/var/lve/lvestats2.db_ </span> , data from old lve-stats (ver. 0.x) are being migrated automatically in the background. Migrating process can last 2-8 hours (during this time lags are possible when admin is trying to check statistics, at the same time users will not be affected). Migrating the latest 30 days, <span class="notranslate"> SQLite DB </span> stable migration is provided.
+SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2.db`</span>, data from old <span class="notranslate">lve-stats</span> (ver. 0.x) are being migrated automatically in the background. Migrating process can last 2-8 hours (during this time lags are possible when admin is trying to check statistics, at the same time users will not be affected). Migrating the latest 30 days, <span class="notranslate">SQLite DB</span> stable migration is provided.
 
-Currently new <span class="notranslate"> lve-stats </span> supports all databases available in CloudLinux (except <span class="notranslate"> PosgreSQL </span> for CL5).
+Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux (except <span class="notranslate">PosgreSQL</span> for CL5).
 
+### Downgrade
 
-If you have any problems after update, downgrade <span class="notranslate"> lve-stats2 </span> to the previous stable version by running:
-<span class="notranslate"> </span>
+If you have any problems after update, downgrade <span class="notranslate">lve-stats2</span> to the previous stable version by running:
+
+<div class="notranslate">
+
 ```
 yum downgrade lve-stats
 ```
+</div>
 
-and contact CloudLinux support at <span class="notranslate">   [https://helpdesk.cloudlinux.com](https://helpdesk.cloudlinux.com) </span>
+and contact CloudLinux support at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/en-us/requests/new)
 
-
-
+:::tip Note
+You may need to rename `*.rpmsave` files to original ones in order to restore settings for old <span class="notranslate">lve-stats (`/etc/sysconfig/lvestats`, `/etc/sysconfig/cloudlinux-notify`</span>).
+:::
 
 ## Configuration
 
+Main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</span> contains the following options:
 
+* <span class="notranslate">`db_type`</span> - selects appropriate database type to use;
+* <span class="notranslate">`connect-string`</span> - connection string for <span class="notranslate">PostGreSQL</span> and MySQL database, has the following form:
+  
+  <div class="notranslate">
 
+  ```
+  connect_string = USER:PASSWORD@HOST[:PORT]/DATABASE
+  ```
+  </div>
 
-Main configuration file _ _ <span class="notranslate"> /etc/sysconfig/lvestats2 </span> contains the following options:
+  Default port is used for specific database, if port is not specified (typical port is 3306 for MySQL and 5432 for <span class="notranslate">PostGreSQL</span>). Connection string is not used for sqlite database.
 
-<span class="notranslate"> </span> - selects appropriate database type to use;
+* <span class="notranslate">`server_id`</span> - sets the name of the server (at most 10 characters). This option is to use with centralized database ( <span class="notranslate">PostGreSQL</span> or MySQL). For use with sqlite database, value of this option should be "localhost" (without quotes).
+* <span class="notranslate">`plugins`</span> – path to directory containing custom plugins for <span class="notranslate">lve-stats</span> (default path <span class="notranslate">`/usr/share/lve-stats/plugins`</span>).
+* <span class="notranslate">`db_timeout`</span> - period of time to write data to database (in seconds); default value is 60 seconds.
+* <span class="notranslate">`timeout`</span> - timeout for custom plugins (seconds). If plugin execution does not finish within this period, plugin is terminated. Default value is 5 seconds.
+* <span class="notranslate">`interval`</span> - duration of one cycle of <span class="notranslate">lvestats-server</span> (seconds). This should be less than total duration of execution of all plugins. Default value is 5 seconds. Increasing this parameter makes precision of statistics worse.
+* <span class="notranslate">`keep_history_days`</span> - period of time (in days) to keep history in database. Old data is removed from database automatically. Default value is 60 days.
+* <span class="notranslate">`mode`</span> – sets compatibility output mode (compatibility with older lveinfo version
+  * Value `v1` enables compatibility with old version of <span class="notranslate">lveinfo</span>.
+  * Value `v2` enables <span class="notranslate">`extended`</span> output mode, but can break LVE plugins for control panels (statistics in <span class="notranslate">LVE Manager</span>, <span class="notranslate">Resource Usage</span>, etc). Support of `v2` mode will be added to LVE plugins in the recent future. When mode parameter is absent, later version of <span class="notranslate">lveinfo</span> is implied.
+* <span class="notranslate">`disable_snapshots`</span> - disable snapshots and incidents.
+  Possible values:
+    * <span class="notranslate">`true`</span>
+    * <span class="notranslate">`false`</span>
 
-<span class="notranslate"> </span> - connection string for <span class="notranslate"> PostGreSQL </span> and MySQL database, has the following form:
+Configuration files for plugins are located in <span class="notranslate">`/etc/sysconfig/lvestats.config`</span> directory.
 
-<span class="notranslate"> </span>
+<span class="notranslate">`/etc/sysconfig/lvestats.config/SnapshotSaver.cfg`</span> contains the following options:
 
-Default port is used for specific database, if port is not specified (typical port is 3306 for MySQL and 5432 for <span class="notranslate"> PostGreSQL </span> ). Connection string is not used for sqlite database.
+* <span class="notranslate">`period_between_incidents`</span> - the minimal interval of time between incidents (in seconds). If minimal interval of time between LVE faults is greater than value specified, than new "incident" will begin and new snapshots will be saved. Default value is 300 seconds.
+* <span class="notranslate">`snapshots_per_minute`</span> - the maximum number of snapshots saved per minute for specific LVE id (default is `2`).
+* <span class="notranslate">`max_snapshots_per_incident`</span> - the maximum number of snapshots saved for one "incident". Default is `10`.
 
-<span class="notranslate"> </span> - sets the name of the server (at most 10 characters). This option is to use with centralized database ( <span class="notranslate"> PostGreSQL </span> or MySQL). For use with sqlite database, value of this option should be "localhost" (without quotes).
+<span class="notranslate">`/etc/sysconfig/lvestats.config/StatsNotifier.cfg`</span> contains the following options:
 
-<span class="notranslate"> </span> – path to directory containing custom plugins for <span class="notranslate"> lve-stats </span> (default path <span class="notranslate"> /usr/share/lve-stats/plugins </span> ).
-
-<span class="notranslate"> </span> - period of time to write data to database (in seconds); default value is 60 seconds.
-
-<span class="notranslate"> </span> - timeout for custom plugins (seconds). If plugin execution does not finish within this period, plugin is terminated. Default value is 5 seconds.
-
-<span class="notranslate"> </span> - duration of one cycle of <span class="notranslate"> lvestats-server </span> (seconds). This should be less than total duration of execution of all plugins. Default value is 5 seconds. Increasing this parameter makes precision of statistics worse.
-
-<span class="notranslate"> </span> - period of time (in days) to keep history in database. Old data is removed from database automatically. Default value is 60 days.
-
-<span class="notranslate"> </span> – sets compatibility output mode (compatibility with older lveinfo version).  Value “v1” (without quotes) enables compatibility with old version of <span class="notranslate"> lveinfo </span> . “v2” value enables “ <span class="notranslate"> extended </span> ” output mode, but can break LVE plugins for control panels (statistics in <span class="notranslate"> LVE Manager </span> , <span class="notranslate"> Resource Usage </span> , etc). Support of v2 mode will be added to LVE plugins in the recent future. When mode parameter is absent, later version of <span class="notranslate"> lveinfo </span> is implied.
-
-<span class="notranslate"> </span> - disable snapshots and incidents. Possible values: <span class="notranslate"> true, false </span> .
-
-Configuration files for plugins are located in <span class="notranslate"> _/etc/sysconfig/lvestats.config_ </span> directory.
-
-<span class="notranslate"> _/etc/sysconfig/lvestats.config/SnapshotSaver.cfg_ </span> contains the following options:
-
-<span class="notranslate"> `period_between_incidents` </span> - Minimal interval of time between incidents (in seconds). If minimal interval of time between LVE faults is greater than value specified, than new "incident" will begin and new snapshots will be saved. Default value is 300 seconds.
-
-<span class="notranslate"> `snapshots_per_minute` </span> - Maximum number of snapshots saved per minute for specific LVE id (default is 2).
-
-<span class="notranslate"> `max_snapshots_per_incident` </span> - Maximum number of snapshots saved for one "incident". Default is 10.
-
-<span class="notranslate"> _/etc/sysconfig/lvestats.config/StatsNotifier.cfg_ </span> contains the following options:
-
-<span class="notranslate"> `NOTIFY_ADMIN` </span> – enables notification for admin  ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> </span> – enables notification for reseller ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_CUSTOMER` </span> - enables notification for customers  ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_INCLUDE_RESELLER_CUSTOMER` </span> – Y=notify all users, N=notify only hoster's users (whos reseller is root), default = N;
-
-<span class="notranslate"> `NOTIFY_CPU` </span> – notify about <span class="notranslate"> CPU </span> faults when customer hits 100% of his <span class="notranslate"> CPU </span> limit ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_IO` </span> - notify about <span class="notranslate"> IO </span> faults when customer hits 100% of his <span class="notranslate"> IO </span> limit ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_IOPS` </span> - notify about <span class="notranslate"> IOPS </span> faults when customer hits 100% of his <span class="notranslate"> IOPS </span> limit ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_MEMORY` </span> - notify about memory faults ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_EP` </span> – notify about entry processes faults ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_NPROC` </span> – notify about number of processes faults ( <span class="notranslate"> Y/N </span> , default N);
-
-<span class="notranslate"> `NOTIFY_MIN_FAULTS_ADMIN` </span> – minimum number of faults to notify admin (default 1);
-
-<span class="notranslate"> `NOTIFY_MIN_FAULTS_USER` </span> – minimum number of faults to notify customer (default 1);
-
-<span class="notranslate"> `NOTIFY_INTERVAL_ADMIN` </span> – period of time to notify admin (default 12h);
-
-<span class="notranslate"> `NOTIFY_INTERVAL_USER` </span> – period of time to notify customer (default 12h);
-
-<span class="notranslate"> `NOTIFY_FROM_EMAIL` </span> - sender email address. For example: <span class="notranslate"> [NOTIFY_FROM_EMAIL=main_admin@host.com](mailto:NOTIFY_FROM_EMAIL=main_admin@host.com;) </span>
-
-<span class="notranslate"> `NOTIFY_FROM_SUBJECT` </span> - email message subject.  For example: <span class="notranslate"> `NOTIFY_FROM_SUBJECT=Message from notifier` </span>
+* <span class="notranslate">`NOTIFY_ADMIN`</span> – enables notification for admin (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_RESELLER`</span> – enables notification for reseller (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_CUSTOMER`</span> - enables notification for customers (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_INCLUDE_RESELLER_CUSTOMER`</span> – `Y`=notify all users, `N`=notify only hoster's users (whos reseller is root), default = `N`;
+* <span class="notranslate">`NOTIFY_CPU`</span> – notify about <span class="notranslate">CPU</span> faults when customer hits 100% of his <span class="notranslate">CPU</span> limit (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_IO`</span> - notify about <span class="notranslate">IO</span> faults when customer hits 100% of his <span class="notranslate">IO</span> limit (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_IOPS`</span> - notify about <span class="notranslate">IOPS</span> faults when customer hits 100% of his <span class="notranslate">IOPS</span> limit (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_MEMORY`</span> - notify about memory faults (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_EP`</span> – notify about entry processes faults (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_NPROC`</span> – notify about number of processes faults (<span class="notranslate">`Y/N`</span>, default `N`);
+* <span class="notranslate">`NOTIFY_MIN_FAULTS_ADMIN`</span> – minimum number of faults to notify admin (default `1`);
+* <span class="notranslate">`NOTIFY_MIN_FAULTS_USER`</span> – minimum number of faults to notify customer (default `1`);
+* <span class="notranslate">`NOTIFY_INTERVAL_ADMIN`</span> – period of time to notify admin (default `12h`);
+* <span class="notranslate">`NOTIFY_INTERVAL_USER`</span> – period of time to notify customer (default `12h`);
+* <span class="notranslate">`NOTIFY_FROM_EMAIL`</span> - sender email address. For example: <span class="notranslate">`NOTIFY_FROM_EMAIL=main_admin@host.com`;</span>
+* <span class="notranslate">`NOTIFY_FROM_SUBJECT`</span> - email message subject. For example: <span class="notranslate">`NOTIFY_FROM_SUBJECT=Message from notifier`</span>
 
 Templates of notifications are located here:
-<span class="notranslate"> </span>
-_/usr/share/lve/emails/en_US/admin_notify.txt_
-_/usr/share/lve/emails/en_US/reseller_notify.txt_
-_/usr/share/lve/emails/en_US/user_notify.txt_
-_/usr/share/lve/emails/en_US/admin_notify.html_
-_/usr/share/lve/emails/en_US/reseller_notify.html_
 
+* <span class="notranslate">`/usr/share/lve/emails/en_US/admin_notify.txt`</span>
+* <span class="notranslate">`/usr/share/lve/emails/en_US/reseller_notify.txt`</span>
+* <span class="notranslate">`/usr/share/lve/emails/en_US/user_notify.txt`</span>
+* <span class="notranslate">`/usr/share/lve/emails/en_US/admin_notify.html`</span>
+* <span class="notranslate">`/usr/share/lve/emails/en_US/reseller_notify.html`</span>
 
+:::tip Note
+Notifications about LVE faults are implemented for CPanel only.
+:::
 
+After changing any options above, please restart <span class="notranslate">lvestats</span> service:
 
+<div class="notranslate">
 
-
-
-<span class="notranslate"> </span>
 ```
 service lvestats restart
 ```
+</div>
 
-<span class="notranslate"> _/etc/logrotate.d/lvestats_ </span> - configuration file for <span class="notranslate"> _/var/log/lve-stats.log rotation_ </span>
+<span class="notranslate">`/etc/logrotate.d/lvestats`</span> - configuration file for <span class="notranslate">`/var/log/lve-stats.log rotation`</span>
 
-### LVE Stats2
+### LVE Stats2 and MySQL DB Server Compatible Work Setup
 
-
-
-
-
+:::tip Note
+Run all the commands below under root.
+:::
 
 **1. MySQL Server Setup**
 
@@ -169,396 +163,562 @@ If MySQL Server is not installed, then install it according to control panel doc
 
 For non-panel system:
 
-_(CloudLinux 6)_
-<span class="notranslate">          </span>
-```
-yum install mysql mysql-serverservice mysqld startchkconfig mysqld on
-```
+* CloudLinux 6
+  
+  <div class="notranslate">
 
-_(CloudLinux 7)_
-<span class="notranslate">          </span>
-```
-yum install mariadb mariadb-serversystemctl start mariadb.servicesystemctl enable mariadb.service
-```
+  ```
+  yum install mysql mysql-server
+  service mysqld start
+  chkconfig mysqld on
+  ```
+  </div>
+
+* CloudLinux 7
+  
+  <div class="notranslate">
+
+  ```
+  yum install mariadb mariadb-server
+  systemctl start mariadb.service
+  systemctl enable mariadb.service
+  ```
+  </div>
 
 
 **2. Database Setup**
 
-1. Run MySQL administrative utility: <span class="notranslate"> _mysql_ </span> .
+* Run MySQL administrative utility: <span class="notranslate">`mysql`</span>.
+* In utility run the commands:
 
-2. In utility run the commands:
+  * creating server DB. Also, check **_Note_** below.
 
-a.
-<span class="notranslate"> </span>
-```
-CREATE DATABASE db_lvestats2;
-```
+  <div class="notranslate">
 
-creating server DB. Also, check **_Note_** below.
+  ```
+  CREATE DATABASE db_lvestats2;
+  ```
+  </div>
 
-b.
-<span class="notranslate"> </span>
-```
-CREATE USER 'lvestats2'@'localhost' IDENTIFIED BY 'lvestats2_passwd';
-```
+  * creating a user for <span class="notranslate">LVE Stats 2</span> server to work under. Also, check **_Note_** below.
 
-creating a user for <span class="notranslate"> LVE Stats 2 </span> server to work under. Also, check **_Note_** below.
+  <div class="notranslate">
 
-c.
-<span class="notranslate"> </span>
-```
-GRANT ALL PRIVILEGES ON db_lvestats2.* TO 'lvestats2'@'localhost';
-```
+  ```
+  CREATE USER 'lvestats2'@'localhost' IDENTIFIED BY 'lvestats2_passwd';
+  ```
+  </div>
 
-granting all the privileges for all DB tables to the user. Use the username and DB name from points a. and b. above.
+  * granting all the privileges for all DB tables to the user. Use the username and DB name from the points above.
 
-d.
-<span class="notranslate"> </span>
-```
-FLUSH PRIVILEGES;
-```
+  <div class="notranslate">
 
-refreshing privileges information.
+  ```
+  GRANT ALL PRIVILEGES ON db_lvestats2.* TO 'lvestats2'@'localhost';
+  ```
+  </div>
 
-e. Exit administrative utility <span class="notranslate"> (Ctrl+d) </span> .
+  * refreshing privileges information.
 
+  <div class="notranslate">
 
+  ```
+  FLUSH PRIVILEGES;
+  ```
+  </div>
 
+  * Exit administrative utility <span class="notranslate">`(Ctrl+d)`</span>.
 
+:::tip Note
+DB name, username and their passwords above are given for an example - you can use any of your choices. Using old DB from <span class="notranslate">LVE Stats</span> version 1 is also acceptable as <span class="notranslate">LVE Stats2</span> uses different tables and the old information will not be corrupted.
+:::
 
-**3. ** <span class="notranslate"> LVE Stats 2 </span> ** Setup**
+**3.** <span class="notranslate">**LVE Stats 2**</span> **Setup**
 
-Stop <span class="notranslate"> LVE Stats 2 </span> server running the command:
-<span class="notranslate"> </span>
+* Stop <span class="notranslate">LVE Stats 2</span> server by running the command:
+
+<div class="notranslate">
+
 ```
 service lvestats stop
 ```
+</div>
 
-In server configuration file _/etc/sysconfig/lvestats2_ edit the following options:
-<span class="notranslate"> </span>
-_db_type = mysql_
-_connect_string = lvestats2:lvestats2_passwd@localhost/db_lvestats2_
+* In server configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</span>, edit the following options:
+  * <span class="notranslate">`db_type = mysql`</span>
+  * <span class="notranslate">`connect_string = lvestats2:lvestats2_passwd@localhost/db_lvestats2`</span>
 
-Note that <span class="notranslate"> _connect_string_ </span> option value is used in format: <span class="notranslate"> _user:pass@host/database_ </span> . Username, password and DB name must be the same as in point 2.b. of Database Setup above.
+:::tip Note
+<span class="notranslate">`connect_string`</span> option value is used in format: <span class="notranslate">`user:pass@host/database`</span>.
+Username, password and DB name must be the same as in point 2 of Database Setup above.
+:::
 
-After making changes in configuration files run
-<span class="notranslate"> </span>
+* After making changes in configuration files run:
+
+<div class="notranslate">
+
 ```
 /usr/sbin/lve-create-db 
 ```
-for DB primary initialization (creating tables, indexes, etc). There is no need to create anything in the DB manually.
+</div>
 
-When done, restart server running:
-<span class="notranslate"> </span>
+  For DB primary initialization (creating tables, indexes, etc). There is no need to create anything in the DB manually.
+
+* When done, restart server by running:
+  
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
+</div>
 
 
 **4. Additional Security Settings**
 
-If you need to provide access to <span class="notranslate"> LVE Stats </span> information utilities ( <span class="notranslate"> _lveinfo, lvechart, lve-read-snapshot_ </span> ) for different users, then we recommend creating one more DB user with read-only privilege to guarantee information security. It can be done by running the following commands in administrative utility:
+If you need to provide access to <span class="notranslate">LVE Stats</span> information utilities (<span class="notranslate">`lveinfo`, `lvechart`, `lve-read-snapshot`</span>) for different users, then we recommend creating one more DB user with read-only privilege to guarantee information security. It can be done by running the following commands in administrative utility:
 
-a.
-<span class="notranslate"> </span>
+* creating a user (check **_Note_** above)
+
+<div class="notranslate"> </span>
+
 ```
 CREATE USER 'lvestats2_read'@'localhost' IDENTIFIED BY 'lvestats2_read_passwd';
 ```
+</div>
 
-creating a user (check **_Note_** above).
+* granting read-only privilege to the user
+  
+<div class="notranslate">
 
-b.
-<span class="notranslate"> </span>
 ```
 GRANT SELECT ON db_lvestats2.* TO 'lvestats2_read'@'localhost';
 ```
+</div>
 
-granting read-only privilege to the user.
+* refreshing privileges information
 
-c.
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 FLUSH PRIVILEGES;
 ```
+</div>
 
-refreshing privileges information.
-
-If <span class="notranslate"> LVE Stats2 </span> server is set correctly (see information below), the information utilities will work under this user.
+If <span class="notranslate">LVE Stats2</span> server is set correctly (see information below), the information utilities will work under this user.
 
 If you need to provide access to information utilities to other users, then in order to guarantee information security you should do the following:
 
-а) Assign permission 600 to the main configuration file ( _/etc/sysconfig/lvestats2_ ), so that it could be read only by <span class="notranslate"> LVE Stats 2 </span> server and by utilities that run under root.
-
-b) Copy <span class="notranslate"> _/etc/sysconfig/lvestats2_  to  _/etc/sysconfig/lvestats2.readonly_ </span> , assign permission 644 to the new file, so that it could be read by any user but could only be changed by root.
-
-с) In <span class="notranslate"> _/etc/sysconfig/lvestats2.readonly_ </span> file, in the line _ _ <span class="notranslate"> connect_string </span> , specify DB user with read-only permission, created above.
+* Assign permission 600 to the main configuration file (<span class="notranslate">`/etc/sysconfig/lvestats2`</span>), so that it could be read only by <span class="notranslate">LVE Stats 2</span> server and by utilities that run under root.
+* Copy <span class="notranslate">`/etc/sysconfig/lvestats2`</span> to <span class="notranslate">`/etc/sysconfig/lvestats2.readonly`</span>, assign permission 644 to the new file, so that it could be read by any user but could only be changed by root.
+* In <span class="notranslate">`/etc/sysconfig/lvestats2.readonly`</span> file, in the line <span class="notranslate">`connect_string`</span>, specify DB user with read-only permission, created above.
 
 These steps allow hiding main DB user username/password from other system users.
 
-If there is no need in such access differentiation, then _ _ <span class="notranslate"> /etc/sysconfig/lvestats2 </span> file access permission should be 644, so that it could be read by all users and could be changed only by root.
+If there is no need in such access differentiation, then <span class="notranslate">`/etc/sysconfig/lvestats2`</span> file access permission should be 644, so that it could be read by all users and could be changed only by root.
 
 
 **5. Using Special Characters in Database Password**
 
-Since scheme <span class="notranslate"> ://user:password@host[:port]/database_name  [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) </span> is used in <span class="notranslate"> _connect_string_ </span> config option, then usage of special characters in user DB password is not allowed . To use special symbols in the password, it must be converted to [escape-sequence](https://en.wikipedia.org/wiki/Percent-encoding) . You can convert a password to escape-sequence in a console as follows:
- <span class="notranslate"> </span>
+Since scheme <span class="notranslate">`://user:password@host[:port]/database_name`</span> [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is used in <span class="notranslate">`connect_string`</span> config option, then usage of special characters in user DB password is not allowed.
+
+To use special symbols in the password, it must be converted to [escape-sequence](https://en.wikipedia.org/wiki/Percent-encoding). You can convert a password to escape-sequence in a console as follows:
+
+<div class="notranslate">
+
 ```
-echo -n '[You_P@$$]:' | perl -MURI::Escape -ne 'print uri_escape($_)."\n"'%5BYou_P%40%24%24%5D%3A
+echo -n '[You_P@$$]:' | perl -MURI::Escape -ne 'print uri_escape($_)."\n"'
+%5BYou_P%40%24%24%5D%3A
 ```
+</div>
 
 Or replace the symbols manually:
- <span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
- !    #    $    &    '    (    )    *    +    ,    /    :    ;    =    ?    @   [    ]%21  %23  %24  %26  %27  %28  %29  %2A  %2B  %2C  %2F  %3A  %3B  %3D  %3F  %40  %5B %5D
+!    #    $    &    '    (    )    *    +    ,    /    :    ;    =    ?    @   [    ]
+%21  %23  %24  %26  %27  %28  %29  %2A  %2B  %2C  %2F  %3A  %3B  %3D  %3F  %40  %5B %5D
 ```
+</div>
 
-After that _сonnect_string_ will look as follows:
-<span class="notranslate"> </span>
-  `сonnect_string=lvestats2:%5BYou_P%40%24%24%5D%3A@localhost/db_lvestats2`  ` ` 
+After that <span class="notranslate">`сonnect_string`</span> will look as follows:
 
-### LVE Stats 2
+<div class="notranslate">
 
-
-_Note. Run all the commands below under _ <span class="notranslate"> root </span> _._
-
-**1. ** <span class="notranslate"> PostgreSQL </span> ** Server Installation and Setup**
-
-
-
-For control panels use proper documentation for installation on the links: [сPanel](https://documentation.cpanel.net/display/CKB/Install+or+Update+PostgreSQL+on+Your+cPanel+Server) , [Plesk](https://kb.plesk.com/en/123729) .
-
-For non-panel CloudLinux run the following commands:
-
-_(CloudLinux 6)_
-<span class="notranslate"> </span>
 ```
-yum install postgresql-server postgresqlservice postgresql initdbservice postgresql startchkconfig postgresql on
+сonnect_string=lvestats2:%5BYou_P%40%24%24%5D%3A@localhost/db_lvestats2
 ```
-
-_(CloudLinux 7)_
-<span class="notranslate"> </span>
-```
-yum install postgresql-server postgresqlpostgresql-setup initdbsystemctl start postgresqlsystemctl enable postgresql
-```
+</div>
 
 
+### LVE Stats 2 and PostgreSQL DB Server Compatible Work Setup
 
 
-1. In <span class="notranslate"> _/var/lib/pgsql/data/pg_hba.conf_  config </span> file change user authentication mode. Add the following lines (place before all other authentication parameters):
-<span class="notranslate"> </span>
-```
-# IPv4 local connections for lve-stats-2.xhost dblvestat all 127.0.0.1/32 password# IPv6 local connections for lve-stats-2.xhost dblvestat all ::1/128 password 
-```
+:::tip Note
+Run all the commands below under <span class="notranslate">root</span>.
+:::
 
-These lines enable user authentication by the password for <span class="notranslate"> IP4/IP6 </span> connections. You can set other modes if needed.
+**1.** **<span class="notranslate">PostgreSQL</span>** **Server Installation and Setup**
 
-3. Apply config changes by running:
-<span class="notranslate"> </span>
-```
-service postgresql restart
-```
+* **PostgreSQL installation and initialization**
+
+  For control panels use proper documentation for installation on the links: [сPanel](https://documentation.cpanel.net/display/CKB/Install+or+Update+PostgreSQL+on+Your+cPanel+Server), [Plesk](https://kb.plesk.com/en/123729).
+
+  For non-panel CloudLinux run the following commands:
+
+    * CloudLinux 6
+
+    <div class="notranslate">
+
+    ```
+    yum install postgresql-server postgresql
+    service postgresql initdb
+    service postgresql start
+    chkconfig postgresql on
+    ```
+    </div>
+
+    * CloudLinux 7
+
+    <div class="notranslate">
+
+    ```
+    yum install postgresql-server postgresql
+    postgresql-setup initdb
+    systemctl start postgresql
+    systemctl enable postgresql
+    ```
+    </div>
+
+* **Setup**
+
+  * In <span class="notranslate">`/var/lib/pgsql/data/pg_hba.conf`</span> config file change user authentication mode. Add the following lines (place before all other authentication parameters):
+  
+    <div class="notranslate">
+
+    ```
+    # IPv4 local connections for lve-stats-2.x
+    host dblvestat all 127.0.0.1/32 password
+    # IPv6 local connections for lve-stats-2.x
+    host dblvestat all ::1/128 password
+    ```
+    </div>
+    
+    These lines enable user authentication by the password for <span class="notranslate">IP4/IP6</span> connections. You can set other modes if needed.
+
+  * Apply config changes by running:
+
+    <div class="notranslate">
+
+    ```
+    service postgresql restart
+    ```
+    </div>
 
 
-**2. DB for ** <span class="notranslate"> lve-stats-2.x </span> ** - Creating and Setup**
+**2. DB for** <span class="notranslate">**lve-stats-2.x**</span> **- Creating and Setup**
 
-1. Run standard <span class="notranslate"> PostgreSQL psql </span> administrative utility:
-<span class="notranslate"> </span>
+* Run standard <span class="notranslate">PostgreSQL psql</span> administrative utility:
+
+<div class="notranslate">
+
 ```
 sudo -u postgres psql postgres 
 ```
-( <span class="notranslate"> psql -w -U postgres </span> for сPanel).
+</div>
 
-2. In utility run:
+OR for сPanel
 
-a.
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-CREATE DATABASE dblvestat;
+psql -w -U postgres
 ```
+</div>
 
-creating server DB. Also, check **_Note_** below.
+* In utility run:
 
-b.
-<span class="notranslate"> </span>
-```
-CREATE USER lvestat WITH password 'passw';
-```
+  * creating server DB. Also, check **_Note_** below.
 
-creating a user for <span class="notranslate"> LVE Stats 2 </span> server to work under. Also, check **_Note_** below.
+    <div class="notranslate">
 
-c.
-<span class="notranslate"> </span>
-```
-GRANT ALL privileges ON DATABASE dblvestat TO lvestat;
-```
+    ```
+    CREATE DATABASE dblvestat;
+    ```
+    </div>
 
-granting <span class="notranslate"> lvestat </span> user all privileges for work with <span class="notranslate"> dblvestat DB </span> .
+  * creating a user for <span class="notranslate">LVE Stats 2</span> server to work under. Also, check **_Note_** below.
 
-d. <span class="notranslate">  \q - exit psql </span> utility. (Alternatively <span class="notranslate"> Ctrl+d </span> ).
+    <div class="notranslate">
+
+    ```
+    CREATE USER lvestat WITH password 'passw';
+    ```
+    </div>
+
+  * granting <span class="notranslate">lvestat</span> user all privileges for work with <span class="notranslate">dblvestat DB</span>.
+
+    <div class="notranslate">
+
+    ```
+    GRANT ALL privileges ON DATABASE dblvestat TO lvestat;
+    ```
+    </div>
+
+  * exit `psql` utility:
+
+    <div class="notranslate">
+
+    ```
+    \q
+    ```
+    </div>
+
+    OR alternatively:
+
+    <div class="notranslate">
+
+    ```
+    Ctrl+d
+    ```
+    </div>
 
 
+:::tip Note
+DB name, username and their passwords above are given for an example - you can use any of your choices. Using old DB from <span class="notranslate">LVE Stats</span> version 1 is also acceptable as <span class="notranslate">LVE Stats 2</span> uses different tables and the old information will not be corrupted
+:::
 
+**3.** <span class="notranslate">**Lve-stats-2.x**</span> **Setup**
 
-**3. ** <span class="notranslate"> Lve-stats-2.x </span> ** Setup**
+* Stop <span class="notranslate">lve-stats2</span> server by running:
 
-Stop <span class="notranslate"> lve-stats2 </span> server by running:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 service lvestats stop
 ```
+</div>
 
-In server config file _ _ <span class="notranslate"> /etc/sysconfig/lvestats2 </span> edit options for connecting to DB:
-<span class="notranslate"> </span>
+* In server config file <span class="notranslate">`/etc/sysconfig/lvestats2`</span> edit options for connecting to DB:
+  
+<div class="notranslate">
+
 ```
-db_type = postgresqlconnect_string=lvestat:passw@localhost/dblvestatIf DB is going to be used as centralized for multiple hosts then collect_usernames parameter must be changed:collect_usernames=true
+db_type = postgresql
+connect_string=lvestat:passw@localhost/dblvestat
+If DB is going to be used as centralized for multiple hosts then collect_usernames parameter must be changed:
+collect_usernames=true
 ```
+</div>
 
-Note that <span class="notranslate"> _connect_string_ </span> option value is of the format: <span class="notranslate"> _user:pass@host/database_ </span> . Username, password and DB name must be the same as in Database Setup section above.
+:::tip Note
+<span class="notranslate">`connect_string`</span> option value is of the format: <span class="notranslate">`user:pass@host/database`</span>. Username, password and DB name must be the same as in Database Setup section above.
+:::
 
-After making changes in configuration files, for DB primary initialization (creating tables, indexes, etc) run:
-<span class="notranslate"> </span>
+* After making changes in configuration files, for DB primary initialization (creating tables, indexes, etc), run:
+
+<div class="notranslate">
+
 ```
 /usr/sbin/lve-create-db 
 ```
+</div>
 
-There is no need to create anything in the DB manually. When done, restart server by running:
-<span class="notranslate"> </span>
+* There is no need to create anything in the DB manually. When done, restart server by running:
+
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
-
+</div>
 
 **4. Additional Security Settings**
 
-If you need to provide access to <span class="notranslate"> LVE Stats </span> information utilities ( <span class="notranslate"> _lveinfo, lve-read-snapshot_ </span> ) for other users (or if <span class="notranslate"> CageFS </span> is disabled), then in order to guarantee DB security the following steps are required:
+If you need to provide access to <span class="notranslate">LVE Stats</span> information utilities (<span class="notranslate">`lveinfo`, `lve-read-snapshot`</span> ) for other users (or if <span class="notranslate">CageFS</span> is disabled), then in order to guarantee DB security the following steps are required:
 
-a. Create a DB user with read-only permission:
-<span class="notranslate"> </span>
+* Create a DB user with read-only permission:
+
+<div class="notranslate">
+
 ```
-CREATE USER lvestat_read WITH password 'passw';GRANT CONNECT ON DATABASE dblvestat to lvestat_read;\connect dblvestat;GRANT SELECT ON lve_stats2_history, lve_stats2_history_gov, lve_stats2_history_x60, lve_stats2_incident, lve_stats2_servers, lve_stats2_snapshot, lve_stats2_user TO lvestat_read;
+CREATE USER lvestat_read WITH password 'passw';
+GRANT CONNECT ON DATABASE dblvestat to lvestat_read;
+\connect dblvestat;
+GRANT SELECT ON lve_stats2_history, lve_stats2_history_gov, lve_stats2_history_x60, lve_stats2_incident, lve_stats2_servers, lve_stats2_snapshot, lve_stats2_user TO lvestat_read;
 ```
+</div>
 
-b. Assign root ownership and permission 600 to the main configuration file ( <span class="notranslate"> _/etc/sysconfig/lvestats2_ </span> ), so that it could be read only by <span class="notranslate"> LVE Stats 2 </span> server and by utilities that run under root.
+* Assign root ownership and permission 600 to the main configuration file (<span class="notranslate">`/etc/sysconfig/lvestats2`</span>), so that it could be read only by <span class="notranslate">LVE Stats 2</span> server and by utilities that run under root.
 
-c. Copy <span class="notranslate"> _/etc/sysconfig/lvestats2_  to  _/etc/sysconfig/lvestats2.readonly_ </span> , assign permission 644 to the new file, so that it could be read by any user but could be changed only by root.
+* Copy <span class="notranslate">`/etc/sysconfig/lvestats2` to `/etc/sysconfig/lvestats2.readonly`</span>, assign permission 644 to the new file, so that it could be read by any user but could be changed only by root.
 
-d. In <span class="notranslate"> _/etc/sysconfig/lvestats2.readonly_ </span> file, in the line _connect_string_ , specify DB user with read-only permission, created above.
+* In <span class="notranslate">`/etc/sysconfig/lvestats2.readonly`</span> file, in the line <span class="notranslate">`connect_string`</span>, specify DB user with read-only permission, created above.
 
-These steps allow hiding main DB user username/password from other system users.
+  These steps allow hiding main DB user username/password from other system users.
 
-If there is no need in such access differentiation, then <span class="notranslate"> _/etc/sysconfig/lvestats2_ </span> file access permission should be 644, so that it could be read by all users and could be changed only by <span class="notranslate"> root </span> .
+  If there is no need in such access differentiation, then <span class="notranslate">`/etc/sysconfig/lvestats2`</span> file access permission should be 644, so that it could be read by all users and could be changed only by <span class="notranslate">root</span>.
 
-When done restart server by running:
-<span class="notranslate"> </span>
+* When done, restart server by running:
+
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
+</div>
 
 
 **5. Using Special Characters in Database Password**
 
-Since scheme <span class="notranslate"> ://user:password@host[:port]/database_name  [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)   </span> is used in <span class="notranslate"> _connect_string_ </span> config option, then usage of special characters in user DB password is not allowed . To use special symbols in the password, it must be converted to [escape-sequence](https://en.wikipedia.org/wiki/Percent-encoding) . You can convert a password to escape-sequence in a console as follows:
- <span class="notranslate"> </span>
+Since scheme <span class="notranslate">`://user:password@host[:port]/database_name`</span> [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is used in <span class="notranslate">`connect_string`</span> config option, then usage of special characters in user DB password is not allowed.
+
+To use special symbols in the password, it must be converted to [escape-sequence](https://en.wikipedia.org/wiki/Percent-encoding). You can convert a password to escape-sequence in a console as follows:
+
+<div class="notranslate">
+
 ```
-echo -n '[You_P@$$]:' | perl -MURI::Escape -ne 'print uri_escape($_)."\n"'%5BYou_P%40%24%24%5D%3A
+echo -n '[You_P@$$]:' | perl -MURI::Escape -ne 'print uri_escape($_)."\n"'
+%5BYou_P%40%24%24%5D%3A
 ```
+</div>
 
-Or replace the symbols manually:
- <span class="notranslate"> </span>
+OR replace the symbols manually:
+
+<div class="notranslate">
+
 ```
-!    #    $    &    '    (    )    *    +    ,    /    :    ;    =    ?    @    [    ]%21  %23  %24  %26  %27  %28  %29  %2A  %2B  %2C  %2F  %3A  %3B  %3D  %3F  %40  %5B  %5D
+!    #    $    &    '    (    )    *    +    ,    /    :    ;    =    ?    @    [    ]
+%21  %23  %24  %26  %27  %28  %29  %2A  %2B  %2C  %2F  %3A  %3B  %3D  %3F  %40  %5B  %5D
 ```
+</div>
 
-After that _сonnect_string_ will look as follows:
-<span class="notranslate"> </span>
-  `сonnect_string=lvestats2:%5BYou_P%40%24%24%5D%3A@localhost/db_lvestats2` 
+After that <span class="notranslate">`сonnect_string`</span> will look as follows:
 
-### Customize 
+<div class="notranslate">
 
+```
+сonnect_string=lvestats2:%5BYou_P%40%24%24%5D%3A@localhost/db_lvestats2
+```
+</div>
 
-<span class="notranslate"> [Jinja2](http://jinja.pocoo.org/) </span> is used as a template engine for the notifications.
+### Customize lve-stats-2 notifications 
 
-The templates for notifications are located in , where - is the directory with localization name (language codes are formed according to <span class="notranslate"> ISO 639-1 </span> and <span class="notranslate"> ISO 639-2 </span> ). By default the templates for English are set: .
+<span class="notranslate">[Jinja2](http://jinja.pocoo.org/)</span> is used as a template engine for the notifications.
 
-<span class="notranslate"> `/usr/share/lve/emails/en_US` </span> contains the following templates:
+The templates for notifications are located in <span class="notranslate">`/usr/share/lve/emails/LOCALE`</span>, where <span class="notranslate">`LOCALE`</span> is the directory with localization name (language codes are formed according to <span class="notranslate">ISO 639-1</span> and <span class="notranslate">ISO 639-2</span>).
 
- <span class="notranslate">   `admin_notify.html  admin_notify.txt` </span> for administrator;
-` ` <span class="notranslate"> reseller_notify.html  reseller_notify.txt </span> for reseller;
-` ` <span class="notranslate"> user_notify.txt </span> for user.
+By default the templates for English are set: <span class="notranslate">`/usr/share/lve/emails/en_US.`</span>.
 
-The notification is formed as _ _ <span class="notranslate"> Multipart content type </span> _ [_ [RFC1341(MIME)](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html) _]_ . The plain text is taken from the <span class="notranslate"> _.txt _ </span> files, html version - from the <span class="notranslate"> _.html_ </span> template. In case when only one template is present ( <span class="notranslate"> _.txt_   </span> or <span class="notranslate"> _.html_ </span> ) the notification is sent as a <span class="notranslate"> _Non-multipart content_   </span> type notification. It is better to use <span class="notranslate"> _Multipart content_ </span> type notifications because when a mail client can not display an html-format message, then it will be displayed as plain text version.
+<span class="notranslate">`/usr/share/lve/emails/en_US`</span> contains the following templates:
 
-To localize notifications copy standard templates into directory with the proper locale name and translate the template. Also you can customize the main template making proper changes into it.
+* <span class="notranslate">`admin_notify.html`  `admin_notify.txt`</span> for administrator;
+* <span class="notranslate">`reseller_notify.html` `reseller_notify.txt`</span> for reseller;
+* <span class="notranslate">`user_notify.txt`</span> for user.
+
+The notification is formed as <span class="notranslate">_Multipart content type_</span> [RFC1341(MIME)](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html).
+
+The plain text is taken from the <span class="notranslate">`.txt`</span> files, html version - from the <span class="notranslate">`.html`</span> template.
+
+In case when only one template is present (<span class="notranslate">`.txt`</span> or <span class="notranslate">`.html`</span>) the notification is sent as a <span class="notranslate">_Non-multipart content_  </span> type notification.
+
+It is better to use <span class="notranslate">_Multipart content_</span> type notifications because when a mail client can not display an html-format message, then it will be displayed as plain text version.
+
+To localize notifications, copy standard templates into directory with the proper locale name and translate the template. Also you can customize the main template making proper changes into it.
 
 The list of variables that can be used in the template:
 
 | |  | |
 |-|--|-|
 |Variable | Example | Description|
-|<span class="notranslate"> TONAME </span> | <span class="notranslate"> “Customer” </span> | Notification receiver user name. Taken from profile in the control panel, by default - <span class="notranslate"> “Customer” </span> for user, <span class="notranslate"> “Administrator” </span> for administrator, <span class="notranslate"> “Reseller” </span> for reseller.|
-|<span class="notranslate"> TOMAIL </span> | <span class="notranslate"> “support@cloudlinux.com” </span> | Notification receiver email address.|
-|<span class="notranslate"> DOMAIN </span> | <span class="notranslate"> “wordpress.test247.cloudlinux.com” </span> | Main domain. Available only for user.|
-|<span class="notranslate"> LOCALE </span> | <span class="notranslate"> “en_US” </span> | Locale in which the notification is sent. Available only for user.|
-|<span class="notranslate"> RESELLER </span> | <span class="notranslate"> “root” </span> | User reseller. Available only for user.|
-|<span class="notranslate"> PERIOD </span> | <span class="notranslate"> “12 hours” </span> | Verification and notification sending period.|
-|<span class="notranslate"> LOGIN </span> | <span class="notranslate"> “wordpress” </span> | User login in the system.|
-|<span class="notranslate"> ID </span> | 500 | User ID in the system.|
-|<span class="notranslate"> lPMem lEP PMemF lVMem anyF IOf VMemF lCPU aIOPS aEP aPMem IOPSf lIO lIOPS aIO EPf aCPU aVMem NprocF aNproc lNproc CPUf' </span> |  | See description in <span class="notranslate"> lveinfo --help </span> output. Available only for users|
-|<span class="notranslate"> STATS_HTML </span> |  | html table with the list of users that exceeded limits. Available for administrator and reseller.|
-|<span class="notranslate"> STATS </span> |  | ascii - table with the list of users that exceeded limits. Available only for admins and resellers.|
+|<span class="notranslate">`TONAME`</span> | <span class="notranslate">`Customer`</span> | Notification receiver user name. Taken from profile in the control panel, by default - <span class="notranslate">`Customer`</span> for user, <span class="notranslate">`Administrator`</span> for administrator, <span class="notranslate">`Reseller`</span> for reseller.|
+|<span class="notranslate">`TOMAIL`</span> | <span class="notranslate">`support@cloudlinux.com`</span> | Notification receiver email address.|
+|<span class="notranslate">`DOMAIN`</span> | <span class="notranslate">`wordpress.test247.cloudlinux.com`</span> | Main domain. Available only for user.|
+|<span class="notranslate">`LOCALE`</span> | <span class="notranslate">`en_US`</span> | Locale in which the notification is sent. Available only for user.|
+|<span class="notranslate">`RESELLER`</span> | <span class="notranslate">`root`</span> | User reseller. Available only for user.|
+|<span class="notranslate">`PERIOD`</span> | <span class="notranslate">`12 hours`</span> | Verification and notification sending period.|
+|<span class="notranslate">`LOGIN`</span> | <span class="notranslate">`wordpress`</span> | User login in the system.|
+|<span class="notranslate">`ID`</span> | `500` | User ID in the system.|
+|<span class="notranslate"> `lPMem` `lEP` `PMemF` `lVMem` `anyF` `IOf` `VMemF` `lCPU` `aIOPS` `aEP` `aPMem` `IOPSf` `lIO` `lIOPS` `aIO` `EPf` `aCPU` `aVMem` `NprocF` `aNproc` `lNproc` `CPUf` </span> |  | See description in <span class="notranslate">`lveinfo --help`</span> output. Available only for users|
+|<span class="notranslate">`STATS_HTML`</span> |  | html table with the list of users that exceeded limits. Available for administrator and reseller.|
+|<span class="notranslate">`STATS`</span> |  | ASCII - table with the list of users that exceeded limits. Available only for admins and resellers.|
 
-Sender’s email address by default is administrator email address from control panel settings <span class="notranslate"> `(root@{hostn_name}` </span> if there is no email in the control panel).
+Sender’s email address by default is administrator email address from control panel settings <span class="notranslate">`(root@{hostn_name}`</span> if there is no email in the control panel).
 
-It can be changed with <span class="notranslate"> `NOTIFY_FROM_EMAIL` </span> option in the config <span class="notranslate"> `/etc/sysconfig/lvestats.config/StatsNotifier.cfg` </span>
+It can be changed with <span class="notranslate">`NOTIFY_FROM_EMAIL`</span> option in the config <span class="notranslate">`/etc/sysconfig/lvestats.config/StatsNotifier.cfg`</span>
 
 For example:
 
-<span class="notranslate"> `NOTIFY_FROM_EMAIL=support@hostername.com` </span>
+<span class="notranslate">`NOTIFY_FROM_EMAIL=support@hostername.com`</span>
 
-To apply changes restart <span class="notranslate"> lve-stats </span> service:
-<span class="notranslate"> </span>
+To apply changes restart <span class="notranslate">`lve-stats`</span> service:
+
+<div class="notranslate">
+
 ```
 service lvestats restart
 ```
+</div>
 
 for CloudLinux 7
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 systemctl restart lvestats.service
 ```
+</div>
 
-Default subject is “ <span class="notranslate"> Hosting account resources exceeded </span> ”.  It can be changed for each template (and for localized templates as well). To change subject, in the very beginning of the file (no blank lines allowed in the beginning of the template) add the field <span class="notranslate"> `Subject:` </span> , leave two blank lines after it and add template body.
+Default subject is <span class="notranslate">`Hosting account resources exceeded`</span>.  It can be changed for each template (and for localized templates as well). To change subject, in the very beginning of the file (no blank lines allowed in the beginning of the template) add the field <span class="notranslate">`Subject:`</span>, leave two blank lines after it and add template body.
 
-Customized subjects can be taken only from the templates with the resolution <span class="notranslate"> _*.txt_  ( _admin_notify.txt, reseller_notify.txt, user_notify.txt_ ) </span> . Changes apply without <span class="notranslate"> lvestats </span> restart.
+Customized subjects can be taken only from the templates with the resolution <span class="notranslate">`*.txt`</span> <span class="notranslate">(`admin_notify.txt`, `reseller_notify.txt`, `user_notify.txt`)</span>. Changes apply without <span class="notranslate">`lvestats`</span> restart.
 
-For backward compatibility the subject can be also changed with the key ` ` <span class="notranslate"> NOTIFY_FROM_SUBJECT </span> in the config <span class="notranslate"> `/etc/sysconfig/lvestats.config/StatsNotifier.cfg`   </span>
+For backward compatibility the subject can be also changed with the key <span class="notranslate"> `NOTIFY_FROM_SUBJECT`</span> in the config <span class="notranslate">`/etc/sysconfig/lvestats.config/StatsNotifier.cfg`</span>.
 
-Customized subjects have higher priority than the key <span class="notranslate"> `NOTIFY_FROM_SUBJECT` . </span>
+Customized subjects have the higher priority than the key <span class="notranslate">`NOTIFY_FROM_SUBJECT`</span>.
 
-Example for the file <span class="notranslate"> `user_notify.txt` </span>
-<span class="notranslate"> </span>
+Example for the file <span class="notranslate">`user_notify.txt`</span>
+
+<div class="notranslate">
+
 ```
-Subject: Customized subject exampleDear {{TONAME}},
-```
-```
- Your {{DOMAIN}} web hosting account exceeded one or more of its resources within the last {{PERIOD}}.{% if epf %}Exceeded the maximum of {{lep}} concurrent website connections. Your website was not available {{epf}} times because of this problem.{% endif %}{% if pmemf %}Exceeded the physical memory limit of {{lpmem}}KB. Your website was not available {{pmemf}} times because of this problem.{% endif %}{% if vmemf %}Exceeded the virtual memory limit of {{lvmem}}KB. Your website was not available {{vmemf}} times because of this problem.{% endif %}{% if nprocf %}Exceeded the number of processes limit of {{lnproc}}. Your website was not available {{nprocf}} times because of this problem.{% endif %}{% if cpuf %}You reached limit of {{lcpu}} of total server CPU usage {{cpuf}} times. Your website was forced to load slower to reduce its CPU usage.{% endif %}{% if iof %}You reached limit of {{lio}}KB/s disk io rate {{iof}} times. The disk io speed for your account was slowed as a result of this problem.{% endif %}{% if iopsf %}You reached limit of {{liops}} I/O operations {{iopsf}} times. The disk io speed for your account was slowed as a result of this problem.{% endif %} To view full details about your web hosting account's resource usage, including the time of each incident listed above, please click the link below and log into your cpanel hosting control panel, then click the "Resource Usage" link under the "Logs and Statistics" section.[http://{{DOMAIN}}:2083](http://%7B%7BDOMAIN%7D%7D:2083) If your account is regularly exceeding it's available resources, please consider upgrading to a higher level hosting plan that includes more resources. If you have any questions or need help with anything, just reply to this email and let us know. Sincerely, Your Friendly Web Hosting Support Team
-```
+Subject: Customized subject example
+Dear {{TONAME}},
 
+ 
+Your {{DOMAIN}} web hosting account exceeded one or more of its resources within the last {{PERIOD}}.
+{% if epf %}Exceeded the maximum of {{lep}} concurrent website connections. Your website was not available {{epf}} times because of this problem.
+{% endif %}{% if pmemf %}Exceeded the physical memory limit of {{lpmem}}KB. Your website was not available {{pmemf}} times because of this problem.
+{% endif %}{% if vmemf %}Exceeded the virtual memory limit of {{lvmem}}KB. Your website was not available {{vmemf}} times because of this problem.
+{% endif %}{% if nprocf %}Exceeded the number of processes limit of {{lnproc}}. Your website was not available {{nprocf}} times because of this problem.
+{% endif %}{% if cpuf %}You reached limit of {{lcpu}} of total server CPU usage {{cpuf}} times. Your website was forced to load slower to reduce its CPU usage.
+{% endif %}{% if iof %}You reached limit of {{lio}}KB/s disk io rate {{iof}} times. The disk io speed for your account was slowed as a result of this problem.
+{% endif %}{% if iopsf %}You reached limit of {{liops}} I/O operations {{iopsf}} times. The disk io speed for your account was slowed as a result of this problem.
+{% endif %}
+ 
+To view full details about your web hosting account's resource usage, including the time of each incident listed above, please click the link below and log into your cpanel hosting control panel, then click the "Resource Usage" link under the "Logs and Statistics" section.
+http://{{DOMAIN}}:2083
+ 
+If your account is regularly exceeding it's available resources, please consider upgrading to a higher level hosting plan that includes more resources. If you have any questions or need help with anything, just reply to this email and let us know.
+ 
+Sincerely,
+ 
+Your Friendly Web Hosting Support Team
+```
+</div>
 
 ## Command-line Tools
 
-
-
-
 | | |
 |-|-|
-|<span class="notranslate"> `/usr/sbin/lveinfo` </span> | `utility to display historical information about LVE usage;`|
-|<span class="notranslate"> `/usr/sbin/lvechart` </span> | `creates a chart representing LVE usage for user;`|
-|<span class="notranslate"> `/usr/sbin/dbgovchart` </span> | `creates a chart representing MySQL usage for user;`|
-|<span class="notranslate"> `/usr/sbin/lve-read-snapshot` </span> | `displays information from system state (snapshots) for user;`|
-|<span class="notranslate"> `/usr/sbin/lve-create-db` </span> | `creates/recreates database for ` <span class="notranslate"> lve-stats </span> `;`|
-|<span class="notranslate"> `/usr/sbin/cloudlinux-top` </span> | `utility provides information about current MySQL and LVE usage of a running system in JSON format.`|
-|<span class="notranslate"> `/usr/sbin/cloudlinux-statistics` </span> | `utility provides historical information about resource usage.`|
+|<span class="notranslate"> `/usr/sbin/lveinfo` </span> |utility to display historical information about LVE usage.|
+|<span class="notranslate"> `/usr/sbin/lvechart` </span> |creates a chart representing LVE usage for user.|
+|<span class="notranslate"> `/usr/sbin/dbgovchart` </span> |creates a chart representing MySQL usage for user.|
+|<span class="notranslate"> `/usr/sbin/lve-read-snapshot` </span> |displays information from system state (snapshots) for user.|
+|<span class="notranslate"> `/usr/sbin/lve-create-db` </span> |creates/recreates database for <span class="notranslate">lve-stats</span>.|
+|<span class="notranslate"> `/usr/sbin/cloudlinux-top` </span> |utility provides information about current MySQL and LVE usage of a running system in JSON format.|
+|<span class="notranslate"> `/usr/sbin/cloudlinux-statistics` </span> |utility provides historical information about resource usage.|
 
 
 ### lveinfo
