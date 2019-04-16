@@ -166,7 +166,7 @@ Log in as Hoster to get access to the following functionality.
 
 <div class="notranslate">
 
-## Current Usage
+### Current Usage
 
 </div>
 
@@ -207,7 +207,7 @@ In the drop-down <span class="notranslate">_Show top_</span> you can choose the 
 
 <div class="notranslate">
 
-## Users
+### Users
 
 </div>
 
@@ -265,7 +265,7 @@ Click on <span class="notranslate">_History_</span> symbol to view the history o
 
 <div class="notranslate">
 
-## Statistics
+### Statistics
 
 </div>
 
@@ -302,7 +302,7 @@ Click chart symbol in the <span class="notranslate">_View_</span> column to view
 
 <div class="notranslate">
 
-## Options
+### Options
 
 </div>
 
@@ -334,7 +334,7 @@ In <span class="notranslate">_Minimum number of Faults to notify_</span> section
 
 <div class="notranslate">
 
-## Packages
+### Packages
 
 </div>
 
@@ -363,7 +363,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 <div class="notranslate">
 
-## Selector
+### Selector
 
 </div>
 
@@ -388,134 +388,171 @@ Reseller interface is designed to manage limits for resellers’ end users, to m
 
 Log in under a particular reseller credentials to have access to the following functionality:
 
-[ ](/reseller_limits/#current-usage) <span class="notranslate"> [Current Usage](/reseller_limits/#current-usage) </span> tab - allows to monitor resellers’ end users resource usage at the moment;
-[ ](/reseller_limits/#historical-usage) <span class="notranslate"> [Historical Usage](/reseller_limits/#historical-usage) </span> tab - allows to control resellers’ end users resource usage history;
-[ ](/reseller_limits/#users) <span class="notranslate"> [Users](/reseller_limits/#users) </span> tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
-[ ](/reseller_limits/#statistics) <span class="notranslate"> [Statistics](/reseller_limits/#statistics) </span> tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
-[ ](/reseller_limits/#options) <span class="notranslate"> [Options](/reseller_limits/#options) </span> tab allows to set LVE Faults email notifications.
-[ ](/reseller_limits/#packages) <span class="notranslate"> [Packages](/reseller_limits/#packages) </span> tab allows to manage reseller’s end user packages limits.
+* <span class="notranslate">[Current Usage](/reseller_limits/#current-usage-tab)</span> tab - allows to monitor resellers’ end users resource usage at the moment;
+* <span class="notranslate"> [Historical Usage](/reseller_limits/#historical-usage-tab)</span> tab - allows to control resellers’ end users resource usage history;
+* <span class="notranslate"> [Users](/reseller_limits/#users-tab)</span> tab with the list of all resellers’ end users allows to view and manage all the reseller’s end user limits;
+* <span class="notranslate"> [Statistics](/reseller_limits/#statistics-tab)</span> tab displays the statistics of resource usage for particular timeframe or particular reseller's end user;
+* <span class="notranslate"> [Options](/reseller_limits/#options-tab)</span> tab allows to set LVE Faults email notifications.
+* <span class="notranslate"> [Packages](/reseller_limits/#packages-tab)</span> tab allows to manage reseller’s end user packages limits.
 
 Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
 
+<div class="notranslate">
 
-### Current Usage
+### Current Usage tab
 
+</div>
 
-Current usage table provides the information on the usage of <span class="notranslate"> SPEED (All), memory (MEM), data throughput (IO) (All) </span> , read/write operations per second (IOPS), number of processes (PNO), and entry processes (EP).
-Resource usage data is being refreshed every 10 seconds which is set by default in <span class="notranslate"> _Auto-refresh_ </span> field. You can set <span class="notranslate"> _Auto-refresh time_ </span> by choosing the value from the drop-down. You can refresh the table manually by clicking <span class="notranslate"> _Refresh now_ </span> or you can freeze the values by clicking <span class="notranslate"> _pause_ </span> button. Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate"> _unpause_ </span> button. The countdown will continue.
+Current usage table provides the information on the usage of the following:
+* <span class="notranslate"> SPEED (All)</span>
+* <span class="notranslate">memory (MEM)</span>
+* data throughput <span class="notranslate">(IO)(All)</span>
+* read/write operations per second (<span class="notranslate">IOPS</span>)
+* <span class="notranslate">number of processes (PNO)</span>
+* <span class="notranslate">entry processes (EP)</span>
 
-Reseller cannot manage INODE or MYSQL limits. Neither his own, nor for his users.
+Resource usage data is being refreshed every 10 seconds which is set by default in <span class="notranslate">_Auto-refresh_</span> field. You can set <span class="notranslate">_Auto-refresh time_</span> by choosing the value from the drop-down.
+
+You can refresh the table manually by clicking <span class="notranslate">_Refresh now_</span> or you can freeze the values by clicking <span class="notranslate">_pause_</span> button.
+
+Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate">_unpause_</span> button. The countdown will continue.
+
+Reseller cannot manage <span class="notranslate">INODE</span> or MYSQL limits. Neither his own, nor for his users.
 
 The bottom line star in the table displays the total reseller resource usage. It means, that all the usage of resellers’ end users and of his own is displayed as a summary for each parameter.
+
+
 ![](/images/currentusagetabresellerr_zoom70.png)
 
+<div class="notranslate">
 
+### Historical Usage tab
 
-### Historical Usage
+</div>
 
+Choose <span class="notranslate">_Historical Usage_</span> tab to view reseller and resellers’ end users resource usage history and faults. The list of users can be filtered by <span class="notranslate">_Timeframe_</span>.
 
-Choose <span class="notranslate"> _Historical Usage_ </span> tab to view reseller and resellers’ end users resource usage history and faults. The list of users can be filtered by <span class="notranslate"> _Timeframe_ </span> .
+When reseller’s end user reaches the limits set by hoster for the reseller, this will be displayed on the chart. 
 
-When reseller’s end user reaches the limits set by hoster for the reseller, this will be displayed on the chart. Please note, that in this case reseller’s end user would not necessarily reaches his limits set by the reseller. These faults are not displayed on the chart.
+:::tip Note
+In this case reseller’s end user would not necessarily reaches his limits set by the reseller. These faults are not displayed on the chart.
+:::
 
-On the <span class="notranslate"> _Historical Usage_ </span> page the reseller is also able to see the list of <span class="notranslate"> _Top 5 Reseller’s end users_ </span> (based on resource usage, for the same period as charts/overall usage). Click on a <span class="notranslate"> _History_ </span> icon in the <span class="notranslate"> _Actions_ </span> column to view resource usage statistics for particular user.
+On the <span class="notranslate">_Historical Usage_</span> page the reseller is also able to see the list of <span class="notranslate">_Top 5 Reseller’s end users_</span> (based on resource usage, for the same period as charts/overall usage). Click <span class="notranslate">_History_</span> in the <span class="notranslate">_Actions_</span> column to view resource usage statistics for particular user.
 
-Click on <span class="notranslate"> _LVE Statistics_ </span> link in the top of the <span class="notranslate"> Top 5 </span> list to go to the _ _ <span class="notranslate"> Statistics </span> page to view or manage the rest of users.
+Click <span class="notranslate">_LVE Statistics_</span> on the top of the <span class="notranslate">Top 5</span> list to go to the <span class="notranslate">_Statistics_</span> page to view or manage the rest of users.
 
 ![](/images/historicalusageresellertab_zoom70.png)
 
+<div class="notranslate">
 
-### Users
+### Users tab
 
+</div>
 
-Choose <span class="notranslate"> _Users_ </span> tab to view and manage the list of all resellers’ end users and resource usage limits provided for them. The following limits are available for the resellers’ end users: <span class="notranslate"> SPEED, PMEM, IO, IOPS, EP, NPROC </span> .
+Choose <span class="notranslate">_Users_</span> tab to view and manage the list of all resellers’ end users and resource usage limits provided for them. The following limits are available for the resellers’ end users:
 
-You can filter the list by <span class="notranslate"> _Username_ ,  _Domain_ ,  _LVE ID_ . </span> Tick <span class="notranslate"> _Show only ignored users_ </span> checkbox to display only users with <span class="notranslate"> MySQL Governor </span> disabled.
+* <span class="notranslate">SPEED</span>
+* <span class="notranslate">PMEM</span>
+* <span class="notranslate">IO</span>
+* <span class="notranslate">IOPS</span>
+* <span class="notranslate">EP</span>
+* <span class="notranslate">NPROC</span>
+
+You can filter the list by <span class="notranslate">_Username_, _Domain_, _LVE ID_.</span>
+
+Tick <span class="notranslate">_Show only ignored users_</span> to display only users with <span class="notranslate">MySQL Governor</span> disabled.
 
 ![](/images/userstabreseller_zoom70.png)
 
+<div class="notranslate">
 
+### Actions column
 
+</div>
 
-Click on a pencil icon in <span class="notranslate"> _Actions_ </span> column to edit limits for a particular user. The following actions are available:
+Click on a pencil icon in <span class="notranslate">_Actions_</span> column to edit limits for a particular user. The following actions are available:
 
-Click <span class="notranslate"> Reset </span> to reset limits to default values.
-Click <span class="notranslate"> Apply </span> for <span class="notranslate"> Do not limit </span> to set unlimited resources to a user.
-Set values for <span class="notranslate"> SPEED, PMEM, IO, IOPS, EP </span> , and NPROC and click <span class="notranslate"> _Save_ </span> to save changes or <span class="notranslate"> _Cancel_ </span> to close the window.
+* Click <span class="notranslate">Reset</span> to reset limits to default values.
+* Click <span class="notranslate">Apply</span> for <span class="notranslate">Do not limit</span> to set unlimited resources to a user.
+* Set values for <span class="notranslate"> PEED, PMEM, IO, IOPS, EP</span>, and NPROC and click <span class="notranslate">_Save_</span> to save changes or <span class="notranslate">_Cancel_</span> to close the window.
 
 ![](/images/userstabpopup_zoom70.png)
 
+<div class="notranslate">
 
+### Statistics tab
 
+</div>
 
+Choose <span class="notranslate">_Statistics_</span> tab to view resource usage limits statistics.
 
-### Statistics
-
-
-Choose _Statistics_ tab to view resource usage limits statistics.
-
-<span class="notranslate"> Statistics </span> table can be filtered by <span class="notranslate"> _Timeframe_ ,  _Limit_ ,  _Top LVEs_ ,  _LVE approaching limit_ ,  _Fault LVE_ </span> .
+<span class="notranslate">_Statistics_</span> table can be filtered by <span class="notranslate">_Timeframe_, _Limit_, _Top LVEs_, _LVE approaching limit_, _Fault LVE_</span>.
 
 The following parameters are displayed:
 
- <span class="notranslate"> SPEED </span> per user;
- <span class="notranslate"> PMEM </span> usage per user;
- <span class="notranslate"> IO </span> usage per user;
- <span class="notranslate"> EP </span> usage per user;
- <span class="notranslate"> NPROC </span> usage per user;
- <span class="notranslate"> IOPS </span> usage per user.
+* <span class="notranslate"> SPEED</span> per user;
+* <span class="notranslate"> PMEM</span> usage per user;
+* <span class="notranslate"> IO</span> usage per user;
+* <span class="notranslate"> EP</span> usage per user;
+* <span class="notranslate"> NPROC</span> usage per user;
+* <span class="notranslate"> IOPS</span> usage per user.
 
 ![](/images/statisticstabreseller_zoom70.png)
 
 
-Use _Charts_ icon in the _View_ column to view detailed resource usage charts for a particular period of time.
+Use <span class="notranslate">_Charts_</span> in the <span class="notranslate">_View_</span> column to view detailed resource usage charts for a particular period of time.
 
 For example, 7 days period chart.
 
 ![](/images/sevendayschartresellers_zoom70.png)
 
+<div class="notranslate">
 
 
-### Options
+### Options tab
 
+</div>
 
-Choose <span class="notranslate"> _Options_ </span> tab to set user email notifications for resellers’ end users.
+Choose <span class="notranslate">_Options_</span> tab to set user email notifications for resellers’ end users.
 
-In <span class="notranslate"> _LVE Faults email notifications_ </span> section tick appropriate checkboxes to set the required type of notification.
+In <span class="notranslate">_LVE Faults email notifications_</span> section tick appropriate checkboxes to set the required type of notification.
 
 ![](/images/optionsresellernotify_zoom70.png)
 
+* <span class="notranslate">_Notify me on users faults_</span> - notify reseller when his users have exceeded limits.
+* <span class="notranslate">_Notify Customers_</span> - notify resellers’ end users when they have exceeded limits.
+* <span class="notranslate">_Notify me when I hit my limits_</span> - notify reseller when overall resource usage limits are reached.
 
-<span class="notranslate"> _Notify me on users faults_ </span> - notify reseller when his users have exceeded limits.
-<span class="notranslate"> _Notify Customers_ </span> - notify resellers’ end users when they have exceeded limits.
-<span class="notranslate"> _Notify me when I hit my limits_ </span> - notify reseller when overall resource usage limits are reached.
-
-In <span class="notranslate"> _Faults to include_ </span> section tick checkboxes to include particular limits to email notifications.
+In <span class="notranslate">_Faults to include_</span> section tick checkboxes to include particular limits to email notifications.
 
 ![](/images/options02_zoom70.png)
 
-In <span class="notranslate"> _Minimum number of Faults to notify_ </span> section enter the number of faults required for the notification to be sent for reseller and customer. You can also set the reseller notification frequency.
+In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter the number of faults required for the notification to be sent for reseller and customer. You can also set the reseller notification frequency.
 
-Set the frequency of sending the reseller email notifications in <span class="notranslate"> _Notify Reseller Every ... days/hours/minutes/seconds_ </span> section.
+Set the frequency of sending the reseller email notifications in <span class="notranslate">_Notify Reseller Every ... days/hours/minutes/seconds_</span> section.
 
 ![](/images/options03_zoom70.png)
 
-Click _Save Changes_ to apply changes.
+Click <span class="notranslate">_Save Changes_</span> to apply changes.
 
-### Packages
+<div class="notranslate">
 
+### Packages tab
 
-Choose <span class="notranslate"> _Packages_ </span> tab to view and modify limits for reseller’s packages.
+</div>
+
+Choose <span class="notranslate">_Packages_</span> tab to view and modify limits for reseller’s packages.
 
 ![](/images/packagesreseller_zoom70.png)
 
-Click on a pencil icon in a package row to set the following limits for a package:
+Click pencil icon in a package row to set the following limits for a package:
 
- <span class="notranslate"> SPEED </span> limit;
- <span class="notranslate"> Physical memory (PMEM) </span> (can be set as unlimited by setting 0);
- <span class="notranslate"> I/O </span> limits;
- <span class="notranslate"> IOPS </span> limits;
- <span class="notranslate"> Concurrent connections (EP) </span> limits.
+* <span class="notranslate">SPEED</span> limit;
+* <span class="notranslate">Physical memory (PMEM)</span> (can be set as unlimited by setting 0);
+* <span class="notranslate">I/O</span> limits;
+* <span class="notranslate">IOPS</span> limits;
+* <span class="notranslate">Concurrent connections (EP)</span> limits.
 
-When limits are set click <span class="notranslate"> _Save_ </span> to apply changes.
+When limits are set click <span class="notranslate">_Save_</span> to apply changes.
 
