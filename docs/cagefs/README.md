@@ -887,59 +887,81 @@ There are two ways:
 
 1. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> is not created yet ( <span class="notranslate"> cagefsctl --init </span> wasn't executed), then execute:
 
-<span class="notranslate"> </span>
-```
-$ mkdir /home/cagefs-skeleton $ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton $ cagefsctl --init
-```
+<div class="notranslate">
 
- 2. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> already exists:
-
-<span class="notranslate"> </span>
 ```
-$ cagefsctl --disable-cagefs $ cagefsctl --unmount-all# To ensure that the following command prints empty output: $ cat /proc/mounts | grep cagefs # if you see any cagefs entries, execute "cagefsctl --unmount-all" again.$ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton $ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeletoncagefsctl --enable-cagefs
+$ mkdir /home/cagefs-skeleton 
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton 
+$ cagefsctl --init
 ```
+</div>
 
+2. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> already exists:
+
+<div class="notranslate">
+
+```
+$ cagefsctl --disable-cagefs 
+$ cagefsctl --unmount-all
+# To ensure that the following command prints empty output: 
+$ cat /proc/mounts | grep cagefs 
+# if you see any cagefs entries, execute "cagefsctl --unmount-all" again.
+$ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton 
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeletoncagefsctl --enable-cagefs
+```
+</div>
 
 On cPanel servers, if you place skeleton into <span class="notranslate"> _/home_   </span> directory, then you should configure the following option:
 
-In _cPanel WHM_ choose <span class="notranslate"> _Server Configuration_ </span> and go to <span class="notranslate"> _Basic cPanel/WHM Setup_ </span> , then in <span class="notranslate"> _Basic Config_ </span> change <span class="notranslate"> _Additional home directories_   </span> default _ _ value to (not <span class="notranslate"> "home" </span> ).
+In _cPanel WHM_ choose <span class="notranslate"> _Server Configuration_ </span> and go to <span class="notranslate"> _Basic cPanel/WHM Setup_ </span> , then in <span class="notranslate"> _Basic Config_ </span> change <span class="notranslate"> _Additional home directories_   </span> default value to blank (not <span class="notranslate"> "home" </span> ).
 
-
-
-
+::: tip Note
+If this option is not set, then cPanel will create new accounts in incorrect places.
+:::
 
 
 
 ### Moving /var/cagefs directory
 
 
-To move /var/cagefs to another location:
-<span class="notranslate"> </span>
-```
-$ cagefsctl --disable-cagefs$ cagefsctl --unmount-all
-```
+To move <span class="notranslate"> /var/cagefs </span> to another location:
 
-
-Verify that directory does not exist (if it exists - change name "cagefs.bak" to something else)
-<span class="notranslate"> </span>
+<div class="notranslate">
+ 
 ```
-$ cp -rp /var/cagefs /new/path/cagefs$ mv /var/cagefs /var/cagefs.bak$ ln -s /new/path/cagefs /var/cagefs$ cagefsctl --enable-cagefs$ cagefsctl --remount-all
+$ cagefsctl --disable-cagefs
+$ cagefsctl --unmount-all
 ```
+</div>
 
+Verify that <span class="notranslate"> /var/cagefs.bak </span> directory does not exist (if it exists - change name "cagefs.bak" to something else)
+
+<div class="notranslate">
+
+```
+$ cp -rp /var/cagefs /new/path/cagefs
+$ mv /var/cagefs /var/cagefs.bak
+$ ln -s /new/path/cagefs /var/cagefs
+$ cagefsctl --enable-cagefs
+$ cagefsctl --remount-all
+```
+</div>
 
 Verify that the following command gives empty output:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cat /proc/mounts | grep cagefs.bak
 ```
-
+</div>
 
 Then you can safely remove /var/cagefs.bak:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ rm -rf /var/cagefs.bak
 ```
-
+</div>
 
 ### TMP Directories
 
@@ -951,30 +973,35 @@ The actual location of the directory is <span class="notranslate"> _$USER_HOME/.
 Once a day, using cron job, <span class="notranslate"> CageFS </span> will clean up user's <span class="notranslate"> _/tmp_ </span> directory from all the files that haven't been accessed during 30 days.
 
 This can be changed by running:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cagefsctl --set-tmpwatch='/usr/sbin/tmpwatch -umclq 720'
 ```
+</div>
 
 Where 720 is the number of hours that the file had to be inaccessible to be removed.
 
 By default this is done at 03:37 AM, but you can also force the clean up outdated files that match 'chosen period' of all user's <span class="notranslate"> _/tmp_ </span> directories without waiting for a job to be launched by <span class="notranslate"> cronjob </span> . Just run:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ cagefsctl --tmpwatch
 ```
+</div>
 
 The following path will be cleaned as well:
 
-<span class="notranslate"> _/var/cache/php-eaccelerator_   </span> (actual location _ _ <span class="notranslate"> $USER_HOME/.cagefs/var/cache/php-eaccelerator </span> )
+<span class="notranslate"> _/var/cache/php-eaccelerator_   </span> (actual location <span class="notranslate"> _$USER_HOME/.cagefs/var/cache/php-eaccelerator_ </span> )
 
-You can configure ` ` <span class="notranslate"> tmpwatch </span> to clean custom directories inside <span class="notranslate"> CageFS </span> .
+You can configure <span class="notranslate"> tmpwatch </span> to clean custom directories inside <span class="notranslate"> CageFS </span> .
 
-Create <span class="notranslate"> _/etc/cagefs/cagefs.ini_ </span> configuration file and specify <span class="notranslate">   _tmpwatch_dirs_ </span> directive as follows:
+Create <span class="notranslate"> _/etc/cagefs/cagefs.ini_ </span> configuration file and specify <span class="notranslate"> _tmpwatch_dirs_ </span> directive as follows:
 
 <span class="notranslate"> _tmpwatch_dirs=/dir1,/dir2_ </span>
 
-After that directories <span class="notranslate"> _/dir1_ </span> and _ _ <span class="notranslate"> /dir2 </span> _ _ inside CageFS  will be cleaned automatically.
+After that directories <span class="notranslate"> _/dir1_ </span> and <span class="notranslate"> _/dir2_ </span> inside CageFS  will be cleaned automatically.
 
 Note that actual location of those directories in real file system is <span class="notranslate"> _$USER_HOME/.cagefs/dir1_ </span> and <span class="notranslate"> _$USER_HOME/.cagefs/dir2_ </span> .
 
@@ -986,24 +1013,23 @@ For cPanel servers, CageFS version 6.0-42 or higher performs cleaning of PHP ses
 
 For <span class="notranslate"> Alt-PHP </span> versions <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/tmp_ </span> .
 
-
-
-
+::: tip Note
+For new installations of Alt-PHP packages, <span class="notranslate"> session.save_path will be changed from /tmp to /opt/alt/phpNN/var/lib/php/session, </span> where NN corresponds to Alt-PHP version.
+:::
 
 This applies to the following <span class="notranslate"> Alt-PHP </span> versions (or later):
-<span class="notranslate"> </span>
-alt-php44-4.4.9-71;
-alt-php51-5.1.6-81;
-alt-php52-5.2.17-107;
-alt-php53-5.3.29-59;
-alt-php54-5.4.45-42;
-alt-php55-5.5.38-24;
-alt-php56-5.6.31-7;
-alt-php70-7.0.23-5;
-alt-php71-7.1.9-5;
-alt-php72-7.2.0-0.rc.2.2.
+* alt-php44-4.4.9-71;
+* alt-php51-5.1.6-81;
+* alt-php52-5.2.17-107;
+* alt-php53-5.3.29-59;
+* alt-php54-5.4.45-42;
+* alt-php55-5.5.38-24;
+* alt-php56-5.6.31-7;
+* alt-php70-7.0.23-5;
+* alt-php71-7.1.9-5;
+* alt-php72-7.2.0-0.rc.2.2.
 
-When using EasyApache 3, <span class="notranslate"> _session.save_path_ </span> value is normally _ _ <span class="notranslate"> /var/cpanel/php/sessions/ea3 </span> or <span class="notranslate"> _/tmp_ </span> . Seettings for EasyApache 3 are usualy taken from the file <span class="notranslate"> _/usr/local/lib/php.ini_ . </span>
+When using EasyApache 3, <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/var/cpanel/php/sessions/ea3_ </span> or <span class="notranslate"> _/tmp_ </span> . Seettings for EasyApache 3 are usualy taken from the file <span class="notranslate"> _/usr/local/lib/php.ini_ . </span>
 
 When using EasyApache 4, <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/var/cpanel/php/sessions/ea-phpXX_ ,  </span> where <span class="notranslate"> _XX_ </span> corresponds to PHP version.
 
@@ -1011,11 +1037,11 @@ Cleaning is started by cron <span class="notranslate"> _/etc/cron.d/cpanel_php_s
 
 The settings for ea-php are located in <span class="notranslate"> _/opt/cpanel/ea-phpXX/root/etc/php.d/local.ini_ </span> or in <span class="notranslate"> _/opt/cpanel/ea-phpXX/root/etc/php.ini_ </span> , where <span class="notranslate"> _XX_ </span> corresponds to the PHP version.
 
-The settings for alt-php are located in _ _ <span class="notranslate"> /opt/alt/phpXX/etc/php.ini </span> files, where <span class="notranslate"> _XX_ </span> corresponds to PHP version.
+The settings for alt-php are located in <span class="notranslate"> _/opt/alt/phpXX/etc/php.ini_ </span> files, where <span class="notranslate"> _XX_ </span> corresponds to PHP version.
 
 The cleaning script cleans php sessions for all PHP versions ( <span class="notranslate"> _ea-php_ </span> and <span class="notranslate"> _alt-php_ </span> ) regardless of whether a version is used or selected via <span class="notranslate"> MultiPHP Manager </span> or <span class="notranslate"> PHP Selector </span> . When different <span class="notranslate"> _session.gc_maxlifetime_ </span> values are specified for the same <span class="notranslate"> _session.save_path_ </span> (for different php versions), the cleaning script will use the least value for cleaning <span class="notranslate"> _session.save_path_ </span> . So, it is recommended to specify different <span class="notranslate"> _session.save_path_ </span> for each PHP version.
 
-Users can define custom value of _ _ <span class="notranslate"> session.gc_maxlifetime </span> via PHP Selector in order to configure PHP's garbage collector, but that will not affect the script for cleaning PHP sessions. The script cleans PHP sessions based on global values of <span class="notranslate"> _session.gc_maxlifetime_ </span> and <span class="notranslate"> _session.save_path_ </span> directives taken from files mentioned above. Settings in custom users’ <span class="notranslate"> php.ini </span> files are ignored.
+Users can define custom value of <span class="notranslate"> _session.gc_maxlifetime_ via PHP Selector </span> in order to configure PHP's garbage collector, but that will not affect the script for cleaning PHP sessions. The script cleans PHP sessions based on global values of <span class="notranslate"> _session.gc_maxlifetime_ </span> and <span class="notranslate"> _session.save_path_ </span> directives taken from files mentioned above. Settings in custom users’ <span class="notranslate"> php.ini </span> files are ignored.
 
 **Cleanup PHP session files in Plesk**
 
@@ -1029,63 +1055,68 @@ Each time the script runs, it performs the cleanup of the paths:
 
 The following features are applied during the cleanup:
 
-all the users with <span class="notranslate"> UID </span> higher than specified in <span class="notranslate"> /etc/login.defs </span> are processed. Each user is processed independently from one another.
-
-only directories inside <span class="notranslate"> CageFS </span> are being cleaned. The paths of the same name in the physical  file system are not processed.
-
-in all the detected directories, all the files with the names that correspond to <span class="notranslate"> sess_* search </span> mask are removed, the rest of the files are ignored.
-
-the files older than specified lifetime are removed.
-
-all non-fatal errors (lack of rights, missing directory) are ignored and do not affect the further work of the script.
+* all the users with <span class="notranslate"> UID </span> higher than specified in <span class="notranslate"> /etc/login.defs </span> are processed. Each user is processed independently from one another.
+* only directories inside <span class="notranslate"> CageFS </span> are being cleaned. The paths of the same name in the physical  file system are not processed.
+* in all the detected directories, all the files with the names that correspond to <span class="notranslate"> sess_* search </span> mask are removed, the rest of the files are ignored.
+* the files older than specified lifetime are removed.
+* all non-fatal errors (lack of rights, missing directory) are ignored and do not affect the further work of the script.
 
 **Disable PHP sessions cleanup on cPanel and Plesk**
 
 Here is a possible workaround for PHP session expiration problem (session lives longer than it is possible in a control panel). To use your own custom PHP sessions cleanup scripts - you can turn off built-in sessions cleanup implementation in the following way: 
-add `clean_user_php_sessions=false` line to `/etc/sysconfig/cloudlinux` .
+add <span class="notranslate"> `clean_user_php_sessions=false` line to _/etc/sysconfig/cloudlinux_ </span> .
 
 
 
 ### Syslog
 
 
-By default, <span class="notranslate"> `/dev/log` </span> should be available inside end user's <span class="notranslate"> CageFS </span> . This is needed so that user's cronjobs and other things that user <span class="notranslate"> `dev/log` </span> would get recorded in the system log files.
+By default, <span class="notranslate"> _/dev/log_ </span> should be available inside end user's <span class="notranslate"> CageFS </span> . This is needed so that user's cronjobs and other things that user <span class="notranslate"> _dev/log_ </span> would get recorded in the system log files.
 
-This is controlled using file <span class="notranslate"> `/etc/rsyslog.d/schroot.conf` </span> with the following content:
-<span class="notranslate"> </span>
+This is controlled using file <span class="notranslate"> _/etc/rsyslog.d/schroot.conf_ </span> with the following content:
+<div class="notranslate">
+
 ```
 $AddUnixListenSocket /usr/share/cagefs-skeleton/dev/log
 ```
+</div>
 
-To remove presence of <span class="notranslate"> `dev/log` </span> inside CageFS, remove that file, and restart rsyslog service.
+To remove presence of <span class="notranslate"> _dev/log_ </span> inside CageFS, remove that file, and restart rsyslog service.
 
 
 ### Excluding mount points
 
-
+**How to exclude mounts from namespaces for all LVEs**
 
 
 By default, all mounts from the real file system is inherited by namespaces of all <span class="notranslate"> LVEs </span> . So, destroying all <span class="notranslate"> LVEs </span> may be required in order to unmount some mount in real file system completely. Otherwise, mount point remains busy after unmounting it in the real file system because this mount exists in namespaces of <span class="notranslate"> LVEs </span> .
 
-<span class="notranslate"> `lvectl start` </span> command saves all mounts from real file system as “default namespace” for later use in all <span class="notranslate"> LVEs </span> . <span class="notranslate"> **lve_namespaces** </span> service executes <span class="notranslate"> </span> command during startup.
+<span class="notranslate"> `lvectl start` </span> command saves all mounts from real file system as “default namespace” for later use in all <span class="notranslate"> LVEs </span> . <span class="notranslate"> **lve_namespaces** </span> service executes <span class="notranslate"> `lvectl start` </span> command during startup.
 
 In <span class="notranslate"> **lve-utils-2.0-26** </span> (and later) there is an ability to exclude specific mounts from namespaces for all <span class="notranslate"> LVEs </span> .
-In order to do so, please create a file <span class="notranslate"> _/etc/container/exclude_mounts.conf_ </span> with list of mounts to exclude (one mount per line) as regular expressions, and then execute <span class="notranslate"> </span> :
-<span class="notranslate"> </span>
+In order to do so, please create a file <span class="notranslate"> _/etc/container/exclude_mounts.conf_ </span> with list of mounts to exclude (one mount per line) as regular expressions, and then execute <span class="notranslate"> `lvectl start` </span> :
+<div class="notranslate">
+
 ```
-# cat /etc/container/exclude_mounts.conf    ^/dir1/^/dir2$# lvectl start
+# cat /etc/container/exclude_mounts.conf    
+^/dir1/
+^/dir2$
+# lvectl start
 ```
+</div>
 
 After that, all new created <span class="notranslate"> LVEs </span> will be without <span class="notranslate"> _/dir2_ </span> mount and without mounts that start with <span class="notranslate"> _/dir1/_ </span> (like <span class="notranslate"> _/dir1/x_ ,  _/dir1/x/y_ </span> , etc). To apply changes to existing <span class="notranslate"> LVEs </span> you should recreate <span class="notranslate"> LVEs </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# lvectl destroy all   # lvectl apply all
+# lvectl destroy all   
+# lvectl apply all
 ```
+</div>
 
-
-
-
-
+::: tip Note
+You should recreate all LVEs only once after creating <span class="notranslate"> _/etc/container/exclude_mounts.conf_ </span> file. After that the configuration changes will be applied to all new LVEs automatically.
+:::
 
 ## Control Panel Integration
 
@@ -1094,13 +1125,13 @@ CageFS comes with a plugin for various control panels.
 
 The plugin allows to:
 
-·        Initialize CageFS;
+* Initialize CageFS;
 
-·        Select [mode of operation](/cagefs/#managing-users) ;
+* Select [mode of operation](/cagefs/#managing-users) ;
 
-·        See and modify the list of enabled/disabled users;
+* See and modify the list of enabled/disabled users;
 
-·        Update CageFS skeleton.
+* Update CageFS skeleton.
 
 
 ### cPanel
@@ -1116,7 +1147,7 @@ To enable CageFS for a proper user (users), in <span class="notranslate"> CageFS
 
 To disable a user (users), choose a user from the list on the left ( <span class="notranslate"> Enabled </span> users) and click <span class="notranslate"> Disable CageFS </span> . The user will move to the list on the right ( <span class="notranslate"> Disabled </span> users).
 
-To update CageFS Skeleton click <span class="notranslate"> Update CageFS Skeleton </span> .
+To update CageFS skeleton, click <span class="notranslate"> Update CageFS Skeleton </span> .
 
 ![](/images/_img2_zoom71.png)
 
@@ -1131,11 +1162,12 @@ CageFS comes with a plugin for Plesk 10.x. It allows initializing and updating C
 In modules section choose CageFS:
 
 ![](/images/plesk_cagefs_icon.png)
+
 To enable CageFS for a proper user (users), in <span class="notranslate"> CageFS User Manager </span> choose a user from the list on the right ( <span class="notranslate"> Disabled </span> users) and click <span class="notranslate"> Toggle </span> . The user will move to the list on the left ( <span class="notranslate"> Enabled </span> users).
 
 To disable a user (users), choose a user from the list on the left ( <span class="notranslate"> Enabled </span> users) and click <span class="notranslate"> Disable CageFS </span> . The user will move to the list on the right ( <span class="notranslate"> Disabled </span> users).
 
-To update <span class="notranslate"> CageFS Skeleton </span> click <span class="notranslate"> Update CageFS Skeleton </span> .
+To update CageFS skeleton, click <span class="notranslate"> Update CageFS Skeleton </span> .
 
 ![](/images/plesk_cagefs_manager_disable_all.png)
 
