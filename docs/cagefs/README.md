@@ -495,262 +495,310 @@ To exclude users from CageFS, create a file (any name would work) inside _ _ `/e
 CageFS creates individual namespace for each user, making it impossible for users to see each other's files and creating high level of isolation. The way namespace is organized:
 
 1. <span class="notranslate"> /usr/share/cagefs-skeleton </span> with safe files is created
-2.        Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate"> /usr/share/cagefs-skeleton </span>
-a.        list of such directories is defined in /etc/cagefs/cagefs.mp
-3. <span class="notranslate"> /var/cagefs/[prefix]/username </span> directory for each user. Prefix is defined as last two digits of user id. User id is taken from /etc/passwd file.
-4.        Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
-5.        /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs-tmp directory </span>
-6.        Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
+2. Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate"> /usr/share/cagefs-skeleton </span>
+(a list of such directories is defined in /etc/cagefs/cagefs.mp)
+3. <span class="notranslate"> /var/cagefs/[prefix]/username </span> directory for each user. Prefix is defined as last two digits of user id. User id is taken from <span class="notranslate"> /etc/passwd </span> file.
+4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
+5. /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs-tmp directory </span>
+6. Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
 7. You can define custom directories per user using [virt.mp](/cagefs/#per-user-virtual-mount-points) files [CageFS 5.1 and higher]
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
-<span class="notranslate"> </span>
-`@/full/path/to/directory,permission notation`
+
+<span class="notranslate"> `@/full/path/to/directory,permission notation` </span>
 
 
 This is useful when you need to give each user its own copy of a particular system directory, like:
-<span class="notranslate"> </span>
-`@/var/run/screen,777`
+
+<span class="notranslate"> `@/var/run/screen,777` </span>
 
 
 Such entry would create separate <span class="notranslate"> /var/run/screen </span> for each user, with permissions set to 777
 
 To modify mount points, edit /etc/cagefs/cagefs.mp. Here is an example of cagefs.mp:
-<span class="notranslate"> </span>
-```
-/var/lib/mysql/var/lib/dav/var/www/cgi-bin/var/spool/dev/pts/usr/local/apache/domlogs/proc/opt@/var/spool/cron,700@/var/run/screen,777
-```
+<div class="notranslate">
 
+```
+/var/lib/mysql
+/var/lib/dav
+/var/www/cgi-bin
+/var/spool
+/dev/pts
+/usr/local/apache/domlogs
+/proc
+/opt
+@/var/spool/cron,700
+@/var/run/screen,777
+```
+</div>
 
 If you want to change mount points, make sure you re-initialize mount points for all customers:
+<div class="notranslate">
 
 ```
 $ cagefsctl --remount-all
 ```
-
+</div>
 This command will kill all current processes and reset mount points.
 
 
 
-#### Per user virtual mount points
+#### **Per user virtual mount points**
 
+_[CageFS 5.1 and higher]_
 
-**[CageFS 5.1 and higher]**
-
-* _Please, see _ [Split by username](/cagefs/#split-by-username) _ feature, as it might be more simpler to implement in some cases._ 
+* _Please, see [Split by username](/cagefs/#split-by-username) feature, as it might be simpler to implement in some cases._ 
 
 Starting with CageFS 5.1 you can specify additional directories to be mounted inside user's CageFS. This can be specified for each user.
 To specify virtual mount points for a user, create a file:
-<span class="notranslate"> </span>
-`/var/cagefs/[prefix]/[user]/virt.mp`
+
+<span class="notranslate"> `/var/cagefs/[prefix]/[user]/virt.mp` </span>
 
 
 Inside that file, you can specify mount points in the following format:
-<span class="notranslate"> </span>
-```
-virtdir1,mask@subdir1,mask@subdir2,maskvirdir2,mask@subdir3,mask@subdir4,mask>virtdir3,mask@subdir5,mask@subdir6,mask# comments
-```
+<div class="notranslate">
 
+```
+virtdir1,mask
+@subdir1,mask
+@subdir2,mask
+virdir2,mask
+@subdir3,mask
+@subdir4,mask
+>virtdir3,mask
+@subdir5,mask
+@subdir6,mask
+# comments
+```
+</div>
 
- <span class="notranslate"> mask </span> is always optional, if missing 0755 is used
-Create virtual directory <span class="notranslate"> subdir/virtdir </span> , mount it to:
- <span class="notranslate"> skeleton jaildir/virtdir </span>
-inside virtual directory, create directories <span class="notranslate"> subdir1, subdir2 </span>
-mount <span class="notranslate"> virtdir1/subdir1 </span> to <span class="notranslate"> subdir/virtdir/subdir1 </span>
-if <span class="notranslate"> virtdir </span> is started with >, create directory <span class="notranslate"> subdir/virtdir </span> , but don't mount it into <span class="notranslate"> jaildir </span> . This is needed for cases when <span class="notranslate"> virtdir </span> is inside home base dir.
-if file /var/cagefs/[prefix]/[user]/virt.mp is missing -- no virt directories are loaded for that user.
+* <span class="notranslate"> _mask_ </span> is always optional, if missing 0755 is used
+* Create virtual directory <span class="notranslate"> _subdir/virtdir_ </span> , mount it to:
+  * <span class="notranslate"> skeleton _jaildir/virtdir_ </span>
+  * inside virtual directory, create directories <span class="notranslate"> _subdir1, subdir2_ </span>
+  * mount <span class="notranslate"> _virtdir1/subdir1_ </span> to <span class="notranslate"> _subdir/virtdir/subdir1_ </span>
+  * if <span class="notranslate"> _virtdir_ </span> is started with >, create directory <span class="notranslate"> _subdir/virtdir_ </span> , but don't mount it into <span class="notranslate"> _jaildir_ </span> . This is needed for cases when <span class="notranslate"> _virtdir_ </span> is inside home base dir.
+* if file _/var/cagefs/[prefix]/[user]/virt.mp_ is missing -- no virt directories are loaded for that user.
 
 Note that CageFS will automatically create those files for Plesk 10 & higher.
 
-For example if we have plesk11.5 with two users <span class="notranslate"> cltest1 </span> , and <span class="notranslate"> cltest2 </span> :
-<span class="notranslate"> </span>
-```
-cltest1 uid 10000 has domains: cltest1.com, cltest1-addon.com and sub1.cltest1.comcltest2 uid 10001 has domains: cltest2.com, cltest2-addon.com
-```
+For example if we have Plesk 11.5 with two users <span class="notranslate"> _cltest1_ </span> , and <span class="notranslate"> _cltest2_ </span> :
+<div class="notranslate">
 
+```
+cltest1 uid 10000 has domains: cltest1.com, cltest1-addon.com and sub1.cltest1.com
+cltest2 uid 10001 has domains: cltest2.com, cltest2-addon.com
+```
+</div>
 
 In such case we would have file _/var/cagefs/00/cltest1/virt.mp_ :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
->/var/www/vhosts/system,0755@cltest1-addon.com,0755@cltest1.com,0755[@sub1.cltest1.com,0755](mailto:@sub1.cltest1.com,0755)
+>/var/www/vhosts/system,0755
+@cltest1-addon.com,0755
+@cltest1.com,0755
+@sub1.cltest1.com,0755
 ```
+</div>
 
+and file: _/var/cagefs/01/cltest2/virt.mp:_
+<div class="notranslate">
 
-and file: _ /var/cagefs/01/cltest2/virt.mp:_
-<span class="notranslate"> </span>
 ```
->/var/www/vhosts/system@cltest2-addon.com[@cltest2.com](mailto:@cltest2.com)
+>/var/www/vhosts/system
+@cltest2-addon.com
+@cltest2.com
 ```
+</div>
 
 
+#### **Split by Username**
 
-#### Split by Username
-
-
-**[CageFS 5.3.1+]**
+_[CageFS 5.3.1+]_
 
 Sometimes you might need to make sure that directory containing all users would show up as containing just that user inside CageFS. For example, if you have directory structure like:
-<span class="notranslate"> </span>
-```
-/home/httpd/fcgi-bin/user1/home/httpd/fcgi-bin/user2
-```
+<div class="notranslate">
 
+```
+/home/httpd/fcgi-bin/user1
+/home/httpd/fcgi-bin/user2
+```
+</div>
 
 Then we can add the following line to /etc/cagefs/cagefs.mp file:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 %/home/httpd/fcgi-bin
 ```
-
+</div>
 
 and execute:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cagefsctl --remount-all
 ```
+</div>
+
+After that each subdirectory of <span class="notranslate"> _/home/httpd/fcgi-bin_ </span> will be mounted for appropriate user in CageFS: <span class="notranslate"> _/home/httpd/fcgi-bin/user1_ </span> will be mounted for <span class="notranslate"> user1 </span> and <span class="notranslate"> _/home/httpd/fcgi-bin/user2_ </span> will be mounted for <span class="notranslate"> user2 </span> .
+
+#### **Mounting user’s home directory inside CageFS**
 
 
-After that each subdirectory of /home/httpd/fcgi-bin will be mounted for appropriate user in CageFS: <span class="notranslate"> /home/httpd/fcgi-bin/user1 </span> will be mounted for <span class="notranslate"> user1 </span> and <span class="notranslate"> /home/httpd/fcgi-bin/user2 </span> will be mounted for <span class="notranslate"> user2 </span> .
+CageFS 6.1-1 (and later) has improved mounting user’s home directory that is applied for users with home directories like <span class="notranslate"> _/home/user_ or _/homeN/user_ </span> (where <span class="notranslate"> N </span> = 0,1,..9).
 
-
-
-
-#### Mounting user’s home directory inside CageFS
-
-
-CageFS 6.1-1 (and later) has improved mounting user’s home directory that is applied for users with home directories like <span class="notranslate"> _/home/user_  or  <span class="notranslate"> /homeN/user </span>   </span> (where <span class="notranslate"> N </span> = 0,1,..9).
-
-In such case, earlier versions of CageFS always mount user’s home directory to <span class="notranslate"> _/home/user_ </span> and create symlink <span class="notranslate"> _/homeN -> /home_ </span> when needed, so user’s home directory can be accessed both via _ _ <span class="notranslate"> /home/user </span> and <span class="notranslate"> _/homeN/user_ </span> . This quirk leads to some rare incompatibilities between CageFS and other software (for example OpenCart), because real path of user’s home directory in CageFS and in real file system can differ.
+In such case, earlier versions of CageFS always mount user’s home directory to <span class="notranslate"> _/home/user_ </span> and create symlink <span class="notranslate"> _/homeN -> /home_ </span> when needed, so user’s home directory can be accessed both via <span class="notranslate"> _/home/user_ </span> and <span class="notranslate"> _/homeN/user_ </span> . This quirk leads to some rare incompatibilities between CageFS and other software (for example OpenCart), because real path of user’s home directory in CageFS and in real file system can differ.
 
 New CageFS mounts user’s home directory in a way that its real path in CageFS is always the same as in real file system. Additionally, CageFS searches for symlinks like
-<span class="notranslate"> _/homeX -> /homeY_ </span> and _ _ <span class="notranslate"> /homeX/user -> /homeY/user </span> in real system and creates such symlinks in user’s CageFS when found.
+<span class="notranslate"> _/homeX -> /homeY_ </span> and <span class="notranslate"> _/homeX/user -> /homeY/user_ </span> in real system and creates such symlinks in user’s CageFS when found.
 
 This new mounting mode is enabled by default. You can switch to old mounting mode by executing the following commands:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# touch /etc/cagefs/disable.home.dirs.search# cagefsctl --force-update# cagefsctl --remount-all
+# touch /etc/cagefs/disable.home.dirs.search
+# cagefsctl --force-update
+# cagefsctl --remount-all
 ```
+</div>
 
-
-
-
+:::tip Note
+New mounting mode will be disabled automatically when "mounting base home directory" mode is enabled <span class="notranslate"> (`mount_basedir=1` setting in _/etc/cagefs/cagefs.base.home.dirs_ </span> file).
+:::
 
 ### Base Home Directory
 
 
-If you have a custom setup where home directories are in a special format, like: <span class="notranslate"> /home/$USERNAME/data </span> , you can specify it using regular expressions. This is needed by CageFS to create safe home space for end user, where no other users are visible.
+If you have a custom setup where home directories are in a special format, like: <span class="notranslate"> _/home/$USERNAME/data_ </span> , you can specify it using regular expressions. This is needed by CageFS to create safe home space for end user, where no other users are visible.
 
-We will create empty: <span class="notranslate">  /var/cagefs/[prefix]/$USERNAME/home </span> , and then mount <span class="notranslate"> /home/$USERNAME </span> in that directory
+We will create empty: <span class="notranslate"> _/var/cagefs/[prefix]/$USERNAME/home_ </span> , and then mount <span class="notranslate"> _/home/$USERNAME_ </span> in that directory
 
-To do that, create a file: <span class="notranslate"> /etc/cagefs/cagefs.base.home.dirs </span>
+To do that, create a file: <span class="notranslate"> _/etc/cagefs/cagefs.base.home.dirs_ </span>
 
 With content like:
-<span class="notranslate"> </span>
-```
-^/home/^/var/www/users/
-```
+<div class="notranslate">
 
+```
+^/home/
+^/var/www/users/
+```
+</div>
 
 If there is no such file, the home directory without last component will be considered as a base dir, like with
-<span class="notranslate"> /home/$USERNAME </span> we would create <span class="notranslate"> /var/cagefs/[prefix]/$USERNAME/home </span> , and then mount
-<span class="notranslate"> /home/$USERNAME </span> in there
+<span class="notranslate"> _/home/$USERNAME_ </span> we would create <span class="notranslate"> _/var/cagefs/[prefix]/$USERNAME/home_ </span> , and then mount
+<span class="notranslate"> _/home/$USERNAME_ </span> in there
 
-WIth <span class="notranslate"> /home/$USERNAME/data </span> as a home dir, we would assume that <span class="notranslate"> /home/$USERNAME </span> is the base directory, and we would create <span class="notranslate"> /var/cagefs/[prefix]/$USERNAME/home/$USERNAME/data </span> and then we would mount <span class="notranslate"> /home/$USERNAME/data </span> -- which would cause each user to see empty base directories for other users, exposing user names.
+With <span class="notranslate"> _/home/$USERNAME/data_ </span> as a home dir, we would assume that <span class="notranslate"> _/home/$USERNAME_ </span> is the base directory, and we would create <span class="notranslate"> _/var/cagefs/[prefix]/$USERNAME/home/$USERNAME/data_ </span> and then we would mount <span class="notranslate"> _/home/$USERNAME/data_ </span> -- which would cause each user to see empty base directories for other users, exposing user names.
 
+**Sharing home directory structure among users**
 
-When you want to share directory structure among multiple users, you can add following line at the top of the <span class="notranslate"> /etc/cagefs/cagefs.base.home.dirs </span> file. This is useful on the systems that support sites with multiple users, with different home directories inside main 'site' directory.
-<span class="notranslate"> </span>
+When you want to share directory structure among multiple users, you can add following line at the top of the <span class="notranslate"> _/etc/cagefs/cagefs.base.home.dirs_ </span> file. This is useful on the systems that support sites with multiple users, with different home directories inside the main 'site' directory.
+<div class="notranslate">
+
 ```
 mount_basedir=1
 ```
-
+</div>
 
 For example:
 
-<span class="notranslate"> user1 </span> has home directory <span class="notranslate"> /var/www/vhosts/sitename.com/web_users/user1 </span>
-<span class="notranslate"> user2 </span> has home directory <span class="notranslate"> /var/www/vhosts/sitename.com/web_users/user2 </span>
-site admin has home directory <span class="notranslate"> /var/www/vhosts/sitename.com </span>
+<span class="notranslate"> user1 </span> has home directory <span class="notranslate"> _/var/www/vhosts/sitename.com/web_users/user1_ </span>
+<span class="notranslate"> user2 </span> has home directory <span class="notranslate"> _/var/www/vhosts/sitename.com/web_users/user2_ </span>
+site admin has home directory <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span>
 
-So, content of <span class="notranslate"> /etc/cagefs/cagefs.base.home.dirs </span> should be the following:
+So, content of <span class="notranslate"> _/etc/cagefs/cagefs.base.home.dirs_ </span> should be the following:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-mount_basedir=1^/var/www/vhosts/[^/]+
+mount_basedir=1
+^/var/www/vhosts/[^/]+
 ```
+</div>
 
+Directory structure in <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span> will be mounted in CageFS for appropriate users.
+Each user will have access to whole directory structure in <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span> (according to their permissions).
 
-Directory structure in <span class="notranslate"> /var/www/vhosts/sitename.com </span> will be mounted in CageFS for appropriate users.
-Each user will have access to whole directory structure in <span class="notranslate"> /var/www/vhosts/sitename.com </span> (according to their permissions).
-
-
-
+::: tip Note
+You should execute <span class="notranslate"> `cagefsctl --remount-all` </span> in order to apply changes to CageFS (i.e. remount home directories).
+:::
 
 ### PostgreSQL support
 
 
 CloudLinux 7:
 
-CageFS works with any PostgreSQL version installed from CloudLinux or CentOS repositories. PostgreSQL packages fo CloudLinux 7 come from upstream (CentOS) unmodified. PostgreSQL’s socket is located in /var/run/postgresql directory. This directory is mounted to CageFS by default (in cagefs-5.5-6.34 or later).
+CageFS works with any PostgreSQL version installed from CloudLinux or CentOS repositories. PostgreSQL packages for CloudLinux 7 come from the upstream (CentOS) unmodified. PostgreSQL’s socket is located in <span class="notranslate"> _/var/run/postgresql_ </span> directory. This directory is mounted to CageFS by default (in cagefs-5.5-6.34 or later).
 
 When PostgreSQL has been installed after CageFS install, please add line:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 /var/run/postgresql
 ```
+</div>
 
+tо _/etc/cagefs/cagefs.mp_ file and then execute:
+<div class="notranslate">
 
-tо /etc/cagefs/cagefs.mp file and then execute:
-<span class="notranslate"> </span>
 ```
 cagefsctl --remount-all 
 ```
-
+</div>
 
 The steps above are enough to configure CageFS to work with PostgreSQL.
 
 CloudLinux 6:
 
-CageFS provides separate /tmp directory for each end user. Yet, PostgreSQL keeps its Unix domain socket inside server's main /tmp directory. In addition to that -- the location is hard coded inside PostgreSQL libraries.
+CageFS provides separate _/tmp_ directory for each end user. Yet, PostgreSQL keeps its Unix domain socket inside server's main _/tmp_ directory. In addition to that, the location is hard coded inside PostgreSQL libraries.
 
-To resolve the issue, CloudLinux provides version of PostgreSQL with modified start up script that can store PostgreSQL's socket in /var/run/postgres. The script automatically creates link from /tmp to that socket to prevent PostgreSQL dependent applications from breaking.
+To resolve the issue, CloudLinux provides a version of PostgreSQL with modified start up script that can store PostgreSQL's socket in <span class="notranslate"> _/var/run/postgres._ </span> The script automatically creates link from _/tmp_ to that socket to prevent PostgreSQL dependent applications from breaking.
 
-In addition to that, CageFS knows how to correctly link this socket inside end user's /tmp directory.
+In addition to that, CageFS knows how to correctly link this socket inside end user's _/tmp_ directory.
 
 To enable PostgreSQL support in CageFS:
 
-1.        Make sure you have updated to latest version of PostgreSQL.
+1. Make sure you have updated to latest version of PostgreSQL.
 
-2.        Edit file /etc/sysconfig/postgres, and uncomment <span class="notranslate"> SOCK_DIR </span> line.
+2. Edit file _/etc/sysconfig/postgres_, and uncomment <span class="notranslate"> _SOCK_DIR_ </span> line.
 
 3. Update CageFS configuration by running:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 cagefsctl  --reconfigure-cagefs
 ```
-
+</div>
 
 4. Restart PostgreSQL by running:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ service postgresql restart 
 ```
+</div>
 
-
-If you are using cPanel, you would also need to modify file: /etc/cron.daily/tmpwatch
+If you are using cPanel, you would also need to modify file: <span class="notranslate"> _/etc/cron.daily/tmpwatch_ </span>
 
 And update line:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 flags=-umc 
 ```
-
+</div>
 
 to:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 flags=-umcl
 ```
-
+</div>
 
 to prevent symlink from being removed.
 
@@ -758,18 +806,18 @@ to prevent symlink from being removed.
 ### PAM Configuration
 
 
-CageFS depends on <span class="notranslate"> pam_lve </span> module tor PAM enabled services.When installed the module is automatically installed for following services:
-<span class="notranslate"> </span>
-·        sshd
-·        crond
-·        su
+CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM enabled services. When installed, the module is automatically installed for following services:
 
-Following line is added to corresponding file in /etc/pam.d/:
-<span class="notranslate"> </span>
+* sshd
+* crond
+* su
+
+The following line is added to corresponding file in _/etc/pam.d/_:
+<div class="notranslate">
 ```
 session    required     pam_lve.so      100     1
 ```
-
+</div>
 
 Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate"> CageFS & LVE </span> , and 1 stands for CageFS enabled.
 
@@ -777,105 +825,111 @@ Where 100 stands for minimum <span class="notranslate"> UID </span> to put into 
 ### Executing By Proxy
 
 
-Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate"> _passwd, sendmail_ ,  </span> etc.
+Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate"> **passwd, sendmail** ,  </span> etc.
 
-CloudLInux uses <span class="notranslate"> proxyexec </span> technology to accomplish this goal. You can define any program to run outside CageFS, by specifying it in <span class="notranslate"> _/etc/cagefs/custom.proxy.commands_ </span> file. Do not edit existing <span class="notranslate"> _/etc/cagefs/proxy.commands_ </span> as it will be overwritten with next CageFS update.
+CloudLinux uses <span class="notranslate"> proxyexec </span> technology to accomplish this goal. You can define any program to run outside CageFS, by specifying it in <span class="notranslate"> _/etc/cagefs/custom.proxy.commands_ </span> file. Do not edit existing <span class="notranslate"> _/etc/cagefs/proxy.commands_ </span> as it will be overwritten with next CageFS update.
 
 Once program is defined, run this command to populate the skeleton:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cagefsctl --update
 ```
+</div>
 
-All the cPanel scripts located in <span class="notranslate"> _/usr/local/cpanel/cgi-sys_ / </span> that user might need to execute should be added to <span class="notranslate"> _proxy.commands_ v </span> .
+All the cPanel scripts located in <span class="notranslate"> _/usr/local/cpanel/cgi-sys/_ </span> that user might need to execute should be added to <span class="notranslate"> _proxy.commands_ </span> .
+
+**Users with duplicate UIDs**
+
+The syntax of <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files is as follows:  
+<span class="notranslate"> _ALIAS:wrapper_name=username:path_to_executable_ </span>
 
 
+Mandatory parameters are <span class="notranslate"> _ALIAS_ </span> and <span class="notranslate"> _path_to_executable_ </span> .
 
-The syntax of _ _ <span class="notranslate"> /etc/cagefs/*.proxy.commands </span> files is as follows:
-<span class="notranslate"> </span>
-_ALIAS:wrapper_name=username:path_to_executable_
+* <span class="notranslate"> ALIAS </span> - any name which is unique within all <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files;
 
+* <span class="notranslate"> wrapper_name </span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate"> _path_to_executable_ inside CageFS </span> . Wrapper files are located in <span class="notranslate"> _/usr/share/cagefs/safeprograms_ </span> . If wrapper name is not specified, then default wrapper <span class="notranslate"> _/usr/share/cagefs/safeprograms/cagefs.proxy.program_ </span> is used. Also, a reserved word <span class="notranslate"> `noproceed` </span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate"> ALIAS </span> , as in the example below.
 
-Obligatory parameters are <span class="notranslate"> _ALIAS_ </span> and _ _ <span class="notranslate"> path_to_executable </span> .
+* <span class="notranslate"> usernam </span> e - the name of a user on whose behalf <span class="notranslate"> _path_to_executable_ </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> _path_to_executable_ </span> will run on behalf the same user that is inside CageFS.
 
- <span class="notranslate"> ALIAS </span> - any name which is unique within all <span class="notranslate"> /etc/cagefs/*.proxy.commands </span> files;
-
- <span class="notranslate"> wrapper_name </span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate"> path_to_executable inside CageFS </span> . Wrapper files are located in <span class="notranslate"> /usr/share/cagefs/safeprograms </span> . If wrapper name is not specified, then default wrapper <span class="notranslate"> /usr/share/cagefs/safeprograms/cagefs.proxy.program </span> is used. Also, a reserved word <span class="notranslate"> “noproceed” </span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate"> ALIAS </span> , as in the example below.
-
- <span class="notranslate"> usernam </span> e - the name of a user on whose behalf <span class="notranslate"> path_to_executable </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> path_to_executable </span> will run on behalf the same user that is inside CageFS.
-
- <span class="notranslate"> path_to_executable </span> - the path to executable file which will run via <span class="notranslate"> proxyexec </span> .
+* <span class="notranslate"> path_to_executable </span> - the path to executable file which will run via <span class="notranslate"> `proxyexec` </span> .
 
 Example of a simple command executed via <span class="notranslate"> proxyexec </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 SENDMAIL=/usr/sbin/sendmail
 ```
+</div>
 
+Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate"> root </span> (privilege escalation). The command uses two <span class="notranslate"> ALIAS </span> , that is why in the second line <span class="notranslate"> `noproceed` </span> is specified instead of wrapper name.
+<div class="notranslate">
 
-Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate"> root </span> (privilege escalation). The command uses two <span class="notranslate"> ALIAS </span> , that is why in the second line <span class="notranslate"> “noproceed” </span> is specified instead of wrapper name.
-<span class="notranslate"> </span>
 ```
-CRONTAB_LIST:cagefs.proxy.crontab=root:/usr/bin/crontabCRONTAB_SAVE:noproceed=root:/usr/bin/crontab
+CRONTAB_LIST:cagefs.proxy.crontab=root:/usr/bin/crontab
+CRONTAB_SAVE:noproceed=root:/usr/bin/crontab
 ```
+</div>
 
-
-Sometimes hosters may have users with non unique <span class="notranslate"> UIDs </span> . Thus, <span class="notranslate"> proxyexec </span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
+Sometimes hosters may have users with non unique <span class="notranslate"> UIDs </span> . Thus, <span class="notranslate"> `proxyexec` </span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
 
 To turn this feature off:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 touch /etc/cagefs/proxy.disable.duid
 ```
-
+</div>
 
 Or to activate it back:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 rm /etc/cagefs/proxy.disable.duid
 ```
-
+</div>
 
 
 ### Custom /etc files per customer
 
 
-**[4.0-5 and later]**
+_[4.0-5 and later]_
 
-To create custom file in /etc directory for end user, create a directory:
-<span class="notranslate"> </span>
-`/etc/cagefs/custom.etc/[username]`
-
+To create a custom file in /etc directory for end user, create a directory:  
+<span class="notranslate"> _/etc/cagefs/custom.etc/[username]_ </span>
 
 Put all custom files, and sub-directories into that direcotry.
 
-For example, if you want to create custom /etc/hosts file for <span class="notranslate"> USER1 </span> , create a directory:
-<span class="notranslate"> </span>
-`/etc/cagefs/custom.etc/USER1`
+For example, if you want to create custom <span class="notranslate"> _/etc/hosts_ file for USER1 </span> , create a directory:  
+<span class="notranslate"> _/etc/cagefs/custom.etc/USER1_ </span>
 
- Inside that directory, create a file hosts, with the content for that user.
+Inside that directory, create a <span class="notranslate"> _hosts_ </span> file, with the content for that user.
 
 After that execute:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cagefsctl --update-etc USER1
 ```
-
+</div>
 
 If you are making changes for multiple users, you can run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ cagefsctl --update-etc
 ```
+</div>
 
+To remove a custom file, remove it from <span class="notranslate"> _/etc/cagefs/custom.etc/[USER]_ </span> directory, and re-run:
+<div class="notranslate">
 
-To remove custom file, remove it from <span class="notranslate"> /etc/cagefs/custom.etc/[USER] </span> directory, and re-run:
-<span class="notranslate"> </span>
 ```
 $ cagefsctl --update-etc
 ```
-
+</div>
 
 
 ### Moving cagefs-skeleton directory
