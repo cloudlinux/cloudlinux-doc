@@ -5,74 +5,84 @@ CageFS is a virtualized file system and a set of tools to contain each user in i
 
 The benefits of CageFS are:
 
-·        Only safe binaries are available to user
-·        User will not see any other users, and would have no way to detect presence of other users & their user names on the server
-·        User will not be able to see server configuration files, such as Apache config files.
-·        User's will have limited view of /proc file system, and will not be able to see other' users processes
+* Only safe binaries are available to user
+* User will not see any other users, and would have no way to detect presence of other users & their user names on the server
+* User will not be able to see server configuration files, such as Apache config files.
+* User's will have limited view of _/proc_ file system, and will not be able to see other users' processes
 
 At the same time, user's environment will be fully functional, and user should not feel in any way restricted. No adjustments to user's scripts are needed. CageFS will cage any scripts execution done via:
-<span class="notranslate"> </span>
-·        Apache (suexec, suPHP, mod_fcgid, mod_fastcgi)
-·        LiteSpeed Web Server
-·        Cron Jobs
-·        SSH
-·        Any other <span class="notranslate"> PAM </span> enabled service
+* <span class="notranslate"> Apache (suexec, suPHP, mod_fcgid, mod_fastcgi) </span>
+* <span class="notranslate"> LiteSpeed Web Server </span>
+* <span class="notranslate"> Cron Jobs  </span>
+* SSH
+* Any other <span class="notranslate"> PAM </span> enabled service
 
+::: tip Note
+mod_php is not supported, MPM ITK requires a custom patch
+:::
 
-
-
+::: tip Note
+CageFS is not supported for H-Sphere.
+:::
 
 ## Installation
 
 
 Minimum Requirements:
 
-kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
-7GB of disk space.
+* kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
+* 7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
-Up to 8MB per customer in /var directory (to store custom /etc directory)
-5GB to 20GB in /usr/share directory (to store safe skeleton of a filesystem)
+* Up to 8MB per customer in _/var_ directory (to store custom _/etc_ directory)
+* 5GB to 20GB in _/usr/share_ directory (to store safe skeleton of a filesystem)
 
-
-
-
+::: danger Warning
+If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cagefs/#uninstalling-cagefs)
+:::
 
 To install CageFS:
+<div class="notranslate">
 
 ```
-$ yum install cagefs$ /usr/sbin/cagefsctl --init
+$ yum install cagefs
+$ /usr/sbin/cagefsctl --init
 ```
+</div>
 
-That last command will create skeleton directory that might be around 7GB in size. If you don't have enough disk space in /usr/share, use following commands to have cagefs-skeleton being placed in a different location:
+That last command will create skeleton directory that might be around 7GB in size. If you don't have enough disk space in _/usr/share_, use following commands to have <span class="notranslate"> `cagefs-skeleton` </span> being placed in a different location:
+<div class="notranslate">
 
 ```
-$ mkdir /home/cagefs-skeleton$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
+$ mkdir /home/cagefs-skeleton
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
 ```
+</div>
 
-
-
-
+::: danger
+If you are placing skeleton in <span class="notranslate"> _/home_ </span> directory on cPanel servers, you must configure the following option in cPanel WHM: <span class="notranslate"> **WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories** </span>  
+Change the value to blank (not default <span class="notranslate"> Home </span> ). Without changing this option, cPanel will create new accounts in incorrect places.
+:::
 
 CageFS will automatically detect and configure all necessary files for:
-cPanel
-Plesk
-DirectAdmin
-ISPmanager
-Interworx
-MySQL
-PostgreSQL
-LiteSpeed
+* cPanel
+* Plesk
+* DirectAdmin
+* ISPmanager
+* Interworx
+* MySQL
+* PostgreSQL
+* LiteSpeed
 
 Web interface to manage CageFS is available for cPanel, Plesk 10+, DirectAdmin, ISPmanager & Interworx. Command line tool would need to be used for other control panels.
 
 Once you initialized the template you can start enabling users. By default CageFS is disabled for all users.
 
-Starting from **cagefs-6.1-27**  _fs.proc_can_see_other_uid_ will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
+Starting from **cagefs-6.1-27** <span class="notranslate"> _fs.proc_can_see_other_uid_ </span> will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
 
 It is strongly advised against setting this variable in _90-cloudlinux.conf_ . Define it in _/etc/sysctl.conf_ or in some other config file with an index number greater than _90-cloudlinux.conf_ , e.g. _/etc/sysctl.d/95-custom.conf_ .
 
-You can find more information on _fs.proc_can_see_other_uid_ automatic migration in [Kernel Config Variables](/kernel_settings/#kernel-config-variables) .
+You can find more information on <span class="notranslate"> _fs.proc_can_see_other_uid_ </span> automatic migration in [Kernel Config Variables](/kernel_settings/#kernel-config-variables) .
 
 
 ## Unistalling CageFS
@@ -80,21 +90,23 @@ You can find more information on _fs.proc_can_see_other_uid_ automatic migration
 
 To uninstall CageFS, start by disabling and removing all directories:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --remove-all
 ```
+</div>
 
-
-That command will: Disable CageFS for all customers, unmount CageFS for all users, removes <span class="notranslate"> /usr/share/cagefs-skeleton & /var/cagefs </span> directories. It will not remove /etc/cagefs directory.
+That command will: disable CageFS for all customers, unmount CageFS for all users, removes <span class="notranslate"> _/usr/share/cagefs-skeleton_ & _/var/cagefs_ </span> directories. It will not remove _/etc/cagefs_ directory.
 
 Remove CageFS RPM:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum remove cagefs
 ```
-
+</div>
 
 
 ## Managing Users
@@ -102,170 +114,163 @@ $ yum remove cagefs
 
 CageFS provides for two modes of operations:
 
-1.        Enabled for all, except those that are disabled.
-2.        Disabled for all, except those that are enabled.
+1. Enabled for all, except those that are disabled.
+2. Disabled for all, except those that are enabled.
 
 Mode #1 is convenient for production operation, where you want all new users to automatically be added to CageFS.
 Mode #2 is convenient while you test CageFS, as it allows you to enable it on one by one for your customers.
 
 To start using CageFS you have to select one of the mode of operations:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --enable-all
 ```
-
+</div>
 or
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --disable-all
 ```
-
+</div>
 or
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --toggle-mode
 ```
-
+</div>
 That will switch the operation mode, preserving current disabled/enabled users.
 
 To enable individual user do:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --enable [username]
 ```
-
+</div>
 To disable individual user:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --disable [username]
 ```
-
+</div>
 To  list all enabled users:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --list-enabled
 ```
-
+</div>
 To list all disabled users:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --list-disabled
 ```
-
+</div>
 To see current mode of operation:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --display-user-mode
 ```
-
+</div>
 
 ## Command-line Tools
 
 
-_cagefsctl _ is used to manage CageFS. It allows initializing and updating CageFS, as well as enabling/disabling CageFS for individual users.
+`cagefsctl` is used to manage CageFS. It allows initializing and updating CageFS, as well as enabling/disabling CageFS for individual users.
 
 Use the following syntax to manage CageFS:
-<span class="notranslate"> </span>
-`/usr/sbin/cagefsctl [OPTIONS]`
+<span class="notranslate"> `/usr/sbin/cagefsctl [OPTIONS]` </span>
 
 
-`Options:`
+Options:
 
-` ` <span class="notranslate"> -i | --init </span> `                 : initialize CageFS (create CageFS if it does not exist)`
-` -r | --reinit               : reinitialize CageFS (make backup and recreate CageFS)`
-` ` <span class="notranslate"> -u | --update </span> `               : update files in CageFS (add new and modified files to CageFS,`
-`                               remove unneeded files)`
-` ` <span class="notranslate"> -f | --force </span> `                : recreate CageFS (do not make backup, overwrite existing files)`
-` ` <span class="notranslate"> -d | --dont-clean </span> `           : do not delete any files from skeleton`
-`                                                                                      : (use with ` <span class="notranslate"> --update </span> ` option)`
-` ` <span class="notranslate"> -k | --hardlink </span> `             : use hardlinks if possible`
-`      ` <span class="notranslate"> --create-mp </span> `            : Creates /etc/cagefs/cagefs.mp file`
-`      ` <span class="notranslate"> --mount-skel </span> `           : mount CageFS skeleton directory`
-`      ` <span class="notranslate"> --unmount-skel </span> `         : unmount CageFS skeleton directory`
-`      ` <span class="notranslate"> --remove-all </span> `           : disable CageFS, remove templates and /var/cagefs directory`
-`      ` <span class="notranslate"> --sanity-check </span> `         : perform basic self-diagnistics of common cagefs-related issues`
-`                                                                                      : (mostly useful for support)`
-`      ` <span class="notranslate"> --addrpm </span> `               : add rpm-packages in CageFS (run ` <span class="notranslate"> "cagefsctl --update" </span>
-`                                                                                      : in order to apply changes)`
-`      ` <span class="notranslate"> --delrpm </span> `               : remove rpm-packages from CageFS (run ` <span class="notranslate"> "cagefsctl --update" </span>
-`                                                                                      : in order to apply changes)`
-`      ` <span class="notranslate"> --list-rpm </span> `             : list rpm-packages that are installed in CageFS`
-` ` <span class="notranslate"> -e | --enter </span> `                : enter into user's CageFS as root`
-`      ` <span class="notranslate"> --update-list </span> `          : update specified files only (paths are read from stdin)`
-`      ` <span class="notranslate"> --update-etc </span> `           : update /etc directory of all or specified users`
-`      ` <span class="notranslate"> --set-update-period </span> `    : set min period of update of CageFS in days (default = 1 day)`
-`      ` <span class="notranslate"> --force-update </span> `         : force update of CageFS (ignore period of update)`
-`      ` <span class="notranslate"> --force-update-etc </span> `     : force update of /etc directories for users in CageFS`
-`      ` <span class="notranslate"> --reconfigure-cagefs </span> `   : configure CageFS integration with other software (control panels,`
-`                               database servers, etc)`
+| | | |
+|-|-|-|
+|-i | <span class="notranslate"> --init </span> |initialize CageFS (create CageFS if it does not exist)|
+|-r | <span class="notranslate"> --reinit </span> |reinitialize CageFS (make backup and recreate CageFS)|
+|-u | <span class="notranslate"> --update </span> |update files in CageFS (add new and modified files to CageFS, remove unneeded files)|
+|-f | <span class="notranslate"> --force </span> |recreate CageFS (do not make backup, overwrite existing files)|
+|-d | <span class="notranslate"> --dont-clean </span> |do not delete any files from skeleton (use with <span class="notranslate"> --update </span> option)|
+|-k | <span class="notranslate"> --hardlink </span> |use hardlinks if possible|
+| | <span class="notranslate"> --create-mp </span> |Creates _/etc/cagefs/cagefs.mp_ file|
+| | <span class="notranslate"> --mount-skel </span> |mount CageFS skeleton directory|
+| | <span class="notranslate"> --unmount-skel </span> |unmount CageFS skeleton directory|
+| | <span class="notranslate"> --remove-all </span> |disable CageFS, remove templates and _/var/cagefs_ directory|
+| | <span class="notranslate"> --sanity-check </span> |perform basic self-diagnistics of common cagefs-related issues (mostly useful for support)|
+| | <span class="notranslate"> --addrpm </span> |add rpm-packages in CageFS (run <span class="notranslate"> `cagefsctl --update` </span> in order to apply changes)|
+| | <span class="notranslate"> --delrpm </span> |remove rpm-packages from CageFS (run <span class="notranslate"> `cagefsctl --update` </span> in order to apply changes)|
+| | <span class="notranslate"> --list-rpm </span> |list rpm-packages that are installed in CageFS|
+|-e | <span class="notranslate"> --enter </span> |enter into user's CageFS as root|
+| | <span class="notranslate"> --update-list </span> |update specified files only (paths are read from stdin)|
+| | <span class="notranslate"> --update-etc </span> |update _/etc_ directory of all or specified users|
+| | <span class="notranslate"> --set-update-period </span> |set min period of update of CageFS in days (default = 1 day)|
+| | <span class="notranslate"> --force-update </span> |force update of CageFS (ignore period of update)|
+| | <span class="notranslate"> --force-update-etc </span> |force update of _/etc_ directories for users in CageFS|
+| | <span class="notranslate"> --reconfigure-cagefs </span> |configure CageFS integration with other software (control panels, database servers, etc)|
 
-Use the following syntax to manage users:
-<span class="notranslate"> </span>
-`/usr/sbin/cagefsctl [OPTIONS] username [more usernames]`
+Use the following syntax to manage users:    
+<span class="notranslate"> `/usr/sbin/cagefsctl [OPTIONS] username [more usernames]` </span>
 
+Options:
 
-`Options:`
+| | | |
+|-|-|-|
+|-m | <span class="notranslate"> --remount </span> |remount specified user(s)|
+|-M | <span class="notranslate"> --remount-all </span> |remount CageFS skeleton directory and all users (use this each time you have changed _cagefs.mp_ file|
+|-w | <span class="notranslate"> --unmount </span> |unmount specified user(s)|
+|____ | <span class="notranslate"> --unmount-dir </span> |unmount specified dir for all users|
+|-W | <span class="notranslate"> --unmount-all </span> |unmount CageFS skeleton directory and all users|
+|-l | <span class="notranslate"> --list </span> |list users that entered in CageFS|
+| | <span class="notranslate"> --list-logged-in </span> |list users that entered in CageFS via SSH|
+| | <span class="notranslate"> --enable </span> |enable CageFS for the user|
+| | <span class="notranslate"> --disable </span> |disable CageFS for the user|
+| | <span class="notranslate"> --enable-all </span> |enable all users, except specified in _/etc/cagefs/users.disabled_|
+| | <span class="notranslate"> --disable-all </span> |disable all users, except specified in _/etc/cagefs/users.enabled_|
+| | <span class="notranslate"> --display-user-mode </span> |display the current mode ( <span class="notranslate"> "Enable All" </span> or <span class="notranslate"> "Disable All" </span> )|
+| | <span class="notranslate"> --toggle-mode </span> |toggle mode saving current lists of users (lists of enabled and disabled users remain unchanged)|
+| | <span class="notranslate"> --list-enabled </span> |list enabled users|
+| | <span class="notranslate"> --list-disabled </span> |list disabled users|
+| | <span class="notranslate"> --user-status </span> |print status of specified user (enabled or disabled)|
+| | <span class="notranslate"> --getprefix </span> |display prefix for user|
 
-` ` <span class="notranslate"> -m | --remount </span> `           : remount specified user(s)`
-` ` <span class="notranslate"> -M | --remount-all </span> `       : remount CageFS skeleton directory and all users`
-`                            (use this each time you have changed cagefs.mp file)`
-` ` <span class="notranslate"> -w | --unmount </span> `           : unmount specified user(s)`
-`    ` <span class="notranslate"> | --unmount-dir </span> `       : unmount specified dir for all users`
-` ` <span class="notranslate"> -W | --unmount-all </span> `       : unmount CageFS skeleton directory and all users`
-` ` <span class="notranslate"> -l | --list </span> `              : list users that entered in CageFS`
-`      ` <span class="notranslate"> --list-logged-in </span> `    : list users that entered in CageFS via SSH`
-`      ` <span class="notranslate"> --enable </span> `            : enable CageFS for the user`
-`      ` <span class="notranslate"> --disable </span> `           : disable CageFS for the user`
-`      ` <span class="notranslate"> --enable-all </span> `        : enable all users, except specified in /etc/cagefs/users.disabled`
-`      ` <span class="notranslate"> --disable-all </span> `       : disable all users, except specified in /etc/cagefs/users.enabled`
-`      ` <span class="notranslate"> --display-user-mode </span> ` : display current mode (` <span class="notranslate"> "Enable All" </span> ` or ` <span class="notranslate"> "Disable All" </span> `)`
-`      ` <span class="notranslate"> --toggle-mode </span> `       : toggle mode saving current lists of users`
-`                            (lists of enabled and disabled users remain unchanged)`
-`      ` <span class="notranslate"> --list-enabled </span> `      : list enabled users`
-`      ` <span class="notranslate"> --list-disabled </span> `     : list disabled users`
-`      ` <span class="notranslate"> --user-status </span> `       : print status of specified user (enabled or disabled)`
-`      ` <span class="notranslate"> --getprefix </span> `         : display prefix for user`
-
-<span class="notranslate"> `PHP Selector`  related options: </span>
-
-`      ` <span class="notranslate"> --setup-cl-selector </span> `         : setup ` <span class="notranslate"> PHP Selector </span> ` or register new alt-php versions`
-`      ` <span class="notranslate"> --remove-cls-selector </span> `       : unregister alt-php versions, switch users to default`
-`                                                                                           : php version when needed`
-`      ` <span class="notranslate"> --rebuild-alt-php-ini </span> `       : rebuild alt_php.ini file for specified users`
-`                                                                                           : (or all users if none specified)`
-`      ` <span class="notranslate"> --validate-alt-php-ini </span> `      : same as ` <span class="notranslate"> --rebuild-alt-php-ini </span>
-`                                                                                           : but also validates alt_php.ini options `
-`      ` <span class="notranslate"> --cl-selector-reset-versions </span> `: reset php version for specifed users to default`
-`                                                                                           : (or all users if none specified)`
-`      ` <span class="notranslate"> --cl-selector-reset-modules </span> ` : reset php modules (extensions) for specific users`
-`                                                                                           : to defaults (or all users if none specified)`
-`      ` <span class="notranslate"> --create-virt-mp </span> `            : create virtual mount points for the user`
-`      ` <span class="notranslate"> --create-virt-mp-all </span> `        : create virtual mount points for all users`
-`      ` <span class="notranslate"> --remount-virtmp </span> `            : create virtual mount points and remount user`
-`      ` <span class="notranslate"> --apply-global-php-ini </span> `      : use with 0, 1 or 2 arguments from the list: error_log,`
-`                                                                                           : date.timezone without arguments applies`
-`                                                                                           : all global php options including two above`
+<span class="notranslate"> PHP Selector </span> related options:
+ 
+| | |
+|-|-|
+| <span class="notranslate"> --setup-cl-selector </span> | setup <span class="notranslate"> PHP Selector </span> or register new alt-php versions|
+| <span class="notranslate"> --remove-cls-selector </span> |unregister alt-php versions, switch users to default php version when needed|
+| <span class="notranslate"> --rebuild-alt-php-ini </span> |rebuild _alt_php.ini_ file for specified users (or all users if none specified)|
+| <span class="notranslate"> --validate-alt-php-ini </span> |same as <span class="notranslate"> `--rebuild-alt-php-ini` </span> but also validates _alt_php.ini_ options|
+| <span class="notranslate"> --cl-selector-reset-versions </span> |reset php version for specifed users to default (or all users if none specified)|
+| <span class="notranslate"> --cl-selector-reset-modules </span> |reset php modules (extensions) for specific users to defaults (or all users if none specified)|
+| <span class="notranslate"> --create-virt-mp </span> |create virtual mount points for the user|
+| <span class="notranslate"> --create-virt-mp-all </span> |create virtual mount points for all users|
+| <span class="notranslate"> --remount-virtmp </span> |create virtual mount points and remount user|
+| <span class="notranslate"> --apply-global-php-ini </span> |use with 0, 1 or 2 arguments from the list: <span class="notranslate"> `error_log`, `date.timezone` </span> without arguments applies all global php options including the two above|
 
 Common options:
 
-
-`      ` <span class="notranslate"> --disable-cagefs </span> `       : disable CageFS`
-`      ` <span class="notranslate"> --cagefs-status </span> `        : print CageFS status (` <span class="notranslate"> enabled </span> ` or ` <span class="notranslate"> disabled </span> `)`
-`      ` <span class="notranslate"> --set-min-uid </span> `          : Set min ` <span class="notranslate"> UID </span>
-`      ` <span class="notranslate"> --get-min-uid </span> `          : Display current MIN_UID setting`
-`      ` <span class="notranslate"> --print-suids </span> `          : Print list of ` <span class="notranslate"> SUID </span> ` and SGID programs in skeleton`
-`      ` <span class="notranslate"> --do-not-ask </span> `           : assume ` <span class="notranslate"> "yes" </span> ` in all queries`
-`                                                                                      : (should be the first option in command)`
-`      ` <span class="notranslate"> --clean-var-cagefs </span> `     : clean /var/cagefs directory (remove data of non-existent users)`
-`      ` <span class="notranslate"> --set-tmpwatch </span> `         : set tmpwatch command and parameters`
-`                                                                                      : (save to /etc/cagefs/cagefs.ini file)`
-`      ` <span class="notranslate"> --tmpwatch </span> `             : execute tmpwatch (remove outdated files in tmp directories`
-`                                                                                      : in CageFS for all users)`
-`      ` <span class="notranslate"> --toggle-plugin </span> `        : disable/enable CageFS plugin`
-` ` <span class="notranslate"> -v | --verbose </span> `              : verbose output`
-`      ` <span class="notranslate"> --wait-lock </span> `            : wait for end of execution of other cagefsctl processes`
-`                                                                                      : (when needed) before execution of the command`
-` ` <span class="notranslate"> -h | --help </span> `                 : this message`
+| | | |
+|-|-|-|
+|___ | <span class="notranslate"> --disable-cagefs </span> |disable CageFS|
+| | <span class="notranslate"> --cagefs-status </span> |print CageFS status: ( <span class="notranslate"> enabled </span> or <span class="notranslate"> disabled </span> )|
+| | <span class="notranslate"> --set-min-uid </span> |Set min <span class="notranslate"> UID </span> |
+| | <span class="notranslate"> --get-min-uid </span> |Display current MIN_UID setting|
+| | <span class="notranslate"> --print-suids </span> |Print list of <span class="notranslate"> SUID </span> and SGID programs in skeleton|
+| | <span class="notranslate"> --do-not-ask </span> |assume <span class="notranslate"> "yes" </span> in all queries (should be the first option in command)|
+| | <span class="notranslate"> --clean-var-cagefs </span> |clean _/var/cagefs_ directory (remove data of non-existent users)|
+| | <span class="notranslate"> --set-tmpwatch </span> |set `tmpwatch` command and parameters (save to _/etc/cagefs/cagefs.ini_ file)|
+| | <span class="notranslate"> --tmpwatch </span> |execute tmpwatch (remove outdated files in tmp directories in CageFS for all users)|
+| | <span class="notranslate"> --toggle-plugin </span> |disable/enable CageFS plugin|
+|-v | <span class="notranslate"> --verbose </span> |verbose output|
+| | <span class="notranslate"> --wait-lock </span> |wait for end of execution of other `cagefsctl` processes (when needed) before execution of the command|
+|-h | <span class="notranslate"> --help </span> |this message|
 
 
 
@@ -277,24 +282,25 @@ Common options:
 Sometimes you will need to execute a command as user inside CageFS.
 
 If a user has shell enabled - you can simply use:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /bin/su - $USERNAME  -c "_command_"
 ```
+</div>
+Yet, if a user have they shell disabled, it wouldn't work. To solve this issue, we have added command:
+<div class="notranslate">
 
-Yet, if user has shell disabled, it wouldn't work. To solve this issue, we have added command:
-
-<span class="notranslate"> </span>
 ```
 $ /sbin/cagefs_enter_user $USERNAME "_command_"
 ```
+</div>
 
+If you disable CageFS for a user, then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> `proxyexec` </span> .
 
-If you disable CageFS for a user,  then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> proxyexec </span> .
+You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start via <span class="notranslate"> `proxyexec` </span> for all users (regardless if CageFS is enabled or disabled) by specifying the parameter <span class="notranslate"> _cagefs_enter_proxied=0_ in _/etc/sysconfig/cloudlinux_ </span> .
 
-You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start via <span class="notranslate"> proxyexec </span> for all users (regardless if CageFS is enabled or disabled) by specifying the parameter _cagefs_enter_proxied=0_ in _/etc/sysconfig/cloudlinux_ .
-
-_/bin/cagefs_enter.proxied_ can be executed instead of _/bin/cagefs_enter_ to enter CageFS without <span class="notranslate"> proxyexec </span> . Note that starting <span class="notranslate"> `cagefs_enter` </span> via <span class="notranslate"> proxyexec </span> is necessary to enable sending local notification messages to users with enabled CageFS. <span class="notranslate"> `cagefs_enter` </span> is executed via <span class="notranslate"> proxyexec </span> by default.
+<span class="notranslate"> _/bin/cagefs_enter.proxied_ </span> can be executed instead of <span class="notranslate"> _/bin/cagefs_enter_ </span> to enter CageFS without <span class="notranslate"> `proxyexec` </span> . Note that starting <span class="notranslate"> `cagefs_enter` </span> via <span class="notranslate"> `proxyexec` </span> is necessary to enable sending local notification messages to users with enabled CageFS. <span class="notranslate"> `cagefs_enter` </span> is executed via <span class="notranslate"> `proxyexec` </span> by default.
 
 
 ## Sanity Check
@@ -305,42 +311,43 @@ _/bin/cagefs_enter.proxied_ can be executed instead of _/bin/cagefs_enter_ to en
 CageFS <span class="notranslate"> `--sanity-check` </span> utility allows to check CageFS configuration consistency, so that an administrator can save the time investigating issues with CageFS and ensure that custom configuration is correct.
 
 To start, run the command:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 cagefsctl --sanity-check
 ```
-
+</div>
 At the moment 7 types of check are implemented:
 
-_Check cagefs mount points exists_ - reads `cagefs.mp` file and verifies if the directories specified in it really exist on the disk. To learn more visit [https://docs.cloudlinux.com/index.html?mount_points.html](https://docs.cloudlinux.com/index.html?mount_points.html) and [https://docs.cloudlinux.com/index.html?split_by_username.html](https://docs.cloudlinux.com/index.html?split_by_username.html)
+1. _Check cagefs mount points exists_ - reads _cagefs.mp_ file and verifies if the directories specified in it really exist on the disk. To learn more, visit [Mount points](/cagefs/#mount-points) and [Split by username](/cagefs/#split-by-username)
 
-_Check cagefs users.enabled is directory_ - ensures that if `/etc/cagefs/users.enabled` exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
+2. _Check cagefs <span class="notranslate"> `users.enabled` </span> is a directory_ - ensures that if  <span class="notranslate"> _/etc/cagefs/users.enabled_ </span> exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
 
-_Check cagefs users.disabled is directory_ - ensures that if `/etc/cagefs/users.disabled` exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
+3. _Check cagefs <span class="notranslate"> `users.disabled` </span> is a directory_ - ensures that if  <span class="notranslate"> _/etc/cagefs/users.disabled_ </span> exists, then it is a directory, not a file (if it is recognized as a file, then it would cause a breakdown).
 
-_Check cagefs disable.etcfs exists_ - checks if `/etc/cagefs/etc.safe/disable.etcfs` exists.
+4. _Check cagefs <span class="notranslate"> `disable.etcfs` </span> exists_ - checks if <span class="notranslate"> _/etc/cagefs/etc.safe/disable.etcfs_ </span> exists.
 
-_Check cagefs users can enter cagefs_ - chooses two users in the system with enabled CageFS (the first and the second ones in the unsorted list) and tries to log in to CageFS under their credentials and see what happens. It runs <span class="notranslate"> `su -l "$USER" -s /bin/bash -c "whoami"` </span> and compares the output with the <span class="notranslate"> $USER </span> and <span class="notranslate"> su </span> command retcode estimation.
+5. _Check cagefs users can enter cagefs_ - chooses two users in the system with enabled CageFS (the first and the second ones in the unsorted list) and tries to log in to CageFS under their credentials and see what happens. It runs <span class="notranslate"> `su -l "$USER" -s /bin/bash -c "whoami"` </span> and compares the output with the <span class="notranslate"> $USER </span> and <span class="notranslate"> su </span> command retcode estimation.
 
+::: tip Note
+If a login fails, it can be due to various reasons, that can only be determined in manual mode. The checker only gives the output of the command.
+:::
 
+6. _Check cagefs proxy commands configs are parsable_ - tries to load <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [Executing by proxy](/cagefs/#executing-by-proxy) .
 
+7. _Check cagefs virt.mp files syntax_ - reads all _/var/cagefs///virt.mp_ files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [Per-user virtual mount points](/cagefs/#per-user-virtual-mount-points)
 
-
-_Check cagefs proxy commands configs are parsable_ - tries to load `/etc/cagefs/*.proxy.commands` files and parse them to check the syntax. In case of any parsing error the test will fail. To learn more, visit [https://docs.cloudlinux.com/index.html?executing_by_proxy.html](https://docs.cloudlinux.com/index.html?executing_by_proxy.html) .
-
-_Check cagefs virt.mp files syntax_ - reads all `/var/cagefs/*/*/virt.mp` files (if any) and checks their syntax validity. At the moment there are only two checks of the syntax: the file is not empty if it exists, and the file is not starting with the sub directory definitions (with @). To learn more, visit [https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html](https://docs.cloudlinux.com/index.html?per_user_virtual_mount_points.html)
-
-_Check MultiPHP system default PHP version – _ checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means PHP Selector should work properly. If MultiPHP system default PHP version is Alt-PHP, PHP Selector does not work and should be disabled. To learn more on how to disable PHP Selector, visit [https://docs.cloudlinux.com/cpanel_lve_manager.html](https://docs.cloudlinux.com/cpanel_lve_manager.html) 
+8. _Check MultiPHP system default PHP version_ – checks that MultiPHP system default PHP version is **NOT** Alt-PHP. That means <span class="notranslate"> PHP Selector </span> should work properly. If MultiPHP system default PHP version is Alt-PHP, <span class="notranslate"> PHP Selector </span> does not work and should be disabled. To learn more on how to disable <span class="notranslate"> PHP Selector, </span> visit [cPanel LVE Manager](/lve_manager/#cpanel-lve-manager) 
 
 Possible results of the checks:
 
- <span class="notranslate"> OK </span> - the check succeeded.
+* <span class="notranslate"> OK </span> - the check succeeded.
 
- <span class="notranslate"> FAILED </span> - the check revealed a problem.
+* <span class="notranslate"> FAILED </span> - the check revealed a problem.
 
- <span class="notranslate"> SKIPPED </span> - the check was skipped as it made no sense in such environment (e.g. wrong control panel) or can not be performed for some reason (e.g no users with enabled CageFS found). The actual result does not mean that a problem exists and can be considered as positive.
+* <span class="notranslate"> SKIPPED </span> - the check was skipped as it made no sense in such environment (e.g. wrong control panel) or can not be performed for some reason (e.g no users with enabled CageFS found). The actual result does not mean that a problem exists and can be considered as positive.
 
- <span class="notranslate"> INTERNAL_TEST_ERROR </span> - the check failed because of a problem inside the checker itself. Must be reported to the developers.
+* <span class="notranslate"> INTERNAL_TEST_ERROR </span> - the check failed because of a problem inside the checker itself. Must be reported to the developers.
 
 In case if at least one of the checks resulted neither <span class="notranslate"> OK </span> nor <span class="notranslate"> SKIPPED </span> then the checker will end with ret code >0.
 
@@ -350,143 +357,144 @@ In case if at least one of the checks resulted neither <span class="notranslate"
 
 Due to the nature of CageFS, some options will not work as before or will require some changes:
 
-lastlog will not work ( _/var/log/lastlog_ ).
-PHP will load php.ini from _/usr/selector/php.ini._ That file is actually a link to a real php.ini file from your system. So the same php.ini will be loaded in the end.
-You have to run `cagefsctl --update` any time you have modified php.ini, or you want to get new/updated software inside CageFS.
-CageFS installation changes jailshell to regular bash on cPanel - [read why](http://kb.cloudlinux.com/2015/11/why-cagefs-installation-change-jailshell-to-regular-bash-on-cpanel/) .
+* lastlog will not work ( <span class="notranslate"> _/var/log/lastlog_ </span> ).
+* PHP will load php.ini from <span class="notranslate"> _/usr/selector/php.ini._ </span> That file is actually a link to the real _php.ini_ file from your system. So the same _php.ini_ will be loaded in the end.
+* You have to run <span class="notranslate"> `cagefsctl --update` </span> any time you have modified _php.ini_, or you want to get new/updated software inside CageFS.
+* CageFS installation changes <span class="notranslate"> `jailshell` </span> to regular bash on cPanel - [read why](http://kb.cloudlinux.com/2015/11/why-cagefs-installation-change-jailshell-to-regular-bash-on-cpanel/) .
 
 
 
 ## Configuration
 
 
-[File System Templates](/cagefs/#file-system-templates)
+* [File System Templates](/cagefs/#file-system-templates)
 
-[Excluding Files](/cagefs/#excluding-files)
+* [Excluding Files](/cagefs/#excluding-files)
 
-[Excluding Users](/cagefs/#excluding-users)
+* [Excluding Users](/cagefs/#excluding-users)
 
-[Mount Points](/cagefs/#mount-points)
+* [Mount Points](/cagefs/#mount-points)
 
-[Per user virtual mount points](/cagefs/#per-user-virtual-mount-points)
+  * [Per user virtual mount points](/cagefs/#per-user-virtual-mount-points)
 
-[Split by Username](/cagefs/#split-by-username)
+  * [Split by Username](/cagefs/#split-by-username)
+  
+  * [Mounting user’s home directory inside CageFS](/cagefs/#mounting-users-home-directory-inside-cagefs)  
 
-[Base Home Directory](/cagefs/#base-home-directory)
+* [Base Home Directory](/cagefs/#base-home-directory)
 
-[PostgreSQL support](/cagefs/#postgresql-support)
+* [PostgreSQL support](/cagefs/#postgresql-support)
 
-[PAM Configuration](/cagefs/#pam-configuration)
+* [PAM Configuration](/cagefs/#pam-configuration)
 
-[Executing By Proxy](/cagefs/#executing-by-proxy)
+* [Executing By Proxy](/cagefs/#executing-by-proxy)
 
-[Custom /etc directory](/cagefs/#custom-etc-files-per-customer)
+* [Custom /etc files per customer](/cagefs/#custom-etc-files-per-customer)
 
-[Moving cagefs-skeleton directory](/cagefs/#moving-cagefs-skeleton-directory)
+* [Moving <span class="notranslate"> cagefs-skeleton </span> directory](/cagefs/#moving-cagefs-skeleton-directory)
 
-[Moving /var/cagefs directory](/cagefs/#moving-var-cagefs-directory)
+* [Moving /var/cagefs directory](/cagefs/#moving-var-cagefs-directory)
 
-[TMP directories](/cagefs/#tmp-directories)
+* [TMP directories](/cagefs/#tmp-directories)
 
-[Syslog](/cagefs/#syslog)
+* [Syslog](/cagefs/#syslog)
 
-[Excluding mount points](/cagefs/#excluding-mount-points)
+* [Excluding mount points](/cagefs/#excluding-mount-points)
 
 
 ### File System Templates
 
 
-CageFS creates a filesystem template in <span class="notranslate"> /usr/share/cagefs-skeleton </span> directory. CageFS template will be mounted for each customer.  The template is created by running:
-<span class="notranslate"> </span>
+CageFS creates a filesystem template in <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> directory. CageFS template will be mounted for each customer.  The template is created by running:
+<div class="notranslate">
+
 ```
 # /usr/sbin/cagefsctl --init
 ```
-
+</div>
 
 To update the template, you should run:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --update
 ```
+</div>
 
-
-The behavior of the commands (and the files copied into <span class="notranslate"> /usr/share/cagefs-skeleton </span> directory) depends on the configuration files in /etc/cagefs/conf.d
+The behavior of the commands (and the files copied into <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> directory) depends on the configuration files in _/etc/cagefs/conf.d_  
 You can add additional files, users, groups and devices into CageFS template by adding .cfg file, and running:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --update
 ```
-
+</div>
 
 To delete files from CageFS template, remove corresponding .cfg file, and run:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ /usr/sbin/cagefsctl --update
 ```
+</div>
 
+Here is an example <span class="notranslate"> _openssh-clients.cfg_ </span> file:
+<div class="notranslate">
 
-Here is an example <span class="notranslate"> openssh-clients.cfg </span> file:
-<span class="notranslate"> </span>
 ```
 [openssh-clients]
-```
-```
+
 comment=OpenSSH Clients
-```
-```
+
 paths=/etc/ssh/ssh_config, /bin/hostname, /usr/bin/scp, /usr/bin/sftp, /usr/bin/slogin, /usr/bin/ssh, /usr/bin/ssh-add, /usr/bin/ssh-agent, /usr/bin/ssh-copy-id, /usr/bin/.ssh.hmac, /usr/bin/ssh-keyscan, /usr/libexec/openssh/sftp-server, /etc/environment, /etc/security/pam_env.conf
-```
-```
+
 devices=/dev/ptmx
 ```
+</div>
 
+Example <span class="notranslate"> _mail.cfg_ </span> file:
+<div class="notranslate">
 
-Example <span class="notranslate"> mail.cfg </span> file:
-<span class="notranslate"> </span>
 ```
 [mail]
-```
-```
+
 comment=Mail tools
-```
-```
+
 paths=/bin/mail, /etc/aliases.db, /etc/mail, /etc/mailcap, /etc/mail.rc, /etc/mime.types, /etc/pam.d/smtp.sendmail, /etc/rc.d/init.d/sendmail, /etc/smrsh, /etc/sysconfig/sendmail, /usr/bin/hoststat, /usr/bin/Mail, /usr/bin/mailq.sendmail, /usr/bin/makemap, /usr/bin/newaliases.sendmail, /usr/bin/purgestat, /usr/bin/rmail.sendmail, /usr/lib64/sasl2/Sendmail.conf, /usr/lib/mail.help, /usr/lib/mail.tildehelp, /usr/lib/sendmail.sendmail, /usr/sbin/mailstats, /usr/sbin/makemap, /usr/sbin/praliases, /usr/sbin/sendmail.sendmail, /usr/sbin/smrsh, /var/log/mail, /var/spool/clientmqueue, /var/spool/mqueue
-```
-```
+
 users=smmsp
-```
-```
+
 groups=smmsp
 ```
+</div>
 
+There is an easy way to add/delete files from particular <span class="notranslate"> RPMs </span> into CageFS. That can be done by using <span class="notranslate"> `--addrpm` and `--delrpm` </span> options in <span class="notranslate"> `cagefsctl` </span> . Like:
+<div class="notranslate">
 
-There is an easy way to add/delete files from particular <span class="notranslate"> RPM </span> s into CageFS. That can be done by using <span class="notranslate"> --addrpm and --delrpm </span> options in <span class="notranslate"> cagefsctl </span> . Like:
-<span class="notranslate"> </span>
 ```
-$ cagefsctl --addrpm ffmpeg$ cagefsctl --update
+$ cagefsctl --addrpm ffmpeg
+$ cagefsctl --update
 ```
+</div>
 
-
-
-
-
+::: tip Note
+ffmpeg RPM should be installed on the system already.
+:::
 
 
 ### Excluding Files
 
 
-To exclude files and directories from CageFS, edit file:
-<span class="notranslate"> </span>
-`/etc/cagefs/custom.black.list`
-
+To exclude files and directories from CageFS, edit file:  
+<span class="notranslate"> _/etc/cagefs/custom.black.list_ </span>  
 And add files or directories in there, one per line.
 
-Please do not edit /etc/cagefs/black.list file because it is replaced during the update of CageFS package.
+Please do not edit <span class="notranslate"> _/etc/cagefs/black.list_ </span> file because it is replaced during the update of CageFS package.
 
 ### Excluding Users
 
 
-To exclude users from CageFS, create a file (any name would work) inside _ _ `/etc/cagefs/exclude` ` ` folder, and list users that you would like to exclude from CageFS in that file.
+To exclude users from CageFS, create a file (any name would work) inside <span class="notranslate"> _/etc/cagefs/exclude_ </span> folder, and list users that you would like to exclude from CageFS in that file.
 
 
 ### Mount Points
@@ -501,7 +509,7 @@ CageFS creates individual namespace for each user, making it impossible for user
 4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
 5. /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs-tmp directory </span>
 6. Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
-7. You can define custom directories per user using [virt.mp](/cagefs/#per-user-virtual-mount-points) files [CageFS 5.1 and higher]
+7. You can define custom directories per user using [virt.mp](/cagefs/#per-user-virtual-mount-points) files _[CageFS 5.1 and higher]_
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
 
@@ -718,7 +726,7 @@ mount_basedir=1
 ```
 </div>
 
-Directory structure in <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span> will be mounted in CageFS for appropriate users.
+Directory structure in <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span> will be mounted in CageFS for appropriate users.  
 Each user will have access to whole directory structure in <span class="notranslate"> _/var/www/vhosts/sitename.com_ </span> (according to their permissions).
 
 ::: tip Note
@@ -851,7 +859,7 @@ Mandatory parameters are <span class="notranslate"> _ALIAS_ </span> and <span cl
 
 * <span class="notranslate"> wrapper_name </span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate"> _path_to_executable_ inside CageFS </span> . Wrapper files are located in <span class="notranslate"> _/usr/share/cagefs/safeprograms_ </span> . If wrapper name is not specified, then default wrapper <span class="notranslate"> _/usr/share/cagefs/safeprograms/cagefs.proxy.program_ </span> is used. Also, a reserved word <span class="notranslate"> `noproceed` </span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate"> ALIAS </span> , as in the example below.
 
-* <span class="notranslate"> usernam </span> e - the name of a user on whose behalf <span class="notranslate"> _path_to_executable_ </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> _path_to_executable_ </span> will run on behalf the same user that is inside CageFS.
+* <span class="notranslate"> username </span> - the name of a user on whose behalf <span class="notranslate"> _path_to_executable_ </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> _path_to_executable_ </span> will run on behalf the same user that is inside CageFS.
 
 * <span class="notranslate"> path_to_executable </span> - the path to executable file which will run via <span class="notranslate"> `proxyexec` </span> .
 
@@ -978,7 +986,7 @@ If this option is not set, then cPanel will create new accounts in incorrect pla
 ### Moving /var/cagefs directory
 
 
-To move <span class="notranslate"> /var/cagefs </span> to another location:
+To move <span class="notranslate"> _/var/cagefs_ </span> to another location:
 
 <div class="notranslate">
  
@@ -988,7 +996,7 @@ $ cagefsctl --unmount-all
 ```
 </div>
 
-Verify that <span class="notranslate"> /var/cagefs.bak </span> directory does not exist (if it exists - change name "cagefs.bak" to something else)
+Verify that <span class="notranslate"> _/var/cagefs.bak_ </span> directory does not exist (if it exists - change name "cagefs.bak" to something else)
 
 <div class="notranslate">
 
@@ -1103,15 +1111,15 @@ For Plesk servers, <span class="notranslate"> CageFS </span> version 6.0-52 or h
 
 Each time the script runs, it performs the cleanup of the paths:
 
-1. set by <span class="notranslate"> session.save_path </span> directive in <span class="notranslate"> /opt/alt/phpXX/etc/php.ini </span> files. If <span class="notranslate"> session.save_path </span> is missing, then <span class="notranslate"> /tmp </span> is used. Session files lifetime is set by <span class="notranslate"> session.gc_maxlifetime </span> directive. If it is not found, then 1440 seconds value is used (24 minutes, as in Plesk). Lifetime set in the file is only taken into consideration if it is longer than 1440 seconds, otherwise 1440 seconds is used. All the installed <span class="notranslate"> Alt-PHP </span> versions are processed.
+1. set by <span class="notranslate"> `session.save_path` </span> directive in <span class="notranslate"> _/opt/alt/phpXX/etc/php.ini_ </span> files. If <span class="notranslate"> session.save_path </span> is missing, then <span class="notranslate"> /tmp </span> is used. Session files lifetime is set by <span class="notranslate"> session.gc_maxlifetime </span> directive. If it is not found, then 1440 seconds value is used (24 minutes, as in Plesk). Lifetime set in the file is only taken into consideration if it is longer than 1440 seconds, otherwise 1440 seconds is used. All the installed <span class="notranslate"> Alt-PHP </span> versions are processed.
 
-2. <span class="notranslate"> /var/lib/php/session </span> . Files lifetime is only defined by Plesk script <span class="notranslate"> /usr/lib64/plesk-9.0/maxlifetime </span> . If the script is missing or returns errors, then this directory is not processed.
+2. <span class="notranslate"> _/var/lib/php/session_ </span> . Files lifetime is only defined by Plesk script <span class="notranslate"> _/usr/lib64/plesk-9.0/maxlifetime_ </span> . If the script is missing or returns errors, then this directory is not processed.
 
 The following features are applied during the cleanup:
 
-* all the users with <span class="notranslate"> UID </span> higher than specified in <span class="notranslate"> /etc/login.defs </span> are processed. Each user is processed independently from one another.
+* all the users with <span class="notranslate"> UID </span> higher than specified in <span class="notranslate"> _/etc/login.defs_ </span> are processed. Each user is processed independently from one another.
 * only directories inside <span class="notranslate"> CageFS </span> are being cleaned. The paths of the same name in the physical  file system are not processed.
-* in all the detected directories, all the files with the names that correspond to <span class="notranslate"> sess_* search </span> mask are removed, the rest of the files are ignored.
+* in all the detected directories, all the files with the names that correspond to <span class="notranslate"> `sess_ ` search </span> mask are removed, the rest of the files are ignored.
 * the files older than specified lifetime are removed.
 * all non-fatal errors (lack of rights, missing directory) are ignored and do not affect the further work of the script.
 
