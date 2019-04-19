@@ -720,351 +720,402 @@ Your Friendly Web Hosting Support Team
 |<span class="notranslate"> `/usr/sbin/cloudlinux-top` </span> |utility provides information about current MySQL and LVE usage of a running system in JSON format.|
 |<span class="notranslate"> `/usr/sbin/cloudlinux-statistics` </span> |utility provides historical information about resource usage.|
 
+<div class="notranslate">
 
 ### lveinfo
 
+</div>
 
-<span class="notranslate"> [lve-stats-2.2-2] </span>
+:::tip Note
+<span class="notranslate">lve-stats-2.2-2</span>
+:::
 
-`usage: ` <span class="notranslate"> lveinfo [-h] [-v] [--dbgov DBGOV] [-f YYYY-MM-DD[HH:MM]] </span>
-`               [-t YYYY-MM-DD[HH:MM]] [--period PERIOD] [-u USER | --id ID]`
-`               [-d] [-o ALIAS] [-b ALIAS [ALIAS ...]] [-p 0..100]`
-`               [--by-fault ALIAS [ALIAS ...]] [-r FAULTS]`
-`               [--style {user,admin}] [-l LIMIT] [-c [PATH] | -j]`
-`               [--server_id SERVER_ID] [--servers-info]`
-`               [--show-all | --show-columns COLUMN_NAME [COLUMN_NAME ...]]`
-`               [--time-unit TIME_UNIT] [-m {v1,v2}]`
-`               [--blank-value [BLANK_VALUE]]`
+**Usage**
 
-<span class="notranslate"> `lveinfo`  - Utility to display historical information about LVE usage </span>
+<div class="notranslate">
 
-`Optional arguments:`
+```
+lveinfo [-h] [-v] [--dbgov DBGOV] [-f YYYY-MM-DD[HH:MM]]
 
-| | |
-|-|-|
-|<span class="notranslate"> `-h, --help` </span> | `show this help message and exit`|
-|<span class="notranslate"> `-v, --version` </span> | `show program's version number and exit`|
-|<span class="notranslate"> <span class="notranslate"> <span class="notranslate"> `--dbgov DBGOV` </span> </span> </span> | `show ` <span class="notranslate"> MySql Governor </span> ` statistic`|
-|<span class="notranslate"> `-u USER, --user USER` </span> | `Use username instead of ` <span class="notranslate"> LVE id </span> `, and show only record for that user`|
-|<span class="notranslate"> `--id ID` </span> | `will display record only for that ` <span class="notranslate"> LVE id </span>|
-|<span class="notranslate"> `-d, --display-username` </span> | `try to convert ` <span class="notranslate"> LVE id </span> ` into username when possible`|
-|<span class="notranslate"> `-o ALIAS, --order-by ALIAS` </span> | `orders results by one of the following:`|
-| |  | |
-|-|--|-|
-|<span class="notranslate"> `ALIAS`   </span> | <span class="notranslate"> `ALIAS`   </span> | `DESCRIPTION`|
-|` cpu_avg` | `aCPU ` | `average ` <span class="notranslate"> CPU </span> ` usage`|
-|`cpu_max` | `mCPU` | `max ` <span class="notranslate"> CPU </span> ` usage`|
-|` total_cpu_faults` | `CPUf` | `total number of max ` <span class="notranslate"> CPU </span> ` usage faults`|
-|`vmem_avg ` | `aVMem` | `average virtual memory usage`|
-|`vmem_max ` | `mVMem` | `average virtual memory usage`|
-|` total_vmem_faults` | `VMemF` | `total number of out of virtual memory faults    `|
-|`mep_avg ` | `aEP` | `average number of entry processes (concurrent connections)`|
-|`mep_max` | `mEP` | `max number of entry processes (concurrent connections)`|
-|`total_ep_faults` | `EPf` | `total number of max entry processes faults`|
-| |  | |
-|-|--|-|
-|`pmem_avg` | `aPMem` | `average physical memory usage (LVE version >= 6)`|
-|`pmem_max` | `mPMem` | `max physical memory usage (LVE version >= 6)`|
-|`nproc_avg` | `aNproc` | `average number of processes (LVE version >= 6)`|
-|`nproc_max` | `mNproc` | `max number of processes (LVE version >= 6)`|
-|`io_avg` | `aIO` | `average ` <span class="notranslate"> io </span> ` usage (LVE version >= 6)`|
-|`io_max` | `mIO` | `max ` <span class="notranslate"> io </span> ` usage (LVE version >= 6)`|
-|`total_pmem_faults` | `PMemF` | `total number of out of physical memory faults (LVE version >= 6)`|
-|`total_nproc_faults` | `NprocF` | `total number of max processes faults (LVE version >= 6)`|
-|`total_io_faults` | `IOf` | `total number of max ` <span class="notranslate"> io </span> ` faults (LVE version >= 6)`|
-|`iops_avg` | `aIOPS` | `average ` <span class="notranslate"> io </span> ` operations (LVE version >= 8)`|
-| |  | |
-|-|--|-|
-|` iops_max` | `mIOPS` | `max ` <span class="notranslate"> io </span> ` operations (LVE version >= 8)`|
-|`total_iops_faults` | `IOPSf` | `total number of max io operations faults (LVE version >= 8)`|
-|`any_faults` | `anyF` | `total number of faults of all types `|
-| | |
-|-|-|
-|<span class="notranslate"> `-b ALIAS [ALIAS ...]` </span> `--by-usage ALIAS [ALIAS ...]` |  `show LVEs with usage (averaged) within 90 percent of the limit available values:`|
-| |  |  | |
-|-|--|--|-|
-|<span class="notranslate"> `ALIAS`   </span> | <span class="notranslate"> `ALIAS ` </span> | <span class="notranslate"> `ALIAS ` </span> | `DESCRIPTION`|
-|` cpu_avg` | <span class="notranslate"> `cpu` </span> | `aCPU` | `average ` <span class="notranslate"> CPU </span> ` usage`|
-|`cpu_max` | `cpu_max` | `mCPU` | `max ` <span class="notranslate"> CPU </span> ` usage`|
-|`vmem_avg` | `vmem` | `aVMem` | `average virtual memory usage`|
-|`vmem_max` | `vmem_max` | `mVMem` | `max virtual memory usage`|
-|`mep_avg` | `mep` | `aEP` | `average number of entry processes (concurrent connections)`|
-|`mep_max` | `mep_max` | `mEP` | `max number of entry processes (concurrent connections)`|
-|`pmem_avg` | `pmem` | `aPMem` | `average physical memory usage (LVE version >= 6)`|
-|`pmem_max` | `pmem_max` | `mPMem` | `max physical memory usage (LVE version >= 6)`|
-|`nproc_avg` | `nproc` | `aNproc` | `average number of processes (LVE version >= 6)`|
-| |  |  | |
-|-|--|--|-|
-|`nproc_max` | `nproc_max` | `mNproc` | `max number of processes (LVE version >= 6)`|
-|`io_avg` | <span class="notranslate"> `io` </span> | `aIO` | `average ` <span class="notranslate"> io </span> ` usage (LVE version >= 6)`|
-|`io_max` | `io_max` | `mIO` | `max ` <span class="notranslate"> io </span> ` usage (LVE version >= 6)`|
-|`iops_avg` | `iops` | `aIOPS` | `average ` <span class="notranslate"> io </span> ` operations (LVE version >= 8)`|
-|`iops_max` | `iops_max` | `mIOPS` | `max ` <span class="notranslate"> io </span> ` operations (LVE version >= 8)`|
-| | |
-|-|-|
-|<span class="notranslate"> `-p 0..100, --percentage 0..100` </span> | `defines percentage for ` <span class="notranslate"> --by-usage </span> ` option; default 90`|
-|<span class="notranslate"> `--style {user,admin}` </span> | `deprecated, not used.`|
-|<span class="notranslate"> `-l LIMIT, --limit LIMIT` </span> | `max number of results to display, 10 by default, if 0 no limit`|
-|<span class="notranslate"> `-c [PATH], --csv [PATH]` </span> | `save statistics in CSV format; "-" by default (output to screen)`|
-|<span class="notranslate"> `-j, --json` </span> | `display output in JSON format`|
-|<span class="notranslate"> `--server_id SERVER_ID` </span> | `used with central database for multiple servers, default ` <span class="notranslate"> "localhost" </span>|
-|<span class="notranslate"> `--servers-info` </span> | `Show servers LVE versions"`|
-|<span class="notranslate"> `--show-all` </span> | `full output (show all limits); brief output is default; equivalent ` <span class="notranslate"> --show-columns all </span>|
-|<span class="notranslate"> `-show-columns COLUMN_NAME [COLUMN_NAME ...]` </span> | ` ` `show only the listed columns; ` <span class="notranslate"> "all" </span> ` for all supported columns`|
-| |  | |
-|-|--|-|
-| | <span class="notranslate"> `COLUMN_NAME` </span> | `DESCRIPTION`|
-| | <span class="notranslate"> `From ` </span> | `Show start period statistics`|
-| | <span class="notranslate"> `To  ` </span> | `Show end period statistics`|
-| | <span class="notranslate"> `ID ` </span> | `LVE Id or username`|
-| | <span class="notranslate"> `aCPU` </span> | `Average ` <span class="notranslate"> CPU </span> ` usage`|
-| | <span class="notranslate"> `uCPU` </span> | `The percentage of user-allocated resource ` <span class="notranslate"> CPU </span>|
-| | <span class="notranslate"> `mCPU` </span> | `deprecated`|
-| | <span class="notranslate"> `lCPU` </span> | <span class="notranslate"> `CPU`  Limit </span>|
-| | `CPUf` | `Out Of ` <span class="notranslate"> CPU </span> ` usage Faults `|
-| | `aEP` | `Average Entry Processes`|
-| |  | |
-|-|--|-|
-| | `uEP` | `The percentage of user-allocated resource Entry processes`|
-| | `mEP` | `deprecated`|
-| | `lEP` | `maxEntryProc limit`|
-| | `aVMem` | `Average Virtual Memory Usage`|
-| | `uVMem ` | `The percentage of user-allocated resource Virtual Memory`|
-| | `mVMem` | `deprecated`|
-| | `lVMem` | `Virtual Memory Limit`|
-| | `VMemF` | `Out Of Memory Faults`|
-| | `EPf` | `Entry processes faults`|
-| | `aPMem` | `Average Physical Memory Usage (LVE version >= 6)`|
-| |  | |
-|-|--|-|
-| | `uPMem` | `The percentage of user-allocated resource Physical Memory (LVE version >= 6)`|
-| | `mPMem` | `deprecated (LVE version >= 6)`|
-| | `lPMem` | `Physical Memory Limit (LVE version >= 6)`|
-| | `aNproc` | `Average Number of processes (LVE version >= 6)`|
-| | `uNproc` | `The percentage of user-allocated resource Number of processes (LVE version >= 6)`|
-| | `mNproc` | `deprecated (LVE version >= 6)`|
-| | `lNproc` | `Limit of Number of processes (LVE version >= 6)`|
-| | `PMemF` | `Out Of Physical Memory Faults (LVE version >= 6)`|
-| | `NprocF` | `Number of processes faults (LVE version >= 6)`|
-| | `aIO` | `Average ` <span class="notranslate"> I/O </span> ` (LVE version >= 6)`|
-| |  | |
-|-|--|-|
-| | `uIO` | `The percentage of user-allocated resource ` <span class="notranslate"> I/O </span> ` (LVE version >= 6)`|
-| | `mIO` | `deprecated (LVE version >= 6)`|
-| | `lIO` | <span class="notranslate"> `I/O`  Limit (LVE version >= 6) </span>|
-| | `IOf` | `Out Of ` <span class="notranslate"> I/O </span> ` usage Faults (LVE version >= 6)`|
-| | `aIOPS` | `Average ` <span class="notranslate"> I/O </span> ` Operations (LVE version >= 8)`|
-| | `mIOPS` | `deprecated (LVE version >= 8)`|
-| | `uIOPS` | `The percentage of user-allocated resource ` <span class="notranslate"> I/O </span> ` Operations (LVE version >= 8)`|
-| | `lIOPS` | <span class="notranslate"> `I/O`  Operations Limit (LVE version >= 8) </span>|
-| | `IOPSf` | `Out Of ` <span class="notranslate"> I/O </span> ` Operations Faults (LVE version >= 8)`|
-| | |
-|-|-|
-|<span class="notranslate"> `--time-unit TIME_UNIT` </span> | `time step for grouping statistic in minutes; 1 min., by default; can use ` <span class="notranslate"> m\|h\|d </span> ` suffixes; for example: 1h or 1h30m or 1d12h`|
-|<span class="notranslate"> `-m {v1,v2}, --compat {v1,v2}` </span> | `v1 - return old output mode; v2 - new mode; default v1; you can change default in config`|
-|<span class="notranslate"> `--blank-value [BLANK_VALUE]` </span> | `Use to fill unsupported limits; default "-"`|
-|<span class="notranslate"> `-f YYYY-MM-DD[ HH:MM], ` </span> `--from YYYY-MM-DD[ HH:MM]` |  `run report from date and time in ` <span class="notranslate"> [YY]YY-MM-DD[ HH:MM] </span> ` format; if not present last 10 minutes are assumed`|
-|<span class="notranslate"> `-t YYYY-MM-DD[ HH:MM], ` </span> `--to YYYY-MM-DD[ HH:MM]` |  `run report up to date and time in ` <span class="notranslate"> [YY]YY-MM-DD[ HH:MM] </span> ` format; if not present, reports results up to now`|
-|<span class="notranslate"> `--period PERIOD` </span> | `time period; specify minutes with m, h - hours, days with d, and values: today, yesterday; 5m - last 5 minutes, 4h -- last four hours, 2d - last 2 days, as well as today`|
-|<span class="notranslate"> `--by-fault ALIAS [ALIAS ...]` </span> | `show LVEs which failed on max processes limit or memory limit`|
-| |  |  |  | |
-|-|--|--|--|-|
-| | <span class="notranslate"> `ALIAS` </span> | <span class="notranslate"> `ALIAS` </span> | <span class="notranslate"> `ALIAS` </span> | `DESCRIPTION`|
-| | `mcpu` | <span class="notranslate"> `cpu` </span> | `CPUf` | `total number of max ` <span class="notranslate"> CPU </span> ` usage faults`|
-| | `mem` | `vmem` | `VMemF` | `total number of out of virtual memory faults`|
-| | `mep` | `ep` | `EPf` | `total number of max entry processes faults   `|
-| | `pmem` | `pmem` | `PMemF` | `total number of out of physical memory faults (LVE version >= 6)`|
-| | `nproc` | `nproc` | `NprocF` | `total number of max processes faults (LVE version >= 6)`|
-| | `io` | `io` | `IOf` | `total number of max ` <span class="notranslate"> io </span> ` faults (LVE version >= 6)`|
-| | `iops` | `iops` | `IOPSf` | `total number of max ` <span class="notranslate"> io </span> ` operations faults (LVE version >= 8)`|
-| | <span class="notranslate"> `any_faults` </span> | <span class="notranslate"> `any` </span> | `anyF` | `total number of faults of all types`|
-| | |
-|-|-|
-|<span class="notranslate"> `-r FAULTS, --threshold FAULTS` </span> | `in combination with ` <span class="notranslate"> --by-fault </span> `, shows only LVEs with number of faults above; default 1`|
-`                                `
-`Prefixes ` <span class="notranslate"> Kb, Mb </span> ` and ` <span class="notranslate"> Gb </span> ` indicates powers of 1024.`
+              [-t YYYY-MM-DD[HH:MM]] [--period PERIOD] [-u USER | --id ID]
 
-`*All ` <span class="notranslate"> ALIAS </span> ` options are not case sensitive.`
+              [-d] [-o ALIAS] [-b ALIAS [ALIAS ...]] [-p 0..100]
 
+              [--by-fault ALIAS [ALIAS ...]] [-r FAULTS]
+
+              [--style {user,admin}] [-l LIMIT] [-c [PATH] | -j]
+
+              [--server_id SERVER_ID] [--servers-info]
+
+              [--show-all | --show-columns COLUMN_NAME [COLUMN_NAME ...]]
+
+              [--time-unit TIME_UNIT] [-m {v1,v2}]
+
+              [--blank-value [BLANK_VALUE]]
+```
+</div>
+
+<span class="notranslate">`lveinfo`</span> is an utility to display historical information about LVE usage.
+
+**Optional arguments**
+
+* <span class="notranslate"> `-h, --help` </span> – show this help message and exit
+* <span class="notranslate"> `-v, --version` </span> – show program's version number and exit
+* <span class="notranslate"> `--dbgov DBGOV` </span> – show <span class="notranslate"> MySql Governor</span> statistic
+* <span class="notranslate"> `-u USER, --user USER` </span> – use username instead of <span class="notranslate"> LVE id</span>, and show only record for that user
+* <span class="notranslate"> `--id ID` </span> – will display record only for that <span class="notranslate"> LVE id</span>
+* <span class="notranslate"> `-d, --display-username` </span> – try to convert <span class="notranslate"> LVE id</span> into username when possible
+* <span class="notranslate"> `-o ALIAS, --order-by ALIAS` </span> – orders results by one of the following:
+  | | | |
+  |-|-|-|
+  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
+  |<span class="notranslate">`cpu_avg`</span>|<span class="notranslate">`aCPU`</span>|average CPU usage|
+  |<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`mCPU`</span>|max CPU usage|
+  |<span class="notranslate">`total_cpu_faults`</span>|<span class="notranslate">`CPUf`</span>|total number of max CPU usage faults|
+  |<span class="notranslate">`vmem_avg`</span>|<span class="notranslate">`aVMem`</span>|average virtual memory usage||<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`mVMem`</span>|average virtual memory usage||<span class="notranslate">`total_vmem_faults`</span>|<span class="notranslate">`VMemF`</span>|total number of out of virtual memory faults|
+  |<span class="notranslate">`mep_avg`</span>|<span class="notranslate">`aEP`</span>|average number of entry processes (concurrent connections)|
+  |<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mEP`</span>|max number of entry processes (concurrent connections)|
+  |<span class="notranslate">`total_ep_faults`</span>|<span class="notranslate">`EPf`</span>|total number of max entry processes faults|
+  |<span class="notranslate">`pmem_avg`</span>|<span class="notranslate">`aPMem`</span>|average physical memory usage (LVE version >= 6)|
+  |<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`mPMem`</span>|max physical memory usage (LVE version >= 6)|
+  |<span class="notranslate">`nproc_avg`</span>|<span class="notranslate">`aNproc`</span>|average number of processes (LVE version >= 6)|
+  |<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`mNproc`</span>|max number of processes (LVE version >= 6)|
+  |<span class="notranslate">`io_avg`</span>|<span class="notranslate">`aIO`</span>|average io usage (LVE version >= 6)|
+  |<span class="notranslate">`io_max`</span>|<span class="notranslate">`mIO`</span>|max io usage (LVE version >= 6)|
+  |<span class="notranslate">`total_pmem_faults`</span>|<span class="notranslate">`PMemF`</span>|total number of out of physical memory faults (LVE version >= 6)|
+  |<span class="notranslate">`total_nproc_faults`</span>|<span class="notranslate">`NprocF`</span>|total number of max processes faults (LVE version >= 6)|
+  |<span class="notranslate">`total_io_faults`</span>|<span class="notranslate">`IOf`</span>|total number of max io faults (LVE version >= 6)|
+  |<span class="notranslate">`iops_avg`</span>|<span class="notranslate">`aIOPS`</span>|average io operations (LVE version >= 8)|
+  |<span class="notranslate">`iops_max`</span>|<span class="notranslate">`mIOPS`</span>|max io operations (LVE version >= 8)|
+  |<span class="notranslate">`total_iops_faults`</span>|<span class="notranslate">`IOPSf`</span>|total number of max io operations faults (LVE version >= 8)|
+  |<span class="notranslate">`any_faults`</span>|<span class="notranslate">`anyF`</span>|total number of faults of all types|
+* <span class="notranslate"> `-b ALIAS [ALIAS ...]` `--by-usage ALIAS [ALIAS ...]`</span> – show LVEs with usage (averaged) within 90 percent of the limit available values:
+
+  | | | | |
+  |-|-|-|-|
+  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
+  |<span class="notranslate">`cpu_avg`</span>|<span class="notranslate">`cpu`</span>|<span class="notranslate">`aCPU`</span>|average CPU usage|
+  |<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`cpu_max`</span>|<span class="notranslate">`mCPU`</span>|max CPU usage|
+  |<span class="notranslate">`vmem_avg`</span>|<span class="notranslate">`vmem`</span>|<span class="notranslate">`aVMem`</span>|average virtual memory usage|
+  |<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`vmem_max`</span>|<span class="notranslate">`mVMem`</span>|max virtual memory usage|
+  |<span class="notranslate">`mep_avg`</span>|<span class="notranslate">`mep`</span>|<span class="notranslate">`aEP`</span>|average number of entry processes (concurrent connections)|
+  |<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mep_max`</span>|<span class="notranslate">`mEP`</span>|max number of entry processes (concurrent connections)|
+  |<span class="notranslate">`pmem_avg`</span>|<span class="notranslate">`pmem`</span>|<span class="notranslate">`aPMem`</span>|average physical memory usage (LVE version >= 6)|
+  |<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`pmem_max`</span>|<span class="notranslate">`mPMem`</span>|max physical memory usage (LVE version >= 6)|
+  |<span class="notranslate">`nproc_avg`</span>|<span class="notranslate">`nproc`</span>|<span class="notranslate">`aNproc`</span>|average number of processes (LVE version >= 6)|
+  |<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`nproc_max`</span>|<span class="notranslate">`mNproc`</span>|max number of processes (LVE version >= 6)|
+  |<span class="notranslate">`io_avg`</span>|<span class="notranslate">`io`</span>|<span class="notranslate">`aIO`</span>|average io usage (LVE version >= 6)|
+  |<span class="notranslate">`io_max`</span>|<span class="notranslate">`io_max`</span>|<span class="notranslate">`mIO`</span>|max io usage (LVE version >= 6)|
+  |<span class="notranslate">`iops_avg`</span>|<span class="notranslate">`iops`</span>|<span class="notranslate">`aIOPS`</span>|average io operations (LVE version >= 8)|
+  |<span class="notranslate">`iops_max`</span>|<span class="notranslate">`iops_max`</span>|<span class="notranslate">`mIOPS`</span>|max io operations (LVE version >= 8)|
+
+* <span class="notranslate">`-p 0..100`, `--percentage 0..100`</span> – defines percentage for <span class="notranslate">`--by-usage`</span> option; default `90`
+* <span class="notranslate"> `--style {user,admin}` </span> – deprecated, not used.
+* <span class="notranslate"> `-l LIMIT`, `--limit LIMIT` </span> – max number of results to display, `10` by default, if `0` no limit
+* <span class="notranslate"> `-c [PATH]`, `--csv [PATH]` </span> – save statistics in CSV format; `-` by default (output to screen)
+* <span class="notranslate"> `-j`, `--json` </span> – display output in JSON format
+* <span class="notranslate"> `--server_id SERVER_ID` </span> – used with central database for multiple servers, default <span class="notranslate">`localhost`</span>
+* <span class="notranslate"> `--servers-info` </span> – show servers LVE versions
+* <span class="notranslate"> `--show-all` </span> – full output (show all limits); brief output is default; equivalent <span class="notranslate">`--show-columns all`</span>
+* <span class="notranslate"> `-show-columns COLUMN_NAME [COLUMN_NAME ...]` </span> – show only the listed columns; <span class="notranslate">`all`</span> for all supported columns
+  
+  | | |
+  |-|-|
+  |<span class="notranslate">COLUMN_NAME</span> |DESCRIPTION|
+  |<span class="notranslate"> `From ` </span> |Show start period statistics|
+  |<span class="notranslate"> `To  ` </span> |Show end period statistics|
+  |<span class="notranslate"> `ID ` </span> |LVE Id or username|
+  |<span class="notranslate"> `aCPU` </span> |Average <span class="notranslate"> CPU</span> usage|
+  |<span class="notranslate"> `uCPU` </span> |The percentage of user-allocated resource <span class="notranslate">CPU</span>|
+  |<span class="notranslate"> `mCPU` </span> |deprecated|
+  |<span class="notranslate"> `lCPU` </span> |<span class="notranslate">CPU</span> limit|
+  |<span class="notranslate">`CPUf`</span> |Out Of <span class="notranslate">CPU</span> usage Faults|
+  |<span class="notranslate">`aEP`</span> | Average Entry Processes|
+  |<span class="notranslate">`uEP` </span> |The percentage of user-allocated resource Entry processes|
+  |<span class="notranslate">`mEP` </span> |deprecated|
+  |<span class="notranslate">`lEP` </span> |maxEntryProc limit|
+  |<span class="notranslate">`aVMem` </span> |Average Virtual Memory Usage|
+  |<span class="notranslate">`uVMem ` </span> |The percentage of user-allocated resource Virtual Memory|
+  |<span class="notranslate">`mVMem` </span> |deprecated|
+  |<span class="notranslate">`lVMem` </span> |Virtual Memory Limit|
+  |<span class="notranslate">`VMemF` </span> |Out Of Memory Faults|
+  |<span class="notranslate">`EPf` </span> |Entry processes faults|
+  |<span class="notranslate">`aPMem` </span> |Average Physical Memory Usage (LVE version >= 6)|
+  |<span class="notranslate">`uPMem` </span> |The percentage of user-allocated resource Physical Memory (LVE version >= 6)|
+  |<span class="notranslate">`mPMem` </span> |deprecated (LVE version >= 6)|
+  |<span class="notranslate">`lPMem` </span> |Physical Memory Limit (LVE version >= 6)|
+  |<span class="notranslate">`aNproc` </span> |Average Number of processes (LVE version >= 6)|
+  |<span class="notranslate">`uNproc` </span> |The percentage of user-allocated resource Number of processes (LVE version >= 6)|
+  |<span class="notranslate">`mNproc` </span> |deprecated (LVE version >= 6)|
+  |<span class="notranslate">`lNproc` </span> |Limit of Number of processes (LVE version >= 6)|
+  |<span class="notranslate">`PMemF` </span> |Out Of Physical Memory Faults (LVE version >= 6)|
+  |<span class="notranslate">`NprocF` </span> |Number of processes faults (LVE version >= 6)|
+  |<span class="notranslate">`aIO` </span> |Average <span class="notranslate">I/O</span> (LVE version >= 6)|
+  |<span class="notranslate">`uIO` </span> |The percentage of user-allocated resource <span class="notranslate">I/O</span> (LVE version >= 6)|
+  |<span class="notranslate">`mIO` </span> |deprecated (LVE version >= 6)|
+  |<span class="notranslate">`lIO` </span> |<span class="notranslate">I/O</span> Limit (LVE version >= 6)|
+  |<span class="notranslate">`IOf` </span> |Out Of <span class="notranslate">I/O</span> usage Faults (LVE version >= 6)|
+  |<span class="notranslate">`aIOPS` </span> |Average <span class="notranslate">I/O</span> Operations (LVE version >= 8)|
+  |<span class="notranslate">`mIOPS` </span> |deprecated (LVE version >= 8)|
+  |<span class="notranslate">`uIOPS` </span> |The percentage of user-allocated resource <span class="notranslate">I/O</span> Operations (LVE version >= 8)|
+  |<span class="notranslate">`lIOPS` </span> |<span class="notranslate">I/O</span> Operations Limit (LVE version >= 8) </span>|
+  |<span class="notranslate">`IOPSf` </span> |Out Of <span class="notranslate">I/O</span> Operations Faults (LVE version >= 8)|
+
+* <span class="notranslate"> `--time-unit TIME_UNIT` </span> – time step for grouping statistic in minutes; 1 min., by default; can use <span class="notranslate">`m\|h\|d`</span> suffixes; for example: `1h or 1h30m or 1d12h`
+* <span class="notranslate"> `-m {v1,v2}`, `--compat {v1,v2}` </span> – `v1` - return old output mode; `v2` - new mode; default `v1`; you can change default in config
+* <span class="notranslate"> `--blank-value [BLANK_VALUE]` </span> – Use to fill unsupported limits; default `-`
+* <span class="notranslate"> `-f YYYY-MM-DD[ HH:MM]`,  `--from YYYY-MM-DD[ HH:MM]`</span> – run report from date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present last 10 minutes are assumed
+* <span class="notranslate"> `-t YYYY-MM-DD[ HH:MM]`,  `--to YYYY-MM-DD[ HH:MM]`</span> – run report up to date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, reports results up to now
+* <span class="notranslate"> `--period PERIOD` </span> – time period; specify minutes with <span class="notranslate"> `m`, `h`</span> - hours, days with <span class="notranslate"> `d`</span>, and values: <span class="notranslate"> `today`, `yesterday`; `5m`</span> - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as <span class="notranslate"> `today`</span>
+* <span class="notranslate"> `--by-fault ALIAS [ALIAS ...]` </span> – show LVEs which failed on max processes limit or memory limit
+  
+  | | | | |
+  |-|-|-|-|
+  |<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|<span class="notranslate">ALIAS</span>|DESCRIPTION|
+  |<span class="notranslate">`mcpu`</span>|<span class="notranslate">`cpu`</span>|<span class="notranslate">`CPUf`</span>|total number of max CPU usage faults|
+  |<span class="notranslate">`mem`</span>|<span class="notranslate">`vmem`</span>|<span class="notranslate">`VMemF`</span>|total number of out of virtual memory faults|
+  |<span class="notranslate">`mep`</span>|<span class="notranslate">`ep`</span>|<span class="notranslate">`EPf`</span>|total number of max entry processes faults|
+  |<span class="notranslate">`pmem`</span>|<span class="notranslate">`pmem`</span>|<span class="notranslate">`PMemF`</span>|total number of out of physical memory faults (LVE version >= 6)|
+  |<span class="notranslate">`nproc`</span>|<span class="notranslate">`nproc`</span>|<span class="notranslate">`NprocF`</span>|total number of max processes faults (LVE version >= 6)|
+  |<span class="notranslate">`io`</span>|<span class="notranslate">`io`</span>|<span class="notranslate">`IOf`</span>|total number of max io faults (LVE version >= 6)|
+  |<span class="notranslate">`iops`</span>|<span class="notranslate">`iops`</span>|<span class="notranslate">`IOPSf`</span>|total number of max io operations faults (LVE version >= 8)|
+  |<span class="notranslate">`any_faults`</span>|<span class="notranslate">`any`</span>|<span class="notranslate">`anyF`</span>|total number of faults of all types|
+* <span class="notranslate"> `-r FAULTS, --threshold FAULTS` </span>– in combination with <span class="notranslate">`--by-fault`</span>, shows only LVEs with number of faults above; default `1`
+  
+Prefixes <span class="notranslate">`Kb`, `Mb` </span> and <span class="notranslate">`Gb`</span> indicates powers of 1024.
+
+:::tip Note
+All <span class="notranslate">ALIAS</span> options are not case sensitive.
+:::
+
+<div class="notranslate">
 
 ### lvechart
 
+</div>
 
-`/usr/sbin/lvechart - creates a chart representing LVE usage for user.`
+`/usr/sbin/lvechart` - creates a chart representing LVE usage for user.
 
-`Usage: ` <span class="notranslate"> /usr/sbin/lvechart [OPTIONS] </span>
+**Usage**
 
-`Acceptable options are:`
+<div class="notranslate">
+
+```
+/usr/sbin/lvechart [OPTIONS]
+```
+</div>
+
+**Acceptable options**
 
 | | |
 |-|-|
-|<span class="notranslate"> `--help ` </span> | `This help screen`|
-|<span class="notranslate"> `--version` </span> | `Version number`|
-|<span class="notranslate"> `--from` </span> | `Run report from date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span> ` format (if not present, last 10 minutes are assumed)`|
-|<span class="notranslate"> `--to=` </span> | `Run report up to date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span> ` format (if not present, reports results up to now)`|
-|<span class="notranslate"> `--period=` </span> | `Time period: ` `specify minutes with m,  h - hours, days with d, and values: today, yesterday; 5m - last 5 minutes, 4h - last four hours, 2d - last 2 days, as well as today`|
-|<span class="notranslate"> `--id= ` </span> | <span class="notranslate"> `LVE id`  -- will display record only for that  <span class="notranslate"> LVE id </span> </span>|
-|<span class="notranslate"> `--user=` </span> | `Use username instead of ` <span class="notranslate"> LVE id </span> `, and show only record for that user`|
-|<span class="notranslate"> `--server= ` </span> | `Server id -- will display record for that server, instead of default (current)`|
-|<span class="notranslate"> `--output= ` </span> | `Filename to save chart as, if not present, output will be sent to STDOUT`|
-|<span class="notranslate"> `--show-all` </span> | `Show all graphs (by default shows graphs for which limits are set)`|
-|<span class="notranslate"> `--style=` </span> | <span class="notranslate"> `{admin|user}`  Set chart style,  <span class="notranslate"> CPU  </span> limits are normalized to 100% in user’s style </span>|
-|<span class="notranslate"> `--format=` </span> | <span class="notranslate"> `{svg|png}`  Set chart output format. </span>|
+|<span class="notranslate"> `--help ` </span> |This help screen|
+|<span class="notranslate"> `--version` </span> |Version number|
+|<span class="notranslate"> `--from` </span> |Run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, last 10 minutes are assumed)|
+|<span class="notranslate"> `--to=` </span> |Run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, reports results up to now)|
+|<span class="notranslate"> `--period=` </span> |Time period: specify minutes with `m`, `h` - hours, days with `d`, and values: <span class="notranslate">`today`</span>, <span class="notranslate">`yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today|
+|<span class="notranslate"> `--id= ` </span> |<span class="notranslate">`LVE id`</span> will display record only for that <span class="notranslate">LVE id</span>|
+|<span class="notranslate"> `--user=` </span> |Use username instead of <span class="notranslate"> LVE id </span>, and show only record for that user|
+|<span class="notranslate"> `--server= ` </span> |<span class="notranslate">`Server id`</span> will display record for that server, instead of default (current)|
+|<span class="notranslate"> `--output= ` </span> |Filename to save chart as, if not present, output will be sent to STDOUT|
+|<span class="notranslate"> `--show-all` </span> |Show all graphs (by default shows graphs for which limits are set)|
+|<span class="notranslate"> `--style=` </span> |<span class="notranslate">`admin`, `user`</span> set chart style,  <span class="notranslate">CPU</span> limits are normalized to 100% in user’s style|
+|<span class="notranslate"> `--format=` </span> |<span class="notranslate">`svg`, `png`</span> set chart output format|
 
+<div class="notranslate">
 
 ### dbgovchart
 
+</div>
 
-`/usr/sbin/dbgovchart - creates a chart representing MySQL usage for user.`
 
-`Usage: ` <span class="notranslate"> /usr/sbin/dbgovchart [OPTIONS] </span>
+`/usr/sbin/dbgovchart` - creates a chart representing MySQL usage for user.`
 
-`Acceptable options are:`
+**Usage**
+
+<div class="notranslate">
+
+```
+/usr/sbin/dbgovchart [OPTIONS]
+```
+</div>
+
+**Acceptable options**
 
 | | |
 |-|-|
-|<span class="notranslate"> `--help ` </span> | `This help screen`|
-|<span class="notranslate"> `--version` </span> | `Version number`|
-|<span class="notranslate"> `--from=` </span> | `Run report from date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span> ` format (if not present, last 10 minutes are assumed)`|
-|<span class="notranslate"> `--to=` </span> | `Run report up to date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span> ` format (if not present, reports results up to now)`|
-|<span class="notranslate"> `--period=` </span> | `Time period: ` `specify minutes with m,  h - hours, days with d, and values: today, yesterday; 5m - last 5 minutes, 4h - last four hours, 2d - last 2 days, as well as today`|
-|<span class="notranslate"> `--user=` </span> | `mysql username`|
-|<span class="notranslate"> `--output= ` </span> | `Filename to save chart as, if not present, output will be sent to ` <span class="notranslate"> STDOUT </span>|
-|<span class="notranslate"> `--show-all` </span> | `Show all graphs (by default shows graphs for which limits are set)`|
-|<span class="notranslate"> `--server=` </span> | <span class="notranslate"> `Server id`  -- will display record for that server, instead of default (current). </span>|
-|<span class="notranslate"> `--style=` </span> | <span class="notranslate"> `{admin|user}`  Set chart style,  <span class="notranslate"> CPU </span>  limits are normalized to 100% in user’s style </span>|
-|<span class="notranslate"> `--format=` </span> | <span class="notranslate"> `{svg|png}`  Set chart output format. </span>|
+|<span class="notranslate"> `--help ` </span> |This help screen|
+|<span class="notranslate"> `--version` </span> |Version number|
+|<span class="notranslate"> `--from=` </span> |Run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, last 10 minutes are assumed)|
+|<span class="notranslate"> `--to=` </span> |Run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format (if not present, reports results up to now)|
+|<span class="notranslate"> `--period=` </span> |Time period: specify minutes with `m`,  `h` - hours, days with `d`, and values: <span class="notranslate">`today`</span>, <span class="notranslate">`yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today`|
+|<span class="notranslate"> `--user=` </span> |mysql username|
+|<span class="notranslate"> `--output= ` </span> |Filename to save chart as, if not present, output will be sent to <span class="notranslate">STDOUT</span>|
+|<span class="notranslate"> `--show-all` </span> |Show all graphs (by default shows graphs for which limits are set)|
+|<span class="notranslate"> `--server=` </span> | <span class="notranslate"> `Server id`</span> will display record for that server, instead of default (current)|
+|<span class="notranslate"> `--style=` </span> | <span class="notranslate">`admin`, `user`</span> set chart style,  <span class="notranslate">CPU</span> limits are normalized to 100% in user’s style|
+|<span class="notranslate"> `--format=` </span> | <span class="notranslate">`svg`, `png`</span> set chart output format|
 
+<div class="notranslate">
 
 ### lve-read-snapshot
 
+</div>
 
-`usage: ` <span class="notranslate"> lve-read-snapshot [-h] [--version] [-f FROM [FROM ...]] [-t TO [TO ...] </span>
-`                         | -p PERIOD | --timestamp TIMESTAMP]`
-`                         [-i ID | -u USER] [-l] [-o file] [-j] [--stats]`
-`                         [--unit unit]`
+**Usage**
 
+<div class="notranslate">
 
-`Reads lve system state snapshots for ` <span class="notranslate"> LVE/user </span>
+```
+lve-read-snapshot [-h] [--version] [-f FROM [FROM ...]] [-t TO [TO ...]
+                  [ -p PERIOD | --timestamp TIMESTAMP]
+                  [-i ID | -u USER] [-l] [-o file] [-j] [--stats]
+                  [--unit unit]
+```
+</div>
 
+Reads LVE system state snapshots for <span class="notranslate">LVE/user</span>.
 
-`optional arguments:`
-`  ` <span class="notranslate"> -h, --help </span> `            show this help message and exit`
-`  ` <span class="notranslate"> --version </span> `             Version number`
-`  ` <span class="notranslate"> -f FROM [FROM ...], --from FROM [FROM ...] </span>
-`                        Run report from date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span>
-`                        format, if not present last 10 minutes are assumed`
-`                        (default: 2016-10-24 19:28)`
-`  ` <span class="notranslate"> -t TO [TO ...], --to TO [TO ...] </span>
-`                        Run report up to date and time in ` <span class="notranslate"> YYYY-MM-DD HH:MM </span>
-`                        format, if not present, reports results up to now`
-`                        (default: 2016-10-24 19:38)`
-`  ` <span class="notranslate"> -p PERIOD, --period PERIOD </span>
-`                        Time period specify minutes with m, h - hours, days`
-`                        with d, and values: today, yesterday, 5m - last 5`
-`                        minutes, 4h - last four hours, 2d - last 2 days, as`
-`                        well as today (default: 10m)`
-`  ` <span class="notranslate"> --timestamp TIMESTAMP </span>
-`                        time stamp in unix format for get one snapshot`
-`                        (default: ` <span class="notranslate"> None </span> `)`
-`  ` <span class="notranslate"> -i ID, --id ID </span> `        LVE id to show records for (default: ` <span class="notranslate"> None </span> `)`
-`  ` <span class="notranslate"> -u USER, --user USER </span> `  user account to show records for (default: ` <span class="notranslate"> None </span> `)`
-`  ` <span class="notranslate"> -l, --list </span> `            show timestamp list only (default: ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> -o file, --output file </span>
-`                        Filename to save snaphots report to, if not present,`
-`                        output will be sent to ` <span class="notranslate"> STDOUT </span> ` (default: ` <span class="notranslate"> None </span> `)`
-`  ` <span class="notranslate"> -j, --json </span> `            Output in json format (default: ` <span class="notranslate"> False </span> `)`
+**Optional arguments**
 
+* <span class="notranslate">`-h, --help`</span> – show this help message and exit
+* <span class="notranslate">`--version`</span> – version number
+* <span class="notranslate">`-f FROM [FROM ...]`, `--from FROM [FROM ...]`</span> – run report from date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format, if not present last 10 minutes are assumed (default: `2016-10-24 19:28`)
+* <span class="notranslate">`-t TO [TO ...]`, `--to TO [TO ...]`</span> – run report up to date and time in <span class="notranslate">`YYYY-MM-DD HH:MM`</span> format, if not present, reports results up to now (default: `2016-10-24 19:38`)
+* <span class="notranslate">`-p PERIOD`, `--period PERIOD`</span> – time period specify minutes with `m`, `h` - hours, days with `d`, and values: <span class="notranslate">`today`, `yesterday`</span>, `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, as well as today (default: `10m`)
+* <span class="notranslate">`--timestamp TIMESTAMP`</span> – time stamp in unix format for get one snapshot (default: <span class="notranslate">`None`</span>)
+* <span class="notranslate">`-i ID, --id ID`</span> – LVE id to show records for (default: <span class="notranslate">`None`</span>)
+* <span class="notranslate">`-u USER`, `--user USER`</span> – user account to show records for (default: <span class="notranslate">`None`</span>)
+* <span class="notranslate">`-l`, `--list`</span> – show timestamp list only (default: <span class="notranslate"> `False`</span>)
+* <span class="notranslate">`-o file`, `--output file`</span> – filename to save snaphots report to, if not present,output will be sent to <span class="notranslate">STDOUT</span> (default: <span class="notranslate">`None`</span>)
+* <span class="notranslate">`-j`, `--json`</span> – output in json format (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--stats`</span> – output stats, instead of snapshots (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--unit unit`</span> – group stats by time unit. Example values `3h`, `24h`, `1d`, `1w`. Other possible value is <span class="notranslate">`auto`</span> for grouping by each incident (default: <span class="notranslate">`1d`</span>)
+  
+One of <span class="notranslate">`-u --user`</span> or <span class="notranslate">`-i --id`</span> should be specified.
 
-`  ` <span class="notranslate"> --stats </span> `               Output stats, instead of snapshots (default: ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> --unit unit </span> `           Group stats by time unit. Example values 3h, 24h, 1d,`
-`                        1w.Other possible value is ` <span class="notranslate"> "auto" </span> ` for grouping by each`
-`                        incident. (default: ` <span class="notranslate"> 1d </span> `)`
-`One of ` <span class="notranslate"> -u --user </span> ` or ` <span class="notranslate"> -i --id </span> ` should be specified`
-
+<div class="notranslate">
 
 ### lve-create-db
 
+</div>
 
-`usage: ` <span class="notranslate"> lve-create-db [-h] [--recreate] [--print-sql] </span>
-`                     [--update-serverid-prompt] [--update-serverid-auto]`
-`                     [--validate]`
+**Usage**
 
+<div class="notranslate">
 
-`Creates a database for ` <span class="notranslate"> lve-stats </span>
+```
+lve-create-db [-h] [--recreate] [--print-sql]
+                   [--update-serverid-prompt] [--update-serverid-auto]
+                   [--validate]
+```
+</div>
 
+Creates a database for <span class="notranslate">lve-stats</span>.
 
-`optional arguments:`
-`  ` <span class="notranslate"> -h, --help </span> `            show this help message and exit`
-`  ` <span class="notranslate"> --recreate  </span> `           Drops and recreates database even if tables exists`
-`                        (default: ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> --print-sql </span> `           Prints sql and exits, without creating db (default:`
-`                        ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> --update-serverid-prompt </span>
-`                        Update exist server ID or create new one (default:`
-`                        ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> --update-serverid-auto </span>
-`                        Update exist server ID with ` <span class="notranslate"> uuid </span> ` (default: ` <span class="notranslate"> False </span> `)`
-`  ` <span class="notranslate"> --validate   </span> `          Check the correctness of the database structure`
-`                        (default: ` <span class="notranslate"> False </span> `)`
+**Optional arguments**
 
-`     `
-`    `
+* <span class="notranslate">`-h`, `--help`</span> – show this help message and exit
+* <span class="notranslate">`--recreate`</span> – drops and recreates database even if tables exists (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--print-sql`</span> – prints sql and exits, without creating db (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--update-serverid-prompt`</span> – update exist server ID or create new one (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--update-serverid-auto`</span> – update exist server ID with <span class="notranslate">uuid</span> (default: <span class="notranslate">`False`</span>)
+* <span class="notranslate">`--validate`</span> – check the correctness of the database structure (default: <span class="notranslate">`False`</span>)
 
 ### cloudlinux-top
 
-
-[Usage](/cloudlinux_top.html#usage/)
-[Output format](/cloudlinux_top.html#output_format/)
-[Units of measurement](/cloudlinux_top.html#units_of_measurement/) 
-[Errors handling](/cloudlinux_top.html#errors_handling/)
-[Examples](/cloudlinux_top.html#examples/)
-
 Utility provides information about current MySQL and LVE usage of a running system in JSON format.
 
+#### **Usage**
 
+<div class="notranslate">
 
-<span class="notranslate"> </span>
-`cloudlinux_top [-h] [-v] [-j] [--hide-mysql]`
-`               [-u USERNAME | -r FOR_RESELLER] [-d DOMAIN] [-m MAX]`
-`               [-o ORDER_BY]`
-
-Optional arguments.
-
-| | |
-|-|-|
-|<span class="notranslate"> `-h, --help` </span> | `show this help message and exit`|
-|<span class="notranslate"> `-v, --version`   </span> | `show program version number and exit`|
-|<span class="notranslate"> `-j, --json`   </span> | `return data in JSON format`|
-|<span class="notranslate"> `--hide-mysql`   </span> | `don't show MySQL related info`|
-|<span class="notranslate"> `-u USERNAME, --username USERNAME` </span> | `show data only for a specific user.` `Can be used to filter the output;` `returns users with username ` <span class="notranslate"> "%USERNAME%" </span>|
-|<span class="notranslate"> `-r FOR_RESELLER, --for-reseller FOR_RESELLER` </span> | `get information only about specified reseller and his users`|
-|<span class="notranslate"> `-d DOMAIN, --domain DOMAIN` </span> | `show data only for a specific domain.` `Can be used to filter the output;` `returns users with domain ` <span class="notranslate"> "%DOMAIN%" </span>|
-|<span class="notranslate"> `-m MAX, --max MAX` </span> | `show up to ` <span class="notranslate"> N </span> ` records.` `If ` <span class="notranslate"> --max </span> ` key is omitted.` `By default will show top 25 users`|
-|<span class="notranslate"> `-o ORDER_BY, --order-by ORDER_BY` </span> | `sort output by resource usage; available options:` <span class="notranslate"> `"cpu", "mysql_cpu", "io", "mysql_io", "iops", "ep", "nproc", "pmem"` </span>|
-
-
-
-<span class="notranslate"> </span>
 ```
-{   "mySqlGov": "enabled",              # possible values: enabled, error   "mySqlGovMode": "abusers",          # see “[MySQL Governor > Modes Of Operation](/mysql_governor/#modes-of-operation)”                                       # if MySQL Governor is not enabled, value is "none"    "resellers": [                      # list of resellers (available only with                                       # [reseller limits feature](/reseller_limits/#installation-and-requirements))       {           "id": 1000020005,           # internal record id           "limit": <lve_section>,     # current limits (last 5 seconds)           "name": "reseller_name",    # reseller’s login in control panel           "usage": <lve_section>      # current usage (last 5 seconds)       }   ],   "result": "success",                # see the ‘[errors handling](/cloudlinux_top.html#errors_handling/)’ section   "timestamp": 1522858537.337549,   "users": [       {           "domain": "domain.com",     # user’s primary domain (from control panel)           "id": 20005,                # lve_id, same as user id in /etc/passwd file           "limit": <lve_section>,     # limits for last 5 seconds           "reseller": "reseler1",     # user’s reseller (from control panel)           "usage": <lve_section>,     # usage for last 5 seconds           "username": "user"          # username from /etc/passwd file or “N/A” if user                                       # with such id does not exist        }    ]}
+cloudlinux_top [-h] [-v] [-j] [--hide-mysql]
+               [-u USERNAME | -r FOR_RESELLER] [-d DOMAIN] [-m MAX]
+               [-o ORDER_BY]
 ```
+</div>
 
+**Optional arguments**
 
-The structure* of <span class="notranslate"> _<lve_section>_ </span> :
+* <span class="notranslate"> `-h, --help` </span> – show this help message and exit
+* <span class="notranslate"> `-v, --version`   </span> – show program version number and exit
+* <span class="notranslate"> `-j, --json`   </span> – return data in JSON format
+* <span class="notranslate"> `--hide-mysql`   </span> | `don't show MySQL related info
+* <span class="notranslate"> `-u USERNAME`, `--username USERNAME` </span> – show data only for a specific user. Can be used to filter the output; returns users with username <span class="notranslate">`%USERNAME%`</span>
+* <span class="notranslate"> `-r FOR_RESELLER`, `--for-reseller FOR_RESELLER` </span> – get information only about specified reseller and his users
+* <span class="notranslate"> `-d DOMAIN`, `--domain DOMAIN` </span> – show data only for a specific domain. Can be used to filter the output; returns users with domain <span class="notranslate">`%DOMAIN%`</span>
+* <span class="notranslate"> `-m MAX`, `--max MAX` </span> – show up to <span class="notranslate">`N`</span> records. If <span class="notranslate">`--max`</span> key is omitted. By default will show top 25 users
+* <span class="notranslate"> `-o ORDER_BY`, `--order-by ORDER_BY` </span> – sort output by resource usage; available options: <span class="notranslate">`cpu`, `mysql_cpu`, `io`, `mysql_io`, `iops`, `ep`, `nproc`, `pmem`</span>
 
-<span class="notranslate"> </span>
+#### **Output format**
+
+<div class="notranslate">
+
 ```
-{"cpu": {  "all": 50.0,      # CPU usage or limit (LVE only)  "mysql": 0.0*     # CPU usage or limit (MySQL Governor only)},"ep": 1.0,           # number of entry processes"io": {  "all": 0.0,       # IO usage or limit (LVE only)  "mysql": 0.0**     # IO usage or limit (MySQL Governor only)},"iops": 0.0,         # IO operations per second"mem": 258048,       # memory usage or limit"pno": 1.0           # number of processes}
+{
+  "mySqlGov": "enabled",              # possible values: enabled, error
+  "mySqlGovMode": "abusers",          # see “MySQL Governor > Modes Of Operation”
+                                      # if MySQL Governor is not enabled, value is "none"
+ 
+  "resellers": [                      # list of resellers (available only with
+                                      # reseller limits feature)
+      {
+          "id": 1000020005,           # internal record id
+          "limit": <lve_section>,     # current limits (last 5 seconds)
+          "name": "reseller_name",    # reseller’s login in control panel
+          "usage": <lve_section>      # current usage (last 5 seconds)
+      }
+  ],
+  "result": "success",                # see the ‘errors handling’ section
+  "timestamp": 1522858537.337549,
+  "users": [
+      {
+          "domain": "domain.com",     # user’s primary domain (from control panel)
+          "id": 20005,                # lve_id, same as user id in /etc/passwd file
+          "limit": <lve_section>,     # limits for last 5 seconds
+          "reseller": "reseler1",     # user’s reseller (from control panel)
+          "usage": <lve_section>,     # usage for last 5 seconds
+          "username": "user"          # username from /etc/passwd file or “N/A” if user
+                                      # with such id does not exist
+       }
+   ]
+ }
 ```
+</div>
 
-* you can modify this structure using <span class="notranslate"> </span> option, see [usage examples](/cloudlinux_top.html#examples/) for details.
-** mysql values are only present when <span class="notranslate"> MySQL Governor </span> statistics is available and <span class="notranslate"> `--hide-mysql` </span> options is not used.
+The structure<sup> *</sup> of <span class="notranslate">`<lve_section>`</span>:
+
+<div class="notranslate">
+
+```
+{
+"cpu": {
+ "all": 50.0,      # CPU usage or limit (LVE only)
+ "mysql": 0.0*     # CPU usage or limit (MySQL Governor only)
+},
+"ep": 1.0,           # number of entry processes
+"io": {
+ "all": 0.0,       # IO usage or limit (LVE only)
+ "mysql": 0.0**     # IO usage or limit (MySQL Governor only)
+},
+"iops": 0.0,         # IO operations per second
+"mem": 258048,       # memory usage or limit
+"pno": 1.0           # number of processes
+}
+```
+</div>
 
 
+:::tip Note
+* you can modify this structure using <span class="notranslate">`--show`</span> option, see [usage examples](/lve-stats_2/#examples) for details.
+* MySQL values are only present when <span class="notranslate">MySQL Governor</span> statistics is available and <span class="notranslate">`--hide-mysql`</span> options is not used.
+:::
 
+#### **Units of measurement**
 
-For <span class="notranslate"> _limits_ </span> and <span class="notranslate"> _usage_ </span> sections we use the following units of measurement.
+For <span class="notranslate">`limits`</span> and <span class="notranslate">`usage`</span> sections we use the following units of measurement.
 
 | | |
 |-|-|
@@ -1077,210 +1128,372 @@ For <span class="notranslate"> _limits_ </span> and <span class="notranslate"> _
 |<span class="notranslate"> pno </span> | number of processes|
 
 
+#### **Errors handling**
 
+The format of the error message is the same as in the other <span class="notranslate">`cloudlinux- *`</span> utilities. When everything is ok, the <span class="notranslate">`result`</span> value is <span class="notranslate">`success`</span>. Otherwise, it contains error message. In case of unexpected errors, the output will be as follows.
 
-The format of the error message is the same as in the other <span class="notranslate"> cloudlinux- * </span> utilities. When everything is ok, the <span class="notranslate"> _result_ </span> value is <span class="notranslate"> _success_ </span> . Otherwise, it contains error message `. ` In case of unexpected errors, the output will be as follows.
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
-# cloudlinux-top --json {   "context": {       "error_text": "Very bad error"   },   "result": "An error occured: \"%(error_text)s\"",   "timestamp": 1523871939.639394}
+# cloudlinux-top --json 
+{
+  "context": {
+      "error_text": "Very bad error"
+  },
+  "result": "An error occured: \"%(error_text)s\"",
+  "timestamp": 1523871939.639394
+}
 ```
+</div>
 
 
+#### **Examples**
 
 
+* get 100 users ordered by <span class="notranslate"> CPU </span> usage
 
-get 100 users ordered by <span class="notranslate"> CPU </span> usage
+  <div class="notranslate">
 
-<span class="notranslate"> </span>
-```
-# cloudlinux-top --json --order-by cpu --max=100
-```
+  ```
+  # cloudlinux-top --json --order-by cpu --max=100
+  ```
+  </div>
 
+* get information about one user
 
-get information about one user
+  <div class="notranslate">
 
-<span class="notranslate"> </span>
-```
-# cloudlinux-top --json -u username
-```
+  ```
+  # cloudlinux-top --json -u username
+  ```
+  </div>
 
+* get information about reseller and his users
 
-get information about reseller and his users
+  <div class="notranslate">
 
-<span class="notranslate"> </span>
-```
-# cloudlinux-top --json --for-reseller=reseller_name
-```
+  ```
+  # cloudlinux-top --json --for-reseller=reseller_name
+  ```
+  </div>
 
+* show only <span class="notranslate">IO</span> limits and usage
 
-show only <span class="notranslate"> IO </span> limits and usage
+  <div class="notranslate">
 
-<span class="notranslate"> </span>
-```
-# cloudlinux-top --json --show=io
-```
+  ```
+  # cloudlinux-top --json --show=io
+  ```
+  </div>
 
+<div class="notranslate">
 
 ### cloudlinux-statistics
 
+</div>
 
-[Usage](/cloudlinux-statistics.html#usage/)
-[Output format](/cloudlinux-statistics.html#output_format/)
-[Units of measurement](/cloudlinux-statistics.html#units_of_measurement/)
-[Errors handling](/cloudlinux-statistics.html#errors_handling/)
-[Examples](/cloudlinux-statistics.html#examples/)
+<span class="notranslate">cloudlinux-statistics</span> is a <span class="notranslate">CLI</span> utility that provides historical information about resource usage.
 
-cloudlinux-statistics is a <span class="notranslate"> CLI </span> utility that provides historical information about resource usage.
+#### **Usage**
 
+<div class="notranslate">
 
+```
+cloudlinux-statistics [-h] [-j] [-v] [--by-usage BY_USAGE]
+                      [--percentage 0..100] [--by-fault BY_FAULT]
+                      [--threshold THRESHOLD] [--server_id SERVER_ID]
+                      [-f FROM] [-t TO] [--period PERIOD]
+                      [--limit LIMIT]
+                      [--show COLUMN_NAME [COLUMN_NAME ...]]
+                      [-o ORDER_BY] [--id ID] [--time-unit TIME_UNIT]
+                      [-r FOR_RESELLER]
+```
+</div>
 
-`cloudlinux-statistics [-h] [-j] [-v] [--by-usage BY_USAGE]`
-`                      [--percentage 0..100] [--by-fault BY_FAULT]`
-`                      [--threshold THRESHOLD] [--server_id SERVER_ID]`
-`                      [-f FROM] [-t TO] [--period PERIOD]`
-`                      [--limit LIMIT]`
-`                      [--show COLUMN_NAME [COLUMN_NAME ...]]`
-`                      [-o ORDER_BY] [--id ID] [--time-unit TIME_UNIT]`
-`                      [-r FOR_RESELLER]`
+**Optional arguments**
 
-Optional arguments.
+* <span class="notranslate"> `-h`, `--help` </span> – show this help message and exit
+* <span class="notranslate"> `-j`, `--json` </span> – return data in JSON format
+* <span class="notranslate"> `-v`, `--version` </span> – show program version number and exit
+* <span class="notranslate"> `--server_id SERVER_ID`, `--server-id SERVER_ID` </span> – can be used with the central database for multiple servers; default `...`
+* <span class="notranslate"> `--limit LIMIT` </span> – limit the number of results to display, `0` is unlimited
+* <span class="notranslate"> `--show COLUMN_NAME [COLUMN_NAME ...]` </span> – show only listed columns; <span class="notranslate">`all`</span> for all supported columns (fields)
+  | | |
+  |-|-|
+  |<span class="notranslate">Key</span>|Fields to show|
+  |<span class="notranslate">`all`</span>|all available fields|
+  |<span class="notranslate">`cpu`</span>|CPU field|
+  |<span class="notranslate">`io`</span>|IO field|
+  |<span class="notranslate">`iops`</span>|IOPS field|
+  |<span class="notranslate">`ep`</span>|entry processes (concurrent connections) field|
+  |<span class="notranslate">`nproc`</span>|number of processes field|
+  |<span class="notranslate">`pmem`</span>|physical memory field|
+  |<span class="notranslate">`vmem`</span>|virtual memory field|
+  |<span class="notranslate">`mysql`</span>|`mysql_cpu` & `mysql_io` field|
 
-| | |
-|-|-|
-|<span class="notranslate"> `-h, --help`   </span> | `show this help message and exit`|
-|<span class="notranslate"> `-j, --json`   </span> | `return data in JSON format`|
-|<span class="notranslate"> `-v, --version` </span> | `show program version number and exit`|
-|<span class="notranslate"> `--server_id SERVER_ID, --server-id SERVER_ID` </span> | `can be used with the central database for multiple servers; default "..."`|
-|<span class="notranslate"> `--limit LIMIT` </span> | `limit the number of results to display, 0 is unlimited`|
-|<span class="notranslate"> `--show COLUMN_NAME [COLUMN_NAME ...]` </span> | `show only listed columns; ` <span class="notranslate"> "all" </span> ` for all supported columns (fields)`|
-|<span class="notranslate"> `-o ORDER_BY, --order-by ORDER_BY` </span> | `order results by one of the following keys (fields):`|
-|<span class="notranslate"> `-r FOR_RESELLER, --for-reseller FOR_RESELLER` </span> | `show statistics only for given reseller and his users`|
+* <span class="notranslate"> `-o ORDER_BY`, `--order-by ORDER_BY` </span> – order results by one of the following keys (fields):
+  | | |
+  |-|-|
+  |FIELD|DESCRIPTION|
+  |<span class="notranslate">`any_faults`</span>|total number of faults of all types|
+  |<span class="notranslate">`cpu`</span>|average CPU usage`</span>|
+  |<span class="notranslate">`mysql_cpu`</span>|average MySQL CPU usage`</span>|
+  |<span class="notranslate">`io`</span>|average IO usage`</span>|
+  |<span class="notranslate">`mysql_io`</span>|average MySQL IO usage`</span>|
+  |<span class="notranslate">`iops`</span>|average IO operations; (LVE version >= 8)`</span>|
+  |<span class="notranslate">`ep`</span>|average number of entry processes (concurrent connections)`</span>|
+  |<span class="notranslate">`nproc`</span>|average number of processes`</span>|
+  |<span class="notranslate">`pmem`</span>|average physical memory usage`</span>|
+  |<span class="notranslate">`vmem`</span>|average virtual memory usage`</span>|
+  |<span class="notranslate">`cpu_faults`</span>|total number of CPU usage faults`</span>|
+  |<span class="notranslate">`io_faults`</span>|total number of max IO faults`</span>|
+  |<span class="notranslate">`iops_fault`</span>|total number of max IO operations faults; (LVE version >= 8)`</span>|
+  |<span class="notranslate">`ep_faults`</span>|total number of max entry processes faults`</span>|
+  |<span class="notranslate">`nproc_faults`</span>|total number of max processes faults`</span>|
+  |<span class="notranslate">`pmem_faults`</span>|total number of out of physical memory faults`</span>|
+  |<span class="notranslate">`vmem_faults`</span>|total number of out of virtual memory faults`</span>|
+
+* <span class="notranslate"> `-r FOR_RESELLER`, `--for-reseller FOR_RESELLER` </span> – show statistics only for given reseller and his users
 
 Filter items by resource usage.
 
-| | |
-|-|-|
-|<span class="notranslate"> `--by-usage BY_USAGE` </span> | `show LVEs with usage (averaged) within 90 percent of the limit available values`|
-|<span class="notranslate"> `-percentage 0..100` </span> | `define percentage for ` <span class="notranslate"> --by-usage </span> ` option; default 90`|
+* <span class="notranslate"> `--by-usage BY_USAGE` </span> – show LVEs with usage (averaged) within 90 percent of the limit available values
+  | | |
+  |-|-|
+  |FIELD|DESCRIPTION|
+  |<span class="notranslate">`cpu`</span>|average CPU usage|
+  |<span class="notranslate">`mysql_cpu`</span>|average MySQL CPU usage|
+  |<span class="notranslate">`io`</span>|average IO usage|
+  |<span class="notranslate">`mysql_io`</span>|average MySQL IO usage|
+  |<span class="notranslate">`iops`</span>|average IO operations; (LVE version >= 8)|
+  |<span class="notranslate">`ep`</span>|average number of entry processes (concurrent connections)|
+  |<span class="notranslate">`nproc`</span>|average number of processes|
+  |<span class="notranslate">`pmem`</span>|average physical memory usage|
+  |<span class="notranslate">`vmem`</span>|average virtual memory usage|
 
+* <span class="notranslate"> `-percentage 0..100` </span> – define percentage for <span class="notranslate">`--by-usage`</span> option; default `90`
 
 Filter items by the number of faults.
 
-| | |
-|-|-|
-|<span class="notranslate"> `--by-fault BY_FAULT` </span> | `show only accounts that have some faults for the given limit`|
-|<span class="notranslate"> `--threshold THRESHOLD` </span> | `in combination with ` <span class="notranslate"> --by-fault </span> `, shows only accounts with the number of faults more than given; default 1`|
+* <span class="notranslate"> `--by-fault BY_FAULT` </span> – show only accounts that have some faults for the given limit
+  | | |
+  |-|-|
+  |FIELD|DESCRIPTION|
+  |<span class="notranslate">`any`</span>|faults of all types|
+  |<span class="notranslate">`cpu`</span>|CPU usage faults|
+  |<span class="notranslate">`io`</span>|max IO usage faults|
+  |<span class="notranslate">`iops`</span>|max IO operations faults; (LVE version >= 8)|
+  |<span class="notranslate">`ep`</span>|max entry processes faults|
+  |<span class="notranslate">`nproc`</span>|max processes faults|
+  |<span class="notranslate">`pmem`</span>|out of physical memory faults|
+  |<span class="notranslate">`vmem`</span>|out of virtual memory faults|
+
+* <span class="notranslate"> `--threshold THRESHOLD` </span> – in combination with <span class="notranslate">`--by-fault`</span> shows only accounts with the number of faults more than given; default `1`
 
 Filter items by a time interval.
 
-Allows to get information for the given period of time; you can either set <span class="notranslate"> --from </span> and <span class="notranslate"> --to </span> options, or just get information for the recent time period using <span class="notranslate"> --period option. </span>
-<span class="notranslate"> --from </span> and <span class="notranslate"> --to </span> values are ignored when <span class="notranslate"> --period </span> is set.
+Allows to get information for the given period of time; you can either set <span class="notranslate">`--from`</span> and <span class="notranslate">`--to`</span> options, or just get information for the recent time period using <span class="notranslate">`--period option`.</span>
 
-| | |
-|-|-|
-|<span class="notranslate"> `-f FROM, --from FROM` </span> | `run report from date and time in ` <span class="notranslate"> [YY]YY-MM-DD[ HH:MM] </span> ` format; if not present, last 10 minutes are assumed`|
-|<span class="notranslate"> `-t TO, --to TO` </span> | `run report up to date and time in ` <span class="notranslate"> [YY]YY-MM-DD[ HH:MM] </span> ` format; if not present, reports results up to now`|
-|<span class="notranslate"> `--period PERIOD`   </span> | `time period; specify minutes with ` <span class="notranslate"> m </span> `, hours with ` <span class="notranslate"> h </span> `, days with ` <span class="notranslate"> d </span> `, and values: ` <span class="notranslate"> today, yesterday </span> `; 5m - last 5 minutes, 4h - last four hours, 2d - last 2 days, and ` <span class="notranslate"> today </span>|
+:::tip Note
+<span class="notranslate">`--from`</span> and <span class="notranslate">`--to`</span> values are ignored when <span class="notranslate">`--period`</span> is set.
+:::
+
+* <span class="notranslate"> `-f FROM`, `--from FROM` </span> – run report from date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, last 10 minutes are assumed
+* <span class="notranslate"> `-t TO`, `--to TO` </span> – run report up to date and time in <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, reports results up to now
+* <span class="notranslate"> `--period PERIOD` </span> – time period; specify minutes with <span class="notranslate">`m`</span>, hours with <span class="notranslate">`h`</span>, days with <span class="notranslate">`d`</span>, and values: <span class="notranslate">`today`, `yesterday`</span>; `5m` - last 5 minutes, `4h` - last four hours, `2d` - last 2 days, and <span class="notranslate">`today`</span>
 
 Get detailed statistics.
 
-| | |
-|-|-|
-|<span class="notranslate"> `--id ID` </span> | `get detailed statistics for database record with the given id`|
-|<span class="notranslate"> `--time-unit TIME_UNIT` </span> | `group statistics using the given time; 1 minute by default. For example: ` <span class="notranslate"> 1h </span> ` or ` <span class="notranslate"> 1h30m </span> ` or ` <span class="notranslate"> dynamic </span> `; available only in pair with ` <span class="notranslate"> --id </span>|
+* <span class="notranslate"> `--id ID` </span> – get detailed statistics for database record with the given id
+* <span class="notranslate"> `--time-unit TIME_UNIT` </span> – group statistics using the given time; 1 minute by default. For example: <span class="notranslate">`1h`</span> or <span class="notranslate">`1h30m`</span> or <span class="notranslate">`dynamic`</span>; available only in pair with <span class="notranslate">`--id`</span>
 
 
+#### **Output format**
 
+There are two different JSON formats used for **summary statistics** and **detailed statistics**.
 
 **Summary statistics**
 
-<span class="notranslate"> </span>
-```
-# cloudlinux-statistics --json{  "resellers": [    {      "usage": <lve_section>,      "faults": <lve_section>,      "name": "reseller",      "limits": <lve_section>,      "id": 1000020005    }  ],  "timestamp": 1522920637,  "mySqlGov": "enabled",            # possible values: ”enabled”, “error”  "result": "success",  "users": [    {      "username": "username",      "domain": "example.com",      "reseller": "reseller",      "limits": <lve_section>,      "faults": <lve_section>,      "usage": <lve_section>,      "id": 20005    }  ]}
-```
+<div class="notranslate">
 
+```
+# cloudlinux-statistics --json
+ {
+ "resellers": [
+   {
+     "usage": <lve_section>,
+     "faults": <lve_section>,
+     "name": "reseller",
+     "limits": <lve_section>,
+     "id": 1000020005
+   }
+ ],
+ "timestamp": 1522920637,
+ "mySqlGov": "enabled",            # possible values: ”enabled”, “error”
+ "result": "success",
+ "users": [
+   {
+     "username": "username",
+     "domain": "example.com",
+     "reseller": "reseller",
+     "limits": <lve_section>,
+     "faults": <lve_section>,
+     "usage": <lve_section>,
+     "id": 20005
+   }
+ ]
+ }
+```
+</div>
 
 **Detailed statistics**
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# cloudlinux-statistics --json --id=20001{  "timestamp": 1523011550,  "mySqlGov": "enabled",           # possible values: ”enabled”, “error”  "result": "success",  "user": [    {      "usage": <lve_section>,      "faults": <lve_section>,      "from": 1523011144,      "limits": <lve_section>,      "to": 1523011143    },...    {      "usage": <lve_section>,      "faults": <lve_section>,      "from": 1523011204,      "limits": <lve_section>,      "to": 1523011203    }  ]}
+# cloudlinux-statistics --json --id=20001
+ {
+ "timestamp": 1523011550,
+ "mySqlGov": "enabled",           # possible values: ”enabled”, “error”
+ "result": "success",
+ "user": [
+   {
+     "usage": <lve_section>,
+     "faults": <lve_section>,
+     "from": 1523011144,
+     "limits": <lve_section>,
+     "to": 1523011143
+   },
+ ...
+   {
+     "usage": <lve_section>,
+     "faults": <lve_section>,
+     "from": 1523011204,
+     "limits": <lve_section>,
+     "to": 1523011203
+   }
+ ]
+ }
 ```
+</div>
 
+For both, **summary statistics** and **detailed statistics**, <span class="notranslate">`<lve_section>`</span> is the same and looks like following<sup> *</sup>.
 
-For both, **summary statistics** and **detailed statistics** , <span class="notranslate"> <lve_section> </span> is the same and looks like following*.
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
-{    "ep": {      "lve": 1        # number of entry processes    },    "vmem": {      "lve": 2428928  # virtual memory usage or limit (deprecated)    },    "iops": {      "lve": 0        # io operations per second    },    "io": {      "lve": 0.0,     # io usage or limit (lve only)      "mysql": 0.0**   # io usage or limit (mysql only)    },    "nproc": {      "lve": 1        # number of processes in lve    },    "cpu": {      "lve": 25.6,    # cpu usage (lve only)      "mysql": 0.0*   # cpu usage (mysql governor only)    },    "pmem": {      "lve": 360448   # physical memory usage or limit    }}
+{
+   "ep": {
+     "lve": 1        # number of entry processes
+   },
+   "vmem": {
+     "lve": 2428928  # virtual memory usage or limit (deprecated)
+   },
+   "iops": {
+     "lve": 0        # io operations per second
+   },
+   "io": {
+     "lve": 0.0,     # io usage or limit (lve only)
+     "mysql": 0.0**   # io usage or limit (mysql only)
+   },
+   "nproc": {
+     "lve": 1        # number of processes in lve
+   },
+   "cpu": {
+     "lve": 25.6,    # cpu usage (lve only)
+     "mysql": 0.0*   # cpu usage (mysql governor only)
+   },
+   "pmem": {
+     "lve": 360448   # physical memory usage or limit
+   }
+ }
 ```
+</div>
 
+:::tip Note
+* you can specify only required fields using <span class="notranslate">`--show`</span> option;
+* <span class="notranslate">`mysql`</span> fields are only available with <span class="notranslate"> [MySQL Governor](/mysql_governor/#installation)</span> installed.
+:::
 
-* you can specify only required fields using <span class="notranslate"> </span> option;
-** <span class="notranslate"> mysql </span> fields are only available with <span class="notranslate"> [MySQL Governor](/mysql_governor/#installation) </span> installed.
+#### **Units of measurement**
 
-
-For <span class="notranslate"> _limits_ </span> and <span class="notranslate"> _usage_ </span> sections we use the following units of measurement.
+For <span class="notranslate">`limits`</span> and <span class="notranslate">`usage`</span> sections we use the following units of measurement.
 
 | | |
 |-|-|
-|**Value** | **Units of measurement**|
-|<span class="notranslate"> cpu (lve and mysql) </span> | percentage of one <span class="notranslate"> CPU </span> core|
-|<span class="notranslate"> io (lve and mysql) </span> | bytes per second|
-|<span class="notranslate"> iops </span> | number of <span class="notranslate"> IO </span> operations per second|
-|<span class="notranslate"> pmem </span> and <span class="notranslate"> vmem </span> | bytes|
-|<span class="notranslate"> ep </span> | number of entry processes|
-|<span class="notranslate"> nproc </span> | number of processes in LVE|
+|Value|Units of measurement|
+|<span class="notranslate">`cpu` (LVE and MySQL)</span> | percentage of one <span class="notranslate">CPU</span> core|
+|<span class="notranslate">`io` (LVE and MySQL) </span> | bytes per second|
+|<span class="notranslate">`iops`</span> | number of <span class="notranslate">IO</span> operations per second|
+|<span class="notranslate">`pmem`</span> and <span class="notranslate">`vmem`</span> | bytes|
+|<span class="notranslate">`ep`</span> | number of entry processes|
+|<span class="notranslate">`nproc`</span> | number of processes in LVE|
 
+#### **Errors handling**
 
-The format of the error message is the same as in the other <span class="notranslate"> cloudlinux- * </span> utilities. When everything is ok, the <span class="notranslate"> _result_ </span> value is <span class="notranslate"> _success_ </span> . Otherwise, it contains error message `.`
-<span class="notranslate"> </span>
+The format of the error message is the same as in the other <span class="notranslate">`cloudlinux- *`</span> utilities. When everything is ok, the <span class="notranslate">`result`</span> value is <span class="notranslate">`success`</span>. Otherwise, it contains error message.
+
+<div class="notranslate">
+
 ```
-# cloudlinux-statistics --json {   "context": {       "error_text": "Very bad error"   },   "result": "An error occured: \"%(error_text)s\"",   "timestamp": 1523871939.639394}
+# cloudlinux-statistics --json 
+{
+  "context": {
+      "error_text": "Very bad error"
+  },
+  "result": "An error occured: \"%(error_text)s\"",
+  "timestamp": 1523871939.639394
+}
 ```
+</div>
+
+#### **Examples**
 
 
+* get top 10 users ordered by <span class="notranslate">CPU</span> usage for today
 
+<div class="notranslate">
 
-get top 10 users ordered by <span class="notranslate"> CPU </span> usage for today
-
-<span class="notranslate"> </span>
 ```
 # cloudlinux-statistics --json --order-by=cpu --period=today --limit=10
 ```
+</div>
 
+* get users that hit <span class="notranslate">IO</span> limit more than 10 times for today
 
-get users that hit <span class="notranslate"> IO </span> limit more than 10 times for today
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # cloudlinux-statistics --json --period=today --by-fault=io --threshold=10
 ```
+</diV>
 
+* get users that used more than 80% of <span class="notranslate">CPU</span> in last 24 hours
 
-get users that used more than 80% of <span class="notranslate"> CPU </span> in last 24 hours
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # cloudlinux-statistics --json --by-usage=cpu --percentage=80 --period=24h
 ```
+</div>
 
+* get information only about reseller and his users
 
-get information only about reseller and his users
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # cloudlinux-statistics --json --for-reseller=reseller_name
 ```
+</div>
 
+* get information only about <span class="notranslate">CPU</span> and <span class="notranslate">IO</span> usage
 
-get information only about <span class="notranslate"> CPU </span> and <span class="notranslate"> IO </span> usage
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # cloudlinux-statistics --json --show=cpu,io
 ```
+</div>
 
 
 ## Plugins
