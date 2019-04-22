@@ -1,9 +1,9 @@
 ﻿# Deprecated
 
 
-[Git for cPanel](/deprecated/#git-for-cpanel)
-[LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
-[OptimumCache](/deprecated/#optimumcache)
+* [Git for cPanel](/deprecated/#git-for-cpanel)
+* [LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
+* [OptimumCache](/deprecated/#optimumcache)
 
 ## Git for cPanel
 
@@ -11,20 +11,25 @@
 This package is no longer supported as it may cause dependency issues
 :::
 
-_Please note that this package is no longer needed, as since cPanel 11.38, you can install git without any issues on cPanel by running:_
 
-<span class="notranslate"> </span>
+Please note that this package is no longer needed, as since cPanel 11.38, you can install git without any issues on cPanel by running:
+
+<div class="notranslate">
+
 ```
 $ yum install git
 ```
+</div>
 
 
 To install [git](http://git-scm.com/) on cPanel servers:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install git-cpanel
 ```
+</div>
 
 
 ## LVE-Stats 0.x
@@ -38,37 +43,43 @@ LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
 
 To install, run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install lve-stats
 ```
+</div>
 
 
 If you are already running lve-stats (in case you are running cPanel LVE plugin), run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum update lve-stats
 ```
+</div>
 
 
 This should also be updated automatically next time your system runs system wide update.
 
 The package installs lvestats-server. You can re-start the server by running:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ service lvestats restart
 ```
+</div>
 
-The package creates sqlite database <span class="notranslate">  /var/lve/lveinfo.db </span> that stores history information about LVE usage. Up to two months of hourly info is stored for each client. The data for the last hour is stored with 5 minutes interval, and the data for the past 10 minutes is stored with 1 minute interval.
+The package creates sqlite database <span class="notranslate">`/var/lve/lveinfo.db`</span> that stores history information about LVE usage. Up to two months of hourly info is stored for each client. The data for the last hour is stored with 5 minutes interval, and the data for the past 10 minutes is stored with 1 minute interval.
 
-LVE Stats updates <span class="notranslate"> /var/lve/info </span> every few seconds. That info is used by <span class="notranslate"> LVE Manager </span> plugin.
+LVE Stats updates <span class="notranslate">`/var/lve/info`</span> every few seconds. That info is used by <span class="notranslate">LVE Manager</span> plugin.
 
 Package consists of lveinfo utility to query LVE usage, and lvechart that allows you to chart usage for individual LVE.
 
-To query historical LVE info, lveinfo command provided. It is located at <span class="notranslate"> /usr/sbin/lveinfo: 
-  </span>
+To query historical LVE info, lveinfo command provided. It is located at <span class="notranslate">`/usr/sbin/lveinfo`</span>: 
+ 
 <div class="notranslate">
 
 ```
@@ -167,7 +178,7 @@ To query historical LVE info, lveinfo command provided. It is located at <span c
 
 Display top 10 users, by max <span class="notranslate"> CPU </span> usage, from Oct 10, 2010 to Oct 15, 2010. Display username if possible:
 
-<span class="notranslate"> </span>
+
 <div class="notranslate">
 
 ```
@@ -181,7 +192,7 @@ web1        0        0        10        0        0        25        204K       1
 </div>
 Display LVE info about user <span class="notranslate"> web2 </span> , from Oct 10, 2010 to Oct 15, 2010:
 
-<span class="notranslate"> </span>
+
 <div class="notranslate">
 
 ```
@@ -199,25 +210,28 @@ LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
 
  You have to install MySQL-python rpm to store lve-stats on centralized server. Run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install MySQL-python
 ```
+</div>
 
 
 If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no  libmysqlclient_r.so.15 on the server, run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum --enablerepo=cloudlinux-updates-testing install mysqlclient15
 ```
+</div>
 
 
 A typical procedure to configure the MySQL database for storing information about multiple servers for lve-stats services looks as follows:
 
 Create database and user. You can do it by executing the following commands:
 
-<span class="notranslate"> </span>
 <div class="notranslate">
 
 ```
@@ -229,7 +243,6 @@ flush privileges;
 
 Create database schema:
 
-<span class="notranslate"> </span>
 <div class="notranslate">
 
 ```
@@ -292,9 +305,9 @@ servername as used in lvestats config file on remote server:
 INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), '_SERVER_NAME_', 4);
 ```
 </div>
-On each server edit file <span class="notranslate"> /etc/sysconfig/lvestats & /etc/sysconfig/lvestats.readonly </span> as follows:
 
-<span class="notranslate"> </span>
+On each server edit file <span class="notranslate">`/etc/sysconfig/lvestats`</span> & <span class="notranslate">`/etc/sysconfig/lvestats.readonly`</span> as follows:
+
 <div class="notranslate">
 
 ```
@@ -317,9 +330,9 @@ _SERVER_NAME_ should be at most 10 characters
 db_port is an optional parameter. Default port would be used.
 :::
 
-Select server responsible for compacting database on regular bases by setting <span class="notranslate"> COMPACT=master </span> in <span class="notranslate"> /etc/sysconfig/lvestats </span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
+Select server responsible for compacting database on regular bases by setting <span class="notranslate">`COMPACT=master`</span> in <span class="notranslate">`/etc/sysconfig/lvestats`</span> for that server. Set <span class="notranslate"> COMPACT=slave </span> on all other servers.
 
-Make sure that <span class="notranslate"> /etc/sysconfig/lvestats </span> is readable only by <span class="notranslate"> root (chmod 600 /etc/sysconfig/lvestats), lvestats.readonly </span> should be readable by anyone
+Make sure that <span class="notranslate">`/etc/sysconfig/lvestats`</span> is readable only by <span class="notranslate">`root (chmod 600 /etc/sysconfig/lvestats), lvestats.readonly`</span> should be readable by anyone
 
 Restart service:
 
@@ -329,6 +342,7 @@ Restart service:
 service lvestats restart
 ```
 </div>
+
 If you use central database to store lvestats data, on each server, execute:
 
 <div class="notranslate">
@@ -337,6 +351,7 @@ If you use central database to store lvestats data, on each server, execute:
 $ /usr/share/lve-stats/save_users_to_database.py 
 ```
 </div>
+
 You just need to execute it once, as it will be later executed via <span class="notranslate"> cron job </span> . That script will store usernames from each server, so that lve-stats would later be able to correctly identify each user.
 
 **Updating MySQL & PostgreSQL schema for lve-stats 0.8+**

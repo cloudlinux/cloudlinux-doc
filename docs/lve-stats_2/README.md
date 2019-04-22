@@ -1504,22 +1504,22 @@ LVE <span class="notranslate"> Stats 2 </span> comes with a set of generic plugi
 | |  |  |  | |
 |-|--|--|--|-|
 |Plugin Name | Order | Default | Period (seconds) | Description|
-|LVECollector | 1000 | Y | 5 | Collects usage/limits data from _/proc/lve/list_|
-|CPUInfoCollector | 2000 | Y | 5 | collents info about <span class="notranslate"> CPU - _/proc/cpuinfo_ </span>|
-|LVEUsernamesCollector | 3000 | Y | 3600 | collects usernames & user ids to match <span class="notranslate"> uid <-> lve id </span> later on|
+|LVECollector | 1000 | Y | 5 | Collects usage/limits data from `/proc/lve/list`|
+|CPUInfoCollector | 2000 | Y | 5 | collents info about <span class="notranslate"> CPU - `/proc/cpuinfo`</span>|
+|LVEUsernamesCollector | 3000 | Y | 3600 | collects usernames & user ids to match <span class="notranslate">`uid <-> lve id`</span> later on|
 |LVEUsageAnalyzer | 4000 | Y | 5 | analyzes usage of LVE|
 |LveUsageAggregator | 5000 | Y | 60 | aggregates data by time periods|
 |DBGovSaver | 6000 | Y | 5 | Saves data about database governor|
-|FileSaver | 7000 | Y | 5 | Saves LVE data into <span class="notranslate"> _/var/lve/info_ </span> |
-|CloudLinuxTopFileSaver | 8000 | Y | 60 | saves data used by <span class="notranslate"> cloudlinux-top to /var/lve/cloudlinux-top.json </span> |
+|FileSaver | 7000 | Y | 5 | Saves LVE data into <span class="notranslate">`/var/lve/info`</span> |
+|CloudLinuxTopFileSaver | 8000 | Y | 60 | saves data used by <span class="notranslate"> cloudlinux-top to `/var/lve/cloudlinux-top.json`</span>|
 |DBSaver | 9000 | Y | 60 | save LVE data to database|
 |DbUsernamesSaver | 10000 | Y | 3600 | saves users name to database|
 |DBSaverX60 | 11000 | Y | 3600 | saves aggregated hourly data into database|
 |SnapshotSaver | 12000 | Y | 30 | collects & saves snapshots data|
 |StatsNotifier | 13000 | Y | varied | notify user/admin based on usage|
 |HistoryCleaner | 14000 | Y | 3600 | removes old usage|
-|ResMEMCollector | 1500 | N | 30 | collects physical memory usage from processes RES field instead of <span class="notranslate"> _/proc/lve/list_ </span> |
-|LVEDestroyer | - | N | 5 | destroys LVEs that weren't active for X iterations. Number of iterations is passed from config using iterations variable. <span class="notranslate"> iterations=0 </span> means plugin disabled|
+|ResMEMCollector | 1500 | N | 30 | collects physical memory usage from processes RES field instead of <span class="notranslate">`/proc/lve/list`</span> |
+|LVEDestroyer | - | N | 5 | destroys LVEs that weren't active for X iterations. Number of iterations is passed from config using iterations variable. <span class="notranslate">`iterations=0`</span> means plugin disabled|
 
 
 To enable non-default plugin, copy or link it to _/usr/share/lve-stats/plugins_ directory.
@@ -1545,8 +1545,6 @@ service lvestats restart
 * [Plugin Configuration](/lve-stats_2/#plugin-configuration)
 
 * [Types of Plugins](/lve-stats_2/#types-of-plugins)
-
-
 
 
 

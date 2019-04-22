@@ -17,7 +17,7 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "Kernelcare documentation"
+      description: "CloudLinux Documentation"
     }
     // TODO: temporary!
     // "/ru/": {
@@ -48,8 +48,8 @@ module.exports = {
     locales: {
       "/": {
         bottomLinks: [
-          { text: "How to", url: "#" },
-          { text: "Getting started", url: "#" },
+          { text: "How to", url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I" },
+          { text: "Getting started", url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os" },
           {
             text: "Contact support",
             url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
@@ -62,7 +62,7 @@ module.exports = {
         // label for this locale in the language dropdown
         label: "English",
         // text for the edit-on-github link
-        editLinkText: "Edit this page on GitHub",
+        editLinkText: "Edit this page",
         // config for Service Worker
         serviceWorker: {
           updatePopup: {
@@ -105,8 +105,7 @@ module.exports = {
               "/cloudlinux_whmcs_plugin/",
               "/deprecated/",
               "/hardware_compatibility/",
-              "/cloudlinux_life-cycle/",
-              "/downloading_documentation/"
+              "/cloudlinux_life-cycle/"
             ]
           }
         ]
@@ -114,10 +113,10 @@ module.exports = {
       "/ru/": {
         selectText: "Выберите язык",
         label: "Русский",
-        editLinkText: "Отредактировать на GitHub",
+        editLinkText: "Редактировать",
         serviceWorker: {
           updatePopup: {
-            message: "Новый контент доступен",
+            message: "Доступен новый контент",
             buttonText: "Обновить"
           }
         },
@@ -150,8 +149,7 @@ module.exports = {
               "/ru/cloudlinux_whmcs_plugin/",
               "/ru/deprecated/",
               "/ru/hardware_compatibility/",
-              "/ru/cloudlinux_life-cycle/",
-              "/ru/downloading_documentation/"
+              "/ru/cloudlinux_life-cycle/"
             ]
           }
         ]

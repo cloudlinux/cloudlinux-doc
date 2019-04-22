@@ -24,9 +24,10 @@ Detecting if system is running CloudLinux/CloudLinux kernel:
 $ uname -r|grep lve 
 ```
 </div>
+
 If you get an output, it means the system is running CloudLinux kernel. CloudLinux kernels have lve in its name, like: <span class="notranslate"> 2.6.32-458.18.1.lve1.2.44.el6.x86_64 </span>
 
-Alternatively you can check for the presence of <span class="notranslate">/proc/lve/list </span> file.
+Alternatively you can check for the presence of <span class="notranslate">`/proc/lve/list`</span> file.
 
 Check if CageFS is enabled (as <span class="notranslate"> root </span> ):
 
@@ -36,7 +37,8 @@ Check if CageFS is enabled (as <span class="notranslate"> root </span> ):
 $ /usr/sbin/cagefsctl --cagefs-status
 ```
 </div>
-Check if CageFS is enabled for a particular user (as <span class="notranslate"> root </span> ):
+
+Check if CageFS is enabled for a particular user (as <span class="notranslate">`root`</span> ):
 
 <div class="notranslate">
 
@@ -44,9 +46,10 @@ Check if CageFS is enabled for a particular user (as <span class="notranslate"> 
 $ /usr/sbin/cagefsctl --user-status _USER_NAME_
 ```
 </div>
+
 Check if you are inside CageFS:
 
-Check for the presence of <span class="notranslate">/var/.cagefs/.cagefs.token </span> file - if present, it means that you are inside CageFS.
+Check for the presence of <span class="notranslate">`/var/.cagefs/.cagefs.token`</span> file - if present, it means that you are inside CageFS.
 
 
 
@@ -168,11 +171,10 @@ package3
 
 Edit <span class="notranslate">/etc/sysconfig/cloudlinux </span> file.
 
-Edit or modify parameter <span class="notranslate">CUSTOM_GETPACKAGE_SCRIPT </span> , and set it to point to your script, like:
-<span class="notranslate">CUSTOM_GETPACKAGE_SCRIPT=/absolute/path/to/your/script </span>
+Edit or modify parameter <span class="notranslate">`CUSTOM_GETPACKAGE_SCRIPT`</span>, and set it to point to your script, like: <span class="notranslate">`CUSTOM_GETPACKAGE_SCRIPT=/absolute/path/to/your/script`</span>
 
 
-For the script example please check the following article: [http://kb.cloudlinux.com/2015/02/integrating-lve-limits-with-packages-for-unsupported-control-panel/](http://kb.cloudlinux.com/2015/02/integrating-lve-limits-with-packages-for-unsupported-control-panel/)
+For the script example please check the following article: [https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels](https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels)
 
 
 
