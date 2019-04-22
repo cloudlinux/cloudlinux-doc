@@ -17,15 +17,15 @@
 
 [TPE Extension](/kernel_settings/#tpe-extension-deprecated)
 
-[IO Limits latency](/kernel_settings/#io)
+[IO Limits latency](/kernel_settings/#io-limits-latency)
 
 [Hybrid Kernel](/kernel_settings/#hybrid-kernel)
 
-[Reading LVE usage](/kernel_settings/#reading)
+[Reading LVE usage](/kernel_settings/#reading-lve-usage)
 
 [flashcache](/kernel_settings/#flashcache)
 
-[OOM Killer for LVE Processes](/kernel_settings/#oom-killer)
+[OOM Killer for LVE Processes](/kernel_settings/#oom-killer-for-lve-processes)
 
 [File System Quotas](/kernel_settings/#file-system-quotas)
 
@@ -33,22 +33,23 @@
 ## Kernel Config Variables
 
 
-Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config `/etc/sysctl.d/90-cloudlinux.conf` _ _ (earlier, the parameters were read/written only from `sysctl.conf` ).
+Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config /etc/sysctl.d/90-cloudlinux.conf (earlier, the parameters were read/written only from sysctl.conf ).
 
 CloudLinux OS utilities get parameter by using _sysctl_ system utility. So for now, even if a config variable is not set in the _sysctl.conf_ and in the _/etc/sysctl.d_ config files, this variable will be read by _sysctl_ utility directly from _/proc/sys_ .
 
 If some kernel variable was set in _/etc/sysctl.d/90-cloudlinux.conf_ do
+<div class="notranslate">
 
 ```
 sysctl --system
 ```
-
+</div>
 to apply the parameters before reading and after writing.
 
-Starting from ** cagefs-6.1-27**  `fs.proc_can_see_other_uid` will be migrated (one time) from `/etc/sysctl.conf` into `/etc/sysctl.d/90-cloudlinux.conf` . If this variable is not set in either file, it will default to 0.
-It is strongly advised against setting this variable in `90-cloudlinux.conf` . Define it in `/etc/sysctl.conf` or in some other config file with an index number greater than `90-cloudlinux.conf` , e.g. `/etc/sysctl.d/95-custom.conf` .
+Starting from **cagefs-6.1-27**,  fs.proc_can_see_other_uid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf . If this variable is not set in either file, it will default to 0.
+It is strongly advised against setting this variable in 90-cloudlinux.conf . Define it in /etc/sysctl.conf or in some other config file with an index number greater than 90-cloudlinux.conf , e.g. /etc/sysctl.d/95-custom.conf .
 
-Starting from **lve-utils-3.0-23.7**  `fs.proc_super_gid` and `fs.symlinkown_gid` will be migrated (one time) from `/etc/sysctl.conf` into ` /etc/sysctl.d/90-cloudlinux.conf` .
+Starting from **lve-utils-3.0-23.7**  fs.proc_super_gid and fs.symlinkown_gid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf .
 
 For **lve-utils** versions from 3.0-21.2 to 3.0-23.7 the migration was performed the same way, but during every package install/update.
 Variables setting guidelines are the same as for CageFS (see above).
@@ -61,17 +62,20 @@ Variables setting guidelines are the same as for CageFS (see above).
 You can prevent user from seeing processes of other users (via ps/top command) as well as special files in /proc file system by setting fs.proc_can_see_other_uid sysctl.
 
 To do that, edit /etc/sysctl.conf
+<div class="notranslate">
 
 ```
-fs.proc_can_see_other_uid=0fs.proc_super_gid=600
+fs.proc_can_see_other_uid=0
+fs.proc_super_gid=600
 ```
-
+</div>
 And do:
+<div class="notranslate">
 
 ```
 # sysctl -p
 ```
-
+</div>
 fs.proc_can_see_other_uid=0
 
 If fs.proc_can_see_other_uid is set to 0, users will not be able to see special files. If it is set to 1 - user will see other processes IDs in /proc filesystem.
@@ -81,57 +85,100 @@ fs.proc_super_gid=XX
 The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/limits/#cldetect) can configure few most commonly used monitoring software automatically.
 
 Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
+<div class="notranslate">
 
 ```
-/proc/cpuinfo/proc/version/proc/stat/proc/uptime/proc/loadavg/proc/filesystems/proc/stat/proc/cmdline/proc/meminfo/proc/mounts/proc/tcp/proc/tcp6/proc/udp/proc/udp6/proc/assocs/proc/raw/proc/raw6/proc/unix/proc/dev
+/proc/cpuinfo
+/proc/version
+/proc/stat
+/proc/uptime
+/proc/loadavg
+/proc/filesystems
+/proc/stat
+/proc/cmdline
+/proc/meminfo
+/proc/mounts
+/proc/tcp
+/proc/tcp6
+/proc/udp
+/proc/udp6
+/proc/assocs
+/proc/raw
+/proc/raw6
+/proc/unix
+/proc/dev
 ```
-   
+</div>   
 
+:::tip Nonte
+Starting from lve-utils 3.0-21.2, fs.proc_super_gid parameter in da_add_admin utility is written to /etc/sysctl.d/90-cloudlinux.conf.
+:::
 
+# Remounting procfs with "hidepid" option
 
+In **lve-utils-2.1-3.2** and later _/proc_ can be remounted with _"hidepid=2"_ option to enable additional protection for procfs. This remount is performed in lve_namespaces service.
+This option is in sync with _fs.proc_can_see_other_uid_ kernel parameter described above.
+When _/etc/sysctl.conf_ does not contain _fs.proc_can_see_other_uid_ setting, the protection is off (procfs is remounted with _hidepid=0_ option). In this case _fs.proc_super_gid_ setting is ignored. Users are able to see full _/proc_ including processes of other users on a server. This is a default behavior.
 
-In **lve-utils-2.1-3.2** and later _/proc_ can be remounted with " _hidepid=2"_ option to enable additional protection for procfs. This remount is performed in lve_namespaces service.
-This option is in sync with _ fs.proc_can_see_other_uid_ kernel parameter described above.
-When _/etc/sysctl.conf_ does not contain _ fs.proc_can_see_other_uid _ setting, the protection is off (procfs is remounted with _hidepid=0_ option). In this case _fs.proc_super_gid_ setting is ignored. Users are able to see full _/proc_ including processes of other users on a server. This is a default behavior.
-
-If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=1"_ setting, then /proc will be remounted with _"hidepid=0" _ option (disable _“hidepid”_ protection for all users).
-If _/etc/sysctl.conf_ contains _ "fs.proc_can_see_other_uid=0" _ setting, then /proc will be remounted with _"hidepid=2"_ option (enable _“hidepid”_ protection for all users).
+If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=1"_ setting, then /proc will be remounted with _"hidepid=0"_ option (disable _“hidepid”_ protection for all users).
+If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=0"_ setting, then /proc will be remounted with _"hidepid=2"_ option (enable _“hidepid”_ protection for all users).
 If _/etc/sysctl.conf_ contains _"fs.proc_can_see_other_uid=0"_ and _"fs.proc_super_gid=$GID"_ settings, then _/proc_ will be remounted with _"hidepid=2, gid=$GID"_ options (enable _“hidepid”_ for all users except users in group with gid $GID).
 
 To apply /etc/sysctl.conf changes, you should execute
+<div class="notranslate">
 
 ```
 service lve_namespaces restart
 ```
- Or 
+</div>
+ Or
+<div class="notranslate">
+ 
 ```
 /usr/share/cloudlinux/remount_proc.py
 ```
+</div>
 
-So, admin can prevent users from seeing processes of other users via _ “fs.proc_can_see_other_uid_ ” and _ "fs.proc_super_gid"_ settings in _/etc/sysctl.conf_ , like earlier.
+So, admin can prevent users from seeing processes of other users via _"fs.proc_can_see_other_uid"_ and _"fs.proc_super_gid"_ settings in _/etc/sysctl.conf_ , like earlier.
 
 Also, you can override this by specifying desired options for _/proc_ in _/etc/fstab_ .
 
-To disable hidepid, add to _ /etc/fstab_ the following:
+To disable hidepid, add to _/etc/fstab_ the following:
+<div class="notranslate">
 
 ```
 proc /proc proc defaults,hidepid=0,gid=0 0 0
 ```
-
+</div>
 Or you can specify desired hidepid and gid values explicitly:
+<div class="notranslate">
 
 ```
 proc /proc proc defaults,hidepid=2,gid=clsupergid 0 0
 ```
- You should execute 
+</div>
+ You should execute
+<div class="notranslate">
+ 
 ```
 mount -o remount /proc
 ```
- to apply _/etc/fstab _ changes.
-But we recommend to manage procfs mount options via _ /etc/sysctl.conf_ as described above for backward compatibility. 
+</div>
 
+to apply _/etc/fstab_ changes.  
+Nevertheless, we recommend to manage procfs mount options via _/etc/sysctl.conf_ as described above for backward compatibility. 
 
+::: tip Note
+There is a known issue on CloudLinux 6 systems. User cannot see full /proc inside CageFS even when this user is in “super” group, that should see full /proc. This issue does not affect users with CageFS disabled. CloudLinux 7 is not affected.
+:::
 
+::: tip Note
+Starting from lve-utils 3.0-21.2, lve_namespaces service can read parameters from the /etc/sysctl.d/90-cloudlinux.conf.
+:::
+
+::: tip Note
+Even if fs.proc_can_see_other_uid and fs.proc_super_gid parameters are not set in config files but specified in /proc/sys, then when restarting lve_namespaces service the parameters from /proc/sys will be used. So, /proc will be remounted according to these parameters.
+:::
 
 
 ## SecureLinks
@@ -147,16 +194,23 @@ The protection requires setting multiple kernel options to be enabled.
 **_fs.enforce_symlinksifowner_**
 
 To protect against symlink attack where attacker tricks Apache web server to read some other user PHP config files, or other sensitive file, enable:
+<div class="notranslate">
 
-_fs.enforce_symlinksifowner=1_ .
+```
+fs.enforce_symlinksifowner=1
+```
+</div>
 
 Setting this option will deny any process running under gid _fs.symlinkown_gid_ to follow the symlink if owner of the link doesn’t match the owner of the target file.
 
 Defaults:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-fs.enforce_symlinksifowner = 1fs.symlinkown_gid = 48
+fs.enforce_symlinksifowner = 1
+fs.symlinkown_gid = 48
 ```
+</div>
 
 | | |
 |-|-|
@@ -167,38 +221,49 @@ When <span class="notranslate"> _fs.enforce_symlinksifowner_ </span> set to 1, p
 
 Please, note that <span class="notranslate"> _fs.enforce_symlinksifowner = 2_ </span> is deprecated and can cause issues for the system operation.
 <span class="notranslate"> </span>
+
 **_fs.symlinkown_gid_**
 
 On standard <span class="notranslate"> RPM Apache </span> installation, <span class="notranslate"> Apache </span> is usually running under <span class="notranslate"> GID </span> 48.
 On <span class="notranslate"> cPanel </span> servers, <span class="notranslate"> Apache </span> is running under user nobody, <span class="notranslate"> GID </span> 99.
 
 To change <span class="notranslate"> GID </span> of processes that cannot follow <span class="notranslate"> symlink </span> , edit the file <span class="notranslate"> _/etc/sysctl.conf_ </span> , add the line:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 fs.symlinkown_gid = XX
 ```
-
+</div>
 And execute:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ sysctl -p
 ```
+</div>
 
 To disable <span class="notranslate"> symlink </span> owner match protection feature, set <span class="notranslate"> _fs.enforce_symlinksifowner = 0_ </span> in <span class="notranslate"> _/etc/sysctl.conf_ </span> , and execute
- <span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ sysctl -p
 ```
-  
+</div>  
 
+::: danger
+/proc/sys/fs/global_root_enable [CloudLinux 7 kernel only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+]
+:::
 
 <span class="notranslate"> _proc/sys/fs/global_root_enable_ </span> flag enables following the <span class="notranslate"> symlink </span> with root ownership. If <span class="notranslate"> _global_root_enable=0_ </span> , then <span class="notranslate"> Symlink Owner Match Protection </span> does not verify the <span class="notranslate"> symlink </span> owned by <span class="notranslate"> root.  </span>
 
-For example, in the path <span class="notranslate"> _/proc/self/fd_ ,  _self_ </span> is a <span class="notranslate"> symlink </span> , which leads to a process directory.  The <span class="notranslate"> symlink </span> owner is <span class="notranslate"> root </span> . When <span class="notranslate"> _global_root_enable=0_ , Symlink Owner Match Protection </span> excludes this element from the verification. When <span class="notranslate"> _global_root_enable=1_ </span> , the verification will be performed, which could block the access to _ fd_ and cause violation of the web-site performance.
+For example, in the path <span class="notranslate"> _/proc/self/fd_ ,  _self_ </span> is a <span class="notranslate"> symlink </span> , which leads to a process directory.  The <span class="notranslate"> symlink </span> owner is <span class="notranslate"> root </span> . When <span class="notranslate"> _global_root_enable=0_ , Symlink Owner Match Protection </span> excludes this element from the verification. When <span class="notranslate"> _global_root_enable=1_ </span> , the verification will be performed, which could block the access to _fd_ and cause violation of web site performance.
 
-It is recommended to set _/proc/sys/fs/global_root_enable=0_ by default. If needed, set _ /proc/sys/fs/global_root_enable=1 _ to increase the level of protection. 
+It is recommended to set _/proc/sys/fs/global_root_enable=0_ by default. If needed, set _/proc/sys/fs/global_root_enable=1_ to increase the level of protection. 
 
-
+::: tip Note
+Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd service user and fs.proc_super_gid for nagios service user is written to /etc/sysctl.d/90-cloudlinux.conf.
+:::
 
 
 ### Link Traversal Protection 
@@ -210,44 +275,61 @@ Yet, <span class="notranslate"> CageFS </span> does not work in each and every s
 
 This allows an attacker to create symlink or hardlink to a sensitive file like <span class="notranslate"> _/etc/passwd_ </span> and then use <span class="notranslate"> WebDAV </span> , filemanager, or webmail to read the content of that file.
 
-Starting with _ _ CL6 _ kernel 2.6.32-604.16.2.lve1.3.45_ , you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
+Starting with CL6 _kernel 2.6.32-604.16.2.lve1.3.45_ , you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
 
 This is done by set following kernel options to 1:
+<div class="notranslate">
 
 ```
-fs.protected_symlinks_create = 1fs.protected_hardlinks_create = 1
+fs.protected_symlinks_create = 1
+fs.protected_hardlinks_create = 1
 ```
-  
+</div>  
 
-   
+::: danger
+We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
+:::   
 
- 
+::: tip Note
+Link Traversal Protection is disabled by default for the new CloudLinux OS installations/convertations.
+:::
+
+<div class="notranslate"> 
 
 ```
-fs.protected_symlinks_create = 0fs.protected_hardlinks_create = 0
+fs.protected_symlinks_create = 0
+fs.protected_hardlinks_create = 0
 ```
-
+</div>
 Then setup:
+<div class="notranslate">
 
 ```
-fs.protected_symlinks_allow_gid = id_of_group_linksafefs.protected_hardlinks_allow_gid = id_of_group_linksafe
+fs.protected_symlinks_allow_gid = id_of_group_linksafe
+fs.protected_hardlinks_allow_gid = id_of_group_linksafe
 ```
-
+</div>
 This is for example needed by PHP Selector to work (new versions of Alt-PHP can already correctly configure those settings).
 
 To manually adjust the settings, edit: _/etc/sysctl.d/cloudlinux-linksafe.conf_
-and execute: 
+and execute:
+<div class="notranslate">
+ 
 ```
 sysctl -p /etc/sysctl.d/cloudlinux-linksafe.conf
 ```
+</div>
  or:
+<div class="notranslate"> 
 
 ```
 sysctl --system
 ```
-
+</div>
  
-
+:::tip Note
+Starting from lvemanager 4.0-25.5, if there is no /etc/sysctl.d/cloudlinux-linksafe.conf config file, selectorctl for PHP with --setup-without-cagefs and --revert-to-cagefs keys writes fs.protected_symlinks_create and fs.protected_hardlinks_create parameters to /etc/sysctl.d/90-cloudlinux.conf.
+:::
 
 ## ptrace Block
 
@@ -257,28 +339,40 @@ Starting with kernel 3.10.0-427.18.s2.lve1.4.21 ( <span class="notranslate"> Clo
 By default, <span class="notranslate"> CloudLinux </span> doesn't prevent <span class="notranslate"> ptrace </span> functionality.
 
 Defaults:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-kernel.user_ptrace = 1kernel.user_ptrace_self = 1
+kernel.user_ptrace = 1
+kernel.user_ptrace_self = 1
 ```
+</div>
 
 The option <span class="notranslate"> kernel.user_ptrace </span> disables <span class="notranslate"> PTRACE_ATTACH </span> functionality, option <span class="notranslate"> kernel.user_ptrace_self </span> disables <span class="notranslate"> PTRACE_TRACEME </span> .
 
 To disable all <span class="notranslate"> ptrace </span> functionality change both <span class="notranslate"> sysctl </span> options to 0, add this section to <span class="notranslate"> /etc/sysctl.conf </span> :
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-## CL. Disable ptrace for userskernel.user_ptrace = 0kernel.user_ptrace_self = 0##
+## CL. Disable ptrace for users
+kernel.user_ptrace = 0
+kernel.user_ptrace_self = 0
+##
 ```
+</div>
 
 Apply changes with:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ sysctl -p
 ```
+</div>
 
 Different software could need different access to <span class="notranslate"> ptrace </span> , you may need to change only one option to 0 to make them working. In this case, there will be only partial <span class="notranslate"> ptrace </span> protection. 
 
-
+::: danger
+ptrace protection is known to break PSA service for Plesk 11
+:::
 
 ## Xen XVDA
 
@@ -294,37 +388,50 @@ This is needed only for CloudLinux 6 and <span class="notranslate"> Hybrid </spa
 ## TPE Extension (deprecated)
 
 
-
+_TPE Extension will removed in the next version of CloudLinux 5.x kernel_
 
 <span class="notranslate"> CloudLinux 5.x (kernel 2.6.18) has limited support for trusted path execution extension. </span>
 <span class="notranslate"> CloudLinux 6.x (kernel 2.6.32) and  <span class="notranslate"> CloudLinux 5.x with hybrid kernel don't have  <span class="notranslate"> TPE extension </span> </span> </span>
 
-
+**TPE (Trusted Path Execution)**
 
 The kernel supports <span class="notranslate"> TPE </span> feature out of the box. You can configure it using following files:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
 ·        /proc/sys/kernel/grsecurity/grsec_lock
 ·        /proc/sys/kernel/grsecurity/tpe
 ·        /proc/sys/kernel/grsecurity/tpe_gid
 ·        /proc/sys/kernel/grsecurity/tpe_restrict_all
+```
+</div>
 
 To enable <span class="notranslate"> TPE </span> feature in a standard way just add following to the end of your <span class="notranslate"> /etc/sysctl.conf </span>
+<div class="notranslate">
 
 ```
-#GRsecurity kernel.grsecurity.tpe = 1 kernel.grsecurity.tpe_restrict_all = 1 kernel.grsecurity.grsec_lock = 1  
+#GRsecurity 
+kernel.grsecurity.tpe = 1 
+kernel.grsecurity.tpe_restrict_all = 1 
+kernel.grsecurity.grsec_lock = 1  
 ```
+</div>
 
 And do:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # sysctl -p
 ```
-  
+</div>  
 
+::: tip Note
+Once you set grsec_lock to 1, you will not be able to change TPE options without reboot.
+:::
 
- This <span class="notranslate"> Trusted Path Execution </span> feature was adopted from <span class="notranslate"> grsecurity </span> .
+ This <span class="notranslate"> Trusted Path Execution </span> feature was adopted from <span class="notranslate"> grsecurity</span>.
 
-## IO
+## IO Limits Latency
 
 
 **[lve1.2.29+]**
@@ -334,45 +441,50 @@ By defining <span class="notranslate"> IO latency, you can make sure that no pro
 
 This option is <span class="notranslate"> OFF by default. </span>
 
-_For _ <span class="notranslate"> CloudLinux 6 and  <span class="notranslate"> CloudLinux 7 (since Hybrid kernel lve1.4.x.el5h): </span> </span>
+_For CloudLinux 6 and CloudLinux 7 (since Hybrid kernel lve1.4.x.el5h):_
 
 To enable <span class="notranslate"> IO </span> Limits latency and set it to 10 seconds:
- <span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # echo 10000 > /sys/module/kmodlve/parameters/latency
 ```
-
+</div>
 To disable latency:
- <span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # echo 2000000000 > /sys/module/kmodlve/parameters/latency
 ```
+</div>
 
-It is possible to set, for example, 1000 as a permanent value. To do so, create a file <span class="notranslate"> </span> with the following content:
-<span class="notranslate"> </span>
+It is possible to set, for example, 1000 as a permanent value. To do so, create a file <span class="notranslate">/etc/modprobe.d/kmodlve.conf </span> with the following content:  
+<span class="notranslate">`options kmodlve latency=1000` </span>
 
 
-_For _ <span class="notranslate"> CloudLinux </span> _ 5 (OBSOLETE):_
+_For <span class="notranslate"> CloudLinux </span> 5 (OBSOLETE):_
 
 To enable <span class="notranslate"> IO </span> Limits latency and set it to 10 seconds:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # echo 10000 > /sys/module/iolimits/**parameters/latency
 ```
-
+</div>
 To disable latency:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # echo 2000000000 > /sys/module/iolimits/**parameters/latency
 ```
-
+</div>
 
 ## Hybrid Kernel
 
 
-<span class="notranslate"> **CloudLinux**  6 Hybrid kernel </span>
+<span class="notranslate"> **CloudLinux 6 Hybrid kernel** </span>
 
-<span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for <span class="notranslate"> CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency. </span>
+<span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
 
 Please find information on the main features of 3.10 kernel branch on the links:
 
@@ -382,7 +494,9 @@ Please find information on the main features of 3.10 kernel branch on the links:
 
 How to migrate from the normal to hybrid channel: 
 
-
+::: tip Note
+The system must be registered in CLN.
+:::
 
 
 1. Update <span class="notranslate"> rhn-client-tools </span> from production
@@ -390,23 +504,34 @@ How to migrate from the normal to hybrid channel:
 2. Run <span class="notranslate"> normal-to-hybrid </span> script.
 
 3. Reboot after script execution is completed.
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-yum update rhn-client-toolsnormal-to-hybridreboot
+yum update rhn-client-tools
+normal-to-hybrid
+reboot
 ```
+</div>
 
 How to migrate from hybrid to the normal channel:
 
-
+::: tip Note
+The system should be registered in CLN.
+:::
 
 
 1. Run <span class="notranslate"> hybrid-to-normal </span> script.
 
 2. Reboot after script execution is completed.
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
-hybrid-to-normalreboot
+hybrid-to-normal
+reboot
 ```
+</div>
 
 **Known limitations and issues** :
 
@@ -414,15 +539,15 @@ hybrid-to-normalreboot
 
 2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
 
-## Reading 
+## Reading LVE Usage
 
 
 CloudLinux kernel provides real time usage data in file.
 
 All the statistics can be read from that file in real time. Depending on your kernel version you will get either Version 6 of the file, or version 4 of the file.
 You can detect the version by reading the first line of the file. It should look like:
-<span class="notranslate"> 
-6:LVE... for version 6 </span>
+ 
+6:LVE... for version 6  
 4:LVE... for version 4
 
 First line presents headers for the data.
@@ -430,17 +555,23 @@ Second line shows default limits for the server, with all other values being 0.
 The rest of the lines present limits & usage data on per <span class="notranslate"> LVE </span> bases.
 
 Version 6 (CL6 & hybrid kernels):
-<span class="notranslate"> </span>
-```
-6:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP        lMEMPHY        lCPUW        lNPROC        MEMPHY        fMEMPHY        NPROC        fNPROC0        0        25        1024        0        0        0        262144        20        1        0        0        262144        100        0        0        0        00300        0        25        1024        1862407        0        0        262144        20        1        0        0        262144        100        0        31        000
-```
+<div class="notranslate">
 
+```
+6:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP        lMEMPHY        lCPUW        lNPROC        MEMPHY        fMEMPHY        NPROC        fNPROC
+0        0        25        1024        0        0        0        262144        20        1        0        0        262144        100        0        0        0        00
+300        0        25        1024        1862407        0        0        262144        20        1        0        0        262144        100        0        31        000
+```
+</div>
 Version 4 (CL 5 kernel):
-<span class="notranslate"> </span>
-```
-4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP0        0        25        25        0        0        0        262144        20        1        0        0300        0        25        25        15103019        0        0        262144        20        1        0        0
-```
+<div class="notranslate">
 
+```
+4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP
+0        0        25        25        0        0        0        262144        20        1        0        0
+300        0        25        25        15103019        0        0        262144        20        1        0        0
+```
+</div>
 
 | |  |  | |
 |-|--|--|-|
@@ -469,15 +600,17 @@ Version 4 (CL 5 kernel):
 ## flashcache
 
 
-_* Available only for x86_64, _ <span class="notranslate"> CloudLinux </span> _ 6 and Hybrid servers_
+_* Available only for x86_64, <span class="notranslate"> CloudLinux </span> 6 and Hybrid servers_
 
 <span class="notranslate"> Flashcache </span> is a module originally written and released by <span class="notranslate">  Facebook (Mohan Srinivasan, Paul Saab </span> and <span class="notranslate"> Vadim Tkachenko </span> ) in April of 2010. It is a kernel module that allows Writethrough caching of a drive on another drive. This is most often used for caching a rotational drive on a smaller solid-state drive for performance reasons. This gives you the speed of an <span class="notranslate"> SSD </span> and the size of a standard rotational drive for recently cached files. <span class="notranslate"> Facebook </span> originally wrote the module to speed up database <span class="notranslate"> I/O </span> , but it is easily extended to any <span class="notranslate"> I/O </span> .
 
 To install on <span class="notranslate"> CloudLinux </span> 6 & Hybrid servers:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 $ yum install flashcache
 ```
+</div>
 
 More info on <span class="notranslate"> flashcache </span> : [https://github.com/facebook/flashcache/](https://github.com/facebook/flashcache/)
 
@@ -485,37 +618,44 @@ More info on <span class="notranslate"> flashcache </span> : [https://github.com
 [https://wiki.archlinux.org/index.php/Flashcache](https://wiki.archlinux.org/index.php/Flashcache)
 
 
-## OOM Killer
+## OOM Killer for LVE Processes
 
 
 When <span class="notranslate"> LVE </span> reaches its memory limit, the processes inside that <span class="notranslate"> LVE </span> are killed by <span class="notranslate"> OOM Killer </span> and appropriate message is written to <span class="notranslate"> /var/log/messages </span> . When any <span class="notranslate"> LVE </span> hits huge number of memory limits in short period of time, then <span class="notranslate"> OOM Killer </span> could cause system overload. Starting from kernel 2.6.32-673.26.1.lve1.4.15 ( <span class="notranslate"> CloudLinux </span> 6) and from kernel 3.10.0-427.18.2.lve1.4.14 ( <span class="notranslate"> CloudLinux </span> 7) heavy <span class="notranslate"> OOM Killer </span> could be disabled. If so - lightweight <span class="notranslate"> SIGKILL </span> will be used instead.
 
 By default <span class="notranslate"> OOM Killer </span> is enabled, to disable it please run:
 
-_For _ <span class="notranslate"> CloudLinux </span> _ 6_ :
-<span class="notranslate"> </span>
+_For <span class="notranslate"> CloudLinux </span> 6_ :
+<div class="notranslate">
+
 ```
 # echo 1 > /proc/sys/ubc/ubc_oom_disable
 ```
+</div>
 
 Also, add the following to <span class="notranslate"> _/etc/sysctl.conf_ </span> file to apply the same during boot:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 ubc.ubc_oom_disable=1
 ```
+</div>
 
-_For _ <span class="notranslate"> CloudLinux </span> _ 7:_
-<span class="notranslate"> </span>
+_For <span class="notranslate"> CloudLinux </span> 7:_
+<div class="notranslate">
+
 ```
 # echo 1 > /proc/sys/kernel/memcg_oom_disable
 ```
+</div>
 
-Also, add the following to _ _ <span class="notranslate"> /etc/sysctl.conf </span> file to apply the same during boot:
-<span class="notranslate"> </span>
+Also, add the following to <span class="notranslate"> _/etc/sysctl.conf_ </span> file to apply the same during boot:
+<div class="notranslate">
+
 ```
 kernel.memcg_oom_disable=1
 ```
-
+</div>
 
 
 ## File System Quotas
@@ -524,10 +664,11 @@ kernel.memcg_oom_disable=1
 In <span class="notranslate"> **Ext4** </span> file system, the process with enabled capability <span class="notranslate"> CAP_SYS_RESOURCE </span> is not checked on the quota exceeding by default. It allows userland utilities <span class="notranslate"> _selectorctl_ </span> and <span class="notranslate"> _cagefs_ </span> to operate without fails even if a user exceeds a quota.
 
 To disable quota checking in <span class="notranslate"> **XFS** </span> file system set <span class="notranslate"> _cap_res_quota_disable_ </span> option to 1 using the following command:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # echo 1 > /proc/sys/fs/xfs/cap_res_quota_disable
 ```
-
+</div>
 
 

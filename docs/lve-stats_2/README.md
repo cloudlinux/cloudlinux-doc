@@ -1499,50 +1499,52 @@ The format of the error message is the same as in the other <span class="notrans
 ## Plugins
 
 
-LVE <span class="notranslate"> Stats 2z </span> comes with a set of generic plugins:
+LVE <span class="notranslate"> Stats 2 </span> comes with a set of generic plugins:
 
 | |  |  |  | |
 |-|--|--|--|-|
 |Plugin Name | Order | Default | Period (seconds) | Description|
-|LVECollector | 1000 | Y | 5 | Collects usage/limits data from /proc/lve/list|
-|CPUInfoCollector | 2000 | Y | 5 | collents info about <span class="notranslate"> CPU - /proc/cpuinfo </span>|
+|LVECollector | 1000 | Y | 5 | Collects usage/limits data from _/proc/lve/list_|
+|CPUInfoCollector | 2000 | Y | 5 | collents info about <span class="notranslate"> CPU - _/proc/cpuinfo_ </span>|
 |LVEUsernamesCollector | 3000 | Y | 3600 | collects usernames & user ids to match <span class="notranslate"> uid <-> lve id </span> later on|
 |LVEUsageAnalyzer | 4000 | Y | 5 | analyzes usage of LVE|
 |LveUsageAggregator | 5000 | Y | 60 | aggregates data by time periods|
 |DBGovSaver | 6000 | Y | 5 | Saves data about database governor|
-|FileSaver | 7000 | Y | 5 | Saves LVE data into /var/lve/info|
-|CloudLinuxTopFileSaver | 8000 | Y | 60 | saves data used by <span class="notranslate"> cloudlinux-top </span> to /var/lve/cloudlinux-top.json|
-|DBSaver | 9000 | Y | 60 | save LVE data to dabase|
+|FileSaver | 7000 | Y | 5 | Saves LVE data into <span class="notranslate"> _/var/lve/info_ </span> |
+|CloudLinuxTopFileSaver | 8000 | Y | 60 | saves data used by <span class="notranslate"> cloudlinux-top to /var/lve/cloudlinux-top.json </span> |
+|DBSaver | 9000 | Y | 60 | save LVE data to database|
 |DbUsernamesSaver | 10000 | Y | 3600 | saves users name to database|
 |DBSaverX60 | 11000 | Y | 3600 | saves aggregated hourly data into database|
 |SnapshotSaver | 12000 | Y | 30 | collects & saves snapshots data|
 |StatsNotifier | 13000 | Y | varied | notify user/admin based on usage|
 |HistoryCleaner | 14000 | Y | 3600 | removes old usage|
-|ResMEMCollector | 1500 | N | 30 | collects physical memory usage from processes RES field instead of /proc/lve/list|
+|ResMEMCollector | 1500 | N | 30 | collects physical memory usage from processes RES field instead of <span class="notranslate"> _/proc/lve/list_ </span> |
 |LVEDestroyer | - | N | 5 | destroys LVEs that weren't active for X iterations. Number of iterations is passed from config using iterations variable. <span class="notranslate"> iterations=0 </span> means plugin disabled|
 
 
-To enable non-default plugin, copy or link it to _ /usr/share/lve-stats/plugins_ directory.
+To enable non-default plugin, copy or link it to _/usr/share/lve-stats/plugins_ directory.
 
-For example to enable _ ResMEMCollector_ plugin, do:
+For example to enable _ResMEMCollector_ plugin, do:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-ln -s /usr/share/lve-stats/plugins.other/res_mem_collector.py /usr/share/lve-stats/plugins/service lvestats restart
+ln -s /usr/share/lve-stats/plugins.other/res_mem_collector.py /usr/share/lve-stats/plugins/
+service lvestats restart
 ```
+</div>
 
 
+## Creating a Plugin for LVE Stats 2
 
-## Creating a Plugin for 
 
+* [Introduction](/lve-stats_2/#introduction)
 
-[Introduction](/lve-stats_2/#introduction)
+* [Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
 
-[Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement)
+* [Plugin Configuration](/lve-stats_2/#plugin-configuration)
 
-[Plugin Configuration](/lve-stats_2/#plugin-configuration)
-
-[Types of Plugins](/lve-stats_2/#types-of-plugins)
+* [Types of Plugins](/lve-stats_2/#types-of-plugins)
 
 
 
@@ -1554,69 +1556,72 @@ ln -s /usr/share/lve-stats/plugins.other/res_mem_collector.py /usr/share/lve-sta
 <span class="notranslate"> LVE Stats 2 </span> complex has scalable architecture, which allows to connect custom plugins.
 
 
-<span class="notranslate"> LVE Stats </span> server searches for plugins in the directory which is specified with plugins parameter of server’s /etc/sysconfig/lvestats2 configuration file. Default directory is _ _ /usr/share/lve-stats/plugins.
+<span class="notranslate"> LVE Stats </span> server searches for plugins in the directory which is specified with plugins parameter of server’s _/etc/sysconfig/lvestats2_ configuration file. Default directory is <span class="notranslate"> _/usr/share/lve-stats/plugins_. </span>
 
 Each plugin must be of a <span class="notranslate"> Python </span> class, must be written in <span class="notranslate"> Python </span> language and its file must have <span class="notranslate"> .py </span> extension. Files with all other extensions will be ignored. For normal server work access permission 400 is enough; owner – <span class="notranslate"> root </span> .
 
-Plugins' classes can be of the same name, but better not, because classes' names can affect the set of parameters in _set_config_ method. You can find detailed plugins' configuring information below, in appropriate chapter.
+Plugin classes can be of the same name, but better not, because classes' names can affect the set of parameters in <span class="notranslate"> _set_config_ </span> method. You can find detailed plugins' configuring information below, in appropriate chapter.
 
-Plugin's class must contain <span class="notranslate"> _execute()_ </span> method, which is invoked by the server every 5 seconds (by default, can be changed by interval parameter of configuration file).
-Also <span class="notranslate"> set_config </span> method (configuration settings) can be available. You can find more info in <span class="notranslate"> Plugins Configuration </span> chapter.
+Plugin class must contain <span class="notranslate"> _execute()_ </span> method, which is invoked by the server every 5 seconds (by default, can be changed by interval parameter of configuration file).
+Also <span class="notranslate"> set_config </span> method (configuration settings) can be available. You can find more info in <span class="notranslate"> [Plugins Configuration](/lve-stats_2/#plugin-configuration) </span> chapter.
 
 Additionally the following attributes can be set (plugin class instance variable):
 
- <span class="notranslate"> order (integer) </span> - defines plugin's position in the server's plugin list, (more info in <span class="notranslate"> Servers Plugin Arrangement </span> ).
- <span class="notranslate"> timeout (integer </span> or <span class="notranslate"> float </span> ) – the longest allowable duration of one launch of the plugin (execute method). Default value of <span class="notranslate"> timeout </span> parameter is 5 seconds.
- <span class="notranslate"> period (integer) </span> – sets the interval between two launches of execute plugin method in seconds. If not defined, then plugin runs every 5 seconds ( <span class="notranslate"> interval </span> parameter in configuration file).
+* <span class="notranslate"> order (integer) </span> - defines plugin's position in the server's plugin list, (more info in <span class="notranslate"> Servers Plugin Arrangement </span> ).
+* <span class="notranslate"> timeout (integer </span> or <span class="notranslate"> float </span> ) – the longest allowable duration of one launch of the plugin (execute method). Default value of <span class="notranslate"> timeout </span> parameter is 5 seconds.
+* <span class="notranslate"> period (integer) </span> – sets the interval between two launches of execute plugin method in seconds. If not defined, then plugin runs every 5 seconds ( <span class="notranslate"> interval </span> parameter in configuration file).
 
-When <span class="notranslate"> _execute()_   </span> method of the plugin is invoked, the server creates an attribute <span class="notranslate"> _now_ </span> in it, where launch time is recorded. This value is equal to what a standard Python function _time.time()_ returns. All the plugins launched one after another receive the same  value of <span class="notranslate"> _now_   </span> attribute from the server. <span class="notranslate"> _now_ </span> is overwritten before <span class="notranslate"> _execute()_ </span> method is invoked.
+When <span class="notranslate"> _execute()_   </span> method of the plugin is invoked, the server creates an attribute <span class="notranslate"> _now_ </span> in it, where launch time is recorded. This value is equal to what a standard Python function <span class="notranslate"> _time.time()_ </span> returns. All the plugins launched one after another receive the same  value of <span class="notranslate"> _now_   </span> attribute from the server. <span class="notranslate"> _now_ </span> is overwritten before <span class="notranslate"> _execute()_ </span> method is invoked.
 
 The previous value of now attribute is not saved by the server. If plugin needs it, it has to save it by itself.
 
-Plugin's class can be inherited from <span class="notranslate"> _LveStatsPlugin_ </span> class, which is the part of the server itself. This is not obligatory, but inheritance can help to avoid different errors in servers work, particularly if a plugin doesn't contain required execute method.
+Plugin class can be inherited from <span class="notranslate"> _LveStatsPlugin_ </span> class, which is the part of the server itself. This is not obligatory, but inheritance can help to avoid different errors in servers work, particularly if a plugin doesn't contain required execute method.
 
-<span class="notranslate"> _LveStatsPlugin_ </span> class is defined in the file: _/opt/alt/python27/lib/python2.7/site-packages/lvestats/core/plugin.py_ .
+<span class="notranslate"> _LveStatsPlugin_ </span> class is defined in the file: <span class="notranslate"> _/opt/alt/python27/lib/python2.7/site-packages/lvestats/core/plugin.py_ . </span>
 
 ### Server Plugin Arrangement
 
 
-When the server starts, it performs the search of plugins in the directory specified in /etc/sysconfig/lvestats2 configuration file. This directory is scanned only when the server starts, therefore if any plugin was added into the directory, the server has to be restarted with the following command:
-<span class="notranslate"> </span>
+When the server starts, it performs the search of plugins in the directory specified in _/etc/sysconfig/lvestats2_ configuration file. This directory is scanned only when the server starts, therefore if any plugin was added into the directory, the server has to be restarted with the following command:
+<div class="notranslate">
+
 ```
 service lvestats restart.
 ```
+</div>
 
-After successful restart the plugins are graded and executed  ascending by <span class="notranslate"> _order_ </span> attribute. If any plugin's <span class="notranslate"> _order_ </span> attribute is not set, it is considered as a Python language constant _sys.maxint_ (which is usually 9223372036854775807). This in fact means that such plugins will be executed in the last.
+After successful restart, the plugins are graded and executed  ascending by <span class="notranslate"> _order_ </span> attribute. If any plugin <span class="notranslate"> _order_ </span> attribute is not set, it is considered as a <span class="notranslate"> Python </span> language constant _sys.maxint_ (which is usually 9223372036854775807). This in fact means that such plugins will be executed in the last.
 If any plugins has similar <span class="notranslate"> _order_ </span> meanings, their execution order is unpredictable.
 
 The server invokes <span class="notranslate"> _execute_ </span> method of all plugins one after another.
 
-When the server invokes <span class="notranslate"> _execute()_ </span> method of any plugin, it transmits a data dictionary ( _lve_data_ argument) into plugin. The dictionary is common for all the plugins. Any plugin can read, write and change any data in this dictionary. <span class="notranslate"> LVE Stats 2 </span> server doesn't control this area. That is why one must be careful while developing new plugins, in order not to change or corrupt other plugins' data which can break their functionality.
+When the server invokes <span class="notranslate"> _execute()_ </span> method of any plugin, it transmits a data dictionary ( <span class="notranslate"> _lve_data_ </span> argument) into plugin. The dictionary is common for all the plugins. Any plugin can read, write and change any data in this dictionary. <span class="notranslate"> LVE Stats 2 </span> server doesn't control this area. That is why one must be careful while developing new plugins, in order not to change or corrupt other plugins' data which can break their functionality.
 
-If an exception occurs in <span class="notranslate"> _execute()_ </span> method, its text and python stack trace is recorded into server log /var/log/lve-stats and all the changes made to _lve_data_ dictionary before the exception happened are lost.
+If an exception occurs in <span class="notranslate"> _execute()_ </span> method, its text and <span class="notranslate"> python </span> stack trace is recorded into server log _/var/log/lve-stats_ and all the changes made to <span class="notranslate"> _lve_data_ </span> dictionary before the exception happened are lost.
 
-The keys of the _lve_data_ dictionary are recommended to look like <span class="notranslate"> “ _PluginName_Key_ ” </span> , in order the plugins do not corrupt other data accidentally.
+The keys of the <span class="notranslate"> _lve_data_ </span> dictionary are recommended to look like <span class="notranslate"> “ _PluginName_Key_ ” </span> , in order the plugins do not corrupt other data accidentally.
 
-Server contains some standard plugins which define and use the following keys in the common dictionary lve_data: <span class="notranslate"> _LVE_VERSION, stats, old_stats, procs_ </span> and <span class="notranslate"> _lve_usage_ </span> . User plugins can use data from these keys, but it is recommended not to change them if there is no special need, because it can break the next plugins in the execution queue.
+Server contains some standard plugins which define and use the following keys in the common dictionary <span class="notranslate"> lve_data: _LVE_VERSION, stats, old_stats, procs_ </span> and <span class="notranslate"> _lve_usage_ </span> . User plugins can use data from these keys, but it is recommended not to change them if there is no special need, because it can break the next plugins in the execution queue.
 
 | | |
 |-|-|
 |Key | Content|
-|<span class="notranslate"> `LVE_VERSION` </span> | LVE version. The same as console command `lvectl lve-version produces.`|
-|<span class="notranslate"> `stats` </span> | Dictionary, that contains lve id’s as keys and LVEStat class objects as values. Every LVEStat object contains values of usages and limits taken from     /proc/lve/list file for every <span class="notranslate"> LVE Id </span> . Dictionary keys – <span class="notranslate"> integer lve id </span> , including 0 for “ <span class="notranslate"> default </span> ” LVE. This dictionary is updated on each iteration of lvestats-server (every 5 seconds by default). LVEStat – is a standard server class, it can be imported with the command from _lvestats.core.lvestat_  `import LVEStat.` The class is described in the file /opt/alt/python27/lib/python2.7/site-packages/lvestats/core/lvestat.py. Here you can find the whole list of data fields and their functions.|
+|<span class="notranslate"> `LVE_VERSION` </span> | LVE version. The same as console command <span class="notranslate"> `lvectl lve-version` </span> produces.|
+|<span class="notranslate"> `stats` </span> | Dictionary, that contains lve id’s as keys and LVEStat class objects as values. Every LVEStat object contains values of usages and limits taken from <span class="notranslate"> _/proc/lve/list_ </span> file for every <span class="notranslate"> LVE Id </span> . Dictionary keys – <span class="notranslate"> integer lve id </span> , including 0 for “ <span class="notranslate"> default </span> ” LVE. This dictionary is updated on each iteration of lvestats-server (every 5 seconds by default). LVEStat – is a standard server class, it can be imported with the command from <span class="notranslate"> _lvestats.core.lvestat_ </span> `import LVEStat.` The class is described in the file <span class="notranslate"> _/opt/alt/python27/lib/python2.7/site-packages/lvestats/core/lvestat.py_ </span> . Here you can find the whole list of data fields and their functions.|
 |<span class="notranslate"> `old_stats` </span> | _stats_ content from the previous iteration. Before the first iteration – empty dictionary.|
 |<span class="notranslate"> `totalHz` </span> | When LVE_VERSION is 4, real <span class="notranslate"> CPU </span> frequency in <span class="notranslate"> Hz </span> multiplied by number of cores. When LVE_VERSION > 4, <span class="notranslate"> CPU </span> speed is in conventional units and equals to 1000000000 * cores (1 <span class="notranslate"> GHz </span> per core).|
-|<span class="notranslate"> `procs` </span> | Quantity of <span class="notranslate">  CPU </span> /cores.|
+|<span class="notranslate"> `procs` </span> | Quantity of <span class="notranslate">  CPU </span> cores.|
 |<span class="notranslate"> `lve_usages` </span> | Contains accumulated LVE statistics for each 5-seconds interval in current minute. Cleared each minute.|
 |<span class="notranslate"> `lve_usage` </span> | Contains aggregated LVE Statistics for “previous” minute to store to database. Overwritten each minute.|
 
-Each plugin’s instance lifetime is from the moment it was loaded till the server stops working. But if <span class="notranslate"> _execute()_ </span> method working time exceeds timeout, the plugin will be terminated and restarted in the next iteration. All changes to the _lve_data_ dictionary will be lost.
+Each plugin’s instance lifetime is from the moment it was loaded till the server stops working. But if <span class="notranslate"> _execute()_ </span> method working time exceeds timeout, the plugin will be terminated and restarted in the next iteration. All changes to the <span class="notranslate"> _lve_data_ </span> dictionary will be lost.
 
 During servers graceful shutdown (restart, server shutdown, commands <span class="notranslate"> `service lvestats stop, service lvestats restart` </span> ), each plugin receives SIGTERM signal.
 This is useful to correctly unload the plugin (terminate all subsidiary processes, save data to files etc.). If a plugin doesn't need to “finalize” its execution before termination, then there's no need to implement this signal handler. Below you can see an example of such handler.
 
-
-
+::: tip Note
+If a plugin implements handler for SIGTERM, then this handler must end with <span class="notranslate"> `sys.exit(0)` </span> command. Otherwise plugin process will not be terminated correctly and will become orphaned.
+:::
 
 ### Plugin Configuration
 
@@ -1625,12 +1630,16 @@ This is useful to correctly unload the plugin (terminate all subsidiary processe
 
 On initialization stage the server invokes <span class="notranslate"> _set_config()_ </span> method of the plugin and locates there a dictionary which contains:
 
-all parameters from file /etc/sysconfig/lvestats2 (global).
-plugin's individual configuration file parameters (if one exists). Configuration files must be located in /etc/sysconfig/lvestats.config directory, have .cfg extension and be the same format as /etc/sysconfig/lvestats2. Files in this directory are matched with the plugins by name. For instance, if plugin's class is <span class="notranslate"> _Plugin1_class_ </span> , then server will try to find and download /etc/sysconfig/lvestats.config/Plugin1_class.cfg. Names are case sensitive. If any plugin doesn't have an individual configuration file, then it's not an error. In this case plugin will just receive parameters from /etc/sysconfig/lvestats2.
+* all parameters from file _/etc/sysconfig/lvestats2_ (global).
+* plugin's individual configuration file parameters (if one exists). Configuration files must be located in <span class="notranslate"> _/etc/sysconfig/lvestats.config_ </span> directory, have .cfg extension and be the same format as _/etc/sysconfig/lvestats2_ . Files in this directory are matched with the plugins by name. For instance, if plugin class is <span class="notranslate"> _Plugin1_class_ </span> , then server will try to find and download <span class="notranslate"> _/etc/sysconfig/lvestats.config/Plugin1_class.cfg_. </span> Names are case sensitive. If any plugin doesn't have an individual configuration file, then it's not an error. In this case plugin will just receive parameters from _/etc/sysconfig/lvestats2_ .
 
+::: tip Note
+An individual configuration file of every plugin is loaded after server configuration file. That is why if it contains any parameters with names similar to ones of server config, then plugin will use parameters from its individual config rather than server config parameters.
 
+If a plugin doesn't require any configuration to be done, then set_config method can be skipped.
 
-
+In addition, plugins can use their own configuration methods.
+:::
 
 
 
@@ -1640,10 +1649,10 @@ plugin's individual configuration file parameters (if one exists). Configuration
 
 According to server architecture, plugins can be of the following types:
 
- <span class="notranslate"> collectors </span>
- <span class="notranslate"> analyzers </span>
- <span class="notranslate"> persistors </span>
- <span class="notranslate"> notifiers </span>
+* <span class="notranslate"> collectors </span>
+* <span class="notranslate"> analyzers </span>
+* <span class="notranslate"> persistors </span>
+* <span class="notranslate"> notifiers </span>
 
 <span class="notranslate"> Collectors </span> are designed to collect information; <span class="notranslate"> analyzers </span> – to analyze it and form some other data on its basis; <span class="notranslate"> persistors </span> – to save information from the common dictionary into files, databases, etc.; <span class="notranslate"> notifiers </span> - to notify system users about any events.
 
@@ -1668,33 +1677,80 @@ Specification:
 As file size check, fixing the result and notification sending must be held with different periods, then it’s impossible to realize all the tasks by means of one plugin.
 The fact that one minute (60 seconds) is multiple to 5 seconds doesn’t matter in this case, because default period can be changed in server’s configuration file, but the condition of fixing the result once a minute is a part of the specification, which can not be violated. In addition, notification email period is known in advance, as it is specified by user in configuration file.
 
-That is why we realize 4 plugins: ** ** <span class="notranslate"> collector, analyzer, persistor </span> and <span class="notranslate"> **notifier** </span> .
+That is why we realize 4 plugins: <span class="notranslate"> **collector, analyzer, persistor** </span> and <span class="notranslate"> **notifier** </span> .
 
 
-#### Collector
+#### **Collector**
 
 
-<span class="notranslate"> **Collector's** </span> aim is to determine the size of a proper file.
-<span class="notranslate"> </span>
+<span class="notranslate"> Collector's </span> aim is to determine the size of a proper file.
+<div class="notranslate">
+
 ```
-# FSize_watcher_collector.py# Example plugin for monitoring file size.# Part 1. Collectorimport osfrom lvestats.core.plugin import LveStatsPlugin # Key nameCOLLECTOR_KEY = 'FSizeWatcher_fsize'COLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname'  class FSize_watcher_collector (LveStatsPlugin):# this plugin should be first in chainorder = 0# File to monitoringfile_to_monitoring = None def __init__(self):pass # Sets configuration to plugindef set_config(self, config):self.file_to_monitoring = config.get('file_to_monitoring', None)pass# Work methoddef execute(self, lve_data):try:# if monitoring file absent, do nothingif self.file_to_monitoring is None or not os.path.exists(self.file_to_monitoring):return # Get file sizestat_info = os.stat(self.file_to_monitoring)fsize = stat_info.st_size # Place file name and file size to server data dictionarylve_data[COLLECTOR_KEY_FILENAME] = self.file_to_monitoringlve_data[COLLECTOR_KEY] = fsizeexcept (OSError, IOError):# file absent or any other error - remove size from dictionarydel lve_data[COLLECTOR_KEY]
+# FSize_watcher_collector.py
+# Example plugin for monitoring file size.
+# Part 1. Collector
+
+import os
+from lvestats.core.plugin import LveStatsPlugin 
+
+# Key name
+COLLECTOR_KEY = 'FSizeWatcher_fsize'
+COLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname'  
+
+class FSize_watcher_collector (LveStatsPlugin):
+	# this plugin should be first in chain
+	order = 0
+	# File to monitoring
+	file_to_monitoring = None 
+	
+	def __init__(self):
+		pass 
+		
+	# Sets configuration to plugin
+	def set_config(self, config):
+		self.file_to_monitoring = config.get('file_to_monitoring', None)
+		pass
+	# Work method
+	def execute(self, lve_data):
+		try:
+			# if monitoring file absent, do nothing
+			if self.file_to_monitoring is None or not os.path.exists(self.file_to_monitoring):
+		return 
+		
+			# Get file size
+			stat_info = os.stat(self.file_to_monitoring)
+			fsize = stat_info.st_size 
+			
+			# Place file name and file size to server data dictionary
+			lve_data[COLLECTOR_KEY_FILENAME] = self.file_to_monitoring
+			lve_data[COLLECTOR_KEY] = fsize
+		except (OSError, IOError):
+			# file absent or any other error - remove size from dictionary
+			del lve_data[COLLECTOR_KEY]
 ```
+</div>
 
-Plugin algorithm is extremely simple – file size is read and written into data dictionary. Files name is read from _set_config_ method configuration. If the name is not specified, then <span class="notranslate"> None </span> is written into appropriate variable. All the errors are completely ignored (e.g. if specified file doesn't exist or there's no way to read any of it's information).
+Plugin algorithm is extremely simple – file size is read and written into data dictionary. Files name is read from <span class="notranslate"> _set_config_ </span> method configuration. If the name is not specified, then <span class="notranslate"> None </span> is written into appropriate variable. All the errors are completely ignored (e.g. if specified file doesn't exist or there's no way to read any of it's information).
 
-<span class="notranslate"> _order_   </span> attribute is specified as 0 to make this plugin go the first among three. Data collector must always be the first in plugins logical chain, because it provides all the necessary information for the analyzer which goes the next. Specific values of я <span class="notranslate"> _order_ </span> can be of any kind, but what is important is that when the server starts, all the plugins line up in proper sequence: <span class="notranslate"> collector – analyzer – persistor </span> .
+<span class="notranslate"> _order_ </span> attribute is specified as 0 to make this plugin go the first among three. Data collector must always be the first in plugins logical chain, because it provides all the necessary information for the analyzer which goes the next. Specific values of <span class="notranslate"> _order_ </span> can be of any kind, but what is important is that when the server starts, all the plugins line up in proper sequence: <span class="notranslate"> collector – analyzer – persistor </span> .
 
-In order to make plugin work, we have to create configuration file /etc/sysconfig/lvestats.config/FSize_watcher_collector.cfg with the following content:
-<span class="notranslate"> </span>
+In order to make plugin work, we have to create configuration file <span class="notranslate"> _/etc/sysconfig/lvestats.config/FSize_watcher_collector.cfg_ </span> with the following content:
+<div class="notranslate">
+
 ```
-# Config file for FSize_watcher_collector plugin# Please define monitoring file here#file_to_monitoring = /usr/local/cpanel/logs/error_logfile_to_monitoring = /usr/local/cpanel/logs/access_log
+# Config file for FSize_watcher_collector plugin
+# Please define monitoring file here
+# file_to_monitoring = /usr/local/cpanel/logs/error_log
+file_to_monitoring = /usr/local/cpanel/logs/access_log
 ```
+</div>
 
-Note that file’s name <span class="notranslate"> _FSize_watcher_collector_ </span> without .cfg extension matches plugin class name.
+Note that file name <span class="notranslate"> _FSize_watcher_collector_ </span> without .cfg extension matches plugin class name.
 
 <span class="notranslate"> _file_to_monitoring_ </span> option is read by plugin in <span class="notranslate"> _set_config_ </span> method and contains file’s full name for monitoring.
 
-Files for monitoring, suggested in the actual example - /usr/local/cpanel/logs/error_log and /usr/local/cpanel/logs/access_log - are real, these are cPanel control panel logs.
+Files for monitoring, suggested in the actual example - <span class="notranslate"> _/usr/local/cpanel/logs/error_log_ and _/usr/local/cpanel/logs/access_log_ </span> - are real, these are cPanel control panel logs.
 
 The first file is errors log; the second is appeal log, is refreshed during common work with panel (e.g. if user email address is changed).
 
@@ -1702,15 +1758,59 @@ Errors log tracking is more important, but appeal log monitoring allows to illus
 
 Note that plugin can monitor one file only.
 
-#### Analizer
+#### **Analyzer**
 
 
-<span class="notranslate"> **Analyzer** </span> decides if the file's size has changed and gives a command to persistor to refresh log.
+<span class="notranslate"> Analyzer </span> decides if the file's size has changed and gives a command to persistor to refresh log.
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# FSize_watcher_analyzer.py# Example plugin for monitoring file size.# Part 2. Analyzer from lvestats.core.plugin import LveStatsPlugin # Key name from collector pluginCOLLECTOR_KEY = 'FSizeWatcher_fsize' # Key name 1 for saver pluginSAVER_KEY = 'FSizeWatcher_fsize_to_store'# Key name 2 for saver pluginSAVER_DATA_PRESENCE = 'FSizeWatcher_fsize_present'  class FSize_watcher_analyzer (LveStatsPlugin):# this plugin should be second in chainorder = 1# Last file sizefile_last_size = 0# Plugin run period in secondsperiod = 60 def __init__(self):pass # work methoddef execute(self, lve_data):# Default setting for saverlve_data[SAVER_DATA_PRESENCE] = 0# Check presence dataif COLLECTOR_KEY not in lve_data:return # Get file size from server data dictionaryfsize = lve_data[COLLECTOR_KEY] # Check, if file size changed, store it for saver pluginif fsize == self.file_last_size:return # Put new size for saver pluginlve_data[SAVER_KEY] = fsizeself.file_last_size = fsizelve_data[SAVER_DATA_PRESENCE] = 1
+# FSize_watcher_analyzer.py
+# Example plugin for monitoring file size.
+# Part 2. Analyzer 
+
+from lvestats.core.plugin import LveStatsPlugin 
+
+# Key name from collector plugin
+COLLECTOR_KEY = 'FSizeWatcher_fsize' 
+
+# Key name 1 for saver plugin
+SAVER_KEY = 'FSizeWatcher_fsize_to_store'
+# Key name 2 for saver plugin
+SAVER_DATA_PRESENCE = 'FSizeWatcher_fsize_present'  
+
+class FSize_watcher_analyzer (LveStatsPlugin):
+	# this plugin should be second in chain
+	order = 1
+	# Last file size
+	file_last_size = 0
+	# Plugin run period in secondsperiod = 60 
+	
+	def __init__(self):
+		pass 
+		
+	# work method
+	def execute(self, lve_data):
+		# Default setting for saver
+		lve_data[SAVER_DATA_PRESENCE] = 0
+		# Check presence data
+		if COLLECTOR_KEY not in lve_data:
+		return 
+		
+		# Get file size from server data dictionary
+		fsize = lve_data[COLLECTOR_KEY] 
+		
+		# Check, if file size changed, store it for saver plugin
+		if fsize == self.file_last_size:
+			return 
+			
+		# Put new size for saver plugin
+		lve_data[SAVER_KEY] = fsize
+		self.file_last_size = fsize
+		lve_data[SAVER_DATA_PRESENCE] = 1
 ```
+</div>
 
 This plugin is extremely simple as well. It starts after <span class="notranslate"> collector (order=1) </span> , searches for file size in the dictionary and compares it with the previous index. If it has changed, then it writes a sign of presence of a new size into the dictionary. If no changes seen, then sign resets. The previous file size is stored in the plugin itself in <span class="notranslate"> _file_last_size_ </span> variable. Note that they are stored during the whole server <span class="notranslate"> lve-stats </span> lifetime.
 
@@ -1723,22 +1823,98 @@ All the errors are completely ignored.
 Plugin starts every 60 seconds (1 minute), because we need data fixation to be performed one time in a minute.
 
 
-#### Persistor
+#### **Persistor**
 
 
-<span class="notranslate"> **Persistor** </span> saves information from the common dictionary into files, databases, etc.
-<span class="notranslate"> </span>
+<span class="notranslate"> Persistor </span> saves information from the common dictionary into files, databases, etc.
+<div class="notranslate">
 ```
-# FSize_watcher_saver.py# Example plugin for monitoring file size and last modification date-time.# Part 3. Data saver import signalimport sysimport timefrom lvestats.core.plugin import LveStatsPlugin # Key name 1 for saver pluginSAVER_KEY = 'FSizeWatcher_fsize_to_store'# Key name 2 for saver pluginSAVER_DATA_PRESENCE = 'FSizeWatcher_fsize_present'# Monitoring file nameCOLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname'  class FSize_watcher_saver (LveStatsPlugin):# this plugin should be third in chainorder = 2# Plugin run period in secondsperiod = 60# Log filenamelog_file_name = None# First run flagis_first_run = True def __init__(self):signal.signal(signal.SIGTERM, self.sigterm_handler) # Sets configuration to plugindef set_config(self, config):# Get log filenameself.log_file_name = config.get('log_filename', None) # work methoddef execute(self, lve_data):# do nothing, if log file not definedif not self.log_file_name:returntry:# Check presence dataif SAVER_DATA_PRESENCE not in lve_data or lve_data[SAVER_DATA_PRESENCE] == 0:# No datareturn# Get file size from server data dictionaryfsize = lve_data[SAVER_KEY]# Store data to logf = open(self.log_file_name, 'a')if self.is_first_run:f.write('%s - FSize_watcher started. Monitoring file: %s, saving data period=%d sec\n' % (time.asctime(time.localtime()), lve_data[COLLECTOR_KEY_FILENAME], self.period))self.is_first_run = Falsef.write('%s - FSize_watcher: file size is %d bytes\n' % (time.asctime(time.localtime()), fsize))f.close()except:# Ignore all errorspass # Terminate handlerdef sigterm_handler(self, signum, frame):if self.log_file_name:try:# Store data to log filef = open(self.log_file_name, 'a')f.write('%s - File watcher saver plugin: TERMINATE\n' % time.asctime(time.localtime()))f.close()passexcept:# Ignore all errorspass# Terminate processsys.exit(0)
-```
+# FSize_watcher_saver.py
+# Example plugin for monitoring file size and last modification date-time.
+# Part 3. Data saver 
 
-Configuration file _/etc/sysconfig/lvestats.config/FSize_watcher_saver.cfg_ :
-<span class="notranslate"> </span>
-```
-# Config file for FSize_watcher_saver.py plugin# Please define log filename herelog_filename = /var/log/FSize_watcher.log
-```
+import signal
+import sys
+import time
+from lvestats.core.plugin import LveStatsPlugin 
 
-This plugin starts after <span class="notranslate"> analyzer (order=2) </span> , checks new file size <span class="notranslate"> presence </span> flag, and if positive – writes it into log. If the flag is cleared (which means the size hasn't changed), then plugin simply ends.
+# Key name 1 for saver plugin
+SAVER_KEY = 'FSizeWatcher_fsize_to_store'
+# Key name 2 for saver plugin
+SAVER_DATA_PRESENCE = 'FSizeWatcher_fsize_present'
+# Monitoring file name
+COLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname'  
+
+class FSize_watcher_saver (LveStatsPlugin):
+	# this plugin should be third in chain
+	order = 2
+	# Plugin run period in seconds
+	period = 60
+	# Log filename
+	log_file_name = None
+	# First run flag
+	is_first_run = True 
+	
+	def __init__(self):
+		signal.signal(signal.SIGTERM, self.sigterm_handler) 
+		
+	# Sets configuration to plugin
+	def set_config(self, config):
+		# Get log filename
+		self.log_file_name = config.get('log_filename', None) 
+		
+	# work method
+	def execute(self, lve_data):
+		# do nothing, if log file not defined
+		if not self.log_file_name:
+			return
+		try:
+			# Check presence data
+			if SAVER_DATA_PRESENCE not in lve_data or lve_data[SAVER_DATA_PRESENCE] == 0:
+				# No data
+				return
+			# Get file size from server data dictionary
+			fsize = lve_data[SAVER_KEY]
+			
+			# Store data to log
+			f = open(self.log_file_name, 'a')
+			if self.is_first_run:
+				f.write('%s - FSize_watcher started. Monitoring file: %s, saving data period=%d sec\n' % (time.asctime(time.localtime()), lve_data[COLLECTOR_KEY_FILENAME], self.period))
+				self.is_first_run = False
+			f.write('%s - FSize_watcher: file size is %d bytes\n' % (time.asctime(time.localtime()), fsize))
+			f.close()
+		except:
+			# Ignore all errors
+			pass 
+			
+	# Terminate handler
+	def sigterm_handler(self, signum, frame):
+		if self.log_file_name:
+			try:
+				# Store data to log file
+				f = open(self.log_file_name, 'a')
+				f.write('%s - File watcher saver plugin: TERMINATE\n' % time.asctime(time.localtime()))
+				f.close()
+				pass
+			except:
+				# Ignore all errors
+				pass
+		# Terminate process
+		sys.exit(0)
+```
+</div>
+
+Configuration file <span class="notranslate"> _/etc/sysconfig/lvestats.config/FSize_watcher_saver.cfg_ </span> :
+<div class="notranslate">
+
+```
+# Config file for FSize_watcher_saver.py plugin
+# Please define log filename here
+log_filename = /var/log/FSize_watcher.log
+```
+</div>
+
+This plugin starts after <span class="notranslate"> analyzer (order=2) </span> , checks new file size <span class="notranslate"> `presence` </span> flag, and if positive – writes it into log. If the flag is cleared (which means the size hasn't changed), then plugin simply ends.
 
 Starts once in a minute (period=60).
 
@@ -1746,66 +1922,166 @@ Also this plugin shows the work of signal handler.
 
 Plugin constructor registers handler-function of a  proper signal: <span class="notranslate"> _signal.signal(signal.SIGTERM, self.sigterm_handler)_ .  </span> This means, that when the server finishes its work, then <span class="notranslate"> _sigterm_handler_ </span> method of plugin class will be invoked. In the actual example the function just writes a notification into log, tracing the fact of it's invocation.
 
-Pay attention on <span class="notranslate"> _sys.exit(0)_ </span> command in the end of the handler. Find the information on it in <span class="notranslate"> **Server Plugin Arrangement** </span> section.
+Pay attention on <span class="notranslate"> _sys.exit(0)_ </span> command in the end of the handler. Find the information on it in <span class="notranslate"> [Server Plugin Arrangement](/lve-stats_2/#server-plugin-arrangement) </span> section.
 
-In addition see into examples of file log /var/log/FSize_watcher.log formed by the plugins above:
-<span class="notranslate"> </span>
-_Tue Feb  3 13:06:24 2015 - FSize_watcher started. Monitoring file: /usr/local/cpanel/logs/access_log, saving data period=60 sec_
-_Tue Feb  3 13:06:24 2015 - FSize_watcher: file size is 122972890 bytes_
-_Tue Feb  3 13:07:25 2015 - FSize_watcher: file size is 122975507 bytes_
-_Tue Feb  3 13:08:25 2015 - FSize_watcher: file size is 122978124 bytes_
-_Tue Feb  3 13:09:25 2015 - FSize_watcher: file size is 122978997 bytes_
-_Tue Feb  3 13:10:25 2015 - FSize_watcher: file size is 122981033 bytes_
-_Tue Feb  3 13:11:25 2015 - FSize_watcher: file size is 122982052 bytes_
-_Tue Feb  3 13:13:25 2015 - FSize_watcher: file size is 122983798 bytes_
-_Tue Feb  3 13:20:15 2015 - File watcher saver plugin: TERMINATE_
+In addition see into examples of file log <span class="notranslate"> _/var/log/FSize_watcher.log_ </span> formed by the plugins above:
+<div class="notranslate">
+
+```
+Tue Feb  3 13:06:24 2015 - FSize_watcher started. Monitoring file: /usr/local/cpanel/logs/access_log, saving data period=60 sec
+Tue Feb  3 13:06:24 2015 - FSize_watcher: file size is 122972890 bytes
+Tue Feb  3 13:07:25 2015 - FSize_watcher: file size is 122975507 bytes
+Tue Feb  3 13:08:25 2015 - FSize_watcher: file size is 122978124 bytes
+Tue Feb  3 13:09:25 2015 - FSize_watcher: file size is 122978997 bytes
+Tue Feb  3 13:10:25 2015 - FSize_watcher: file size is 122981033 bytes
+Tue Feb  3 13:11:25 2015 - FSize_watcher: file size is 122982052 bytes
+Tue Feb  3 13:13:25 2015 - FSize_watcher: file size is 122983798 bytes
+Tue Feb  3 13:20:15 2015 - File watcher saver plugin: TERMINATE
+```
+</div>
 
 and
-<span class="notranslate"> </span>
-_Thu Feb  5 13:07:27 2015 - FSize_watcher started. Monitoring file: /usr/local/cpanel/logs/error_log, saving data period=60 sec_
-_Thu Feb  5 13:07:27 2015 - FSize_watcher: file size is 14771849 bytes_
-_Thu Feb  5 14:03:32 2015 - FSize_watcher: file size is 14771995 bytes_
-_Thu Feb  5 15:01:36 2015 - FSize_watcher: file size is 14772434 bytes_
-_Thu Feb  5 17:15:47 2015 - FSize_watcher: file size is 14772873 bytes_
-_Thu Feb  5 18:47:54 2015 - FSize_watcher: file size is 14775213 bytes_
-_Thu Feb  5 19:11:56 2015 - FSize_watcher: file size is 14775652 bytes_
-_Thu Feb  5 21:09:05 2015 - FSize_watcher: file size is 14776091 bytes_
-_Thu Feb  5 23:06:14 2015 - FSize_watcher: file size is 14776530 bytes_
-_Fri Feb  6 00:47:23 2015 - FSize_watcher: file size is 14778870 bytes_
-_Fri Feb  6 01:02:24 2015 - FSize_watcher: file size is 14779309 bytes_
-_Fri Feb  6 02:00:28 2015 - FSize_watcher: file size is 14779434 bytes_
-_Fri Feb  6 03:16:34 2015 - FSize_watcher: file size is 14779873 bytes_
-_Fri Feb  6 05:04:42 2015 - FSize_watcher: file size is 14779998 bytes_
-_Fri Feb  6 05:12:43 2015 - FSize_watcher: file size is 14780437 bytes_
-_Fri Feb  6 05:56:50 2015 - FSize_watcher: file size is 14780551 bytes_
-_Fri Feb  6 06:01:50 2015 - FSize_watcher: file size is 14780975 bytes_
-_Fri Feb  6 06:03:51 2015 - FSize_watcher: file size is 14782183 bytes_
-_Fri Feb  6 06:04:51 2015 - FSize_watcher: file size is 14782575 bytes_
-_Fri Feb  6 06:18:52 2015 - FSize_watcher: file size is 14782647 bytes_
-_Fri Feb  6 06:21:52 2015 - FSize_watcher: file size is 14782898 bytes_
-_Fri Feb  6 06:48:54 2015 - FSize_watcher: file size is 14785238 bytes_
-_Fri Feb  6 07:09:56 2015 - FSize_watcher: file size is 14785677 bytes_
-_Tue Feb  6 08:03:15 2015 - File watcher saver plugin: TERMINATE_
+<div class="notranslate">
+
+```
+Thu Feb  5 13:07:27 2015 - FSize_watcher started. Monitoring file: /usr/local/cpanel/logs/error_log, saving data period=60 sec
+Thu Feb  5 13:07:27 2015 - FSize_watcher: file size is 14771849 bytes
+Thu Feb  5 14:03:32 2015 - FSize_watcher: file size is 14771995 bytes
+Thu Feb  5 15:01:36 2015 - FSize_watcher: file size is 14772434 bytes
+Thu Feb  5 17:15:47 2015 - FSize_watcher: file size is 14772873 bytes
+Thu Feb  5 18:47:54 2015 - FSize_watcher: file size is 14775213 bytes
+Thu Feb  5 19:11:56 2015 - FSize_watcher: file size is 14775652 bytes
+Thu Feb  5 21:09:05 2015 - FSize_watcher: file size is 14776091 bytes
+Thu Feb  5 23:06:14 2015 - FSize_watcher: file size is 14776530 bytes
+Fri Feb  6 00:47:23 2015 - FSize_watcher: file size is 14778870 bytes
+Fri Feb  6 01:02:24 2015 - FSize_watcher: file size is 14779309 bytes
+Fri Feb  6 02:00:28 2015 - FSize_watcher: file size is 14779434 bytes
+Fri Feb  6 03:16:34 2015 - FSize_watcher: file size is 14779873 bytes
+Fri Feb  6 05:04:42 2015 - FSize_watcher: file size is 14779998 bytes
+Fri Feb  6 05:12:43 2015 - FSize_watcher: file size is 14780437 bytes
+Fri Feb  6 05:56:50 2015 - FSize_watcher: file size is 14780551 bytes
+Fri Feb  6 06:01:50 2015 - FSize_watcher: file size is 14780975 bytes
+Fri Feb  6 06:03:51 2015 - FSize_watcher: file size is 14782183 bytes
+Fri Feb  6 06:04:51 2015 - FSize_watcher: file size is 14782575 bytes
+Fri Feb  6 06:18:52 2015 - FSize_watcher: file size is 14782647 bytes
+Fri Feb  6 06:21:52 2015 - FSize_watcher: file size is 14782898 bytes
+Fri Feb  6 06:48:54 2015 - FSize_watcher: file size is 14785238 bytes
+Fri Feb  6 07:09:56 2015 - FSize_watcher: file size is 14785677 bytes
+Tue Feb  6 08:03:15 2015 - File watcher saver plugin: TERMINATE
+```
+</div>
 
 You can see that log record is being held once a minute (what we actually need), new file size is written.
 
 Also we can notice that handler <span class="notranslate"> SIG_TERM </span> was executed, signaling that plugin received the notification about server shut-down.
 
 
-#### Notifier
+#### **Notifier**
 
 
-<span class="notranslate"> **Notifier** </span> informs system users about any events.
-<span class="notranslate"> </span>
-```
-# FSize_watcher_saver.py# Example plugin for monitoring file size and last modification date-time.# Part 4. Notifier import timeimport smtplib from lvestats.lib.commons import dateutilfrom lvestats.core.plugin import LveStatsPlugin  # Key nameCOLLECTOR_KEY_FSIZE = 'FSizeWatcher_fsize'COLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname' # email message patternEMAIL_MESSAGE_PATTERN = """Hello, administrator!Size of the file '%s' is %d bytes."""  class FSize_watcher_notifier (LveStatsPlugin):# Default periodDEFAULT_PERIOD_STR = '12h'# this plugin should be third in chainorder = 3# Timeouttimeout = 20# Notifier Log filenamelog_file_name = '/var/log/FSize_watcher_notifier.log'# Email from addressemail_from = None# Email to addressemail_to = None# Email subjectemail_subject = None# Sets configuration to plugindef set_config(self, config):# Email settingsself.email_from = config.get('notify_from_email', None)self.email_to = config.get('notify_to_email', None)self.email_subject = config.get('notify_from_subject', 'Message from FSize_watcher_notifier plugin')# Notify periods_period = config.get('notify_period', None)if s_period:self.period = dateutil.parse_period2(s_period)else:self.period = dateutil.parse_period2(FSize_watcher_notifier.DEFAULT_PERIOD_STR)f = open(self.log_file_name, 'a')f.write('%s - FSize_watcher_notifier plugin: configure\n' % time.asctime(time.localtime()))f.write('       - Period: %s\n' % self.period)f.write('       - From: %s\n' % self.email_from)f.write('       - To: %s\n' % self.email_to)f.write('       - Subject: \'%s\'\n' % self.email_subject)f.close() # work methoddef execute(self, lve_data):if COLLECTOR_KEY_FSIZE not in lve_data or COLLECTOR_KEY_FILENAME not in lve_data:returnif not self.email_from or not self.email_to:f = open(self.log_file_name, 'a')f.write('%s - FSize_watcher_notifier plugin error: email_from or email_to not set\n')f.close()returntry:from email.mime.text import MIMEText# Send emailmsg = MIMEText(EMAIL_MESSAGE_PATTERN % (lve_data[COLLECTOR_KEY_FILENAME], lve_data[COLLECTOR_KEY_FSIZE]))msg['Subject'] = self.email_subjectmsg['From'] = self.email_frommsg['To'] = self.email_to s = smtplib.SMTP('localhost')s.sendmail(self.email_from, [self.email_to], msg.as_string())s.quit() f = open(self.log_file_name, 'a')f.write('%s - FSize_watcher_notifier plugin: email message was successfully sent\n' % time.asctime(time.localtime()))f.close()except Exception as e:f = open(self.log_file_name, 'a')f.write('%s - FSize_watcher_notifier plugin error:\n%s\n' % (time.asctime(time.localtime()), str(e)))f.close()
-```
+<span class="notranslate"> Notifier </span> informs system users about any events.
+<div class="notranslate">
 
-Configuration file _/etc/sysconfig/lvestats.config/FSize_watcher_notifier.cfg_ :
-<span class="notranslate"> </span>
 ```
-# Config file for FSize_watcher_notifier.py plugin# Please define email options here NOTIFY_FROM_EMAIL=user@hostnameNOTIFY_FROM_SUBJECT=Message from FSize_watcher_notifierNOTIFY_TO_EMAIL=admin@hostnameNOTIFY_PERIOD=12h
+# FSize_watcher_saver.py
+# Example plugin for monitoring file size and last modification date-time.
+# Part 4. Notifier 
+
+import time
+import smtplib 
+
+from lvestats.lib.commons import dateutil
+from lvestats.core.plugin import LveStatsPlugin  
+
+
+# Key name
+COLLECTOR_KEY_FSIZE = 'FSizeWatcher_fsize'
+COLLECTOR_KEY_FILENAME = 'FSizeWatcher_fname' 
+
+# email message pattern
+EMAIL_MESSAGE_PATTERN = """Hello, administrator!
+Size of the file '%s' is %d bytes.
+"""  
+
+
+class FSize_watcher_notifier (LveStatsPlugin):
+	# Default period
+	DEFAULT_PERIOD_STR = '12h'
+	# this plugin should be third in chainorder = 3
+	# Timeout
+	timeout = 20
+	# Notifier Log filename
+	log_file_name = '/var/log/FSize_watcher_notifier.log'
+	# Email from address
+	email_from = None
+	# Email to address
+	email_to = None
+	# Email subject
+	email_subject = None
+	# Sets configuration to plugin
+	def set_config(self, config):
+		# Email settings
+		self.email_from = config.get('notify_from_email', None)
+		self.email_to = config.get('notify_to_email', None)
+		self.email_subject = config.get('notify_from_subject', 'Message from FSize_watcher_notifier plugin')
+		# Notify period
+		s_period = config.get('notify_period', None)
+		if s_period:
+			self.period = dateutil.parse_period2(s_period)
+		else:
+			self.period = dateutil.parse_period2(FSize_watcher_notifier.DEFAULT_PERIOD_STR)
+		f = open(self.log_file_name, 'a')
+		f.write('%s - FSize_watcher_notifier plugin: configure\n' % time.asctime(time.localtime()))
+		f.write('       - Period: %s\n' % self.period)
+		f.write('       - From: %s\n' % self.email_from)
+		f.write('       - To: %s\n' % self.email_to)
+		f.write('       - Subject: \'%s\'\n' % self.email_subject)
+		f.close() 
+		
+	# work method
+	def execute(self, lve_data):
+		if COLLECTOR_KEY_FSIZE not in lve_data or COLLECTOR_KEY_FILENAME not in lve_data:
+			return
+		if not self.email_from or not self.email_to:
+			f = open(self.log_file_name, 'a')
+			f.write('%s - FSize_watcher_notifier plugin error: email_from or email_to not set\n')
+			f.close()
+			return
+		try:
+			from email.mime.text import MIMEText
+			# Send email
+			msg = MIMEText(EMAIL_MESSAGE_PATTERN % (lve_data[COLLECTOR_KEY_FILENAME], lve_data[COLLECTOR_KEY_FSIZE]))
+		msg['Subject'] = self.email_subject
+		msg['From'] = self.email_from
+		msg['To'] = self.email_to 
+		
+		s = smtplib.SMTP('localhost')
+		s.sendmail(self.email_from, [self.email_to], msg.as_string())
+			s.quit() 
+			
+		f = open(self.log_file_name, 'a')
+			f.write('%s - FSize_watcher_notifier plugin: email message was successfully sent\n' % time.asctime(time.localtime()))
+			f.close()
+			except Exception as e:
+			f = open(self.log_file_name, 'a')
+			f.write('%s - FSize_watcher_notifier plugin error:\n%s\n' % (time.asctime(time.localtime()), str(e)))
+			f.close()
 ```
+</div>
+
+Configuration file <span class="notranslate"> _/etc/sysconfig/lvestats.config/FSize_watcher_notifier.cfg_ : </span>
+<div class="notranslate">
+
+```
+# Config file for FSize_watcher_notifier.py plugin
+# Please define email options here 
+
+NOTIFY_FROM_EMAIL=user@hostname
+NOTIFY_FROM_SUBJECT=Message from FSize_watcher_notifier
+NOTIFY_TO_EMAIL=admin@hostname
+NOTIFY_PERIOD=12h
+```
+</div>
 
 Plugin’s index number equals 3 ( <span class="notranslate"> order=3 </span> ), that is why <span class="notranslate"> notifier </span> starts after the rest. But since it uses only data formed by <span class="notranslate"> collector </span> , then its order may equal any number bigger that <span class="notranslate"> collectors </span> order (>0).
 
@@ -1816,33 +2092,36 @@ Plugin’s <span class="notranslate"> _execute_ </span> method checks the availa
 If any data is missing,  the message is not sent.
 
 Log example:
-<span class="notranslate"> </span>
-_Thu Feb  5 11:51:34 2015 - FSize_watcher_notifier plugin: configure_
-_       - Period: 60.0_
-_       - From: user@hostname_
-_       - To: admin@hostname_
-_       - Subject: 'Message from FSize_watcher_notifier'_
-_Thu Feb  5 11:51:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent_
-_Thu Feb  5 11:52:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent_
-_Thu Feb  5 11:53:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent_
-_Thu Feb  5 11:54:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent_
-_Thu Feb  5 11:57:00 2015 - FSize_watcher_notifier plugin: configure_
-_       - Period: 43200.0_
-_       - From: user@hostname_
-_       - To: admin@hostname_
-_       - Subject: 'Message from FSize_watcher_notifier'_
-_Thu Feb  5 11:57:00 2015 - FSize_watcher_notifier plugin: email message was successfully sent_
+<div class="notranslate">
 
+```
+Thu Feb  5 11:51:34 2015 - FSize_watcher_notifier plugin: configure
+       - Period: 60.0
+       - From: user@hostname
+       - To: admin@hostname
+       - Subject: 'Message from FSize_watcher_notifier'
+Thu Feb  5 11:51:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent
+Thu Feb  5 11:52:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent
+Thu Feb  5 11:53:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent
+Thu Feb  5 11:54:35 2015 - FSize_watcher_notifier plugin: email message was successfully sent
+Thu Feb  5 11:57:00 2015 - FSize_watcher_notifier plugin: configure
+       - Period: 43200.0
+       - From: user@hostname
+       - To: admin@hostname
+       - Subject: 'Message from FSize_watcher_notifier'
+Thu Feb  5 11:57:00 2015 - FSize_watcher_notifier plugin: email message was successfully sent
+```
+</div>
 
 ## File info and format for /var/lve/info file
 
 
 This file is used by control panels to display to user their 'current' usage. The file is updated every 5 seconds by lve-stats.
 
-When writing to this file we make sure that: average <span class="notranslate"> CPU/IOPS/MEM </span> is never more then <span class="notranslate"> LIMIT </span> for that resource.
+When writing to this file we make sure that: average <span class="notranslate"> CPU/IOPS/MEM </span> is never greater then <span class="notranslate"> LIMIT </span> for that resource.
 
 Example:
-<span class="notranslate"> </span>
+
 0,0,20,0,2500,0,262144,0,0,262144,0,0,100,0,0,0,0,1024,1024,0,0,0,0
 600,1,20,2492,2500,70,262144,0,0,262144,33,0,100,1,0,0,0,1024,1024,0,5,0,0
 200,0,20,0,2500,0,262144,0,0,262144,0,0,100,0,0,0,0,1024,1024,0,0,0,0
@@ -1851,7 +2130,9 @@ Example:
 First line of the file is ' <span class="notranslate"> default limits </span> '.
 
 Fields:
+<div class="notranslate">
 
+```
 # 0 - id
 # 1 - mep (average entry processes)
 # 2 - lep  (limit ...)
@@ -1874,11 +2155,13 @@ LVE_VERSION >=6
 LVE_VERSION >=8
 #18 - liops  (limit IOPS)
 #19 - iops (average IOPS)
+```
+</div>
 
 ## Troubleshooting
 
 
 <span class="notranslate"> lvestats </span> service and utilities write fatal errors to system log.
 
-There is _ /var/log/lve-stats.log_ file with additional information (warnings, tracebacks for errors)
+There is <span class="notranslate"> _/var/log/lve-stats.log_ </span> file with additional information (warnings, tracebacks for errors)
 
