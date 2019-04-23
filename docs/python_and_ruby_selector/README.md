@@ -1,5 +1,4 @@
-# Python
-
+# Python and Ruby Selector
 
 We have the ability to deploy <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby </span> applications via application server. <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby </span> .
 
@@ -168,6 +167,7 @@ To change application folder name:
 /usr/bin/selectorctl --interpreter=<python|ruby> [--user=USER] [--print-summary] [--json] --relocate-webapp <FOLDER_NAME> <NEW_FOLDER_NAME>
 ```
 </div>
+
 To change application <span class="notranslate"> URI </span> :
 <div class="notranslate">
 
@@ -175,6 +175,7 @@ To change application <span class="notranslate"> URI </span> :
 /usr/bin/selectorctl --interpreter=<python|ruby> [--user=USER] [--print-summary] [--json] --transit-webapp <FOLDER_NAME> <NEW_URI>
 ```
 </div>
+
 To change application interpreter version:
 <div class="notranslate">
 
@@ -242,12 +243,23 @@ selectorctl --interpreter=ruby --user=$USER -v 2.0
 ## Hide Python and Ruby Selector Icons
 
 
-It is possible to hide or show <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> icons by marking or unmarking proper checkboxes in <span class="notranslate"> LVE Manager  _Options_ </span> tab:
+It is possible to hide or show <span class="notranslate">Python</span> and <span class="notranslate">Ruby Selector</span> icons by marking or unmarking proper checkboxes in <span class="notranslate"> LVE Manager _Options_</span> tab.
 
-![](/images/hide-python-ruby-selectors.jpg)
+![](/images/CL-hide-python-ruby.png)
 
-::: tip Note
-You also can hide/show <span class="notranslate"> CloudLinux Plugins in cPanel using Feature Manager. </span>
+
+The same result can be accomplished in CLI by running:
+
+<div class="notranslate">
+
+```
+cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
+```
+</div>
+ 
+:::tip Note
+If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Python/Ruby Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
+For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
 :::
 
 ## Deploying Trac using Python Selector
