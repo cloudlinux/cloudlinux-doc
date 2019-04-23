@@ -276,7 +276,7 @@ If **fs.proc_super_gid** was configured by an admin to some existing group, the 
 
 In all cases, for the negative checker result, the exit code will be > 0 (at the moment it will be equal to the number of failed checkers).
 
-All the checkers support additional |<span class="notranslate">`--json`</span> option with the unified output in an appropriate format.
+All the checkers support additional <span class="notranslate">`--json`</span> option with the unified output in an appropriate format.
 
 For example:
  
@@ -322,13 +322,16 @@ Currently implemented checkers:
 Checks control panel and its configuration (for DirectAdmin only).
 
 Checking control panel availability, thereby detecting it with our code. Displaying control panel name and version. Also, for DirectAdmin, checking if CloudLinux support is enabled in its config.
- 
+
+Fails if <span class="notranslate">`/usr/local/directadmin/custombuild/options.conf`</span> does not contain <span class="notranslate">`cloudlinux=yes`</span> line (for DirectAdmin control panel).
 
 2. <span class="notranslate">`--symlinksifowner`</span>
 
 Checks fs.enforce_symlinksifowner is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
 Checking specified kernel setup described in [this docs section](/kernel_settings/#symlink-owner-match-protection) for deprecated value and displaying its current value.
+
+Fails if <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span> contains value `2` (it is deprecated and can cause issues for the system operation).
  
 
 3. <span class="notranslate">`--check-suexec`</span>
@@ -337,6 +340,8 @@ Checks suexec has <span class="notranslate">cagefs</span> jail.
 
 In case if <span class="notranslate">CageFS</span> is installed and SuEXEC is on, checking if <span class="notranslate">CageFS</span> is enabled for SuEXEC.
  
+Fails if CageFS is not enabled for suexec binary.
+
 
 4. <span class="notranslate">`--check-suphp`</span>
 
@@ -344,6 +349,7 @@ Checks suphp has <span class="notranslate">cagefs</span> jail.
 
 In case if <span class="notranslate">CageFS</span> is installed and SuPHP is on, checking if <span class="notranslate">CageFS</span> is enabled for SuPHP.
  
+Fails if CageFS is not enabled for suphp binary.
 
 5. <span class="notranslate">`--check-usepam`</span>
 
@@ -351,32 +357,42 @@ Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
 
 Checking if <span class="notranslate">`/etc/ssh/sshd_config`</span> config file contains <span class="notranslate">`UsePAM yes`</span> line, which is required for pam_lve correct work with sshd.
  
+Fails if <span class="notranslate">`/etc/ssh/sshd_config`</span> contains <span class="notranslate">`UsePAM no`</span> line. 
 
 6. <span class="notranslate">`--check-symlinkowngid`</span>
 
 Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
-First checking if user <span class="notranslate">`apache`</span> is available in the system (on some panels users `httpd` or <span class="notranslate">`nobody`</span> with special GID are present instead of <span class="notranslate">`apache`</span>, they are detected correctly as well). Then, if such user exists, checking that his GID equals to the one specified in sysctl or that this user belongs to this supplemental group. If these conditions are met, then the protection effect described in [this docs section](/kernel_settings/#symlink-owner-match-protection) is applied to this user, and the appropriate message will be displayed.
+First checking if user <span class="notranslate">`Apache`</span> is available in the system (on some panels users `httpd` or <span class="notranslate">`nobody`</span> with special GID are present instead of <span class="notranslate">`Apache`</span>, they are detected correctly as well). Then, if such user exists, checking that his GID equals to the one specified in sysctl or that this user belongs to this supplemental group. If these conditions are met, then the protection effect described in [this docs section](/kernel_settings/#symlink-owner-match-protection) is applied to this user, and the appropriate message will be displayed.
  
+Fails if Apache user is not in the group specified in <span class="notranslate">`/proc/sys/fs/symlinkown_gid`</span>.
 
 7. <span class="notranslate">`--check-cpanel-packages`</span>
 
 Checks existence of all user's packages (cPanel only)
 
 Reading <span class="notranslate">`PLAN=`</span> for all users from <span class="notranslate">`/var/cpanel/users`</span> and checking if all of them are present in <span class="notranslate">`/var/cpanel/packages`</span> and if not, then displaying them in pairs like <span class="notranslate">`user: plan`. `default`</span> and <span class="notranslate">`undefined`</span> packages are excluded from the check.
+
+Fails if users from <span class="notranslate">`/var/cpanel/users/`</span> directory have non-existing packages (packages do not exist in <span class="notranslate">`/var/cpanel/packages/`</span> directory, except for <span class="notranslate">`undefined`</span> and <span class="notranslate">`default`</span>). 
  
 
-8. <span class="notranslate">`--check-defaults-conf`</span>
+8. <span class="notranslate">`--check-defaults-cfg`</span>
 
-Checks <span class="notranslate">`/etc/cl.selector/default.conf`</span>.
+Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>.
 
 Checking that if this config exists, the default PHP version is not disabled in it. Also performing minimal syntax checks for PHP modules settings and displaying the incorrect.
  
+Fails if there are some problems in <span class="notranslate">`/etc/cl.selector/default.cfg`</span> found.
+
+Possible reasons for failure:
+   * Default version is undefined, which means <span class="notranslate">`/etc/cl.selector/default.cfg`</span> file does not contain section [versions] with the defined default version. 
+   * Default PHP version is disabled.
 
 9. <span class="notranslate">`--check-cagefs`</span>
 
 All checks for CageFS are described separately in [this docs section](/cagefs/#sanity-check) and their start from cagefsctl utility is completely equivalent to the start from cldiag and is designed only for a better experience.
  
+This checker includes a set of CageFS sub-checkers, failure of one (or more) of them causes general checker failure.
 
 10. <span class="notranslate">`--check-php-conf`</span>
 
@@ -384,26 +400,37 @@ Checks <span class="notranslate">`/etc/cl.selector/php.conf`</span>.
 
 Checking the config syntax for acceptable blocks and directives.
  
+Fails if <span class="notranslate">`/etc/cl.selector/php.conf`</span> has incorrect format.
 
-11. <span class="notranslate">`--check-phpselector`</span>
+ * File contains an invalid parameter (valid parameters: <span class="notranslate">`Directive`</span>, <span class="notranslate">`Default`</span>, <span class="notranslate">`Type`</span>, <span class="notranslate">`Comment`</span>, <span class="notranslate">`Range`</span>, <span class="notranslate">`Remark`</span>).
+  
+ * File contains an invalid setting for the parameter <span class="notranslate">`Type`</span> (valid settings for the  <span class="notranslate">`Type`</span> parameter: <span class="notranslate">`value`, `list`, `bool`</span>)
+
+11.  <span class="notranslate">`--check-phpselector`</span>
 
 Checks compatibility for the <span class="notranslate">PHP Selector</span>
 
 Detecting which PHP handler has been configured on the server and checking its compatibility with the <span class="notranslate">CloudLinux PHP Selector</span> according to [this table](/limits/#compatibility-matrix) and displaying the corresponding message with the link to the documentation in case of a problem detected. No checks are performed for EasyApache3.
+
+Failure reasons:
+  * The installed <span class="notranslate">`mod_ruid`</span> package is incompatible with the <span class="notranslate">PHP Selector</span>
+  * <span class="notranslate">`mod_suexec`</span> is not installed
+  * <span class="notranslate">`mod_suphp`</span> is not installed
+  * Absence of the <span class="notranslate">`/usr/local/lsws/conf/httpd_config.xml`</span> file (only for LiteSpeed server)
 
 ::: tip Note
 The following checkers are available in <span class="notranslate">**lve-utils >= 3.1.2**</span>
 :::
  
 
-11. <span class="notranslate">`--check-lve-limits`</span>
+12. <span class="notranslate">`--check-lve-limits`</span>
 
 Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#lve-limits-validation).
  
 
-12. <span class="notranslate">`--check-rpmdb`</span>
+13. <span class="notranslate">`--check-rpmdb`</span>
 
 Checks the RPM database integrity.
 
@@ -467,3 +494,77 @@ Check suphp has cagefs jail:
 There are 0 errors found.
 ```
 </div>
+
+### Common problems troubleshooting
+
+Reasons and recommendations on how to fix common cldiag checkers failures.
+
+* <a name="diag_cp"><span class="notranslate">`--diag-cp`</span></a>
+
+  Checks control panel and its configuration (for DirectAdmin only).
+  
+  On servers with DirectAdmin control panel, CloudLinux support should be enabled in custombuild config. To do so, set <span class="notranslate">`yes`</span> for the <span class="notranslate">`cloudlinux`</span> parameter via <span class="notranslate">`/usr/local/directadmin/custombuild/build`</span> utility. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004584909-PHP-Selector-and-DirectAdmin) to see how to set values to parameters.
+* <a name="symlinksifowner"><span class="notranslate">`--symlinksifowner`</span></a>
+
+  Checks <span class="notranslate">`fs.enforce_symlinksifowner`</span> is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
+
+  To fix warning, change the value of <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span>. See [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) to know more about the <span class="notranslate">`fs.enforce_symlinksifowner`</span> parameter and configure it correctly.
+  
+  Fixing that warning makes the server more protected against symlink attacks and enables protection of PHP configs and other sensitive files.
+* <a name="check_symlinkowngid"><span class="notranslate">`--check-symlinkowngid`</span></a>
+  
+  Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
+
+  Symlink Owner Match Protection is not enabled for the <span class="notranslate">`Apache`</span> user. To enable it, see [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) and set value of apache GID to the <span class="notranslate">`fs.symlinkown_gid`</span> parameter.
+
+  Enabling Symlink Owner Match Protection provides protection for the <span class="notranslate">`Apache `</span>user and it may improve your server security.
+* <a name="check_suexec"><span class="notranslate">`--check-suexec`</span></a>
+
+  Checks <span class="notranslate">`suexec`</span> has CageFS jail.
+
+  Check that <span class="notranslate">`suexec`</span> package was installed from CloudLinux repository and if yes, try to reinstall it, probably <span class="notranslate">`suexec`</span> binary was broken.
+  
+  If you are running server without a control panel, you need to configure <span class="notranslate">`suexec`</span> by yourself. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup suexec on your server.
+  
+  Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suexec module. This may improve server security.
+* <a name="check_suphp"><span class="notranslate">`--check-suphp`</span></a>
+  
+  Checks <span class="notranslate">`suphp`</span> has CageFS jail.
+
+  Check that <span class="notranslate">`suphp`</span> package was installed from CloudLinux repo and if yes, try to reinstall it, probably <span class="notranslate">`suphp`</span> binary was broken. 
+
+  If you are running server without a control panel, you need to configure suphp by yourself. Please read [this article | Installation and setup of a server using suPHP](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup <span class="notranslate">`suphp`</span> on your server.
+
+  Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suphp module. This may improve server security.
+* <a name="check_usepam"><span class="notranslate">`--check-usepam`</span></a>
+  
+  Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
+
+  To fix the issue, replace <span class="notranslate">`UsePAM no`</span> with <span class="notranslate">`Use PAM yes`</span> in the <span class="notranslate">`/etc/ssh/sshd_config`</span> file.
+  
+  Fix the warning to provide correct work of <span class="notranslate">`pam_lve`</span> module with sshd and CageFS ssh sessions, for details, please [read this documentation about LVE PAM](/limits/#lve-pam-module).
+* <a name="check_defaults_cfg"><span class="notranslate">`--check-defaults-cfg`</span></a>
+
+  Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>
+
+  * In case of <span class="notranslate">`undefined default version`</span> error, go to <span class="notranslate">LVE Manager | Selector</span> Tab and set the default PHP version;
+  * In case of <span class="notranslate">`default version disabled`</span> error, enable that version to fix the warning;
+
+  <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> config file is used by the PHP Selector and stores its global options, so it is important to keep needed configurations and valid syntax for PHP modules settings to avoid <span class="notranslate">PHP Selector</span> misconfiguration.
+
+* <a name="check_cagefs"><span class="notranslate">`--check-cagefs`</span></a>
+
+  Depending on the error you get, resolution options may differ. See the full list of checks that <span class="notranslate">`--check-cagefs`</span> performs [here](/cagefs/#sanity-check). There you also can find possible failure reasons.
+
+* <a name="check_phpselector"><span class="notranslate">`--check-phpselector`</span></a>
+
+  Checks compatibility for the <span class="notranslate">PHP Selector</span>.
+  
+  Possible failures:
+
+  * In case of installed `mod_ruid2` package - remove it, <span class="notranslate">PHP Selector</span> is incompatible with that module.
+  * In case of non-installed `mod_suexec` package - install it.
+  * In case of non-installed `mod_suphp` package - install it.
+  * In case of unsupported handler - see [this table]() to set the compatible handler.
+
+
