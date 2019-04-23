@@ -96,71 +96,70 @@ For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsa
 
 ## Configuration References
 
+[mod_lsapi customization](/apache_mod_lsapi/#mod-lsapi-customization):
+* [lsapi_engine](/apache_mod_lsapi/#lsapi-engine)  
+* [lsapi_socket_path](/apache_mod_lsapi/#lsapi-socket-path)  
+* [lsapi_poll_timeout](/apache_mod_lsapi/#lsapi-poll-timeout)  
+* [lsapi_per_user](/apache_mod_lsapi/#lsapi-per-user)  
+* [lsapi_output_buffering](/apache_mod_lsapi/#lsapi-output-buffering)  
+* [lsapi_disable_reject_mode](/apache_mod_lsapi/#lsapi-disable-reject-mode)  
+* [lsapi_terminate_backends_on_exit](/apache_mod_lsapi/#lsapi-terminate-backends-on-exit)  
+* [lsapi_avoid_zombies](/apache_mod_lsapi/#lsapi-avoid-zombies)  
+* [lsapi_use_req_hostname](/apache_mod_lsapi/#lsapi-use-req-hostname)  
+* [lsapi_debug](/apache_mod_lsapi/#lsapi-debug)
 
-[mod_lsapi customization](/apache_mod_lsapi/#mod_lsapi_customization/):  
-* [lsapi_engine](/apache_mod_lsapi/#lsapi_engine/)  
-* [lsapi_socket_path](/apache_mod_lsapi/#lsapi_socket_path/)  
-* [lsapi_poll_timeout](/apache_mod_lsapi/#lsapi_poll_timeout/)  
-* [lsapi_per_user](/apache_mod_lsapi/#lsapi_per_user/)  
-* [lsapi_output_buffering](/apache_mod_lsapi/#lsapi_output_buffering/)  
-* [lsapi_disable_reject_mode](/apache_mod_lsapi/#lsapi_disable_reject_mode/)  
-* [lsapi_terminate_backends_on_exit](/apache_mod_lsapi/#lsapi_terminate_backends_on_exit/)  
-* [lsapi_avoid_zombies](/apache_mod_lsapi/#lsapi_avoid_zombies/)  
-* [lsapi_use_req_hostname](/apache_mod_lsapi/#lsapi_use_req_hostname/)  
-* [lsapi_debug](/apache_mod_lsapi/#lsapi_debug/)
-
-[Tuning LSPHP backend](/apache_mod_lsapi/#tuning_lsphp_backend/):
-* [lsapi_set_env](/apache_mod_lsapi/#lsapi_set_env/)
-* [lsapi_set_env_path](/apache_mod_lsapi/#lsapi_set_env_path/)
-* [lsapi_backend_children](/apache_mod_lsapi/#lsapi_backend_children/)
-* [lsapi_backend_connect_tries](/apache_mod_lsapi/#lsapi_backend_connect_tries/)
-* [lsapi_backend_connect_timeout](/apache_mod_lsapi/#lsapi_backend_connect_timeout/)
-* [lsapi_backend_max_process_time](/apache_mod_lsapi/#lsapi_backend_max_process_time/)
-* [lsapi_backend_pgrp_max_idle](/apache_mod_lsapi/#lsapi_backend_pgrp_max_idle/)
-* [lsapi_backend_use_own_log](/apache_mod_lsapi/#lsapi_backend_use_own_log/)
-* [lsapi_backend_common_own_log](/apache_mod_lsapi/#lsapi_backend_common_own_log/)
-* [lsapi_backend_coredump](/apache_mod_lsapi/#lsapi_backend_coredump/)
-* [lsapi_backend_accept_notify](/apache_mod_lsapi/#lsapi_backend_accept_notify/)
+[Tuning LSPHP backend](/apache_mod_lsapi/#tuning-lsphp-backend):
+* [lsapi_set_env](/apache_mod_lsapi/#lsapi-set-env)
+* [lsapi_set_env_path](/apache_mod_lsapi/#lsapi-set-env-path)
+* [lsapi_backend_children](/apache_mod_lsapi/#lsapi-backend-children)
+* [lsapi_backend_connect_tries](/apache_mod_lsapi/#lsapi-backend-connect-tries)
+* [lsapi_backend_connect_timeout](/apache_mod_lsapi/#lsapi-backend-connect-timeout)
+* [lsapi_backend_max_process_time](/apache_mod_lsapi/#lsapi-backend-max-process-time)
+* [lsapi_backend_pgrp_max_idle](/apache_mod_lsapi/#lsapi-backend-pgrp-max-idle)
+* [lsapi_backend_use_own_log](/apache_mod_lsapi/#lsapi-backend-use-own-log)
+* [lsapi_backend_common_own_log](/apache_mod_lsapi/#lsapi-backend-common-own-log)
+* [lsapi_backend_coredump](/apache_mod_lsapi/#lsapi-backend-coredump)
+* [lsapi_backend_accept_notify](/apache_mod_lsapi/#lsapi-backend-accept-notify)
  
-[Connection pool mode](/apache_mod_lsapi/#connection_pool_mode/) :
-* [lsapi_with_connection_pool](/apache_mod_lsapi/#lsapi_with_connection_pool/)
-* [lsapi_backend_max_idle](/apache_mod_lsapi/#lsapi_backend_max_idle/)
-* [lsapi_backend_max_reqs](/apache_mod_lsapi/#lsapi_backend_max_reqs/)
+[Connection pool mode](/apache_mod_lsapi/#connection-pool-mode):
+* [lsapi_with_connection_pool](/apache_mod_lsapi/#lsapi-with-connection-pool)
+* [lsapi_backend_max_idle](/apache_mod_lsapi/#lsapi-backend-max-idle)
+* [lsapi_backend_max_reqs](/apache_mod_lsapi/#lsapi-backend-max-reqs)
 
-[CRIU support (CloudLinux 7 only)](/apache_mod_lsapi/#criu_support_cloudlinux7_only/) :
-* [lsapi_criu](/apache_mod_lsapi/#lsapi_criu/)
-* [lsapi_criu_socket_path](/apache_mod_lsapi/#lsapi_criu_socket_path/)
-* [lsapi_criu_imgs_dir_path](/apache_mod_lsapi/#lsapi_criu_imgs_dir_path/)
-* [lsapi_backend_initial_start](/apache_mod_lsapi/#lsapi_backend_initial_start/)
-* [lsapi_criu_use_shm](/apache_mod_lsapi/#lsapi_criu_use_shm/)
-* [lsapi_backend_semtimedwait](/apache_mod_lsapi/#lsapi_backend_semtimedwait/)
-* [lsapi_reset_criu_on_apache_restart](/apache_mod_lsapi/#lsapi_reset_criu_on_apache_restart/)
+[CRIU support (CloudLinux 7 only)](/apache_mod_lsapi/#criu-support-cloudlinux7-only):
+* [lsapi_criu](/apache_mod_lsapi/#lsapi-criu)
+* [lsapi_criu_socket_path](/apache_mod_lsapi/#lsapi-criu-socket-path)
+* [lsapi_criu_imgs_dir_path](/apache_mod_lsapi/#lsapi-criu-imgs-dir-path)
+* [lsapi_backend_initial_start](/apache_mod_lsapi/#lsapi-backend-initial-start)
+* [lsapi_criu_use_shm](/apache_mod_lsapi/#lsapi-criu-use-shm)
+* [lsapi_backend_semtimedwait](/apache_mod_lsapi/#lsapi-backend-semtimedwait)
+* [lsapi_reset_criu_on_apache_restart](/apache_mod_lsapi/#lsapi-reset-criu-on-apache-restart)
 
-[PHP configuration management](/apache_mod_lsapi/#php_configuration_management/) :
-* [lsapi_process_phpini](/apache_mod_lsapi/#lsapi_process_phpini/)
-* [lsapi_phpini](/apache_mod_lsapi/#lsapi_phpini/)
-* [lsapi_phprc](/apache_mod_lsapi/#lsapi_phprc/)
-* [lsapi_tmpdir](/apache_mod_lsapi/#lsapi_tmpdir/)
-* [lsapi_enable_user_ini](/apache_mod_lsapi/#lsapi_enable_user_ini/)
-* [lsapi_user_ini_homedir](/apache_mod_lsapi/#lsapi_user_ini_homedir/)
-* [lsapi_keep_http200](/apache_mod_lsapi/#lsapi_keep_http200/)
-* [lsapi_mod_php_behaviour](/apache_mod_lsapi/#lsapi_mod_php_behaviour/)
-* [php_value, php_admin_value, php_flag, php_admin_flag](/apache_mod_lsapi/#php_valuephp_admin_valuephp_flagphp_admin_flag/)
+[PHP configuration management](/apache_mod_lsapi/#php-configuration-management):
+* [lsapi_process_phpini](/apache_mod_lsapi/#lsapi-process-phpini)
+* [lsapi_phpini](/apache_mod_lsapi/#lsapi-phpini)
+* [lsapi_phprc](/apache_mod_lsapi/#lsapi-phprc)
+* [lsapi_tmpdir](/apache_mod_lsapi/#lsapi-tmpdir)
+* [lsapi_enable_user_ini](/apache_mod_lsapi/#lsapi-enable-user-ini)
+* [lsapi_user_ini_homedir](/apache_mod_lsapi/#lsapi-user-ini-homedir)
+* [lsapi_keep_http200](/apache_mod_lsapi/#lsapi-keep-http200)
+* [lsapi_mod_php_behaviour](/apache_mod_lsapi/#lsapi-mod-php-behaviour)
+* [php_value, php_admin_value, php_flag, php_admin_flag](/apache_mod_lsapi/#php-valuephp-admin-valuephp-flagphp-admin-flag)
 
-[Security](/apache_mod_lsapi/#security/) :
-* [lsapi_use_suexec](/apache_mod_lsapi/#lsapi_use_suexec/)
-* [lsapi_user_group](/apache_mod_lsapi/#lsapi_user_group/)
-* [lsapi_uid_gid](/apache_mod_lsapi/#lsapi_uid_gid/)
-* [lsapi_use_default_uid](/apache_mod_lsapi/#lsapi_use_default_uid/)
-* [lsapi_target_perm](/apache_mod_lsapi/#lsapi_target_perm/)
-* [lsapi_paranoid](/apache_mod_lsapi/#lsapi_paranoid/)
-* [lsapi_check_document_root](/apache_mod_lsapi/#lsapi_check_document_root/)
-* [lsapi_disable_forced_pwd_var](/apache_mod_lsapi/#lsapi_disable_forced_pwd_var/)
-* [lsapi_max_resend_buffer](/apache_mod_lsapi/#lsapi_max_resend_buffer/)
+[Security](/apache_mod_lsapi/#security):
+* [lsapi_use_suexec](/apache_mod_lsapi/#lsapi-use-suexec)
+* [lsapi_user_group](/apache_mod_lsapi/#lsapi-user-group)
+* [lsapi_uid_gid](/apache_mod_lsapi/#lsapi-uid-gid)
+* [lsapi_use_default_uid](/apache_mod_lsapi/#lsapi-use-default-uid)
+* [lsapi_target_perm](/apache_mod_lsapi/#lsapi-target-perm)
+* [lsapi_paranoid](/apache_mod_lsapi/#lsapi-paranoid)
+* [lsapi_check_document_root](/apache_mod_lsapi/#lsapi-check-document-root)
+* [lsapi_disable_forced_pwd_var](/apache_mod_lsapi/#lsapi-disable-forced-pwd-var)
+* [lsapi_max_resend_buffer](/apache_mod_lsapi/#lsapi-max-resend-buffer)
 
-# mod_lsapi customization
+#### **mod_lsapi customization**
 
-**lsapi_engine**
+#### **lsapi_engine**
 
 **Syntax** : lsapi_engine on/off  
 **Default** : lsapi_engine off  
@@ -169,19 +168,20 @@ For installation guide mod_lsapi PRO please visit [Installation](/apache_mod_lsa
 **Description** :  
 Switching mod_lsapi handler on or off.
 
+---
 
-**lsapi_socket_path**
+#### **lsapi_socket_path**
 
-**Syntax** : lsapi_socket_path [path]  
+**Syntax** : lsapi_socket_path [path]
 **Default** : lsapi_socket_path `/var/run/mod_lsapi`  
 **Context** : httpd.conf  
 
 **Description:**  
 Path to backend lsphp sockets. By default `/var/run/mod_lsapi`
 
+---
 
-
-**lsapi_poll_timeout**
+#### **lsapi_poll_timeout**
 
 **Syntax** : lsapi_poll_timeout [number]  
 **Default** : lsapi_poll_timeout 300  
@@ -190,9 +190,9 @@ Path to backend lsphp sockets. By default `/var/run/mod_lsapi`
 **Description** :  
 Time to wait for response from the lsphp daemon, in seconds. 0 stands for infinity. For preventing long running processes which can use EP (limit number of entry processes). Default value is 300. Should be more or equal to 0. In the case of wrong format, the default value will be used.
 
+---
 
-
-**lsapi_per_user**
+#### **lsapi_per_user**
 
 **Syntax** : lsapi_per_user On/Off  
 **Default** : lsapi_per_user Off  
@@ -205,9 +205,9 @@ Default value is Off.
 It is possible, for example, to set it to On in global config file and to Off in config files of some particular Virtual Hosts.
 Then these Virtual Hosts will have a dedicated backend process, while others will have backend processes shared on account basis.
 
+---
 
-
-**lsapi_output_buffering**
+#### **lsapi_output_buffering**
 
 **Syntax** : lsapi_output_buffering On/Off  
 **Default** : lsapi_output_buffering On  
@@ -216,9 +216,9 @@ Then these Virtual Hosts will have a dedicated backend process, while others wil
 **Description** :  
 Enable or disable output buffering on Apache level. Default value is On.
 
+---
 
-
-**lsapi_disable_reject_mode**
+#### **lsapi_disable_reject_mode**
 
 **Syntax** : lsapi_disable_reject_mode On/Off  
 **Default** : lsapi_disable_reject_mode Off  
@@ -228,9 +228,9 @@ Enable or disable output buffering on Apache level. Default value is On.
 If a new HTTP request is coming to LSPHP daemon when all LSPHP workers are still busy, it can process this situation in two different ways. In REJECT mode LSPHP daemon will reject such request immediately. Otherwise, in legacy mode, LSPHP daemon will put this request into infinite queue, until one or more LSPHP daemon becomes free. When HTTP request is rejected in REJECT mode, mod_lsapi will write into Apache error_log the following message: Connect to backend rejected, and the client will receive 507 HTTP response.
 By default LSPHP daemon in CloudLinux uses REJECT mode. It can be switched off with this option.
 
+---
 
-
-**lsapi_terminate_backends_on_exit**
+#### **lsapi_terminate_backends_on_exit**
 
 **Syntax** : lsapi_terminate_backends_on_exit On/Off  
 **Default** : lsapi_terminate_backends_on_exit On  
@@ -239,9 +239,9 @@ By default LSPHP daemon in CloudLinux uses REJECT mode. It can be switched off w
 **Description** :  
 httpd.conf, On - stop lsphp services on apache restart, Off - leave live started lsphp services on apache restart (for php+opcache). The lsphp will not restart, even if Apache gets restarted.
 
+---
 
-
-**lsapi_avoid_zombies**
+#### **lsapi_avoid_zombies**
 
 **Syntax** : lsapi_avoid_zombies On/Off  
 **Default** : lsapi_avoid_zombies Off  
@@ -250,9 +250,9 @@ httpd.conf, On - stop lsphp services on apache restart, Off - leave live started
 **Description** :  
 Enable or disable a mechanism to avoid creation of zombie processes by lsphp. Default value is Off.
 
+---
 
-
-**lsapi_use_req_hostname**
+#### **lsapi_use_req_hostname**
 
 **Syntax** : lsapi_use_req_hostname On/Off  
 **Default** : lsapi_use_req_hostname Off  
@@ -261,9 +261,9 @@ Enable or disable a mechanism to avoid creation of zombie processes by lsphp. De
 **Description** :  
 By default, we are using hostname from the server_rec structure (off), it means that mod_lsapi takes hostname from the VirtualHost section of the configuration file. Using hostname from the request_rec structure (On) means that mod_lsapi takes hostname from the HOST section of the request. It could be useful for those who use dynamically generated configs for virtual hosts for example with mod_lua.
 
+---
 
-
-**lsapi_sentry**
+#### **lsapi_sentry**
 
 **Syntax** : lsapi_sentry On/Off  
 **Default** : lsapi_sentry On  
@@ -272,7 +272,9 @@ By default, we are using hostname from the server_rec structure (off), it means 
 **Description** :  
 When this option is enabled, errors that occur in the operation of the mod_lsapi will be sent to the remote sentry server. You can see the error messages that were sent to the sentry server in the directory /var/log/mod_lsapi. If you do not want to send error notifications from your server, you can disable this directive in lsapi.conf.
 
-**lsapi_debug**
+---
+
+#### **lsapi_debug**
 
 **Syntax** : lsapi_debug On/Off  
 **Default** : lsapi_debug Off  
@@ -281,9 +283,11 @@ When this option is enabled, errors that occur in the operation of the mod_lsapi
 **Description** :  
 Extended debug logging.
 
-# Tuning LSPHP backend
+---
 
-**lsapi_set_env**
+#### **Tuning LSPHP backend**
+
+#### **lsapi_set_env**
 
 **Syntax** : lsapi_set_env VAR_NAME [VAR_VALUE]  
 **Default** : -  
@@ -295,9 +299,9 @@ Example: lsapi_set_env TMP "/var/lsphp-tmp"
 Note: PATH env var default "/usr/local/bin:/usr/bin:/bin" cannot be changed because of security reasons.  
 To change it, use explicitly lsapi_set_env_path option.
 
+---
 
-
-**lsapi_set_env_path**
+#### **lsapi_set_env_path**
 
 **Syntax** : lsapi_set_env_path [path(s)]  
 **Default** : lsapi_set_env_path /usr/local/bin:/usr/bin:/bin  
@@ -306,9 +310,9 @@ To change it, use explicitly lsapi_set_env_path option.
 **Description** :  
 Change PATH variable in the environment of lsPHP processes. Default path /usr/local/bin:/usr/bin:/bin will be used if not set.
 
+---
 
-
-**lsapi_backend_children**
+#### **lsapi_backend_children**
 
 **Syntax** : lsapi_backend_children [number]  
 **Default** : lsapi_backend_children [EP]  
@@ -320,9 +324,9 @@ Maximum number of simultaneously running child backend processes.
 Optional, a default value is equal to EP.  
 min value is 2; max value is 10000. If var value is more, 10000 will be used.
 
+---
 
-
-**lsapi_backend_connect_tries**
+#### **lsapi_backend_connect_tries**
 
 **Syntax** : lsapi_backend_connect_tries [number]  
 **Default** : lsapi_backend_connect_tries 20  
@@ -331,9 +335,9 @@ min value is 2; max value is 10000. If var value is more, 10000 will be used.
 **Description** :  
 Number of retries to connects to lsPHP daemon.
 
+---
 
-
-**lsapi_backend_connect_timeout**
+#### **lsapi_backend_connect_timeout**
 
 **Syntax** : lsapi_backend_connect_timeout [number]  
 **Default** : lsapi_backend_connect_timeout 500000  
@@ -342,9 +346,9 @@ Number of retries to connects to lsPHP daemon.
 **Description** :  
 Number of usec to wait while lsPHP starts (if not started on request).
 
+---
 
-
-**lsapi_backend_max_process_time**
+#### **lsapi_backend_max_process_time**
 
 **Syntax** : lsapi_backend_max_process_time [number]  
 **Default** : lsapi_backend_max_process_time 300  
@@ -355,9 +359,9 @@ Sets env variable LSAPI_MAX_PROCESS_TIME
 Optional. Default value is 300.  
 Timeout to kill runaway processes.
 
+---
 
-
-**lsapi_backend_pgrp_max_idle**
+#### **lsapi_backend_pgrp_max_idle**
 
 **Syntax** : lsapi_backend_pgrp_max_idle [number]  
 **Default** : lsapi_backend_pgrp_max_idle 30  
@@ -369,9 +373,9 @@ Controls how long a control process will wait for a new request before it exits.
 Optional, default value is 30.  
 Should be more or equal to 0.  
 
+---
 
-
-**lsapi_backend_use_own_log**
+#### **lsapi_backend_use_own_log**
 
 **Syntax** : lsapi_backend_use_own_log On/Off  
 **Default** : lsapi_backend_use_own_log Off  
@@ -380,9 +384,9 @@ Should be more or equal to 0.
 **Description** :  
 Redirecting log output of backend processes from Apache error_log to dedicated log file or files, depending on value of lsapi_backend_common_own_log option. If Off, use Apache error log file for backend output, or separate file otherwise.
 
+---
 
-
-**lsapi_backend_common_own_log**
+#### **lsapi_backend_common_own_log**
 
 **Syntax** : lsapi_backend_common_own_log On/Off  
 **Default** : lsapi_backend_common_own_log Off  
@@ -391,9 +395,9 @@ Redirecting log output of backend processes from Apache error_log to dedicated l
 **Description** :  
 It will be used only when lsapi_backend_use_own_log set to On. On - backend processes of the all virtual hosts will share the common log file. Off - every virtual host will have its own backend log file.
 
+---
 
-
-**lsapi_backend_coredump**
+#### **lsapi_backend_coredump**
 
 **Syntax** : lsapi_backend_coredump On/Off  
 **Default** : lsapi_backend_coredump Off  
@@ -404,9 +408,9 @@ env variable LSAPI_ALLOW_CORE_DUMP (On or Off). Pass LSAPI_ALLOW_CORE_DUMP to ls
 Off by default.  
 By default LSAPI application will not leave a core dump file when crashed. If you want to have LSAPI PHP dump a core file, you should set this environment variable. If set, regardless the value has been set to, core files will be created under the directory that the PHP script in.
 
+---
 
-
-**lsapi_backend_accept_notify**
+#### **lsapi_backend_accept_notify**
 
 **Syntax** : lsapi_backend_accept_notify On/Off  
 **Default** : lsapi_backend_accept_notify On  
@@ -415,9 +419,11 @@ By default LSAPI application will not leave a core dump file when crashed. If yo
 **Description** :  
 Switch LSAPI_ACCEPT_NOTIFY mode for lsphp. This option can be used both in Global and VirtualHost scopes.This mode is incompatible with PHP 4.4.
 
-# Connection pool mode
+---
 
-**lsapi_with_connection_pool**
+#### **Connection pool mode**
+
+#### **lsapi_with_connection_pool**
 
 **Syntax** : lsapi_with_connection_pool On/Off  
 **Default** : lsapi_with_connection_pool Off  
@@ -426,9 +432,9 @@ Switch LSAPI_ACCEPT_NOTIFY mode for lsphp. This option can be used both in Globa
 **Description** :  
 On/Off - disable enable connect pool, default is Off.
 
+---
 
-
-**lsapi_backend_max_idle**
+#### **lsapi_backend_max_idle**
 
 **Syntax** : lsapi_backend_max_idle [number]  
 **Default** : lsapi_backend_max_idle 300  
@@ -437,9 +443,9 @@ On/Off - disable enable connect pool, default is Off.
 **Description** :  
 It is relevant only with lsapi_with_connection_pool option switched on. Controls how long a worker process will wait for a new request before it exits. 0 stands for infinite. Should be more or equal to 0. In the case of wrong format default value will be used. Optional, default value is 300.
 
+---
 
-
-**lsapi_backend_max_reqs**
+#### **lsapi_backend_max_reqs**
 
 **Syntax** : lsapi_backend_max_reqs [number]  
 **Default** : lsapi_backend_max_reqs 10000  
@@ -448,9 +454,11 @@ It is relevant only with lsapi_with_connection_pool option switched on. Controls
 **Description** :  
 It is relevant only with lsapi_with_connection_pool option switched on. Controls how many requests a worker process will process before it exits. Should be more than 0. In the case of wrong format default value will be used. Optional, default value is 10000.
 
-# CRIU support (CloudLinux 7 only)
+---
 
-**lsapi_criu**
+#### **CRIU support (CloudLinux 7 only)**
+
+#### **lsapi_criu**
 
 **Syntax** : lsapi_criu On/Off  
 **Default** : lsapi_criu Off  
@@ -459,9 +467,9 @@ It is relevant only with lsapi_with_connection_pool option switched on. Controls
 **Description** :  
 Enable/disable CRIU for lsphp freezing. Default: Off.
 
+---
 
-
-**lsapi_criu_socket_path**
+#### **lsapi_criu_socket_path**
 
 **Syntax** : lsapi_criu_socket_path [path]  
 **Default** : lsapi_criu_socket_path /var/run/criu/criu_service.socket  
@@ -470,9 +478,9 @@ Enable/disable CRIU for lsphp freezing. Default: Off.
 **Description** :  
 Set path to socket for communication with criu service. Default: /var/run/criu/criu_service.socket.
 
+---
 
-
-**lsapi_criu_imgs_dir_path**
+#### **lsapi_criu_imgs_dir_path**
 
 **Syntax** : lsapi_criu_imgs_dir_path [path]  
 **Default** : lsapi_criu_imgs_dir_path /var/run/mod_lsapi/  
@@ -481,9 +489,9 @@ Set path to socket for communication with criu service. Default: /var/run/criu/c
 **Description** :  
 Path to folder where images of freezed PHP will be stored. Should be path. Default: /var/run/mod_lsapi/
 
+---
 
-
-**lsapi_backend_initial_start**
+#### **lsapi_backend_initial_start**
 
 **Syntax** : lsapi_backend_initial_start [number]  
 **Default** : lsapi_backend_initial_start 0  
@@ -492,9 +500,9 @@ Path to folder where images of freezed PHP will be stored. Should be path. Defau
 **Description** :  
 Number of requests to virtualhost, when lsphp will be freezed.  Default: 0 - means disable freezing.
 
+---
 
-
-**lsapi_criu_use_shm**
+#### **lsapi_criu_use_shm**
 
 **Syntax** : lsapi_criu_use_shm Off/Signals  
 **Default** : lsapi_criu_use_shm Off  
@@ -503,9 +511,9 @@ Number of requests to virtualhost, when lsphp will be freezed.  Default: 0 - mea
 **Description** :  
 Method of requests counting. Off - use shared memory. Signals - use signals from child processes to parent. Default: Off
 
+---
 
-
-**lsapi_backend_semtimedwait**
+#### **lsapi_backend_semtimedwait**
 
 **Syntax** : lsapi_backend_semtimedwait On/Off  
 **Default** : lsapi_backend_semtimedwait On  
@@ -514,9 +522,9 @@ Method of requests counting. Off - use shared memory. Signals - use signals from
 **Description** :  
 Use semaphore for checking when lsphp process will be started. Speed of start lsphp increased with semaphore using. This method avoid cycles of waiting for lsphp start. Default: On.
 
+----
 
-
-**lsapi_reset_criu_on_apache_restart**
+#### **lsapi_reset_criu_on_apache_restart**
 
 **Syntax** : lsapi_reset_criu_on_apache_restart On/Off  
 **Default** : lsapi_reset_criu_on_apache_restart Off  
@@ -527,9 +535,11 @@ This option allows cleaning all CRIU images on Apache restart.
 Setting lsapi_reset_criu_on_apache_restart to On means that on each Apache restart the CRIU images which are stored in directory specified by lsapi_criu_imgs_dir_path directive will be recreated on new request to domain(only after restart).  
 If this option set to Off then CRIU images won’t be recreated on Apache restart.
 
-# PHP configuration management
+----
 
-**lsapi_process_phpini**
+#### **PHP configuration management**
+
+#### **lsapi_process_phpini**
 
 **Syntax** : lsapi_process_phpini On/Off  
 **Default** : lsapi_process_phpini Off  
@@ -538,9 +548,9 @@ If this option set to Off then CRIU images won’t be recreated on Apache restar
 **Description** :  
 Enable or disable phpini_* directive processing. Default value is Off.
 
+---
 
-
-**lsapi_phpini**
+#### **lsapi_phpini**
 
 **Syntax** : lsapi_phpini [path]  
 **Default** : lsapi_phpini -  
@@ -549,9 +559,9 @@ Enable or disable phpini_* directive processing. Default value is Off.
 **Description** :  
 When lsapi_process_phpini option switched to Off, these values will be silently ignored. lsapi_phpini values with absolute filename of php.ini file can be inserted into .htaccess files in order to set custom php.ini which will override/complement settings from system default php.ini.
 
+---
 
-
-**lsapi_phprc**
+#### **lsapi_phprc**
 
 **Syntax** : lsapi_phprc [No | Env | Auto | DocRoot]  
 **Default** : lsapi_phprc No  
@@ -569,9 +579,9 @@ lsapi_phprc DocRoot
 lsapi_phprc Env  
 lsapi_phprc /etc/
 
+---
 
-
-**lsapi_tmpdir**
+#### **lsapi_tmpdir**
 
 **Syntax** : lsapi_tmpdir [path]  
 **Default** : lsapi_tmpdir /tmp  
@@ -580,9 +590,9 @@ lsapi_phprc /etc/
 **Description** :  
 Set alternate request body temporary files directory.
 
+---
 
-
-**lsapi_enable_user_ini**
+#### **lsapi_enable_user_ini**
 
 **Syntax** : lsapi_enable_user_ini On/Off  
 **Default** : lsapi_enable_user_ini Off  
@@ -591,9 +601,9 @@ Set alternate request body temporary files directory.
 **Description** :  
 Enable .user.ini files for backend. Same as suphp, php-fpm and fcgid mechanism of .user.ini. Default value is Off.
 
+---
 
-
-**lsapi_user_ini_homedir**
+#### **lsapi_user_ini_homedir**
 
 **Syntax** : lsapi_user_ini_homedir On/Off  
 **Default** : lsapi_user_ini_homedir Off  
@@ -602,9 +612,9 @@ Enable .user.ini files for backend. Same as suphp, php-fpm and fcgid mechanism o
 **Description** :  
 If lsapi_enable_user_ini option is set to On, then enable/disable processing .user.ini file in home directory also. Default value is Off.
 
+---
 
-
-**lsapi_keep_http200**
+#### **lsapi_keep_http200**
 
 **Syntax** : lsapi_keep_http200 On/Off  
 **Default** : lsapi_keep_http200 Off  
@@ -613,9 +623,9 @@ If lsapi_enable_user_ini option is set to On, then enable/disable processing .us
 **Description** :  
 If set to On, always keep backend's response status as mod_php do. If set to Off, response status can be overridden by Apache as suphp do (in case of call via ErrorDocument directive).
 
+---
 
-
-**lsapi_mod_php_behaviour**
+#### **lsapi_mod_php_behaviour**
 
 **Syntax** : lsapi_mod_php_behaviour On/Off  
 **Default** : lsapi_mod_php_behaviour On  
@@ -624,9 +634,9 @@ If set to On, always keep backend's response status as mod_php do. If set to Off
 **Description** :  
 On/Off - disable php_* directives, default On.
 
+---
 
-
-**php_value, php_admin_value, php_flag, php_admin_flag**
+#### **php_value, php_admin_value, php_flag, php_admin_flag**
 
 **Syntax** : [php_value|php_admin_value|php_flag|php_admin_flag]  
 **Default** :  
@@ -635,9 +645,11 @@ On/Off - disable php_* directives, default On.
 **Description** :  
 mod_php emulation.
 
-# Security
+---
 
-**lsapi_use_suexec**
+#### **Security**
+
+#### **lsapi_use_suexec**
 
 **Syntax** : lsapi_use_suexec On/Off  
 **Default** : lsapi_use_suexec On  
@@ -646,9 +658,9 @@ mod_php emulation.
 **Description** :  
 Use or not suexec to a target user.
 
+---
 
-
-**lsapi_user_group**
+#### **lsapi_user_group**
 
 **Syntax** : lsapi_user_group [user_name] [group_name]  
 **Default** : -  
@@ -657,9 +669,9 @@ Use or not suexec to a target user.
 **Description** :  
 Set user & group for requests.  
 
+---
 
-
-**lsapi_uid_gid**
+#### **lsapi_uid_gid**
 
 **Syntax** : lsapi_uid_gid [uid] [gid]  
 **Default** : -  
@@ -668,9 +680,9 @@ Set user & group for requests.
 **Description** :  
 Set user & group for request.
 
+---
 
-
-**lsapi_use_default_uid**
+#### **lsapi_use_default_uid**
 
 **Syntax** : lsapi_use_default_uid On/Off  
 **Default** : lsapi_use_default_uid On  
@@ -679,9 +691,9 @@ Set user & group for request.
 **Description** :  
 Use default Apache UID/GID if no uid/gid set. Values: On/Off. If Off, and no UID/GID set, error 503 will be returned.
 
+---
 
-
-**lsapi_target_perm**
+#### **lsapi_target_perm**
 
 **Syntax** : lsapi_target_perm On/Off  
 **Default** : lsapi_target_perm Off  
@@ -690,9 +702,9 @@ Use default Apache UID/GID if no uid/gid set. Values: On/Off. If Off, and no UID
 **Description** :  
 Check target PHP script permissions. If set to On, lsapi will check that script is owned by the same user, as user under which it is being executed. Return 503 error if they don't match. Default: Off.
 
+---
 
-
-**lsapi_paranoid**
+#### **lsapi_paranoid**
 
 **Syntax** : lsapi_paranoid On/Off  
 **Default** : lsapi_paranoid Off  
@@ -701,9 +713,9 @@ Check target PHP script permissions. If set to On, lsapi will check that script 
 **Description** :  
 Check or not permissions of target php scripts. Optional, default value is Off.
 
+---
 
-
-**lsapi_check_document_root**
+#### **lsapi_check_document_root**
 
 **Syntax** : lsapi_check_document_root On/Off  
 **Default** : lsapi_check_document_root On  
@@ -712,9 +724,9 @@ Check or not permissions of target php scripts. Optional, default value is Off.
 **Description** :  
 Check or not owner of DOCUMENT_ROOT. Optional, default value is On.
 
+---
 
-
-**lsapi_disable_forced_pwd_var**
+#### **lsapi_disable_forced_pwd_var**
 
 **Syntax** : lsapi_disable_forced_pwd_var On/Off  
 **Default** : lsapi_disable_forced_pwd_var Off  
@@ -723,9 +735,9 @@ Check or not owner of DOCUMENT_ROOT. Optional, default value is On.
 **Description** :  
 To disable addition of PWD variable. Default value is Off. If set to On, the PWD variable will not be added into a backend environment.
 
+---
 
-
-**lsapi_max_resend_buffer**
+#### **lsapi_max_resend_buffer**
 
 **Syntax** : lsapi_max_resend_buffer [number]tmp  
 **Default** : lsapi_max_resend_buffer 200  
@@ -1124,7 +1136,7 @@ See next table for more details:
 |**error_log** | **sulsphp_log** | **Solution**|
 |Could not connect to lsphp backend: connect to lsphp failed: 111 Connection refused. Increase memory limit for LVE ID |uid: (xxx/xxxxxxxx) gid: (xxx/xxxxxxxxxx) cmd: /usr/local/bin/lsphp  | Increase pmem or vmem limits for the user uid.|
 |Error sending request: ReceiveLSHeader: nothing to read from backend socket |No need to check this log.  | lsphp was killed. It can be due to apache restart or lfd. If you see this  message too often - change <span class="notranslate">  lsapi_terminate_backends_on_exit </span> to <span class="notranslate"> Off </span> in lsapi.conf or add to <span class="notranslate"> /etc/csf/csf.pignore </span> the following lines: <span class="notranslate"> exe:/usr/local/bin/lsphp </span> pexe:/opt/alt/php.*/usr/bin/lsphp|
-|Error sending request (lsphp is killed?): ReceiveLSHeader: nothing to read from backend socket, referer: http://XXXXXXX  Child process with pid: XXXXX was killed by signal: 11, core dump: 0 |No need to check this log.  | lsphp has crashed. Next slide will explain what to do (core dump creating). Also, check configuration options for apc and suhosin in php.ini. Once you have a core file generated at DocumentRoot contact [https://helpdesk.cloudlinux.com/](https://helpdesk.cloudlinux.com/) so we can investigate the cause.|
+|Error sending request (lsphp is killed?): ReceiveLSHeader: nothing to read from backend socket, referer: http://XXXXXXX  Child process with pid: XXXXX was killed by signal: 11, core dump: 0 |No need to check this log.  | lsphp has crashed. Next slide will explain what to do (core dump creating). Also, check configuration options for apc and suhosin in php.ini. Once you have a core file generated at DocumentRoot contact [https://cloudlinux.zendesk.com/](https://cloudlinux.zendesk.com/hc/) so we can investigate the cause.|
 |Could not connect to lsphp backend: connect to lsphp failed: 111 Connection refused |file is writable by others: (///usr/local/bin/lsphp)  | Incorrect lsphp file permissions. For fixing: <span class="notranslate"> chmod 755 /usr/local/bin/lsphp </span> cagefsctl --force-update.|
 |Could not determine uid/gid for request |No need to check this log.  | UID/GID are not set in  virtualhost. Set <span class="notranslate"> lsapi_use_default_uid On </span> in lsapi.conf (it is <span class="notranslate"> On </span> by default since 0.1-98 version, this solution is for older versions).|
 |Own id for script file (/xxxx/xxx/xxxx) is xxx; should be xxxx |No need to check this log.  | File is not owned by the user PHP executed by. To overwrite (insecure), set <span class="notranslate"> lsapi_target_perm Off </span> in lsapi.conf. |
@@ -1135,7 +1147,8 @@ See next table for more details:
 |fork() failed, please increase process limit: Cannot allocate memory<br><br>Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: backend process reset connection: errno 104 (possibly memory limit for LVE ID XXXX too small) |uid:(xxx); gid:(xxx); uid limit warning: EP should be < than NPROC, current EP: XX, NPROC: XX<br><br>uid: (xxx/xxxxxxxx) gid: (xxx/xxxxxxxxxx) cmd: /usr/local/bin/lsphp  | Increase NPROC limits for the UID. It should be greater than EP and <span class="notranslate"> lsapi_backend_children. </span>|
 |Child process with pid: XXXXXX was killed by signal: 9, core dump: 0<br><br>Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: nothing to read from backend socket (LVE ID XXXX |uid: (xxx/xxxxxxxx) gid: (xxx/xxxxxxxxxx) cmd: /usr/local/bin/lsphp  | These errors occurs when the amount of PMEM limits is incommensurable with the number of EP. Increase PMEM limits or decrease EP number for the user UID.|
 |totBytesRead (X) != bodyLen (X), referer: XXXX<br><br>Backend error on sending request(POST /XXXX HTTP/1.1); uri(/XXXX) content-length(X) (lsphp is killed?): ReceiveAckHdr: nothing to read from backend socket (LVE ID XXXX)<br><br>lsphp(XXXX): Child process with pid: XXXX was killed by signal: 15, core dump: 0 |No need to check this log.  | Increase LimitRequestBody (Apache) or/and SecRequestBodyNoFilesLimit (mod_security) configuration limits|
-|Connect to backend failed: connect to lsphp failed: 13 |No need to check this log.  | Check that disabled|
+|Connect to backend failed: connect to lsphp failed: 13 |No need to check this log.  | Check that `mod_ruid2` is disabled|
+|Connect to backend rejected on sending request(POST /XXXXX HTTP/1.1); uri(/XXXXX) |No need to check this log.|Set <span class="notranslate">`lsapi_disable_reject_mode On`</span> in your <span class="notranslate">`lsapi.conf`</span> and reload Apache. This way LSPHP daemon will put requests that cannot be served by LSPHP daemon right away into infinite queue, until one or more LSPHP daemon becomes free. Visit [Configuration Reference](/apache_mod_lsapi/#configuration-references) for more info.|
 
 
 **Non-standard apache user**

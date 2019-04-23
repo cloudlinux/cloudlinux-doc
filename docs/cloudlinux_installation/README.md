@@ -476,8 +476,14 @@ After updating H-Sphere software on web server with CloudLinux you need to re-ap
 
 ## Virtuozzo and OpenVZ
 
+
+:::warning Note
+We’ll be ending support for Virtuozzo and OpenVZ on **August 1st, 2019**.
+:::
+
 :::tip Note
-Virtuozzo 6 and OpenVZ support is currently in Beta. Virtuozzo 7 and OpenVZ 7 are not supported at the moment.
+* Virtuozzo 6 and OpenVZ 6 are supported.
+* Virtuozzo 7 and OpenVZ 7 are not supported.
 :::
 
 :::tip Note
