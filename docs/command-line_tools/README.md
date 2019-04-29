@@ -499,26 +499,26 @@ There are 0 errors found.
 
 Reasons and recommendations on how to fix common cldiag checkers failures.
 
-* <a name="diag_cp"><span class="notranslate">`--diag-cp`</span></a>
+* <a name="diag-cp"></a><span class="notranslate">`--diag-cp`</span>
 
   Checks control panel and its configuration (for DirectAdmin only).
   
   On servers with DirectAdmin control panel, CloudLinux support should be enabled in custombuild config. To do so, set <span class="notranslate">`yes`</span> for the <span class="notranslate">`cloudlinux`</span> parameter via <span class="notranslate">`/usr/local/directadmin/custombuild/build`</span> utility. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004584909-PHP-Selector-and-DirectAdmin) to see how to set values to parameters.
-* <a name="symlinksifowner"><span class="notranslate">`--symlinksifowner`</span></a>
+* <a name="symlinksifowner"></a><span class="notranslate">`--symlinksifowner`</span>
 
   Checks <span class="notranslate">`fs.enforce_symlinksifowner`</span> is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
   To fix warning, change the value of <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span>. See [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) to know more about the <span class="notranslate">`fs.enforce_symlinksifowner`</span> parameter and configure it correctly.
   
   Fixing that warning makes the server more protected against symlink attacks and enables protection of PHP configs and other sensitive files.
-* <a name="check_symlinkowngid"><span class="notranslate">`--check-symlinkowngid`</span></a>
+* <a name="check-symlinkowngid"></a><span class="notranslate">`--check-symlinkowngid`</span>
   
   Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
   Symlink Owner Match Protection is not enabled for the <span class="notranslate">`Apache`</span> user. To enable it, see [Symlink Owner Match Protection](/kernel_settings/#symlink-owner-match-protection) and set value of apache GID to the <span class="notranslate">`fs.symlinkown_gid`</span> parameter.
 
   Enabling Symlink Owner Match Protection provides protection for the <span class="notranslate">`Apache `</span>user and it may improve your server security.
-* <a name="check_suexec"><span class="notranslate">`--check-suexec`</span></a>
+* <a name="check-suexec"></a><span class="notranslate">`--check-suexec`</span>
 
   Checks <span class="notranslate">`suexec`</span> has CageFS jail.
 
@@ -527,7 +527,7 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
   If you are running server without a control panel, you need to configure <span class="notranslate">`suexec`</span> by yourself. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup suexec on your server.
   
   Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suexec module. This may improve server security.
-* <a name="check_suphp"><span class="notranslate">`--check-suphp`</span></a>
+* <a name="check-suphp"></a><span class="notranslate">`--check-suphp`</span>
   
   Checks <span class="notranslate">`suphp`</span> has CageFS jail.
 
@@ -536,14 +536,15 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
   If you are running server without a control panel, you need to configure suphp by yourself. Please read [this article | Installation and setup of a server using suPHP](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup <span class="notranslate">`suphp`</span> on your server.
 
   Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suphp module. This may improve server security.
-* <a name="check_usepam"><span class="notranslate">`--check-usepam`</span></a>
+* <a name="check-usepam"><span class="notranslate">`--check-usepam`</span></a>
   
   Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
 
   To fix the issue, replace <span class="notranslate">`UsePAM no`</span> with <span class="notranslate">`Use PAM yes`</span> in the <span class="notranslate">`/etc/ssh/sshd_config`</span> file.
   
   Fix the warning to provide correct work of <span class="notranslate">`pam_lve`</span> module with sshd and CageFS ssh sessions, for details, please [read this documentation about LVE PAM](/limits/#lve-pam-module).
-* <a name="check_defaults_cfg"><span class="notranslate">`--check-defaults-cfg`</span></a>
+
+* <a name="check-defaults-cfg"></a><span class="notranslate">`--check-defaults-cfg`</span>
 
   Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>
 
@@ -552,11 +553,11 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
 
   <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> config file is used by the PHP Selector and stores its global options, so it is important to keep needed configurations and valid syntax for PHP modules settings to avoid <span class="notranslate">PHP Selector</span> misconfiguration.
 
-* <a name="check_cagefs"><span class="notranslate">`--check-cagefs`</span></a>
+* <a name="check-cagefs"></a><span class="notranslate">`--check-cagefs`</span>
 
   Depending on the error you get, resolution options may differ. See the full list of checks that <span class="notranslate">`--check-cagefs`</span> performs [here](/cagefs/#sanity-check). There you also can find possible failure reasons.
 
-* <a name="check_phpselector"><span class="notranslate">`--check-phpselector`</span></a>
+* <a name="check-phpselector"></a><span class="notranslate">`--check-phpselector`</span>
 
   Checks compatibility for the <span class="notranslate">PHP Selector</span>.
   
@@ -565,6 +566,6 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
   * In case of installed `mod_ruid2` package - remove it, <span class="notranslate">PHP Selector</span> is incompatible with that module.
   * In case of non-installed `mod_suexec` package - install it.
   * In case of non-installed `mod_suphp` package - install it.
-  * In case of unsupported handler - see [this table]() to set the compatible handler.
+  * In case of unsupported handler - see [this table](/limits/#compatibility-matrix) to set the compatible handler.
 
 

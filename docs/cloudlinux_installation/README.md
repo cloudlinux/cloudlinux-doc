@@ -590,7 +590,8 @@ $ /usr/sbin/rhnreg_ks --activationkey=<activation key> --force
 
 Where activation key is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
 
-If you have IP based license, use <span class="notranslate"> `clnreg_ks` </span> command:
+If you have IP based license, use <span class="notranslate">`clnreg_ks`</span> command:
+
 <div class="notranslate">
 
 ```
