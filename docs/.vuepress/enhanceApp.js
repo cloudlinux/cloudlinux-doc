@@ -4,8 +4,12 @@ export default ({
   router, // the router instance for the app
   siteData // site metadata
 }) => {
+  const redirectionMapping = siteData.themeConfig.redirectionMapping;
+
   router.beforeEach((to, from, next) => {
-    if(to.path === "/") {
+    if (redirectionMapping && redirectionMapping[to.redirectedFrom]) {
+      next(redirectionMapping[to.redirectedFrom]);
+    } else if (to.path === "/") {
       next(siteData.themeConfig.defaultURL);
     } else {
       next();
