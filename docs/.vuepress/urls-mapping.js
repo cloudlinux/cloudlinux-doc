@@ -476,7 +476,7 @@ module.exports = {
   "/index.html?log_files.html": "/mysql_governor/#log-files",
   "/change_mysql_version.html/": "/mysql_governor/#change-mysql-version",
   "/change_mysql_version.html": "/mysql_governor/#change-mysql-version",
-  "https://docs.cloudlinux.com/index.html?change_mysql_version.html":
+  "/index.html?change_mysql_version.html":
     "/mysql_governor/#change-mysql-version",
   "/mysql_governor_command_line_tools.html/":
     "/mysql_governor/#command-line-tools",
