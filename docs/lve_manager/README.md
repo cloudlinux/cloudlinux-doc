@@ -483,7 +483,9 @@ The snapshot configuration options are available in
 * <span class="notranslate">`snapshots_per_minute = 2`</span> by default, maximum number of snapshots per minute
 * <span class="notranslate">`max_snapshots_per_incident = 10`</span> by default, maximum number of snapshots for an incident
 
-To access <span class="notranslate">**Snapshots**</span> perform the following steps:
+To access <span class="notranslate">**Snapshots**</span> on Plesk you can use [lve-read-snapshot](/lve-stats_2/#lve-read-snapshot) utility.
+
+To access <span class="notranslate">**Snapshots**</span> on cPanel perform the following steps:
 
 1. Go to cPanel | <span class="notranslate">CPU and Concurrent Connection Usage</span> in <span class="notranslate"> **paper_latern**</span> theme:
 
