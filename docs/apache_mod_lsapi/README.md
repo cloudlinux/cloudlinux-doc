@@ -36,7 +36,11 @@ Currently, the mod_lsapi is not compatible with:
 * Installed mod_suexec for Apache and configured [SuExecUserGroup](https://httpd.apache.org/docs/2.4/mod/mod_suexec.html#page-header) directive for each virtual host ( **recommended - higher security level** );
 * Enabled [CageFS](/cagefs/) for end-users ( **recommended - higher security level** );
 * [PHP Selector](/php_selector/) with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
-* ea-php - alternative to alt-php provided by cPanel (for cPanel only);
+* ea-php - alternative to alt-php provided by cPanel (for cPanel only).
+
+:::tip Note
+Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
+:::
 
 **Configuring mod_lsapi PRO**
 

@@ -513,6 +513,10 @@ Network limits are supported only for processes inside LVE. By default it does n
 2. CloudLinux 7 and CloudLinux 6 kernels only. 3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
+:::tip Note
+Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
+:::
+
 ## Integration Components
 
 CloudLinux uses various ways to integrate with existing system. By default we can integrate with:
