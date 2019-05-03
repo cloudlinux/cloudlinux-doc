@@ -160,13 +160,13 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 ```
 </div>
 
-where MYSQL_VERSION is the target database server version that should be replaced with the value from the table above.
+where `MYSQL_VERSION` is the target database server version that should be replaced with the value from the table above.
 
 ::: danger IMPORTANT
 Make sure you have full database backup (including system tables) before you switch. This action will prevent data loss in case if something goes wrong.
 :::
 
-## Removing <span class="notranslate"> MySQL Governor </span>
+## Removing MySQL Governor
 
 
 To remove <span class="notranslate"> MySQL Governor </span> :
