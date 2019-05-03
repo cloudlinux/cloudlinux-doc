@@ -75,12 +75,11 @@ module.exports = {
             buttonText: "Refresh"
           }
         },
-        // algolia docsearch options for current locale
-        // algolia: {
-        //   apiKey: 'c81913402fd913c6851439a56d3ad963',
-        //   indexName: 'cloudlinux',
-        //   appId: 'HU6RMR9IB4'
-        // },
+        algolia: {
+          apiKey: "efaa28397ce47241021d716c439b80d1",
+          indexName: "cloudlinuxos",
+          appId: "0TCNL6CGX8"
+        },
 
         sidebar: [
           {
