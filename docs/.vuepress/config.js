@@ -23,12 +23,17 @@ module.exports = {
     // "/ru/": {
     //   lang: "ru",
     //   title: "Документация",
-    //   description: "Документация Kernelcare"
+    //   description: "Документация CloudLinux"
     // }
   },
   theme: "cloudlinux",
 
   themeConfig: {
+    repo: "cloudlinux/cloudlinux-doc",
+    editLinks: true,
+    docsBranch: "dev",
+    docsDir: "docs",
+
     defaultURL: "/cloudlinux_installation/",
     redirectionMapping: urls,
     sidebarDepth: 2,
