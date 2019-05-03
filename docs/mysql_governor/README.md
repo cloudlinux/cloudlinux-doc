@@ -148,7 +148,25 @@ Please note that restore of previous packages in case of failed installation wou
 Use <span class="notranslate"> --yes </span> flag on your own risk, because it confirms installation in any case - even in case if there are troubles during installation (for example, network problems causing incomplete download of packages), everything would be confirmed.
 :::
 
-## Removing <span class="notranslate"> MySQL Governor </span>
+## Upgrading database server
+
+In order to change MySQL version you should run the following commands:
+
+<div class="notranslate">
+
+```
+$ /usr/share/lve/dbgovernor/mysqlgovernor.py --mysql-version=MYSQL_VERSION
+$ /usr/share/lve/dbgovernor/mysqlgovernor.py --install
+```
+</div>
+
+where `MYSQL_VERSION` is the target database server version that should be replaced with the value from the table above.
+
+::: danger IMPORTANT
+Make sure you have full database backup (including system tables) before you switch. This action will prevent data loss in case if something goes wrong.
+:::
+
+## Removing MySQL Governor
 
 
 To remove <span class="notranslate"> MySQL Governor </span> :
