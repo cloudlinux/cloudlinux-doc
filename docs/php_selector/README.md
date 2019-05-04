@@ -72,7 +72,7 @@ To update PHP Selector, run the following command:
 <div class="notranslate">
 
 ```
-yum groupupdate
+yum groupupdate alt-php
 ```
 </div>
 
