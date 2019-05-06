@@ -28,7 +28,7 @@ Currently, the mod_lsapi is not compatible with:
 
 * Apache mod_ruid2 - should be disabled;
 * Apache mod_itk - should be disabled;
-* mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
+* PHP-FPM - should be disabled because PHP-FPM is also a PHP Handler just as mod_lsapi.
 
 **Optional requirements**
 
