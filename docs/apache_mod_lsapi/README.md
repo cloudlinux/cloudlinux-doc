@@ -28,6 +28,7 @@ Currently, the mod_lsapi is not compatible with:
 
 * Apache mod_ruid2 - should be disabled;
 * Apache mod_itk - should be disabled;
+* mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
 
 **Optional requirements**
 
@@ -37,10 +38,6 @@ Currently, the mod_lsapi is not compatible with:
 * Enabled [CageFS](/cagefs/) for end-users ( **recommended - higher security level** );
 * [PHP Selector](/php_selector/) with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
 * ea-php - alternative to alt-php provided by cPanel (for cPanel only).
-
-:::tip Note
-Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
-:::
 
 **Configuring mod_lsapi PRO**
 
