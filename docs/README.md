@@ -1,1 +1,1 @@
-<RedirectComponent />
+<Redirect />
