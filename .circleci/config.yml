@@ -1,4 +1,4 @@
-version: 2.0
+version: 2
 jobs:
   build:
     docker:
@@ -25,11 +25,10 @@ jobs:
             - ~/.cache/yarn
 
 workflows:
-  version: 2.0
+  version: 2
   build-deploy:
     jobs:
-      requires:
-        - build:
-            filters:
-              branches:
-                test: test
+      - build:
+          filters:
+            branches:
+              only: test
