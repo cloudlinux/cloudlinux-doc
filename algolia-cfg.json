@@ -11,6 +11,6 @@
     "lvl3": "h4",
     "lvl4": "h5",
     "lvl5": "h6",
-    "text": "p, li"
+    "text": "p, li, code"
   }
 }
