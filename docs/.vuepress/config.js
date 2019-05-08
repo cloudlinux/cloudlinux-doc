@@ -18,13 +18,12 @@ module.exports = {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
       description: "CloudLinux Documentation"
+    },
+    "/ru/": {
+      lang: "ru",
+      title: "Документация",
+      description: "Документация CloudLinux"
     }
-    // TODO: temporary!
-    // "/ru/": {
-    //   lang: "ru",
-    //   title: "Документация",
-    //   description: "Документация CloudLinux"
-    // }
   },
   theme: "cloudlinux",
 
@@ -53,8 +52,15 @@ module.exports = {
     locales: {
       "/": {
         bottomLinks: [
-          { text: "How to", url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I" },
-          { text: "Getting started", url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os" },
+          {
+            text: "How to",
+            url:
+              "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
+          },
+          {
+            text: "Getting started",
+            url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
+          },
           {
             text: "Contact support",
             url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
