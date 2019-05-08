@@ -7,12 +7,4 @@ export default ({
   siteData // site metadata
 }) => {
   Vue.component('Redirect', Redirect);
-
-  router.beforeEach((to, from, next) => {
-    if (to.fullPath === "/") {
-      next(siteData.themeConfig.defaultURL);
-    } else {
-      next();
-    }
-  });
 };
