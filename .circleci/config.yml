@@ -32,4 +32,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: dev
+              test: dev
