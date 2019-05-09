@@ -30,7 +30,7 @@ Sometimes <span class="notranslate"> disk quota </span> breaks, so do <span clas
 
 ![](/images/inodelimitsoptions_zoom70.png)
 
-
+The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
 
 End users can monitor their inodes usage through cPanel:
 

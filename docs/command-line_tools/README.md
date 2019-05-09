@@ -5,6 +5,7 @@
 * [lvetop](/command-line_tools/#lvetop)
 * [cldetect](/command-line_tools/#cldetect)
 * [cldiag](/command-line_tools/#cldiag)
+* [cloudlinux-config](/command-line_tools/#cloudlinux-config)
 * [lve-stats](/deprecated/#lve-stats-0-x)
   * [Storing statistics in MySQL](/deprecated/#storing-statistics-in-mysql)
   * [Storing statistics in PostgreSQL](/deprecated/#storing-statistics-in-postgresql)
@@ -568,4 +569,66 @@ Reasons and recommendations on how to fix common cldiag checkers failures.
   * In case of non-installed `mod_suphp` package - install it.
   * In case of unsupported handler - see [this table](/limits/#compatibility-matrix) to set the compatible handler.
 
+## cloudlinux-config
 
+**cloudlinux-config** utility shows/sets various parameters related to [LVE Manager](/lve_manager/#lve-manager-options) UI, [MySQL Governor](/mysql_governor/#configuration) and [faults notifications for LVE-Stats 2](/lve-stats_2/#configuration)
+
+**Usage:**
+
+<div class="notranslate">
+
+```
+cloudlinux-config get [--json] [--for-reseller resname ]
+cloudlinux-config set [--json] --data <str> [--for-reseller resname ]
+cloudlinux-config set [--json] --reset-inodes-limit
+```
+</div>
+
+**Commands:**
+
+| | |
+|-|-|
+| get| Shows the values of all supported parameters|
+| set| Sets values for supported parameters|
+
+**Options**
+
+| | |
+|-|-|
+| --json| Sets/returns values in json format|
+| --data| Sets values from the data string that follows|
+| --for-reseller| Sets/limits the output only to the data related to reseller _resname_ |
+| --reset-inodes-limit| Resets inode limits (in case disk quota breaks)|
+
+**JSON data structure**
+
+All options are enclosed inside `options` (Level 0) string. All options are enclosed in " ", while values come as is. Here's an example:
+
+<div class="notranslate">
+
+```
+'{"options":{"L1_option1":value1, "L1_option2":value2}}'
+```
+</div>
+
+Each Level1 option can have nested Level2 options specified using the same syntax, the same goes for Level2 and Level3 options respectively.
+
+| | | | | | |
+|-|-|-|-|-|-|
+| Level1| Level2| Level3| Level4| Possible values| Description|
+| inodeLimits| showUserInodesUsage| | |true/false| Show end user inode usage|
+| uiSettings| hideLVEUserStat| | |true/false| Hide LVE end user usage statistic|
+| uiSettings| hidePHPextensions| | |true/false| Hide PHP extension selection|
+| uiSettings| hidePythonApp| | |true/false| Hide Python App in web-interface|
+| uiSettings| hideRubyApp| | |true/false| Hide Ruby App in web-interface|
+
+**Examples**
+
+* enable Python/Ruby Selector in User UI for cPanel users
+
+<div class="notranslate">
+
+```
+$ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}‌}}'
+```
+</div>
