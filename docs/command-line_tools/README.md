@@ -613,17 +613,6 @@ All options are enclosed inside `options` (Level 0) string. All options are encl
 
 Each Level1 option can have nested Level2 options specified using the same syntax, the same goes for Level2 and Level3 options respectively.
 
-**LVE Manager UI settings**
-
-| | | | |
-|-|-|-|-|
-| Level1| Level2| Possible values| Description|
-| inodeLimits| showUserInodesUsage| true/false| Show end user inode usage|
-| uiSettings| hideLVEUserStat| true/false| Hide LVE end user usage statistic|
-| uiSettings| hidePHPextensions| true/false| Hide PHP extension selection|
-| uiSettings| hidePythonApp| true/false| Hide Python App in web-interface|
-| uiSettings| hideRubyApp| true/false| Hide Ruby App in web-interface|
-
 **LVE-Stats 2 faults notification settings**
 
 | | | | | | |
@@ -657,6 +646,48 @@ Each Level1 option can have nested Level2 options specified using the same synta
 ::: tip Note  
 Options marked with (*) are for reseller use only
 :::
+
+**MySQL Governor settings**
+
+| | | | | | |
+|-|-|-|-|-|-|
+| Level1| Level2| Level3| Level4| Possible values| Description|
+| mySQLGovSettings| errorLog| level| | DEBUG/ERROR| Sets error log level |
+| mySQLGovSettings| errorLog| logPath| | /var/log/dbgovernor-error.log| Sets error log destination file |
+| mySQLGovSettings| gatherDataForDetailedStats| | | true/false| Enables gathering data for detailed statistics |
+| mySQLGovSettings| logRestrictedUsersQueries| | | true/false| Enables logging of restricted user queries |
+| mySQLGovSettings| modeOfOperation| | | off/single/abusers/all| Sets the mode of operation |
+| mySQLGovSettings| restrictLog| format| | SHORT/MEDIUM/LONG/VERYLONG| Sets the format for restrict log |
+| mySQLGovSettings| restrictLog| logPath| | /var/log/dbgovernor-restrict.log| Sets the format for restrict log |
+| mySQLGovSettings| restrictType| mode| | period/limit| Sets the restriction mode |
+| mySQLGovSettings| restrictType| unlimit| period| N| Sets the restriction expiration period |
+| mySQLGovSettings| restrictType| unlimit| unitOfTime| seconds/minutes/hours/days| Sets the restriction expiration period units of time |
+| mySQLGovSettings| restrictedTimePeriods| level1| period| N| Sets L1 restriction time period |
+| mySQLGovSettings| restrictedTimePeriods| level1| unitOfTime| seconds/minutes/hours/days| Sets L1 restriction time period units of time |
+| mySQLGovSettings| restrictedTimePeriods| level2| period| N| Sets L2 restriction time period |
+| mySQLGovSettings| restrictedTimePeriods| level2| unitOfTime| seconds/minutes/hours/days| Sets L2 restriction time period units of time |
+| mySQLGovSettings| restrictedTimePeriods| level3| period| N| Sets L3 restriction time period |
+| mySQLGovSettings| restrictedTimePeriods| level3| unitOfTime| seconds/minutes/hours/days| Sets L3 restriction time period units of time |
+| mySQLGovSettings| restrictedTimePeriods| level4| period| N| Sets L4 restriction time period |
+| mySQLGovSettings| restrictedTimePeriods| level4| unitOfTime| seconds/minutes/hours/days| Sets L4 restriction time period units of time |
+| mySQLGovSettings| restrictedTimePeriods| timeout| period| N| Sets restriction time period timeout|
+| mySQLGovSettings| restrictedTimePeriods| timeout| unitOfTime| seconds/minutes/hours/days| Sets L1 restriction time period timeout units of time |
+| mySQLGovSettings| scriptPath| | | /path/to/script| Path to script to be triggered when account is restricted |
+| mySQLGovSettings| slowQueries| kill| | true/false| Enables killing of slow queries |
+| mySQLGovSettings| slowQueries| logPath| | /path/to/sqkill.log| Sets the path to slow query kill log file |
+| mySQLGovSettings| slowQueries| timeout| | N| Time to kill slow SELECT queries for account (seconds) |
+| mySQLGovSettings| userMaxConnections| | | N| Sets the maximum number of user connections to database |
+
+**LVE Manager UI settings**
+
+| | | | |
+|-|-|-|-|
+| Level1| Level2| Possible values| Description|
+| inodeLimits| showUserInodesUsage| true/false| Show end user inode usage|
+| uiSettings| hideLVEUserStat| true/false| Hide LVE end user usage statistic|
+| uiSettings| hidePHPextensions| true/false| Hide PHP extension selection|
+| uiSettings| hidePythonApp| true/false| Hide Python App in web-interface|
+| uiSettings| hideRubyApp| true/false| Hide Ruby App in web-interface|
 
 **Examples**
 

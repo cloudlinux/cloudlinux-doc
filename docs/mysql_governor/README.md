@@ -303,6 +303,8 @@ user_max_connections="30"/>
 ```
 </div>
 
+These values can also be set using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
+
 ## Starting And Stopping
 
 
