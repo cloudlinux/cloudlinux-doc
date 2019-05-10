@@ -1,4 +1,5 @@
 module.exports = {
+  "/ru/":"/ru/cloudlinux_installation/",
   "/cloudlinux_installation.html/": "/cloudlinux_installation/",
   "/cloudlinux_installation.html": "/cloudlinux_installation/",
   "/index.html?cloudlinux_installation.html": "/cloudlinux_installation/",

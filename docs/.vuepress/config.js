@@ -1,6 +1,13 @@
 const urls = require("./urls-mapping.js");
 
 module.exports = {
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      }
+    }
+  },
   base: "/",
   head: [
     [
@@ -32,7 +39,8 @@ module.exports = {
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
-
+    
+    translationSource: 'docs.cloudlinux.com',
     defaultURL: "/cloudlinux_installation/",
     redirectionMapping: urls,
     sidebarDepth: 2,
