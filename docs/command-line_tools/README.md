@@ -621,24 +621,34 @@ Each Level1 option can have nested Level2 options specified using the same synta
 | uiSettings| hidePHPextensions| | |true/false| Hide PHP extension selection|
 | uiSettings| hidePythonApp| | |true/false| Hide Python App in web-interface|
 | uiSettings| hideRubyApp| | |true/false| Hide Ruby App in web-interface|
-| faultsNotification| email| notifyFromEmail| | user@domain.com| Set sender field for faults notification emails|
-| faultsNotification| email| notifySubject| | Subject| Set Subject field for faults notification emails|
-| faultsNotification| email| reportAdminMail| | admin@domain.com| Set Admin Mail for notification emails|
 | faultsNotification| faultsToInclude| concurrentConnections| | true/false| Include concurrent connection value in notification emails|
 | faultsNotification| faultsToInclude| cpu| | true/false| Include CPU consumption value in notification emails|
 | faultsNotification| faultsToInclude| io| | true/false| Include IO value in notification emails|
 | faultsNotification| faultsToInclude| iops| | true/false| Include IOPS value in notification emails|
 | faultsNotification| faultsToInclude| mem| | true/false| Include RAM consumption value in notification emails|
+| faultsNotification| faultsToInclude| nproc| | true/false| Include number of processes value in notification emails|
 | faultsNotification| fminimumNumberOfFaultsToNotify| admin| | N| The minimum number of faults to notify for admin|
 | faultsNotification| fminimumNumberOfFaultsToNotify| user| | N| The minimum number of faults to notify for users|
+| faultsNotification| fminimumNumberOfFaultsToNotify| reseller*| | N| The minimum number of faults to notify for reseller|
+| faultsNotification| fminimumNumberOfFaultsToNotify| customer*| | N| The minimum number of faults to notify for reseller's customers|
 | faultsNotification| notify| admin| period| N| The period of faults notifications for admin|
 | faultsNotification| notify| admin| unitOfTime| minutes/hours/days| Time units of period of faults notifications for admin|
 | faultsNotification| notify| user| period| N| The period of faults notifications for users|
 | faultsNotification| notify| user| unitOfTime| minutes/hours/days| Time units of period of faults notifications for users|
+| faultsNotification| notify| reseller*| period| N| The period of faults notifications for resellers|
+| faultsNotification| notify| reseller*| unitOfTime| minutes/hours/days| Time units of period of faults notifications for resellers|
+| faultsNotification| notify| customer*| period| N| The period of faults notifications for reseller's customers|
+| faultsNotification| notify| customer*| unitOfTime| minutes/hours/days| Time units of period of faults notifications for reseller's customers|
 | faultsNotification| notifyAdmin| | | true/false| Send faults notifications to admin|
-| faultsNotification| notifyCustomers| | | true/false| Send faults notifications to users|
 | faultsNotification| notifyResellerCustomers| | | true/false| Send faults notification to reseller users|
+| faultsNotification| notifyResellerOnCustomers*| | | true/false| Send users' faults notifications to the respective reseller|
+| faultsNotification| notifyReseller*| | | true/false| Send faults notification to reseller|
+| faultsNotification| notifyCustomers| | | true/false| Send faults notifications to users|
 | faultsNotification| notifyResellers| | | true/false| Send faults notification to resellers|
+
+::: tip Note  
+Options marked with (*) are for reseller use
+:::
 
 **Examples**
 
