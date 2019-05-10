@@ -613,14 +613,22 @@ All options are enclosed inside `options` (Level 0) string. All options are encl
 
 Each Level1 option can have nested Level2 options specified using the same syntax, the same goes for Level2 and Level3 options respectively.
 
+**LVE Manager UI settings**
+
+| | | | |
+|-|-|-|-|
+| Level1| Level2| Possible values| Description|
+| inodeLimits| showUserInodesUsage| true/false| Show end user inode usage|
+| uiSettings| hideLVEUserStat| true/false| Hide LVE end user usage statistic|
+| uiSettings| hidePHPextensions| true/false| Hide PHP extension selection|
+| uiSettings| hidePythonApp| true/false| Hide Python App in web-interface|
+| uiSettings| hideRubyApp| true/false| Hide Ruby App in web-interface|
+
+**LVE-Stats 2 faults notification settings**
+
 | | | | | | |
 |-|-|-|-|-|-|
 | Level1| Level2| Level3| Level4| Possible values| Description|
-| inodeLimits| showUserInodesUsage| | |true/false| Show end user inode usage|
-| uiSettings| hideLVEUserStat| | |true/false| Hide LVE end user usage statistic|
-| uiSettings| hidePHPextensions| | |true/false| Hide PHP extension selection|
-| uiSettings| hidePythonApp| | |true/false| Hide Python App in web-interface|
-| uiSettings| hideRubyApp| | |true/false| Hide Ruby App in web-interface|
 | faultsNotification| faultsToInclude| concurrentConnections| | true/false| Include concurrent connection value in notification emails|
 | faultsNotification| faultsToInclude| cpu| | true/false| Include CPU consumption value in notification emails|
 | faultsNotification| faultsToInclude| io| | true/false| Include IO value in notification emails|
@@ -647,7 +655,7 @@ Each Level1 option can have nested Level2 options specified using the same synta
 | faultsNotification| notifyResellers| | | true/false| Send faults notification to resellers|
 
 ::: tip Note  
-Options marked with (*) are for reseller use
+Options marked with (*) are for reseller use only
 :::
 
 **Examples**
