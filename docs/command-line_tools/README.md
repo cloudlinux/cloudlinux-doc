@@ -691,7 +691,7 @@ Options marked with (*) are for reseller use only
 
 **Examples**
 
-* enable Python/Ruby Selector in User UI for cPanel users
+* display Python/Ruby Selector in User UI (cPanel)
 
 <div class="notranslate">
 
