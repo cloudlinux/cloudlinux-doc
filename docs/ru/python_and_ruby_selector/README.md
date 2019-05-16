@@ -4,7 +4,7 @@ title: Python и Ruby Selector
 <gtranslate-io>
 # Python и Ruby Selector
 
-## Установка Python and Ruby Selector
+## Установка Python и Ruby Selector
 
 ## Доступ для пользователей
 

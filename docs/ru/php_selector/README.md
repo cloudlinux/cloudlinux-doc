@@ -50,7 +50,7 @@ title: PHP Selector
 
 ## PHP Selector без CageFS
 
-## Конфигурация глобальных настроек php.ini для всех версий Alt-PHP
+## Настройка «глобальных» параметров php.ini для всех версий Alt-PHP
 
 ## Наборы PHP-расширений
 
