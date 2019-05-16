@@ -8,6 +8,7 @@ jobs:
       - checkout
       - add_ssh_keys: # add SSH key with write access
           fingerprints:
+            - "02:d5:63:28:6b:94:5d:76:08:42:ab:1e:b2:b7:80:bb"
             - "c4:87:62:5a:20:92:4e:14:e0:e0:59:4c:41:f3:43:55"
       - restore_cache:
           keys:
@@ -31,4 +32,6 @@ workflows:
       - build:
           filters:
             branches:
-              only: test
+              only:
+                - dev 
+                - test
