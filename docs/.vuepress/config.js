@@ -1,6 +1,15 @@
 const urls = require("./urls-mapping.js");
+const sidebarUrls = require("./sidebar-urls");
+const _slugify = require('vuepress/lib/markdown/slugify');
 
 module.exports = {
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      }
+    }
+  },
   base: "/",
   head: [
     [
@@ -18,22 +27,30 @@ module.exports = {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
       description: "CloudLinux Documentation"
+    },
+    "/ru/": {
+      lang: "ru",
+      title: "Документация",
+      description: "Документация CloudLinux"
     }
-    // TODO: temporary!
-    // "/ru/": {
-    //   lang: "ru",
-    //   title: "Документация",
-    //   description: "Документация CloudLinux"
-    // }
   },
   theme: "cloudlinux",
+  markdown: {
+    slugify: (s) => {
+      if (sidebarUrls[s]) {
+        return sidebarUrls[s];
+      }
+      return _slugify(s);
+    }
+},
 
   themeConfig: {
     repo: "cloudlinux/cloudlinux-doc",
     editLinks: true,
     docsBranch: "dev",
     docsDir: "docs",
-
+    
+    translationSource: 'docs.cloudlinux.com',
     defaultURL: "/cloudlinux_installation/",
     redirectionMapping: urls,
     sidebarDepth: 2,
@@ -53,8 +70,15 @@ module.exports = {
     locales: {
       "/": {
         bottomLinks: [
-          { text: "How to", url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I" },
-          { text: "Getting started", url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os" },
+          {
+            text: "How to",
+            url:
+              "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
+          },
+          {
+            text: "Getting started",
+            url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
+          },
           {
             text: "Contact support",
             url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"

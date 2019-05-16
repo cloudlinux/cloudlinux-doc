@@ -446,10 +446,13 @@ You just need to execute it once, as it will be later executed via cron job. Tha
 
 ### Storing statistics in PostgreSQL
 
+:::tip Note
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+:::
 
+You have to install <span class="notranslate">`postgresql-python rpm`</span> to store lve-stats on centralized server.
 
-
- You have to install <span class="notranslate"> postgresql-python rpm </span> to store lve-stats on centralized server. Run:
+Run:
 
 <div class="notranslate">
 
@@ -457,6 +460,7 @@ You just need to execute it once, as it will be later executed via cron job. Tha
 $ yum install postgresql-python
 ```
 </div>
+
 A typical procedure to configure the PostgreSQL database for storing information about multiple servers for lve-stats services looks as follows:
 
 Create a database and a user. You can do it by executing the following commands:
@@ -533,7 +537,7 @@ CREATE TABLE last_run_gov (hourly TIMESTAMP, daily TIMESTAMP, server_id CHAR(10)
 INSERT INTO last_run(hourly, daily, server_id, lve_version) VALUES (now() AT TIME ZONE 'UTC', now() AT TIME ZONE 'UTC', '_SERVER_NAME_', 4);
 ```
 </div>
-On each server edit file <span class="notranslate"> /etc/sysconfig/lvestats </span> and <span class="notranslate"> /etc/sysconfig/lvestats </span> as follows:
+On each server edit file <span class="notranslate">`/etc/sysconfig/lvestats`</span> and <span class="notranslate">`/etc/sysconfig/lvestats`</span> as follows:
 
 <div class="notranslate">
 
@@ -591,11 +595,11 @@ LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
 
 When you have multiple servers storing LVE statistics to a central database, then you will need to pick one server responsible for compacting data.
 
-On that server, edit file: <span class="notranslate"> </span> , and change option <span class="notranslate"> **COMPACT** </span> to <span class="notranslate"> **master** </span>
+On that server, edit file: <span class="notranslate">`/etc/sysconfig/lvestats`</span> and change the option <span class="notranslate">`COMPACT`</span> to <span class="notranslate">`master`</span>.
 
-On all other servers, change that option to <span class="notranslate"> **slave** . </span>
+On all other servers, change that option to <span class="notranslate">`slave`</span>.
 
-Default: <span class="notranslate"> **single** </span> -- should be used when lve-stats stores data to a single database.
+Default: <span class="notranslate">`single`</span> – should be used when lve-stats stores data to a single database.
 
 ## OptimumCache
 
@@ -603,7 +607,7 @@ Default: <span class="notranslate"> **single** </span> -- should be used when lv
 OPTIMUMCACHE IS NO LONGER SUPPORTED.
 :::
 
-   **OptimumCache 0.2+**
+**OptimumCache 0.2+**
 
 OptimumCache is a de-duplicating file cache optimized specifically for shared hosting. Typical shared hosting server runs a number of sites with WordPress and Joomla as well as other popular software. This usually means that there are hundreds of duplicate files that are constantly being read into file cache - both wasting precious disk <span class="notranslate"> IO </span> operations as well as memory. OptimumCache creates a cache of such duplicated files and de-duplicates file cache.
 ![](/images/embim1.png)
@@ -615,136 +619,161 @@ Further reading: [http://kb.cloudlinux.com/tag/optimumcache/](http://kb.cloudlin
 
 ### Installation
 
+:::tip NOTE
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
+#### Requirements
 
+* 64bit CloudLinux 6.x or higher
+* ext4 filesystem
+* kernel lve1.2.55 or later.
 
+#### Installation
 
-64bit CloudLinux 6.x or higher
-ext4 filesystem
-kernel lve1.2.55 or later.
+<div class="notranslate">
 
-
-<span class="notranslate"> </span>
 ```
 # yum install optimumcache
 ```
-
+</div>
 
 OptimumCache must be provided with list of directories to expect duplicate files be in:
 
-<span class="notranslate"> </span>
-_# occtl --recursive --mark-dir /home_
-
-_# occtl --recursive --mark-dir /home2_ (for cPanel)
-
-<span class="notranslate"> _# occtl --recursive --mark-dir /var/www_ </span> (for Plesk)
+* <span class="notranslate">`# occtl --recursive --mark-dir /home`</span>
+* <span class="notranslate">`# occtl --recursive --mark-dir /home2`</span> (for cPanel)
+* <span class="notranslate">`# occtl --recursive --mark-dir /var/www`</span> (for Plesk)
 
 OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. See 'Marking directories' [ [http://docs.cloudlinux.com/index.html?marking_directories.html](http://docs.cloudlinux.com/index.html?marking_directories.html) ].
 
 **Allocating Disk Space for OptimumCache:**
 
-By default OptimumCache will attempt to setup 5GB ploop (high efficiency loopback disk) to be used for the cache in <span class="notranslate"> /var/share/optimumcache/optimumcache.image </span>
+By default OptimumCache will attempt to setup 5GB ploop (high efficiency loopback disk) to be used for the cache in <span class="notranslate">`/var/share/optimumcache/optimumcache.image`</span>
 
-That ploop will be mounted to: <span class="notranslate"> /var/cache/optimumcache  </span>
+That ploop will be mounted to: <span class="notranslate">`/var/cache/optimumcache`</span>
 
-The ploop image will be located at <span class="notranslate"> /var/share/optimumcache/optimumcache.image </span>
+The ploop image will be located at <span class="notranslate">`/var/share/optimumcache/optimumcache.image`</span>
 
 Allocating OptimumCache disk space for ploop on a fast drives (like SSD) will provide additional performance improvement as more duplicated files would be loaded from fast disks into memory.
 
 **Moving ploop image to another location:**
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --move-ploop /path/to/new/image/file [new size[KMGT]]
 ```
+</div>
 
-_/path/to/new/image/file_ must be file path + file name, not a directory name.
+`/path/to/new/image/file` must be file path + file name, not a directory name.
 
 Example:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
 # occtl --move-ploop /var/ssh/optimumcache.image
+```
+</div>
 
-
-If <span class="notranslate"> ‘new size’ </span> is not mentioned, then value from <span class="notranslate"> /etc/sysconfig/optimumcache </span> is used. If <span class="notranslate"> /etc/sysconfig/optimumcache </span> does not mention anything regarding ploop image size, then default 5GB is used.
+If <span class="notranslate">`new size`</span> is not mentioned, then value from <span class="notranslate">`/etc/sysconfig/optimumcache`</span> is used. If <span class="notranslate">`/etc/sysconfig/optimumcache`</span> does not mention anything regarding ploop image size, then default 5GB is used.
 
 **Enabling and disabling ploop:**
 
 To turn on ploop:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 # occtl --init-ploop
 ```
-
+</div>
 
 To disable ploop:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 # occtl --disable-ploop
 ```
+</div>
 
-If ploop image has been mounted in <span class="notranslate"> /etc/fstab </span> for OpimumCache-0.1-21 and earlier, you may consider removing this fstab entry in OpimumCache 0.2+. That is because since 0.2+ ploop is mounted automatically at service start.
+If ploop image has been mounted in <span class="notranslate">`/etc/fstab`</span> for OpimumCache-0.1-21 and earlier, you may consider removing this fstab entry in OpimumCache 0.2+. That is because since 0.2+ ploop is mounted automatically at service start.
 
-If you prefer leave that fstab mount point as is, you may see some warnings when you decide to move ploop later via <span class="notranslate"> ‘occtl --move-ploop’ </span> .
+If you prefer leave that fstab mount point as is, you may see some warnings when you decide to move ploop later via <span class="notranslate">`occtl --move-ploop`</span>.
 
 **Resizing ploop:**
 
 To resize ploop:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --resize-ploop [new size[KMGT]]
 ```
+</div>
 
-A common reason for resizing ploop is reacting to OptimumCache syslog message like <span class="notranslate"> “OptimumCache recommends cache storage size to be at least … GB” </span>
+A common reason for resizing ploop is reacting to OptimumCache syslog message like <span class="notranslate">“OptimumCache recommends cache storage size to be at least … GB”</span>.
 
 **Deleting ploop:**
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --delete-ploop
 ```
+</div>
 
-For the case when this action cannot be completed due to <span class="notranslate"> “Unable unmount ploop” </span> issue, there is a workaround in “Troubleshooting” section.
+For the case when this action cannot be completed due to <span class="notranslate">“Unable unmount ploop”</span> issue, there is a workaround in “Troubleshooting” section.
 
 Q. I created/resized/moved/deleted ploop. Do I need to rerun the initial mark process?
+
 А. Not needed.
 
 ### Using without ploop
 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
+On servers with kernel prior to lve1.2.55 ploop will not be used (due to ploop related issues in the kernel). Instead cached files will be stored in <span class="notranslate">`/var/cache/optimumcache`</span>.
 
+The cache will be cleaned (shrunk) by 20% once partition on which <span class="notranslate">`OPTIMUMCACHE_MNT`</span> resides has only 10% of free space. You can change that by changing <span class="notranslate">`PURGEAHEAD`</span> param in <span class="notranslate">`/etc/sysconfig/optimumcache`</span>, and restarting optimumcache service.
 
- On servers with kernel prior to lve1.2.55 ploop will not be used (due to ploop related issues in the kernel). Instead cached files will be stored in <span class="notranslate"> /var/cache/optimumcache </span> .
-The cache will be cleaned (shrunk) by 20% once partition on which <span class="notranslate"> OPTIMUMCACHE_MNT </span> resides has only 10% of free space. You can change that by changing <span class="notranslate"> PURGEAHEAD </span> param in <span class="notranslate"> /etc/sysconfig/optimumcache </span> , and restarting optimumcache service.
+The cache is cleaned <span class="notranslate">`/etc/cron.d/optimumcache_cron`</span> script optimumcache_purge, which runs every minute:
 
-The cache is cleaned <span class="notranslate"> /etc/cron.d/optimumcache_cron </span> script optimumcache_purge, which runs every minute:
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
 0-59 * * * * root /usr/share/optimumcache/optimumcache_purge
-
+```
+</div>
 
 ### Marking Directories
 
-
-
-
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
 **Marking directories to be cached:**
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --mark-dir /path/to/site/on/filesystem --recursive
 ```
+</div>
 
 In common scenario admin marks for caching user directories:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --mark-dir /home /home2 /home3 --recursive
 ```
+</div>
 
-
-OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. You can check indexing job status with <span class="notranslate"> 'at -l' </span> at any time.
+OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. You can check indexing job status with <span class="notranslate">`at -l`</span> at any time.
 
 **Ignoring particular files & directories:**
 
@@ -753,394 +782,551 @@ OptimumCache tracks files & directories that need to be cached. Once file is mod
 Sometimes you might want to ignore such checks for directories where large number of temporary or new files are created, that will not have duplicates - as such checks are expensive. Directories like mail queue, and tmp directories should be ignored.
 
 You can set a regexp mask for directories that you would like to ignore using:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ occtl --add-skip-mask REGEX
 ```
-
+</div>
 
 To list skip masks:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ occtl --list-skip-mask
 ```
-
+</div>
 
 To remove skip mask:
-<span class="notranslate"> </span>
+
+<div class="notranslate">
+
 ```
 $ occtl --remove-skip-mask ID|Tag
 ```
-
+</div>
 
 At the very end, for those changes to take effect:
-<span class="notranslate"> </span>
-$ occtl --check
 
-‘occtl --check’ is the same lengthy operation as <span class="notranslate"> ‘marking’ </span> is. Thus, it’s usage has to be sane, especially for big <span class="notranslate"> ‘home’ </span> (>500G).
+<div class="notranslate">
+
+```
+$ occtl --check
+```
+</div>
+
+<span class="notranslate">`occtl --check`</span> is the same lengthy operation as <span class="notranslate">`marking`</span> is. Thus, it’s usage has to be sane, especially for big <span class="notranslate">`home`</span> (>500G).
 
 By default, OptimumCache sets up following skip masks:
-<span class="notranslate"> </span>
+
 | |  | |
 |-|--|-|
 |id | tag | regex|
-|----- | ------------------ | ---------------|
-|1 | all_dot_files | /\...*|
-|2 | cagefs | ^/home/cagefs-skeleton$|
-|3 | cagefs | ^/home/cagefs-skeleton/|
-|4 | cpanel | ^/home[^/]*/cPanelInstall|
-|5 | cpanel | ^/home[^/]*/cpeasyapache|
-|6 | cpanel | ^/home[^/]*/aquota|
-|7 | cpanel | ^/home[^/]*/jailshell|
-|8 | cpanel | ^/home[^/]*/[^/]+/mail$|
-|9 | cpanel | ^/home[^/]*/[^/]+/mail/.*|
-|10 | cpanel | ^/home[^/]*/[^/]+/logs$|
-|11 | cpanel | ^/home[^/]*/[^/]+/logs/.*|
-|12 | cpanel | ^/home[^/]*/[^/]+/\.cpanel$|
-|13 | cpanel | ^/home[^/]*/[^/]+/\.cpanel/.*|
-|14 | cpanel | ^/home[^/]*/[^/]+/\.cagefs|
-|15 | cpanel | ^/home[^/]*/[^/]+/\.cagefs/.*|
-|16 | cpanel | ^/home[^/]*/virtfs|
-|17 | cpanel | ^/home[^/]*/virtfs/.*|
-|18 | not_a_userdir | ^/home/tmp/|
-|19 | not_a_userdir | ^/home/tmp$|
-|20 | not_a_userdir | ^/home/ftp/|
-|21 | not_a_userdir | ^/home/ftp$|
-|22 | not_a_userdir | ^/home/admin/|
-|23 | not_a_userdir | ^/home/admin$|
-|24 | quota | ^/home[^/]*/quota.user$|
-|25 | usermisc | /quota.user$|
-|26 | users_home | ^/home/[^/]+/backups$|
-|27 | users_home | ^/home/[^/]+/backups/|
-|28 | users_home | ^/home/[^/]+/imap$|
-|29 | users_home | ^/home/[^/]+/imap/|
-|30 | users_home | ^/home/[^/]+/Maildir$|
-|31 | users_home | ^/home/[^/]+/Maildir/|
-|32 | users_home | ^/home/[^/]+/domains/[^/]+/logs$|
-|33 | users_home | ^/home/[^/]+/domains/[^/]+/logs/|
-|34 | users_home | ^/home/[^/]+/domains/[^/]+/public_ftp$|
-|35 | users_home | ^/home/[^/]+/domains/[^/]+/public_ftp/|
-|36 | users_home | ^/home/[^/]+/domains/[^/]+/stats$|
-|37 | users_home | ^/home/[^/]+/domains/[^/]+/stats/|
+|1 | <span class="notranslate">`all_dot_files`</span> | <span class="notranslate">`/\...*`</span>|
+|2 | <span class="notranslate">`cagefs`</span> | <span class="notranslate">`^/home/cagefs-skeleton$`</span>|
+|3 | <span class="notranslate">`cagefs`</span> | <span class="notranslate">`^/home/cagefs-skeleton/`</span>|
+|4 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/cPanelInstall`</span>|
+|5 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/cpeasyapache`</span>|
+|6 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/aquota`</span>|
+|7 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/jailshell`</span>|
+|8 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/mail$`</span>|
+|9 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/mail/.*`</span>|
+|10 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/logs$`</span>|
+|11 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/logs/.*`</span>|
+|12 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/\.cpanel$`</span>|
+|13 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/\.cpanel/.*`</span>|
+|14 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/\.cagefs`</span>|
+|15 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/[^/]+/\.cagefs/.*`</span>|
+|16 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/virtfs`</span>|
+|17 | <span class="notranslate">`cpanel`</span> | <span class="notranslate">`^/home[^/]*/virtfs/.*`</span>|
+|18 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/tmp/`</span>|
+|19 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/tmp$`</span>|
+|20 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/ftp/`</span>|
+|21 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/ftp$`</span>|
+|22 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/admin/`</span>|
+|23 | <span class="notranslate">`not_a_userdir`</span> | <span class="notranslate">`^/home/admin$`</span>|
+|24 | <span class="notranslate">`quota`</span> | <span class="notranslate">`^/home[^/]*/quota.user$`</span>|
+|25 | <span class="notranslate">`usermisc`</span> | <span class="notranslate">`/quota.user$`</span>|
+|26 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/backups$`</span>|
+|27 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/backups/`</span>|
+|28 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/imap$`</span>|
+|29 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/imap/`</span>|
+|30 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/Maildir$`</span>|
+|31 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/Maildir/`</span>|
+|32 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/logs$`</span>|
+|33 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/logs/`</span>|
+|34 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/public_ftp$`</span>|
+|35 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/public_ftp/`</span>|
+|36 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/stats$`</span>|
+|37 | <span class="notranslate">`users_home`</span> | <span class="notranslate">`^/home/[^/]+/domains/[^/]+/stats/`</span>|
 
-This information is stored in <span class="notranslate"> /etc/container/optimumcache/ignore.d/ </span>
+This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>.
 
 **Skip Mask syntax**
 
 Skip masks use following regexp syntax: [http://www.greenend.org.uk/rjk/tech/regexp.html](http://www.greenend.org.uk/rjk/tech/regexp.html)
 
-For example, to disable caching all directories that contain <span class="notranslate"> */cache/* </span> , you should use skip masks like:
+For example, to disable caching all directories that contain <span class="notranslate">`*/cache/*`</span>, you should use skip masks like:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
 /cache/
 /cache$
+```
+</div>
 
-This information is stored in <span class="notranslate"> /etc/container/optimumcache/ignore.d/ </span>
+This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>
 
 
 ### OptimumCache Configuration File
 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
+<span class="notranslate">`/etc/sysconfig/optimumcache`</span>
 
+<div class="notranslate">
 
-<span class="notranslate"> </span>
-/etc/sysconfig/optimumcache
-
+```
 OPTIMUMCACHE_MNT=/var/cache/optimumcache
 
+ 
 # Valency to cache
+
 COUNT=0
 
+ 
 # Minimal file size to cache, default - cache all files
+
 # MINSIZE=0
 
+ 
 # Minimal page number in file to start caching, default - 1
+
 PAGEMIN=0
 
+ 
 # Maximum file size to cache, 10485760 (10MB) by default
+
 # MAXSIZE
 
+ 
 # Interval between caching attempts, default - 5 seconds
+
 # TIMEOUT=7
 
+ 
 # Adaptive timeout upper limit (seconds)
+
 # MAXTIMEOUT=160
 
+ 
 # Adaptive timeout multiplicator and divisor
+
 # TIMEOUT_INCR_MUL=2
+
 # TIMEOUT_DECR_DIV=4
 
+ 
 # Buffer size in KB for 'optimumcache dump', default is 32MB
+
 # DUMP_BUFFER_SIZE=32000
 
+ 
 # Extra space in %% of requested to purge, default 20%
+
 # PURGEAHEAD=20
 
+ 
 # Experimental: Eliminate frequent sync to address IO performance
+
 NOIMMSYNC=1
 
+ 
 # Logging verbosity, default - 1, verbose
+
 # LOGLEVEL=1
 
+ 
 # occtl --mark-dir or --check operations IO limit, MB/s, default is 5 MB/s
+
 # OCCTL_LVE_IO_LIMIT=5
 
+ 
 # occtl --mark-dir or --check operations %cpu limit, default is 50% of one CPU core
+
 # OCCTL_LVE_SPEED_LIMIT=50
 
+ 
 # Lve ID to associate limits with
+
 # LVEID=5
 
+ 
 # Collect perf statistics in /var/log/optimumcache_perf. Default is enabled.
+
 # PERF_LOG_ENABLED=1
+```
+</div>
 
+### Command-line Interface
 
-### 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
+OptimumCache is controlled using <span class="notranslate">`occtl`</span> command line utility.
 
+**Usage:**
 
+<div class="notranslate">
 
- OptimumCache is controlled using occtl command line utility.
-<span class="notranslate"> </span>
-| |  | |
-|-|--|-|
-| |  | |
+```
+occtl.py    [-h] [--move-ploop param [param ...]] [--check] [--verbose]
+
+            [--init-ploop [param [param ...]]] [--resize-ploop New Size]
+
+            [--disable-ploop] [--enable-ploop] [--mount-ploop]
+
+            [--unmount-ploop] [--delete-ploop] [--unmark-all]
+
+            [--mark-dir Path [Path ...]] [--unmark-dir Path [Path ...]]
+
+            [--recursive]  [--add-skip-mask Regex]
+
+            [--remove-skip-mask Id|Tag] [--list-skip-mask] [--silent]
+
+            [--ignore-unmount-failure] [--no-lve-limits] [--foreground]
+
+            [--ploop-status] [--remount-cached-points] [--purge]
+
+            [--cancel-pending-jobs] [--report [Period]]
+
+            [--recommend-minmax-size]
+```
+</div>
 
 Display numbers/percents of cached files:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 optimumcache stat
 ```
+</div>
 
 or
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 optimumcache stat /home
 ```
+</div>
 
 To display statistic for specific mount. In depth display what is being held in cache:
+
+<div class="notranslate">
 
 ```
 optimumcache dump [--resolve-filenames] [mount]
 ```
+</div>
 
-The option <span class="notranslate"> '--resolve-filenames' </span> is experimental and may not apply to all output cached entries.
+The option <span class="notranslate">`--resolve-filenames`</span> is experimental and may not apply to all output cached entries.
 
 Optional Arguments:
 
 | | |
 |-|-|
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-
+|<span class="notranslate">`-h`</span>, <span class="notranslate">`--help`</span>|Show this help message and exit.|
+|<span class="notranslate">`--move-ploop param [param ...]`</span>|Move cache from one ploop image to <span class="notranslate">`/path/to/new/image/location [New Size[KMGT]]`</span>.
+|<span class="notranslate">`--check`</span>|Check marked files for errors. This task is scheduled as background job, unless <span class="notranslate">`--foreground`</span> is specified.|
+|<span class="notranslate">`--verbose`</span>|List what is being checked.|
+|<span class="notranslate">`--init-ploop [param [param ...]]`</span>|Create ploop image for the cache <span class="notranslate">`[/path/to/ploop/image [ploop_size] | ploop_size]`</span> - if only one parameter is given, it is considered to be ploop size. Size should be a <span class="notranslate">`NUMBER[KMGT]`</span>.|
+|<span class="notranslate">`--resize-ploop New Size`</span>|New Size NUMBER[KMGT].|
+|<span class="notranslate">`--disable-ploop`</span>|Disable ploop.|
+|<span class="notranslate">`--enable-ploop`</span>|Enable ploop.|
+|<span class="notranslate">`--mount-ploop`</span>|Mount ploop image.|
+|<span class="notranslate">`--unmount-ploop`</span>|Unmount ploop image.|
+|<span class="notranslate">`--delete-ploop`</span>|Delete ploop image. Implies disable ploop, if was enabled.|
+|<span class="notranslate">`--unmark-all`</span>|Unmark all marked directories.|
+|<span class="notranslate">`--mark-dir Path [Path ...]`</span>|Mark directory for caching.This task is scheduled as background job, unless <span class="notranslate">`--foreground`</span> is specified.|
+|<span class="notranslate">`--unmark-dir Path [Path ...]`</span>|Unmark directory for caching.|
+|<span class="notranslate">`--recursive`</span>|Is used with mark/unmark dir.|
+|<span class="notranslate">`--add-skip-mask Regex`</span>|Regexp to skip files/directories for caching.|
+|<span class="notranslate">`--remove-skip-mask Id|Tag`</span>|Remove regexp to skip files/directories by id or tag.|
+|<span class="notranslate">`--list-skip-mask`</span>|List regexp to skip files/directories.|
+|<span class="notranslate">`--silent`</span>|Do not echo status to stdout/syslog.|
+|<span class="notranslate">`--ignore-unmount-failure`</span>|Ignore cannot unmount ploop problem.|
+|<span class="notranslate">`--no-lve-limits`</span>|Ignore default LVE limits for <span class="notranslate">`--mark-dir`</span> and <span class="notranslate">`--check`</span> commands. Also implies --foreground.|
+|<span class="notranslate">`--foreground`</span>|Don't spawn <span class="notranslate">`--mark-dir`</span> and <span class="notranslate">`--check`</span> commands in background.|
+|<span class="notranslate">`--ploop-status`</span>|Check if ploop is mounted.|
+|<span class="notranslate">`--purge`</span>|Purge cache storage (takes some time).|
+|<span class="notranslate">`--cancel-pending-jobs`</span>|Cancel <span class="notranslate">`--mark-dir`</span> and <span class="notranslate">`--check`</span> commands if were queued or are being run in background.|
+|<span class="notranslate">`--report [Period]`</span>|Report statistics for Period (hourly|daily|weekly|monthly).|
 
 
 ### cloudlinux-collect: Collect System Load Statistics
 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
-
-
-
-
+#### cloudlinux-collectl Quick Start
 
 Installing this package automatically starts system load statistics collection in background. cloudlinux-collectl package has no strict dependency on OptimumCache, thus the statistics is collected regardless of whether OptimumCache is installed or not. The aim of having this package pre-installed is to compare system performance before and after installing OptimumCache, thus to measure OptimumCache effectiveness.
 
+#### Install
 
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # yum install cloudlinux-collect --enablerepo=cloudlinux-updates-testing
 ```
+</div>
 
-Note: cloudlinux-collectl will be installed automatically on optimumcache upgrade to 0.2-23.
+:::tip Note
+cloudlinux-collectl will be installed automatically on optimumcache upgrade to 0.2-23
+:::
 
-
+#### Measure Web Site Response Time
 
 cloudlinux-collectl can monitor response time for a configurable set of URLs.
 
 Start monitoring new URL:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# cloudlinux-collect --addurl <alias> <[http://url](http://url)
+# cloudlinux-collect --addurl <alias> <http://url
 ```
+</div>
 
-example:
+Example:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
-# cloudlinux-collect --addurl localhost [http://127.0.0.1/index.php](http://127.0.0.1/index.php)
+# cloudlinux-collect --addurl localhost http://127.0.0.1/index.php
 ```
+</div>
 
-Try <span class="notranslate"> </span> for more options.
+Try <span class="notranslate">`cloudlinux-collectl --help`</span> for more options.
+
+#### To watch what is being collected
 
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # cloudlinux-collect --test
 ```
+</div>
 
-Actual logs are compressed with gzip and kept in <span class="notranslate"> /var/log/optimumcache/collectl </span> directory.
+Actual logs are compressed with gzip and kept in <span class="notranslate">`/var/log/optimumcache/collectl`</span> directory.
 
-
+#### Statistics Being Collected in Details
 
 To monitor what statistics are being collected, try command:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # cloudlinux-collect --test
 ```
+</div>
 
 ![](/images/optimumcachecollect_zoom93.png)
 
-Along with common statistics blocks as <span class="notranslate"> CPU </span> , disk usage, <span class="notranslate"> inodes </span> cached, there are two blocks of data to watch how effectively OptimumCache is functioning.
+Along with common statistics blocks as <span class="notranslate">CPU</span> , disk usage, <span class="notranslate">inodes</span> cached, there are two blocks of data to watch how effectively OptimumCache is functioning.
 
-<span class="notranslate"> ‘OPTIMUMCACHE DETAIL’ </span> refers to data, which is similar to output of command
+<span class="notranslate">`OPTIMUMCACHE DETAIL`</span> refers to data, which is similar to output of command
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # optimumcache stat
 ```
+</div>
 
+<div class="notranslate">
 
+```
+csums:          4964 (99.9%)
 
+             fetched        uncached            cached
 
+inodes:          4967            31               4936    (99.4%)
 
+size:          204177          131072           73104     (35.8%)
 
+RAM:                8              4                4     (50.0%)
+```
+</div>
 
 Particularly, the last column percent numbers shall match.
 
-The next goes <span class="notranslate"> URLSTATTRACKER DETAIL </span> block with url response time in milliseconds. Negative values here may pop up unexpectedly. Negative numbers are not milliseconds, but signal about http error response code for that specific url. For instance, -403 will signal for <span class="notranslate"> ‘Forbidden’ </span> http error. As for -500 value, it signals not only for <span class="notranslate"> ‘Internal Server Error’ </span> , but can be displayed, when there is connection problem with the server, which is specified by the url.
+The next goes <span class="notranslate">`URLSTATTRACKER DETAIL`</span> block with url response time in milliseconds. Negative values here may pop up unexpectedly. Negative numbers are not milliseconds, but signal about http error response code for that specific url. For instance, -403 will signal for <span class="notranslate">`Forbidden`</span> http error. As for -500 value, it signals not only for <span class="notranslate">`Internal Server Error`</span>, but can be displayed, when there is connection problem with the server, which is specified by the url.
 
+#### Statistics Manual Configuration
 
+<span class="notranslate">`URLSTATTRACKER DETAIL`</span> is the only statistics, which requires manual configuration. Upon clean installation, it has only <span class="notranslate">`url_localhost`</span> preconfigured:
 
-<span class="notranslate"> URLSTATTRACKER DETAIL </span> is the only statistics, which requires manual configuration. Upon clean installation, it has only <span class="notranslate"> url_localhost </span> preconfigured:
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # cloudlinux-collect --info
 ```
+</div>
 
+<div class="notranslate">
 
-
-
-
-To add another url for monitoring:
-
-<span class="notranslate"> </span>
 ```
-# cloudlinux-collect --addurl alt [http://192.168.0.102/](http://192.168.0.102/)
+url shortname            url
+
+--------------------         ---
+
+localhost                 http://localhost/
 ```
+</div>
 
-To display urls being monitored list:
 
-<span class="notranslate"> </span>
+To add another URL for monitoring:
+
+<div class="notranslate">
+
+```
+## cloudlinux-collect --addurl alt http://192.168.0.102/
+```
+</div>
+
+To display URLs being monitored list:
+
+<div class="notranslate">
+
 ```
 # cloudlinux-collect --info
 ```
+</div>
 
+<div class="notranslate">
 
+```
+url shortname          url
 
+--------------------          ---
+
+alt                        http://192.168.0.102/
+
+localhost                  http://localhost/
+```
+</div>
 
 
 
 To skip URL from being tracked run command:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # cloudlinux-collect --skip <url short name>
 ```
+</div>
 
+#### Running Statistics Daemon: collectl-cloudlinux
 
+cloudlinux-collectl has got collectl package as a dependency. Initd script <span class="notranslate">`/etc/init.d/cloudlinux-collectl`</span> will automatically bring up another instance of collectl named <span class="notranslate">`collectl-optimumcache`</span> . collectl-optimumcache daemon instance has a separate config and does not interfere with other running pre-configure collectl daemon (if any).
 
-cloudlinux-collectl has got collectl package as a dependency. Initd script <span class="notranslate"> /etc/init.d/cloudlinux-collectl </span> will automatically bring up another instance of collectl named <span class="notranslate"> ‘collectl-optimumcache’ </span> . collectl-optimumcache daemon instance has a separate config and does not interfere with other running pre-configure collectl daemon (if any).
+As it was mentioned, collectl-optimumcache daemon starts automatically on package install, then on server restart events, kicked by regular Initd script <span class="notranslate">`/etc/init.d/cloudlinux-collectl`</span>. Thus, checking the daemon status, stop, restart is trivial:
 
-As it was mentioned, collectl-optimumcache daemon starts automatically on package install, then on server restart events, kicked by regular Initd script <span class="notranslate"> /etc/init.d/cloudlinux-collectl </span> . Thus, checking the daemon status, stop, restart is trivial:
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
-# service cloudlinux-collect statuscollectl-optimumcache (pid  1745) is running…
+# service cloudlinux-collect status
+collectl-optimumcache (pid  1745) is running…
 ```
+</div>
 
 To start /stop:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # service cloudlinux-collect < start | stop >
 ```
+</div>
 
+#### Analyzing the Results
 
-
-
-The statistics is being collected into files named <span class="notranslate"> %hostname%-%datetime%.raw.gz </span> under directory <span class="notranslate"> </span>
+The statistics is being collected into files named <span class="notranslate">`%hostname%-%datetime%.raw.gz`</span> under directory <span class="notranslate">`/var/log/cloudlinux-collect`</span>.
 
 To convert those info format suitable for loading into Excel, LibreOffice Calc, another data mining tool, run the command:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # cloudlinux-collect --genplotfiles
 ```
+</div>
 
+<div class="notranslate">
 
+```
+Generate fresh plot files in
 
+         /var/log/cloudlinux-collect/plotfiles
 
-
+ ```
+ </div>
 
 
 ### Uninstall OptimumCache
 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
+To uninstall OptimumCache, run:
 
+<div class="notranslate">
 
-
-To uninstall OptimumCache run:
-
-<span class="notranslate"> </span>
 ```
-service optimumcache stopocctl --delete-ploop:>/var/share/optimumcache_storeyum remove optimumcache
+service optimumcache stop
+occtl --delete-ploop
+:>/var/share/optimumcache_store
+yum remove optimumcache
 ```
+</div>
 
+If available, reboot server
 
-If available: reboot server
-
-After the reboot <span class="notranslate"> pfcache= mount </span> options will disappear by themselves.
+After the reboot <span class="notranslate">`pfcache= mount`</span> options will disappear by themselves.
 
 For OptimumCache version prior 0.2-11, uninstalling via rpm package manager does not automatically removes away ploop image. That is because not always possible to unmount it properly due to kernel dependency. If there is no luck with unmounting ploop, then the server will have to be rebooted and will need to remove ploop files manually:
 
-```
-# rm /var/share/optimumcache/optimumcache.image# rm /var/share/optimumcache/DiskDescriptor.xml# rm /var/share/optimumcache/DiskDescriptor.xml.lck
-```
- or
+<div class="notranslate">
 
 ```
-# rm /path/to/ploop/image/file# rm /path/to/ploop/image/DiskDescriptor.xml# rm /path/to/ploop/image/DiskDescriptor.xml.lck
+# rm /var/share/optimumcache/optimumcache.image
+# rm /var/share/optimumcache/DiskDescriptor.xml
+# rm /var/share/optimumcache/DiskDescriptor.xml.lck
 ```
+</div>
+ or
+
+<div class="notranslate">
+
+```
+# rm /path/to/ploop/image/file
+# rm /path/to/ploop/image/DiskDescriptor.xml
+# rm /path/to/ploop/image/DiskDescriptor.xml.lck
+```
+</div>
 
 For OptimumCache version 0.2-11 and later, ploop image will be removed automatically during uninstall. If ploop unmount issue prevents doing that, ploop image clean up will be scheduled after next server reboot.
 
@@ -1149,129 +1335,192 @@ If uninstall OptimumCache process lasts for too long, please find the solution i
 
 ### Troubleshooting
 
+:::tip Note
+OPTIMUMCACHE IS NO LONGER SUPPORTED
+:::
 
-
-
-
-**Installing for FS is different from Ext4**
+#### Installing for FS is different from Ext4
 
 For now Ext4 is the only supported file system type. If a host has no Ext4 filesystem mounted, OptimumCache package installation will be abandoned:
 
-<span class="notranslate"> </span>
-||
-||
-||
+<div class="notranslate">
+
+```
+Preparing packages for installation...
+
+Cannot continue: Ext4 partition is the only supported by OptimiumCache, there is no one in fstab
+
+error: %pre(optimumcache-0.1-22.el6.cloudlinux.x86_64) scriptlet failed, exit status 1
+
+error:   install: %pre scriptlet failed (2), skipping
+```
+</div>
 
 Also, an attempt to add for caching directory, which does not reside on Ext4, will fail:
-<span class="notranslate"> </span>
-||
-||
-||
 
+<div class="notranslate">
 
+```
+# occtl --mark-dir /home --recursive
 
-If got this error with <span class="notranslate"> ‘yum install optimumcache’: </span>
+mount: / not mounted already, or bad option
 
-||
-||
-||
+optimumcache: Can not mount device. rc[8192]
 
-Most probably you have excluded <span class="notranslate"> "perl*" </span> packages in <span class="notranslate"> /etc/yum.conf </span> file, in this case to install OptimumCache run:
+Error: mark[1]: /usr/bin/optimumcache mark --recursive /home
+```
+</div>
 
-<span class="notranslate"> </span>
+#### Yum fails to install Perl rpms coming with OptimumCache
+
+If got this error with <span class="notranslate">`yum install optimumcache`</span>
+
+<div class="notranslate">
+
+```
+Error: Package: cloudlinux-collect-0.1-6.el6.noarch (cloudlinux-x86_64-server-6)
+
+Requires: perl(Config::Tiny)
+
+Error: Package: cloudlinux-collect-0.1-6.el6.noarch (cloudlinux-x86_64-server-6)
+
+Requires: perl(IO::Socket::SSL)
+
+Error: Package: cloudlinux-collect-0.1-6.el6.noarch (cloudlinux-x86_64-server-6)
+
+Requires: perl(YAML::Tiny)
+
+Error: Package: cloudlinux-collect-0.1-6.el6.noarch (cloudlinux-x86_64-server-6)
+
+Requires: perl(IPC::Run)
+
+You could try using --skip-broken to work around the problem
+
+You could try running: rpm -Va --nofiles --nodigest
+```
+</div>
+
+Most probably you have excluded <span class="notranslate">`perl*`</span> packages in <span class="notranslate">`/etc/yum.conf`</span> file, in this case to install OptimumCache run:
+
+<div class="notranslate">
+
 ```
 # yum install optimumcache --disableexcludes=all
 ```
+</div>
 
+#### OptimumCache prior 0.2-23: Cannot unmount old ploop image
 
-**OptimumCache prior 0.2-23: ** <span class="notranslate"> Cannot unmount old ploop image </span>
+This is well-known ploop problem, which may result in failing such actions as resizing or moving ploop in OptimumCache. To workaround this problem use <span class="notranslate">`--ignore-unmount-failure`</span> with <span class="notranslate">`--move-ploop`</span>
 
-This is well-known ploop problem, which may result in failing such actions as resizing or moving ploop in OptimumCache. To workaround this problem use <span class="notranslate"> ‘--ignore-unmount-failure’ </span> with <span class="notranslate"> --move-ploop: </span>
+<div class="notranslate">
 
 ```
 # occtl --move-ploop --ignore-unmount-failure
 ```
+</div>
 
-As for resizing ploop, use flavor of <span class="notranslate"> ‘--move-ploop’ </span> command instead:
+As for resizing ploop, use flavor of <span class="notranslate">`--move-ploop`</span> command instead:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --move-ploop /path/to/new/image/file [size GB] --ignore-unmount-failure
 ```
+</div>
 
-For your changes to take effect, the server has to be rebooted. Upon reboot, you may clean up manually old ploop image file and <span class="notranslate"> DiskDescriptor.xml </span> file, which resides in the same directory along with old image.
+For your changes to take effect, the server has to be rebooted. Upon reboot, you may clean up manually old ploop image file and <span class="notranslate">`DiskDescriptor.xml`</span> file, which resides in the same directory along with old image.
 
-**High ** <span class="notranslate"> IO </span> ** rate**
+#### High IO rate
 
-High <span class="notranslate"> IO </span> problem was fixed in latest version of OptimumCache (version 0.2-6). The fix is to eliminate <span class="notranslate"> superflows fsync() </span> calls in OptimumCache operations. To activate this fix in existing installation, flag <span class="notranslate"> NOIMMSYNC=1 </span> has to be manually set in <span class="notranslate"> /etc/syscoconfig/optimumcache.  </span>
+High <span class="notranslate">IO</span> problem was fixed in latest version of OptimumCache (version 0.2-6). The fix is to eliminate <span class="notranslate">`superflows fsync()`</span> calls in OptimumCache operations. To activate this fix in existing installation, flag <span class="notranslate">`NOIMMSYNC=1`</span> has to be manually set in <span class="notranslate">`/etc/syscoconfig/optimumcache`</span>.
 
-To ensure that this parameter is set <span class="notranslate"> ON </span> in the config, set <span class="notranslate"> LOGLEVEL=2 </span> and execute <span class="notranslate"> ‘service optimumcache restart’ </span> . You will see something like this:
+To ensure that this parameter is set <span class="notranslate">`ON`</span> in the config, set <span class="notranslate">`LOGLEVEL=2`</span> and execute <span class="notranslate">`service optimumcache restart`</span>. You will see something like this:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
+```
 optimumcache[1770]: Hash-size: 100000000 min-size: 0 max-size: 18446744071562067968
 optimumcache[1770]: Count: 0 Timeout: 5
 optimumcache[1770]: Max Timeout: 160 Adaptive Timeout Mul/Div: 2/4
 optimumcache[1770]: Iolimit: 0 iopslimit: 0
 optimumcache[1770]: No immediate fsync: Yes
 optimumcache[1771]: Starting OptimumCache monitor
+```
+</div>
 
-To update to version 0.2-6 run:
+To update to version 0.2-6, run:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # yum update optimumcache --enablerepo=cloudlinux-updates-testing
 ```
+</div>
 
+#### High CPU Utilization
 
-**High ** <span class="notranslate"> CPU </span> ** Utilization**
+Once it is detected that OptimumCache overuses <span class="notranslate">CPU</span>, it is useful to check, whether checksums reindexing process is running. When reindexing is running, high <span class="notranslate">CPU</span> usage is ok, as far it will certainly drop down after reindexing finished.
 
-Once it is detected that OptimumCache overuses <span class="notranslate"> CPU </span> , it is useful to check, whether checksums reindexing process is running. When reindexing is running, high <span class="notranslate"> CPU </span> usage is ok, as far it will certainly drop down after reindexing finished.
+Can be checked in <span class="notranslate">`/var/log/messages`</span>
 
-Can be checked in <span class="notranslate"> /var/log/messages - </span>
+<div class="notranslate">
 
+```
 # grep Reindexing /var/log/messages
+
 Feb  4 17:00:55 CL-default-2 occtl[2654]: Reindexing started
+```
+</div>
 
-If the last line from the output is not <span class="notranslate"> ‘Reindexing finished…” </span> , than indexing is in progress.
+If the last line from the output is not <span class="notranslate">`Reindexing finished…`</span>, than indexing is in progress.
 
-Also, can be checked via command <span class="notranslate"> ‘occtl --report’ </span> , watch if <span class="notranslate"> PFL_REINDEX_NUM_FILES </span> and <span class="notranslate"> PFL_REINDEX_THOUGHPUT_KB </span> identifiers are present in the last series of data:
-<span class="notranslate"> </span>
+Also, can be checked via command <span class="notranslate">`occtl --report`</span>, watch if <span class="notranslate">`PFL_REINDEX_NUM_FILES`</span> and <span class="notranslate">`PFL_REINDEX_THOUGHPUT_KB`</span> identifiers are present in the last series of data:
 
+<div class="notranslate">
 
+```
+# occtl --report
+- Period starts at: 2015-02-04 17:00
+Period Stat:
 
-| | |
-|-|-|
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
+PFL_ATTACHED:                    170318
+PFL_CREATED:                     161583
+PFL_ERR_BAD_CSUM:                176
+PFL_ERR_INODES:                  879
+PFL_FAILED_TO_ATTACH_PEER:       791
+PFL_FAILED_TO_ATTACH_PEER_EBUSY: 791
 
+PFL_INODE_IN:                    406167
+PFL_PAGEMIN_FILTERED_OUT:        233418
+PFL_PAGEMIN_USED:                136082
+PFL_REINDEX_NUM_FILES:           192810
+PFL_REINDEX_THOUGHPUT_KB:        2904007
+PFL_RESTART:                     1
+```
+</div>
 
+#### Uninstalling OptimumCache lasts for too long
 
-Uninstalling OptimumCache takes time because of files unmark process, which lasts proportionally to number of files, previously marked for caching with <span class="notranslate"> ‘occtl --mark-dir...’ </span> . If you see, that ‘yum remove optimumcache’ command is stuck and you have no time to wait for it to finish, or <span class="notranslate"> IO </span> load, caused by unmarking files, is undesirable for you, open another console terminal and invoke:
+Uninstalling OptimumCache takes time because of files unmark process, which lasts proportionally to number of files, previously marked for caching with <span class="notranslate">`occtl --mark-dir...`</span>. If you see, that <span class="notranslate">`yum remove optimumcache`</span> command is stuck and you have no time to wait for it to finish, or <span class="notranslate">IO</span> load, caused by unmarking files, is undesirable for you, open another console terminal and invoke:
 
-<span class="notranslate"> </span>
+<div class="notranslate">
+
 ```
 # occtl --cancel-pending-jobs
 ```
+</div>
 
 This command will cancel unmark operation, being run by yum under the hood. So that yum uninstall package transaction will complete very soon.
 
+#### ‘Failed to attach peer: Invalid argument’ appears in syslog
 
+Rather rare problem, try to forcibly update `optimumcache_s` with ploop status.
 
-Rather rare problem, try to forcibly update optimumcache_s with ploop status.
+<div class="notranslate">
 
-<span class="notranslate"> </span>
 ```
 # occtl --remount-cached-points
 ```
-
+</div>
 
