@@ -1,64 +1,64 @@
 ---
 title: CageFS
 ---
-
+<gtranslate-io>
 # CageFS
 
-## Installation
+## Установка CageFS
 
-## Unistalling CageFS
+## Удаление CageFS
 
-## Managing Users
+## Управление пользователями
 
-## Command-line Tools
+## Инструменты командной строки
 
-## Running Command Inside CageFS
+## Выполнение команд внутри CageFS
 
-## Sanity Check
+## Утилита sanity check
 
-## CageFS Quirks
+## Особенности CageFS
 
-## Configuration
+## Конфигурация
 
-### File System Templates
+### Шаблоны файловой системы
 
-### Excluding Files
+### Исключить файлы из CageFS
 
-### Excluding Users
+### Исключить пользователей из CageFS
 
-### Mount Points
+### Точки монтирования
 
-#### Per user virtual mount points
+#### Виртуальные точки монтирования для пользователя
 
-#### Split by Username
+#### Разделение по имени пользователя
 
-#### Mounting user’s home directory inside CageFS
+#### Монтирование домашнего каталога пользователя внутри CageFS
 
-### Base Home Directory
+### Базовый домашний каталог
 
-### PostgreSQL support
+### Поддержка PostgreSQL
 
-### PAM Configuration
+### Конфигурация PAM
 
-### Executing By Proxy
+### Использование proxy
 
-### Custom /etc files per customer
+### Пользовательские /etc файлы
 
-### Moving cagefs-skeleton directory
+### Перемещение директории cagefs-skeleton
 
-### Moving /var/cagefs directory
+### Перемещение директории /var/cagefs
 
-### TMP Directories
+### TMP-директории
 
 ### Syslog
 
-### Excluding mount points
+### Исключение точек монтирования
 
-## Control Panel Integration
+## Интеграция с панелями управления
 
 ### cPanel
 
 ### Plesk
 
 ### ISPManager
-
+</gtranslate-io>

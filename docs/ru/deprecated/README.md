@@ -1,34 +1,34 @@
 ---
-title: Deprecated
+title: Устаревшие и неподдерживаемые пакеты
 ---
+<gtranslate-io>
+# Устаревшие и неподдерживаемые пакеты
 
-# Deprecated
-
-## Git for cPanel
+## Git для cPanel
 
 ## LVE-Stats 0.x
 
-### Storing statistics in MySQL
+### Хранение статистики в MySQL
 
-### Storing statistics in PostgreSQL
+### Хранение статистики в PostgreSQL
 
-### Compacting in multi-server settings
+### Настройка сжатия при использовании нескольких серверов
 
 ## OptimumCache
 
-### Installation
+### Установка OptimumCache
 
-### Using without ploop
+### Использование без ploop
 
-### Marking Directories
+### Как пометить директории
 
-### OptimumCache Configuration File
+### конфигурационный файл OptimumCache
 
-### 
+### Интерфейс командной строки
 
-### cloudlinux-collect: Collect System Load Statistics
+### cloudlinux-collect: сбор статистики загрузки системы
 
-### Uninstall OptimumCache
+### Удаление OptimumCache
 
-### Troubleshooting
-
+### Поиск и устранение неисправностей по OptimumCache
+</gtranslate-io>

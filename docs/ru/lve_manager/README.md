@@ -1,20 +1,28 @@
 ---
 title: LVE Manager
 ---
-
+<gtranslate-io>
 # LVE Manager
 
-## Dashboard
+## Информационная панель
 
-## CloudLinux Installation Wizard
+## Мастер установки CloudLinux
+
+### Краткое описание
+
+### Настройка
+
+### Компоненты CloudLinux
+
+### Установка и возможные ошибки
 
 ## cPanel LVE Manager
 
-### LVE Manager Options
+### Параметры LVE Manager
 
-### Server Processes Snapshots
+### Снапшоты процессов сервера
 
-### LVE Plugins Branding
+### Брендинг LVE-плагинов
 
-## User Message for PHP version
-
+## Пользовательские сообщения для определенных версий PHP
+</gtranslate-io>

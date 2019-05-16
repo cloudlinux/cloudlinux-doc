@@ -1,84 +1,85 @@
 ---
 title: PHP Selector
 ---
-
+<gtranslate-io>
 # PHP Selector
 
-## Installation and Update
+## Установка и обновление
 
-### LiteSpeed support
+### Поддержка LiteSpeed
 
-### ISPmanager
+### Поддержка ISPmanager
 
-## Configuration
+## Конфигурация
 
-### Setting Default Version and Modules
+### Установка версии по умолчанию и модулей
 
-### Individual PHP.ini files
+### Пользовательские файлы PHP.ini
 
-### Substitute global php.ini for individual customer
+### Замена глобального php.ini для отдельного клиента
 
-### Managing interpreter version
+### Управление версиями интерпретатора
 
-### Including 
+### PHP Selector только с выбранными пакетами (cPanel)
 
-### PHP Extensions
+### Расширения PHP
 
 ### FFmpeg
 
 ### Native PHP
 
-## Command-line Tools
+## Инструменты командной строки для PHP Selector
 
 ### selectorctl
 
-### Integrating With Control Panels
+### Интеграция с панелями управления
 
-## Removing 
+## Удаление 
 
-## Using 
+## Использование
 
-## Custom PHP.ini options
+## Пользовательские настройки PHP.ini
 
-## End user files and directories
+## Файлы и директории конечного пользователя
 
-## Compiling your own extensions
+## Компиляция собственных расширений
 
-## Roll your own PHP
+## Добавление собственной версии PHP
 
-## Detect User's PHP Version
+## Определение пользовательской версии PHP
 
-## PHP Selector
+## PHP Selector без CageFS
 
-## Configuring "
+## Конфигурация глобальных настроек php.ini для всех версий Alt-PHP
 
-## Bundled PHP Extensions
+## Наборы PHP-расширений
 
-### PHP 4.4 Extensions
+### Расширения PHP 4.4
 
-### PHP 5.1 Extensions
+### Расширения PHP 5.1
 
-### PHP 5.2 Extensions
+### Расширения PHP 5.2
 
-### PHP 5.3 Extensions
+### Расширения PHP 5.3
 
-### PHP 5.4 Extensions
+### Расширения PHP 5.4
 
-### PHP 5.5 Extensions
+### Расширения PHP 5.5
 
-### PHP 5.6 Extensions
+### Расширения PHP 5.6
 
-### PHP 7.0 Extensions
+### Расширения PHP 7.0
 
-### PHP 7.1 Extensions
+### Расширения PHP 7.1
 
-### PHP 7.2 Extensions
+### Расширения PHP 7.2
 
-### PHP 7.3 Extensions
+### Расширения PHP 7.3
 
-## Disabling PHP extension globally
+## Глобальное отключение PHP-расширений
 
-## Control Panel Integration
+## Интеграция с панелями управления
 
-### PHP Selector
+### cPanel
+</gtranslate-io>
 

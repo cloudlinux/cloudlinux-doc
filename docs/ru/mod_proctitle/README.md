@@ -1,10 +1,10 @@
 ---
 title: mod_proctitle
 ---
-
+<gtranslate-io>
 # mod_proctitle
 
-## How to Read 
+## Как читать информацию mod_proctitle
 
-## Tuning Parameters
-
+## Параметры настройки
+</gtranslate-io>

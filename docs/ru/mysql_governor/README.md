@@ -1,26 +1,28 @@
 ---
 title: MySQL Governor
 ---
-
+<gtranslate-io>
 # MySQL Governor
 
-## Installation
+## Установка MySQL Governor
 
-## Removing 
+## Обновление сервера базы данных
 
-## Modes Of Operation
+## Удаление MySQL Governor 
 
-## Configuration
+## Режимы работы
 
-## Starting And Stopping
+## Конфигурация
 
-## Mapping a User to Database 
+## Запуск и остановка
 
-## Log Files
+## Определение соответствия пользователей в базе данных 
 
-## Change MySQL version
+## Log-файлы
 
-## Command-line Tools
+## Изменение версии MySQL
+
+## Инструменты командной строки для MySQL Governor
 
 ### dbtop
 
@@ -30,9 +32,9 @@ title: MySQL Governor
 
 ### dbgovchart
 
-## Backing Up MySQL
+## Резервное копирование MySQL
 
-## abrt
+## Плагин abrt
 
-## Troubleshooting
-
+## Поиск и устранение неисправностей с MySQL Governor
+</gtranslate-io>

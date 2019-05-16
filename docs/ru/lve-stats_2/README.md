@@ -1,20 +1,22 @@
 ---
 title: LVE-Stats 2
 ---
-
+<gtranslate-io>
 # LVE-Stats 2
 
-## Installation
+## Установка LVE-Stats 2
 
-## Configuration
+### Перейти на более низкую версию
 
-### LVE Stats2
+## Конфигурация
 
-### LVE Stats 2
+### Настройка совместимости LVE Stats2 и базы данных MySQL
 
-### Customize 
+### Настройка совместимости LVE Stats 2 и базы данных PostgreSQL
 
-## Command-line Tools
+### Настройка уведомлений lve-stats-2 
+
+## Инструменты командной строки для lve-stats-2
 
 ### lveinfo
 
@@ -30,29 +32,21 @@ title: LVE-Stats 2
 
 ### cloudlinux-statistics
 
-## Plugins
+## Плагины
 
-## Creating a Plugin for 
+## Создание плагина для LVE Stats 2
 
-### Introduction
+### Введение
 
-### Server Plugin Arrangement
+### Расположение плагина на сервере
 
-### Plugin Configuration
+### Конфигурация плагина
 
-### Types of Plugins
+### Типы плагинов
 
-### Examples of Plugins
+### Примеры плагинов
 
-#### Collector
+## Информация и формат файла /var/lve/info
 
-#### Analizer
-
-#### Persistor
-
-#### Notifier
-
-## File info and format for /var/lve/info file
-
-## Troubleshooting
-
+## Поиск и устранение неисправностей для LVE Stats 2
+</gtranslate-io>

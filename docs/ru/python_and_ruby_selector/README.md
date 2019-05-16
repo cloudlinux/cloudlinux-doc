@@ -1,22 +1,22 @@
 ---
-title: Python
+title: Python и Ruby Selector
 ---
+<gtranslate-io>
+# Python и Ruby Selector
 
-# Python
+## Установка Python and Ruby Selector
 
-## Python and Ruby Selector Installation
+## Доступ для пользователей
 
-## End User Access
+## Интерфейс командной строки
 
-## Command Line
+## Как скрыть значки Python и Ruby Selector
 
-## Hide Python and Ruby Selector Icons
+## Развёртывание Trac с использованием Python Selector
 
-## Deploying Trac using Python Selector
+### Trac с MySQL
 
-### Trac
+## Развёртывание Redmine с использованием Ruby Selector
 
-## Deploying Redmine using Ruby Selector
-
-## Easy Apache 4
-
+## EasyApache 4
+</gtranslate-io>

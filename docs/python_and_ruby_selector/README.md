@@ -473,7 +473,7 @@ RAILS_ENV=production ~/rubyvenv/redmine/2.1/bin/rake db:migrate
 <span class="notranslate"> `RAILS_ENV=production ~/rubyvenv/redmine/2.1/bin/rake redmine:load_default_data`  </span> 
 - Loading default data into database.
 
-## Easy Apache 4
+## EasyApache 4
 
 
 Since cPanel/WHM version 66 provides <span class="notranslate"> ea-ruby24-mod_passenger </span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager) ), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.

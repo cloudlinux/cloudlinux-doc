@@ -1,20 +1,21 @@
 ---
 title: inodes
 ---
-
+<gtranslate-io>
 # inodes
 
 ## cl-quota
 
-### General Provisions
+### Общие положения
 
-### Setting Limits and Integration with Panel Packages
+### Установка лимитов и интеграция с панелью управления
 
-### Limits Inheritance
+### Наследование лимитов
 
-### Caching and Synchronizing the Limits
+### Кэширование и синхронизация лимитов
 
-### Quotas DB File
+### Файл базы данных для cl-quota
 
-### CLI Options/Examples
+### Параметры интерфейса командной строки и примеры использования
+</gtranslate-io>
 

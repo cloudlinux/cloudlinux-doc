@@ -1,20 +1,22 @@
 ---
 title: Node.js Selector
 ---
-
+<gtranslate-io>
 # Node.js Selector
 
-## Overview & Requirements
+## Обзор и требования
 
-## Installation
+## Установка Node.js Selector
 
-## Command Line Interface
+## Интерфейс командной строки для Node.js Selector
 
-## User Interface
+## Пользовательский интерфейс
 
-## Node.js Deployment
+### Поиск и устранение ошибок
 
-### Remote Usage of Node.js Interpreters
+## Развертывание Node.js
 
-### Remote Usage of the cloudlinux-selector Utility
+### Удаленное использование интерпретаторов Node.js
 
+### Удаленное использование утилиты cloudlinux-selector
+</gtranslate-io>

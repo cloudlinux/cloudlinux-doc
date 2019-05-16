@@ -1,14 +1,28 @@
 ---
-title: Reseller Limits
+title: Лимиты реселлеров
 ---
+<gtranslate-io>
+# Лимиты реселлеров
 
-# Reseller Limits
+## Краткое описание
 
-## Installation and Requirements
+## Типы пользователей
 
-## How to Enable and Disable Reseller Limits
+## Типы лимитов
 
-## Hoster Interface
+### Что происходит когда реселлер или пользователь реселлера достигает лимита?
+
+# Требования и установка
+
+## Требования
+
+## Установка
+
+## Включение и отключение лимтов реселлеров
+
+### Как отключить лимимы реселлера
+
+## Интерфейс хостера
 
 ### Current Usage
 
@@ -22,17 +36,19 @@ title: Reseller Limits
 
 ### Selector
 
-## Reseller Interface
+## Интерфейс реселлера
 
-### Current Usage
+### Вкладка Current Usage
 
-### Historical Usage
+### Вкладка Historical Usage
 
-### Users
+### Вкладка Users
 
-### Statistics
+### Столбец Actions
 
-### Options
+### Вкладка Statistics
 
-### Packages
+### Вкладка Options
 
+### Вкладка Packages
+</gtranslate-io>

@@ -1,38 +1,41 @@
 ---
-title: CloudLinux WHMCS Plugin
+title: Плагин WHMCS для CloudLinux
 ---
+<gtranslate-io>
+# Плагин WHMCS для CloudLinux
 
-# CloudLinux WHMCS Plugin
+## Обзор
 
-## Overview
+## Установка и настройка
 
-## Installation & Configuration
+### Установка и обновление
 
-### Installation and Update
+### Конфигурация продукта
 
-### Configuration of Product
+### Конфигурация надстройки
 
-### Configuration of Add-on
+## Управление
 
-## Management
+### Установление зависимости через надстройку – дополнительная лицензия
 
-### Link Via Add-on. Optional License
+### Установление зависимости напрямую
 
-### Link Products Directly
+### Установление зависимости через настраиваемые параметры
 
-### Link Via Configurable Options
+### Установление зависимости между надстройками напрямую
 
-### Link Add-ons Directly
+### Заказ
 
-### Order
+### Интерфейс администратора
 
-### Admin Area
+### Интерфейс клиента
 
-### Client Area
+### Список лицензий
 
-### Licenses List
+### Список лицензий надстроек
 
-### Add-on Licenses List
+## Типичные проблемы
+</gtranslate-io>
 
-## Common Problems
+
 

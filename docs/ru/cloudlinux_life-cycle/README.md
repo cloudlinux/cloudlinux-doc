@@ -1,6 +1,6 @@
 ---
-title: CloudLinux Life cycle
+title: Жизненный цикл CloudLinux OS
 ---
-
-# CloudLinux Life cycle
-
+<gtranslate-io>
+# Жизненный цикл CloudLinux OS
+</gtranslate-io>

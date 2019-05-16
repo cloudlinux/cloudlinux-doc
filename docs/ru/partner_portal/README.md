@@ -1,6 +1,7 @@
 ---
 title: Partner Portal
 ---
-
-# Partner Portal
+<gtranslate-io>
+# Партнерский портал
+</gtranslate-io>
 

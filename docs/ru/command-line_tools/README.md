@@ -1,8 +1,8 @@
 ---
-title: Command-line Tools
+title: Инструменты командной строки
 ---
-
-# Command-line Tools
+<gtranslate-io>
+# Инструменты командной строки
 
 ## lvectl
 
@@ -14,4 +14,7 @@ title: Command-line Tools
 
 ## cldiag
 
-### Common problems troubleshooting
+### Автоматические уведомления о неисправностях (только cPanel)
+
+### Устранение распространенных неисправностей
+</gtranslate-io>

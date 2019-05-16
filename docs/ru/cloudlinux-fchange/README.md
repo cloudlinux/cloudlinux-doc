@@ -1,16 +1,16 @@
 ---
 title: File Change API
 ---
-
+<gtranslate-io>
 # File Change API
 
-## General
+## Основные положения
 
-## Usage and Integration
+## Использование и интегрирование
 
-## Installation and Configuration
+## Установка и конфигурирование
 
-## Configuration Details
+## Описание конфигурации
 
-## Low-level access
-
+## Низкоуровневый доступ
+</gtranslate-io>

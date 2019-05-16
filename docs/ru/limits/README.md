@@ -1,26 +1,38 @@
 ---
-title: Limits
+title: Лимиты
 ---
+<gtranslate-io>
+# Лимиты
 
-# Limits
+## Что такое LVE?
 
-## Understanding LVE
+### Как проверить, что LVE установлен
 
-## Command-line Tools
+### Управление LVE-лимитами
 
-### lvectl
+### Мониторинг использования LVE
 
-### lveps
+## Проверка LVE-лимитов
 
-### lvetop
+### Список исключений (проверка не поддерживается)
 
-### cldetect
+### Проверка существующих лимитов
 
-## SPEED Limits
+### Практические рекомендации
 
-## CPU Limits
+## Лимит SPEED
 
-## Memory Limits
+## Лимит CPU
+
+### Лимит CPU для lve-utils версии ниже 1.4
+
+## Лимит Memory
+
+### Лимит Virtual Memory
+
+### Лимит Physical Memory
+
+### Поиск и устранение неисправностей для лимита Memory
 
 ## IO
 
@@ -30,23 +42,31 @@ title: Limits
 
 ## Number of Processes
 
-## Network Traffic Bandwidth Control and Accounting System
+## Система контроля и учета пропускной способности сетевого трафика
 
-## Compatibility Matrix
+### Как ограничить исходящий сетевой трафик
 
-## Integration Components
+### Учет трафика
 
-### LVE PAM module
+## Матрица совместимости
+
+## Компоненты
+
+### LVE PAM модуль
 
 ### LVE Wrappers
 
 ### MPM ITK
 
-### HostingLimits
+### Модуль HostingLimits для Apache
 
-#### Redis Support for HostingLimits
+### Как установить
+
+### Директивы
+
+### Поддержка Redis для HostingLimits
 
 ### cPanel/WHM JSON API
 
-### cPanel LVE Extension
-
+### Расширение LVE для cPanel
+</gtranslate-io>

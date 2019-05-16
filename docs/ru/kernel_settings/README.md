@@ -1,34 +1,34 @@
 ---
-title: Kernel Settings
+title: Настройки ядра
 ---
+<gtranslate-io>
+# Настройки ядра
 
-# Kernel Settings
+## Переменные конфигурации ядра
 
-## Kernel Config Variables
-
-## Virtualized /proc filesystem
+## Виртуальная файловая система /proc
 
 ## SecureLinks
 
-### Symlink Owner Match Protection
+### Защита подбора символических ссылок
 
-### Link Traversal Protection 
+### Защита обхода ссылок
 
-## ptrace Block
+## Защита от ptrace
 
 ## Xen XVDA
 
-## TPE Extension (deprecated)
+## Расширение TPE (не поддерживается)
 
-## IO
+## Задержка для лимита IO
 
-## Hybrid Kernel
+## Гибридное ядро
 
-## Reading 
+## Статистика использования LVE 
 
 ## flashcache
 
-## OOM Killer
+## OOM Killer для LVE-процессов
 
-## File System Quotas
-
+## Квоты файловой системы
+</gtranslate-io>

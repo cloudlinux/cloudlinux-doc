@@ -1,10 +1,11 @@
 ---
-title: Additional Packages
+title: Дополнительные пакеты
 ---
+<gtranslate-io>
 
-# Additional Packages
+# Дополнительные пакеты
 
 ## alt-suexec
 
 ## tuned-profiles-cloudlinux
-
+</gtranslate-io>

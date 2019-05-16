@@ -6,37 +6,61 @@ title: Установка
 
 ## Конвертация существующих серверов
 
-### Advanced Options for cldeploy
+### Дополнительные параметры для cldeploy
 
-### Explanation Of Changes
+### Объяснение изменений
 
-## Installing new servers
+## Установка на новый сервер
 
-## CloudLinux OS Images
+## Образы CloudLinux OS
 
-### Xen Images
+### Xen
 
-## Net Install
+## Сетевая установка
 
-## asd
+## Установка на сервер H-Sphere
 
-### Converting from mod_fastcgi to mod_fcgid
+### Требования
 
-## Virtuozzo and OpenVZ
+### Конвертация из mod_fastcgi в mod_fcgid
 
-## Getting Trial License
+### Старые версии H-Sphere
 
-## Registering CloudLinux Server
+## Virtuozzo и OpenVZ
 
-## CloudLinux on DigitalOcean
+### Установка для Virtuozzo и OpenVZ
 
-## CloudLinux on Linode
+## Получение пробной лицензии
 
-## Servers with LILO boot loader
+## Регистрация сервера CloudLinux
 
-## Migrating to EasyApache 4
+## CloudLinux на DigitalOcean
+
+### Добавление образа CloudLinux в DigitalOcean
+
+## CloudLinux на Linode
+
+### CloudLinux на Linode KVM
+
+### CloudLinux на Linode Xen
+
+## Серверы с LILO-загрузчиком
+
+## Миграция на EasyApache 4
+
+###  Советы и ограничения
+
+### CentOS с EeasyApache 4
+
+### CentOS без EasyApache 4
+
+### CloudLinux без EasyApache 4
+
+### Переход обратно с EasyApache 4 на EasyApache 3
+
+### Подробнее о скрипте cloudlinux_ea3_to_ea4
 
 ### FAQ
 
-## Uninstalling CloudLinux
+## Удаление CloudLinux
 </gtranslate-io>

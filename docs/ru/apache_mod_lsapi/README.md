@@ -1,22 +1,12 @@
 ---
 title: Apache mod_lsapi PRO
 ---
-
+<gtranslate-io>
 # Apache mod_lsapi PRO
 
-## Configuration References
+## Конфигурационные параметры
 
-## Installation
-
-### cPanel
-
-### Plesk
-
-### DirectAdmin
-
-### No control panel
-
-## Uninstall
+## Установка Apache mod_lsapi PRO
 
 ### cPanel
 
@@ -24,13 +14,23 @@ title: Apache mod_lsapi PRO
 
 ### DirectAdmin
 
-### No control panel
+### Сервер без панели управления
 
-## switch_mod_lsapi tool
+## Удаление
 
-## Troubleshooting
+### cPanel
 
-## FAQ on mod_lsapi
+### Plesk
 
-## CRIU Support
+### DirectAdmin
 
+### Сервер без панели управления
+
+## Инструмент switch_mod_lsapi
+
+## Диагностика и устранение неполадок
+
+## FAQ по mod_lsapi
+
+## Поддержка CRIU
+</gtranslate-io>

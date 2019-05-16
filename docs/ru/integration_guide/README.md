@@ -1,12 +1,12 @@
 ---
-title: Integration Guide
+title: Руководство по интеграции
 ---
+<gtranslate-io>
+# Руководство по интеграции
 
-# Integration Guide
+## Обнаружение и работа с CloudLinux
 
-## Detecting and Working with CloudLinux
+## Отображение лимитов CPU, Memory и IO
 
-## Displaying CPU, Memory & IO limits
-
-## Integrating LVE Limits with Packages
-
+## Интеграция LVE-лимитов с пакетами
+</gtranslate-io>

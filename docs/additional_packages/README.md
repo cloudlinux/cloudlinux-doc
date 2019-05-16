@@ -5,18 +5,22 @@ CloudLinux will package additional software needed by hosters for your convenien
 
 [Git for cPanel](/deprecated/#git-for-cpanel) (deprecated)
 
-[alt-suexec](/additional_packages/#alt-suexec)
+<span class="notranslate"> [alt-suexec](/additional_packages/#alt-suexec) </span>
 
 <span class="notranslate"> [tuned-profiles-cloudlinux](/additional_packages/#tuned-profiles-cloudlinux) </span>
 
 [cloudlinux-fchange](/cloudlinux-fchange/)
 
+<div class="notranslate">
+
 ## alt-suexec
 
-**What is alt-suexec package needed for?**
+</div>
+
+**What is <span class="notranslate">alt-suexec</span> package needed for?**
 
 
-If you use standard httpd from our repository, but your users' sites do not match standard Apache location of <span class="notranslate"> /var/www </span> , then you should use alt-suexec.
+If you use standard httpd from our repository, but your users' sites do not match standard Apache location of <span class="notranslate">`/var/www`</span>, then you should use alt-suexec.
 alt-suexec package brings suEXEC binaries pre-compiled for specific locations, like <span class="notranslate"> /home </span> .
 
 **How to switch suEXEC with alt-suexec**

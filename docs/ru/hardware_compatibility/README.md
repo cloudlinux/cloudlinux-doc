@@ -1,6 +1,6 @@
 ---
-title: Hardware Compatibility
+title: Совместимость оборудования
 ---
-
-# Hardware Compatibility
-
+<gtranslate-io>
+# Совместимость оборудования
+</gtranslate-io>
