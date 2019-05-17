@@ -819,7 +819,10 @@ Now, when the module is installed, restart Apache to ensure that mod_lsapi PRO i
 $ service httpd restart
 ```
 </div>
+
 Now LSPHPXY alt-php PHP handlers are available for managing through Plesk PHP Settings.
+
+![](/images/plesk-php-settings.png)
 
 For more details about swith_mod_lsapi, please visit [switch_mod_lsapi tool](/apache_mod_lsapi/#switch-mod-lsapi-tool) .
 
