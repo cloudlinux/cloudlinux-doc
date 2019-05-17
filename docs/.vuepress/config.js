@@ -87,7 +87,7 @@ module.exports = {
         ],
 
         // text for the language dropdown
-        selectText: "Languages",
+        selectText: "En",
         // label for this locale in the language dropdown
         label: "English",
         // text for the edit-on-github link
@@ -139,7 +139,7 @@ module.exports = {
         ]
       },
       "/ru/": {
-        selectText: "Выберите язык",
+        selectText: "Рус",
         label: "Русский",
         editLinkText: "Редактировать",
         serviceWorker: {
