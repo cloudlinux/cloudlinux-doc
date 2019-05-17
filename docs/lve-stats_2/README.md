@@ -128,6 +128,8 @@ Configuration files for plugins are located in <span class="notranslate">`/etc/s
 * <span class="notranslate">`NOTIFY_FROM_EMAIL`</span> - sender email address. For example: <span class="notranslate">`NOTIFY_FROM_EMAIL=main_admin@host.com`;</span>
 * <span class="notranslate">`NOTIFY_FROM_SUBJECT`</span> - email message subject. For example: <span class="notranslate">`NOTIFY_FROM_SUBJECT=Message from notifier`</span>
 
+These values can also be set using [cloudlinux-config CLI](/command-line_tools/#cloudlinux-config) utility
+
 Templates of notifications are located here:
 
 * <span class="notranslate">`/usr/share/lve/emails/en_US/admin_notify.txt`</span>
