@@ -588,21 +588,21 @@ cloudlinux-config set [--json] --reset-inodes-limit
 
 | | |
 |-|-|
-| get| Shows the values of all supported parameters|
-| set| Sets values for supported parameters|
+|<span class="notranslate">`get`</span>| Shows the values of all supported parameters|
+|<span class="notranslate">`set`</span>| Sets values for supported parameters|
 
 **Options**
 
 | | |
 |-|-|
-| --json| Sets/returns values in json format|
-| --data| Sets values from the data string that follows|
-| --for-reseller| Sets/limits the output only to the data related to reseller _resname_ |
-| --reset-inodes-limit| Resets inode limits (in case disk quota breaks)|
+|<span class="notranslate">`--json`</span>| Sets/returns values in json format|
+|<span class="notranslate">`--data`</span>| Sets values from the data string that follows|
+|<span class="notranslate">`--for-reseller`</span>| Sets/limits the output only to the data related to reseller _resname_ |
+|<span class="notranslate">`--reset-inodes-limit`</span>| Resets inode limits (in case disk quota breaks)|
 
 **JSON data structure**
 
-All options are enclosed inside `options` (Level 0) string. All options are enclosed in " ", while values come as is. Here's an example:
+All options are enclosed inside <span class="notranslate">`options`</span> (Level 0) string. All options are enclosed in `" "`, while values come as is. Here's an example:
 
 <div class="notranslate">
 
@@ -618,33 +618,33 @@ Each Level1 option can have nested Level2 options specified using the same synta
 | | | | | | |
 |-|-|-|-|-|-|
 | Level1| Level2| Level3| Level4| Possible values| Description|
-| faultsNotification| faultsToInclude| concurrentConnections| | true/false| Include concurrent connection value in notification emails|
-| faultsNotification| faultsToInclude| cpu| | true/false| Include CPU consumption value in notification emails|
-| faultsNotification| faultsToInclude| io| | true/false| Include IO value in notification emails|
-| faultsNotification| faultsToInclude| iops| | true/false| Include IOPS value in notification emails|
-| faultsNotification| faultsToInclude| mem| | true/false| Include RAM consumption value in notification emails|
-| faultsNotification| faultsToInclude| nproc| | true/false| Include number of processes value in notification emails|
-| faultsNotification| fminimumNumberOfFaultsToNotify| admin| | N| The minimum number of faults to notify for admin|
-| faultsNotification| fminimumNumberOfFaultsToNotify| user| | N| The minimum number of faults to notify for users|
-| faultsNotification| fminimumNumberOfFaultsToNotify| reseller*| | N| The minimum number of faults to notify for reseller|
-| faultsNotification| fminimumNumberOfFaultsToNotify| customer*| | N| The minimum number of faults to notify for reseller's customers|
-| faultsNotification| notify| admin| period| N| The period of faults notifications for admin|
-| faultsNotification| notify| admin| unitOfTime| minutes/hours/days| Time units of period of faults notifications for admin|
-| faultsNotification| notify| user| period| N| The period of faults notifications for users|
-| faultsNotification| notify| user| unitOfTime| minutes/hours/days| Time units of period of faults notifications for users|
-| faultsNotification| notify| reseller*| period| N| The period of faults notifications for resellers|
-| faultsNotification| notify| reseller*| unitOfTime| minutes/hours/days| Time units of period of faults notifications for resellers|
-| faultsNotification| notify| customer*| period| N| The period of faults notifications for reseller's customers|
-| faultsNotification| notify| customer*| unitOfTime| minutes/hours/days| Time units of period of faults notifications for reseller's customers|
-| faultsNotification| notifyAdmin| | | true/false| Send faults notifications to admin|
-| faultsNotification| notifyResellerCustomers| | | true/false| Send faults notification to reseller users|
-| faultsNotification| notifyResellerOnCustomers*| | | true/false| Send users' faults notifications to the respective reseller|
-| faultsNotification| notifyReseller*| | | true/false| Send faults notification to reseller|
-| faultsNotification| notifyCustomers| | | true/false| Send faults notifications to users|
-| faultsNotification| notifyResellers| | | true/false| Send faults notification to resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>| <span class="notranslate">`concurrentConnections`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include concurrent connection value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`cpu`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include CPU consumption value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`io`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include IO value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`iops`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include IOPS value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`mem`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include RAM consumption value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`faultsToInclude`</span>|<span class="notranslate">`nproc`</span>| |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Include number of processes value in notification emails|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`admin`</span>| | `N`| The minimum number of faults to notify for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`user`</span>| | `N`| The minimum number of faults to notify for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`reseller`</span><sup> *</sup>| | `N`| The minimum number of faults to notify for reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`fminimumNumberOfFaultsToNotify`</span>| <span class="notranslate">`customer`</span><sup> *</sup>| | `N`| The minimum number of faults to notify for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`admin`</span>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`admin`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`user`</span>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`user|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`reseller`</span><sup> *</sup>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`reseller`</span><sup> *</sup>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`customer`</span><sup> *</sup>|<span class="notranslate">`period`</span>| `N`| The period of faults notifications for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notify`</span>|<span class="notranslate">`customer*|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Time units of period of faults notifications for reseller's customers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyAdmin`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to admin|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellerCustomers`</span>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellerOnCustomers`</span><sup> *</sup>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send users' faults notifications to the respective reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyReseller`</span><sup> *</sup>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyCustomers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to users|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to resellers|
 
 ::: tip Note  
-Options marked with (*) are for reseller use only
+Options marked with `*` are for reseller use only
 :::
 
 **MySQL Governor settings**
@@ -652,42 +652,42 @@ Options marked with (*) are for reseller use only
 | | | | | | |
 |-|-|-|-|-|-|
 | Level1| Level2| Level3| Level4| Possible values| Description|
-| mySQLGovSettings| errorLog| level| | DEBUG/ERROR| Sets error log level |
-| mySQLGovSettings| errorLog| logPath| | /var/log/dbgovernor-error.log| Sets error log destination file |
-| mySQLGovSettings| gatherDataForDetailedStats| | | true/false| Enables gathering data for detailed statistics |
-| mySQLGovSettings| logRestrictedUsersQueries| | | true/false| Enables logging of restricted user queries |
-| mySQLGovSettings| modeOfOperation| | | off/single/abusers/all| Sets the mode of operation |
-| mySQLGovSettings| restrictLog| format| | SHORT/MEDIUM/LONG/VERYLONG| Sets the format for restrict log |
-| mySQLGovSettings| restrictLog| logPath| | /var/log/dbgovernor-restrict.log| Sets the format for restrict log |
-| mySQLGovSettings| restrictType| mode| | period/limit| Sets the restriction mode |
-| mySQLGovSettings| restrictType| unlimit| period| N| Sets the restriction expiration period |
-| mySQLGovSettings| restrictType| unlimit| unitOfTime| seconds/minutes/hours/days| Sets the restriction expiration period units of time |
-| mySQLGovSettings| restrictedTimePeriods| level1| period| N| Sets L1 restriction time period |
-| mySQLGovSettings| restrictedTimePeriods| level1| unitOfTime| seconds/minutes/hours/days| Sets L1 restriction time period units of time |
-| mySQLGovSettings| restrictedTimePeriods| level2| period| N| Sets L2 restriction time period |
-| mySQLGovSettings| restrictedTimePeriods| level2| unitOfTime| seconds/minutes/hours/days| Sets L2 restriction time period units of time |
-| mySQLGovSettings| restrictedTimePeriods| level3| period| N| Sets L3 restriction time period |
-| mySQLGovSettings| restrictedTimePeriods| level3| unitOfTime| seconds/minutes/hours/days| Sets L3 restriction time period units of time |
-| mySQLGovSettings| restrictedTimePeriods| level4| period| N| Sets L4 restriction time period |
-| mySQLGovSettings| restrictedTimePeriods| level4| unitOfTime| seconds/minutes/hours/days| Sets L4 restriction time period units of time |
-| mySQLGovSettings| restrictedTimePeriods| timeout| period| N| Sets restriction time period timeout|
-| mySQLGovSettings| restrictedTimePeriods| timeout| unitOfTime| seconds/minutes/hours/days| Sets L1 restriction time period timeout units of time |
-| mySQLGovSettings| scriptPath| | | /path/to/script| Path to script to be triggered when account is restricted |
-| mySQLGovSettings| slowQueries| kill| | true/false| Enables killing of slow queries |
-| mySQLGovSettings| slowQueries| logPath| | /path/to/sqkill.log| Sets the path to slow query kill log file |
-| mySQLGovSettings| slowQueries| timeout| | N| Time to kill slow SELECT queries for account (seconds) |
-| mySQLGovSettings| userMaxConnections| | | N| Sets the maximum number of user connections to database |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`errorLog`</span>|<span class="notranslate">`level`</span>| | <span class="notranslate">`DEBUG`</span>/<span class="notranslate">`ERROR`</span>| Sets error log level |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`errorLog`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/var/log/dbgovernor-error.log`</span>| Sets error log destination file |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`gatherDataForDetailedStats`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables gathering data for detailed statistics |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`logRestrictedUsersQueries`</span>| | | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables logging of restricted user queries |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`modeOfOperation`</span>| | |<span class="notranslate">`off`</span>/<span class="notranslate">`single`</span>/<span class="notranslate">`abusers`</span>/<span class="notranslate">`all`</span>| Sets the mode of operation |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictLog`</span>|<span class="notranslate">`format`</span>| |<span class="notranslate">`SHORT`</span>/<span class="notranslate">`MEDIUM`</span>/<span class="notranslate">`LONG`</span>/<span class="notranslate">`VERYLONG`</span>| Sets the format for restrict log |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictLog`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/var/log/dbgovernor-restrict.log`</span>| Sets the format for restrict log |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`mode`</span>| |<span class="notranslate">`period`</span>/<span class="notranslate">`limit`</span>| Sets the restriction mode |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`unlimit`</span>|<span class="notranslate">`period`</span>| `N`| Sets the restriction expiration period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictType`</span>|<span class="notranslate">`unlimit`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets the restriction expiration period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level1`</span>|<span class="notranslate">`period`</span>| `N`| Sets L1 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level1`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L1 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level2`</span>|<span class="notranslate">`period`</span>| `N`| Sets L2 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level2`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L2 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level3`</span>|<span class="notranslate">`period`</span>| `N`| Sets L3 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level3`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L3 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level4`</span>|<span class="notranslate">`period`</span>| `N`| Sets L4 restriction time period |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`level4`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L4 restriction time period units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>| <span class="notranslate">`timeout`</span>|<span class="notranslate">`period`</span>| `N`| Sets restriction time period timeout|
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`restrictedTimePeriods`</span>|<span class="notranslate">`timeout`</span>|<span class="notranslate">`unitOfTime`</span>|<span class="notranslate">`seconds`</span>/<span class="notranslate">`minutes`</span>/<span class="notranslate">`hours`</span>/<span class="notranslate">`days`</span>| Sets L1 restriction time period timeout units of time |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`scriptPath`</span>| | | <span class="notranslate">`/path/to/script`</span>| Path to script to be triggered when account is restricted |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`kill`</span>| | <span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Enables killing of slow queries |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`logPath`</span>| |<span class="notranslate">`/path/to/sqkill.log`</span>| Sets the path to slow query kill log file |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`slowQueries`</span>|<span class="notranslate">`timeout`</span>| | `N`| Time to kill slow SELECT queries for account (seconds) |
+|<span class="notranslate">`mySQLGovSettings`</span>|<span class="notranslate">`userMaxConnections`</span>| | | `N`| Sets the maximum number of user connections to database |
 
 **LVE Manager UI settings**
 
 | | | | |
 |-|-|-|-|
 | Level1| Level2| Possible values| Description|
-| inodeLimits| showUserInodesUsage| true/false| Show end user inode usage|
-| uiSettings| hideLVEUserStat| true/false| Hide LVE end user usage statistic|
-| uiSettings| hidePHPextensions| true/false| Hide PHP extension selection|
-| uiSettings| hidePythonApp| true/false| Hide Python App in web-interface|
-| uiSettings| hideRubyApp| true/false| Hide Ruby App in web-interface|
+|<span class="notranslate">`inodeLimits`</span>|<span class="notranslate">`showUserInodesUsage`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Show end user inode usage|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hideLVEUserStat`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide LVE end user usage statistic|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hidePHPextensions`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide PHP extension selection|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hidePythonApp`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide Python App in web-interface|
+|<span class="notranslate">`uiSettings`</span>|<span class="notranslate">`hideRubyApp`</span>|<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Hide Ruby App in web-interface|
 
 **Examples**
 
