@@ -92,6 +92,7 @@ module.exports = {
         label: "English",
         // text for the edit-on-github link
         editLinkText: "Edit this page",
+        stayInTouch: "Stay in touch",
         // config for Service Worker
         serviceWorker: {
           updatePopup: {
