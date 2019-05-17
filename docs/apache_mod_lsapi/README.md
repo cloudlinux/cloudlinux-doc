@@ -1548,12 +1548,47 @@ Q: **_Is it possible to use CRIU with Litespeed Web Server?_**
 A: Yes, Litespeed Web Server officially supports CRIU on the servers with CloudLinux. For detailed information on setting up CRIU with a Litespeed Web Server, follow the [link](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:lsphp_criu_enable) . You can also use lsphp binaries from alt-php or ea-php packages for that purpose.
 
 
+Q: **_Is the <span class="notranslate">New Relic</span> extension compatible with the mod_lsapi PRO?_**
+
+A: Yes, it is. Follow the next guide on how to enable it with mod_lsapi PRO.
+
+#### Installation guide New Relic with mod_lsapi PRO
+
+Currently, the <span class="notranslate">[New Relic PHP Agent](https://docs.newrelic.com/docs/agents/php-agent)</span> extension is supported for <span class="notranslate">alt-php</span> version 7.0 and higher. It can be installed for <span class="notranslate">alt-php</span> with the <span class="notranslate">`alt-php**-pecl-ext`</span> package (`**` - version 70 and higher).
+
+For example:
+
+<div class="notranslate">
+
+```
+# yum install alt-php70-pecl-ext
+```
+</div>
+
+The next step is to enable the <span class="notranslate">New Relic</span> extension on the domain. You can do this through `php.ini` configuration or via <span class="notranslate">[PHP Selector](/php_selector/#using)</span>.
+
+We assume that the <span class="notranslate">mod_lsai PRO</span> is already installed and enabled on the domain. If not, visit [mod_lsapi PRO installation guide](/apache_mod_lsapi/#installation).
+
+The next step is to specify the <span class="notranslate">New Relic</span> license and name of your application on the domain. This can be easily done by adding the following lines to the main htaccess file of domain or to the virtual host section of the Apache configuration file:
+
+<div class="notranslate">
+
+```
+<IfModule lsapi_module>
+    php_value newrelic.appname  "My PHP Application"
+    php_value newrelic.license  "<My license key>"
+</IfModule>
+
+```
+</div>
+
+The only thing you need to make sure that the directive <span class="notranslate">[`lsapi_mod_php_behaviour`](https://docs.cloudlinux.com/apache_mod_lsapi/#lsapi-mod-php-behaviour)</span> is on. To further configure the PHP agent use the [link](https://docs.newrelic.com/docs/agents/php-agent/configuration/php-agent-configuration).
+
 ## CRIU Support
 
-
-_[ <span class="notranslate"> CloudLinux </span> 7 only]_
-
-
+:::tip Note
+<span class="notranslate"> CloudLinux </span> 7 only
+:::
 
 CRIU is <span class="notranslate"> _Checkpoint/Restore In Userspace_ </span> , (pronounced <span class="notranslate"> kree-oo </span> ), is a software tool for Linux operating system. Using this tool, you can freeze a running application (or part of it) and checkpoint it as a collection of files on disk. You can then use the files to restore the application and run it exactly as it was during the time of freeze (more information on the link [https://criu.org/Main_Page](https://criu.org/Main_Page) ).
 

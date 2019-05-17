@@ -116,7 +116,7 @@ Starting from lve-utils 3.0-21.2, fs.proc_super_gid parameter in da_add_admin ut
 
 # Remounting procfs with "hidepid" option
 
-In **lve-utils-2.1-3.2** and later _/proc_ can be remounted with _"hidepid=2"_ option to enable additional protection for procfs. This remount is performed in lve_namespaces service.
+In **lve-utils-2.1-3.2** and later _/proc_ can be remounted with `hidepid=2` option to enable additional protection for procfs. This remount is performed in lve_namespaces service.
 This option is in sync with _fs.proc_can_see_other_uid_ kernel parameter described above.
 When _/etc/sysctl.conf_ does not contain _fs.proc_can_see_other_uid_ setting, the protection is off (procfs is remounted with _hidepid=0_ option). In this case _fs.proc_super_gid_ setting is ignored. Users are able to see full _/proc_ including processes of other users on a server. This is a default behavior.
 
