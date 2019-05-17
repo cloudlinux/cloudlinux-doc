@@ -27,7 +27,7 @@ $ reboot
 Once you have rebooted, you are running CloudLinux kernel with LVE enabled.
 
 The script automatically detects and supports the following control panels:
-* cPanel with EA3
+* cPanel with EA4 (EA3 till September 1st.)
 * Plesk
 * DirectAdmin
 * InterWorx.
