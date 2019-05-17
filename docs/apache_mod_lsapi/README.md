@@ -1072,8 +1072,6 @@ It has the following syntax:
 
 **Main options**
 
-<div class="notranslate">
-
 | | |
 |-|-|
 |**Option** | **Description**|
@@ -1089,17 +1087,14 @@ It has the following syntax:
 |`--check-php` | check PHP configuration<br> _* NOT supported for DirectAdmin_|
 |`--stat` | return usage statistics in JSON format; the following statistics metrics are collected:<br> • control panel name;<br> • mod_lsapi version;<br> • liblsapi version;<br> • criu version and status;<br> • whether mod_lsapi is enabled;<br> • lsapi configuration options;<br> • number of domains, that use _mod_lsapi_, per each installed PHP version including those set in PHP Selector _(this metric is supported for cPanel EasyApache 4, Plesk and DirectAdmin)_ .|
 
-</div>
-
 **Additional options**
-<div class="notranslate">
 
 | | |
 |-|-|
 |**Option** | **Description**|
 |`--verbose` | switch verbose level on|
 |`--force` | switch force mode on|
-</div>
+
 
 The following table presents which `[OPTIONS]` are supported for various panels:
 

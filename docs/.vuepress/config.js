@@ -69,6 +69,7 @@ module.exports = {
     cloudlinuxSite: "https://cloudlinux.com",
     locales: {
       "/": {
+        stayInTouch: "Stay in touch",
         bottomLinks: [
           {
             text: "How to",
@@ -86,13 +87,16 @@ module.exports = {
           { text: "Blog", url: "https://www.cloudlinux.com/blog" }
         ],
 
+        // text for the language dropdown title
+        title: "Language",
         // text for the language dropdown
         selectText: "En",
         // label for this locale in the language dropdown
         label: "English",
         // text for the edit-on-github link
         editLinkText: "Edit this page",
-        stayInTouch: "Stay in touch",
+        tryFree: "Try Free",
+        search: "Search",
         // config for Service Worker
         serviceWorker: {
           updatePopup: {
@@ -140,16 +144,35 @@ module.exports = {
         ]
       },
       "/ru/": {
+        title: "Язык",
         selectText: "Рус",
         label: "Русский",
         editLinkText: "Редактировать",
+        tryFree: "Попробовать бесплатно",
+        search: "Поиск",
         serviceWorker: {
           updatePopup: {
-            message: "Доступен новый контент",
+            message: "Доступен Новый контент",
             buttonText: "Обновить"
           }
         },
         algolia: {},
+        stayInTouch: "Будем на связи",
+        bottomLinks: [
+            {
+                text: "Инструкции",
+                url: "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
+            },
+            {
+                text: "С чего начать",
+                url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
+            },
+            {
+                text: "Техподдержка",
+                url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
+            },
+            { text: "Блог", url: "https://www.cloudlinux.com/blog" }
+        ],
         sidebar: [
           {
             title: "Содержание",
