@@ -110,7 +110,7 @@ Virtualized /proc filesystem will only display following files (as well as direc
 ```
 </div>   
 
-:::tip Nonte
+:::tip Note
 Starting from lve-utils 3.0-21.2, fs.proc_super_gid parameter in da_add_admin utility is written to /etc/sysctl.d/90-cloudlinux.conf.
 :::
 
