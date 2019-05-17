@@ -291,15 +291,14 @@ $ cagefsctl --force-update
 </div>
 
 ::: tip Notes
-:::
 
-1. _Make sure that php.ini load path is set to_ <span class="notranslate"> _/etc/php.ini_ </span>
+1. Make sure that `php.ini` load path is set to <span class="notranslate">`/etc/php.ini`</span>
 
-2. _Users will be able to override settings of those php.ini files (global or custom) via_ <span class="notranslate"> _PHP Selector_ </span> _. If you want to prevent that, you should disable_ <span class="notranslate"> _PHP Selector_ </span> _feature._
+2. Users will be able to override settings of those php.ini files (global or custom) via <span class="notranslate">PHP Selector</span>. If you want to prevent that, you should disable <span class="notranslate">PHP Selector</span> feature.
 
-3. _Even if_ <span class="notranslate"> _PHP Selector_ </span> _is disabled, user can override php settings by using_ <span class="notranslate"> _ini_set() php_ </span> _function in php script, or by_ <span class="notranslate"> _"php -c"_ </span> _command line option._
+3. Even if <span class="notranslate">PHP Selector</span> is disabled, user can override PHP settings by using <span class="notranslate">`ini_set() php`</span> function in PHP script, or by <span class="notranslate">`php -c`</span> command line option.
 
-4. _If you modify anything in_ <span class="notranslate"> _/etc/cagefs/custom.etc_ </span> _directory, you should execute:_
+4. If you modify anything in <span class="notranslate">`/etc/cagefs/custom.etc`</span> directory, you should execute:
 
 <div class="notranslate">
 
@@ -308,7 +307,10 @@ $ cagefsctl --update-etc
 ```
 </div>
 
-_in order to apply changes to CageFS for all users or:_
+in order to apply changes to CageFS for all users.
+
+OR 
+
 <div class="notranslate">
 
 ```
@@ -316,8 +318,9 @@ $ cagefsctl --update-etc user1 user2
 ```
 </div>
 
-_to apply changes to CageFS for specific users._
+to apply changes to CageFS for specific users.
 
+:::
 
 ### Managing interpreter version
 
