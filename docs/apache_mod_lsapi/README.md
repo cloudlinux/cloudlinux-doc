@@ -1570,9 +1570,9 @@ For example:
 
 The next step is to enable the <span class="notranslate">New Relic</span> extension on the domain. You can do this through `php.ini` configuration or via <span class="notranslate">[PHP Selector](/php_selector/#using)</span>.
 
-We assume that the <span class="notranslate">mod_lsai PRO</span> is already installed and enabled on the domain. If not, visit [mod_lsapi PRO installation guide](/apache_mod_lsapi/#installation).
+We assume that the <span class="notranslate">mod_lsapi PRO</span> is already installed and enabled on the domain. If not, visit [mod_lsapi PRO installation guide](/apache_mod_lsapi/#installation).
 
-The next step is to specify the <span class="notranslate">New Relic</span> license and name of your application on the domain. This can be easily done by adding the following lines to the main htaccess file of domain or to the virtual host section of the Apache configuration file:
+The next step is to specify the <span class="notranslate">New Relic</span> license and the name of your application on the domain. This can be easily done by adding the following lines to the main htaccess file of domain or to the virtual host section of the Apache configuration file:
 
 <div class="notranslate">
 
