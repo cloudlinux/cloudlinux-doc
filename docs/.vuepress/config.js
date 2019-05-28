@@ -18,7 +18,14 @@ module.exports = {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/icon?family=Material+Icons"
       }
-    ]
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "/favicon.ico"
+      }
+    ],
   ],
   locales: {
     // The key is the path for the locale to be nested under.
