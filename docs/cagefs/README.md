@@ -30,7 +30,7 @@ CageFS is not supported for H-Sphere.
 
 Minimum Requirements:
 
-* kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
+* kernel: CL6 with lve1.2.17.1 or later, CL7.
 * 7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
