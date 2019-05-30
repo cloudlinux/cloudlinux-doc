@@ -142,13 +142,6 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
   * Last updated: July 05, 2018
 
 
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#registering-cloudlinux-server) and then run yum update.
 :::
@@ -224,7 +217,6 @@ It will boot into CloudLinux installer.
 
 2. During the CloudLinux installation select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/) and continue with installation.
 
-To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
