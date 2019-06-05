@@ -3,7 +3,7 @@
 
 [Overview](/cloudlinux_whmcs_plugin/#overview)  
 [Installation & Configuration](/cloudlinux_whmcs_plugin/#installation-configuration)  
-[Installation and Update](/installation_and_update.html#installationupdate/)  
+[Installation and Update](/cloudlinux_whmcs_plugin/#installation-and-update)  
 [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product)  
 [Configuration of Add-on](/cloudlinux_whmcs_plugin/#configuration-of-add-on)  
 [Management](/cloudlinux_whmcs_plugin/#management)  
