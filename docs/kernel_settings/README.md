@@ -551,15 +551,15 @@ reboot
 
 Features that are absent in the current kernel build:
 
-1. OOM killer
-2. CPU boost
-3. CRIU support for mod_lsapi PRO
-4. Per LVE traffic accounting
+1. CPU boost
+2. CRIU support for mod_lsapi PRO
+3. Per LVE traffic accounting
 
 Limitations of the current kernel build:
 
-1. Proc can be seen other uids - can hide all procfs files for the regular (not root) users
-2. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
+1. Standard OOM killer is used
+2. Proc can be seen other uids - can hide all procfs files for the regular (not root) users
+3. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
 
 <div class="notranslate">
 
