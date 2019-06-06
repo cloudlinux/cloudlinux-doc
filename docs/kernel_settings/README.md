@@ -492,15 +492,7 @@ Please find information on the main features of 3.10 kernel branch on the links:
 
 [https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1](https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1)
 
-<span class="notranslate"> **CloudLinux 7 Hybrid kernel** </span>
-
-<span class="notranslate"> CloudLinux </span> 7 Hybrid Kernel is essentially EL8-based (4.18) kernel compiled for CloudLinux OS 7.
-
-You can find more information on 4.18 kernel branch using this link:
-
-[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel)
-
-How to migrate from the normal to hybrid channel (for both CL6h and CL7h): 
+How to migrate from the normal to hybrid channel: 
 
 ::: tip Note
 The system must be registered in CLN.
@@ -522,7 +514,7 @@ reboot
 ```
 </div>
 
-How to migrate from hybrid to the normal channel (for both CL6h and CL7h):
+How to migrate from hybrid to the normal channel:
 
 ::: tip Note
 The system should be registered in CLN.
@@ -546,29 +538,6 @@ reboot
 1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_ .
 
 2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
-
-**Known limitations and issues of CloudLinux 7 Hybrid kernel**
-
-Features that are absent in the current kernel build:
-
-1. CPU boost
-2. CRIU support for mod_lsapi PRO
-3. Per LVE traffic accounting
-
-Limitations of the current kernel build:
-
-1. Standard OOM killer is used
-2. Proc can be seen other uids - can hide all procfs files for the regular (not root) users
-3. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
-
-<div class="notranslate">
-
-```
-sysctl -w fs.enforce_symlinksifowner=1
-```
-</div>
-
-Find more details on [symlink owner match protection](/kernel_settings/#securelinks)
 
 ## Reading LVE Usage
 
