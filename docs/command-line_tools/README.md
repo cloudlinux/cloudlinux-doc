@@ -74,6 +74,7 @@ lvectl is the primary tool for LVE management. To use it, you have to have admin
 | <span class="notranslate"> `lve-version` </span> |LVE version number|
 | <span class="notranslate"> `set-reseller` </span> |create LVE container and set LVE parameters for a reseller|
 | <span class="notranslate"> `set-reseller-default` </span> |set default limits for resellers users|
+| <span class="notranslate"> `remove-reseller`</span> |delete LVE container and the record in the config, move LVE containers to the host container|
 
 **Options**
 
