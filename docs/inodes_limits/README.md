@@ -108,7 +108,7 @@ You should not set soft limit higher than hard limit. cl-quota does not control 
 
 <span class="notranslate"> cl-quota </span> utility allows setting <span class="notranslate"> inodes </span> limits for users of the system.
 
-<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](http://docs.cloudlinux.com/index.html?lve_limits_with_packages.html) .
+<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](/integration_guide/#integrating-lve-limits-with-packages) .
 
 Panel users are such users whose UIDs are issued by the above panel integration mechanism. The list of panel packages and the information on the user's affiliation to a particular package is obtained from there as well.
 

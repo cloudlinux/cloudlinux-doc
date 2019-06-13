@@ -644,7 +644,7 @@ OptimumCache must be provided with list of directories to expect duplicate files
 * <span class="notranslate">`# occtl --recursive --mark-dir /home2`</span> (for cPanel)
 * <span class="notranslate">`# occtl --recursive --mark-dir /var/www`</span> (for Plesk)
 
-OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. See 'Marking directories' [ [http://docs.cloudlinux.com/index.html?marking_directories.html](http://docs.cloudlinux.com/index.html?marking_directories.html) ].
+OptimumCache is going to index these directories. Thus system load during this period (from hours to days) might be as twice as high. See [Marking directories](/deprecated/#marking-directories).
 
 **Allocating Disk Space for OptimumCache:**
 

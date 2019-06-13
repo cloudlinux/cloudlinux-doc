@@ -269,7 +269,7 @@ Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd s
 ### Link Traversal Protection 
 
 
-<span class="notranslate"> [CageFS](http://docs.cloudlinux.com/cagefs.html) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate"> _/etc/passwd_ </span> .
+<span class="notranslate"> [CageFS](/cagefs/) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
 
 Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
 
