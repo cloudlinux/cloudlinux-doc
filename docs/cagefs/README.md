@@ -969,7 +969,8 @@ $ cagefsctl --unmount-all
 $ cat /proc/mounts | grep cagefs 
 # if you see any cagefs entries, execute "cagefsctl --unmount-all" again.
 $ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton 
-$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeletoncagefsctl --enable-cagefs
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
+$ cagefsctl --enable-cagefs
 ```
 </div>
 
