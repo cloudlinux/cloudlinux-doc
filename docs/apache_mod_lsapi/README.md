@@ -1555,7 +1555,7 @@ Q: **_Is the <span class="notranslate">New Relic</span> extension compatible wit
 
 A: Yes, it is. Follow the next guide on how to enable it with mod_lsapi PRO.
 
-#### Installation guide New Relic with mod_lsapi PRO
+### Installation guide New Relic with mod_lsapi PRO
 
 Currently, the <span class="notranslate">[New Relic PHP Agent](https://docs.newrelic.com/docs/agents/php-agent)</span> extension is supported for <span class="notranslate">alt-php</span> version 7.0 and higher. It can be installed for <span class="notranslate">alt-php</span> with the <span class="notranslate">`alt-php**-pecl-ext`</span> package (`**` - version 70 and higher).
 
