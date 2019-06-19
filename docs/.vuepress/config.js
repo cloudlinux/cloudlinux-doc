@@ -163,7 +163,11 @@ module.exports = {
             buttonText: "Обновить"
           }
         },
-        algolia: {},
+        algolia: {
+          apiKey: "efaa28397ce47241021d716c439b80d1",
+          indexName: "cloudlinuxos-ru",
+          appId: "0TCNL6CGX8"
+        },
         stayInTouch: "Будем на связи",
         bottomLinks: [
             {
