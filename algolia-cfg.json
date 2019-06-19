@@ -1,16 +1,35 @@
 {
   "index_name": "cloudlinuxos",
   "start_urls": [
-    "https://docs.cloudlinux.com/"
+    "http://docs.cloudlinux.com"
   ],
-  "stop_urls": [],
+  "stop_urls": [
+    "/#",
+    "https://docs.cloudlinux.com/ru/"
+  ],
   "selectors": {
-    "lvl0": "h1",
-    "lvl1": "h2",
-    "lvl2": "h3",
-    "lvl3": "h4",
-    "lvl4": "h5",
-    "lvl5": "h6",
-    "text": "p, li, code"
-  }
+    "lvl0": ".content h1",
+    "lvl1": ".content h2",
+    "lvl2": ".content h3",
+    "lvl3": ".content h4",
+    "lvl4": ".content h5",
+    "lvl5": ".content h6",
+    "text": ".content p, .content li",
+    "lang": {
+      "selector": "/html/@lang",
+      "type": "xpath",
+      "global": true,
+      "default_value": "en-US"
+    }
+  },
+  "strip_chars": " .,;:#",
+  "custom_settings": {
+    "attributesForFaceting": [
+      "lang"
+    ]
+  },
+  "selectors_exclude": [
+    ".table-of-contents"
+  ],
+  "scrap_start_urls": false
 }
