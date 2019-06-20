@@ -831,17 +831,19 @@ Once <span class="notranslate"> PHP Selector </span> is installed you will see "
 <span class="notranslate"> PHP Selector </span> lets you select default PHP version, as well as modules that will be available to user out of the box.
 
 
-Inside <span class="notranslate"> cPanel </span> , User will be able to change PHP version they would have:
+Inside <span class="notranslate"> cPanel </span>, User will be able to change PHP version they would have:
 
-![](/images/php_selector_user.png.png)
+![](/images/php_selector_user.png)
 
 as well as extensions that they want to use:
 
-![](/images/phpselector_customer.png)
+![](/images/php_selector_customer.png)
 
 and php.ini settings
 
-![](/images/phpselector_options.png)
+![](/images/php_selector_options.png)
+
+All changes are saved automatically.
 
 ## Custom PHP.ini options
 
@@ -890,7 +892,7 @@ Admin can modify the settings using <span class="notranslate"> [selectorctl](/ph
 
 Users can use web interface to modify php.ini settings:
 
-![](/images/phpselector_options.png)
+![](/images/php_selector_options.png)
 
 ## End user files and directories
 
