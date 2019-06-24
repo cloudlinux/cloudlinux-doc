@@ -824,9 +824,9 @@ These commands can affect PHP version of your clients’ web sites. Use them wit
 ## Using 
 
 
-Once <span class="notranslate"> PHP Selector </span> is installed you will see "<span class="notranslate"> Selector </span>" tab in <span class="notranslate"> LVE Manager </span> :
+Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">**Selector**</span> tab in the <span class="notranslate">**LVE Manager**</span>.
 
-![](/images/php_selector.png.png)
+![](/images/php_selector.png)
 
 <span class="notranslate"> PHP Selector </span> lets you select default PHP version, as well as modules that will be available to user out of the box.
 
