@@ -16,7 +16,7 @@ PHP Selector is not supported for H-Sphere.
 
 The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/)  &  <span class="notranslate"> [LVE Manager](/lve_manager/)  installed. </span>
 
-Use [compatibility matrix](/limits/#compatiblity_matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
+Use [compatibility matrix](/limits/#compatibility-matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
 
 Installation of different versions of PHP & modules:
 <div class="notranslate">
