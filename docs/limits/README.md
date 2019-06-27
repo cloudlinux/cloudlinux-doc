@@ -207,7 +207,7 @@ This command supports limits validation both for packages existing in the system
  b) when NPROC limit for a package is less than a custom EP limit for a user included in this package.
  
 
-2.    a) When default EP limit for a hoster is greater than a custom NPROC limit for a user/package which inherits        the default limit.
+2.    a) When default EP limit for a hoster is greater than a custom NPROC limit for a user/package which inherits the default limit.
 
  **OR**
  
