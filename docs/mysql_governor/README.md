@@ -1,7 +1,7 @@
 # MySQL Governor
 
 
-[ <span class="notranslate"> MySQL Governor </span> 0.8-32+]
+[<span class="notranslate">MySQL Governor</span> 0.8-32+]
 
 <span class="notranslate"> MySQL Governor </span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
 
@@ -182,7 +182,6 @@ The script will install original MySQL server, and remove <span class="notransla
 
 
 ## Modes Of Operation
-
 
 **[** <span class="notranslate"> **MySQL Governor** </span> **1.0+]**
 
