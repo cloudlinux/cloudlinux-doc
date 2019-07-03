@@ -1,6 +1,6 @@
-# Python and Ruby Selector
+# Ruby Selector
 
-We have the ability to deploy <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby </span> applications via application server. <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby </span> .
+We have the ability to deploy <span class="notranslate"> Ruby </span> applications via application server. <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby </span> .
 
 This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
 
