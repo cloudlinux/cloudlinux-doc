@@ -825,62 +825,87 @@ For details see [How to migrate an application to the new Python Selector](/pyth
 
 ## Deploying Trac using Python Selector
 
-1. In <span class="notranslate"> **Setup Python App** </span> create an application. <span class="notranslate"> Trac </span> project <span class="notranslate"> WSGI </span> script will be located in <span class="notranslate"> **App Directory** </span> ( _e.g._ <span class="notranslate"> _trac_ </span> ).
+1. In <span class="notranslate">**Setup Python App**</span> create an application. <span class="notranslate">Trac</span> project <span class="notranslate">WSGI</span> script will be located in <span class="notranslate">**App Directory**</span> (e.g. <span class="notranslate">`trac`</span>).
 
-<span class="notranslate"> App URI</span> – is a <span class="notranslate"> URL </span> where web-interface is located. (e.g. <span class="notranslate">Trac</span> – web-interface is located in <span class="notranslate">`YOUR_DOMAIN/trac`</span>).
+<span class="notranslate">App URI</span> – is a <span class="notranslate">URL</span> where web-interface is located (e.g. <span class="notranslate">Trac</span> – web-interface is located in <span class="notranslate">`YOUR_DOMAIN/trac`</span>).
 
-<span class="notranslate"> Trac </span> needs <span class="notranslate"> Python </span> version from **2.5** to **3.0,** in actual example version 2.7 is used.
+<span class="notranslate">Trac</span> needs <span class="notranslate">Python</span> version from **2.5** to **3.0,** in the actual example version 2.7 is used.
 
-2. When the App is created, add the following modules: <span class="notranslate"> Trac, Genshi, MySQL-python </span> .
+2. When the App is created, add the following modules: <span class="notranslate">`Trac`, `Genshi`, `MySQL-python`</span>.
 
 2.1. Alternatively, connect to the server via SSH and perform the following steps:
 
-<span class="notranslate"> 
-source ~/virtualenv/trac/2.7/bin/activate; </span>
+<div class="notranslate"> 
+
+```
+source ~/virtualenv/trac/2.7/bin/activate
+```
+</div>
 
 then:
 
-<span class="notranslate"> 
-~/virtualenv/trac/2.7/bin/easy_install Trac mysql-python (using easy_install </span> );
+<div class="notranslate"> 
+
+```
+~/virtualenv/trac/2.7/bin/easy_install Trac mysql-python (using easy_install)
+```
+</div>
 
 or
 
-<span class="notranslate">
-~/virtualenv/trac/2.7/bin/pip install trac mysql-python </span> 
-(using <span class="notranslate"> pip </span> ).
+<div class="notranslate">
+
+```
+~/virtualenv/trac/2.7/bin/pip install trac mysql-python
+```
+</div> 
+
+(using <span class="notranslate">`pip`</span>).
 
 3. In cPanel create MySQL database and a user. Add user to database.
 
-![](/images/trac1.jpg)
+![](/images/Python_trac1.png)
 
-_In this example_ <span class="notranslate"> _DB tractest_trac_ </span> _and user_ <span class="notranslate"> _tractest_trac_ </span> _were created._
+In this example DB <span class="notranslate">`tractest_trac`</span> and user <span class="notranslate">`tractest_trac`</span> were created.
 
 4. Connect to the server via SSH using your cPanel account.
 
-Create <span class="notranslate"> Trac </span> project:
- <span class="notranslate"> ~/virtualenv/trac/2.7/bin/trac-admin  ~/trac_project initenv </span>
+Create <span class="notranslate">Trac</span> project:
 
-For <span class="notranslate"> "Database connection string" </span> parameter enter the following: <span class="notranslate"> mysql://user:password@localhost/database_name </span> – here the data for connecting MySQL database are specified.
+ <div class="notranslate">
+ 
+ ```
+ ~/virtualenv/trac/2.7/bin/trac-admin
+ ~/trac_project initenv
+ ```
+ </div>
+
+For the <span class="notranslate">`Database connection string`</span> parameter enter the following: <span class="notranslate">`mysql://user:password@localhost/database_name`</span> – here the data for connecting MySQL database are specified.
 
 ::: tip Note
-In case of "... The charset and collation of database are 'latin1' and 'latin1_swedish_ci' error the database must be created with one of (('utf8', 'utf8_bin'), ('utf8mb4', 'utf8mb4_bin')) ..."  while creating the project, you should change database encoding.
+In case of `... The charset and collation of database are 'latin1' and 'latin1_swedish_ci' error the database must be created with one of (('utf8', 'utf8_bin'), ('utf8mb4', 'utf8mb4_bin')) ...`  while creating the project, you should change database encoding.
 :::
 
-To change encoding, in cPanel run <span class="notranslate"> phpMyAdmin </span> , choose <span class="notranslate"> DB </span> , go to <span class="notranslate"> Operations </span> , choose the necessary encoding in <span class="notranslate"> Collation </span> section and click <span class="notranslate"> Go </span> .
+To change encoding, in cPanel run <span class="notranslate">phpMyAdmin</span>, choose <span class="notranslate">`DB`</span>, go to <span class="notranslate">`Operations`</span>, choose the necessary encoding in <span class="notranslate">`Collation`</span> section and click <span class="notranslate">`Go`</span>.
 
 ![](/images/trac2.jpg)
 
-After that you have to repeat the procedure of creating a project. When done, the <span class="notranslate"> Trac </span> project must appear: <span class="notranslate"> ~/trac_project </span>
+After that you have to repeat the procedure of creating a project. When done, the <span class="notranslate">`Trac`</span> project must appear: <span class="notranslate">`~/trac_project`</span>
 
 5. To create project frontend run the following:
 
-<span class="notranslate">
-~/virtualenv/trac/2.7/bin/trac-admin ~/track_project deploy ~/trac </span>
+<div class="notranslate">
 
-<span class="notranslate"> ~/track_project </span> — is the path to the project,
-<span class="notranslate"> ~/trac </span> — is the path, that was specified while setting <span class="notranslate"> App Directory </span> .
+```
+~/virtualenv/trac/2.7/bin/trac-admin ~/track_project deploy ~/trac
+```
+</div>
+
+<span class="notranslate">`~/track_project`</span> — is the path to the project,
+<span class="notranslate">`~/trac`</span> — is the path, that was specified while setting <span class="notranslate">`App Directory`</span>.
 
 Create topic directory by default:
+
 <div class="notranslate">
 
 ```
@@ -889,19 +914,21 @@ mkdir chrome
 cp -R ~/trac/htdocs/ ~/public_html/trac/chrome/
 ```
 </div>
-- all project static files are located in this directory; the changes can be added here as well.
 
-6. To add path to <span class="notranslate"> WSGI </span> file in created application:
+All project static files are located in this directory; the changes can be added here as well.
 
-Go back to <span class="notranslate"> cPanel Setup Python App </span> , change <span class="notranslate"> “WSGI file location” </span> for your application to <span class="notranslate"> cgi-bin/trac.wsgi </span> , click <span class="notranslate"> Update </span> to apply changes and then click <span class="notranslate"> Restart </span> .
+6. To add path to <span class="notranslate">WSGI</span> file in the created application:
 
-Your Existing application now must look like the following:
+Go back to <span class="notranslate">_cPanel Setup Python App_</span>, change <span class="notranslate">`WSGI file location`</span> for your application to <span class="notranslate">`cgi-bin/trac.wsgi`</span>, click <span class="notranslate">`Update`</span> to apply changes and then click <span class="notranslate">`Restart`</span>.
 
-![](/images/trac3.jpg)
+Your existing application now must look like the following:
+
+![](/images/Python_trac2.png)
 
 7. Adding authorization:
 
-In <span class="notranslate"> ~/public_html/trac/.htaccess </span> after <span class="notranslate"> CLOUDLINUX PASSENGER CONFIGURATION </span> section add the following lines:
+In <span class="notranslate">`~/public_html/trac/.htaccess`</span> after <span class="notranslate">`CLOUDLINUX PASSENGER CONFIGURATION`</span> section add the following lines:
+
 <div class="notranslate">
 
 ```
@@ -912,23 +939,27 @@ Require valid-user
 ```
 </div>
 
-8. Add new user and create passwd file <span class="notranslate"> /usr/local/apache/bin/htpasswd </span> with <span class="notranslate"> ~/trac/passwd </span> admin.
+8. Add new user and create password file <span class="notranslate">`/usr/local/apache/bin/htpasswd`</span> with <span class="notranslate">`~/trac/passwd`</span> admin.
 
 Enter password.
 
-<span class="notranslate">
-~/virtualenv/trac/2.7/bin/trac-admin  ~/track_project permission add admin TRAC_ADMIN </span>
+<div class="notranslate">
 
-Add admin user to <span class="notranslate"> TRAC_ADMIN </span> group.
+```
+~/virtualenv/trac/2.7/bin/trac-admin  ~/track_project permission add admin TRAC_ADMIN
+```
+</div>
 
-Here the path <span class="notranslate"> trac </span> directory is equal to <span class="notranslate"> App Directory </span> in your project.
+Add admin user to <span class="notranslate">`TRAC_ADMIN`</span> group.
 
-Now <span class="notranslate"> Trac </span> is available via <span class="notranslate"> YOUR_DOMAIN/trac </span> .
+Here the path <span class="notranslate">`trac`</span> directory is equal to <span class="notranslate">`App Directory`</span> in your project.
+
+Now <span class="notranslate">`Trac`</span> is available via <span class="notranslate">`YOUR_DOMAIN/trac`</span>.
 
 
 ### Trac with MySQL
 
-To use <span class="notranslate"> Trac </span> with MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package.
+To use <span class="notranslate">Trac</span> with MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package.
 
 To install run:
 <div class="notranslate">
