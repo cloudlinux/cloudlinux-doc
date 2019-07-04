@@ -737,7 +737,7 @@ There are several columns in the list:
 * <span class="notranslate">App URI</span> — application URI including the domain.
 * <span class="notranslate">App Root Directory</span> — application root directory relative to user's home.
 * <span class="notranslate">Status — started/stopped</span> — displays if an application is running or not and version of the application.
-* <span class="notranslate">Actions</span> — allows to start, restart, stop, edit, and remove a particular application.
+* <span class="notranslate">Actions</span> — allows to migrate, start, restart, stop, edit, and remove a particular application.
 
 #### How to manage an application
 
@@ -817,6 +817,11 @@ The following actions are available:
 * Add Environment variables — click <span class="notranslate">_Add Variable_</span> and specify a name and a value.
   
 Click <span class="notranslate">_Save_</span> to save all changes or <span class="notranslate">_Cancel_</span> to close the tab.
+
+**Migrate application**
+
+For details see [How to migrate an application to the new Python Selector](/python_selector/#how-to-migrate-an-application-to-the-new-python-selector)
+
 
 ## Deploying Trac using Python Selector
 
