@@ -7,8 +7,9 @@
 ### Requirements
 
 :::danger Important!
-It is highly not recommended to downgrade LVE Manager to versions lower than 4.2 if you have already migrated Python applications.
+Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already migrated Python applications because it will break migrated applications.
 :::
+
 
 * Python Selector supports the following Alt-Python versions:
   * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux 6, CloudLinux 7
