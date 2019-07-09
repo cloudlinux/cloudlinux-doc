@@ -1605,6 +1605,6 @@ This mode is enabled by default and creates a separate lsphp process for each vi
 
 <span class="notranslate"> _mod_lsapi_reset_me[vhost_name]_ </span> flag will not work for a user when lsapi_per_user option is <span class="notranslate"> On </span> .
 
-5. There is (default <span class="notranslate"> off </span> ) option in mod_lsapi that creates only one lsphp process for a user, regardless of the number of his virtual hosts. We don't recommend to use this option with CRIU, but if you use it, make sure that your virtual hosts (under the same user) have the same environment configurations. If they are not the same, this may cause undesirable lsphp process operation.
+5. There is (default <span class="notranslate">`off`</span>) option in mod_lsapi that creates only one lsphp process for a user, regardless of the number of his virtual hosts. We don't recommend to use this option with CRIU, but if you use it, make sure that your virtual hosts (under the same user) have the same environment configurations. If they are not the same, this may cause undesirable lsphp process operation.
 
 

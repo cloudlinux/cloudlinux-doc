@@ -52,7 +52,7 @@ Settings of old <span class="notranslate">lve-stats</span> (ver. 0.x) are import
 
 SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2.db`</span>, data from old <span class="notranslate">lve-stats</span> (ver. 0.x) are being migrated automatically in the background. Migrating process can last 2-8 hours (during this time lags are possible when admin is trying to check statistics, at the same time users will not be affected). Migrating the latest 30 days, <span class="notranslate">SQLite DB</span> stable migration is provided.
 
-Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux (except <span class="notranslate">PosgreSQL</span> for CL5).
+Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux.
 
 ### Downgrade
 

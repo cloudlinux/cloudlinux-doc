@@ -10,10 +10,12 @@ CloudLinux has support for the following limits:
 |[NCPU](/limits/#cpu-limits) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of <span class="notranslate"> CPU </span> & NCPU used) | all|
 |[PMEM](/limits/#memory-limits) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
 |[VMEM](/limits/#memory-limits) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
-|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel, CL5 hybrid kernel|
-|IOPS [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7, CL6 and CL5 hybrid kernels lve1.3+|
-|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel|
+|IOPS [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7 and CL6  kernel|
+|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL6 and CL7 kernels|
 |[EP](/limits/#entry-processes) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
+
+
 
 ::: tip Note
 It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
