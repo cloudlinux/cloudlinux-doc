@@ -43,7 +43,7 @@ End user can also see the usage inside resource usage menu.
 ## cl-quota
 
 
-<span class="notranslate"> **cl-quota**   </span> utility is designed to control <span class="notranslate"> disk quotas </span> and provides:
+<span class="notranslate">**cl-quota**</span> utility is designed to control <span class="notranslate">disk quotas</span> and provides:
 
 * Setting user and package limits.
 
@@ -51,7 +51,11 @@ End user can also see the usage inside resource usage menu.
 
 * Limits synchronization.
 
-* Automatic inheritance of panel limits to all appropriate users. 
+* Automatic inheritance of panel limits to all appropriate users.
+
+:::tip Note
+cl-quita is supported on Plesk and DirectAdmin control panels.
+:::
 
 ::: tip Note
 cl-quota works only with inodes soft/hard limits (soft/hard file limits in setquota/repquota utilities terminology). Block limits are not controlled by cl-quota utility in any way, they are not taken into account and do not affect the data that they issue. That is why hereinafter it is the inode limits that are implied by the word “limits”.
