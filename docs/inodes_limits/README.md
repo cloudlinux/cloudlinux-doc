@@ -1,7 +1,9 @@
 # inodes
 
 
-**[cPanel Only]**
+:::tip Note
+Supported on cPanel, Plesk, and DirectAdmin control panels
+:::
 
 <span class="notranslate"> LVE Manager inodes </span> limits extension allows setting <span class="notranslate"> inode </span> limits for the customers. An <span class="notranslate"> inode </span> is a data structure on a file system used to keep information about a file or a folder. The number of <span class="notranslate"> inodes </span> indicates the number of files and folders an account has. <span class="notranslate"> inodes </span> limits work on the level of <span class="notranslate"> disk quota </span> , and will be enabled on <span class="notranslate"> /home </span> partition only.
 
@@ -25,14 +27,13 @@ The limits can be set on the level of individual account or package:
 ![](/images/inodespackages_zoom70.png)
 
 
-
-Sometimes <span class="notranslate"> disk quota </span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate"> _Options_ </span> tab of <span class="notranslate"> LVE Manager </span> :
+Sometimes <span class="notranslate">disk quota</span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate">_Options_</span> tab of <span class="notranslate">LVE Manager</span>:
 
 ![](/images/inodelimitsoptions_zoom70.png)
 
 The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
 
-End users can monitor their inodes usage through cPanel:
+End users can monitor their inodes usage through cPanel only (not available on Plesk and DirectAdmin):
 
 ![](/images/inodescpanel.png)
 
@@ -52,10 +53,6 @@ End user can also see the usage inside resource usage menu.
 * Limits synchronization.
 
 * Automatic inheritance of panel limits to all appropriate users.
-
-:::tip Note
-cl-quita is supported on Plesk and DirectAdmin control panels.
-:::
 
 ::: tip Note
 cl-quota works only with inodes soft/hard limits (soft/hard file limits in setquota/repquota utilities terminology). Block limits are not controlled by cl-quota utility in any way, they are not taken into account and do not affect the data that they issue. That is why hereinafter it is the inode limits that are implied by the word “limits”.
