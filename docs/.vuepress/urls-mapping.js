@@ -1135,5 +1135,6 @@ module.exports = {
   "/index.html?lvetop.html": "/command-line_tools/#lvetop",
   "/cldetect.html": "/command-line_tools/#cldetect",
   "/cldetect.html/": "/command-line_tools/#cldetect",
-  "/index.html?cldetect.html": "/command-line_tools/#cldetect"
+  "/index.html?cldetect.html": "/command-line_tools/#cldetect",
+  "/python_and_ruby_selector/#python-and-ruby-selector":"/python_selector"
 };
