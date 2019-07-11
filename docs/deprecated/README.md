@@ -218,7 +218,7 @@ $ yum install MySQL-python
 </div>
 
 
-If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no  libmysqlclient_r.so.15 on the server, run:
+If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no libmysqlclient_r.so.15 on the server, run:
 
 <div class="notranslate">
 

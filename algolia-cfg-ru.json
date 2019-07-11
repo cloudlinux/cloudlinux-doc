@@ -13,7 +13,7 @@
     "lvl3": ".content h4",
     "lvl4": ".content h5",
     "lvl5": ".content h6",
-    "text": ".content p, .content li",
+    "text": ".content p, .content li, .content code",
     "lang": {
       "selector": "/html/@lang",
       "type": "xpath",

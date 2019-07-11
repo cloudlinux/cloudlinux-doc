@@ -30,7 +30,5 @@ title: Apache mod_lsapi PRO
 
 ## Диагностика и устранение неполадок
 
-## FAQ по mod_lsapi
-
 ## Поддержка CRIU
 </gtranslate-io>

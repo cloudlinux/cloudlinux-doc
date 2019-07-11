@@ -30,7 +30,7 @@ CageFS is not supported for H-Sphere.
 
 Minimum Requirements:
 
-* kernel: CL5 with lve0.8.54 or later, CL6 with lve1.2.17.1 or later, CL7.
+* kernel: CL6 with lve1.2.17.1 or later, CL7.
 * 7GB of disk space.
 
 Depending on your setup, and number of users, you might also need:
@@ -80,7 +80,7 @@ Once you initialized the template you can start enabling users. By default CageF
 
 Starting from **cagefs-6.1-27** <span class="notranslate"> _fs.proc_can_see_other_uid_ </span> will be migrated (one time) from _/etc/sysctl.conf_ into _/etc/sysctl.d/90-cloudlinux.conf_ . If this variable is not set in either file, it will default to 0.
 
-It is strongly advised against setting this variable in _90-cloudlinux.conf_ . Define it in _/etc/sysctl.conf_ or in some other config file with an index number greater than _90-cloudlinux.conf_ , e.g. _/etc/sysctl.d/95-custom.conf_ .
+It is strongly advised against setting this variable in `90-cloudlinux.conf`. Define it in `/etc/sysctl.conf` or in some other config file with an index number greater than `90-cloudlinux.conf`, e.g. `/etc/sysctl.d/95-custom.conf`.
 
 You can find more information on <span class="notranslate"> _fs.proc_can_see_other_uid_ </span> automatic migration in [Kernel Config Variables](/kernel_settings/#kernel-config-variables) .
 
@@ -590,7 +590,7 @@ virdir2,mask
 
 Note that CageFS will automatically create those files for Plesk 10 & higher.
 
-For example if we have Plesk 11.5 with two users <span class="notranslate"> _cltest1_ </span> , and <span class="notranslate"> _cltest2_ </span> :
+For example if we have Plesk 11.5 with two users <span class="notranslate">_cltest1_</span>, and <span class="notranslate">_cltest2_</span>:
 <div class="notranslate">
 
 ```
@@ -969,7 +969,8 @@ $ cagefsctl --unmount-all
 $ cat /proc/mounts | grep cagefs 
 # if you see any cagefs entries, execute "cagefsctl --unmount-all" again.
 $ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton 
-$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeletoncagefsctl --enable-cagefs
+$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
+$ cagefsctl --enable-cagefs
 ```
 </div>
 

@@ -16,7 +16,7 @@ PHP Selector is not supported for H-Sphere.
 
 The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cagefs/)  &  <span class="notranslate"> [LVE Manager](/lve_manager/)  installed. </span>
 
-Use [compatibility matrix](/limits/#compatiblity_matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
+Use [compatibility matrix](/limits/#compatibility-matrix) to check if your Web Server/PHP mode is supporting <span class="notranslate"> PHP Selector. </span> If not, you need a change to one of the supported models.
 
 Installation of different versions of PHP & modules:
 <div class="notranslate">
@@ -824,24 +824,26 @@ These commands can affect PHP version of your clients’ web sites. Use them wit
 ## Using 
 
 
-Once <span class="notranslate"> PHP Selector </span> is installed you will see "<span class="notranslate"> Selector </span>" tab in <span class="notranslate"> LVE Manager </span> :
+Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">**Selector**</span> tab in the <span class="notranslate">**LVE Manager**</span>.
 
-![](/images/php_selector.png.png)
+![](/images/php_selector.png)
 
 <span class="notranslate"> PHP Selector </span> lets you select default PHP version, as well as modules that will be available to user out of the box.
 
 
-Inside <span class="notranslate"> cPanel </span> , User will be able to change PHP version they would have:
+Inside <span class="notranslate"> cPanel </span>, User will be able to change PHP version they would have:
 
-![](/images/php_selector_user.png.png)
+![](/images/php_selector_user.png)
 
 as well as extensions that they want to use:
 
-![](/images/phpselector_customer.png)
+![](/images/php_selector_customer.png)
 
 and php.ini settings
 
-![](/images/phpselector_options.png)
+![](/images/php_selector_options.png)
+
+All changes are saved automatically.
 
 ## Custom PHP.ini options
 
@@ -890,7 +892,7 @@ Admin can modify the settings using <span class="notranslate"> [selectorctl](/ph
 
 Users can use web interface to modify php.ini settings:
 
-![](/images/phpselector_options.png)
+![](/images/php_selector_options.png)
 
 ## End user files and directories
 
@@ -1157,6 +1159,17 @@ Sections are ignored. Only name of an option and a value have meaning.
 When an option is absent in <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> file, than it is not changed (applied) to php.ini for <span class="notranslate"> Alt-PHP </span> versions.
 
 <span class="notranslate"> date.timezone </span> and <span class="notranslate"> error_log </span> options are handled differently than the others. When these options are not in <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> file, than values for the options will be taken from <span class="notranslate"> "native" </span> php.ini file. And when the option is in php.ini for some <span class="notranslate"> Alt-PHP </span> version already (and its value is not empty), than value from <span class="notranslate"> _/etc/cl.selector/global_php.ini_ </span> will be NOT applied.
+
+
+**[CageFS version 6.1.5-1 or later]**
+
+The behavior above is changed for cPanel servers with EasyApache 4. The <span class="notranslate">`/usr/local/lib/php.ini`</span> file is removed for new installations of cPanel v80 and later.
+
+* When <span class="notranslate">`/usr/local/lib/php.ini`</span> file exists, <span class="notranslate">`error_log`</span> and <span class="notranslate">`date.timezone`</span> options will be taken from that <span class="notranslate">`php.ini`</span> file.
+* When <span class="notranslate">`/usr/local/lib/php.ini`</span> file does not exist, <span class="notranslate">`error_log`</span> and <span class="notranslate">`date.timezone`</span> options will be taken from the <span class="notranslate">`php.ini`</span> file for system default PHP version selected in MultiPHP Manager.
+  
+This functionality works when the system default PHP version is <span class="notranslate">`ea-php`</span> only. When the system default PHP version is <span class="notranslate">`alt-php`, `error_log`</span> and <span class="notranslate">`date.timezone`</span> directives will be NOT taken from that <span class="notranslate">`php.ini`</span> file.
+
 
 To confirm changes (not affecting <span class="notranslate"> "date.timezone" </span> and <span class="notranslate"> "error_log" </span> options) please run:
 

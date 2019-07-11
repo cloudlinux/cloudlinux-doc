@@ -47,7 +47,7 @@ sysctl --system
 to apply the parameters before reading and after writing.
 
 Starting from **cagefs-6.1-27**,  fs.proc_can_see_other_uid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf . If this variable is not set in either file, it will default to 0.
-It is strongly advised against setting this variable in 90-cloudlinux.conf . Define it in /etc/sysctl.conf or in some other config file with an index number greater than 90-cloudlinux.conf , e.g. /etc/sysctl.d/95-custom.conf .
+It is strongly advised against setting this variable in 90-cloudlinux.conf . Define it in /etc/sysctl.conf or in some other config file with an index number greater than 90-cloudlinux.conf , e.g. `/etc/sysctl.d/95-custom.conf`.
 
 Starting from **lve-utils-3.0-23.7**  fs.proc_super_gid and fs.symlinkown_gid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf .
 
@@ -275,7 +275,7 @@ Yet, <span class="notranslate"> CageFS </span> does not work in each and every s
 
 This allows an attacker to create symlink or hardlink to a sensitive file like <span class="notranslate"> _/etc/passwd_ </span> and then use <span class="notranslate"> WebDAV </span> , filemanager, or webmail to read the content of that file.
 
-Starting with CL6 _kernel 2.6.32-604.16.2.lve1.3.45_ , you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
+Starting with CL6 _kernel 2.6.32-604.16.2.lve1.3.45_, you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
 
 This is done by set following kernel options to 1:
 <div class="notranslate">
@@ -616,15 +616,6 @@ Version 6 (CL6 & hybrid kernels):
 300        0        25        1024        1862407        0        0        262144        20        1        0        0        262144        100        0        31        000
 ```
 </div>
-Version 4 (CL 5 kernel):
-<div class="notranslate">
-
-```
-4:LVE        EP        lCPU        lIO        CPU        MEM        IO        lMEM        lEP        nCPU        fMEM        fEP
-0        0        25        25        0        0        0        262144        20        1        0        0
-300        0        25        25        15103019        0        0        262144        20        1        0        0
-```
-</div>
 
 | |  |  | |
 |-|--|--|-|
@@ -632,7 +623,7 @@ Version 4 (CL 5 kernel):
 |<span class="notranslate"> LVE </span> | <span class="notranslate"> LVE ID </span> | number | |
 |<span class="notranslate"> EP </span> | Number of <span class="notranslate"> entry processes </span> | number | |
 |<span class="notranslate"> lCPU </span> | <span class="notranslate"> CPU </span> Limit | % relative to total <span class="notranslate"> CPU power </span> | |
-|<span class="notranslate"> lIO </span> | <span class="notranslate"> IO </span> limits for CL6 or <span class="notranslate"> IO </span> priority for CL5 | KB/s for v6, from 1 to 100 for v4 | |
+|<span class="notranslate"> lIO </span> | <span class="notranslate"> IO </span> limits for CL6 | KB/s for v6, from 1 to 100 for v4 | |
 |<span class="notranslate"> CPU </span> | <span class="notranslate"> CPU </span> usage since reboot | in nanoseconds for v6, hertz for v4 | |
 |<span class="notranslate"> MEM </span> | Virtual memory usage | number of 4k pages | |
 |<span class="notranslate"> IO </span> | <span class="notranslate"> IO </span> usage | KB/s for v6, 0 for v4 | |
@@ -674,7 +665,7 @@ More info on <span class="notranslate"> flashcache </span> : [https://github.com
 ## OOM Killer for LVE Processes
 
 
-When <span class="notranslate"> LVE </span> reaches its memory limit, the processes inside that <span class="notranslate"> LVE </span> are killed by <span class="notranslate"> OOM Killer </span> and appropriate message is written to <span class="notranslate"> /var/log/messages </span> . When any <span class="notranslate"> LVE </span> hits huge number of memory limits in short period of time, then <span class="notranslate"> OOM Killer </span> could cause system overload. Starting from kernel 2.6.32-673.26.1.lve1.4.15 ( <span class="notranslate"> CloudLinux </span> 6) and from kernel 3.10.0-427.18.2.lve1.4.14 ( <span class="notranslate"> CloudLinux </span> 7) heavy <span class="notranslate"> OOM Killer </span> could be disabled. If so - lightweight <span class="notranslate"> SIGKILL </span> will be used instead.
+When <span class="notranslate">LVE</span> reaches its memory limit, the processes inside that <span class="notranslate"> LVE </span> are killed by <span class="notranslate"> OOM Killer </span> and appropriate message is written to <span class="notranslate"> /var/log/messages </span> . When any <span class="notranslate"> LVE </span> hits huge number of memory limits in short period of time, then <span class="notranslate"> OOM Killer </span> could cause system overload. Starting from kernel 2.6.32-673.26.1.lve1.4.15 ( <span class="notranslate"> CloudLinux </span> 6) and from kernel 3.10.0-427.18.2.lve1.4.14 ( <span class="notranslate"> CloudLinux </span> 7) heavy <span class="notranslate"> OOM Killer </span> could be disabled. If so - lightweight <span class="notranslate"> SIGKILL </span> will be used instead.
 
 By default <span class="notranslate"> OOM Killer </span> is enabled, to disable it please run:
 

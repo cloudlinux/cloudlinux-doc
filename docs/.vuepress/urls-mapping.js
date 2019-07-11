@@ -657,47 +657,48 @@ module.exports = {
   "/php_selector_cpanel.html/": "/php_selector/#php-selector",
   "/php_selector_cpanel.html": "/php_selector/#php-selector",
   "/index.html?php_selector_cpanel.html": "/php_selector/#php-selector",
-  "/python_and_ruby_selector.html/": "/python_and_ruby_selector/",
-  "/python_and_ruby_selector.html": "/python_and_ruby_selector/",
-  "/index.html?python_and_ruby_selector.html": "/python_and_ruby_selector/",
+  "/python_and_ruby_selector/": "/python_selector/",
+  "/python_and_ruby_selector.html/": "/python_selector/",
+  "/python_and_ruby_selector.html": "/python_selector/",
+  "/index.html?python_and_ruby_selector.html": "/python_selector/",
   "/python_ruby_installation.html/":
-    "/python_and_ruby_selector/#python-and-ruby-selector-installation",
+    "/python_selector/#installation",
   "/python_ruby_installation.html":
-    "/python_and_ruby_selector/#python-and-ruby-selector-installation",
+    "/python_selector/#installation",
   "/index.html?python_ruby_installation.html":
-    "/python_and_ruby_selector/#python-and-ruby-selector-installation",
-  "/end_user_access.html/": "/python_and_ruby_selector/#end-user-access",
-  "/end_user_access.html": "/python_and_ruby_selector/#end-user-access",
+    "/python_selector/#installation",
+  "/end_user_access.html/": "/python_selector/#user-interface",
+  "/end_user_access.html": "/python_selector/#user-interface",
   "/index.html?end_user_access.html":
-    "/python_and_ruby_selector/#end-user-access",
-  "/python_ruby_command_line.html/": "/python_and_ruby_selector/#command-line",
-  "/python_ruby_command_line.html": "/python_and_ruby_selector/#command-line",
+    "/python_selector/#user-interface",
+  "/python_ruby_command_line.html/": "/python_selector/#command-line-interface",
+  "/python_ruby_command_line.html": "/python_selector/#command-line-interface",
   "/index.html?python_ruby_command_line.html":
-    "/python_and_ruby_selector/#command-line",
+    "/python_selector/#command-line-interface",
   "/hide_python_ruby_selector.html/":
-    "/python_and_ruby_selector/#hide-python-and-ruby-selector-icons",
+    "/ruby_selector/#hide-ruby-selector-icons",
   "/hide_python_ruby_selector.html":
-    "/python_and_ruby_selector/#hide-python-and-ruby-selector-icons",
+    "/ruby_selector/#hide-ruby-selector-icons",
   "/index.html?hide_python_ruby_selector.html":
-    "/python_and_ruby_selector/#hide-python-and-ruby-selector-icons",
+    "/ruby_selector/#hide-ruby-selector-icons",
   "/trac.html/":
-    "/python_and_ruby_selector/#deploying-trac-using-python-selector",
+    "/python_selector/#deploying-trac-using-python-selector",
   "/trac.html":
-    "/python_and_ruby_selector/#deploying-trac-using-python-selector",
+    "/python_selector/#deploying-trac-using-python-selector",
   "/index.html?trac.html":
-    "/python_and_ruby_selector/#deploying-trac-using-python-selector",
-  "/trac_with_mysql.html/": "/python_and_ruby_selector/#trac",
-  "/trac_with_mysql.html": "/python_and_ruby_selector/#trac",
-  "/index.html?trac_with_mysql.html": "/python_and_ruby_selector/#trac",
+    "/python_selector/#deploying-trac-using-python-selector",
+  "/trac_with_mysql.html/": "/python_selector/#trac-with-mysql",
+  "/trac_with_mysql.html": "/python_selector/#trac-with-mysql",
+  "/index.html?trac_with_mysql.html": "/python_selector/#trac-with-mysql",
   "/redmine.html/":
-    "/python_and_ruby_selector/#deploying-redmine-using-ruby-selector",
+    "/ruby_selector/#deploying-redmine-using-ruby-selector",
   "/redmine.html":
-    "/python_and_ruby_selector/#deploying-redmine-using-ruby-selector",
+    "/ruby_selector/#deploying-redmine-using-ruby-selector",
   "/index.html?redmine.html":
-    "/python_and_ruby_selector/#deploying-redmine-using-ruby-selector",
-  "/easy_apache_4.html/": "/python_and_ruby_selector/#easy-apache-4",
-  "/easy_apache_4.html": "/python_and_ruby_selector/#easy-apache-4",
-  "/index.html?easy_apache_4.html": "/python_and_ruby_selector/#easy-apache-4",
+    "/ruby_selector/#deploying-redmine-using-ruby-selector",
+  "/easy_apache_4.html/": "/python_selector/#easyapache-4",
+  "/easy_apache_4.html": "/python_selector/#easyapache-4",
+  "/index.html?easy_apache_4.html": "/python_selector/#easyapache-4",
   "/node_js_selector.html/": "/node_js_selector/",
   "/node_js_selector.html": "/node_js_selector/",
   "/index.html?node_js_selector.html": "/node_js_selector/",
@@ -1134,5 +1135,6 @@ module.exports = {
   "/index.html?lvetop.html": "/command-line_tools/#lvetop",
   "/cldetect.html": "/command-line_tools/#cldetect",
   "/cldetect.html/": "/command-line_tools/#cldetect",
-  "/index.html?cldetect.html": "/command-line_tools/#cldetect"
+  "/index.html?cldetect.html": "/command-line_tools/#cldetect",
+  "/python_and_ruby_selector/#python-and-ruby-selector":"/python_selector"
 };

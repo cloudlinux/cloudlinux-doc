@@ -60,7 +60,5 @@ title: Установка
 
 ### Подробнее о скрипте cloudlinux_ea3_to_ea4
 
-### FAQ
-
 ## Удаление CloudLinux
 </gtranslate-io>

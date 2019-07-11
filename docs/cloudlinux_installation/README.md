@@ -142,13 +142,6 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
   * Last updated: July 05, 2018
 
 
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#registering-cloudlinux-server) and then run yum update.
 :::
@@ -223,8 +216,6 @@ It will boot into CloudLinux installer.
     Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/)
 
 2. During the CloudLinux installation select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/) and continue with installation.
-
-To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
@@ -924,52 +915,9 @@ sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 ```
 </div>
 
-### FAQ
+#### FAQ
 
-
-**1. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --convert 
-```
-</div>
-
-1.1. Migration from EasyApache 3 to EasyApache 4.
-
-The main difference between EasyApache 3 and EasyApache 4 for CloudLinux is the repositories used for <span class="notranslate">Apache RPM</span> packages. For this reason, we need to use packages from the _cl-ea4_ repository or _cl-ea4-testing_ beta for EasyApache 4. Running this script we update all native ea-* packages from CloudLinux repository. In this case, non-native packages for Apache include mod_lsapi and <span class="notranslate">alt-mod-passenger</span> (CloudLinux feature). So, if mod_lsapi or <span class="notranslate">alt-mod-passenger</span> (or both) were installed on EasyApache 3, the script should be run with the additional options as it described [here](/cloudlinux_installation/#migrating-to-easyapache-4) .
-
-Also, our script starts cPanel EasyApache 3 migration to EasyApache 4 Process. Read more about Profile changes, Apache changes, PHP changes on the link [https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process](https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process)
-
-1.2. Migration from EasyApache 4 CentOS to EasyApache 4 CloudLinux.
-
-When cPanel is installed with EasyApache 4 on a clean CloudLinux (or it was CentOS converted to CloudLinux), the installation of the ea-* packages comes from the EA4 cPanel repository. Most packages from the EA4 cPanel repository are not compatible with CloudLinux packages and this can lead to various errors. For this reason, we need to run this script to update the ea-* packages from the CloudLinux repository.
-
-If there was a need to return back EasyApache 4 packages from the EA4 cPanel repository, we need to run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo
-```
-</div>
-
-**2. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --revert
-```
-</div>
-
-2.1. Reverting back to EasyApache 3.
-
-Revert back is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
+You can find FAQ [here](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ).
 
 ## Uninstalling CloudLinux
 
