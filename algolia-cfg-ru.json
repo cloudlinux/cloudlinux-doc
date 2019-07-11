@@ -30,7 +30,7 @@
   "selectors_exclude": [
     ".table-of-contents"
   ],
-  "js_wait": 1,
+  "js_wait": 3,
   "js_render": true,
-  "nb_hits": 3097
+  "nb_hits": 4900
 }
