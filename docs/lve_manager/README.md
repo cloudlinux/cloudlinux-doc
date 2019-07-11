@@ -43,7 +43,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
     * Click _Install_ to install <span class="notranslate">Node.js Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Node.js.Selector</span>.
   * Default version — the current default version of Node.js set in your system. Click <span class="notranslate">_Manage_</span> to change the default version account wide.
   * <span class="notranslate">Applications</span> —  number of installed/all applications for the account.
-* <span class="notranslate">[Ruby Selector](/python_and_ruby_selector/)</span> block displays the following data:
+* <span class="notranslate">[Ruby Selector](/ruby_selector/)</span> block displays the following data:
   * <span class="notranslate">Ruby Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span>) — displays a current status of the Ruby Selector.
 
     * To manage <span class="notranslate">Ruby Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | Ruby Selector</span>.
@@ -54,7 +54,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 * <span class="notranslate">[PHP Selector](/php_selector/)</span> block displays the following data:
   * <span class="notranslate">Default version</span> — the default version of PHP binaries.
   Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.
-* <span class="notranslate">[Python Selector](/python_and_ruby_selector/)</span> block displays the following data:
+* <span class="notranslate">[Python Selector](/python_selector/)</span> block displays the following data:
   * <span class="notranslate">Python Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span> — displays a current status of the Python Selector.
   
     * To manage <span class="notranslate">Python Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | Python Selector</span>.
