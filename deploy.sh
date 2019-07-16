@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # abort on errors
-set -e
+set -xe
 
 # build
 yarn docs:build
@@ -9,6 +9,7 @@ yarn docs:build
 # navigate into the build output directory
 cd docs/.vuepress/dist
 
+echo "$CIRCLE_BRANCH"
 if [[ "$CIRCLE_BRANCH" == 'dev' ]]; then
     domain="docs.cloudlinux.com"
     repo="cloudlinux-doc"
