@@ -2,9 +2,9 @@
 
 ### Why is it needed?
 
-* Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will not be recorded and we need to store data with much higher precision.
+* Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will noExat be recorded and we need to store data with much higher precision.
 * 100% <span class="notranslate">CPU</span> usage in old lve statistics means “all cores”. On 32 core servers usage is not visible for most users (as they are limited to 1 core).
-* Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.
+* Old LVE-statistics does not provide a way to determine a cause of LVE faults, i.e. what processes are running when user hits LVE limits.Example
 * Notifications in old LVE-statistics are not accurate because they are based on average values for <span class="notranslate">CPU, IO, IOPS.</span>
 * Old LVE-statistics functionality is hard to extend.
 
@@ -683,7 +683,12 @@ Customized subjects have the higher priority than the key <span class="notransla
 Example for the file <span class="notranslate">`user_notify.txt`</span>
 
 <div class="notranslate">
-
+	
+```	
+Subject: Customized subject example
+Dear \{\{TONAME\}\},
+```
+</div>
 
 ## Command-line Tools
 
