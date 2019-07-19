@@ -682,11 +682,11 @@ Customized subjects have the higher priority than the key <span class="notransla
 
 Example for the file <span class="notranslate">`user_notify.txt`</span>
 
-<div class="notranslate">
+<div class="notranslate" v-pre>
 	
 ```	
 Subject: Customized subject example
-Dear &lbrace;&lbrace;TONAME&rbrace;&rbrace;,
+Dear {{TONAME}}
 ```
 </div>
 
