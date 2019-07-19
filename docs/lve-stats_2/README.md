@@ -686,7 +686,7 @@ Example for the file <span class="notranslate">`user_notify.txt`</span>
 	
 ```	
 Subject: Customized subject example
-Dear \{\{TONAME\}\},
+Dear &lbrace;&lbrace;TONAME&rbrace;&rbrace;,
 ```
 </div>
 
