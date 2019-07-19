@@ -686,7 +686,7 @@ Example for the file <span class="notranslate">`user_notify.txt`</span>
 
 ```
 Subject: Customized subject example
-Dear {{TONAME}},
+Dear {{-}},
 
  
 Your {{DOMAIN}} web hosting account exceeded one or more of its resources within the last {{PERIOD}}.
