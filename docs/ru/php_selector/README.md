@@ -78,8 +78,15 @@ title: PHP Selector
 
 ## Глобальное отключение PHP-расширений
 
-## Интеграция с панелями управления
+## Интеграция PHP Selector с cPanel’s MultiPHP Manager
 
-### cPanel
+### Обзор
+
+### Требования
+
+### Конфигурация
+
+### Подробнее о конфигурации PHP Selector
+
 </gtranslate-io>
 
