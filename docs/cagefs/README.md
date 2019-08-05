@@ -486,15 +486,33 @@ ffmpeg RPM should be installed on the system already.
 
 
 To exclude files and directories from CageFS, edit file:  
-<span class="notranslate"> _/etc/cagefs/custom.black.list_ </span>  
+<span class="notranslate">`/etc/cagefs/custom.black.list`</span>  
 And add files or directories in there, one per line.
 
-Please do not edit <span class="notranslate"> _/etc/cagefs/black.list_ </span> file because it is replaced during the update of CageFS package.
+Execute the following command to apply changes:
+<div class="notranslate">
+
+```
+cagefsctl --force-update
+```
+</div>
+
+Please do not edit <span class="notranslate">`/etc/cagefs/black.list`</span> file because it is replaced during the update of CageFS package.
 
 ### Excluding Users
 
 
-To exclude users from CageFS, create a file (any name would work) inside <span class="notranslate"> _/etc/cagefs/exclude_ </span> folder, and list users that you would like to exclude from CageFS in that file.
+To exclude users from CageFS, create a file (any name would work) inside <span class="notranslate">`/etc/cagefs/exclude`</span> folder, and list users that you would like to exclude from CageFS in that file (each user in separate line).
+
+Then execute the following command to apply changes: 
+<div class="notranslate">
+
+```
+cagefsctl --user-status USER
+```
+</div>
+
+And check that the command shows <span class="notranslate">`Disabled`</span>.
 
 
 ### Mount Points
@@ -845,25 +863,23 @@ $ cagefsctl --update
 ```
 </div>
 
-All the cPanel scripts located in <span class="notranslate"> _/usr/local/cpanel/cgi-sys/_ </span> that user might need to execute should be added to <span class="notranslate"> _proxy.commands_ </span> .
+All the cPanel scripts located in <span class="notranslate">`/usr/local/cpanel/cgi-sys/`</span> that user might need to execute should be added to <span class="notranslate">`proxy.commands`</span>.
 
-**Users with duplicate UIDs**
-
-The syntax of <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files is as follows:  
-<span class="notranslate"> _ALIAS:wrapper_name=username:path_to_executable_ </span>
+The syntax of <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files is as follows:  
+<span class="notranslate">`ALIAS:wrapper_name=username:path_to_executable`</span>
 
 
-Mandatory parameters are <span class="notranslate"> _ALIAS_ </span> and <span class="notranslate"> _path_to_executable_ </span> .
+Mandatory parameters are <span class="notranslate">`ALIAS`</span> and <span class="notranslate">`path_to_executable`</span>.
 
-* <span class="notranslate"> ALIAS </span> - any name which is unique within all <span class="notranslate"> _/etc/cagefs/*.proxy.commands_ </span> files;
+* <span class="notranslate">`ALIAS`</span> - any name which is unique within all <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files;
 
-* <span class="notranslate"> wrapper_name </span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate"> _path_to_executable_ inside CageFS </span> . Wrapper files are located in <span class="notranslate"> _/usr/share/cagefs/safeprograms_ </span> . If wrapper name is not specified, then default wrapper <span class="notranslate"> _/usr/share/cagefs/safeprograms/cagefs.proxy.program_ </span> is used. Also, a reserved word <span class="notranslate"> `noproceed` </span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate"> ALIAS </span> , as in the example below.
+* <span class="notranslate">`wrapper_name`</span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate">`path_to_executable_ inside CageFS`</span>. Wrapper files are located in <span class="notranslate">`/usr/share/cagefs/safeprograms`</span>. If wrapper name is not specified, then default wrapper <span class="notranslate">`/usr/share/cagefs/safeprograms/cagefs.proxy.program`</span> is used. Also, a reserved word <span class="notranslate">`noproceed`</span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate">`ALIAS`</span>, as in the example below.
 
-* <span class="notranslate"> username </span> - the name of a user on whose behalf <span class="notranslate"> _path_to_executable_ </span> will run in the real system. If <span class="notranslate"> username </span> is not specified, then <span class="notranslate"> _path_to_executable_ </span> will run on behalf the same user that is inside CageFS.
+* <span class="notranslate">`username`</span> - the name of a user on whose behalf <span class="notranslate">`path_to_executable`</span> will run in the real system. If <span class="notranslate">`username`</span> is not specified, then <span class="notranslate">`path_to_executable`</span> will run on behalf the same user that is inside CageFS.
 
-* <span class="notranslate"> path_to_executable </span> - the path to executable file which will run via <span class="notranslate"> `proxyexec` </span> .
+* <span class="notranslate">`path_to_executable`</span> - the path to executable file which will run via <span class="notranslate">`proxyexec`</span>.
 
-Example of a simple command executed via <span class="notranslate"> proxyexec </span> :
+Example of a simple command executed via <span class="notranslate">`proxyexec`</span>:
 <div class="notranslate">
 
 ```
@@ -871,7 +887,7 @@ SENDMAIL=/usr/sbin/sendmail
 ```
 </div>
 
-Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate"> root </span> (privilege escalation). The command uses two <span class="notranslate"> ALIAS </span> , that is why in the second line <span class="notranslate"> `noproceed` </span> is specified instead of wrapper name.
+Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate">root</span> (privilege escalation). The command uses two <span class="notranslate">ALIAS</span> , that is why in the second line <span class="notranslate">`noproceed`</span> is specified instead of wrapper name.
 <div class="notranslate">
 
 ```
@@ -880,7 +896,10 @@ CRONTAB_SAVE:noproceed=root:/usr/bin/crontab
 ```
 </div>
 
-Sometimes hosters may have users with non unique <span class="notranslate"> UIDs </span> . Thus, <span class="notranslate"> `proxyexec` </span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
+**Users with duplicate UIDs**
+
+
+Sometimes hosters may have users with non unique <span class="notranslate">UIDs</span>. Thus, <span class="notranslate">`proxyexec`</span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
 
 To turn this feature off:
 <div class="notranslate">

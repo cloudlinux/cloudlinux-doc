@@ -419,13 +419,24 @@ selectorctl --enable-extensions=ffmpeg --user USERNAME --version X.Y
 ### Native PHP Configuration
 
 
-<span class="notranslate"> PHP Selector </span> requires access to the <span class="notranslate"> native PHP </span> version for proper work. It is specified in the file <span class="notranslate"> _/etc/cl.selector/native.conf_ </span> of the following content (example):
+<span class="notranslate">PHP Selector</span> requires access to the <span class="notranslate">native PHP</span> version for proper work. It is specified in the file <span class="notranslate">`/etc/cl.selector/native.conf`</span> of the following content (example):
 <div class="notranslate">
 
 ```
 php=/usr/bin/php-cgi
 php-cli=/usr/bin/php
 php.ini=/etc/php.ini
+lsphp=/usr/local/bin/lsphp
+php-fpm=/usr/local/sbin/php-fpm
+```
+</div>
+
+
+Then execute the following command to apply changes.
+<div class="notranslate">
+
+```
+cagefsctl --setup-cl-selector
 ```
 </div>
 
