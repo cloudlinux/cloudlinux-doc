@@ -328,7 +328,7 @@ $ service db_governor stop
 
 **[** <span class="notranslate"> **MySQL Governor** </span> **1.x]**
 
-Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span> and <span class="notranslate"> DirectAdmin </span> control panels (other panels will follow).
+Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span>, <span class="notranslate"> Plesk </span> and <span class="notranslate"> DirectAdmin </span> control panels.
 
 The mapping file is located in: <span class="notranslate"> /etc/container/dbuser-map </span>
 
