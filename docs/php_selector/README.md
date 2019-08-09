@@ -193,8 +193,8 @@ You might need to edit/modify wrappers for existing users if you want them to be
 
 * [Setting default version and modules](/php_selector/#setting-default-version-and-modules)
 * [Individual PHP.ini files](/php_selector/#individual-php-ini-files)
-* [How to substitute global php.ini for individual customer on cPanel server with EasyApache4](/php_selector/#how-to-substitute-global-php-ini-for-individual-customer-on-cpanel-server-with-easyapache4)
 * [Substitute global php.ini for individual customer](/php_selector/#substitute-global-php-ini-for-individual-customer)
+* [How to substitute global php.ini for individual customer on cPanel server with EasyApache4](/php_selector/#how-to-substitute-global-php-ini-for-individual-customer-on-cpanel-server-with-easyapache4)
 * [Managing interpreter version](/php_selector/#managing-interpreter-version)
 * [Including ](/php_selector/#including-php-selector-only-with-some-packages-cpanel) <span class="notranslate"> [PHP Selector](/php_selector/#including-php-selector-only-with-some-packages-cpanel) </span> [ only with some packages (cPanel)](/php_selector/#including-php-selector-only-with-some-packages-cpanel)
 * [PHP Extensions](/php_selector/#php-extensions)
@@ -267,81 +267,6 @@ You can find more details [here](/php_selector/#php-extensions).
 
 But the recommended way is to modify PHP options via PHP Selector web or CLI interfaces, as described [here](/php_selector/#custom-php-ini-options).
 
-
-
-### How to substitute global php.ini for individual customer on cPanel server with EasyApache4
-
-:::tip Note
-It is enough to put `php.ini` in the directory where PHP script is located in order to run the PHP script with a custom `php.ini` when using SuPHP. Also, you can use <span class="notranslate">cPanel MultiPHP Manager</span> to create user’s custom `php.ini` file, and this approach should work for CGI, FCGI, and LSAPI. Recommended ways to manage `php.ini` settings per user are to use <span class="notranslate">cPanel MultiPHP</span> or <span class="notranslate">CloudLinux PHP Selector</span> interfaces.
-:::
-
-1. For each user that needs custom file, create directory <span class="notranslate">`/etc/cagefs/custom.etc/USER_NAME/php.ini`</span>.
-    
-    For example, if you want to create a custom file for USER1 and USER2 you would create files:
-
-    <div class="notranslate">
-
-    ```
-    /etc/cagefs/custom.etc/USER1/php.ini
-    /etc/cagefs/custom.etc/USER2/php.ini
-    ```
-    </div>
-
-    Create such files for each user that should have a custom file.
-
-2. Execute the following command:
-
-    <div class="notranslate">
-
-    ```
-    $ cagefsctl --force-update
-    ```
-    </div>
-
-3. Configure `php.ini` load path for user’s domains.
-   
-* When using **suphp** handler, you should use `SuPHP_ConfigPath` directive in virtual host configuration for these domains, or use this directive in `.htaccess` files: `suPHP_ConfigPath/etc`.
-
-* When using **mod_lsapi**, you should use `lsapi_phprc` directive in virtual host configuration: `lsapi_phprc/etc/`.
-    You can find the detailed description of `mod_lsapi` directives [here](/apache_mod_lsapi/#configuration-references).
-
-* When using **FCGI** or **CGI**, you should implement custom PHP wrapper and redefine the path to `php.ini` via `-c` command line option, like below:
-    <div class="notranslate">
-
-    ```
-    #!/bin/bash
-    [ -f /etc/php.ini ] && exec /usr/bin/php -c /etc/php.ini
-    exec /usr/bin/php
-    ```
-    </div>
-
-**Notes:**
-
-1. You should restart Apache web server after modifying virtual host configuration for the domains.
-2. Custom `php.ini` may break switching PHP version via <span class="notranslate">CloudLinux PHP Selector</span> or <span class="notranslate">cPanel MultiPHP Manager</span> for the appropriate users or domains.
-3. When using cPanel ea-php for the domains, additional `php.ini` files may not be loaded, so you should load all needed PHP extensions in custom `/etc/php.ini` file:
-![](/images/custom_file_cPanel1.png)
-4. When using CloudLinux alt-php, additional `php.ini` files will be loaded:
-![](/images/custom_file_cPanel2.png)
-5. If you have modified anything in `/etc/cagefs/custom.etc` directory, you should execute one of the following:
-
-    * to apply changes to CageFS for all users, run:
-  
-    <div class="notranslate">
-
-    ```
-    $ cagefsctl --update-etc
-    ```
-    </div>
-
-    * to apply changes to CageFS for specific users, run:
-  
-    <div class="notranslate">
-
-    ```
-    $ cagefsctl --update-etc user1 user2
-    ```
-    </div>
 
 ### Substitute global php.ini for individual customer
 
@@ -417,6 +342,81 @@ $ cagefsctl --update-etc user1 user2
 to apply changes to CageFS for specific users.
 
 :::
+
+
+### How to substitute global php.ini for individual customer on cPanel server with EasyApache4
+
+:::tip Note
+It is enough to put `php.ini` in the directory where PHP script is located in order to run the PHP script with a custom `php.ini` when using SuPHP. Also, you can use <span class="notranslate">cPanel MultiPHP Manager</span> to create user’s custom `php.ini` file, and this approach should work for CGI, FCGI, and LSAPI. Recommended ways to manage `php.ini` settings per user are to use <span class="notranslate">cPanel MultiPHP</span> or <span class="notranslate">CloudLinux PHP Selector</span> interfaces.
+:::
+
+1. For each user that needs custom file, create directory <span class="notranslate">`/etc/cagefs/custom.etc/USER_NAME/php.ini`</span>.
+    
+    For example, if you want to create a custom file for USER1 and USER2 you would create files:
+
+    <div class="notranslate">
+
+    ```
+    /etc/cagefs/custom.etc/USER1/php.ini
+    /etc/cagefs/custom.etc/USER2/php.ini
+    ```
+    </div>
+
+    Create such files for each user that should have a custom file.
+
+2. Execute the following command:
+
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --force-update
+    ```
+    </div>
+
+3. Configure `php.ini` load path for user’s domains.
+   
+* When using **suphp** handler, you should use `SuPHP_ConfigPath` directive in virtual host configuration for these domains, or use this directive in `.htaccess` files: `suPHP_ConfigPath/etc`.
+
+* When using **mod_lsapi**, you should use `lsapi_phprc` directive in virtual host configuration: `lsapi_phprc/etc/`.
+    You can find the detailed description of `mod_lsapi` directives [here](/apache_mod_lsapi/#configuration-references).
+
+* When using **FCGI** or **CGI**, you should implement custom PHP wrapper and redefine the path to `php.ini` via `-c` command line option, like below:
+    <div class="notranslate">
+
+    ```
+    #!/bin/bash
+    [ -f /etc/php.ini ] && exec /usr/bin/php -c /etc/php.ini
+    exec /usr/bin/php
+    ```
+    </div>
+
+**Notes:**
+
+1. You should restart Apache web server after modifying virtual host configuration for the domains.
+2. Custom `php.ini` may break switching PHP version via <span class="notranslate">CloudLinux PHP Selector</span> or <span class="notranslate">cPanel MultiPHP Manager</span> for the appropriate users or domains.
+3. When using cPanel ea-php for the domains, additional `php.ini` files may not be loaded, so you should load all needed PHP extensions in custom `/etc/php.ini` file:
+![](/images/custom_file_cPanel1.png)
+4. When using CloudLinux alt-php, additional `php.ini` files will be loaded:
+![](/images/custom_file_cPanel2.png)
+5. If you have modified anything in `/etc/cagefs/custom.etc` directory, you should execute one of the following:
+
+    * to apply changes to CageFS for all users, run:
+  
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --update-etc
+    ```
+    </div>
+
+    * to apply changes to CageFS for specific users, run:
+  
+    <div class="notranslate">
+
+    ```
+    $ cagefsctl --update-etc user1 user2
+    ```
+    </div>
 
 ### Managing interpreter version
 
