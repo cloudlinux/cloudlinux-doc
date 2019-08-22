@@ -45,7 +45,7 @@ To integrate CPAPI, set the paths to the scripts in the integration file in the 
 
 You can use different scripts for different CPAPI methods or only one script and call it with different arguments. The script is any executable file written in any programming language, that returns a valid JSON file of the specified format in response to arguments it is expected to be called.
 
-Integration scripts requirements
+### Integration scripts requirements
 
 * By default, integration scripts should run only from UNIX user with the same credentials as LVE Manager is run, unless otherwise stated in the script description.
 * Some scripts are run from both root and end-user. If the script is run from end-user it should return information related to this user only, filtering the irrelevant data for security/isolation purposes or return `PermissionDenied` if script is not intended to be run as this user at all.
@@ -77,7 +77,7 @@ You can find details on how to configure CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
-#### Expected structure of replies
+### Expected structure of replies
 
 A reply from any integration script should be a valid JSON and UTF-8 encoding is required.
 
@@ -693,7 +693,7 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 
 ## Web UI Integration
 
-**ui-user-info script**
+### ui-user-info script
 
 This script returns information about the current user opening Web UI
 Used only in UI part of the LVE Manager and utilities.
@@ -721,7 +721,7 @@ The following configuration file parameters are used to determine the location o
 
 **baseUri** - the URI of LVE Manager files
 
-### PHP-based integration of WEB UI with the control panel
+## PHP-based integration of WEB UI with the control panel
 
 The first use case:
 ```
@@ -761,11 +761,11 @@ In case of Node.js Selector and Python Selector, this is due to the possibility 
 
 In case of PHP Selector, there is not possible. When PHP Selector is called, the resources for such queries are not limited and when the user’s site is reaching limits, the UI will work without enforcing limits.
 
-### How to integrate CageFS with a control panel
+## How to integrate CageFS with a control panel
 
 CageFS documentation can be found here: [CageFS](/cloudlinux_os_components/#cagefs)
 
-**CageFS MIN_UID**  
+### CageFS MIN_UID  
 
 CageFS has MIN_UID setting. Users with UIDs < MIN_UID will not be limited by CageFS. This setting is configured based on UID_MIN setting from `/etc/login.defs` file by default. So, typically MIN_UID is 500 on CloudLinux 6 and 1000 on CloudLinux 7. You can obtain current MIN_UID value by executing
 ```
@@ -780,7 +780,7 @@ For example, to set MIN_UID to 10000, you should execute
 cagefsctl --set-min-uid 10000
 ```
 
-**PAM configuration for CageFS**
+### PAM configuration for CageFS
 
 CageFS is enabled for su, ssh and cron services by default.
 [PAM Configuration](/cloudlinux_os_components/#pam-configuration)
@@ -792,14 +792,14 @@ Also you can enable CageFS for any service that uses PAM.
 It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS is enabled.
 :::
 
-**Integrating CageFS with Apache**
+### Integrating CageFS with Apache
 
 You should apply CloudLinux patches to integrate CageFS with Apache. Details can be found here:
 [Integration of Apache modules with Control Panels](/control_panel_integration/#integration-of-apache-modules-with-control-panels)
 
 Note that it may be required to execute “cagefsctl --force-update” after rebuild of Apache in order to update CageFS.
 
-**Running commands inside CageFS**
+### Running commands inside CageFS
 
 You may want to execute commands inside CageFS for security reasons. To do so, you can execute a command inside CageFS in the following way:
 ```
@@ -812,7 +812,7 @@ The commands above require root privileges. You can use the following command wh
 /bin/cagefs_enter "$COMMAND"
 ```
 
-**Updating CageFS skeleton**
+### Updating CageFS skeleton
 
 Updating CageFS skeleton is required after update of system RPM packages. It may be also required after update of hosting control panel itself. Execute
 ```
@@ -829,7 +829,8 @@ You can set update period for CageFS skeleton in days using
 cagefsctl --set-update-period <days>
 ```
 
-**Setting up directories for PHP sessions**
+### Setting up directories for PHP sessions
+
 Each user in CageFS has its own `/tmp` directory that is not visible for other users. PHP scripts save sessions in `/tmp` directory by default (when `session.save_path` directive is empty). However, you can set up a different location for PHP sessions specific to each PHP versions using CageFS per-user [mounts](/cloudlinux_os_components/#mount-points) like it is done for alt-php. Simply add a line like below to `/etc/cagefs/cagefs.mp`
 ```
 @/opt/alt/php54/var/lib/php/session,700
@@ -846,7 +847,7 @@ Temporary files including php sessions in `/tmp` directories in CageFS are clean
 
 Knowing the location where PHP sessions are stored (described above), you can also implement any custom script for cleaning PHP sessions. Remember to drop permissions (switch to the appropriate user) when removing the files (for example using sudo).
 
-**Creating new user account**
+### Creating new user account
 
 When user or admin account has been created, you should execute an appropriate hook script, so all needed actions are performed.
 More about CloudLinux hooks subsystem: [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
@@ -869,11 +870,11 @@ rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.
 You should create `/etc/cagefs/enable.duplicate.uids` empty file when your control panel creates users with duplicate UIDs. This is required for CageFS to operate properly.
 :::
 
-**Modifying user accounts**
+### Modifying user accounts
 
 You should execute appropriate hook script when an account has been modified: [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
-**Removing user accounts**
+### Removing user accounts
 
 CageFS has userdel hook script `/usr/bin/userdel.cagefs`, that is configured in `/etc/login.defs` file:
 ```
@@ -884,7 +885,7 @@ This script performs all needed actions when a user is being removed.
 Anyway, you should execute appropriate hook script when removing an account:
 [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
-**Excluding users from CageFS**
+### Excluding users from CageFS
 
 If you need to exclude some system users from CageFS that are specific to your control panel, you can do this by creating a file (any name would work) inside `/etc/cagefs/exclude` folder, and list users that you would like to exclude from CageFS in that file (each user in separate line). Then execute
 ```
@@ -892,9 +893,9 @@ cagefsctl --user-status USER
 ```
 
 to apply changes and check that the command shows _Disabled_:
-[Excluding Users](/cloudlinux_os_components/#excluding-users)
+[Excluding users](/cloudlinux_os_components/#excluding-users)
 
-**How to add a file or directory to CageFS**
+### How to add a file or directory to CageFS
 
 To add a file or directory to CageFS, you can create custom .cfg file in `/etc/cagefs/conf.d` directory and specify paths to be added to CageFS in that config file: 
 [File System Templates](/cloudlinux_os_components/#file-system-templates)
@@ -915,7 +916,7 @@ cagefsctl --remount-all
 
 to apply changes of mounts in `/etc/cagefs/cagefs.mp` file.
 
-**Users' Home Directory**
+### Users' home directory
 
 CageFS mounts users' home directories to CageFS automatically. Usually, there is no need to configure anything. However, if your control panel uses a custom path to users' home directories (for example `/home/$USER/data` instead of `/home/$USER`), then it may be necessary to configure Base Home Directory setting:
 [Base Home Directory](/cloudlinux_os_components/#base-home-directory)
@@ -923,22 +924,22 @@ CageFS mounts users' home directories to CageFS automatically. Usually, there is
 The modes of mounting users' home directories into CageFS are described here: 
 [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)
 
-**Excluding files from CageFS**
+### Excluding files from CageFS
 
 CageFS has a default set of files and directories that are visible to users inside CageFS. If you wish to exclude some of these files or directories from CageFS, you can do this like described below:
-[Excluding Files](/cloudlinux_os_components/#excluding-files) 
+[Excluding files](/cloudlinux_os_components/#excluding-files) 
 
-**Executing suid commands inside CageFS**
+### Executing suid commands inside CageFS
 
 SUID programs cannot run inside CageFS due to “nosuid” mounts. You can allow users in CageFS to execute some specific commands outside of CageFS via proxyexec. Typically these commands are suid programs or programs that cannot run inside CageFS.
 More details: [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
 
-**Filtering options for commands executed by proxyexec**
+### Filtering options for commands executed by proxyexec
 
 It is possible to disable specific “dangerous” options of programs executed via proxyexec. More details:
 [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
 
-### Integrating CloudLinux PHP Selector
+## Integrating CloudLinux PHP Selector
 
 Complete documentation for CloudLinux PHP Selector can be found here:
 [PHP Selector](/cloudlinux_os_components/#php-selector)
@@ -963,7 +964,7 @@ You can configure CloudLinux PHP Selector to allow your customers an ability to 
 Also, you can compile and add your own PHP extensions to CloudLinux PHP Selector:
 [Compiling your own extensions](/cloudlinux_os_components/#compiling-your-own-extensions) 
 
-### Integration of Apache modules in control panels
+## Integration of Apache modules in control panels
 
 We provide control panels with the ability to build their own Apache packages with modules such as alt-mod-passenger, mod_lsapi, mod_hostinglimits. This is due to the fact that control panels often have own custom Apache. At the same time, the modules must be compiled with the version of Apache and APR libraries that control panels use. Therefore, if your control panel uses an Apache that is provided by CloudLinux OS, you can use native packages with modules. The following table represents the RPM package compatibility.
 
@@ -978,7 +979,7 @@ RPMs of Apache provided by CloudLinux, if you are using:
 
 If you use custom Apache, follow this documentation on how to build a package for your Apache.
 
-#### alt-mod-passenger
+### alt-mod-passenger
 
 
 1. Download alt-mod-passenger sources
@@ -1015,7 +1016,7 @@ export APXS2="${PATH_IN_YOUR_SYSTEM}/bin/apxs"
 
 6. Install the module, check that it is successfully loaded into Apache.
 
-#### mod_hostinglimits
+### mod_hostinglimits
 
 1. Download mod_hostinglimits sources
 ```
@@ -1053,7 +1054,7 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 
 6. Install the module, check that it is successfully loaded into Apache.
 
-#### mod_lsapi
+### mod_lsapi
 
 1. Install the packages needed to build mod_lsapi from the source
 ```

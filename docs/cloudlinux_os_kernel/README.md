@@ -202,7 +202,7 @@ Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd s
 ### Link traversal protection 
 
 
-<span class="notranslate"> [CageFS](/cagefs/) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
+<span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
 
 Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
 
@@ -691,7 +691,7 @@ If fs.proc_can_see_other_uid is set to 0, users will not be able to see special 
 
 fs.proc_super_gid=XX
 
-The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/limits/#cldetect) can configure few most commonly used monitoring software automatically.
+The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/command-line_tools/#cldetect) can configure few most commonly used monitoring software automatically.
 
 Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
 <div class="notranslate">
