@@ -1132,7 +1132,7 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 8. Install the module, check that it is successfully loaded into Apache.
 
 
-### MySQL Governor
+## MySQL Governor
 
 1. Install MySQL Governor
 ```
@@ -1166,7 +1166,7 @@ dbtop
 
 10. If the load appears in the dbtop output, then you have successfully configured MySQL Governor.
 
-### CloudLinux LVE and CageFS patches
+## CloudLinux LVE and CageFS patches
 
 :::tip Note
 If you are using Apache from the CloudLinux repository (such as httpd or httpd24-httpd), skip this chapter.
@@ -1225,7 +1225,7 @@ Then  apply this patch in the _%setup_ section:
 
 If no errors appear during the build, the patch has been successfully applied.
 
-### Hardened PHP
+## Hardened PHP
 
 All versions of alt-php should work properly in any control panel.
 
