@@ -4,7 +4,7 @@
 
 ## Converting Existing Servers
 
-It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+Test string. It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html) .
 * Download script: <span class="notranslate"> [cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy) </span> .
