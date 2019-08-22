@@ -1,20 +1,7 @@
 ---
-title: Инструменты командной строки
+title: Инструменты командной строки (CLI)
 ---
 <gtranslate-io>
-# Инструменты командной строки
+# Command-line tools (CLI)
 
-## lvectl
-
-## lvetop
-
-## cldetect
-
-#### **clsupergid auto-configuration**
-
-## cldiag
-
-### Автоматические уведомления о неисправностях (только cPanel)
-
-### Устранение распространенных неисправностей
 </gtranslate-io>

@@ -4,6 +4,8 @@
 * [Git for cPanel](/deprecated/#git-for-cpanel)
 * [LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
 * [OptimumCache](/deprecated/#optimumcache)
+* [TPE extension](/deprecated/#tpe-extension)
+* [CPU limits](/deprecated/#cpu-limits)
 
 ## Git for cPanel
 
@@ -749,7 +751,7 @@ The cache is cleaned <span class="notranslate">`/etc/cron.d/optimumcache_cron`</
 ```
 </div>
 
-### Marking Directories
+### Marking directories
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -864,7 +866,7 @@ By default, OptimumCache sets up following skip masks:
 
 This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>.
 
-**Skip Mask syntax**
+**Skip mask syntax**
 
 Skip masks use following regexp syntax: [http://www.greenend.org.uk/rjk/tech/regexp.html](http://www.greenend.org.uk/rjk/tech/regexp.html)
 
@@ -881,7 +883,7 @@ For example, to disable caching all directories that contain <span class="notran
 This information is stored in <span class="notranslate">`/etc/container/optimumcache/ignore.d/`</span>
 
 
-### OptimumCache Configuration File
+### OptimumCache configuration file
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -973,7 +975,7 @@ NOIMMSYNC=1
 ```
 </div>
 
-### Command-line Interface
+### Command-line interface
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
@@ -1071,13 +1073,13 @@ Optional Arguments:
 |<span class="notranslate">`--report [Period]`</span>|Report statistics for Period (hourly|daily|weekly|monthly).|
 
 
-### cloudlinux-collect: Collect System Load Statistics
+### cloudlinux-collect: collect system load statistics
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
 :::
 
-#### cloudlinux-collectl Quick Start
+#### cloudlinux-collectl: quick start
 
 Installing this package automatically starts system load statistics collection in background. cloudlinux-collectl package has no strict dependency on OptimumCache, thus the statistics is collected regardless of whether OptimumCache is installed or not. The aim of having this package pre-installed is to compare system performance before and after installing OptimumCache, thus to measure OptimumCache effectiveness.
 
@@ -1094,7 +1096,7 @@ Installing this package automatically starts system load statistics collection i
 cloudlinux-collectl will be installed automatically on optimumcache upgrade to 0.2-23
 :::
 
-#### Measure Web Site Response Time
+#### Measure web site response time
 
 cloudlinux-collectl can monitor response time for a configurable set of URLs.
 
@@ -1130,7 +1132,7 @@ Try <span class="notranslate">`cloudlinux-collectl --help`</span> for more optio
 
 Actual logs are compressed with gzip and kept in <span class="notranslate">`/var/log/optimumcache/collectl`</span> directory.
 
-#### Statistics Being Collected in Details
+#### Statistics being collected in details
 
 To monitor what statistics are being collected, try command:
 
@@ -1173,7 +1175,7 @@ Particularly, the last column percent numbers shall match.
 
 The next goes <span class="notranslate">`URLSTATTRACKER DETAIL`</span> block with url response time in milliseconds. Negative values here may pop up unexpectedly. Negative numbers are not milliseconds, but signal about http error response code for that specific url. For instance, -403 will signal for <span class="notranslate">`Forbidden`</span> http error. As for -500 value, it signals not only for <span class="notranslate">`Internal Server Error`</span>, but can be displayed, when there is connection problem with the server, which is specified by the url.
 
-#### Statistics Manual Configuration
+#### Statistics manual configuration
 
 <span class="notranslate">`URLSTATTRACKER DETAIL`</span> is the only statistics, which requires manual configuration. Upon clean installation, it has only <span class="notranslate">`url_localhost`</span> preconfigured:
 
@@ -1238,7 +1240,7 @@ To skip URL from being tracked run command:
 ```
 </div>
 
-#### Running Statistics Daemon: collectl-cloudlinux
+#### Running statistics daemon: collectl-cloudlinux
 
 cloudlinux-collectl has got collectl package as a dependency. Initd script <span class="notranslate">`/etc/init.d/cloudlinux-collectl`</span> will automatically bring up another instance of collectl named <span class="notranslate">`collectl-optimumcache`</span> . collectl-optimumcache daemon instance has a separate config and does not interfere with other running pre-configure collectl daemon (if any).
 
@@ -1261,7 +1263,7 @@ To start /stop:
 ```
 </div>
 
-#### Analyzing the Results
+#### Analyzing the results
 
 The statistics is being collected into files named <span class="notranslate">`%hostname%-%datetime%.raw.gz`</span> under directory <span class="notranslate">`/var/log/cloudlinux-collect`</span>.
 
@@ -1458,7 +1460,7 @@ To update to version 0.2-6, run:
 ```
 </div>
 
-#### High CPU Utilization
+#### High CPU utilization
 
 Once it is detected that OptimumCache overuses <span class="notranslate">CPU</span>, it is useful to check, whether checksums reindexing process is running. When reindexing is running, high <span class="notranslate">CPU</span> usage is ok, as far it will certainly drop down after reindexing finished.
 
@@ -1524,3 +1526,71 @@ Rather rare problem, try to forcibly update `optimumcache_s` with ploop status.
 ```
 </div>
 
+## TPE extension
+
+**TPE (Trusted Path Execution)**
+
+The kernel supports <span class="notranslate"> TPE </span> feature out of the box. You can configure it using following files:
+<div class="notranslate">
+
+```
+·        /proc/sys/kernel/grsecurity/grsec_lock
+·        /proc/sys/kernel/grsecurity/tpe
+·        /proc/sys/kernel/grsecurity/tpe_gid
+·        /proc/sys/kernel/grsecurity/tpe_restrict_all
+```
+</div>
+
+To enable <span class="notranslate"> TPE </span> feature in a standard way just add following to the end of your <span class="notranslate"> /etc/sysctl.conf </span>
+<div class="notranslate">
+
+```
+#GRsecurity 
+kernel.grsecurity.tpe = 1 
+kernel.grsecurity.tpe_restrict_all = 1 
+kernel.grsecurity.grsec_lock = 1  
+```
+</div>
+
+And do:
+<div class="notranslate">
+
+```
+# sysctl -p
+```
+</div>  
+
+::: tip Note
+Once you set grsec_lock to 1, you will not be able to change TPE options without reboot.
+:::
+
+ This <span class="notranslate">Trusted Path Execution</span> feature was adopted from <span class="notranslate">grsecurity</span>.
+
+## CPU limits
+
+:::tip Note
+Deprecated
+
+This limit is no longer used, and <span class="notranslate"> [SPEED](/limits/#speed-limits) </span> is used instead
+:::
+
+### CPU limits before lve-utils 1.4
+
+<span class="notranslate"> CPU </span> Limits are set by <span class="notranslate"> CPU </span> and <span class="notranslate"> NCPU </span> parameters. <span class="notranslate"> CPU </span> specifies the % of total <span class="notranslate"> CPU </span> of the server available to LVE. <span class="notranslate"> NCPU </span> specifies the number of cores available to LVE. The smallest of the two is used to define how much <span class="notranslate"> CPU </span> power will be accessible to the customer.
+
+| |  |  | |
+|-|--|--|-|
+|Cores Per Server | <span class="notranslate"> CPU </span> Limit | <span class="notranslate"> NCPU </span> Limit | Real limit|
+|1 | 25% | 1 | 25% of 1 core|
+|2 | 25% | 1 | 50% of 1 core|
+|2 | 25% | 2 | 50% of 1 core|
+|4 | 25% | 1 | 100% of 1 core (full core)|
+|4 | 25% | 2 | 1 core|
+|4 | 50% | 1 | 1 core|
+|4 | 50% | 2 | 2 cores|
+|8 | 25% | 1 | 1 core|
+|8 | 25% | 2 | 2 cores|
+|8 | 50% | 2 | 2 cores|
+|8 | 50% | 3 | 3 cores|
+
+When user hits <span class="notranslate"> CPU </span> limit, processes within that limit are slowed down. For example, if you set your <span class="notranslate"> CPU </span> limit to 10%, and processes inside LVE want to use more then 10% they will be throttled (put to sleep) to make sure they don't use more then 10%. In reality, processes don't get <span class="notranslate"> CPU </span> time above the limit, and it happens much more often then 1 second interval, but the end result is that processes are slowed down so that their usage is never above the <span class="notranslate"> CPU </span> limit set.

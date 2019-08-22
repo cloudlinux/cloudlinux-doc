@@ -1,6 +1,6 @@
 ---
-title: Лимиты
+title: Введение
 ---
 <gtranslate-io>
-# Limits
+# Introduction
 </gtranslate-io>

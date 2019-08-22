@@ -1,14 +1,25 @@
 # Installation
 
-[[TOC]]
+## Hardware compatibility
 
-## Converting Existing Servers
+CloudLinux supports all the hardware supported by RHEL/CentOS 6.x, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+
+At this moment we are aware of only one such case:
+
+| |  | |
+|-|--|-|
+|**Device** | **Binary Driver** | **Source**|
+|<span class="notranslate"> B110i Smart Array RAID controller </span> | hpahcisr | [http://h10032.www1.hp.com/ctg/Manual/c01754456](http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
+|<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [http://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
+|<span class="notranslate"> SanDisk DAS Cache </span> |  | [http://www.dell.com/en-us/work/learn/server-technology-components-caching](http://www.dell.com/en-us/work/learn/server-technology-components-caching)|
+
+## Converting existing servers
 
 It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
-* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html) .
-* Download script: <span class="notranslate"> [cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy) </span> .
-* Execute <span class="notranslate"> `sh cldeploy -k <activation_key>` </span> (if you have IP based license, execute <span class="notranslate"> `sh cldeploy -i` </span> ).
+* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription]() or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html) .
+* Download script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
+* Execute <span class="notranslate">`sh cldeploy -k <activation_key>`</span> (if you have IP based license, execute <span class="notranslate">`sh cldeploy -i`</span>).
 * Reboot.
 
 If you have activation key:
@@ -36,63 +47,15 @@ It will install CloudLinux kernel, [Apache module](/limits/#hostinglimits), [PAM
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
-### Advanced Options for cldeploy
+See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
-<span class="notranslate">`sh cldeploy --help`</span>
 
-Usage:
-
-| | |
-|--|--|
-|<span class="notranslate">`-h, --help`</span>|Print this message|
-|<span class="notranslate">`-k, --key &lt;key&gt;`</span>|Update your system to CloudLinux with activation key|
-|<span class="notranslate">`-i, --byip`</span>|Update your system to CloudLinux and register by IP|
-|<span class="notranslate">`-c, --uninstall`</span>|Convert CloudLinux back to CentOS|
-|<span class="notranslate">`--serverurl`</span>|Use non-default registration server (default is `https://xmlrpc.cln.cloudlinux.com/XMLRPC`)|
-|<span class="notranslate">`--components-only`</span>|Install control panel components only|
-|<span class="notranslate">`--conversion-only`</span>|Do not install control panel components after converting|
-|<span class="notranslate">`--hostinglimits`</span>|Install mod_hostinglimits rpm|
-|<span class="notranslate">`--skip-kmod-check`</span>|Skip check for unsupported kmods|
-|<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
-|<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
-
-The script will install the following to the server:
-
-1. Register server with CLN.
-2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
-3. It will attempt to detect control panel and do the following actions:
-*  _For cPanel & DirectAdmin_:
-   * recompile Apache to install mod_hostinglimits;
-   * install LVE Manager.
-
-* _For Plesk, ISPManager & InterWorx_:
-  * update httpd and install mod_hostinglimits;
-  * install LVE Manager.
-
-* To disable installation of LVE Manager and mod_hostinglimits, please use <span class="notranslate">`--conversion-only`</span> option.
-
-* To disable installation of kernel & CLN registration, please use <span class="notranslate">`--components-only`</span> option.
-
-* To install **mod_hostinglimits** only, use <span class="notranslate">`--hostinglimits`</span> option.
-
-Examples:
-
-<div class="notranslate">
-
-```
-$ cldeploy --key xx-xxxxxx           # convert RHEL/CentOS to CL by using activation key, install control panel components
-$ cldeploy --byip --conversion-only  # convert RHEL/CentOS to CL by ip, don't install control panel components
-$ cldeploy --components-only         # install control panel components on already converted system
-$ cldeploy --hostinglimits           # update httpd and install mod_hostinglimits 
-```
-</div>
-
-### Explanation Of Changes
+#### Explanation of changes
 
 CloudLinux uses the fact that it is very close to CentOS and RHEL to convert systems in place, requiring just one reboot. Our conversion script does the following actions:
 
-* Backup of original repository settings into <span class="notranslate">_/etc/cl-convert-saved_</span>.
-* Backup of RHEL system id into <span class="notranslate">_/etc/cl-convert-saved_</span> (RHEL systems only).
+* Backup of original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
+* Backup of RHEL system id into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
 * Installs CL repository settings & imports CL RPM key.
 * Replaces redhat/centos-release, redhat-release-notes, redhat-logos with CL version.
 * Removes cpuspeed RPM (as it conflicts with CPU limits).
@@ -101,7 +64,7 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 * Detects OVH servers and fixes mkinitrd issues.
 * Detects Linode servers and fixes grub issues.
 * Checks if LES is installed.
-* Checks that <span class="notranslate">_/etc/fstab_</span> has correct <span class="notranslate">_/dev/root_</span>
+* Checks that <span class="notranslate">`/etc/fstab`</span> has correct <span class="notranslate">`/dev/root`</span>
 * Checks for efi.
 * Installs CL kernel, lve-utils, liblve, lve-stats RPMs.
 * Installs LVE Manager for cPanel, Plesk, DirectAdmin, ISPManager & InterWorx
@@ -124,8 +87,8 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
-## Installing new servers
 
+## Installing new servers
 
 You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
 
@@ -142,11 +105,60 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
   * Last updated: July 05, 2018
 
 
+* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
+
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
+  * Last updated: Oct 10, 2014
+
+
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#registering-cloudlinux-server) and then run yum update.
 :::
 
-## CloudLinux OS Images
+## Activation
+### Getting trial license
+
+You will need a trial activation key to be able to convert your CentOS server to CloudLinux.  The trial subscription will work for 30 days.
+
+If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
+
+To get the activation key:
+
+1. Register with CloudLinux Network: [https://cln.cloudlinux.com/console/register/customer](https://cln.cloudlinux.com/console/register/customer) (skip it if you already registered)
+2. You will receive an email with activation link
+3. Login at [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
+4. Click on `Get Trial Activation Key`
+
+You will get a key that looks like: `12314-d34463a182fede4f4d7e140f1841bcf2`
+
+Use it to register your system or to [convert CentOS server to CloudLinux]() server.
+
+### License activation
+
+To register your server with CloudLinux Network using activation key run:
+
+<div class="notranslate">
+
+```
+$ yum install rhn-setup --enablerepo=cloudlinux-base
+$ /usr/sbin/rhnreg_ks --activationkey=<activation key> --force
+```
+</div>
+
+Where activation key is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
+
+If you have IP based license, use <span class="notranslate">`clnreg_ks`</span> command:
+
+<div class="notranslate">
+
+```
+$ yum install rhn-setup --enablerepo=cloudlinux-base
+$ /usr/sbin/clnreg_ks --force
+```
+</div>
+
+## CloudLinux OS images
 
 
 * [OpenStack QEMU/KVM](https://download.cloudlinux.com/cloudlinux/images/#kvm-tab)
@@ -156,7 +168,7 @@ Once you install server from the ISO, make sure you [register your system](/clou
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
 * [Xen](/cloudlinux_installation/#xen-images)
 
-### Xen Images
+#### Xen images
 
 
 To start using Xen image:
@@ -205,8 +217,7 @@ Root password: <span class="notranslate">`cloudlinux`</span>
 * CloudLinux 7 + DirectAdmin: [http://download.cloudlinux.com/images/cl6-7/cl7-hvm-da.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl7-hvm-da.img.tgz)
 
 
-## Net Install
-
+## Net install
 
 To install CloudLinux over network:
 
@@ -217,9 +228,17 @@ It will boot into CloudLinux installer.
 
 2. During the CloudLinux installation select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/) and continue with installation.
 
+To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/)
+
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
-## Installing on H-Sphere Server
+## Provider-specific guidelines
+
+* [H-Sphere](/cloudlinux_installation/#h-sphere)
+* [DigitalOcean](/cloudlinux_installation/#digitalocean)
+* [Linode](/cloudlinux_installation/#linode)
+
+### H-Sphere
 
 :::tip Note
 For H-Sphere 3.5+
@@ -228,7 +247,7 @@ Please note, that CageFS and PHP Selector are not supported for H-Sphere
 :::
 
 
-### Requirements
+#### Requirements
 
 1. CloudLinux with liblve 0.8 or later.
 2. Apache 2.2.x or 1.3.
@@ -291,7 +310,7 @@ Restart Apache afterward.
 Don't forget to [convert from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid).
 :::
 
-### Converting from mod_fastcgi to mod_fcgid
+#### Converting from mod_fastcgi to mod_fcgid
 
 To achieve the best results in productivity and stability we recommend converting from <span class="notranslate">`mod_fastcgi`</span> to <span class="notranslate">`mod_fcgid`</span>.
 
@@ -338,7 +357,7 @@ Include /hsphere/local/config/httpd2/fcgi.conf
 *No changes needed to `httpd.conf.tmpl.custom` or `usermodule.phpmode` as this version provides its own mod_fcgid.
 :::
 
-### Older Versions of H-Sphere
+#### Older versions of H-Sphere
 
 1. Compile mod_fcgid module:
    
@@ -459,139 +478,13 @@ php_fastcgi5 enabled and is default
 
 Other options could be configured according to personal needs.
 
-When done - click SUBMIT to apply changes.
+When done - click <span class="notranslate">_SUBMIT_</span> to apply changes.
 
 :::tip Note
 After updating H-Sphere software on web server with CloudLinux you need to re-apply step 2 (patch usemodule.phpmode) and restart apache with `/hsphere/shared/scripts/apache-restart` script.
 :::
 
-## Virtuozzo and OpenVZ
-
-
-:::warning Note
-We’ll be ending support for Virtuozzo and OpenVZ on **August 1st, 2019**.
-:::
-
-:::tip Note
-* Virtuozzo 6 and OpenVZ 6 are supported.
-* Virtuozzo 7 and OpenVZ 7 are not supported.
-:::
-
-:::tip Note
-Kernel 2.6.32-042stab088.4 or later required
-:::
-
-CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
-* CageFS
-* PHP Selector
-* max entry processes
-* mod_lsapi
-* MySQL Governor
-
-No other limits work so far.
-
-### Installation
-
-VZ Node (needs to be done once for the server):
-
-:::tip Note
-Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
-:::
-
-:::tip Note
-Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with <span class="notranslate">`yum`</span>:
-:::
-
-<div class="notranslate">
-
-```
-yum install vzkernel-headers vzkernel-devel
-
-$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
-$ yum install lve-kernel-module
-```
-</div>
-
-This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
-
-After this is done, you can add LVE support for any container on a node, at any time.
-
-To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:rw --save
-```
-</div>
-
-To disable LVE support for Container:
-
-<div class="notranslate">
-
-```
-$ vzctl set CT_ID --devnodes lve:none --save
-```
-</div>
-
-Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers)
-
-CloudLinux license is required for each VZ container.
-
-
-:::tip Note
-Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors. On a host node:
-
-1. add `fs.ve-mount-nr = 15000` to `/etc/sysctl.conf`;
-
-2. apply it with `sysctl -p` command.
-
-In very rare cases the value should be increased higher, up to 50000.
-:::
-
-## Getting Trial License
-
-
-You will need a trial activation key to be able to convert your CentOS server to CloudLinux.  The trial subscription will work for 30 days.
-
-If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
-
-To get the activation key:
-
-1. Register with CloudLinux Network: [https://cln.cloudlinux.com/console/register/customer](https://cln.cloudlinux.com/console/register/customer) (skip it if you already registered)
-2. You will receive an email with activation link
-3. Login at [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
-4. Click on `Get Trial Activation Key`
-
-You will get a key that looks like: `12314-d34463a182fede4f4d7e140f1841bcf2`
-
-Use it to register your system or to [convert CentOS server to CloudLinux](/cloudlinux_installation/#converting-existing-servers) server.
-
-## Registering CloudLinux Server
-
-To register your server with CloudLinux Network using activation key run:
-
-<div class="notranslate">
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key> --force
-```
-</div>
-
-Where activation key is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
-
-If you have IP based license, use <span class="notranslate">`clnreg_ks`</span> command:
-
-<div class="notranslate">
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/clnreg_ks --force
-```
-</div>
-
-## CloudLinux on DigitalOcean
+### DigitalOcean
 
 How to make CloudLinux work on DigitalOcean:
 
@@ -624,7 +517,7 @@ chkconfig --add kexec
 ```
 </div>
 
-### Adding CloudLinux OS image to DigitalOcean
+#### Adding CloudLinux OS image to DigitalOcean
 
 Custom images are Linux distributions that have been modified to fit the specific needs of DigitalOcean users. You can find some basics of importing a custom CloudLinux OS image below.
 
@@ -638,17 +531,17 @@ Below, we will describe how to add a qcow2 (QEMU/KVM) CloudLinux OS image as a c
 
 2. Copy the link for the image you are going to use and log into [cloud.digitalocean.com](https://blog.digitalocean.com/custom-images/cloud.digitalocean.com).
 
-Click _Images_ on the left of the screen and then choose _Custom Images_. Click the _Import via URL_ button and paste the CloudLinux OS image link.
+Click <span class="notranslate">_Images_</span> on the left of the screen and then choose <span class="notranslate">_Custom Images_</span>. Click the <span class="notranslate">_Import via URL_</span> button and paste the CloudLinux OS image link.
 
 ![](/images/customimages.png)
 
-There are several options here, but the most important is _Choose a datacenter region_, i.e. which datacenter region your Droplets should be created in for this image.
+There are several options here, but the most important is <span class="notranslate">_Choose a datacenter region_</span>, i.e. which datacenter region your Droplets should be created in for this image.
 
 ![](/images/uploadimage.png)
 
-Click the _Upload Image_ button and wait until the image is successfully uploaded.
+Click the <span class="notranslate">_Upload Image_</span> button and wait until the image is successfully uploaded.
 
-3. Add your public key to access your droplets using key-based authentication: navigate to the _Security_ sidebar menu and click the _Add SSH Key_ button.
+3. Add your public key to access your droplets using key-based authentication: navigate to the <span class="notranslate">_Security_</span> sidebar menu and click the <span class="notranslate">_Add SSH Key_</span> button.
 
 You can find more information about creating/adding SSH keys in [this article](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/).
 
@@ -666,9 +559,10 @@ You can find more information about creating/adding SSH keys in [this article](h
 
 ![](/images/sshclient.png)
 
-## CloudLinux on Linode
 
-### CloudLinux on Linode KVM
+### Linode
+
+#### CloudLinux on Linode KVM
 
 To install CloudLinux 7 on Linode KVM server you should perform the following steps:
 
@@ -710,7 +604,7 @@ grub2-mkconfig -o /boot/grub/grub.cfg
 
 After reboot you will have fully operational CloudLinux 7 system and can proceed with other configuration you need.
 
-### CloudLinux on Linode Xen
+#### CloudLinux on Linode Xen
 
 To install CloudLinux 7 on Linode Xen please perform the following steps:
 
@@ -741,13 +635,13 @@ You will need to update <span class="notranslate">`/boot/grub/menu.lst`</span> m
 
 In case if you will migrate to KVM later you will need only switch the boot settings to <span class="notranslate">`GRUB 2`</span>.
 
-## Servers with LILO boot loader
+## LILO boot loader
 
-CloudLinux can be deployed on servers that don't have grub installed, by installing <span class="notranslate"> хороgrub </span> first.
+CloudLinux can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
 
 To do that:
 
-1. Make sure grub and kernel packages are not excluded. Edit file <span class="notranslate">`/etc/yum.conf`</span> and check <span class="notranslate">`exclude=`</span> line for presence of `kernel* grub*`.
+1. Make sure grub and kernel packages are not excluded. Edit file <span class="notranslate">`/etc/yum.conf`</span> and check <span class="notranslate">`exclude=`</span> line for presence of <span class="notranslate">`kernel* grub*`</span>.
 
 2. Backup lilo config file:
    
@@ -787,12 +681,85 @@ timeout=5
  ```
  </div>
 
-6. Reboot and check that you are running CloudLinux. <span class="notranslate">`uname -r`</span> should show something like: <span class="notranslate">`2.6.18-294.8.1.el5.lve0.7.33`</span> .
+6. Reboot and check that you are running CloudLinux. <span class="notranslate">`uname -r`</span> should show something like: <span class="notranslate">`2.6.18-294.8.1.el5.lve0.7.33`</span>.
 
+## Uninstalling
 
-## Migrating to EasyApache 4
+You can always uninstall CloudLinux. In this case, we will 'convert' the system back to CentOS. Even if the original system was RHEL - we will still convert to CentOS state.
 
-### Advices and limitations:
+The following actions will be taken:
+
+1. LVE related packages will be removed.
+2. CloudLinux repositories & <span class="notranslate">yum</span> plugin will be removed.
+3. CentOS repositories will be setup.
+
+At the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
+
+To uninstall CloudLinux, do:
+
+<div class="notranslate">
+
+```
+$ wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+$ sh cldeploy -c
+```
+</div>
+
+Now you have converted back to CentOS and it is the time to install kernel.
+
+To delete CloudLinux kernel, run:
+
+<div class="notranslate">
+
+```
+rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
+```
+</div>
+
+To install new CentOS kernel once you deleted CloudLinux kernel, type <span class="notranslate">`yum install kernel`</span>.
+
+If <span class="notranslate">`yum`</span> says that the latest kernel is already installed, it is OK.
+
+Please check your bootloader configuration before rebooting the system.
+
+To remove unused kmods and lve libs run:
+
+<div class="notranslate">
+
+```
+yum remove lve kmod*lve*
+```
+</div>
+
+Kernel package and related LVE packages should be deleted and the required kernel will be installed.
+
+Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
+
+**For EasyApache 3:**
+
+<div class="notranslate">
+
+```
+/scripts/easyapache --build
+```
+</div>
+
+**For EasyApache 4:**
+
+<div class="notranslate">
+
+```
+/usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
+```
+</div>
+
+:::tip Note
+Some of the packages from CloudLinux repo will still be present. They are the same as CentOS packages, and don't have to be removed. They will be updated in the future from CentOS repositories, as new versions come out.
+:::
+
+## Migration to EasyApache 4
+
+### Advices and limitations
 
 * Use cPanel 11.55.999.66(55.999.66) or higher version.
 * <span class="notranslate">Hardened EA4</span> limitations:
@@ -915,80 +882,49 @@ sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 ```
 </div>
 
-#### FAQ
+### FAQ
 
-You can find FAQ [here](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ).
 
-## Uninstalling CloudLinux
-
-You can always uninstall CloudLinux. In this case, we will 'convert' the system back to CentOS. Even if the original system was RHEL - we will still convert to CentOS state.
-
-The following actions will be taken:
-
-1. LVE related packages will be removed.
-2. CloudLinux repositories & <span class="notranslate">yum</span> plugin will be removed.
-3. CentOS repositories will be setup.
-
-At the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
-
-To uninstall CloudLinux, do:
+**1. When do we need to call the following script?**
 
 <div class="notranslate">
 
 ```
-$ wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
-$ sh cldeploy -c
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --convert 
 ```
 </div>
 
-Now you have converted back to CentOS and it is the time to install kernel.
+1.1. Migration from EasyApache 3 to EasyApache 4.
 
-To delete CloudLinux kernel, run:
+The main difference between EasyApache 3 and EasyApache 4 for CloudLinux is the repositories used for <span class="notranslate">Apache RPM</span> packages. For this reason, we need to use packages from the _cl-ea4_ repository or _cl-ea4-testing_ beta for EasyApache 4. Running this script we update all native ea-* packages from CloudLinux repository. In this case, non-native packages for Apache include mod_lsapi and <span class="notranslate">alt-mod-passenger</span> (CloudLinux feature). So, if mod_lsapi or <span class="notranslate">alt-mod-passenger</span> (or both) were installed on EasyApache 3, the script should be run with the additional options as it described [here](/cloudlinux_installation/#migrating-to-easyapache-4) .
+
+Also, our script starts cPanel EasyApache 3 migration to EasyApache 4 Process. Read more about Profile changes, Apache changes, PHP changes on the link [https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process](https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process)
+
+1.2. Migration from EasyApache 4 CentOS to EasyApache 4 CloudLinux.
+
+When cPanel is installed with EasyApache 4 on a clean CloudLinux (or it was CentOS converted to CloudLinux), the installation of the ea-* packages comes from the EA4 cPanel repository. Most packages from the EA4 cPanel repository are not compatible with CloudLinux packages and this can lead to various errors. For this reason, we need to run this script to update the ea-* packages from the CloudLinux repository.
+
+If there was a need to return back EasyApache 4 packages from the EA4 cPanel repository, we need to run:
 
 <div class="notranslate">
 
 ```
-rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo
 ```
 </div>
 
-To install new CentOS kernel once you deleted CloudLinux kernel, type <span class="notranslate">`yum install kernel`</span>.
-
-If <span class="notranslate">`yum`</span> says that the latest kernel is already installed, it is OK.
-
-Please check your bootloader configuration before rebooting the system.
-
-To remove unused kmods and lve libs run:
+**2. When do we need to call the following script?**
 
 <div class="notranslate">
 
 ```
-yum remove lve kmod*lve*
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
+sh cloudlinux_ea3_to_ea4 --revert
 ```
 </div>
 
-Kernel package and related LVE packages should be deleted and the required kernel will be installed.
+2.1. Reverting back to EasyApache 3.
 
-Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
-
-**For EasyApache 3:**
-
-<div class="notranslate">
-
-```
-/scripts/easyapache --build
-```
-</div>
-
-**For EasyApache 4:**
-
-<div class="notranslate">
-
-```
-/usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
-```
-</div>
-
-:::tip Note
-Some of the packages from CloudLinux repo will still be present. They are the same as CentOS packages, and don't have to be removed. They will be updated in the future from CentOS repositories, as new versions come out.
-:::
+Revert back is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.

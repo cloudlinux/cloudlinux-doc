@@ -58,7 +58,7 @@ module.exports = {
     docsDir: "docs",
     
     translationSource: 'docs.cloudlinux.com',
-    defaultURL: "/cloudlinux_installation/",
+    defaultURL: "/introduction/",
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",
@@ -122,31 +122,16 @@ module.exports = {
             title: "Content",
             collapsable: false,
             children: [
+              "/introduction/",
               "/cloudlinux_installation/",
+              "/control_panel_integration/",
               "/limits/",
               "/command-line_tools/",
               "/lve_manager/",
-              "/reseller_limits/",
-              "/lve-stats_2/",
-              "/cagefs/",
-              "/mysql_governor/",
-              "/php_selector/",
-              "/python_selector/",
-              "/ruby_selector/",
-              "/node_js_selector/",
-              "/inodes_limits/",
-              "/kernel_settings/",
-              "/apache_mod_lsapi/",
-              "/cloudlinux-fchange/",
-              "/mod_proctitle/",
-              "/additional_packages/",
-              "/integration_guide/",
-              "/partner_portal/",
-              "/cloudlinux_network/",
-              "/cloudlinux_whmcs_plugin/",
-              "/deprecated/",
-              "/hardware_compatibility/",
-              "/cloudlinux_life-cycle/"
+              "/cloudlinux_os_components/",
+              "/cloudlinux_os_kernel/",
+              "/for_cloudlinux_partners/",
+              "/deprecated/"
             ]
           }
         ]
@@ -160,7 +145,7 @@ module.exports = {
         search: "Поиск",
         serviceWorker: {
           updatePopup: {
-            message: "Доступен Новый контент",
+            message: "Доступен новый контент",
             buttonText: "Обновить"
           }
         },
@@ -190,31 +175,16 @@ module.exports = {
             title: "Содержание",
             collapsable: false,
             children: [
+              "/ru/introduction/",
               "/ru/cloudlinux_installation/",
+              "/ru/control_panel_integration/",
               "/ru/limits/",
               "/ru/command-line_tools/",
               "/ru/lve_manager/",
-              "/ru/reseller_limits/",
-              "/ru/lve-stats_2/",
-              "/ru/cagefs/",
-              "/ru/mysql_governor/",
-              "/ru/php_selector/",
-              "/ru/python_selector/",
-              "/ru/ruby_selector/",
-              "/ru/node_js_selector/",
-              "/ru/inodes_limits/",
-              "/ru/kernel_settings/",
-              "/ru/apache_mod_lsapi/",
-              "/ru/cloudlinux-fchange/",
-              "/ru/mod_proctitle/",
-              "/ru/additional_packages/",
-              "/ru/integration_guide/",
-              "/ru/partner_portal/",
-              "/ru/cloudlinux_network/",
-              "/ru/cloudlinux_whmcs_plugin/",
-              "/ru/deprecated/",
-              "/ru/hardware_compatibility/",
-              "/ru/cloudlinux_life-cycle/"
+              "/ru/cloudlinux_os_components/",
+              "/ru/cloudlinux_os_kernel/",
+              "/ru/for_cloudlinux_partners/",
+              "/ru/deprecated/"
             ]
           }
         ]
