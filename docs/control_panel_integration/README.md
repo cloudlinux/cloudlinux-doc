@@ -7,10 +7,10 @@ We encourage you to create a pull request with your feedback at the bottom of th
 ## General
 
 To integrate CloudLinux into a control panel, you should implement the following interfaces required by the CloudLinux OS utilities:
-* CPAPI — a small scripts/files-type interface to get the required information from the control panel
-* CP Hooks Integration — a set of the CloudLinux OS scripts/commands. Control panel calls this set in response to its internal events
-* Web UI Integration(optional) — various configuration parameters and scripts to embed interface SPA application into the control panel native interface. Optional, if CLI is enough
-* CageFS Integration — some changes may be required in the config files to work and integrate with CageFS as well as additional support from a control panel
+* [CPAPI](/control_panel_integration/#control-panel-api-integration) — a small scripts/files-type interface to get the required information from the control panel
+* [CP Hooks Integration](/control_panel_integration/#control-panel-hooks-integration) — a set of the CloudLinux OS scripts/commands. Control panel calls this set in response to its internal events
+* [Web UI Integration(optional)](/control_panel_integration/#web-ui-integration) — various configuration parameters and scripts to embed interface SPA application into the control panel native interface. Optional, if CLI is enough
+* [CageFS Integration](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel) — some changes may be required in the config files to work and integrate with CageFS as well as additional support from a control panel
 
 Configuration related to integration should be placed in a valid INI file (further “integration config file”):
 
