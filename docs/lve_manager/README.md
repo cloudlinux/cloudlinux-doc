@@ -524,13 +524,17 @@ It is impossible:
 
 #### **Make a particular Python version as a default**
 
-To make a particular Python version as a default do the following:
+:::tip Note
+You can set a particular Python version as a default version in the CloudLinux [installation wizard](/lve_manager/#cloudlinux-installation-wizard) during the first installation.
+:::
+
+To make a particular Python version as a default version, do the following:
 
 * Click <span class="notranslate">_Double-Tick_</span> icon in the Actions column for a particular Python version.
 * In the confirmation popup click <span class="notranslate">_Agree_</span> to save changes or <span class="notranslate">_Cancel_</span> to close popup.
  
 :::tip Note
-It is impossible to make default disabled version
+It is impossible to make disabled Python version as a default version
 :::
 
 ![](/images/PythonChangeDefaultVersion.png)
