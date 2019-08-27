@@ -1439,7 +1439,7 @@ All end user settings are contained in individual user's alt_php.ini files and c
 
 
 :::warning Warning!
-selectorctl command line tool is not supported in the new Python Selector.
+selectorctl command line tool is not supported in the new Python Selector. You can use cloudlinux-selector command line tool instead.
 :::
 
 Below, there is a list of commands hoster and end user can run in a command line.
@@ -1915,7 +1915,7 @@ To start all users CLI commands use <span class="notranslate">`cagefs_enter`</sp
 
 
 :::warning Warning!
-selectorctl command line tool is not supported in the new Python Selector.
+selectorctl command line tool is not supported in the new Python Selector. You can use cloudlinux-selector command line tool instead.
 :::
 
 To create application run:
