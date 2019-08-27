@@ -237,6 +237,7 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 * [H-Sphere](/cloudlinux_installation/#h-sphere)
 * [DigitalOcean](/cloudlinux_installation/#digitalocean)
 * [Linode](/cloudlinux_installation/#linode)
+* [Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
 
 ### H-Sphere
 
@@ -635,6 +636,96 @@ You will need to update <span class="notranslate">`/boot/grub/menu.lst`</span> m
 
 In case if you will migrate to KVM later you will need only switch the boot settings to <span class="notranslate">`GRUB 2`</span>.
 
+
+### Virtuozzo and OpenVZ
+
+
+:::warning Note
+We’ll be ending support for Virtuozzo and OpenVZ on November 1st, 2019.
+:::
+
+:::tip Note
+* Virtuozzo 6 and OpenVZ 6 are supported.
+* Virtuozzo 7 and OpenVZ 7 are not supported.
+:::
+
+:::tip Note
+Kernel 2.6.32-042stab088.4 or later required
+:::
+
+CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
+
+* CageFS
+* PHP Selector
+* max entry processes
+* mod_lsapi
+* MySQL Governor
+
+No other limits work so far.
+
+#### Installation
+
+VZ Node (needs to be done once for the server):
+
+:::tip Note
+Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
+:::
+
+:::tip Note
+Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with `yum`
+:::
+
+<div class="notranslate">
+
+```
+yum install vzkernel-headers vzkernel-devel
+
+$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
+$ yum install lve-kernel-module
+```
+
+</div>
+
+This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
+
+After this is done, you can add LVE support for any container on a node, at any time.
+
+To make CloudLinux work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:rw --save
+```
+
+</div>
+
+To disable LVE support for Container:
+
+<div class="notranslate">
+
+```
+$ vzctl set CT_ID --devnodes lve:none --save
+```
+
+</div>
+
+Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers).
+
+CloudLinux license is required for each VZ container.
+
+:::tip Note
+Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors.
+:::
+
+To increase `fs.ve-mount-nr`, on a host node:
+
+1. add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;
+
+2. apply it with <span class="notranslate">`sysctl -p`</span> command.
+
+In very rare cases the value should be increased higher, up to 50000.
+
 ## LILO boot loader
 
 CloudLinux can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
@@ -882,49 +973,4 @@ sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 ```
 </div>
 
-### FAQ
-
-
-**1. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --convert 
-```
-</div>
-
-1.1. Migration from EasyApache 3 to EasyApache 4.
-
-The main difference between EasyApache 3 and EasyApache 4 for CloudLinux is the repositories used for <span class="notranslate">Apache RPM</span> packages. For this reason, we need to use packages from the _cl-ea4_ repository or _cl-ea4-testing_ beta for EasyApache 4. Running this script we update all native ea-* packages from CloudLinux repository. In this case, non-native packages for Apache include mod_lsapi and <span class="notranslate">alt-mod-passenger</span> (CloudLinux feature). So, if mod_lsapi or <span class="notranslate">alt-mod-passenger</span> (or both) were installed on EasyApache 3, the script should be run with the additional options as it described [here](/cloudlinux_installation/#migrating-to-easyapache-4) .
-
-Also, our script starts cPanel EasyApache 3 migration to EasyApache 4 Process. Read more about Profile changes, Apache changes, PHP changes on the link [https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process](https://documentation.cpanel.net/display/EA4/The+EasyApache+3+to+EasyApache+4+Migration+Process)
-
-1.2. Migration from EasyApache 4 CentOS to EasyApache 4 CloudLinux.
-
-When cPanel is installed with EasyApache 4 on a clean CloudLinux (or it was CentOS converted to CloudLinux), the installation of the ea-* packages comes from the EA4 cPanel repository. Most packages from the EA4 cPanel repository are not compatible with CloudLinux packages and this can lead to various errors. For this reason, we need to run this script to update the ea-* packages from the CloudLinux repository.
-
-If there was a need to return back EasyApache 4 packages from the EA4 cPanel repository, we need to run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --restore-cpanel-ea4-repo
-```
-</div>
-
-**2. When do we need to call the following script?**
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4
-sh cloudlinux_ea3_to_ea4 --revert
-```
-</div>
-
-2.1. Reverting back to EasyApache 3.
-
-Revert back is possible only if EasyApache 3 was previously installed, and then converted to EasyApache 4. If cPanel was originally installed with EasyApache 4, there is no way to convert to EasyApache 3.
+See also: [FAQ](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ)
