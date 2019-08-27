@@ -1201,5 +1201,6 @@ module.exports = {
   "/index.html?cldetect.html": "/command-line_tools/#cldetect",
   "/command-line_tools/#cldetect": "/command-line_tools/#cldetect",
   "/python_and_ruby_selector/#python-and-ruby-selector": "/cloudlinux_os_components/#python-selector",
-  "/python_selector/#python-selector": "/cloudlinux_os_components/#python-selector"
+  "/python_selector/#python-selector": "/cloudlinux_os_components/#python-selector",
+  "/ru/selectorctl.html": "/ru/command-line_tools/#selectorctl"
 };

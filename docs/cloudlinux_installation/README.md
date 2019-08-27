@@ -641,7 +641,8 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 
 
 :::warning Note
-We’ll be ending support for Virtuozzo and OpenVZ on November 1st, 2019.
+We’ll be ending support for Virtuozzo and OpenVZ containers on November 1st, 2019.
+If you are running Virtuozzo and OpenVZ, you will still be able to use CloudLinux OS but you will need to run hypervisors. See detail on how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
 :::
 
 :::tip Note
