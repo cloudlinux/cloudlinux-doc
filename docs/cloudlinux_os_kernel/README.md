@@ -94,20 +94,20 @@ reboot
 
 Features that are absent in the current kernel build:
 
-1. CPU boost
-2. CRIU support for mod_lsapi PRO
-3. Per LVE traffic accounting
+1. CRIU support for mod_lsapi PRO
+2. Per LVE traffic accounting
 
 Limitations of the current kernel build:
 
-1. Standard OOM killer is used
-2. The _/etc/sysctl.conf_ parameter <span class="notranslate"> `proc_can_see_other_uid` </span> is supported but its behavior is more restrictive than [documented](/kernel_settings/#virtualized-proc-filesystem). This will be improved in the next beta release.
-3. Symlink Owner Match Protection is disabled by default. To enable it, use `sysctl` utility:
+1. Native OOM killer is used
+2. Native СPU boost is used
+3. The `/etc/sysctl.conf` parameter <span class="notranslate">`proc_can_see_other_uid`</span> is the same as in CloudLinux 7. See [documentation](/kernel_settings/#virtualized-proc-filesystem).
+4. Symlink Owner Match Protection is enabled by default. To disable it, use `sysctl` utility:
 
 <div class="notranslate">
 
 ```
-sysctl -w fs.enforce_symlinksifowner=1
+sysctl -w fs.enforce_symlinksifowner=0
 ```
 </div>
 
