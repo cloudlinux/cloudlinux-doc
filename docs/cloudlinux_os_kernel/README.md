@@ -94,8 +94,7 @@ reboot
 
 Features that are absent in the current kernel build:
 
-1. CRIU support for mod_lsapi PRO
-2. Per LVE traffic accounting
+* Per LVE traffic accounting
 
 Limitations of the current kernel build:
 
