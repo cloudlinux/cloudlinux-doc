@@ -102,7 +102,8 @@ Limitations of the current kernel build:
 1. Native OOM killer is used
 2. Native СPU boost is used
 3. The `/etc/sysctl.conf` parameter <span class="notranslate">`proc_can_see_other_uid`</span> is the same as in CloudLinux 7. See [documentation](/kernel_settings/#virtualized-proc-filesystem).
-4. Symlink Owner Match Protection is enabled by default. To disable it, use `sysctl` utility:
+
+Note, that Symlink Owner Match Protection is enabled by default in CL7 Hybrid kernel. To disable it, use `sysctl` utility:
 
 <div class="notranslate">
 
