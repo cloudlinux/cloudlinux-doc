@@ -446,6 +446,10 @@ Choose default modules from the list for a proper PHP version or for native.
 ![](/images/lveman_092.jpg)
 ![](/images/lveman_093.jpg)
 
+:::tip Note
+You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
+:::
+
 
 ### Python Selector
 
@@ -558,6 +562,11 @@ To change Python version for a particular application do the following:
 All packages of the application(s) will be re-installed.
 :::
 
+:::tip Note
+You can also use [Python Selector CLI](/command-line_tools/#hoster)
+:::
+
+
 #### End User
 
 :::tip Note
@@ -665,6 +674,11 @@ Click <span class="notranslate">_Save_</span> to save all changes or <span class
 For details see [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
 
 
+:::tip Note
+You can also use [Python Selector CLI](/command-line_tools/#end-user)
+:::
+
+
 ### Node.js Selector
 
 #### Hoster
@@ -766,6 +780,11 @@ To change Node.js version for a particular application do the following:
 All packages of the application(s) will be re-installed.
 :::
 
+:::tip Note
+You can also use [Node.js Selector CLI](/command-line_tools/#hoster-2)
+:::
+
+
 #### End User
 
 :::tip Note
@@ -853,6 +872,10 @@ Context: virtual host, htaccess
 By default, <span class="notranslate"> Passenger </span> log messages are all written to the Passenger log file. With this option, you can have the app specific messages logged to a different file in addition. In <span class="notranslate"> alt-mod-passenger </span>, you can use it in the context of a virtual host or in the htaccess file.
 
 See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+
+:::tip Note
+You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
+:::
 
 ### Reseller limits
 

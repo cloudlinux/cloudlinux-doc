@@ -205,6 +205,10 @@ SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2
 
 Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux.
 
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
+
 #### Downgrade
 
 If you have any problems after update, downgrade <span class="notranslate">lve-stats2</span> to the previous stable version by running:
@@ -220,6 +224,10 @@ and contact CloudLinux support at [https://cloudlinux.zendesk.com/hc/requests/ne
 
 :::tip Note
 You may need to rename `*.rpmsave` files to original ones in order to restore settings for old <span class="notranslate">lve-stats (`/etc/sysconfig/lvestats`, `/etc/sysconfig/cloudlinux-notify`</span>).
+:::
+
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
 :::
 
 ### Configuration
@@ -304,6 +312,10 @@ service lvestats restart
 </div>
 
 <span class="notranslate">`/etc/logrotate.d/lvestats`</span> - configuration file for <span class="notranslate">`/var/log/lve-stats.log rotation`</span>
+
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
 
 ### LVE-stats2 and DB servers compatible work setup
 
@@ -1513,6 +1525,10 @@ LVE_VERSION >=8
 ```
 </div>
 
+:::tip Note
+You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
+:::
+
 ### Troubleshooting
 
 <span class="notranslate"> lvestats </span> service and utilities write fatal errors to system log.
@@ -1608,6 +1624,10 @@ It is strongly advised against setting this variable in `90-cloudlinux.conf`. De
 You can find more information on <span class="notranslate">`fs.proc_can_see_other_uid`</span> automatic migration in [Kernel Config Variables](/cloudlinux_os_kernel/#kernel-config-variables).
 
 
+:::tip Note
+You can also use [CageFS CLI](/command-line_tools/#cagefs)
+:::
+
 ### Uninstalling
 
 To uninstall CageFS, start by disabling and removing all directories:
@@ -1700,6 +1720,10 @@ $ /usr/sbin/cagefsctl --display-user-mode
 ```
 </div>
 
+
+:::tip Note
+You can also use [CageFS CLI](/command-line_tools/#cagefs)
+:::
 
 ### Configuration
 
@@ -1856,7 +1880,7 @@ And check that the command shows <span class="notranslate">`Disabled`</span>.
 CageFS creates individual namespace for each user, making it impossible for users to see each other's files and creating high level of isolation. The way namespace is organized:
 
 1. <span class="notranslate"> /usr/share/cagefs-skeleton </span> with safe files is created
-2. Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate"> /usr/share/cagefs-skeleton </span>
+2. Any directory from the server that needs to be shared across all users is mounted into <span class="notranslate">`/usr/share/cagefs-skeleton`</span>
 (a list of such directories is defined in /etc/cagefs/cagefs.mp)
 3. <span class="notranslate"> /var/cagefs/[prefix]/username </span> directory for each user. Prefix is defined as last two digits of user id. User id is taken from <span class="notranslate"> /etc/passwd </span> file.
 4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
@@ -1866,7 +1890,7 @@ CageFS creates individual namespace for each user, making it impossible for user
 
 To define individual custom directories in /etc/cagefs/cagefs.mp following format is used:
 
-<span class="notranslate"> `@/full/path/to/directory,permission notation` </span>
+<span class="notranslate">`@/full/path/to/directory,permission notation`</span>
 
 
 This is useful when you need to give each user its own copy of a particular system directory, like:
@@ -2746,6 +2770,10 @@ Please note that restore of previous packages in case of failed installation wou
 Use <span class="notranslate"> --yes </span> flag on your own risk, because it confirms installation in any case - even in case if there are troubles during installation (for example, network problems causing incomplete download of packages), everything would be confirmed.
 :::
 
+:::tip Note
+See also [MySQL Governor CLI](/command-line_tools/#mysql-governor)
+:::
+
 #### Upgrading database server
 
 In order to change MySQL version you should run the following commands:
@@ -3058,6 +3086,10 @@ Starting from cPanel & WHM version 78, cPanel supports MariaDB 10.3: https://doc
 cPanel does not officially support MySQL 8.0, that is why we don’t recommend to use it on cPanel servers. Use on your own risk for <span class="notranslate"> DirectAdmin and Plesk </span> servers, because downgrade can corrupt your databases.
 :::
 
+:::tip Note
+See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
+:::
+
 ### Backing up MySQL
 
 
@@ -3257,6 +3289,10 @@ yum groupupdate alt-php
 </div>
 
 This command allows to install newly released versions in <span class="notranslate"> PHP Selector. </span>
+
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
 
 #### LiteSpeed support
 
@@ -4072,6 +4108,9 @@ This command removes symlinks:
 <span class="notranslate">`/opt/alt/php55/link/conf/alt_php.ini` -> `/home/USER/.cl.selector/alt_php55.ini`</span>
 turns on link traversal protection (linksafe) and cagefs service.
 
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
 
 #### Configuring "global” php.ini options for all Alt-PHP versions
 
@@ -4159,6 +4198,10 @@ selectorctl --apply-global-php-ini date.timezone error_log
 </div>
 
 The latter command has the same effect as <span class="notranslate">`/usr/bin/selectorctl --apply-global-php-ini`</span>.
+
+:::tip Note
+See also PHP Selector [CLI](/command-line_tools/#php-selector)
+:::
 
 
 ### Integration with control panels
@@ -4778,7 +4821,7 @@ cagefsctl --force-update
 
 
 * See also [Python Selector UI](/lve_manager/#python-selector-2).
-* See also [Python Selector CLI tool](/command-line_tools/#python-selector).
+* See also [Python Selector CLI](/command-line_tools/#python-selector).
 
 ### Deploying Trac using Python Selector
 
@@ -5148,6 +5191,10 @@ After installation, please make sure that you have unmarked appropriate checkbox
 Adding Ruby modules requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run: <span class="notranslate">`cagefsctl --force-update`</span>
 :::
 
+:::tip Note
+See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
+:::
+
 ### Configuration and using
 
 #### End user access
@@ -5216,6 +5263,10 @@ The possibility to choose domain when creating an application was added to web i
 Also, you can run simple commands from web interface (e.g. you can install packages from specific repositories or control web applications by means of <span class="notranslate">django -admin</span>).
 
 ![](/images/webapp002_zoom93.png)
+
+:::tip Note
+See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
+:::
 
 #### Hide Ruby Selector icon
 
@@ -5536,8 +5587,8 @@ It is not required to install <span class="notranslate"> _Passenger_ </span> whi
 You can see the running app at <span class="notranslate"> http://DOMAIN/APPLICATION_URL </span>
 To apply all changes, restart the application.
 
-See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
-See also [Node.js Selector UI](/lve_manager/#node-js-selector-2).
+* See also [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
+* See also [Node.js Selector UI](/lve_manager/#node-js-selector-2).
 
 ### Troubleshooting
 
@@ -5617,6 +5668,11 @@ Select the control panel you are using:
 * [Plesk](/cloudlinux_os_components/#installing-on-plesk-servers)
 * [DirectAdmin](/cloudlinux_os_components/#installing-on-directadmin-servers)
 * [No control panel](/cloudlinux_os_components/#installing-on-servers-with-no-control-panel)
+
+
+:::tip Note
+See also [mod_lsapi PRO](/command-line_tools/#apache-mod-lsapi-pro).
+:::
 
 #### Installing on cPanel servers with EasyApache 4
 
