@@ -17,7 +17,7 @@ At this moment we are aware of only one such case:
 
 It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
-* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription]() or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html) .
+* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
 * Execute <span class="notranslate">`sh cldeploy -k <activation_key>`</span> (if you have IP based license, execute <span class="notranslate">`sh cldeploy -i`</span>).
 * Reboot.
@@ -43,12 +43,16 @@ The script automatically detects and supports the following control panels:
 * DirectAdmin
 * InterWorx.
   
-It will install CloudLinux kernel, [Apache module](/limits/#hostinglimits), [PAM module](/cagefs/#pam-configuration), [command line tools](/cloudlinux_installation/#advanced-options-for-cldeploy) as well as LVE Manager.
+It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cagefs/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
+:::tip Note
+We normally recommend to install `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.  
+But when you deploy CloudLinux from the ISO image, these packages will be preinstalled. You can reinstall them after installing the control panel.
+:::
 
 #### Explanation of changes
 
@@ -113,8 +117,14 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
 
 
 :::tip Note
-Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#registering-cloudlinux-server) and then run yum update.
+Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
 :::
+
+:::warning Note
+We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
+:::
+
+
 
 ## Activation
 ### Getting trial license
