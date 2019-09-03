@@ -8323,3 +8323,21 @@ yum install alt-suexec
 **New suexec with custom parameters**
 
 If you need suEXEC with custom parameters absent in current set of alt-suexec, please submit a ticket on [https://cloudlinux.zendesk.com](https://cloudlinux.zendesk.com/) and we will add new suEXEC with needed parameters.
+
+### cPanel Nginx and application selectors
+
+Recently, cPanel added support for the [Nginx](https://documentation.cpanel.net/display/CKB/Nginx) web server and for [Python](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Python+WSGI+Application) and [Node.js](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Node.js+Application) applications. 
+
+We have checked the compatibility of ea-nginx and cPanel application Selectors with CloudLinux LVE and CageFS.
+All tests passed successfully and all processes started by ea-nginx and cPanel selectors are launched inside LVE and CageFS.
+
+
+Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux. Here you can find a large number of supported versions for Ruby/Python/Node.js applications.
+
+* [CloudLinux Python Selector](/cloudlinux_os_components/#python-selector)
+* [CloudLinux Ruby Selector](/cloudlinux_os_components/#ruby-selector)
+* [CloudLinux NodeJS Selector](/cloudlinux_os_components/#node-js-selector)
+
+:::tip Note
+Nginx support is currently experimental.
+:::
