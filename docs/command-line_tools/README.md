@@ -3147,7 +3147,7 @@ $ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":f
 </div>
 
 
-### Automatic problems notifications
+### Cldiag
 
 The utility generates HTML reports and emails them to the administrator. You can change email for notifications by adding the following line to the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span>.
 
