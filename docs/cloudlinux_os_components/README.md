@@ -8147,26 +8147,25 @@ For reading information saved by module use the following script (the script is 
 <div class="notranslate">
 
 ```
-# CAT PROCTITLES_INFO.SH
-#!/BIN/BASH
+#!/bin/bash
 
-HTTPD=HTTPD 
+httpd=httpd 
 
-FOR PID IN `/USR/BIN/PGREP $HTTPD`; DO
-    FOR TID IN `LS /PROC/$PID/TASK`; DO
-		FOUND=NO
-		FOR SHM IN `LS /DEV/SHM/APACHE_TITLE_SHM_${PID}_${TID}_* 2>/DEV/NULL`; DO
-			FOUND=YES
-			TITLE=`/USR/BIN/TR -D '\0' < $SHM`
-			THREAD_ID=`/BIN/BASENAME "${SHM}" | SED "S/APACHE_TITLE_SHM_${PID}_${TID}_//"`
-			ECHO "$PID.$TID - $THREAD_ID - $TITLE"
-		BREAK
-		DONE
-	IF [ "$FOUND" = "NO" ]; THEN
-		ECHO "$PID.$TID NOT FOUND"
-	FI
-    DONE
-DONE
+for pid in `/usr/bin/pgrep $httpd`; do
+    for tid in `ls /proc/$pid/task`; do
+		found=no
+		for shm in `ls /dev/shm/apache_title_shm_${pid}_${tid}_* 2>/dev/null`; do
+			found=yes
+			title=`/usr/bin/tr -d '\0' < $shm`
+			thread_id=`/bin/basename "${shm}" | sed "s/apache_title_shm_${pid}_${tid}_//"`
+			echo "$pid.$tid - $thread_id - $title"
+		break
+		done
+	if [ "$found" = "no" ]; then
+		echo "$pid.$tid not found"
+	fi
+    done
+done
 ```
 </div>
 Here are the examples of saved by module:
