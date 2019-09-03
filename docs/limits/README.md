@@ -298,6 +298,15 @@ cat /proc/bc/XXX/meminfo
 ```
 </div>
 
+On CloudLinux 7 and CloudLinux 6 Hybrid systems, the file is different:
+
+<div class="notranslate">
+
+```
+cat /proc/bc/lveXXX/meminfo
+```
+</div>
+
 …
 
 Cached: 67300 kB
