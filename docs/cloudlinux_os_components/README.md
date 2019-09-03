@@ -3791,6 +3791,111 @@ chmod 0644 /etc/cl.selector/native.conf
 </div>
 
 
+#### How to configure alt-php72-zts to use with PHP Selector
+
+**Requirements**
+
+To use `alt-php72-zts` with PHP Selector you need the following:
+
+* `cagefs-6.1.8-1` or later
+* `alt-php72-zts-7.2.21-4` or later
+
+**Using zts PHP**
+
+1. Install `alt-php72-zts` with the following command:
+  
+  <div class="notranslate">
+
+  ```
+  yum install alt-php72-zts
+  ```
+  </div>
+
+2. Make sure that <span class="notranslate">`/etc/cl.selector/selector.conf`</span> file contains correct paths to the PHP `zts` binaries.
+
+  You should remove the old lines:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/php
+  ```
+  </div>
+
+  And replace them with the lines with the new paths:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php
+  ```
+  </div>
+
+3. Make sure that <span class="notranslate">`/opt/alt/php72/etc/php.d.all`</span> path refers to the directory containing `ini` files for `zts` PHP extensions:
+
+  <div class="notranslate">
+
+  ```
+  cd /opt/alt/php72/etc
+  ln -fsn php.d.all.zts php.d.all
+  ```
+  </div>
+
+4. Execute the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --setup-cl-selector
+  ```
+  </div>
+
+
+**Using non-zts PHP**
+
+1. Make sure that <span class="notranslate">`/etc/cl.selector/selector.conf`</span> file contains correct paths to the `non-zts` PHP binaries.
+   
+  You should remove the old lines:
+  
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/zts-php
+  ```
+  </div>
+
+And replace them with the lines with the new paths:
+
+  <div class="notranslate">
+
+  ```
+  php 7.2 7.2.20 /opt/alt/php72/usr/bin/php-cgi
+  php-cli 7.2 7.2.20 /opt/alt/php72/usr/bin/php
+  ```
+  </div>
+  
+2. Make sure that <span class="notranslate">`/opt/alt/php72/etc/php.d.all`</span> path refers to the directory containing `ini` files for `non-zts` PHP extensions:
+
+  <div class="notranslate">
+
+  ```
+  cd /opt/alt/php72/etc
+  ln -fsn php.d.all.def php.d.all
+  ```
+  </div>
+
+3. Execute the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --setup-cl-selector
+  ```
+  </div>
+
 #### Using
 
 Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">**Selector**</span> tab in the <span class="notranslate">**LVE Manager**</span>.
