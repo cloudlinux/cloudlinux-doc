@@ -1203,5 +1203,6 @@ module.exports = {
   "/python_and_ruby_selector/#python-and-ruby-selector": "/cloudlinux_os_components/#python-selector",
   "/python_selector/#python-selector": "/cloudlinux_os_components/#python-selector",
   "/ru/selectorctl.html": "/ru/command-line_tools/#selectorctl",
-  "/ru/file_system_quotas.html": "/ru/cloudlinux_os_kernel/#file-system-quotas"
+  "/ru/file_system_quotas.html": "/ru/cloudlinux_os_kernel/#file-system-quotas",
+  "/kernel_settings/#remounting-procfs-with-hidepid-option": "/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option"
 };

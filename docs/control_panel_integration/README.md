@@ -1240,3 +1240,84 @@ yum groupinstall alt-php{some_version}
 ```
 
 For details, see [PHP Selector Installation and Update](/cloudlinux_os_components/#installation-and-update-4)
+
+## CloudLinux kernel set-up
+
+### /proc filesystem access control
+
+CloudLinux kernel allows the server administrator to control the user access to the `/proc` filesystem with the special parameters.
+Unprivileged system users will not be able to see the processes of other system users, they can only see their processes. See details [here](/cloudlinux_os_kernel/#virtualized-proc-filesystem).
+
+If the <span class="notranslate">`fs.proc_can_see_other_uid`</span> parameter is not defined in `sysctl` config during the CageFS package installation, it is set to `0`: <span class="notranslate">`fs.proc_can_see_other_uid=0`</span>.
+
+You can also set this parameter in the <span class="notranslate">`/etc/sysctl.conf`</span> file and then run the <span class="notranslate">`sysctl -p`</span> command.
+
+<span class="notranslate">[`hidepid`](/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option)</span> parameter is set based on the <span class="notranslate">`fs.proc_can_see_other_uid`</span> parameter value automatically during the <span class="notranslate">`lve_namespaces`</span> service starting (i.e. during <span class="notranslate">`lve-utils`</span> package installation and server booting).
+
+#### Integrating control panel with CloudLinux
+
+Run the following command to add administrators into <span class="notranslate">`proc_super_gid`</span> group (if the panel administrator is not a root user or there are several administrators):
+
+<div class="notranslate">
+
+```
+/usr/share/cloudlinux/hooks/post_modify_admin.py create --username <admin_name>
+```
+</div>
+
+:::tip Note 
+This administrator should exist as a system user.
+:::
+
+This command also adds a specified administrator to the <span class="notranslate">`clsudoers`</span> group, so the LVE Manager admin's plugin works properly.
+
+This command is a hook that the control panel should call after adding the admin user to the system.
+
+If the [admins](/control_panel_integration/#admins) list script exists when installing <span class="notranslate">`lve-utils`</span> package then the existing administrators will be processed automatically. It the script does not exist, you should run the above mentioned command for each administrator.
+
+### Symlink protection
+
+CloudLinux kernels have symlink attacks protection. When this protection is enabled, the system does not allow users to create symlinks (and hard links) to non-existent/not their own files.
+
+For details see [here](/cloudlinux_os_kernel/#link-traversal-protection). Here you can find all protection mechanism parameters.
+
+See also: [the special module to protect web-server](/cloudlinux_os_kernel/#symlink-owner-match-protection).
+
+You can run <span class="notranslate">`cldiag`</span> utility with the <span class="notranslate">`--check-symlinkowngid`</span> parameter to check web-server protection mechanism proper set-up.
+
+<div class="notranslate">
+
+```
+# cldiag --symlinksifowner
+Check fs.enforce_symlinksifowner is correctly enabled in sysctl conf:
+	OK: fs.enforce_symlinksifowner = 1
+
+There are 0 errors found.
+# cldiag --check-symlinkowngid
+Check fs.symlinkown_gid:
+	OK: Web-server user is protected by Symlink Owner Match Protection
+
+There are 0 errors found.
+```
+</div>
+
+* Symlink traversal protection is disabled by default.
+* Symlink owner match protection is enabled by default.
+
+#### How to enable symlink protection
+
+Set the <span class="notranslate">`symlinkown_gid`</span> parameter to the value of the GID group, which the web-server process has.
+
+Before enabling symlink protection, ensure it does not break the control panel functionality.
+
+For example, if an unprivileged user is allowed to create symlinks or hard links to files or directories he doesn’t own then when enabling symlink traversal protection he will not be able to do it.
+
+To allow an unprivileged user to create such symlink or hard link, a file/directory which symlink is referred to should have <span class="notranslate">`linksafe`</span> group.
+
+### File system quotas
+
+Some of CloudLinux OS utilities (`cagefsctl`, `selectorctl`, `cloudlinux-selector`, etc) writes files to the user’s home directory on behalf of this user.
+
+So they are subject to the disk quotas if any are set for the user. The utilities can override these quotas to avoid failures.
+See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel parameters controlling these permissions. This parameter is used only for XFS file system.
+
