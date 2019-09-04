@@ -691,35 +691,38 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 |--new-domain |Yes | - |A new domain name |
 |--include-subdomains |No |False |If set, all subdomains are renamed as well, i.e. when renaming domain.com → domain.eu the corresponding subdomain will be renamed as well test.domain.com → test.domain.eu.|
 
-## Web UI Integration
+## Web UI integration
 
 ### ui-user-info script
 
-This script returns information about the current user opening Web UI
+This script should return information about the current user opening Web UI
 Used only in UI part of the LVE Manager and utilities.
 
-*Input value (first positional argument) — the current authentication token, passed on plugin open
-*Expected data format
+* Input value (first positional argument) — the current authentication token, passed on plugin open (for example, <span class="notranslate">`open.php?token=hash`</span>)
+* Expected data format
 
 ```
 {
     "userName": "user1",
+    "userId": 1000,
     "userType": "user",
     "lang": "en",
     "userDomain": "current-user-domain.com"
 }
 ```
 
-User name is used in queries to Selectors.
-**userType** - can have the following values: “user”, “reseller”, “admin”
-**lang** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
-**userDomain** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
+* **userName** is used in queries to Selectors.
+* **userId** - system user ID if exist. May be used in future functions.
+* **userType** - can have the following values: “user”, “reseller”, “admin”
+* **lang** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
+* **userDomain** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
 
 The following configuration file parameters are used to determine the location of the plugin UI part.
 
-**basePath** - the path to copy file assets to make them available from the control panel. Optional if `/usr/share/l.v.e-manager/commons` and `/usr/share/l.v.e-manager/panelless-version/lvemanager` are available from the control panel and the paths to this directory in web server are set.
+* **base_path** - the path to copy file assets to make them available from the control panel. Optional if `/usr/share/l.v.e-manager/commons` and `/usr/share/l.v.e-manager/panelless-version/lvemanager` are available from the control panel and the paths to this directory in web server are set.
+Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
 
-**baseUri** - the URI of LVE Manager files
+* **base_uri** - the URI of LVE Manager files
 
 ## PHP-based integration of WEB UI with the control panel
 
