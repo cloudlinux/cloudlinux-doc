@@ -299,7 +299,7 @@ Templates of notifications are located here:
 * <span class="notranslate">`/usr/share/lve/emails/en_US/reseller_notify.html`</span>
 
 :::tip Note
-Notifications about LVE faults are implemented for CPanel only.
+Notifications about LVE faults are implemented for CPanel, Plesk, and DirectAdmin.
 :::
 
 After changing any options above, please restart <span class="notranslate">lvestats</span> service:
