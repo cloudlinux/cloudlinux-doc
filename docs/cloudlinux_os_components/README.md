@@ -2187,7 +2187,6 @@ flags=-umcl
 
 to prevent symlink from being removed.
 
-
 #### PAM configuration
 
 
@@ -2197,20 +2196,97 @@ CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM 
 * crond
 * su
 
-The following line is added to corresponding file in _/etc/pam.d/_:
+The following line is added to corresponding file in `/etc/pam.d/`:
 <div class="notranslate">
 ```
 session    required     pam_lve.so      100     1
 ```
 </div>
 
-Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate"> CageFS & LVE </span> , and 1 stands for CageFS enabled.
+Where 100 stands for minimum <span class="notranslate"> UID </span> to put into <span class="notranslate">CageFS & LVE</span> , and 1 stands for CageFS enabled.
+
+
+#### Filtering options for commands executed by proxyexec
+
+You can disallow a user in CageFS to execute specific commands with some specific *dangerous* options via proxyexec.
+
+To do so, you should create <span class="notranslate">`<command>.json`</span> file in the <span class="notranslate">`/etc/cagefs/filters`</span> directory and specify the names of options you want to disable.
+
+For example, to disable some options of <span class="notranslate">`sendmail`</span> command, <span class="notranslate">`/etc/cagefs/filters/sendmail.json`</span> is created with the following content:
+
+<div class="notranslate">
+
+```
+{
+  "default": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/sbin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/var/qmail/bin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/sbin/sendmail.sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  },
+  "/usr/local/cpanel/bin/sendmail": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ]
+  }
+}
+```
+</div>
+
+You can specify options for different paths separately (for example, <span class="notranslate">`/usr/sbin/sendmail`</span> or <span class="notranslate">`/var/qmail/bin/sendmail`</span>).
+
+If the path to the program being executed does not match any path specified in the config file, then default parameters are used.
+
+* <span class="notranslate">`deny`</span> list should contain options that should be disallowed for use by users (the black list of options, all other options will be allowed).
+* You can specify the white list of options in the <span class="notranslate">`allow`</span> list (all other options will be denied).
+* You cannot specify both white and black list (<span class="notranslate">`allow`</span> and <span class="notranslate">`deny`</span>).
+
+It is possible to verify that a path specified as a parameter for an option does not refer outside of the user’s home directory. This check is performed for options specified in the <span class="notranslate">`restrict_path`</span> list. All issues are reported in <span class="notranslate">`/var/log/secure`</span> log file.
 
 
 #### Executing by proxy
 
 
-Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate"> **passwd, sendmail** ,  </span> etc.
+Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate">**passwd, sendmail**</span>, etc.
 
 CloudLinux uses <span class="notranslate"> proxyexec </span> technology to accomplish this goal. You can define any program to run outside CageFS, by specifying it in <span class="notranslate"> _/etc/cagefs/custom.proxy.commands_ </span> file. Do not edit existing <span class="notranslate"> _/etc/cagefs/proxy.commands_ </span> as it will be overwritten with next CageFS update.
 

@@ -939,8 +939,8 @@ More details: [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy
 
 ### Filtering options for commands executed by proxyexec
 
-It is possible to disable specific “dangerous” options of programs executed via proxyexec. More details:
-[Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
+It is possible to disable specific *dangerous* options of programs executed via `proxyexec`. More details:
+[Filtering options for commands executed by proxyexec](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec).
 
 ## Integrating CloudLinux PHP Selector
 
