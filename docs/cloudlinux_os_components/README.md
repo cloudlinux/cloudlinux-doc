@@ -1747,6 +1747,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 
 * [PAM configuration](/cloudlinux_os_components/#pam-configuration)
 
+* [Filtering options for commands executed by proxyexec](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec)
+
 * [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
 
 * [Custom /etc files per customer](/cloudlinux_os_components/#custom-etc-files-per-customer)
