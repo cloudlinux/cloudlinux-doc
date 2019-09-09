@@ -187,16 +187,6 @@ Possible results of the checks:
 In case if at least one of the checks resulted neither <span class="notranslate"> OK </span> nor <span class="notranslate"> SKIPPED </span> then the checker will end with ret code >0.
 
 
-#### CageFS quirks
-
-
-Due to the nature of CageFS, some options will not work as before or will require some changes:
-
-* lastlog will not work ( <span class="notranslate"> _/var/log/lastlog_ </span>).
-* PHP will load php.ini from <span class="notranslate"> _/usr/selector/php.ini._ </span> That file is actually a link to the real _php.ini_ file from your system. So the same _php.ini_ will be loaded in the end.
-* You have to run <span class="notranslate"> `cagefsctl --update` </span> any time you have modified _php.ini_, or you want to get new/updated software inside CageFS.
-* CageFS installation changes <span class="notranslate"> `jailshell` </span> to regular bash on cPanel - [read why](https://cloudlinux.zendesk.com/hc/articles/115004517685-Why-CageFS-installation-changes-jailshell-to-regular-bash-on-cPanel-).
-
 ## LVE-stats 2
 
 | | |
@@ -2554,6 +2544,7 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 * [cldetect](/command-line_tools/#cldetect)
 * [cldiag](/command-line_tools/#cldiag)
 * [cloudlinux-config](/command-line_tools/#cloudlinux-config)
+* [cl-quota](/command-line_tools/#cl-quota)
 
 
 ### cldeploy
@@ -3147,132 +3138,279 @@ $ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":f
 </div>
 
 
-### Cldiag
+### cl-quota
 
-The utility generates HTML reports and emails them to the administrator. You can change email for notifications by adding the following line to the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span>.
+<span class="notranslate">**cl-quota**</span> utility is designed to control <span class="notranslate">disk quotas</span> and provides:
+
+* Setting user and package limits.
+
+* Integration with panel packages.
+
+* Limits synchronization.
+
+* Automatic inheritance of panel limits to all appropriate users.
+
+::: tip Note
+cl-quota works only with inodes soft/hard limits (soft/hard file limits in setquota/repquota utilities terminology). Block limits are not controlled by cl-quota utility in any way, they are not taken into account and do not affect the data that they issue. That is why hereinafter it is the inode limits that are implied by the word “limits”.
+:::
+
+#### General provisions
+
+
+<span class="notranslate"> cl-quota </span> utility never sets/reads limits directly in the system, it uses standard <span class="notranslate"> setquota/repquota </span> utilities included into the <span class="notranslate"> quota </span> package for this purpose.
+
+<span class="notranslate"> cl-quota </span>  **will not work** in the following cases:
+
+* <span class="notranslate"> setquota/repquota </span> are missing or working incorrectly;
+
+* the <span class="notranslate"> quotas </span> are not configured in the system.
+
+<span class="notranslate"> cl-quota </span> only **performs** the minimal diagnostics of <span class="notranslate"> quota </span> related errors:
+
+* verifies the availability of <span class="notranslate"> setquota/repquota </span> utilities on the disk;
+
+* verifies if <span class="notranslate"> quotas </span> are activated for a specified user (with a separate command), see below.
+
+<span class="notranslate"> quota </span> package which contains the required <span class="notranslate"> setquota/repquota </span> utilities, is not included in <span class="notranslate"> lvemanager </span> package dependencies by default, and <span class="notranslate"> quotas </span> activation is a long process which sometimes depends on the panel used, therefore, all the steps on <span class="notranslate"> quotas </span> configuration and activation must be carried out by yourself, <span class="notranslate"> cl-quota </span> does not perform these actions.
+
+Error messages sent back to the console are extremely rare, to receive error messages use the command:
+<div class="notranslate">
+
+```
+# cat /var/log/messages | grep clquota
+```
+</div>
+
+::: tip Note
+You should not set soft limit higher than hard limit. cl-quota does not control it in any way, but in some cases, the system can ban such limits combination and they won’t be set or will be set in some other way.
+:::
+
+#### Setting limits and integration with panel packages
+
+
+<span class="notranslate"> cl-quota </span> utility allows setting <span class="notranslate"> inodes </span> limits for users of the system.
+
+<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](/lve_manager/#detecting-and-working-with-cloudlinux) .
+
+Panel users are such users whose UIDs are issued by the above panel integration mechanism. The list of panel packages and the information on the user's affiliation to a particular package is obtained from there as well.
+
+When installing/reading the limits, the following peculiarities are applied:
+
+1. When displaying <span class="notranslate"> quotas, cl-quota </span> displays information about the limits of all users - system and panel. No filter applied. The actual limit values are always displayed.
+
+2. Limit value -1 for the packages (see below) is displayed as dash (-).
+
+3. If <span class="notranslate"> cl-quota </span> is running under <span class="notranslate"> root </span> , it will display the limits returned by <span class="notranslate"> repquota </span> utility with no changes. If it is running under some other user, it will return data from a special cache file, see [Quotas cache and synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
+
+4. Limits setting only works for panel users, for all other users limits are not set (the command is ignored). The only exception - <span class="notranslate"> uid=0 </span> . The limits are never set for the <span class="notranslate"> root </span> user <span class="notranslate"> (uid=0) </span> , but they are stored in <span class="notranslate"> DB </span> file and are used by inheritance mechanism. See [Limits Inheritance](/lve_manager/#limits-inheritance).
+
+5. <span class="notranslate"> Hard </span> and <span class="notranslate"> soft </span> limits are completely independent, <span class="notranslate"> сl-quota </span> does not apply any interdependencies to them. Setting only one of them (any) is acceptable, the other one will not change.
+
+<span class="notranslate"> cl-quota </span> utility also supports package limits set/read. When setting package limits, they are set for all users of a particular package except for those whose limits are set individually. See also [Limits Inheritance](/lve_manager/#limits-inheritance).
+
+If package name is <span class="notranslate"> "default" </span> , then setting limits command is ignored. If some limits are set for this package in <span class="notranslate"> DB </span> file, they will be displayed along with all the others, but will not be used. See also [Limits inheritance](/lve_manager/#limits-inheritance).
+
+Any positive numbers are allowed as limit values. <span class="notranslate"> cl-quota </span> neither controls nor changes these values except the following cases:
+
+negative values are taken modulo;
+
+fractional values are converted to integers by discarding the fractional part;
+
+if the transferred value can not be turned into a number (for example, 67wg76), it is completely ignored and the limit is not set at all.
+
+Then these values are transmitted directly to <span class="notranslate"> setquota </span> system utility for the actual setting of the limits.
+
+Thus <span class="notranslate"> cl-quota </span> has two limit values, which are processed in a special way:
+
+* 0: Means inheritance of the limit from the package where the user is located, or from <span class="notranslate"> uid=0 </span> . See also [Limits inheritance](/lve_manager/#limits-inheritance) for more detailed information.
+
+* -1: The real limits are set to 0, which means no limits, literally "unlimited". This is legit both for individual and for package limits. Limit value -1 is stored in the database as well as any other but is never displayed.
+
+You can use the words <span class="notranslate"> “default” </span> and <span class="notranslate"> “unlimited” </span> instead of 0 and -1 respectively, they are fully interchangeable. See also [DB File](/lve_manager/#quotas-db-file) and [CLI Options](/lve_manager/#cli-options-examples).
+
+Individual and package limits are always saved in DB file. Limits from there are used when synchronizing <span class="notranslate"> quotas </span> . Please find more details in [Limits Synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
+
+Also, find detailed information on DB file itself in [Quotas DB File](/lve_manager/#quotas-db-file) section.
+
+Utility options are described in [CLI Options](/lve_manager/#cli-options-examples) section.
+
+#### Limits inheritance
+
+
+When setting package limits to the package users, the inheritance principle is applied. It means that:
+
+* If no individual limit is set to a user, then he inherits the limits of the package he belongs to.
+
+* If no limit is set to a package (=0), then the users inherit uid=0 limits.
+
+Limits of the package named <span class="notranslate"> “default” </span> (if found in the <span class="notranslate"> DB </span> file) will always be ignored and all the users of this package will get <span class="notranslate"> uid=0 </span> limits.
+
+
+#### Caching and synchronizing the limits
+
+
+Any user of the system (including panel users) is always created with limits equal to 0. To assign him the limits of the corresponding package, the synchronization process is used.
+
+During the synchronization, <span class="notranslate"> cl-quota </span> utility reads the database file and sets the limits from it to the users and packages specified therein.
+This mode is designed to set the correct limits for the new users and to restore them for the existing ones. When recovering, the current limits are neither read nor analyzed.
+
+Caching - is writing current limits to <span class="notranslate"> _/etc/container/cl-quotas.cache_ </span> file. If <span class="notranslate"> cl-quota </span> is not started from the <span class="notranslate"> root </span> for reading the current limits, then it returns data from this file.
+
+When installing <span class="notranslate"> LVE Manager </span> package, a special <span class="notranslate"> cron job </span> is installed, which performs synchronization and caching ( <span class="notranslate"> cl-quota -YC </span> ) every 5 minutes. Therefore, the correct limits will be set for the user within 5 minutes from the moment of its creation.
+
+Caching and synchronization can also be performed separately, see ["CLI Options"](/lve_manager/#cli-options-examples) section.
+
+To disable this feature add to the config file _/etc/sysconfig/cloudlinux_ .
+
+
+#### Quotas DB file
+
+
+All <span class="notranslate"> cl-quota </span> limits settings are stored in along with the <span class="notranslate"> UID </span> or the name of the package the limit was set for.
+
+When saving the limits to a file, the following rules are applied:
+
+* If a limit value is non-integer or non-numeric, then the rules from <span class="notranslate"> "Setting limits and integrating with panel packages" </span> section are applied. The assigned value is saved to the file.
+
+* Limits are always saved in pairs, no matter if only one limit was set or both. The pair looks as follows: <span class="notranslate"> soft_limit:hard_limit </span> .
+
+* The values 0 and -1, when having a predetermined meaning, are saved as is without any transformations.
+
+* The words <span class="notranslate"> “default” </span> and <span class="notranslate"> “unlimited” </span> are saved as 0 and -1 respectively.
+
+* If both limits for a user/package were set as 0, then such user/package is not saved in the file, and if it was previously there - it will be removed. Therefore, if a user/package is not mentioned in the file, then all its limits are inherited. See [Limits Inheritance](/lve_manager/#limits-inheritance) section.
+
+The lists of panel users, packages, and user-package correspondence are not saved anywhere, this information is always subtracted from the panel.
+
+Example:
+<div class="notranslate">
+
+```
+/etc/container/cl-quotas.dat
+[users]
+0 = 1000:2000
+500 = -1:-1
+958 = 0:20000
+[packages]
+pack1 = 5000:-1
+```
+</div>
+It follows that:
+
+* uid=0 limits are set to 1000:2000 - all users in the default package will obtain these limits.
+
+* Both limits are set as unlimited for a user with uid=500, which means that its real limits will always be 0:0. The package limits do not affect this user.
+
+* <span class="notranslate"> Soft </span> limit of the user with uid=958 is inherited (0 means inheritance), his <span class="notranslate"> hard </span> limit is set to 20000 and it will not depend on the package limits or uid=0 limits.
+
+* Limits 5000:-1 are set for pack1 package, therefore its real limits are: <span class="notranslate"> soft_limit=5000 </span> and <span class="notranslate"> hard_limit=0 </span> (unlimited).
+
+* The users of <span class="notranslate"> pack1 </span> package will get <span class="notranslate"> pack1 </span> limits (5000:-1), the users of all the rest of the packages will get the limits of uid=0 because no limits are set for them. Exceptions: uid=500 and 958. uid=500 has both limits set individually, and uid=958 inherits only <span class="notranslate"> soft </span> limits.
+
+#### CLI options/examples
+
+
+<span class="notranslate"> cl-quotа </span> utility has the following command line options:
+<div class="notranslate">
+
+```
+-u | --user                  : specifies the user
+-U | --user-id              : specifies the user ID
+-S | --soft-limit            : sets the soft limit for a user. Pass 0 or 'default' to set package default limit. Pass -1 or 'unlimited' to cancel limit
+-H | --hard-limit            : sets the hard limit for a user. Pass 0 or 'default' to set package default limit. Pass -1 or 'unlimited' to cancel limit
+-V | --csv                  : returns data as comma separated values
+-p | --package              : specifies a package to set or get limits
+-P | --package-limits        : prints package limits
+-a | --all-package-limits : prints all package limits (including packages without limits)
+-Y | --sync                  : synchronizes packages and users limits with the database
+-C | --cache-content        : cache quota data to a file the database
+-F | --force                : save user quotas even when they are equal to defaults
+       --check                : check if quotas is enabled/activated/suported; if disabled show diagnostic information; using with --user or --user-id options
+```
+</div>
+
+<span class="notranslate"> **--user** </span> and <span class="notranslate"> **--user-id** </span> options are designed to specify user whose limits are required to be set or displayed. <span class="notranslate"> --user </span> specifies user name, <span class="notranslate"> --user-id - uid </span> . It is acceptable to specify one or another.
+
+<span class="notranslate"> **--package** </span> - specifies package name.
+
+<span class="notranslate"> **--soft-limit** ,  **--hard-limit** </span> - specify <span class="notranslate"> soft </span> and <span class="notranslate"> hard </span> limits values respectively. It is acceptable to use words <span class="notranslate"> “default” </span> or <span class="notranslate"> “unlimited” </span> as limit value.
+
+<span class="notranslate"> **--csv** </span> - displays limits in <span class="notranslate"> csv </span> format (instead of data formatted in the table).
+
+<span class="notranslate"> **--package-limits** </span> - displaying the limits of the packages created by the panel admin.
+
+<span class="notranslate"> **--all-package-limits**   </span> - displaying the limits of all the packages, including the ones created by the resellers and packages with no users.
+
+<span class="notranslate"> **--sync** </span> - synchronizes users <span class="notranslate"> quotas </span> and packages with the database.
+
+<span class="notranslate"> **--cache-contents** </span> - performs <span class="notranslate"> quotas </span> caching.
+
+<span class="notranslate"> **--force** </span> - saving user <span class="notranslate"> quotas </span> even if they are equal to the current.
+
+<span class="notranslate"> **--check**   </span> - performs diagnostics for a specified user. Can be used only when a user is specified (along with <span class="notranslate"> --user / --user-id </span> ).
+
+_Examples:_
+
+1. Reading current user limits:
 
 <div class="notranslate">
 
 ```
-EMAIL=username@domain.zone
+# cl-quota
+# cl-quota --csv
 ```
 </div>
- 
-The automatic checks using cldiag utility by cron job is enabled on a server by default. You can disable it in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> config file by adding <span class="notranslate">`ENABLE_CLDIAG=no`</span> option. When calling this utility automatically by cron, it checks all limits existing on the server and sends an administrator a report with limits check results.
 
-**Usage examples**
-
-* Run only one checker
+2. Reading current package limits:
 
 <div class="notranslate">
 
 ```
-# cldiag --check-phpselector
-
-Check compatibility for PHP Selector:
-
-  OK: It looks ok [php.conf:cgi with suexec, suphp]
-
-There are 0 errors found.
+# cl-quota --package-limits
+# cl-quota --all-package-limits
+# cl-quota --package-limits --csv
+# cl-quota --all-package-limits --csv
 ```
 </div>
 
-* Run all available checkers
+3. Specifying limits for a user:
 
 <div class="notranslate">
 
 ```
-# cldiag -a
-
-Check control panel and it's configuration(for DirectAdmin only):
-
-  OK: Control Panel - cPanel; Version 79.9999;
-
-Check fs.enforce_symlinksifowner is correctly enabled in sysctl conf:
-
-  OK: fs.enforce_symlinksifowner = 1
-
-Check suexec has cagefs jail:
-
-  OK: binary has jail
-
-Check suphp has cagefs jail:
-
-  OK: binary has jail
-
-There are 0 errors found.
+# cl-quota --user-id=500 --soft-limit=0 --hard-limit=0
+# cl-quota --user-id=500 --soft-limit=unlimited
+# cl-quota --user-id=500 --soft-limit=0 --hard-limit=-1
+# cl-quota --user-id=958 --hard-limit=20000 --soft-limit=0 --force
 ```
 </div>
 
-### Common problems troubleshooting
+4. Specifying limits for a package:
 
-Reasons and recommendations on how to fix common cldiag checkers failures.
+<div class="notranslate">
 
-* <a name="diag-cp"></a><span class="notranslate">`--diag-cp`</span>
+```
+# cl-quota --package pack1 --hard-limit=-1 --soft-limit=5000
+# cl-quota --package pack1 --hard-limit=10000
+# cl-quota --package pack1 --soft-limit=default
+```
+</div>
 
-  Checks control panel and its configuration (for DirectAdmin only).
-  
-  On servers with DirectAdmin control panel, CloudLinux support should be enabled in custombuild config. To do so, set <span class="notranslate">`yes`</span> for the <span class="notranslate">`cloudlinux`</span> parameter via <span class="notranslate">`/usr/local/directadmin/custombuild/build`</span> utility. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004584909-PHP-Selector-and-DirectAdmin) to see how to set values to parameters.
-* <a name="symlinksifowner"></a><span class="notranslate">`--symlinksifowner`</span>
+5. User diagnostics (with example output):
 
-  Checks <span class="notranslate">`fs.enforce_symlinksifowner`</span> is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
+<div class="notranslate">
 
-  To fix warning, change the value of <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span>. See [Symlink Owner Match Protection](/cloudlinux_os_kernel/#symlink-owner-match-protection) to know more about the <span class="notranslate">`fs.enforce_symlinksifowner`</span> parameter and configure it correctly.
-  
-  Fixing that warning makes the server more protected against symlink attacks and enables protection of PHP configs and other sensitive files.
-* <a name="check-symlinkowngid"></a><span class="notranslate">`--check-symlinkowngid`</span>
-  
-  Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
+```
+# cl-quota --user-id=500 --check
+Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoint (or device) / not found or has no quota enabled.
+```
+</div>
 
-  Symlink Owner Match Protection is not enabled for the <span class="notranslate">`Apache`</span> user. To enable it, see [Symlink Owner Match Protection](/cloudlinux_os_kernel/#symlink-owner-match-protection) and set value of apache GID to the <span class="notranslate">`fs.symlinkown_gid`</span> parameter.
+6. Synchronizing <span class="notranslate"> quotas with caching (executed in cron): </span>
 
-  Enabling Symlink Owner Match Protection provides protection for the <span class="notranslate">`Apache `</span>user and it may improve your server security.
-* <a name="check-suexec"></a><span class="notranslate">`--check-suexec`</span>
+<div class="notranslate">
 
-  Checks <span class="notranslate">`suexec`</span> has CageFS jail.
-
-  Check that <span class="notranslate">`suexec`</span> package was installed from CloudLinux repository and if yes, try to reinstall it, probably <span class="notranslate">`suexec`</span> binary was broken.
-  
-  If you are running server without a control panel, you need to configure <span class="notranslate">`suexec`</span> by yourself. Please read [this article](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup suexec on your server.
-  
-  Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suexec module. This may improve server security.
-* <a name="check-suphp"></a><span class="notranslate">`--check-suphp`</span>
-  
-  Checks <span class="notranslate">`suphp`</span> has CageFS jail.
-
-  Check that <span class="notranslate">`suphp`</span> package was installed from CloudLinux repo and if yes, try to reinstall it, probably <span class="notranslate">`suphp`</span> binary was broken. 
-
-  If you are running server without a control panel, you need to configure suphp by yourself. Please read [this article | Installation and setup of a server using suPHP](https://cloudlinux.zendesk.com/hc/articles/115004524005-Configuring-CloudLinux-software-and-PHP-Handlers-on-a-server-with-no-control-panel) to setup <span class="notranslate">`suphp`</span> on your server.
-
-  Fix that warning to be sure that users run their sites inside CageFS and provide stable work of sites that are using Apache suphp module. This may improve server security.
-* <a name="check-usepam"><span class="notranslate">`--check-usepam`</span></a>
-  
-  Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
-
-  To fix the issue, replace <span class="notranslate">`UsePAM no`</span> with <span class="notranslate">`Use PAM yes`</span> in the <span class="notranslate">`/etc/ssh/sshd_config`</span> file.
-  
-  Fix the warning to provide correct work of <span class="notranslate">`pam_lve`</span> module with sshd and CageFS ssh sessions, for details, please [read this documentation about LVE PAM](/cloudlinux_os_components/#lve-pam-module).
-
-* <a name="check-defaults-cfg"></a><span class="notranslate">`--check-defaults-cfg`</span>
-
-  Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>
-
-  * In case of <span class="notranslate">`undefined default version`</span> error, go to <span class="notranslate">LVE Manager | Selector</span> Tab and set the default PHP version;
-  * In case of <span class="notranslate">`default version disabled`</span> error, enable that version to fix the warning;
-
-  <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> config file is used by the PHP Selector and stores its global options, so it is important to keep needed configurations and valid syntax for PHP modules settings to avoid <span class="notranslate">PHP Selector</span> misconfiguration.
-
-* <a name="check-cagefs"></a><span class="notranslate">`--check-cagefs`</span>
-
-  Depending on the error you get, resolution options may differ. See the full list of checks that <span class="notranslate">`--check-cagefs`</span> performs [here](/command-line_tools/#sanity-check). There you also can find possible failure reasons.
-
-* <a name="check-phpselector"></a><span class="notranslate">`--check-phpselector`</span>
-
-  Checks compatibility for the <span class="notranslate">PHP Selector</span>.
-  
-  Possible failures:
-
-  * In case of installed `mod_ruid2` package - remove it, <span class="notranslate">PHP Selector</span> is incompatible with that module.
-  * In case of non-installed `mod_suexec` package - install it.
-  * In case of non-installed `mod_suphp` package - install it.
-  * In case of unsupported handler - see [this table](/limits/#compatibility-matrix) to set the compatible handler.
+```
+# cl-quota -YC
+```
+</div>

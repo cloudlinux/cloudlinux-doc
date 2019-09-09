@@ -17,7 +17,7 @@ CloudLinux has support for the following limits:
 
 
 
-::: tip Note
+::: warning Note
 It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
 :::
 
@@ -88,7 +88,7 @@ lve                    46496  0
 
 Starting from kernels lve1.4.x iolimits module is a part of kmod-lve and could not be used separately.
 
-* You can toggle LVE on/ff by editing <span class="notranslate">`/etc/sysconfig/lve`</span> and setting <span class="notranslate">`LVE_ENABLE`</span> variable to <span class="notranslate">`yes`</span> or <span class="notranslate">`no`</span>.
+* You can toggle LVE on/off by editing <span class="notranslate">`/etc/sysconfig/lve`</span> and setting <span class="notranslate">`LVE_ENABLE`</span> variable to <span class="notranslate">`yes`</span> or <span class="notranslate">`no`</span>.
 
     Setting it to <span class="notranslate">`yes`</span> will enable LVE, setting it to <span class="notranslate">`no`</span> will disable LVE.
 
@@ -154,87 +154,7 @@ You can also check the content of <span class="notranslate">`/proc/lve/list`</sp
 ```
 </div>
 
-Additionally you can use tool lveps to see <span class="notranslate">CPU</span> usage, and processes within LVE.
-
-## Limits validation
-
-Starting from <span class="notranslate">**lve-utils**</span> **version 3.1-1**, the validation of EP and NPROC limits is supported. If an administrator sets the NPROC limit less than (EP + 15), the following warning is shown:
-
-<div class="notranslate">
-
-```
-error: You're trying to set invalid LVE limits.
-NPROC limit must be greater than EP + 15 limit, because number of processes and threads within LVE includes
-also Apache processes/threads, SSH sessions and etc, which enter into LVE.
-```
- </div>
-
-Validation does not affect limits operation in any way. Even if invalid limits have been set, they will be applied for users/resellers.
-
-Commands that support validation:
-
-1. <span class="notranslate">`lvectl set`</span>
-
-This command allows validation of an LVE ID which does not have a corresponding UID in the system. I.e., you can set limits for any LVE ID and they can be validated.
-
-
-2. <span class="notranslate">`lvectl set-user`</span>
-
-This command allows validation when setting limits using a user name instead of LVE ID.
-
-
-3. <span class="notranslate">`lvectl set-reseller`</span>
-
-This command supports limits validation both for inactive reseller and active one.
-
-4. <span class="notranslate">`lvectl set-reseller-default`</span>
-
-This command supports validation when setting default limits for a reseller.
-
-
-5. <span class="notranslate">`lvectl package-set`</span>
-
-This command supports limits validation both for packages existing in the system and nonexisting ones.
-
-
-6. The <span class="notranslate">`cloudlinux-package`</span> and <span class="notranslate">`cloudlinux-limits`</span> commands support all validation types described above, and support limits validation and exceptions lists as described below.
-
-#### Exceptions list (validation is not supported)
-
-
-1.    a) When EP limit for a package is greater than a custom NPROC limit for a user included in this package.
-
- **OR**
- 
- b) when NPROC limit for a package is less than a custom EP limit for a user included in this package.
- 
-
-2.    a) When default EP limit for a hoster is greater than a custom NPROC limit for a user/package which inherits the default limit.
-
- **OR**
- 
- b) When default NPROC limit for a hoster is less than a custom EP limit for a user/package which inherits the default limit.
- 
-
-3. When using the following commands:
-
- a) <span class="notranslate">`lvectl set-reseller --all`</span>
-
- b) <span class="notranslate">`cloudlinux-limits --json enable-reseller-limits --all`</span>
-
-
-#### Existing limits validation
-
- 
-The automatic validation using <span class="notranslate">`cldiag`</span> utility by cron job is enabled on a server by default. You can disable it in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> config file using <span class="notranslate">`ENABLE_CLDIAG`</span> option (**Warning!** This option disables all automatic checks using cldiag!) When calling this utility automatically by cron, it checks all limits existing on the server and send an administrator a report with limits check results. You can use the following command to validate existing limits: <span class="notranslate">`cldiag --check-lve-limits`</span>.
-
-
-The important difference between checking existing and setting limits is that even if validation fails when setting limits (see exceptions list above), checking existing limits will catch invalid limits in any case. I.e. even if a server administrator set invalid limits, validation of existing limits will catch invalid limit in any case.
-
-#### Best practice
-
-Set NPROC limit greater than (EP + 15).
-
+Additionally, you can use tool [lveps](/command-line_tools/#lveps) to see <span class="notranslate">CPU</span> usage, and processes within LVE.
 
 ## SPEED limit
 
@@ -382,7 +302,7 @@ The system supports IPv4 only protocol.
 
 ### How to limit outgoing network traffic
 
-All outgoing IP packets generated inside LVE container and marked with LVE identifier. Traffic control utility tc from iproute2 package uses this marker to set required bandwidth.
+All outgoing IP packets generated inside LVE container are marked with LVE identifier. Traffic control utility tc from iproute2 package uses this marker to set required bandwidth.
 
 :::tip Note
 CloudLinux doesn’t limit the network traffic itself, it only marks IP packets with specific LVE id.
@@ -469,6 +389,87 @@ The current version of CloudLinux network control system doesn’t limit network
 
 Network limits are supported only for processes inside LVE. By default it does not limit static content, but only PHP/cgi scripts processed by Apache and processes launched over ssh etc.
 :::
+
+
+## Limits validation
+
+Starting from <span class="notranslate">**lve-utils**</span> **version 3.1-1**, the validation of EP and NPROC limits is supported. If an administrator sets the NPROC limit less than (EP + 15), the following warning is shown:
+
+<div class="notranslate">
+
+```
+error: You're trying to set invalid LVE limits.
+NPROC limit must be greater than EP + 15 limit, because number of processes and threads within LVE includes
+also Apache processes/threads, SSH sessions and etc, which enter into LVE.
+```
+ </div>
+
+Validation does not affect limits operation in any way. Even if invalid limits have been set, they will be applied for users/resellers.
+
+Commands that support validation:
+
+1. <span class="notranslate">`lvectl set`</span>
+
+This command allows validation of an LVE ID which does not have a corresponding UID in the system. I.e., you can set limits for any LVE ID and they can be validated.
+
+
+2. <span class="notranslate">`lvectl set-user`</span>
+
+This command allows validation when setting limits using a user name instead of LVE ID.
+
+
+3. <span class="notranslate">`lvectl set-reseller`</span>
+
+This command supports limits validation both for inactive reseller and active one.
+
+4. <span class="notranslate">`lvectl set-reseller-default`</span>
+
+This command supports validation when setting default limits for a reseller.
+
+
+5. <span class="notranslate">`lvectl package-set`</span>
+
+This command supports limits validation both for packages existing in the system and nonexisting ones.
+
+
+6. The <span class="notranslate">`cloudlinux-package`</span> and <span class="notranslate">`cloudlinux-limits`</span> commands support all validation types described above, and support limits validation and exceptions lists as described below.
+
+#### Exceptions list (validation is not supported)
+
+
+1.    a) When EP limit for a package is greater than a custom NPROC limit for a user included in this package.
+
+ **OR**
+ 
+ b) when NPROC limit for a package is less than a custom EP limit for a user included in this package.
+ 
+
+2.    a) When default EP limit for a hoster is greater than a custom NPROC limit for a user/package which inherits the default limit.
+
+ **OR**
+ 
+ b) When default NPROC limit for a hoster is less than a custom EP limit for a user/package which inherits the default limit.
+ 
+
+3. When using the following commands:
+
+ a) <span class="notranslate">`lvectl set-reseller --all`</span>
+
+ b) <span class="notranslate">`cloudlinux-limits --json enable-reseller-limits --all`</span>
+
+
+#### Existing limits validation
+
+ 
+The automatic validation using <span class="notranslate">`cldiag`</span> utility by cron job is enabled on a server by default. You can disable it in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> config file using <span class="notranslate">`ENABLE_CLDIAG`</span> option (**Warning!** This option disables all automatic checks using cldiag!) When calling this utility automatically by cron, it checks all limits existing on the server and send an administrator a report with limits check results. You can use the following command to validate existing limits: <span class="notranslate">`cldiag --check-lve-limits`</span>.
+
+
+The important difference between checking existing and setting limits is that even if validation fails when setting limits (see exceptions list above), checking existing limits will catch invalid limits in any case. I.e. even if a server administrator set invalid limits, validation of existing limits will catch invalid limit in any case.
+
+#### Best practice
+
+Set NPROC limit greater than (EP + 15).
+
 
 
 ## Compatibility matrix

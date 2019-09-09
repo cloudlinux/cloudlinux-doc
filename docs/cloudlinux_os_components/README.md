@@ -108,7 +108,7 @@ Use the detailed instruction below:
     </div>
 
 
-#### How to enable and disable Reseller limits
+### How to enable and disable Reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
 
@@ -137,7 +137,7 @@ When the checkbox is selected, user <span class="notranslate">**Reseller**</span
 Resellers’ end users can use as much resources in total as it is provided for that particular reseller by a hoster. The summary usage of all end users that belong to that particular reseller will not exceed the amount of resources provided to reseller by a hoster. If no Reseller Limits are set, reseller’s end user will be limited by default limits set by a hoster.
 :::
 
-#### How to disable Reseller limits
+### How to disable Reseller limits
 
 To disable Reseller limits, please do the following:
 
@@ -1577,6 +1577,17 @@ Depending on your setup, and number of users, you might also need:
 ::: danger Warning
 If at any time you decide to uninstall CageFS, please make sure you follow [uninstall instructions](/cloudlinux_os_components/#uninstalling)
 :::
+
+#### CageFS quirks
+
+
+Due to the nature of CageFS, some options will not work as before or will require some changes:
+
+* lastlog will not work (<span class="notranslate">`/var/log/lastlog`</span>).
+* PHP will load `php.ini` from <span class="notranslate">`/usr/selector/php.ini`</span>. That file is actually a link to the real `php.ini` file from your system. So the same `php.ini` will be loaded in the end.
+* You have to run <span class="notranslate">`cagefsctl --update`</span> any time you have modified `php.ini`, or you want to get new/updated software inside CageFS.
+* CageFS installation changes <span class="notranslate">`jailshell`</span> to regular bash on cPanel - [read why](https://cloudlinux.zendesk.com/hc/articles/115004517685-Why-CageFS-installation-changes-jailshell-to-regular-bash-on-cPanel-).
+
 
 ### Installation and update
 
@@ -3372,7 +3383,7 @@ This command allows to install newly released versions in <span class="notransla
 See also PHP Selector [CLI](/command-line_tools/#php-selector)
 :::
 
-#### LiteSpeed support
+### LiteSpeed support
 
 ::: tip Note
 LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
@@ -3434,7 +3445,7 @@ Some PHP configurations require more memory for SuExec to work properly. If you 
 If you have LiteSpeed installed not in standard location path, please create a symlink: <span class="notranslate"> 'ln -s /path/to/custom/lsws /usr/local/lsws' then run 'cagefsctl --setup-cl-selector'. </span>
 :::
 
-#### ISPmanager support
+### ISPmanager support
 
 
 As of July 2013, <span class="notranslate"> PHP Selector </span> support for <span class="notranslate"> ISPmanager </span> is limited to command line utilities. You should still be able to use it.

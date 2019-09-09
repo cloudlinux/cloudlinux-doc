@@ -58,8 +58,8 @@ But when you deploy CloudLinux from the ISO image, these packages will be preins
 
 CloudLinux uses the fact that it is very close to CentOS and RHEL to convert systems in place, requiring just one reboot. Our conversion script does the following actions:
 
-* Backup of original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
-* Backup of RHEL system id into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
+* Backups the original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
+* Backups RHEL system ID into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
 * Installs CL repository settings & imports CL RPM key.
 * Replaces redhat/centos-release, redhat-release-notes, redhat-logos with CL version.
 * Removes cpuspeed RPM (as it conflicts with CPU limits).
@@ -92,40 +92,6 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
 
-## Installing new servers
-
-You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
-
-* **Latest stable CloudLinux 7.6 ISO**:
-
-    * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso](http://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.6.iso)
-    * Last updated: November 13, 2018
-
-
-* **Latest stable CloudLinux 6.10 ISO**:
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
-  * Last updated: July 05, 2018
-
-
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
-:::tip Note
-Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
-:::
-
-:::warning Note
-We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
-:::
-
-
-
 ## Activation
 ### Getting trial license
 
@@ -152,7 +118,7 @@ To register your server with CloudLinux Network using activation key run:
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key> --force
+$ /usr/sbin/rhnreg_ks --force --activationkey=<activation key>
 ```
 </div>
 
@@ -167,6 +133,41 @@ $ yum install rhn-setup --enablerepo=cloudlinux-base
 $ /usr/sbin/clnreg_ks --force
 ```
 </div>
+
+
+## Installing new servers
+
+You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
+
+* **Latest stable CloudLinux 7.7 ISO**:
+
+    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso)
+    * Last updated: August 16, 2019
+
+
+* **Latest stable CloudLinux 6.10 ISO**:
+
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
+  * Last updated: July 05, 2018
+
+
+* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
+
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
+  * Last updated: Oct 10, 2014
+
+
+:::tip Note
+Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
+:::
+
+:::warning Note
+We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
+:::
+
+
 
 ## CloudLinux OS images
 
@@ -231,14 +232,13 @@ Root password: <span class="notranslate">`cloudlinux`</span>
 
 To install CloudLinux over network:
 
-1. Download & boot from netboot image from: [http://repo.cloudlinux.com/cloudlinux/6.6/iso/x86_64/CloudLinux-6.6-x86_64-netboot.iso](http://repo.cloudlinux.com/cloudlinux/6.6/iso/x86_64/CloudLinux-6.6-x86_64-netboot.iso).
-It will boot into CloudLinux installer.
+1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso](https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso). It will boot into CloudLinux installer.
 
-    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/images/pxeboot/)
+    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/)
 
-2. During the CloudLinux installation select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.6/install/x86_64/) and continue with installation.
+2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/) and continue with installation.
 
-To install CloudLinux 5.10 instead of 6.6 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.10/netinstall/x86_64/)
+To install CloudLinux 5.11 instead of 6.10 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
@@ -910,16 +910,6 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 
 (Find examples of `cloudlinux_ea3_to_ea4` script usage below).
 
-### Revert back from EasyApache 4 to EasyApache 3
-
-To migrate back to EA3 for CloudLinux run:
-
-<div class="notranslate">
-
-```
-cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --revert
-```
-</div>
 
 ### More about cloudlinux_ea3_to_ea4 script
 
