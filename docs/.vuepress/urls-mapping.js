@@ -1206,5 +1206,5 @@ module.exports = {
   "/ru/file_system_quotas.html": "/ru/cloudlinux_os_kernel/#file-system-quotas",
   "/kernel_settings/#remounting-procfs-with-hidepid-option": "/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option",
   "/python_selector/#overview-and-requirements": "/cloudlinux_os_components/#general-information-and-requirements-6",
-  "/php_selector/#php-selector-integration-with-cpanel’s-multiphp-manager":"/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager"
+  "/php_selector/#php-selector-integration-with-cpanel’s-multiphp-manager": "/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager"
 };
