@@ -1363,21 +1363,50 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 ### LVE Manager options
 
-When you need to change <span class="notranslate">LVE Manager</span> options in cPanel config file on big amount of servers, you don't have to edit file manually, therefore there is no need to login into cPanel on each server. Just go to WHM, choose CloudLinux and click <span class="notranslate">Options</span> - and you will be able to change settings from here.
+You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
+
+####  Changing settings manually
+
+* Log in to cPanel, go to WHM, choose CloudLinux and click <span class="notranslate">_Options_</span>.
+* Change settings.
+
+#### Changing settings in the config file
+
+You can modify the following options in the config file <span class="notranslate">`/var/cpanel/cpanel.config`</span> directly for example via Puppet.
+
+| | |
+|-|-|
+|<span class="notranslate">`lve_hideextensions`</span>| Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version|
+|<span class="notranslate">`lve_hideuserstat  `</span>| Hides (when =1) LVE statistics in <span class="notranslate">cPanel Stats Bar (UI)</span>|
+|<span class="notranslate">`lve_showinodeusage`</span>| Displays (when =1) used inodes in cPanel (UI)|
+|<span class="notranslate">`lve_hide_selector`</span>| Turns off <span class="notranslate">UI PHP Selector</span> (Select <span class="notranslate">PHP Version</span> option)|
+|<span class="notranslate">`lve_enablerubyapp`</span>|Displays (when =1) Ruby Selector in user’s interface (UI)|
+
+
+:::warning Note
+It is not allowed to change <span class="notranslate">`lve_enablepythonapp`</span> option in the config file directly.
+:::
+
+You can use <span class="notranslate">`cloudlinux-selector`</span> utility to change <span class="notranslate">`lve_enablepythonapp`</span> option:
 
 <div class="notranslate">
 
 ```
-root@toaster [~]# grep lve /var/cpanel/cpanel.config
+cloudlinux-selector set --json --interpreter=python --selector-status=enabled
 ```
 </div>
 
-| | |
-|-|-|
-|<span class="notranslate">`lve_hideextensions`</span>| Hides (when =1) range of php extensions for user in <span class="notranslate"> Select PHP </span> version.|
-|<span class="notranslate">`lve_hideuserstat  `</span>| Hides (when =1) LVE statistics in <span class="notranslate"> cPanel Stats Bar (UI) </span> .|
-|<span class="notranslate">`lve_showinodeusage`</span>| Displays (when =1) used inodes in cPanel (UI).|
-|<span class="notranslate">`lve_hide_selector`</span>| Turns off <span class="notranslate">UI PHP Selector</span> (Select <span class="notranslate">PHP Version</span> option).|
+Or you can change it via <span class="notranslate">WHM -> LVE Manager -> Options -> Python Selector -> Python</span>
+
+After modifying the config files directly, you should execute the following command to apply changes:
+
+<div class="notranslate">
+
+```
+/usr/share/l.v.e-manager/utils/dynamicui.py --sync-conf=all
+```
+</div>
+
 
 ### Server processes snapshots
 
