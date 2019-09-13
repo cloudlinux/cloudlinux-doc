@@ -370,35 +370,107 @@ The following parameters are displayed in the statistics table:
 
 </div>
 
-An administrator can set email notifications for users and resellers in cases of limits faults.
+The following sections are available to set the required options:
 
-Choose <span class="notranslate">_Options_</span> tab to manage <span class="notranslate">LVE Faults</span> email notifications.
+* <span class="notranslate">[LVE Faults Email Notifications](/lve_manager/#lve-faults-email-notifications)</span> - allows to set the required type of notification
+* [Faults to include](/lve_manager/#faults-to-include) - allows to include required limits to the notifications
+* [Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify) - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
+* [Inode limits](/lve_manager/#inode-limits) - allows to manage inode limits
+* [User interface settings](/lve_manager/#user-interface-settings) - allows to manage user interface settings
+* [CageFS](/lve_manager/#cagefs-2) - allows to manage CageFS settings
+* [Node.js](/lve_manager/#node-js) - allows to enable/disable and manage Node.js Selector
+* <span class="notranslate">[Python Selector](/lve_manager/#python-selector-section)</span> - allows to enable/disable and manage Python Selector
 
-In <span class="notranslate">_LVE Faults_</span> email notifications section check proper checkboxes to set the required type of notification:
+![](/images/options-general.png)
 
-* <span class="notranslate">Notify me on users faults</span> - to receive notifications on users LVE faults;
-* <span class="notranslate">Notify customers</span> - to allow hosts users receiving notifications on their LVE faults;
-* <span class="notranslate">Notify me when I hit my limits</span> - to receive notifications on LVE faults.
+#### LVE Faults Email Notifications
 
-In <span class="notranslate">_Faults to include_</span> section check proper checkboxes to include proper limits to the notifications:
+![](/images/lve-faults-email-notifications.png)
 
-* <span class="notranslate"> SPEED </span> - include speed limit fault to the notification;
-* <span class="notranslate"> IO </span> - include <span class="notranslate"> I/O </span> limit fault info to the notification;
-* <span class="notranslate"> IOPS </span> - include <span class="notranslate"> IOPS </span> limit fault info to the notification;
-* <span class="notranslate"> Memory </span> - include <span class="notranslate"> Memory </span> limit fault info to the notification;
-* <span class="notranslate"> Concurrent connections </span> - include <span class="notranslate"> concurrent connections </span> limit fault info to the notification.
+The following types of notification are available:
 
-In <span class="notranslate">_Minimum number of Faults to notify_</span> section enter proper number of faults required for the notification to be sent for:
+* **<span class="notranslate">Notify Hoster</span>** - receive notifications on users and its own LVE faults
+* **<span class="notranslate">Notify Reseller</span>** - allows reseller receiving notifications on their user's LVE faults
+* **<span class="notranslate">Notify Customers</span>** - allow host's users receiving notifications on their LVE faults
+* **<span class="notranslate">Notify Reseller's customers</span>** - allows resller's users receiving notifications on their LVE faults
 
-* <span class="notranslate">Me</span> - for an administrator;
-* <span class="notranslate">User</span> - for a User;
 
-Set the frequency of email notifications sending in <span class="notranslate"> Notify me every.. hours/days</span> section.
+#### Faults to include
 
-Click <span class="notranslate">_Save_</span> to apply changes.
+![](/images/faults-to-include.png)
 
-![](/images/lveman_08.jpg)
-![](/images/lveman_09.jpg)
+Tick checkboxes to include required limits to the notifications:
+
+* **<span class="notranslate">SPEED</span>** - include <span class="notranslate">_SPEED_</span> limit fault to the notification
+* **<span class="notranslate">IO</span>** - include <span class="notranslate">_I/O_</span> limit fault info to the notification
+* **<span class="notranslate">IOPS</span>** - include <span class="notranslate">_IOPS_</span> limit fault info to the notification
+* **<span class="notranslate">Memory</span>** - include <span class="notranslate">_Memory_</span> limit fault info to the notification
+* **<span class="notranslate">Concurrent connections</span>** - include <span class="notranslate">_concurrent connections_</span> limit fault info to the notification
+* **<span class="notranslate">NPROC</span>** - include <span class="notranslate">_NPROC_</span> limit fault info to the notification.
+
+#### Minimum number of Faults to notify
+
+![](/images/minimum-number-of-faults-to-notify.png)
+
+Set a number of faults required for the notification to be sent for:
+
+* <span class="notranslate">Hoster and Reseller</span>
+* <span class="notranslate">User</span>
+
+Set the frequency of email notifications sending to: 
+
+* <span class="notranslate">Hoster and Reseller</span>
+* <span class="notranslate">User</span>
+
+#### Inode limits
+
+![](/images/inode-limits.png)
+
+Allows to reset inode limits and show/hide end-user inode usage.
+
+#### User interface settings
+
+![](/images/user-interface-settings.png)
+
+Allows to manage user interface settings:
+
+* **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
+* **<span class="notranslate">Hide PHP extension selection</span>** - a user will not be able to select PHP extensions in his web interface
+* **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
+
+#### CageFS
+
+![](/images/options-cagefs.png)
+
+Allows to manage CageFS settings:
+
+* **CageFS** - enable/disable CageFS
+* **<span class="notranslate">CageFS Skeleton</span>** - click to update CageFS skeleton. See: [Updating CageFS skeleton](/control_panel_integration/#updating-cagefs-skeleton)
+* **<span class="notranslate">New users will be disabled by default in CageFS</span>** - toggle to enable/disable new users in CageFS by default.
+
+#### Node.js
+
+![](/images/options-nodejs.png)
+
+Allows to enable/disable and manage Node.js Selector.
+
+See more:
+
+* [Node.js Selector UI](/lve_manager/#node-js-selector-2)
+* [Node.js Selector](/cloudlinux_os_components/#node-js-selector)
+
+#### Python Selector section
+
+![](/images/options-python-selector.png)
+
+Allows to enable/disable and manage Python Selector.
+
+See more:
+
+* [Python Selector UI](/lve_manager/#python-selector-2)
+* [Python Selector](/cloudlinux_os_components/#python-selector)
+
+When you've done with settings, click <span class="notranslate">**Save Changes**</span> to apply changes.
 
 <div class="notranslate">
 
