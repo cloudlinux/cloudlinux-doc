@@ -92,6 +92,14 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
 
+#### Common issues and troubleshooting during conversion
+
+| | |
+|-|-|
+|**Issue**|**Solution**|
+|Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
+
+
 ## Activation
 ### Getting trial license
 
