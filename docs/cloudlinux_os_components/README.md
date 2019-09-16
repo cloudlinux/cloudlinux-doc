@@ -5613,9 +5613,13 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
 ### Installation and update
 
+:::tip Note
+Node.js Selector support is added to LiteSpeed Web Server starting from the 5.3RC1 release. See details [here](https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:cloudlinux:node.js_selector).
+:::
+
 **cPanel**
 
-To use <span class="notranslate"> Node.js Selector </span>, please install <span class="notranslate"> Node.js </span> packages by running the following command:
+To use <span class="notranslate">Node.js Selector</span>, install <span class="notranslate">Node.js</span> packages by running the following command:
 <div class="notranslate">
 
 ```
