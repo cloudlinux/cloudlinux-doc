@@ -3409,7 +3409,7 @@ You can select any other application or create a custom one.
 
 <span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span>.
 
-For <span class="notranslate"> Plesk </span> :
+For <span class="notranslate">Plesk</span>:
 
 ![](/images/litespeed3_zoom70.png)
 
@@ -3417,7 +3417,36 @@ For other control panels:
 
 ![](/images/litespeed2_zoom70.png)
 
-5. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
+Settings in text format:
+
+| | |
+|-|-|
+|<span class="notranslate">Name</span>|<span class="notranslate">`lsphp_selector`</span>|
+|<span class="notranslate">Address</span>|<span class="notranslate">`uds://tmp/lshttpd/lsphp_selector.sock`</span>|
+|<span class="notranslate">Notes</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Max Connections</span>|`35`|
+|<span class="notranslate">Environment</span>|<span class="notranslate">`PHP_LSAPI_MAX_REQUESTS=5000`</span><br><span class="notranslate">`PHP_LSAPI_CHILDREN=35`</span>|
+|<span class="notranslate">Initial Request Timeout (secs)</span>|`60`|
+|<span class="notranslate">Retry Timeout (secs)</span>|`0`|
+|<span class="notranslate">Persistent Connection</span>|<span class="notranslate">`Yes`</span>|
+|<span class="notranslate">Connection Keepalive Timeout</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Response Buffering</span>|<span class="notranslate">`No`</span>|
+|<span class="notranslate">Auto Start</span>|<span class="notranslate">`Through CGI Daemon (Async)`</span>|
+|<span class="notranslate">Command</span>|* For Plesk <span class="notranslate">`/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper`</span><br>* For other control panels <span class="notranslate">`/usr/local/bin/lsphp`</span>|
+|<span class="notranslate">Back Log</span>|`100`|
+|<span class="notranslate">Instances</span>|`1`|
+|<span class="notranslate">suEXEC User</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">suEXEC Group</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">umask</span>|<span class="notranslate">Not Set</span>|
+|<span class="notranslate">Run On Start Up</span>|<span class="notranslate">`Yes`</span>|
+|<span class="notranslate">Max Idle Time</span>|`70`|
+|<span class="notranslate">Priority</span>|`0`|
+|<span class="notranslate">Memory Soft Limit (bytes)</span>|`2047M`|
+|<span class="notranslate">Memory Hard Limit (bytes)</span>|`2047M`|
+|<span class="notranslate">Process Soft Limit</span>|`400`|
+|<span class="notranslate">Process Hard Limit</span>|`500`|
+
+1. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
 
 ![](/images/litespeed4_zoom70.png)
 
