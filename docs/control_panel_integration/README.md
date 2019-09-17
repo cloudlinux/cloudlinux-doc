@@ -202,7 +202,7 @@ Returns the information about the control panel in the format specified.
 	"data": {
 		"name": "CentosWebPanel",
 		"version": "1.0.1",
-            "user_login_url": "https://{domain}:1111/"
+		"user_login_url": "https://{domain}:1111/"
 	},
 	"metadata": {
 		"result": "ok"
@@ -252,11 +252,11 @@ Integration script is optional, when there is no script, [lve-stats won’t coll
         "unix_user_name": [
           "db_user_name1",
           "db_user_name2"
-        },
+        ],
         "unix_user_name2": [
           "db_user_name3",
           "db_user_name4"
-        }
+        ]
       }
     }
   },
@@ -457,12 +457,12 @@ To make Python/Node.js/Ruby/PHP Selector workable, this script should be execute
     "domain.com": {
       "owner": "username",
       "document_root": "/home/username/public_html/",
-      "is_main": True
+      "is_main": true
     },
     "subdomain.domain.com": {
       "owner": "username",
       "document_root": "/home/username/public_html/subdomain/",
-      "is_main": False  
+      "is_main": false  
     }
   },
   "metadata": {
@@ -507,7 +507,7 @@ Gives information about resellers who can be users owners in the control panel. 
     {
       "name": "reseller",
       "locale_code": "EN_us",
-      "email": "reseller@domain.zone"
+      "email": "reseller@domain.zone",
       "id": 10001   
     }
   ],
