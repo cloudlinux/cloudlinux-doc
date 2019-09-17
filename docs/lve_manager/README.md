@@ -1510,23 +1510,28 @@ echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
 
 As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
 
-![](/images/screen1.1lvemanfeature_zoom74.png)
-
-_Figure 1.1_
-
-
-![](/images/screen1.2lvemanfeature_zoom76.png)
-
-_Figure 1.2_
-
-![](/images/screen2.1lvemanfeature_zoom72.png)
-
-_Figure 2.1_
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_admin.png)|
+| Figure 1.1 cPanel LVE Manager (administrator)| 
 
 
-![](/images/screen2.2lvemanfeature_zoom75.png)
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_admin.png)|
+| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
 
-_Figure 2.2_
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_user.png)|
+| Figure 2.1 cPanel LVE Manager (user)|
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_user.png)|
+| Figure 2.2 DirectAdmin LVE Manager (user)| 
 
 :::tip Note
 *For cPanel and DirectAdmin only.
