@@ -3,7 +3,7 @@
 ## Hybrid Kernels
 
 
-<span class="notranslate"> **CloudLinux 6 Hybrid kernel** </span>
+<span class="notranslate">**CloudLinux 6 Hybrid kernel**</span>
 
 <span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
 
@@ -59,7 +59,7 @@ The system must be registered in CLN.
 <div class="notranslate">
 
 ```
-yum update rhn-client-tools rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+yum update rhn-client-tools rhn-check rhn-setup
 normal-to-hybrid
 reboot
 ```
@@ -84,9 +84,9 @@ reboot
 ```
 </div>
 
-**Known limitations and issues of CloudLinux 6 Hybrid kernel** :
+**Known limitations and issues of CloudLinux 6 Hybrid kernel**
 
-1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_ .
+1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux </span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_.
 
 2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
 
@@ -96,13 +96,7 @@ Features that are absent in the current kernel build:
 
 * Per LVE traffic accounting
 
-Limitations of the current kernel build:
-
-1. Native OOM killer is used
-2. Native СPU boost is used
-3. The `/etc/sysctl.conf` parameter <span class="notranslate">`proc_can_see_other_uid`</span> is the same as in CloudLinux 7. See [documentation](/kernel_settings/#virtualized-proc-filesystem).
-
-Note, that Symlink Owner Match Protection is enabled by default in CL7 Hybrid kernel. To disable it, use `sysctl` utility:
+Note that Symlink Owner Match Protection is enabled by default in CL7 Hybrid kernel. To disable it, use `sysctl` utility:
 
 <div class="notranslate">
 
