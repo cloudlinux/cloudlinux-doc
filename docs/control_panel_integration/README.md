@@ -336,7 +336,7 @@ If a reseller or administrator except for the account in the control panel has U
 **Usage example**
 
 ```
-/scripts/users [--owner=<string> | (--package-name=<string> & --package-owner=<string>) | --username=<string>] [--fields=id,username,package,...]
+/scripts/users [--owner=<string> | (--package-name=<string> & --package-owner=<string>) | --username=<string> | --unix-id=<int>] [--fields=id,username,package,...]
 ```
 
 **Arguments**
@@ -348,6 +348,7 @@ If a reseller or administrator except for the account in the control panel has U
 |--package-name|False|Used for filtering. Set the name of the package which users to output. Used ONLY in pair with `--package-owner`.|
 |--package-owner|False|Used in pair with package.name. Set the owner of the specified package.|
 |--username|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
+|--unix-id|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
 |--fields|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.|
 
 The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux will work more slowly.
@@ -361,6 +362,7 @@ The key is used to reduce the data size for the large systems. You can ignore th
       "id": 1000,
       "username": "ins5yo3",
       "owner": "root",
+      "domain": "ins5yo3.com",
       "package": {
         "name": "package", 
         "owner": "root"
@@ -370,13 +372,14 @@ The key is used to reduce the data size for the large systems. You can ignore th
     },
     {
       "id": 1001,
-      "username": "ins5yo3",
+      "username": "ins5yo4",
       "owner": "root",
+      "domain": "ins5yo4.com",
       "package": {
         "name": "package", 
         "owner": "root"
       },
-      "email": "ins5yo3@ins5yo3.com",
+      "email": "ins5yo4@ins5yo4.com",
       "locale_code": "EN_us"
     }  
   ],
@@ -422,6 +425,7 @@ The key is used to reduce the data size for the large systems. You can ignore th
 |owner|False|The name of the account owner in the control panel. The owner can be an administrator (in this case he should be included in the `admins()` output) or a reseller (in this case he should be included in the `resellers()` output).|
 |locale_code|True|The control panel locale selected by a user (the values are according to ISO 639-1). Used when sending lve-stats emails. If not selected, EN_us used.|
 |email|True|Email to send lve-stats notifications about hitting limits. If there is no email, should return null.|
+|domain|False|Main domain of user (used to display in lvemanager UI and create applications in selectors)|
 |package|True|Information about the package to which a user belongs to. If the user doesn’t belong to any package, should return null.|
 |package.name|False|The name of the package to which a user belongs to.|
 |package.owner|False|The owner of the package to which a user belongs to (reseller or administrator).|
