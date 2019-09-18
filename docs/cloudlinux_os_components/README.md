@@ -3296,8 +3296,11 @@ After applying the command MySQL <span class="notranslate">Governor</span> succe
 
 ## PHP Selector
 
-
 ### General information and requirements
+
+:::warning Note
+To PHP Selector proper operation, make sure you have installed and configured `mod_suexec` package. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module).
+:::
 
 <span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
 
@@ -8567,3 +8570,80 @@ Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux. Here 
 :::tip Note
 Nginx support is currently experimental.
 :::
+
+## Apache suexec module
+
+### General information and requirements
+
+This module is used by the Apache HTTP Server to switch to another user before executing CGI programs. The suEXEC feature provides users of the Apache HTTP Server with the ability to run CGI and SSI programs under user IDs different from the user ID of the calling web server (<span class="notranslate">apache/nobody</span>). Normally, when a CGI or SSI program executes, it runs as the same user who is running the web server.
+
+If we are talking about shared hosting where different accounts are launched on the same server, the installation of this module is necessary to ensure security.
+
+#### How does it work with CloudLinux?
+
+The DirectAdmin and CloudLinux (for httpd, httpd24-httpd and cPanel EasyApache 4) both provide a patched version of suexec. For other distributions you can use patches available here:
+[http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+
+1. Besides the ability to run CGI programs under user IDs, suexec with CloudLinux patch adds the ability to run that script under CageFS. 
+  :::tip NOTE
+  Therefore, this module is necessary for the proper work of PHP Selector.
+  :::
+2. This module is also necessary for the proper work of mod_hostinglimits. The <span class="notranslate">`SuexecUserGroup`</span> directive indicates for `mod_hostinglimits` in which LVE the user process should be put in.
+
+
+### Configuration
+
+**SuexecUserGroup Directive**
+
+**Syntax**: <span class="notranslate">SuexecUserGroup User Group</span>
+
+**Context**: `httpd.conf`, `virtualhost`
+
+**Description**: The SuexecUserGroup directive allows you to specify a user and a group for CGI programs to run as. Startup will fail if this directive is specified but the suEXEC feature is disabled.
+
+::: warning Note
+Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the Apache configuration automatically when creating a domain. If you use the server without a control panel, make sure this directive is added for each virtual host.
+:::
+
+
+### Installation
+
+The installation process varies depending on the control panel and Apache.
+
+#### Installing on cPanel servers with EasyApache 4
+
+1. Install `mod_suexec` through YUM package manager as follows:
+
+  <div class="notranslate">
+  
+  ```
+  $ yum install ea-apache24-mod_suexec
+  ```
+  </div>
+
+  :::warning NOTE
+  `ea-apache24-mod_suexec` conflicts with the `mod_ruid2` therefore, before installing the module, remove `ea-apache24-mod_ruid2` as follows: <span class="notranslate">`$ yum remove ea-apache24-mod_ruid2`</span>
+  :::
+
+2. Now, when the module is installed, restart Apache:
+
+  <div class="notranslate">
+  
+  ``` 
+  $ service httpd restart
+  ```
+  </div>
+
+#### Installing on Plesk servers
+
+This module is integrated into Apache for Plesk control panel by default.
+
+#### Installing on DirectAdmin servers
+
+This module is integrated into Apache for DirectAdmin control panel by default.
+
+#### Installing on servers with no control panel
+
+This module is integrated into httpd Apache rpm provided by Cloudlinux by default.
+
+If you are using an alternative Apache - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6), nothing has to be done as this module is also integrated into httpd24-httpd Apache rpm provided by Cloudlinux by default.
