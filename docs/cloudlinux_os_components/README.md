@@ -2648,6 +2648,119 @@ After that, all new created <span class="notranslate"> LVEs </span> will be with
 You should recreate all LVEs only once after creating <span class="notranslate"> _/etc/container/exclude_mounts.conf_ </span> file. After that the configuration changes will be applied to all new LVEs automatically.
 :::
 
+#### Shared memory (/dev/shm) isolation in CageFS
+
+:::tip Note
+Requires `cagefs-6.2.1-1` or later
+:::
+
+The `/dev/shm` in a real file system directory is “world-writable”. This directory from the real file system is mounted to CageFS by default, so `/dev/shm` directory is common for all users by default. However, it is possible to improve security and isolate `/dev/shm` (shared memory) for each user in CageFS.
+
+To enable `/dev/shm` isolation, do the following steps:
+
+1. Delete `/dev/shm` line from the `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  sed -i -e '/^\/dev\/shm/d' /etc/cagefs/cagefs.mp
+  ```
+  </div>
+
+2. Create a configuration file with mount options for shared memory
+   
+  <div class="notranslate">
+
+  ```
+  echo 'mode=0777' > /etc/cagefs/dev.shm.options
+  ```
+  </div>
+
+3. Remount CageFS to apply changes
+   
+  <div class="notranslate">
+
+  ```
+  cagefsctl --remount-all
+  ```
+  </div>
+
+You can also specify additional mount options.
+
+For example, you can specify the size of shared memory in megabytes:
+
+<div class="notranslate">
+
+```
+echo 'mode=0777,size=1m' > /etc/cagefs/dev.shm.options
+cagefsctl --remount-all
+```
+</div>
+
+Or you can specify the size of user’s physical memory limit (PMEM) in percentage:
+
+<div class="notranslate">
+
+```
+echo 'mode=0777,size=50%' > /etc/cagefs/dev.shm.options
+cagefsctl --remount-all
+```
+</div>
+
+To disable `/dev/shm` isolation, do the following steps:
+
+1. Delete configuration file
+
+  <div class="notranslate">
+
+  ```
+  rm -f /etc/cagefs/dev.shm.options
+  ```
+  </div>
+
+2. Validate `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --check-mp
+  ```
+  </div>
+
+3. Add `/dev/shm` line to `/etc/cagefs/cagefs.mp` file
+
+  <div class="notranslate">
+
+  ```
+  echo '/dev/shm' >> /etc/cagefs/cagefs.mp
+  ```
+  </div>
+
+4. Remount CageFS to apply changes
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --remount-all
+  ```
+  </div>
+
+:::tip Note
+you should specify `mode=0777`. It is required for the proper operation of shared memory inside CageFS. This is not a security issue because the `/dev/shm` directory is isolated for each user and visible inside a user’s CageFS only.
+:::
+
+:::tip Note
+`/dev/shm` is mounted with `nosuid,nodev,noexec` mount options always (both in “isolated `/dev/shm`” mode and not). You cannot change this behavior.
+:::
+
+:::tip Note
+“isolated `/dev/shm`” mode will become the default in the future CageFS releases.
+:::
+
+:::tip Note
+when the size of the `/dev/shm` is specified in percentage of user’s physical memory limit (PMEM), you should remount CageFS after changing PMEM limit in order to change the size of shared memory allocated for the `/dev/shm` in user’s CageFS. To do so, execute `cagefsctl --remount-all`
+:::
+
 ### Integration with control panels
 
 CageFS comes with a plugin for various control panels.
