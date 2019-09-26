@@ -1361,6 +1361,161 @@ Click pencil icon in a package row to set the following limits for a package:
 When limits are set click <span class="notranslate">_Save_</span> to apply changes.
 
 
+### Client plugins
+
+#### Resource Usage client plugin
+
+Client resource usage plugin for cPanel, Plesk, and DirectAdmin allows host’s end users to view and monitor resource usage.
+
+
+Go to your control panel and click _CPU and concurrent connection usage_.
+
+![](/images/client_resource_usage.png)
+
+Here you can see three tabs:
+
+* **<span class="notranslate">Dashboard</span>**: displays the general condition of your site. If your site is limited, this displays on the Dashboard.
+* **<span class="notranslate">Current usage</span>**: here you can find full information on the resource usage displayed in charts and tables.
+* **<span class="notranslate">Snapshot</span>**: server snapshots with processes list and database and HTTP queries.
+
+![](/images/RU-dashboard.png)
+
+#### Dashboard
+
+Go to the <span class="notranslate">_Dashboard_</span> tab to see the general condition of your site.
+If your site is limited, you can see this on the <span class="notranslate">_Dashboard_</span> with the resource you are limited over.
+To see detailed information about resource usage, click <span class="notranslate">_Details_</span>.
+
+If your site is not limited, you will see the plain <span class="notranslate">Dashboard</span>.
+
+![](/images/RU-no-issues.png)
+
+#### Current Usage
+
+Go to the <span class="notranslate">_Current Usage_</span> tab to see the detailed information about resource usage on your server.
+
+![](/images/RU-current-usage.png)
+
+#### Current Usage table
+
+The <span class="notranslate">_Current Usage_</span> table displays resource usage.
+
+:::warning Note
+**<span class="notranslate">Inodes</span>** usage is displayed if it is enabled and **<span class="notranslate">Inodes</span>** limits are set for the user. cPanel only.
+:::
+
+![](/images/RU-current-usage-table.png)
+
+* **<span class="notranslate">Description</span>**: resource name
+* **<span class="notranslate">Usage</span>**: resource usage value
+* **<span class="notranslate">Limit</span>**: resource usage limit
+* **<span class="notranslate">Fault</span>**: number of faults
+
+#### Filters
+
+You can filter charts and the Usage table by timeframe and time unit (day, hour, minute).
+
+#### Charts
+
+The following resources are displayed in charts:
+
+* <span class="notranslate">CPU</span>
+* <span class="notranslate">Virtual Memory</span>
+* <span class="notranslate">Physical Memory</span>
+* <span class="notranslate">Input/Output</span>
+* <span class="notranslate">Io operations</span>
+* <span class="notranslate">Entry Processes</span>
+* <span class="notranslate">Processes</span>
+  
+All charts have the color legend:
+
+* Green — average resource usage
+* Red — limit set for this parameter
+* Blue — database
+* Green-cyan — faults (limit violations)
+  
+You can also see the Faults chart with all faults for all resources.
+
+![](/images/RU-faults-chart.png)
+
+#### Usage
+
+The <span class="notranslate">_Usage_</span> table displays information on each resource usage sorted by timeframe and time unit.
+
+![](/images/RU-usage-table.png)
+
+* **<span class="notranslate">From-To</span>**: period
+* **<span class="notranslate">A</span>**: average
+* **<span class="notranslate">L</span>**: limit
+* **<span class="notranslate">F</span>**: faults
+
+Use controls below the table to navigate through it.
+
+#### Snapshot
+
+Go to the <span class="notranslate">_Snapshot_</span> tab to see server snapshots with processes list and database and HTTP queries.
+
+![](/images/RU-snapshots.png)
+
+You can choose a date and a snapshot to display in the table.
+
+#### Server processes snapshots
+
+In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
+
+Snapshots allow users to investigate the reason of account hitting its limits. Several snapshots are generated for each incident. An incident is a state when faults are generated in a close time period. The time period is configurable. By default, if faults are generated in 300 seconds time period, we consider them as a single incident.
+
+The snapshot configuration options are available in
+
+<div class="notranslate">
+
+```
+/etc/sysconfig/lvestats.config/SnapshotSaver.cfg
+```
+</div>
+
+* <span class="notranslate">`period_between_incidents = 300`</span> by default, time in seconds
+* <span class="notranslate">`snapshots_per_minute = 2`</span> by default, maximum number of snapshots per minute
+* <span class="notranslate">`max_snapshots_per_incident = 10`</span> by default, maximum number of snapshots for an incident
+
+To access <span class="notranslate">**Snapshots**</span> you can also use [lve-read-snapshot](/command-line_tools/#lve-read-snapshot) utility.
+
+:::tip Note
+The list of processes in a snapshot is close but not similar to the real processes list when faults were generated. It happens because of delay when the faults are happened and the snapshot is taken by the system.
+:::
+
+The list of MySQL queries is an output of a query:
+
+<div class="notranslate">
+
+```
+SELECT command, time, info FROM information_schema.processlist
+
+WHERE user = '%username';
+```
+</div>
+
+#### Process list
+
+Displays information on processes in the selected snapshot.
+
+* **<span class="notranslate">PID</span>**: process ID
+* **<span class="notranslate">CMD</span>**: what command was run
+* **<span class="notranslate">CPU</span>**: CPU usage
+* **<span class="notranslate">MEM</span>**: memory usage
+  
+#### Database queries (cPanel only)
+
+Displays information on database queries in the selected snapshot.
+
+![](/images/RU-db-queries.png)
+
+#### HTTP queries
+
+Displays information on HTTP queries in the selected snapshot.
+
+![](/images/RU-HTTP-queries.png)
+
 ### LVE Manager options
 
 You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
@@ -1404,64 +1559,6 @@ After modifying the config files directly, you should execute the following comm
 
 ```
 /usr/share/l.v.e-manager/utils/dynamicui.py --sync-conf=all
-```
-</div>
-
-
-### Server processes snapshots
-
-In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates Server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
-
-Snapshots allow users to investigate the reason of account hitting its limits. Several snapshots are generated for each incident. An incident is a state when faults are generated in a close time period. The time period is configurable. By default, if faults are generated in 300 seconds time period, we consider them as a single incident.
-
-The snapshot configuration options are available in
-
-<div class="notranslate">
-
-```
-/etc/sysconfig/lvestats.config/SnapshotSaver.cfg
-```
-</div>
-
-* <span class="notranslate">`period_between_incidents = 300`</span> by default, time in seconds
-* <span class="notranslate">`snapshots_per_minute = 2`</span> by default, maximum number of snapshots per minute
-* <span class="notranslate">`max_snapshots_per_incident = 10`</span> by default, maximum number of snapshots for an incident
-
-To access <span class="notranslate">**Snapshots**</span> on Plesk you can use [lve-read-snapshot](/command-line_tools/#lve-read-snapshot) utility.
-
-To access <span class="notranslate">**Snapshots**</span> on cPanel perform the following steps:
-
-1. Go to cPanel | <span class="notranslate">CPU and Concurrent Connection Usage</span> in <span class="notranslate"> **paper_latern**</span> theme:
-
-![](/images/snapshots.jpg)
-
-2. Click the <span class="notranslate">**Snapshots**</span> in <span class="notranslate">**paper_latern**</span> theme:
-
-![](/images/snapshots2.jpg)
-
-3. Select a date:
-
-![](/images/snapshots3.jpg)
-
-4. Select an appropriate <span class="notranslate">**Snapshot**</span> in the combobox:
-
-![](/images/snapshots4.jpg)
-![](/images/snapshots5.jpg)
-
-
-:::tip Note
-The list of processes in a snapshot is close but not similar to the real processes list when faults were generated. It happens because of delay when the faults are happened and the snapshot is taken by the system.
-:::
-
-
-The list of MySQL queries is an output of a query:
-
-<div class="notranslate">
-
-```
-SELECT command, time, info FROM information_schema.processlist
-
-WHERE user = '%username';
 ```
 </div>
 

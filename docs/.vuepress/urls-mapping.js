@@ -2410,6 +2410,8 @@ module.exports = {
   "/ru/command-line_tools/#cldetect": "/ru/command-line_tools/#cldetect",
   "/ru/python_and_ruby_selector/#python-and-ruby-selector": "/ru/cloudlinux_os_components/#python-selector",
   "/ru/python_selector/#python-selector": "/ru/cloudlinux_os_components/#python-selector",
+  "/lve_manager/#server-processes-snapshots": "/lve_manager/#resource-usage-client-plugin",
+  "/ru/lve_manager/#server-processes-snapshots": "/ru/lve_manager/#resource-usage-client-plugin",
   "/ru/kernel_settings/#remounting-procfs-with-hidepid-option": "/ru/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option",
   "/ru/python_selector/#overview-and-requirements": "/ru/cloudlinux_os_components/#general-information-and-requirements-6",
   "/ru/php_selector/#php-selector-integration-with-cpanel’s-multiphp-manager": "/ru/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager",
