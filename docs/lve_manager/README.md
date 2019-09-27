@@ -722,7 +722,7 @@ To edit application do the following:
 
 * Click the <span class="notranslate">_Pencil_</span> in the <span class="notranslate">_Actions_</span> column in a particular application row. A particular application tab opens.
 
-![](/images/PythonEditApp.png)
+![](/images/PythonSelectorEditApp.png)
 
 The following actions are available:
 
@@ -735,6 +735,7 @@ The following actions are available:
 * Open Application URL — click the <span class="notranslate">_Open_</span>.
 * Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
 * Change Application Entry point — specify WSGI callable object for your application.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
 * Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
 * Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
 * Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
@@ -916,7 +917,7 @@ To remove application do the following:
 To edit application do the following:
 * Click <span class="notranslate"> _Pencil_ </span> icon in the <span class="notranslate"> _Actions_ </span> column in a particular application row. A particular application tab opens.
 
-![](/images/nodejseditapp_zoom70.png)
+![](/images/Node.js-Selector-edit-app.png)
 
 The following actions are available:
 * Restart application — click <span class="notranslate"> _Restart_ </span> button.
@@ -925,9 +926,10 @@ The following actions are available:
 * Remove application — click <span class="notranslate"> _Delete_ </span> button and confirm the action in a pop-up.
 * Change Node.js version — choose Node.js version from a drop-down.
 * Change Application mode — choose application mode from a drop-down. Available modes are <span class="notranslate"> _Production_ </span> and <span class="notranslate"> _Development_ </span> .
-* Specify Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
-* Specify Application URL — specify in a field an HTTP/HTTPS link to the application.
-* Specify Application startup file — specify as <span class="notranslate"> NAME.js file </span> .
+* Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
+* Application URL — specify in a field an HTTP/HTTPS link to the application.
+* Application startup file — specify as <span class="notranslate"> NAME.js file </span>.
+* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
 * Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
 * Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
 

@@ -1774,6 +1774,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 
 * [Excluding mount points](/cloudlinux_os_components/#excluding-mount-points)
 
+* [Shared memory (/dev/shm) isolation in CageFS](/cloudlinux_os_components/#shared-memory-dev-shm-isolation-in-cagefs)
+
 
 #### File system templates
 
