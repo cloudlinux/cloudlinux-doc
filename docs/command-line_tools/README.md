@@ -1802,7 +1802,7 @@ To start all users CLI commands use <span class="notranslate">`cagefs_enter`</sp
     <div class="notranslate">
     
     ```
-    cloudlinux-selector (start | restart | stop | destroy) [--json] --interpreter python  [--user <str> | --domain <str>] --app-root <str>
+    cloudlinux-selector (start | restart | stop | destroy) [--json] --interpreter python [--user <str> | --domain <str>] --app-root <str>
     ```
     </div>
 
@@ -1812,6 +1812,28 @@ To start all users CLI commands use <span class="notranslate">`cagefs_enter`</sp
     
     ```
     cloudlinux-selector start --json --interpreter python --user user1 --app-root my_apps/app1
+    ```
+    </div>
+
+* Set a custom path for Passenger log files:
+
+    **Example:**
+
+    <div class="notranslate">
+    
+    ```
+    cloudlinux-selector --json create --interpreter=python --version=3.3 --user=cltest1 --app-root=p_app2 --app-uri=p_app2_uri --passenger-log-file=/home/cltest1/passenger.log
+    ```
+    </div>
+
+* Remove a custom path for Passenger log files:
+  
+    **Example:**
+
+    <div class="notranslate">
+    
+    ```
+    cloudlinux-selector --json set --interpreter=python --user=cltest1 --app-root=p_app1 --passenger-log-file=""
     ```
     </div>
 
@@ -2383,6 +2405,24 @@ Change properties for an application
 
 ```
 cloudlinux-selector set [--json] --interpreter nodejs  [(--user <str> | --domain <str>)] --app-root <str> [--app-mode <str>] [--new-app-root <str>] [--new-domain <str>] [--new-app-uri <str>] [--new-version <str>] [--startup-file <str>] [--env-vars <json string>]
+```
+</div>
+
+**Examples:**
+
+This command sets a custom path for Passenger log files:
+<div class="notranslate">
+    
+```
+cloudlinux-selector --json create --interpreter=nodejs --user=cltest1 --app-root=p_app2 --app-uri=p_app2_uri --passenger-log-file=/home/cltest1/passenger.log
+```
+</div>
+
+This command removes a custom path for Passenger log files:
+<div class="notranslate">
+    
+```
+cloudlinux-selector --json set --interpreter=nodejs --user=cltest1 --app-root=p_app1 --passenger-log-file=""
 ```
 </div>
 
