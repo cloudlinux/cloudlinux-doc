@@ -7861,6 +7861,7 @@ SecureLinks On
 |**Syntax**| <span class="notranslate">`SkipErrors On`</span>|
 |**Default**| <span class="notranslate">`SkipErrors On`</span>|
 |**Context**| server config|
+|**<font color="Red">Status</font>**| <font color="Red">deprecated</font>|
 
 Prevents Apache from exiting if LVE is not available.
 
