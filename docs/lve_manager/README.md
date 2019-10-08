@@ -666,11 +666,11 @@ There are several columns in the list:
 
 #### How to manage an application
 
-#### **Create application**
+#### Create application
 
 1. Click <span class="notranslate">_Create Application_</span> to create an application. The Create Application tab opens.
 
-    ![](/images/PythonCreateApp.png)
+    ![](/images/PythonCreateApp1.png)
 
 2. Specify the following:
     * <span class="notranslate">Python version</span> — select from the dropdown (required);
@@ -678,6 +678,7 @@ There are several columns in the list:
     * <span class="notranslate">Application URL</span> —  HTTP/HTTPS link to your application (optional);
     * <span class="notranslate">Application startup file</span> — the file where WSGI callable object is located. It is required for application to run. Default is <span class="notranslate">`passenger_wsgi.py`</span>;
     * Application Entry point — WSGI callable object for your application (optional). Default is <span class="notranslate">`application`</span>;
+    * <span class="notranslate">Passenger log file</span> — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector utility](/command-line_tools/#new-python-selector)).
 3. Optionally, add environment variable. To do so, click <span class="notranslate">_Add Variable_</span> and specify variable name and value, then click the <span class="notranslate">_Done_</span> or <span class="notranslate">_Cancel_</span> to close an adding form.
 
 To delete or edit environment variable, click <span class="notranslate">_Bin_</span> or <span class="notranslate">_Pencil_</span> for the required variable.
