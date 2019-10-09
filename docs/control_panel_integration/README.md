@@ -4,6 +4,24 @@
 We encourage you to create a pull request with your feedback at the bottom of the page.
 :::
 
+## Introduction
+
+There are several possible ways of integration with CloudLinux OS:
+
+* **Complete integration using new API** - exactly what is described in this document. This way a panel vendor will get all CloudLinux OS features (current and future) and maximum support. It’s recommended.
+* **Manually Ad-hoc** - using low-level CLI utils. It is not recommended. It’s kind of “do it yourself way” - a control panel might use low-level utils like `lvectl` to set limits directly to a raw LVE by ID and control everything (including edge-cases) in its own code. There are many downsides of such approach e.g. only a small number of features can be implemented this way and any new changes in CloudLinux will require more and more updates to the control panel code, and can possibly even introduce bugs, etc. And although this way looks easier at first, it will become more and more difficult to maintain it over time.
+* **Old API for CloudLinux OS limits** - described [here](/deprecated/#package-integration). It’s deprecated. It still works but will not get any updates.
+
+## New API in a nutshell
+
+The goal of the new API is to shift all complexity for controlling CloudLinux components from a control panel to the CloudLinux web UI and utils.
+Most of the integration is done within a few steps:
+1. A control panel vendor implements 7 simple scripts (any language) and specifies them in a special config file. All Cloudlinux OS components will look up and call them with some arguments to get all needed information from the control panel (e.g. users list, their hosting plans, domains, etc.)
+2. Control panel should call hooks described below in a response to Admin/Users actions (e.g. changing end-user’s domain, creating new end-user, etc.). CloudLinux utils will do their stuff to reconfigure itself according to these events. There is no need to worry about what exactly they do because it will be related only to CloudLinux components and control panel will not be affected.
+3. Configure the control panel and CageFS to work together by changing some configs.
+4. Optionally embed CloudLinux web UI into the control panel. It is highly recommended because it does all you may need. You can use PHP scripts to embed SPA application to the specially prepared pages (with your menus) for LVE Manager and Selectors.
+
+
 ## General
 
 To integrate CloudLinux into a control panel, you should implement the following interfaces required by the CloudLinux OS utilities:
@@ -11,34 +29,54 @@ To integrate CloudLinux into a control panel, you should implement the following
 * [CP Hooks Integration](/control_panel_integration/#control-panel-hooks-integration) — a set of the CloudLinux OS scripts/commands. Control panel calls this set in response to its internal events
 * [Web UI Integration(optional)](/control_panel_integration/#web-ui-integration) — various configuration parameters and scripts to embed interface SPA application into the control panel native interface. Optional, if CLI is enough
 * [CageFS Integration](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel) — some changes may be required in the config files to work and integrate with CageFS as well as additional support from a control panel
+* [CloudLinux kernel set-up](/control_panel_integration/#cloudlinux-kernel-set-up)
+
+Files related to integration (integration config file, CPAPI integration scripts and all their dependencies) as well as parent directories to place them (e.g. <span class="notranslate">`/opt/cpvendor/etc/`</span>) should be delivered/managed by the control panel vendor. They don't exist by default and should be created to activate integration mechanism. Most likely, they should be bundled with the control panel or installed with some CloudLinux support module (if CloudLinux support is not built-in).
 
 Configuration related to integration should be placed in a valid INI file (further “integration config file”):
+
+<div class="notranslate">
 
 ```
 -rw-r--r-- root root /opt/cpvendor/etc/integration.ini
 ```
-The panel vendor should deliver/update this file. All users (and in the CageFS too) should have read access to this file as some CPAPI methods have to work from end-users too.
+</div>
 
-We recommend to deliver a set of scripts for CPAPI and integration file in a separate RPM package. This can greatly simplify support for vendors as they will be able to release any updates and compatibility fixes separately from panel updates and use dependencies/conflicts management provided by a package manager.
+All users (and in CageFS too) should have read access to this file because some CPAPI methods have to work from end-user too. CloudLinux components only read this file and never write/create it.
 
-Assumed that this package contains the list of paths to the integration scripts (or to the one script if it deals with all `cpapi` commands).
+The control panel vendor decides where to put CPAPI scripts (CloudLinux utils will read path to scripts from the integration file) but we recommend to put them into <span class="notranslate">`/opt/cpvendor/bin/`</span> (should be created by the vendor first) because <span class="notranslate">`/opt/*`</span> is mounted to CageFS by default and the standard location will save some time during possible support incidents.
 
-#### **Example of the integration config**:
+We recommend to deliver a set of scripts for CPAPI and integration file as a separate RPM package. This can greatly simplify support for vendors as they will be able to release any updates and compatibility fixes separately from the panel updates and use dependencies/conflicts management provided by a package manager.
+
+Assumed that this package contains a list of paths to the integration scripts (or to the one script if it deals with all `cpapi` commands). You can specify default script arguments in the <span class="notranslate">`integration_scripts`</span> section, additional arguments like <span class="notranslate">`filter`</span> and <span class="notranslate">`--name`</span> will be automatically added after the defined ones.
+
+#### **Example of the integration config**
+
+<div class="notranslate">
 
 ```
 [integration_scripts]
 
-get_cp_name = /usr/bin/cl_panel_script some-command-to-get-cpname --any-args
-get_cp_description = /usr/bin/script_get_cp_description
-db_access = /usr/bin/cl_panel_script_db_access
+panel_info = /opt/cpvendor/bin/panel_info
+db_info = /opt/cpvendor/bin/db_info
+packages = /opt/cpvendor/bin/packages
+users = /opt/cpvendor/bin/users
+domains = /opt/cpvendor/bin/vendor_integration_script domains
+resellers = /opt/cpvendor/bin/vendor_integration_script resellers
+admins = /opt/cpvendor/bin/vendor_integration_script admins
+
 
 
 [lvemanager_config]
 ui_user_info = /panel/path/ui_user_info.sh
 base_path = /panel/path/lvemanager
-base_uri = /lvemanager
+
+run_service = 1
+service_port = 9000
 
 ```
+</div>
+
 ## Control panel API integration
 
 To integrate CPAPI, set the paths to the scripts in the integration file in the `integration_scripts` section (see example above.
@@ -59,13 +97,13 @@ You can use different scripts for different CPAPI methods or only one script and
 | | | | |
 |-|-|-|-|
 |Script name|Necessity|Accessed by|Must work inside CageFS also|
-|panel_info|Always|All UNIX users|+|
-|db_info|Only for LVE-Stats, otherwise optional|admins (UNIX users)|-|
-|packages|For limits functionality|admins (UNIX users)|-|
-|users|Always|admins (UNIX users)|-|
-|domains|Selectors, some UI features|All UNIX users|+|
-|resellers|Always|admins (UNIX users)|-|
-|admins|Always|admins (UNIX users)|-|
+|<span class="notranslate">[panel_info](/control_panel_integration/#panel-info)</span>|Always|All UNIX users|+|
+|<span class="notranslate">[db_info](/control_panel_integration/#db-info)</span>|Only for LVE-Stats, otherwise optional|admins (UNIX users)|-|
+|<span class="notranslate">[packages](/control_panel_integration/#packages)</span>|For limits functionality|admins (UNIX users)|-|
+|<span class="notranslate">[users](/control_panel_integration/#users)</span>|Always|admins (UNIX users)|-|
+|<span class="notranslate">[domains](/control_panel_integration/#domains)</span>|Selectors, some UI features|All UNIX users|+|
+|<span class="notranslate">[resellers](/control_panel_integration/#resellers)</span>|Always|admins (UNIX users)|-|
+|<span class="notranslate">[admins](/control_panel_integration/#admins)</span>|Always|admins (UNIX users)|-|
 
 ### Working with CPAPI & CageFS
 
@@ -73,7 +111,7 @@ Some integration scripts required to be called not only from root but from end-u
 * be available in CageFS
 * the script itself should be run in the real system via [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism
 
-You can find details on how to configure CageFS properly here:
+You can find more details on how to configure CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
@@ -83,6 +121,8 @@ A reply from any integration script should be a valid JSON and UTF-8 encoding is
 
 There are two expected formats of integration script replies. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
 
+<div class="notranslate">
+
 ```
 {
   "data": object or array,
@@ -91,12 +131,15 @@ There are two expected formats of integration script replies. In case of success
   }
 }
 ```
+</div>
 
 In case of error, the output should be one of the following.
 
 #### Internal errors
 
-In case when data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the return code is `1` and the output  is as follows:
+In case when data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the output is as follows:
+
+<div class="notranslate">
 
 ```
 {
@@ -107,6 +150,7 @@ In case when data is temporarily unavailable due to internal errors in the integ
   }
 }
 ```
+</div>
 
 **Data description**
 
@@ -117,7 +161,9 @@ In case when data is temporarily unavailable due to internal errors in the integ
 
 #### Restricted access
 
-In case when data is unavailable due to restricted access of a user that called the script, the return code is `2` and the output  is as follows: 
+In case when data is unavailable due to restricted access of a user that called the script, the output is as follows: 
+
+<div class="notranslate">
 
 ```
 {
@@ -128,6 +174,7 @@ In case when data is unavailable due to restricted access of a user that called 
   }
 }
 ```
+</div>
 
 **Data description**
 
@@ -136,13 +183,21 @@ In case when data is unavailable due to restricted access of a user that called 
 |Key|Nullable|Description|
 |message|False|Error message for an administrator printed by CloudLinux utility|
 
+
+:::tip Info
+This kind of error should be used in the case when a user is requesting data that he does not have access to.
+E.g., when a user named <span class="notranslate">`user1`</span> is running <span class="notranslate">`domains`</span> script with the argument <span class="notranslate">`--owner=user2`</span>, you must return this error.
+:::
+
 #### Error in arguments
 
 In case when known to be false arguments are passed to the utility, for example:
 * unknown argument
 * unknown fields in `--fields`
 
-The return code is `3` and the output is as follows:
+The output is as follows:
+
+<div class="notranslate">
 
 ```
 {
@@ -153,6 +208,7 @@ The return code is `3` and the output is as follows:
   }
 }
 ```
+</div>
 
 **Data description**
 
@@ -164,7 +220,9 @@ The return code is `3` and the output is as follows:
 
 #### Nonexistent entities
 
-In case when during data filtering the target entity doesn't exist in the control panel, the return code is `4` and the output is as follows:
+In case when during data filtering the target entity doesn't exist in the control panel, the output is as follows:
+
+<div class="notranslate">
 
 ```
 {
@@ -175,6 +233,12 @@ In case when during data filtering the target entity doesn't exist in the contro
   }
 }
 ```
+</div>
+
+:::tip Info
+This kind of error should be used only in the filtering case. In case when some script is called without filtering arguments and the control panel has no entities to return (e.g. domains) you should return an empty list/object.
+:::
+
 
 **Data description**
 
@@ -191,16 +255,21 @@ Returns the information about the control panel in the format specified.
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/panel_info
 ```
+</div>
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
 	"data": {
-		"name": "CentosWebPanel",
+		"name": "SomeCoolWebPanel",
 		"version": "1.0.1",
 		"user_login_url": "https://{domain}:1111/"
 	},
@@ -209,6 +278,7 @@ Returns the information about the control panel in the format specified.
 	}
 }
 ```
+</div>
 
 **Data description**
 
@@ -344,7 +414,7 @@ If a reseller or administrator except for the account in the control panel has U
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--owner, -o|False|Used for filtering. When the argument is set, output only this owner packages.|
+|--owner, -o|False|Used for filtering. When the argument is set, output only this owner users.|
 |--package-name|False|Used for filtering. Set the name of the package which users to output. Used ONLY in pair with `--package-owner`.|
 |--package-owner|False|Used in pair with package.name. Set the owner of the specified package.|
 |--username|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
@@ -425,7 +495,7 @@ The key is used to reduce the data size for the large systems. You can ignore th
 |owner|False|The name of the account owner in the control panel. The owner can be an administrator (in this case he should be included in the `admins()` output) or a reseller (in this case he should be included in the `resellers()` output).|
 |locale_code|True|The control panel locale selected by a user (the values are according to ISO 639-1). Used when sending lve-stats emails. If not selected, EN_us used.|
 |email|True|Email to send lve-stats notifications about hitting limits. If there is no email, should return null.|
-|domain|False|Main domain of user (used to display in lvemanager UI and create applications in selectors)|
+|domain|False|Main domain of user (used to display in LVE Manager UI and create applications in Selectors)|
 |package|True|Information about the package to which a user belongs to. If the user doesn’t belong to any package, should return null.|
 |package.name|False|The name of the package to which a user belongs to.|
 |package.owner|False|The owner of the package to which a user belongs to (reseller or administrator).|
@@ -436,7 +506,8 @@ The key is used to reduce the data size for the large systems. You can ignore th
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
 
 ::: warning WARNING
-To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS.
+To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS. When running this script as the user, you must limit answer scope to values, allowed for the user to view.
+E.g. if the control panel has two domains: <span class="notranslate">`user1.com`</span> and <span class="notranslate">`user2.com`</span>, and <span class="notranslate">`user1`</span> Unix user owns only one of them, you should not return second one even if <span class="notranslate">`--name`</span> argument is not set explicitly.
 :::
 
 **Usage example**
@@ -480,7 +551,7 @@ To make Python/Node.js/Ruby/PHP Selector workable, this script should be execute
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|name|False|Domain name (subdomains are acceptable)|
+|Dictionary (named array) key|False|Domain name (subdomains are acceptable)|
 |owner|False|UNIX user who is a domain owner|
 |document_root|False|Absolute path to the site root directory|
 |is_main|False|Is the domain the main domain for a user|
@@ -597,13 +668,16 @@ For CloudLinux proper operation, you should implement hooks mechanism. These hoo
 
 ### Managing administrators
 
-_Some control panels allow to create several administrator accounts, each of which has a system user who is used to work with the LVE Manager plugin. In this case, all administrator accounts should be added to the sudoers and clsupergid. To do so, you can use our user-friendly interface._
+::: tip Note
+Some control panels allow to create several administrator accounts, each of which has a system user who is used to work with the LVE Manager plugin. In this case, all administrator accounts should be added to the sudoers and clsupergid. To do so, you can use our user-friendly interface.
+:::
 
-::: tip
+::: tip Note
 If you don’t have several administrator accounts (or LVE Manager plugin always runs from the root) you don’t need to implement these hooks.
 :::
 
 After creating a new administrator, the control panel should call the following command:
+
 ```
 /usr/share/cloudlinux/hooks/post_modify_admin.py create --username admin
 ```
@@ -625,7 +699,7 @@ Before removing the administrator, the following command should be called by the
 
 ### Managing users
 
-To manage user limits properly, CloudLinux utilities need information about the following events occurred in the control panel:
+To manage user limits properly, CloudLinux utilities need information about the following events occurred in the control panel.
 
 After creating a new user, the following script should be called:
 ```
@@ -639,20 +713,28 @@ After creating a new user, the following script should be called:
 |--owner, -o |Yes | - |A name of the account owner. The owner can be an administrator or a reseller |
 
 After renaming a user (when a user name or a home directory was changed), the following script should be called:
+
+<div class="notranslate">
+
 ```
-/usr/share/cloudlinux/hooks/post_modify_user.py rename --old-username user --new-username newuser
+/usr/share/cloudlinux/hooks/post_modify_user.py modify -u user --new-username newuser
 ```
+</div>
 
 | | | | |
 |-|-|-|-|
 |Argument |Mandatory |Default |Description |
-|--old-username |Yes | - |The user name to be changed |
+|-u ,--username |Yes | - |The user name to be changed |
 |--new-username |Yes | - |A new user name |
 
 After moving the user to the new owner, the following command should be run:
+
+<div class="notranslate">
+
 ```
-/usr/share/cloudlinux/hooks/post_modify_user.py transit --new-owner new_owner
+/usr/share/cloudlinux/hooks/post_modify_user.py modify -u user --new-owner new_owner
 ```
+</div>
 
 | | | |
 |-|-|-|
@@ -682,16 +764,19 @@ After removing the user, you should call the following command:
 
 ### Managing domains
 
+We expect that all domain-related data is stored inside the user's home directory. If your control panel stores domain-related data outside the user's home directory and that data may be later changed, please contact us so we can add support for this to our integration mechanism.
+
 After renaming a domain (or any equivalent domain removal operation with transfer of all data to another domain), the following command should be run:
+
 ```
-/usr/share/cloudlinux/hooks/post_modify_domain.py rename -u user --old-domain old_domain --new-domain new_domain [--include-subdomains]
+/usr/share/cloudlinux/hooks/post_modify_domain.py modify -u user --domain old_domain --new-domain new_domain [--include-subdomains]
 ```
 
 | | | | |
 |-|-|-|-|
 |Argument |Mandatory |Default |Description |
 |--username, -u |Yes | - |The name of the new domain owner (should be the same as the name in /etc/passwd). |
-|--old-domain |Yes | - |The domain name to be changed |
+|--domain |Yes | - |The domain name to be changed |
 |--new-domain |Yes | - |A new domain name |
 |--include-subdomains |No |False |If set, all subdomains are renamed as well, i.e. when renaming domain.com → domain.eu the corresponding subdomain will be renamed as well test.domain.com → test.domain.eu.|
 
@@ -710,6 +795,8 @@ Used only in UI part of the LVE Manager and utilities.
     "userName": "user1",
     "userId": 1000,
     "userType": "user",
+    "baseUri": "/user2/lvemanager/",
+    "assetsUri": "/userdata/assets/lvemanager",
     "lang": "en",
     "userDomain": "current-user-domain.com"
 }
@@ -720,13 +807,15 @@ Used only in UI part of the LVE Manager and utilities.
 * **userType** - can have the following values: “user”, “reseller”, “admin”
 * **lang** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
 * **userDomain** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
+* **baseUri** - URI where LVE Manager files are available on the webserver
+* **assetsUri** - URI where assets files for LVE Manager are available on the webserver
 
 The following configuration file parameters are used to determine the location of the plugin UI part.
 
 * **base_path** - the path to copy file assets to make them available from the control panel. Optional if `/usr/share/l.v.e-manager/commons` and `/usr/share/l.v.e-manager/panelless-version/lvemanager` are available from the control panel and the paths to this directory in web server are set.
 Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
-
-* **base_uri** - the URI of LVE Manager files
+* **run_service** - enable LVE Manager web server. If it equals 1 then when installing or updating LVE Manager, we enable and run the web server with LVE Manager
+* **service_port** - a port used for running a web server for access LVE Manager without the control panel
 
 ## PHP-based integration of WEB UI with the control panel
 
