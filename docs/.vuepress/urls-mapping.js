@@ -2415,5 +2415,9 @@ module.exports = {
   "/ru/kernel_settings/#remounting-procfs-with-hidepid-option": "/ru/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option",
   "/ru/python_selector/#overview-and-requirements": "/ru/cloudlinux_os_components/#general-information-and-requirements-6",
   "/ru/php_selector/#php-selector-integration-with-cpanel’s-multiphp-manager": "/ru/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager",
-  "/ru/php_selector/#php-selector-integration-with-cpanel%E2%80%99s-multiphp-manager": "/ru/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager"
+  "/ru/php_selector/#php-selector-integration-with-cpanel%E2%80%99s-multiphp-manager": "/ru/cloudlinux_os_components/#php-selector-integration-with-cpanel’s-multiphp-manager",
+  "/lve_manager/#end-user": "/lve_manager/#python-selector-client-plugin",
+  "/ru/lve_manager/#end-user": "/ru/lve_manager/#python-selector-client-plugin",
+  "/lve_manager/#end-user-2": "/lve_manager/#node-js-selector-client-plugin",
+  "/ru/lve_manager/#end-user-2": "/ru/lve_manager/#node-js-selector-client-plugin"
 };
