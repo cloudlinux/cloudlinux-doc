@@ -50,7 +50,7 @@ We recommend to deliver a set of scripts for CPAPI and integration file as a sep
 
 Assumed that this package contains a list of paths to the integration scripts (or to the one script if it deals with all `cpapi` commands). You can specify default script arguments in the <span class="notranslate">`integration_scripts`</span> section, additional arguments like <span class="notranslate">`filter`</span> and <span class="notranslate">`--name`</span> will be automatically added after the defined ones.
 
-#### **Example of the integration config**
+#### Example of the integration config
 
 <div class="notranslate">
 
@@ -79,19 +79,19 @@ service_port = 9000
 
 ## Control panel API integration
 
-To integrate CPAPI, set the paths to the scripts in the integration file in the `integration_scripts` section (see example above.
+To integrate CPAPI, set the paths to the scripts in the integration file in the <span class="notranslate">`integration_scripts`</span> section (see example above.
 
 You can use different scripts for different CPAPI methods or only one script and call it with different arguments. The script is any executable file written in any programming language, that returns a valid JSON file of the specified format in response to arguments it is expected to be called.
 
 ### Integration scripts requirements
 
 * By default, integration scripts should run only from UNIX user with the same credentials as LVE Manager is run, unless otherwise stated in the script description.
-* Some scripts are run from both root and end-user. If the script is run from end-user it should return information related to this user only, filtering the irrelevant data for security/isolation purposes or return `PermissionDenied` if script is not intended to be run as this user at all.
+* Some scripts are run from both root and end-user. If the script is run from end-user it should return information related to this user only, filtering the irrelevant data for security/isolation purposes or return <span class="notranslate">`PermissionDenied`</span> if script is not intended to be run as this user at all.
 * Scripts run from the end-user should also work from inside CageFS. You can find details on how to implement this [here](/control_panel_integration/#working-with-cpapi-cagefs)
 
-#### **Legend**:
-* Necessity `always` means it’s required nearly by all CloudLinux code and should be implemented no matter what features you are interested in. Other methods might not be implemented and this will affect only some CloudLinux features leaving others to work fine.
-* `All UNIX users` means any Linux system account (from `/etc/passwd`) that is able to execute CloudLinux utilities directly or indirectly.
+#### Legend
+* Necessity <span class="notranslate">`always`</span> means it’s required nearly by all CloudLinux code and should be implemented no matter what features you are interested in. Other methods might not be implemented and this will affect only some CloudLinux features leaving others to work fine.
+* <span class="notranslate">`All UNIX users`</span> means any Linux system account (from <span class="notranslate">`/etc/passwd`</span>) that is able to execute CloudLinux utilities directly or indirectly.
 
 
 | | | | |
@@ -249,7 +249,7 @@ This kind of error should be used only in the filtering case. In case when some 
 
 ### The list of the integration scripts
 
-#### panel_info
+#### <span class="notranslate">panel_info</span>
 
 Returns the information about the control panel in the format specified.
 
@@ -286,11 +286,11 @@ Returns the information about the control panel in the format specified.
 |-|-|-|
 |Key|Nullable|Description|
 |name|False|Control panel name|
-|version|False|Control panel version|
-|user_login_url_template|True|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: `{domain}`. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:`“user_login_url_template”: “https://{domain}:2087/login”` CloudLinux utility automatically replaces `{domain}`, and the link will look like `https://domain.zone:2087/login`|
+|<span class="notranslate">version</span>|False|Control panel version|
+|<span class="notranslate">user_login_url_template</span>|True|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
 
 
-#### db_info
+#### <span class="notranslate">db_info</span>
 
 Returns the information about databases that are available to the control panel users and are managed by the control panel.
 
@@ -302,11 +302,16 @@ Integration script is optional, when there is no script, [lve-stats won’t coll
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/db_info
 ```
+</div>
 
 **Output**
+
+<div class="notranslate">
 
 ```
 {
@@ -335,38 +340,44 @@ Integration script is optional, when there is no script, [lve-stats won’t coll
   }
 }
 ```
+</div>
 
 **Data description**
 
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|mysql|True|Data section for the MySQL database. Used in lve-stats; if there is no data, snapshots of  SQL queries won’t be collected.|
-|mysql.access.login|False|User name to enter to the database to view a list of SQL queries that are executing at the moment.|
-|mysql.access.password|False|Open password.|
-|mysql.access.host|False|Host to access the database.|
-|mysql.access.port|False|Port to access the database.|
-|mysql.mapping|False|A mapping file where the key is the name of a UNIX user managed by the control panel and the value is a list of the corresponding database users.|
+|<span class="notranslate">mysql</span>|True|Data section for the MySQL database. Used in lve-stats; if there is no data, snapshots of  SQL queries won’t be collected.|
+|<span class="notranslate">mysql.access.login</span>|False|User name to enter to the database to view a list of SQL queries that are executing at the moment.|
+|<span class="notranslate">mysql.access.password</span>|False|Open password.|
+|<span class="notranslate">mysql.access.host</span>|False|Host to access the database.|
+|<span class="notranslate">mysql.access.port</span>|False|Port to access the database.|
+|<span class="notranslate">mysql.mapping</span>|False|A mapping file where the key is the name of a UNIX user managed by the control panel and the value is a list of the corresponding database users.|
 
 
-#### packages
+#### <span class="notranslate">packages</span>
 
 The package is an abstraction that represents a group of users that have the same default limits. 
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/packages [--owner=<owner>]
 ```
+</div>
 
 **Arguments**
 
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--owner, -o|False|Set the name of the packages' owner to output.|
+|<span class="notranslate">--owner, -o</span>|False|Set the name of the packages' owner to output.|
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
@@ -389,15 +400,16 @@ The package is an abstraction that represents a group of users that have the sam
   }
 }
 ```
+</div>
 
 **Data description**
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|name|False|Package name|
-|owner|False|Package’s owner name. The owner can be the administrator or reseller.|
+|<span class="notranslate">name</span>|False|Package name|
+|<span class="notranslate">owner</span>|False|Package’s owner name. The owner can be the administrator or reseller.|
 
-#### users
+#### <span class="notranslate">users</span>
 
 Returns information about UNIX users, created and managed by the control panel. You will be able to manage the limits of these users via LVE Manager.
 
@@ -405,25 +417,30 @@ If a reseller or administrator except for the account in the control panel has U
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/users [--owner=<string> | (--package-name=<string> & --package-owner=<string>) | --username=<string> | --unix-id=<int>] [--fields=id,username,package,...]
 ```
+</div>
 
 **Arguments**
 
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--owner, -o|False|Used for filtering. When the argument is set, output only this owner users.|
-|--package-name|False|Used for filtering. Set the name of the package which users to output. Used ONLY in pair with `--package-owner`.|
-|--package-owner|False|Used in pair with package.name. Set the owner of the specified package.|
-|--username|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
-|--unix-id|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
-|--fields|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.|
+|<span class="notranslate">--owner, -o</span>|False|Used for filtering. When the argument is set, output only this owner users.|
+|<span class="notranslate">--package-name</span>|False|Used for filtering. Set the name of the package which users to output. Used ONLY in pair with <span class="notranslate">`--package-owner`</span>.|
+|<span class="notranslate">--package-owner</span>|False|Used in pair with package.name. Set the owner of the specified package.|
+|<span class="notranslate">--username</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
+|<span class="notranslate">--unix-id</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
+|<span class="notranslate">--fields</span>|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.|
 
 The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux will work more slowly.
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
@@ -458,14 +475,20 @@ The key is used to reduce the data size for the large systems. You can ignore th
   }
 }
 ```
+</div>
 
 **Example to output specific data fields**
+
+<div class="notranslate">
 
 ```
 /scripts/users --filter=id,email
 ```
+</div>
 
 **Output**
+
+<div class="notranslate">
 
 ```
 {
@@ -484,24 +507,25 @@ The key is used to reduce the data size for the large systems. You can ignore th
   }
 }
 ```
+</div>
 
 **Data description**
 
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|id|False|ID of the UNIX account in the system.|
-|username|False|The name of the UNIX account in the system.|
-|owner|False|The name of the account owner in the control panel. The owner can be an administrator (in this case he should be included in the `admins()` output) or a reseller (in this case he should be included in the `resellers()` output).|
-|locale_code|True|The control panel locale selected by a user (the values are according to ISO 639-1). Used when sending lve-stats emails. If not selected, EN_us used.|
-|email|True|Email to send lve-stats notifications about hitting limits. If there is no email, should return null.|
-|domain|False|Main domain of user (used to display in LVE Manager UI and create applications in Selectors)|
-|package|True|Information about the package to which a user belongs to. If the user doesn’t belong to any package, should return null.|
-|package.name|False|The name of the package to which a user belongs to.|
-|package.owner|False|The owner of the package to which a user belongs to (reseller or administrator).|
+|<span class="notranslate">id</span>|False|ID of the UNIX account in the system.|
+|<span class="notranslate">username</span>|False|The name of the UNIX account in the system.|
+|<span class="notranslate">owner</span>|False|The name of the account owner in the control panel. The owner can be an administrator (in this case he should be included in the <span class="notranslate">`admins()`</span> output) or a reseller (in this case he should be included in the <span class="notranslate">`resellers()`</span> output).|
+|<span class="notranslate">locale_code</span>|True|The control panel locale selected by a user (the values are according to ISO 639-1). Used when sending lve-stats emails. If not selected, EN_us used.|
+|<span class="notranslate">email</span>|True|Email to send lve-stats notifications about hitting limits. If there is no email, should return null.|
+|<span class="notranslate">domain</span>|False|Main domain of user (used to display in LVE Manager UI and create applications in Selectors)|
+|<span class="notranslate">package</span>|True|Information about the package to which a user belongs to. If the user doesn’t belong to any package, should return null.|
+|<span class="notranslate">package.name</span>|False|The name of the package to which a user belongs to.|
+|<span class="notranslate">package.owner</span>|False|The owner of the package to which a user belongs to (reseller or administrator).|
 
 
-#### domains
+#### <span class="notranslate">domains</span>
 
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
 
@@ -512,19 +536,24 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/domains ([--owner=<unix_user>] | [--name=<name>])
 ```
+</div>
 
 **Arguments**
 
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--owner, -o|False|Used for filtering output; set a name of the owner whose domains to print|
-|--name, -n|False|Used for filtering output; set a name of the domain, to display information about it|
+|<span class="notranslate">--owner, -o</span>|False|Used for filtering output; set a name of the owner whose domains to print|
+|<span class="notranslate">--name, -n</span>|False|Used for filtering output; set a name of the domain, to display information about it|
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
@@ -545,6 +574,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
   }
 }
 ```
+</div>
 
 **Data description**
 
@@ -552,29 +582,34 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |-|-|-|
 |Key|Nullable|Description|
 |Dictionary (named array) key|False|Domain name (subdomains are acceptable)|
-|owner|False|UNIX user who is a domain owner|
-|document_root|False|Absolute path to the site root directory|
-|is_main|False|Is the domain the main domain for a user|
+|<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
+|<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
+|<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
 
-#### resellers
+#### <span class="notranslate">resellers</span>
 
 Gives information about resellers who can be users owners in the control panel. Resellers do not obligatory have their own same-name UNIX accounts in the system and could exist only as an account in the control panel.
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/resellers ([--id=<id>] | [--name=<name>])
 ```
+</div>
 
 **Arguments**
 
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--id|False|Used for filtering output; set a reseller ID to output information about it|
-|--name, -n|False|Used for filtering output; set a reseller name to output information about it|
+|<span class="notranslate">--id</span>|False|Used for filtering output; set a reseller ID to output information about it|
+|<span class="notranslate">--name, -n</span>|False|Used for filtering output; set a reseller name to output information about it|
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
@@ -591,19 +626,20 @@ Gives information about resellers who can be users owners in the control panel. 
   }
 }
 ```
+</div>
 
 **Data description**
 
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|name|False|Reseller name in the control panel; unique on the server, should not be the same as administrators names|
-|locale_code|True|Control panel locale selected by a reseller (according to ISO 639-1). Default is EN_us.|
-|id|True|Unique reseller ID in the system. From `MAX_UID` to `0xFFFFFFFF`, where `MAX_UID` is a value from `/etc/login.defs`. Required for the second level reseller limits. Set null if not needed.|
-|email|True|Reseller email to send notifications from lve-stats about reseller’s users limits hitting. If no email, output null.|
+|<span class="notranslate">name</span>|False|Reseller name in the control panel; unique on the server, should not be the same as administrators names|
+|<span class="notranslate">locale_code</span>|True|Control panel locale selected by a reseller (according to ISO 639-1). Default is EN_us.|
+|<span class="notranslate">id</span>|True|Unique reseller ID in the system. From <span class="notranslate">`MAX_UID`</span> to <span class="notranslate">`0xFFFFFFFF`</span>, where <span class="notranslate">`MAX_UID`</span> is a value from <span class="notranslate">`/etc/login.defs`</span>. Required for the second level reseller limits. Set null if not needed.|
+|<span class="notranslate">email</span>|True|Reseller email to send notifications from lve-stats about reseller’s users limits hitting. If no email, output null.|
 
 
-#### admins
+#### <span class="notranslate">admins</span>
 
 Gives information about panel’s administrators, output information about all panel’s administrators who:
 * could be (or actually are) the owners of the users, listed in users() 
@@ -612,19 +648,24 @@ Gives information about panel’s administrators, output information about all p
 
 **Usage example**
 
+<div class="notranslate">
+
 ```
 /scripts/admins ([--name=<string>] | [--is-main=<true|false>])
 ```
+</div>
 
 **Arguments**
 
 | | | |
 |-|-|-|
 |Key|Required|Description|
-|--name, -n|False|Used for filtering; set the administrator name to output information about it|
-|--is-main, -m|False|Used for filtering output to get the main and the alternative administrators of the control panel|
+|<span class="notranslate">--name, -n</span>|False|Used for filtering; set the administrator name to output information about it|
+|<span class="notranslate">--is-main, -m</span>|False|Used for filtering output to get the main and the alternative administrators of the control panel|
 
 **Output example**
+
+<div class="notranslate">
 
 ```
 {
@@ -649,17 +690,18 @@ Gives information about panel’s administrators, output information about all p
   }
 }
 ```
+</div>
 
 **Data description**
 
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|name|False|The name of the administrator in the control panel; unique, should not be the same as resellers’ names|
-|unix_user|True|The name of the UNIX account in the system; it corresponds to the administrator account in the control panel. If an administrator already has UNIX account, it is automatically added to the special group on the server using hook, so this administrator can enter to the LVE Manager and manage users limits. If an administrator doesn't have UNIX account and he can only own users, output null.|
-|locale_code|True|Control panel locale selected by the administrator (values are according to  ISO 639-1). Default is EN_us.|
-|email|True|Email to send notifications from lve-stats. If email is not set in the control panel, output null.|
-|is_main|False|Assumed that one of the control panel’s administrators is the main administrator. That particular administrator will receive server status notifications from lve-stats to his email.|
+|<span class="notranslate">name</span>|False|The name of the administrator in the control panel; unique, should not be the same as resellers’ names|
+|<span class="notranslate">unix_user</span>|True|The name of the UNIX account in the system; it corresponds to the administrator account in the control panel. If an administrator already has UNIX account, it is automatically added to the special group on the server using hook, so this administrator can enter to the LVE Manager and manage users limits. If an administrator doesn't have UNIX account and he can only own users, output null.|
+|<span class="notranslate">locale_code</span>|True|Control panel locale selected by the administrator (values are according to  ISO 639-1). Default is EN_us.|
+|<span class="notranslate">email</span>|True|Email to send notifications from lve-stats. If email is not set in the control panel, output null.|
+|<span class="notranslate">is_main</span>|False|Assumed that one of the control panel’s administrators is the main administrator. That particular administrator will receive server status notifications from lve-stats to his email.|
 
 
 ## Control panel hooks integration
@@ -678,39 +720,50 @@ If you don’t have several administrator accounts (or LVE Manager plugin always
 
 After creating a new administrator, the control panel should call the following command:
 
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/post_modify_admin.py create --username admin
 ```
+</div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|--name, -n | - |The name of the newly created administrator account |
+|<span class="notranslate">--name, -n</span>| - |The name of the newly created administrator account |
 
 Before removing the administrator, the following command should be called by the control panel:
+
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/pre_modify_admin.py delete --name admin
 ```
+</div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|--name, -n | - |The name of administrator account to be removed |
+|<span class="notranslate">--name, -n</span>| - |The name of administrator account to be removed |
 
 ### Managing users
 
 To manage user limits properly, CloudLinux utilities need information about the following events occurred in the control panel.
 
 After creating a new user, the following script should be called:
+
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/post_modify_user.py create --username user --owner owner
 ```
+</div>
 
 | | | | |
 |-|-|-|-|
 |Argument |Mandatory |Default |Description |
-|--username, -u |Yes | - |The name of administrator account to be removed |
-|--owner, -o |Yes | - |A name of the account owner. The owner can be an administrator or a reseller |
+|<span class="notranslate">--username, -u</span>|Yes | - |The name of administrator account to be removed |
+|<span class="notranslate">--owner, -o</span>|Yes | - |A name of the account owner. The owner can be an administrator or a reseller |
 
 After renaming a user (when a user name or a home directory was changed), the following script should be called:
 
@@ -724,8 +777,8 @@ After renaming a user (when a user name or a home directory was changed), the fo
 | | | | |
 |-|-|-|-|
 |Argument |Mandatory |Default |Description |
-|-u ,--username |Yes | - |The user name to be changed |
-|--new-username |Yes | - |A new user name |
+|<span class="notranslate">-u ,--username</span>|Yes | - |The user name to be changed |
+|<span class="notranslate">--new-username</span>|Yes | - |A new user name |
 
 After moving the user to the new owner, the following command should be run:
 
@@ -739,28 +792,36 @@ After moving the user to the new owner, the following command should be run:
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|--new-owner | - |The name of the new account owner. The owner can be an administrator or a reseller. |
-|--username, -u | - |The account name (should be the same as the name in /etc/passwd). |
+|<span class="notranslate">--new-owner</span>| - |The name of the new account owner. The owner can be an administrator or a reseller. |
+|<span class="notranslate">--username, -u</span>| - |The account name (should be the same as the name in /etc/passwd). |
 
 Before removing a user, the following command should be run:
+
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/pre_modify_user.py delete --username user
 ```
+</div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|--username, -u | - |The name of the account to be removed (should be the same as the name in /etc/passwd). |
+|<span class="notranslate">--username, -u</span>| - |The name of the account to be removed (should be the same as the name in /etc/passwd). |
 
 After removing the user, you should call the following command:
+
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/post_modify_user.py delete --username user
 ```
+</div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|--username, -u | - |The name of the removed account |
+|<span class="notranslate">--username, -u</span>| - |The name of the removed account |
 
 ### Managing domains
 
@@ -768,17 +829,20 @@ We expect that all domain-related data is stored inside the user's home director
 
 After renaming a domain (or any equivalent domain removal operation with transfer of all data to another domain), the following command should be run:
 
+<div class="notranslate">
+
 ```
 /usr/share/cloudlinux/hooks/post_modify_domain.py modify -u user --domain old_domain --new-domain new_domain [--include-subdomains]
 ```
+</div>
 
 | | | | |
 |-|-|-|-|
 |Argument |Mandatory |Default |Description |
-|--username, -u |Yes | - |The name of the new domain owner (should be the same as the name in /etc/passwd). |
-|--domain |Yes | - |The domain name to be changed |
-|--new-domain |Yes | - |A new domain name |
-|--include-subdomains |No |False |If set, all subdomains are renamed as well, i.e. when renaming domain.com → domain.eu the corresponding subdomain will be renamed as well test.domain.com → test.domain.eu.|
+|<span class="notranslate">--username, -u</span>|Yes | - |The name of the new domain owner (should be the same as the name in /etc/passwd). |
+|<span class="notranslate">--domain</span>|Yes | - |The domain name to be changed |
+|<span class="notranslate">--new-domain</span>|Yes | - |A new domain name |
+|<span class="notranslate">--include-subdomains</span>|No |False |If set, all subdomains are renamed as well, i.e. when renaming domain.com → domain.eu the corresponding subdomain will be renamed as well test.domain.com → test.domain.eu.|
 
 ## Web UI integration
 
@@ -789,6 +853,8 @@ Used only in UI part of the LVE Manager and utilities.
 
 * Input value (first positional argument) — the current authentication token, passed on plugin open (for example, <span class="notranslate">`open.php?token=hash`</span>)
 * Expected data format
+
+<div class="notranslate">
 
 ```
 {
@@ -801,28 +867,33 @@ Used only in UI part of the LVE Manager and utilities.
     "userDomain": "current-user-domain.com"
 }
 ```
+</div>
 
-* **userName** is used in queries to Selectors.
-* **userId** - system user ID if exist. May be used in future functions.
-* **userType** - can have the following values: “user”, “reseller”, “admin”
-* **lang** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
-* **userDomain** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
-* **baseUri** - URI where LVE Manager files are available on the webserver
-* **assetsUri** - URI where assets files for LVE Manager are available on the webserver
+* **<span class="notranslate">userName</span>** is used in queries to Selectors.
+* **<span class="notranslate">userId</span>** - system user ID if exist. May be used in future functions.
+* **<span class="notranslate">userType</span>** - can have the following values: “user”, “reseller”, “admin”
+* **<span class="notranslate">lang</span>** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
+* **<span class="notranslate">userDomain</span>** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
+* **<span class="notranslate">baseUri</span>** - URI where LVE Manager files are available on the webserver
+* **<span class="notranslate">assetsUri</span>** - URI where assets files for LVE Manager are available on the webserver
 
 The following configuration file parameters are used to determine the location of the plugin UI part.
 
-* **base_path** - the path to copy file assets to make them available from the control panel. Optional if `/usr/share/l.v.e-manager/commons` and `/usr/share/l.v.e-manager/panelless-version/lvemanager` are available from the control panel and the paths to this directory in web server are set.
+* **<span class="notranslate">base_path</span>** - the path to copy file assets to make them available from the control panel. Optional if <span class="notranslate">`/usr/share/l.v.e-manager/commons`</span> and <span class="notranslate">`/usr/share/l.v.e-manager/panelless-version/lvemanager`</span> are available from the control panel and the paths to this directory in web server are set.
 Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
-* **run_service** - enable LVE Manager web server. If it equals 1 then when installing or updating LVE Manager, we enable and run the web server with LVE Manager
-* **service_port** - a port used for running a web server for access LVE Manager without the control panel
+* **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it equals 1 then when installing or updating LVE Manager, we enable and run the web server with LVE Manager
+* **<span class="notranslate">service_port</span>** - a port used for running a web server for access LVE Manager without the control panel
 
 ## PHP-based integration of WEB UI with the control panel
 
 The first use case:
+
+<div class="notranslate">
+
 ```
 require_once('lvemanager/widget.php');
 ```
+</div>
 
 This script defines the type of user and displays icons to open plugins included in LVE Manager.
 You can customize your styles by copying the file content and setting your control panel styles.
@@ -831,6 +902,9 @@ In this case, all LVE Manager plugins will be opened in a new window.
 The second use case:
 
 Embedding the specific plugin into the control panel page.
+
+<div class="notranslate">
+
 ```
 <?php
 require_once('lvemanager/LveManager.php');
@@ -843,6 +917,7 @@ echo $manager->insertPanel();
 ?>
 </body></html>
 ```
+</div>
 
 Pass the plugin name to the class constructor to initialize the plugin (user name will be defined).
 At the time of the insertPanel method invocation, the SPA application with the specified Selector will be embedded.
@@ -863,18 +938,34 @@ CageFS documentation can be found here: [CageFS](/cloudlinux_os_components/#cage
 
 ### CageFS MIN_UID  
 
-CageFS has MIN_UID setting. Users with UIDs < MIN_UID will not be limited by CageFS. This setting is configured based on UID_MIN setting from `/etc/login.defs` file by default. So, typically MIN_UID is 500 on CloudLinux 6 and 1000 on CloudLinux 7. You can obtain current MIN_UID value by executing
+CageFS has MIN_UID setting. Users with UIDs < MIN_UID will not be limited by CageFS. This setting is configured based on UID_MIN setting from <span class="notranslate">`/etc/login.defs`</span> file by default. So, typically MIN_UID is 500 on CloudLinux 6 and 1000 on CloudLinux 7.
+
+You can obtain current MIN_UID value by executing the following command:
+
+<div class="notranslate">
+
 ```
 cagefsctl --get-min-uid`
 ```
-You can set MIN_UID by executing:
+</div>
+
+You can set MIN_UID by executing the following command:
+
+<div class="notranslate">
+
 ```
 cagefsctl --set-min-uid <value>
 ```
-For example, to set MIN_UID to 10000, you should execute
+</div>
+
+For example, to set MIN_UID to 10000, you should execute the following command:
+
+<div class="notranslate">
+
 ```
 cagefsctl --set-min-uid 10000
 ```
+</div>
 
 ### PAM configuration for CageFS
 
@@ -893,51 +984,81 @@ It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS
 You should apply CloudLinux patches to integrate CageFS with Apache. Details can be found here:
 [Integration of Apache modules with Control Panels](/control_panel_integration/#integration-of-apache-modules-with-control-panels)
 
-Note that it may be required to execute “cagefsctl --force-update” after rebuild of Apache in order to update CageFS.
+Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after rebuild of Apache in order to update CageFS.
 
 ### Running commands inside CageFS
 
 You may want to execute commands inside CageFS for security reasons. To do so, you can execute a command inside CageFS in the following way:
+
+<div class="notranslate">
+
 ```
 /bin/su -s /bin/bash -c “$COMMAND” - $USER
 /sbin/cagefs_enter_user $USER "$COMMAND"
 ```
+</div>
 
 The commands above require root privileges. You can use the following command when running as user:
+
+<div class="notranslate">
+
 ```
 /bin/cagefs_enter "$COMMAND"
 ```
+</div>
 
 ### Updating CageFS skeleton
 
-Updating CageFS skeleton is required after update of system RPM packages. It may be also required after update of hosting control panel itself. Execute
+Updating CageFS skeleton is required after update of the system RPM packages. It may be also required after update of hosting control panel itself.
+
+To update CageFS skeleton, execute the following command:
+
+<div class="notranslate">
+
 ```
 cagefsctl --force-update
 ```
+</div>
 
-in order to update CageFS skeleton.
 CageFS RPM package installs a daily cron job that updates CageFS skeleton
+
+<div class="notranslate">
+
 ```
 /etc/cron.d/cp-cagefs-cron
 ```
+</div>
+
 You can set update period for CageFS skeleton in days using
+
+<div class="notranslate">
+
 ```
 cagefsctl --set-update-period <days>
 ```
+</div>
 
 ### Setting up directories for PHP sessions
 
-Each user in CageFS has its own `/tmp` directory that is not visible for other users. PHP scripts save sessions in `/tmp` directory by default (when `session.save_path` directive is empty). However, you can set up a different location for PHP sessions specific to each PHP versions using CageFS per-user [mounts](/cloudlinux_os_components/#mount-points) like it is done for alt-php. Simply add a line like below to `/etc/cagefs/cagefs.mp`
+Each user in CageFS has its own <span class="notranslate">`/tmp`</span> directory that is not visible for other users. PHP scripts save sessions in <span class="notranslate">`/tmp`</span> directory by default (when <span class="notranslate">`session.save_path`</span> directive is empty). However, you can set up a different location for PHP sessions specific to each PHP versions using CageFS per-user [mounts](/cloudlinux_os_components/#mount-points) like it is done for alt-php. Simply add a line like below to <span class="notranslate">`/etc/cagefs/cagefs.mp`</span>
+
+<div class="notranslate">
+
 ```
 @/opt/alt/php54/var/lib/php/session,700
 ```
+</div>
 
 and then execute
+
+<div class="notranslate">
+
 ```
 cagefsctl --remount-all
 ```
+</div>
 
-to apply changes. After that, session files will be stored in `/opt/alt/php54/var/lib/php/session` inside user’s CageFS. In real file systems these files can be found inside `.cagefs` directory in user’s home directory. For above example, given that user’s home directory is `/home/user`, the files will reside in `/home/user/.cagefs/opt/alt/php54/var/lib/php/session` directory. TMP directory for the user will be located in `/home/user/.cagefs/tmp`. 
+to apply changes. After that, session files will be stored in <span class="notranslate">`/opt/alt/php54/var/lib/php/session`</span> inside user’s CageFS. In real file systems these files can be found inside `.cagefs` directory in user’s home directory. For above example, given that user’s home directory is <span class="notranslate">`/home/user`</span>, the files will reside in <span class="notranslate">`/home/user/.cagefs/opt/alt/php54/var/lib/php/session`</span> directory. TMP directory for the user will be located in <span class="notranslate">`/home/user/.cagefs/tmp`</span>. 
 Temporary files including php sessions in `/tmp` directories in CageFS are cleaned using `tmpwatch`. You can change the period of removing old temporary files or set up additional directories for cleaning according to the documentation: 
 [TMP directories](/cloudlinux_os_components/#tmp-directories).
 
@@ -953,17 +1074,20 @@ It is safe to enable an interactive shell (/bin/bash) for users when CageFS is e
 :::
 
 :::warning IMPORTANT
-Execute the post hook described in the link above after the account has been created completely. When the account is being transferred to another server or restored from backup, all files in user’s home directory should be written/restored completely BEFORE executing the post hooks, including files in `~/.cl.selector` directory. This is required to setup/restore PHP Selector settings for the user correctly. If PHP Selector settings were not restored correctly, you can recreate them by executing
+Execute the post hook described in the link above after the account has been created completely. When the account is being transferred to another server or restored from backup, all files in user’s home directory should be written/restored completely BEFORE executing the post hooks, including files in <span class="notranslate">`~/.cl.selector`</span> directory. This is required to setup/restore PHP Selector settings for the user correctly. If PHP Selector settings were not restored correctly, you can recreate them by executing
+
+<div class="notranslate">
 
 ```
 rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.selector
 rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.php.d
 /usr/sbin/cagefsctl --force-update-etc "$username"
 ```
+</div>
 :::
 
 :::warning IMPORTANT
-You should create `/etc/cagefs/enable.duplicate.uids` empty file when your control panel creates users with duplicate UIDs. This is required for CageFS to operate properly.
+You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. This is required for CageFS to operate properly.
 :::
 
 ### Modifying user accounts
@@ -972,10 +1096,14 @@ You should execute appropriate hook script when an account has been modified: [C
 
 ### Removing user accounts
 
-CageFS has userdel hook script `/usr/bin/userdel.cagefs`, that is configured in `/etc/login.defs` file:
+CageFS has <span class="notranslate">`userdel`</span> hook script <span class="notranslate">`/usr/bin/userdel.cagefs`</span>, that is configured in <span class="notranslate">`/etc/login.defs`</span> file:
+
+<div class="notranslate">
+
 ```
 USERDEL_CMD /usr/bin/userdel.cagefs
 ```
+</div>
 
 This script performs all needed actions when a user is being removed.
 Anyway, you should execute appropriate hook script when removing an account:
@@ -983,12 +1111,16 @@ Anyway, you should execute appropriate hook script when removing an account:
 
 ### Excluding users from CageFS
 
-If you need to exclude some system users from CageFS that are specific to your control panel, you can do this by creating a file (any name would work) inside `/etc/cagefs/exclude` folder, and list users that you would like to exclude from CageFS in that file (each user in separate line). Then execute
+If you need to exclude some system users from CageFS that are specific to your control panel, you can do this by creating a file (any name would work) inside <span class="notranslate">`/etc/cagefs/exclude`</span> folder, and list users that you would like to exclude from CageFS in that file (each user in separate line). Then execute
+
+<div class="notranslate">
+
 ```
 cagefsctl --user-status USER
 ```
+</div>
 
-to apply changes and check that the command shows _Disabled_:
+to apply changes and check that the command shows <span class="notranslate">_Disabled_</span>:
 [Excluding users](/cloudlinux_os_components/#excluding-users)
 
 ### How to add a file or a directory to CageFS
@@ -1032,7 +1164,7 @@ Please make sure that the mounted directory does not contain sensitive data.
 
 You can mount a directory from the real system to CageFS via <span class="notranslate">`/etc/cagefs/cagefs.mp`</span> config file.
 
-To apply changes of mount points in /etc/cagefs/cagefs.mp file you should execute the following command:
+To apply changes of mount points in <span class="notranslate">`/etc/cagefs/cagefs.mp`</span> file you should execute the following command:
 
 <div class="notranslate">
 
@@ -1045,7 +1177,7 @@ You can find more info [here](/cloudlinux_os_components/#mount-points).
 
 ### Users' home directory
 
-CageFS mounts users' home directories to CageFS automatically. Usually, there is no need to configure anything. However, if your control panel uses a custom path to users' home directories (for example `/home/$USER/data` instead of `/home/$USER`), then it may be necessary to configure Base Home Directory setting:
+CageFS mounts users' home directories to CageFS automatically. Usually, there is no need to configure anything. However, if your control panel uses a custom path to users' home directories (for example <span class="notranslate">`/home/$USER/data`</span> instead of <span class="notranslate">`/home/$USER`</span>), then it may be necessary to configure Base Home Directory setting:
 [Base Home Directory](/cloudlinux_os_components/#base-home-directory)
 
 The modes of mounting users' home directories into CageFS are described here: 
@@ -1089,10 +1221,14 @@ CloudLinux PHP Selector requires CageFS, so integration of CageFS must be comple
 
 If your control panel has some PHP version selector installed already, we suggest you not to enable CloudLinux PHP Selector for your users, so they will not be confused by two multiple PHP Selectors. However, if you want to use CloudLinux PHP Selector anyway, you can refer to the following article to configure loading of extensions for alt-php: [PHP extensions](/cloudlinux_os_components/#php-extensions)
 
-For proper operation of CloudLinux PHP Selector, you should specify location of native PHP binaries of your control panel in `/etc/cl.selector/native.conf`. Then execute
+For proper operation of CloudLinux PHP Selector, you should specify location of native PHP binaries of your control panel in <span class="notranslate">`/etc/cl.selector/native.conf`</span>. Then execute
+
+<div class="notranslate">
+
 ```
 cagefsctl --setup-cl-selector
 ```
+</div>
 
 to apply changes.
 More details: [Native PHP Configuration](/cloudlinux_os_components/#native-php-configuration)
@@ -1113,7 +1249,7 @@ RPMs of Apache provided by CloudLinux, if you are using:
 | | |
 |-|-|
 |httpd |httpd24-httpd |
-|then install:<br>- mod_lsapi<br>- mod_hostinglimits<br>- alt-mod-passenger |then install:<br>- httpd24-mod_lsapi<br>- httpd24-mod_hostinglimits<br>- httpd24-alt-mod-passenger|
+|then install:<br>`mod_lsapi`<br>`mod_hostinglimits`<br>`alt-mod-passenger` |then install:<br>`httpd24-mod_lsapi`<br>`httpd24-mod_hostinglimits`<br>`httpd24-alt-mod-passenger`|
 
 
 If you use custom Apache, follow this documentation on how to build a package for your Apache.
@@ -1122,18 +1258,29 @@ If you use custom Apache, follow this documentation on how to build a package fo
 
 
 1. Download alt-mod-passenger sources
+
+<div class="notranslate">
+
 ```
 yumdownloader --source alt-mod-passenger --enablerepo=*source
 ```
+</div>
 
 2. Rebuild the package with your Apache using rpmbuild
+
+<div class="notranslate">
+
 ```
 rpmbuild --rebuild alt-mod-passenger-ver.cloudlinux.src.rpm
 ```
+</div>
 
-3. Remove dependencies from httpd, apr, apr-util packages ( -devel packages as well) and set your Apache packages instead, in the alt-mod-passenger spec file. Also, set the path for the directory where your Apache configs are located with __apache_conf_dir in the spec file.
+3. Remove dependencies from `httpd`, `apr`, `apr-util` packages (`-devel` packages as well) and set your Apache packages instead, in the alt-mod-passenger spec file. Also, set the path for the directory where your Apache configs are located with <span class="notranslate">`__apache_conf_dir`</span> in the spec file.
 
 4. Rebuild the package again, this time you should get to the compilation stage. During compilation, you may encounter such errors:
+
+<div class="notranslate">
+
 ```
 * Checking for Apache 2 development headers...
      Found: no
@@ -1142,14 +1289,18 @@ rpmbuild --rebuild alt-mod-passenger-ver.cloudlinux.src.rpm
 * Checking for Apache Portable Runtime Utility (APU) development headers...
      Found: no
 ```
+</div>
 
-In this case, you should specify the paths of your custom Apache in  `alt-mod-passenger-5.3.7/utils/passenger` file. You need to add paths to binaries such as httpd, apu-1-config, and apxs. For example the following lines should be added before the passenger-install-apache2-module call:
+In this case, you should specify the paths of your custom Apache in <span class="notranslate">`alt-mod-passenger-5.3.7/utils/passenger`</span> file. You need to add paths to binaries such as `httpd`, `apu-1-config`, and `apxs`. For example the following lines should be added before the <span class="notranslate">`passenger-install-apache2-module`</span> call:
+
+<div class="notranslate">
 
 ```
 export APU_CONFIG="${PATH_IN_YOUR_SYSTEM}/bin/apu-1-config"
 export HTTPD="${PATH_IN_YOUR_SYSTEM}/sbin/httpd"
 export APXS2="${PATH_IN_YOUR_SYSTEM}/bin/apxs"
 ```
+</div>
 
 5. Rebuild the package again, if everything is set correctly, there shouldn't be any problems.
 
@@ -1158,24 +1309,39 @@ export APXS2="${PATH_IN_YOUR_SYSTEM}/bin/apxs"
 ### mod_hostinglimits
 
 1. Download mod_hostinglimits sources
+
+<div class="notranslate">
+
 ```
 yumdownloader --source mod_hostinglimits --enablerepo=*source
 ```
+</div>
 
 2. Rebuild the package with your Apache using rpmbuild
+
+<div class="notranslate">
+
 ```
 rpmbuild --rebuild mod_hostinglimits-ver.el7.cloudlinux.1.src.rpm
 ```
+</div>
 
-3. Remove dependencies such as httpd, ( -devel packages as well) and set your Apache packages instead, in the mod_hostinglimits spec file. Also, check the paths that lead to the “modules” or “conf.d” directories and change them if they are different on your system.
+3. Remove dependencies such as `httpd`, (`-devel` packages as well) and set your Apache packages instead, in the mod_hostinglimits spec file. Also, check the paths that lead to the <span class="notranslate">`modules`</span> or <span class="notranslate">`conf.d`</span> directories and change them if they are different on your system.
 
 4. Rebuild the package again, this time you should get to the compilation stage. During compilation, you may encounter the following errors:
+
+<div class="notranslate">
+
 ```
 -- Not Found Apache Bin Directory: APACHE2_2_HTTPD_BIN-NOTFOUND, APACHE2_2_HTTPD_MODULES-NOTFOUND
 -- Can't find Apache2.2: APACHE2_2_HTTPD_INCLUDE_DIR-NOTFOUND
 ```
+</div>
 
-In this case, you should specify the paths of your custom Apache in  `mod_hostinglimits-1.0/cmake/FindApacheForBuild.cmake` file. According to macros above, add the paths to the directory where httpd bin is located, to the dir where apache modules are located and to the dir where include files are located. It may look the following way:
+In this case, you should specify the paths of your custom Apache in <span class="notranslate">`mod_hostinglimits-1.0/cmake/FindApacheForBuild.cmake`</span> file. According to macros above, add the paths to the directory where httpd bin is located, to the dir where apache modules are located and to the dir where include files are located. It may look the following way:
+
+<div class="notranslate">
+
 ```
 FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR 
    NAMES 
@@ -1188,6 +1354,7 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
       /usr/local/apache/include/       # added line
 )
 ```
+</div>
 
 5. Rebuild the package again, if you set everything correctly, there shouldn't be any problems.
 
@@ -1196,63 +1363,106 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 ### mod_lsapi
 
 1. Install the packages needed to build mod_lsapi from the source
+
+<div class="notranslate">
+
 ```
 yum install -y rpm-build
 yum install -y liblsapi liblsapi-devel
 yum install -y autoconf cmake apr-devel apr-util-devel
 yum install -y python-lxml pytest python-mock
 ```
+</div>
 
 On CloudLinux 7 you also should install criu related packages
+
+<div class="notranslate">
+
 ```
 yum install -y criu-lve python-criu-lve criu-lve-devel crit-lve
 ```
+</div>
 
 2. Download mod_lsapi sources
+
+<div class="notranslate">
+
 ```
 yumdownloader --source mod_lsapi --enablerepo=*source
 ```
+</div>
 
 3. Rebuild the package with your Apache using rpmbuild
+
+<div class="notranslate">
+
 ```
 rpmbuild --rebuild mod_lsapi-ver.el7.cloudlinux.src.rpm
 ```
+</div>
 
-4. Remove building dependency from httpd-devel in the `mod_lsapi.spec` spec file located in `~/rpmbuild/SPECS/` directory.
+4. Remove building dependency from `httpd-devel` in the <span class="notranslate">`mod_lsapi.spec`</span> spec file located in the <span class="notranslate">`~/rpmbuild/SPECS/`</span> directory.
 
-5. Change the paths to copy `mod_lsapi.so` and `mod_lsapi.conf` in the %install section of the `mod_lsapi.spec` file. For example, if Apache root is `/usr/local/apache`, then modules directory and config files directory will be `/usr/local/apache/modules` and  `/usr/local/apache/conf.d` respectively. So for the config file you should substitute the following line in the _%install_ section:
+5. Change the paths to copy `mod_lsapi.so` and `mod_lsapi.conf` in the %install section of the `mod_lsapi.spec` file. For example, if Apache root is `/usr/local/apache`, then modules directory and config files directory will be <span class="notranslate">`/usr/local/apache/modules`</span> and <span class="notranslate">`/usr/local/apache/conf.d`</span> respectively. So for the config file you should substitute the following line in the <span class="notranslate">`%install`</span> section:
+
+<div class="notranslate">
+
 ```
 install -D -m 644 conf/mod_lsapi.conf $RPM_BUILD_ROOT%{g_path}/confs/lsapi.conf
 ```
+</div>
 
 with the following line:
+
+<div class="notranslate">
+
 ```
 install -D -m 644 conf/mod_lsapi.conf $RPM_BUILD_ROOT/usr/local/apache/conf/lsapi.conf
 ```
+</div>
 
-And, also, for the module you should substitute the following line in the _%install_ section:
+And, also, for the module you should substitute the following line in the <span class="notranslate">`%install`</span> section:
+
+<div class="notranslate">
+
 ```
 install -D -m 755 build/lib/mod_lsapi.so $RPM_BUILD_ROOT%{g_path}standard/mod_lsapi.so 
 ```
+</div>
 
 with the following line:
+
+<div class="notranslate">
+
 ```
 install -D -m 755 build/lib/mod_lsapi.so $RPM_BUILD_ROOT/usr/local/apache/modules/mod_lsapi.so
 ```
+</div>
 
-Also you should add mentions of both module and config files in the _%files_ section of mod_lsapi.spec. For example, for `/usr/local/apache` Apache root the following two lines  should be added:
+Also you should add mentions of both module and config files in the <span class="notranslate">`%files`</span> section of <span class="notranslate">`mod_lsapi.spec`</span>. For example, for <span class="notranslate">`/usr/local/apache`</span> Apache root the following two lines should be added:
+
+<div class="notranslate">
+
 ```
 %config /usr/local/apache/conf.d/lsapi.conf
 /usr/local/apache/modules/mod_lsapi.conf
 ```
+</div>
 
 6. Rebuild the package again, this time you should get to the compilation stage. During compilation, you may encounter some errors:
+
+<div class="notranslate">
+
 ```
 -- Not Found Apache Bin Directory: APACHE2_2_HTTPD_BIN-NOTFOUND, APACHE2_2_HTTPD_MODULES-NOTFOUND
 -- Can't find Apache2.2: APACHE2_2_HTTPD_INCLUDE_DIR-NOTFOUND
 ```
+</div>
 
-In this case, you should specify the paths of your custom Apache in  `mod_lsapi-1.1/cmake/FindApacheForBuild.cmake` file. According to macros above, add the paths to the directory where httpd binary is located, to the dir where apache modules are located and to the dir where include files are located. It may look a such way:
+In this case, you should specify the paths of your custom Apache in the <span class="notranslate">`mod_lsapi-1.1/cmake/FindApacheForBuild.cmake`</span> file. According to macros above, add the paths to the directory where httpd binary is located, to the dir where apache modules are located and to the dir where include files are located. It may look a such way:
+
+<div class="notranslate">
+
 ```
 FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR 
    NAMES 
@@ -1265,6 +1475,7 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
       /usr/local/apache/include/       # added line
 )
 ```
+</div>
 
 7. Rebuild the package again, if you set everything correctly, there shouldn't be any problems.
 
@@ -1274,51 +1485,67 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 ## MySQL Governor
 
 1. Install MySQL Governor
+
+<div class="notranslate">
+
 ```
 yum install governor-mysql
 ```
+</div>
 
-2. MySQL Governor supports only cl-MariaDB** or cl-MySQL** packages. Follow the documentation to figure out all supported versions. 
+2. MySQL Governor supports only `cl-MariaDB**` or `cl-MySQL**` packages. Follow the [documentation](/cloudlinux_os_components/#mysql-governor) to figure out all supported versions.
+
+<div class="notranslate">
+
 ```
 /usr/share/lve/dbgovernor/mysqlgovernor.py --mysql-version=mysqlXX
 ```
+</div>
 
 3. Backup your databases.
 
 4. Run the cl-MySQL/cl-MariaDB installation.
+
+<div class="notranslate">
+
 ```
 /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 ```
+</div>
 
-5. After installation, check that the database server is working properly. If you have any problems, contact support http://helpdesk.cloudlinux.com/
+5. After installation, check that the database server is working properly. If you have any problems, contact [support](http://helpdesk.cloudlinux.com/)
 
-6. Configure user mapping to the database. The mapping format is described in the following [section](/cloudlinux_os_components/#mapping-a-user-to-a-database). The control panel should automatically generate such mapping and write it to `/etc/container/dbuser-map`. Usually, it is enough to write a hook when adding, deleting or renaming a database for a user. The control panel should implement such a mechanism for MySQL Governor to operate properly. MySQL Governor automatically applies changes from the dbuser-map file every five minutes.
+6. Configure user mapping to the database. The mapping format is described in the following [section](/cloudlinux_os_components/#mapping-a-user-to-a-database). The control panel should automatically generate such mapping and write it to <span class="notranslate">`/etc/container/dbuser-map`</span>. Usually, it is enough to write a hook when adding, deleting or renaming a database for a user. The control panel should implement such a mechanism for MySQL Governor to operate properly. MySQL Governor automatically applies changes from the dbuser-map file every five minutes.
 
 7. MySQL Governor configuration can be found in the following [section](/cloudlinux_os_components/#configuration-3).
 
 8. MySQL Governor CLI tools description can be found in the following [section](/command-line_tools/#mysql-governor)
 
-9. After you've configured the mapping, use dbtop to see the current user load on the database (you'd need to make some database queries). 
+9. After you've configured the mapping, use `dbtop` to see the current user load on the database (you'd need to make some database queries).
+
+<div class="notranslate">
+
 ```
 dbtop
 ```
+</div>
 
 10. If the load appears in the dbtop output, then you have successfully configured MySQL Governor.
 
 ## CloudLinux LVE and CageFS patches
 
 :::tip Note
-If you are using Apache from the CloudLinux repository (such as httpd or httpd24-httpd), skip this chapter.
+If you are using Apache from the CloudLinux repository (such as httpd or httpd24-httpd), skip this section.
 :::
 
 If you use custom Apache, you need to apply patches so that the processes launched by the Apache are worked with LVE and CageFS properly. 
 Cloudlinux provides patches for the following packages: 
 
-*suphp
-*suexec
-*php-fpm
-*apr library
-*Apache mpm itk
+* `suphp`
+* `suexec`
+* `php-fpm`
+* `apr` library
+* `Apache mpm itk`
 
 First of all, download patches using the following link [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
@@ -1332,7 +1559,10 @@ To apply the patch, follow these steps.
 
 4. Recompile your project.
 
-Here's an example with apr library:
+Here's an example with `apr` library:
+
+<div class="notranslate">
+
 ```
 # ls 
 apr-1.4.8.tar.bz2  apr-2.4-httpd.2.patch
@@ -1347,20 +1577,31 @@ patching file threadproc/unix/proc.c
 Patch applied Successfully, recompile apr. 
 ```
 
+</div>
+
 If you build custom RPM packages, it might make sense to apply patches using spec file.
 
-In this case, add to the Source section (example for apr):
+In this case, add to the Source section (example for `apr`):
+
+<div class="notranslate">
+
 ```
 Source0: apr-1.4.8.tar.bz2
 Patch100: apr-2.4-httpd.2.patch
 ```
 
-Then  apply this patch in the _%setup_ section:
+</div>
+
+Then  apply this patch in the <span class="notranslate">`%setup`</span> section:
+
+<div class="notranslate">
+
 ```
 %prep
 %setup -q
 %patch100 -p3 -b .lve
 ```
+</div>
 
 If no errors appear during the build, the patch has been successfully applied.
 
@@ -1369,14 +1610,22 @@ If no errors appear during the build, the patch has been successfully applied.
 All versions of alt-php should work properly in any control panel.
 
 To install all PHP versions, run:
+
+<div class="notranslate">
+
 ```
 yum groupinstall alt-php
 ```
+</div>
 
 To install a particular version of PHP, run:
+
+<div class="notranslate">
+
 ```
 yum groupinstall alt-php{some_version}
 ```
+</div>
 
 For details, see [PHP Selector Installation and Update](/cloudlinux_os_components/#installation-and-update-4)
 
