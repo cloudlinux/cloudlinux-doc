@@ -1520,6 +1520,56 @@ The following actions are available:
 You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
 :::
 
+#### Ruby Selector client plugin
+
+End user interface allows end users to setup and manage Ruby for their web applications.
+
+Go to <span class="notranslate">_cPanel → Software Section → Setup Ruby App_</span>.
+
+![](/images/RubyClientPluginStart.png)
+
+Setup Ruby application page is displayed.
+
+![](/images/RubyClientPlugin1.png)
+
+Here you can do the following:
+
+* Setup a new application.
+* View/edit/restart/remove the existing application.
+
+#### PHP Selector client plugin
+
+End user interface allows end users to select and manage PHP extensions and options for the particular PHP version.
+
+Go to <span class="notranslate">_cPanel → Software Section → Select PHP Version_</span>.
+
+![](/images/PHPSelectorClientPlugin.png)
+
+PHP Extensions page opens.
+
+![](/images/PHPSelectorExtensions.png)
+
+Here you can choose extensions for the particular PHP version, the current PHP version and reset to default.
+
+To manage PHP options, click <span class="notranslate">_Switch to PHP options_</span>.
+
+![](/images/PHPSelectorOptions.png)
+
+* <span class="notranslate">`allow_url_fopen`</span>. Allows PHP file functions to retrieve data from remote locations over FTP or HTTP. This option is a great security risk, thus do not turn it on without necessity.
+* <span class="notranslate">`display_errors`</span>. Determines whether errors should be printed to the screen as part of the output or if they should not be shown to a user.
+* <span class="notranslate">`error_reporting`</span>. The error reporting level.
+* <span class="notranslate">`file_uploads`</span>. Allows uploading files over HTTP.
+* <span class="notranslate">`include_path`</span>. The list of directories where scripts look for files (similar to system's PATH variable). To separate directories, use a colon (`:`) For example: <span class="notranslate">`.:/dir/inc:/usr/lib/php`</span>
+* <span class="notranslate">`log_errors`</span>. Tells whether to log errors. By default, errors are logged in the server's error log. Use the error_log directive to specify the path to your own log file.
+* <span class="notranslate">`mail.force_extra_parameters`</span>. Additional parameters for the mail() function used to send mail. For example, to use your custom Sendmail configuration: <span class="notranslate">`-C /dir/conf.cf`</span>
+* <span class="notranslate">`max_execution_time`</span>. The maximum time in seconds a script is allowed to run before it is terminated.
+* <span class="notranslate">`max_input_time`</span>. The maximum time in seconds a script is allowed to parse input data.
+* <span class="notranslate">`memory_limit`</span>. The maximum amount of memory in bytes a script is allowed to allocate. Set the value to -1 to have no memory limit (not recommended). Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
+* <span class="notranslate">`open_basedir`</span>. The list of directories used to limit the files that can be opened by PHP. If the file is outside the specified directories, PHP scripts will refuse to open it. To separate directories, use a colon. For example: <span class="notranslate">`/dir/upload:/usr/tmp`</span>.
+* <span class="notranslate">`post_max_size`</span>. The maximum size in bytes of data that can be posted with the POST method. Typically, should be larger than <span class="notranslate">`upload_max_filesize`</span> and smaller than <span class="notranslate">`memory_limit`</span>. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 16M.
+* <span class="notranslate">`session.save_path`</span>. The directory where PHP writes session data (files). For example: <span class="notranslate">`/dir/tmp`</span>
+* <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
+* <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
 
 #### LVE Manager options
 
