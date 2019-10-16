@@ -6382,6 +6382,8 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_common_own_log](/cloudlinux_os_components/#lsapi-backend-common-own-log)
 * [lsapi_backend_coredump](/cloudlinux_os_components/#lsapi-backend-coredump)
 * [lsapi_backend_accept_notify](/cloudlinux_os_components/#lsapi-backend-accept-notify)
+* [lsapi_backend_pgrp_max_reqs](/cloudlinux_os_components/#lsapi-backend-pgrp-max-reqs)
+* [lsapi_backend_pgrp_max_crashes](/cloudlinux_os_components/#lsapi-backend-pgrp-max-crashes)
  
 [Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
 * [lsapi_with_connection_pool](/cloudlinux_os_components/#lsapi-with-connection-pool)
@@ -6680,6 +6682,28 @@ By default LSAPI application will not leave a core dump file when crashed. If yo
 
 **Description** :  
 Switch LSAPI_ACCEPT_NOTIFY mode for lsphp. This option can be used both in Global and VirtualHost scopes.This mode is incompatible with PHP 4.4.
+
+---
+
+#### **lsapi_backend_pgrp_max_reqs**
+
+**Syntax** : lsapi_backend_prgrp_max_reqs [number]  
+**Default** : lsapi_backend_max_reqs 0  
+**Context** : httpd.conf, virtualhost  
+
+**Description** :  
+Controls how many requests a control process will process before it exits. Should be more or equal to 0. In the case of wrong format, a default value will be used. Optional, the default value is 0, which means an unlimited number of requests.
+
+---
+
+#### **lsapi_backend_pgrp_max_crashes**
+
+**Syntax** : lsapi_backend_prgrp_max_crashes [number]  
+**Default** : lsapi_backend_max_crashes 0  
+**Context** : httpd.conf, virtualhost
+
+**Description** :  
+Controls how many crashes of its worker processes a control process will detect before it exits. Should be more or equal to 0. In the case of wrong format, a default value will be used. Optional, the default value is 0, which means an unlimited number of crashes.
 
 ---
 
