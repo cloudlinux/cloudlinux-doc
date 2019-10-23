@@ -732,19 +732,19 @@ After creating a new administrator, the control panel should call the following 
 |Argument |Default |Description |
 |<span class="notranslate">--name, -n</span>| - |The name of the newly created administrator account |
 
-Before removing the administrator, the following command should be called by the control panel:
+After removing the administrator, the following command should be called by the control panel:
 
 <div class="notranslate">
 
 ```
-/usr/share/cloudlinux/hooks/pre_modify_admin.py delete --name admin
+/usr/share/cloudlinux/hooks/post_modify_admin.py delete --name admin
 ```
 </div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|<span class="notranslate">--name, -n</span>| - |The name of administrator account to be removed |
+|<span class="notranslate">--name, -n</span>| - |The name of removed UNIX user of administrator |
 
 ### Managing users
 
