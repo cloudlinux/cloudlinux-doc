@@ -515,7 +515,7 @@ Please keep in mind, that current implementation implies that one process is wri
 Using this options is dangerous, and might cause problems with <span class="notranslate">CloudLinux File Change API.</span>
 :::
 
-The kernel exposes the functionality to folder.
+The kernel exposes the functionality to /proc/sys/fs/datacycle/ folder.
 
 1. <span class="notranslate"> **enable** </span> - enable/disable the functionality. Write 1 to this file to enable, 0 to disable. If disabled, no events are coming to events file.
 
