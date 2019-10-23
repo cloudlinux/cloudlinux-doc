@@ -2044,7 +2044,7 @@ cagefsctl --remount-all
 
 After that each subdirectory of <span class="notranslate"> _/home/httpd/fcgi-bin_ </span> will be mounted for appropriate user in CageFS: <span class="notranslate"> _/home/httpd/fcgi-bin/user1_ </span> will be mounted for <span class="notranslate"> user1 </span> and <span class="notranslate"> _/home/httpd/fcgi-bin/user2_ </span> will be mounted for <span class="notranslate"> user2 </span> .
 
-#### **Mounting user’s home directory inside CageFS**
+#### **Mounting users home directory inside CageFS**
 
 
 CageFS 6.1-1 (and later) has improved mounting user’s home directory that is applied for users with home directories like <span class="notranslate"> _/home/user_ or _/homeN/user_ </span> (where <span class="notranslate"> N </span> = 0,1,..9).
