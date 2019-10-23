@@ -2419,5 +2419,7 @@ module.exports = {
   "/lve_manager/#end-user": "/lve_manager/#python-selector-client-plugin",
   "/ru/lve_manager/#end-user": "/ru/lve_manager/#python-selector-client-plugin",
   "/lve_manager/#end-user-2": "/lve_manager/#node-js-selector-client-plugin",
-  "/ru/lve_manager/#end-user-2": "/ru/lve_manager/#node-js-selector-client-plugin"
+  "/ru/lve_manager/#end-user-2": "/ru/lve_manager/#node-js-selector-client-plugin",
+  "/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs": "/cloudlinux_os_components/#mounting-user’s-home-directory-inside-cagefs",
+  "/ru/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs": "/ru/cloudlinux_os_components/#mounting-user’s-home-directory-inside-cagefs"
 };
