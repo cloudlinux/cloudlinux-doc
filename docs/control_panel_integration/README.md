@@ -1,4 +1,4 @@
-# Control panel integration (Draft)
+# Control panel integration
 
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
