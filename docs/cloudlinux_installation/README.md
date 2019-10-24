@@ -75,9 +75,7 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 * Installs mod_hostinglimits apache module:
   * RPM install for Plesk, ISPManager & InterWorx;
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
-  * EasyApache rebuild for cPanel;
   * custombuild for DirectAdmin.
-
 
 Script for converting back:
 
