@@ -2523,30 +2523,32 @@ $ cagefsctl --tmpwatch
 ```
 </div>
 
-The following path will be cleaned as well:
+The following paths will be cleaned as well:
 
-<span class="notranslate"> _/var/cache/php-eaccelerator_   </span> (actual location <span class="notranslate"> _$USER_HOME/.cagefs/var/cache/php-eaccelerator_ </span> )
+* <span class="notranslate">`/var/cache/php-eaccelerator`</span> (actual location <span class="notranslate">`$USER_HOME/.cagefs/var/cache/php-eaccelerator`</span>)
+* <span class="notranslate">`/opt/alt/phpNN/var/lib/php/session`</span> (actual location <span class="notranslate">`$USER_HOME/.cagefs/opt/alt/phpNN/var/lib/php/session`</span>), where NN corresponds to Alt-PHP version.
 
-You can configure <span class="notranslate"> tmpwatch </span> to clean custom directories inside <span class="notranslate"> CageFS </span> .
 
-Create <span class="notranslate"> _/etc/cagefs/cagefs.ini_ </span> configuration file and specify <span class="notranslate"> _tmpwatch_dirs_ </span> directive as follows:
+You can configure <span class="notranslate">`tmpwatch`</span> to clean custom directories inside <span class="notranslate"> CageFS</span>.
 
-<span class="notranslate"> _tmpwatch_dirs=/dir1,/dir2_ </span>
+Create <span class="notranslate">`/etc/cagefs/cagefs.ini`</span> configuration file and specify <span class="notranslate">`tmpwatch_dirs`</span> directive as follows:
 
-After that directories <span class="notranslate"> _/dir1_ </span> and <span class="notranslate"> _/dir2_ </span> inside CageFS  will be cleaned automatically.
+<span class="notranslate">`tmpwatch_dirs=/dir1,/dir2`</span>
 
-Note that actual location of those directories in real file system is <span class="notranslate"> _$USER_HOME/.cagefs/dir1_ </span> and <span class="notranslate"> _$USER_HOME/.cagefs/dir2_ </span> .
+After that directories <span class="notranslate">`/dir1`</span> and <span class="notranslate">`/dir2`</span> inside CageFS  will be cleaned automatically.
+
+Note that actual location of those directories in real file system is <span class="notranslate">`$USER_HOME/.cagefs/dir1`</span> and <span class="notranslate">`$USER_HOME/.cagefs/dir2`</span>.
 
 **Cleanup PHP sessions**
 
-For cPanel servers, CageFS version 6.0-42 or higher performs cleaning of PHP sessions based on <span class="notranslate"> _session.gc_maxlifetime_ </span> and <span class="notranslate"> _session.save_path_ </span> directives specified in proper <span class="notranslate"> _php.ini_ </span> files.
+For cPanel servers, CageFS version 6.0-42 or higher performs cleaning of PHP sessions based on <span class="notranslate">`session.gc_maxlifetime`</span> and <span class="notranslate">`session.save_path`</span> directives specified in proper <span class="notranslate">`php.ini`</span> files.
 
-<span class="notranslate"> _session.gc_maxlifetime_ </span> directive default value is 1440 seconds. Those session files will be deleted, that were created or had metadata (ctime) changes more time ago than it is specified in <span class="notranslate"> _session.gc_maxlifetime_ .  </span>
+<span class="notranslate">`session.gc_maxlifetime`</span> directive default value is 1440 seconds. Those session files will be deleted, that were created or had metadata (ctime) changes more time ago than it is specified in <span class="notranslate">`session.gc_maxlifetime`</span>.
 
-For <span class="notranslate"> Alt-PHP </span> versions <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/tmp_ </span> .
+For <span class="notranslate"> Alt-PHP </span> versions <span class="notranslate">`session.save_path`</span> value is normally <span class="notranslate">`/tmp`</span>.
 
 ::: tip Note
-For new installations of Alt-PHP packages, <span class="notranslate"> session.save_path will be changed from /tmp to /opt/alt/phpNN/var/lib/php/session, </span> where NN corresponds to Alt-PHP version.
+For new installations of Alt-PHP packages, <span class="notranslate">`session.save_path`</span> will be changed from `/tmp` to <span class="notranslate">`/opt/alt/phpNN/var/lib/php/session`</span>, where NN corresponds to Alt-PHP version.
 :::
 
 This applies to the following <span class="notranslate"> Alt-PHP </span> versions (or later):
