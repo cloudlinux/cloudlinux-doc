@@ -3035,15 +3035,6 @@ The following checkers are available in <span class="notranslate">**lve-utils >=
 Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#limits-validation).
- 
-
-13. <span class="notranslate">`--check-rpmdb`</span>
-
-Checks the RPM database integrity.
-
-Check that rpm database is operable and utils using it (e.g. yum) can work properly.
-
-To start all available checkers at once, the keys <span class="notranslate">`-a | --all`</span> are used. This does not include Check compatibility for PHP Selector, it must be started separately with <span class="notranslate">`--check-phpselector`</span> key.
 
 
 ### cloudlinux-config
