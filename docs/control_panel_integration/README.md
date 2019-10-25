@@ -79,7 +79,7 @@ service_port = 9000
 
 ## Control panel API integration
 
-To integrate CPAPI, set the paths to the scripts in the integration file in the <span class="notranslate">`integration_scripts`</span> section (see example above.
+To integrate CPAPI, set the paths to the scripts in the integration file in the <span class="notranslate">`integration_scripts`</span> section (see example above).
 
 You can use different scripts for different CPAPI methods or only one script and call it with different arguments. The script is any executable file written in any programming language, that returns a valid JSON file of the specified format in response to arguments it is expected to be called.
 
