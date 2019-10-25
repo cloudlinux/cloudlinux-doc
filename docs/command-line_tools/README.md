@@ -3040,6 +3040,12 @@ Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#limits-validation).
 
+13. <span class="notranslate">`--check-rpmdb`</span>
+
+:::warning Warning
+This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can in some cases hang up during `rpmdb` check, which can brake access to the database for `rpm/yum` utilities.
+:::
+
 
 ### cloudlinux-config
 
