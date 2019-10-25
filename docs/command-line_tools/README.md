@@ -2612,7 +2612,11 @@ The script will install the following to the server:
 1. Register server with CLN.
 2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
 3. It will attempt to detect control panel and do the following actions:
-*  _For cPanel & DirectAdmin_:
+*  _For cPanel_:
+   * install mod_hostinglimits;
+   * install LVE Manager.
+
+*  _For DirectAdmin_:
    * recompile Apache to install mod_hostinglimits;
    * install LVE Manager.
 
