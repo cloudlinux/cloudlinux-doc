@@ -2419,5 +2419,6 @@ module.exports = {
   "/lve_manager/#end-user": "/lve_manager/#python-selector-client-plugin",
   "/ru/lve_manager/#end-user": "/ru/lve_manager/#python-selector-client-plugin",
   "/lve_manager/#end-user-2": "/lve_manager/#node-js-selector-client-plugin",
-  "/ru/lve_manager/#end-user-2": "/ru/lve_manager/#node-js-selector-client-plugin"
+  "/ru/lve_manager/#end-user-2": "/ru/lve_manager/#node-js-selector-client-plugin",
+  "/cldiag.html#check_phpselector": "/command-line_tools/#cldiag"
 };

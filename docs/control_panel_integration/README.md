@@ -1,4 +1,4 @@
-# Control panel integration (Draft)
+# Control panel integration
 
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
@@ -79,7 +79,7 @@ service_port = 9000
 
 ## Control panel API integration
 
-To integrate CPAPI, set the paths to the scripts in the integration file in the <span class="notranslate">`integration_scripts`</span> section (see example above.
+To integrate CPAPI, set the paths to the scripts in the integration file in the <span class="notranslate">`integration_scripts`</span> section (see example above).
 
 You can use different scripts for different CPAPI methods or only one script and call it with different arguments. The script is any executable file written in any programming language, that returns a valid JSON file of the specified format in response to arguments it is expected to be called.
 
@@ -732,19 +732,19 @@ After creating a new administrator, the control panel should call the following 
 |Argument |Default |Description |
 |<span class="notranslate">--name, -n</span>| - |The name of the newly created administrator account |
 
-Before removing the administrator, the following command should be called by the control panel:
+After removing the administrator, the following command should be called by the control panel:
 
 <div class="notranslate">
 
 ```
-/usr/share/cloudlinux/hooks/pre_modify_admin.py delete --name admin
+/usr/share/cloudlinux/hooks/post_modify_admin.py delete --name admin
 ```
 </div>
 
 | | | |
 |-|-|-|
 |Argument |Default |Description |
-|<span class="notranslate">--name, -n</span>| - |The name of administrator account to be removed |
+|<span class="notranslate">--name, -n</span>| - |The name of removed UNIX user of administrator |
 
 ### Managing users
 
