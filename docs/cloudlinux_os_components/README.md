@@ -3925,7 +3925,7 @@ You can find more info on ' <span class="notranslate"> Feature Manager </span> '
 
 Once <span class="notranslate"> PHP Selector </span> is enabled, you can find it in the <span class="notranslate"> Feature Manager </span> . Disabling it in <span class="notranslate"> Feature Manager </span> , will remove the icon for users that are using that particular <span class="notranslate"> 'Feature List' </span>
 
-![](/images/screen1-phpselector-featuremanager.png)
+<img src="/images/screen1-phpselector-featuremanager.png" width="478" height="575" />
 
 
 #### PHP extensions
