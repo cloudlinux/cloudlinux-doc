@@ -2205,7 +2205,7 @@ to prevent symlink from being removed.
 #### PAM configuration
 
 
-CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM enabled services. When installed, the module is automatically installed for following services:
+CageFS depends on <span class="notranslate"> **pam_lve** </span> module for PAM enabled services. When installed, the module is automatically installed for following services:
 
 * sshd
 * crond
