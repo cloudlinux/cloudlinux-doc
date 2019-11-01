@@ -259,6 +259,10 @@ Main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</sp
   Possible values:
     * <span class="notranslate">`true`</span>
     * <span class="notranslate">`false`</span>
+* <span class="notranslate">`hide_lve_more_than_maxuid`</span> - disable displaying of lve ids more than max uid in resource usage.
+  Possible values:
+    * <span class="notranslate">`true`</span>
+    * <span class="notranslate">`false`</span>
 
 Configuration files for plugins are located in <span class="notranslate">`/etc/sysconfig/lvestats.config`</span> directory.
 
