@@ -115,11 +115,11 @@ You can find more details on how to configure CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
-### Expected structure of replies
+### Expected scripts responses
 
-A reply from any integration script should be a valid JSON and UTF-8 encoding is required.
+Any integration script should return a valid UTF-8 encoded JSON.
 
-There are two expected formats of integration script replies. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
+There are two expected formats of integration script responses. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
 
 <div class="notranslate">
 
@@ -133,11 +133,11 @@ There are two expected formats of integration script replies. In case of success
 ```
 </div>
 
-In case of error, the output should be one of the following.
+In case of error, the output should be one of the following: Internal errors, Restricted access, Error in arguments,  Nonexistent entities. 
 
 #### Internal errors
 
-In case when data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the output is as follows:
+When data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the output is as follows:
 
 <div class="notranslate">
 
@@ -161,7 +161,7 @@ In case when data is temporarily unavailable due to internal errors in the integ
 
 #### Restricted access
 
-In case when data is unavailable due to restricted access of a user that called the script, the output is as follows: 
+When data is unavailable due to restricted access of a user that called the script, the output is as follows: 
 
 <div class="notranslate">
 
@@ -191,7 +191,7 @@ E.g., when a user named <span class="notranslate">`user1`</span> is running <spa
 
 #### Error in arguments
 
-In case when known to be false arguments are passed to the utility, for example:
+When wrong arguments are passed to the utility, for example:
 * unknown argument
 * unknown fields in `--fields`
 
@@ -220,7 +220,7 @@ The output is as follows:
 
 #### Nonexistent entities
 
-In case when during data filtering the target entity doesn't exist in the control panel, the output is as follows:
+When during data filtering the target entity doesn't exist in the control panel, the output is as follows:
 
 <div class="notranslate">
 
