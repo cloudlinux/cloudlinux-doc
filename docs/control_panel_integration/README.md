@@ -706,7 +706,7 @@ Gives information about panel’s administrators, output information about all p
 
 ## Control panel hooks integration
 
-For CloudLinux proper operation, you should implement hooks mechanism. These hooks are called with the specified arguments in the proper time. All scripts should be executed by the control panel from the system root user.
+For proper CloudLinux operation, you should implement a hooks mechanism. Hooks are scripts that control panel invokes with the exact arguments at a specific time. The control panel is responsible for executing these scripts as a system root user.
 
 ### Managing administrators
 
