@@ -1233,7 +1233,7 @@ cagefsctl --setup-cl-selector
 to apply changes.
 More details: [Native PHP Configuration](/cloudlinux_os_components/#native-php-configuration)
 
-You can configure CloudLinux PHP Selector to allow your customers an ability to select any custom PHP version specific to your control panel. Here's how to do this:
+You can configure CloudLinux PHP Selector to allow your customers to select any custom PHP version specific to your control panel. Here's how to do this:
 [Roll your own PHP](/cloudlinux_os_components/#roll-your-own-php)
 
 Also, you can compile and add your own PHP extensions to CloudLinux PHP Selector:
@@ -1241,7 +1241,7 @@ Also, you can compile and add your own PHP extensions to CloudLinux PHP Selector
 
 ## Integration of Apache modules in control panels
 
-We provide control panels with the ability to build their own Apache packages with modules such as alt-mod-passenger, mod_lsapi, mod_hostinglimits. This is due to the fact that control panels often have own custom Apache. At the same time, the modules must be compiled with the version of Apache and APR libraries that control panels use. Therefore, if your control panel uses an Apache that is provided by CloudLinux OS, you can use native packages with modules. The following table represents the RPM package compatibility.
+We provide control panels with the ability to build their own Apache packages with modules such as alt-mod-passenger, mod_lsapi, mod_hostinglimits. This is due to the fact that control panels often have their own customly-built Apache. At the same time, the modules must be compiled with the version of Apache and APR libraries that control panels use. Therefore, if your control panel uses Apache that is provided by CloudLinux OS, you can use native packages with modules. The following table represents the RPM package compatibility.
 
 
 RPMs of Apache provided by CloudLinux, if you are using:
@@ -1521,7 +1521,7 @@ yum install governor-mysql
 
 8. MySQL Governor CLI tools description can be found in the following [section](/command-line_tools/#mysql-governor)
 
-9. After you've configured the mapping, use `dbtop` to see the current user load on the database (you'd need to make some database queries).
+9. Having configured the mapping use `dbtop` to see the current user load on the database (you'd need to make some database queries).
 
 <div class="notranslate">
 
@@ -1538,7 +1538,7 @@ dbtop
 If you are using Apache from the CloudLinux repository (such as httpd or httpd24-httpd), skip this section.
 :::
 
-If you use custom Apache, you need to apply patches so that the processes launched by the Apache are worked with LVE and CageFS properly. 
+If you use custom Apache, you need to apply patches so that the processes launched by the Apache are working with LVE and CageFS properly. 
 Cloudlinux provides patches for the following packages: 
 
 * `suphp`
@@ -1667,11 +1667,11 @@ If the [admins](/control_panel_integration/#admins) list script exists when inst
 
 CloudLinux kernels have symlink attacks protection. When this protection is enabled, the system does not allow users to create symlinks (and hard links) to non-existent/not their own files.
 
-For details see [here](/cloudlinux_os_kernel/#link-traversal-protection). Here you can find all protection mechanism parameters.
+[Here](/cloudlinux_os_kernel/#link-traversal-protection) you can find all protection mechanism parameters.
 
 See also: [the special module to protect web-server](/cloudlinux_os_kernel/#symlink-owner-match-protection).
 
-You can run <span class="notranslate">`cldiag`</span> utility with the <span class="notranslate">`--check-symlinkowngid`</span> parameter to check web-server protection mechanism proper set-up.
+You can run <span class="notranslate">`cldiag`</span> utility with the <span class="notranslate">`--check-symlinkowngid`</span> parameter to check whether your web-server protection mechanisms are correctly set-up.
 
 <div class="notranslate">
 
@@ -1694,11 +1694,11 @@ There are 0 errors found.
 
 #### How to enable symlink protection
 
-Set the <span class="notranslate">`symlinkown_gid`</span> parameter to the value of the GID group, which the web-server process has.
+Set the <span class="notranslate">`symlinkown_gid`</span> parameter to the value of the GID group of the web-server process.
 
 Before enabling symlink protection, ensure it does not break the control panel functionality.
 
-For example, if an unprivileged user is allowed to create symlinks or hard links to files or directories he doesn’t own then when enabling symlink traversal protection he will not be able to do it.
+For example, if an unprivileged user is allowed to create symlinks or hard links to files or directories he doesn’t own then when enabling symlink traversal protection he will not be able to do so.
 
 To allow an unprivileged user to create such symlink or hard link, a file/directory which symlink is referred to should have <span class="notranslate">`linksafe`</span> group.
 
@@ -1708,4 +1708,3 @@ Some of CloudLinux OS utilities (`cagefsctl`, `selectorctl`, `cloudlinux-selecto
 
 So they are subject to the disk quotas if any are set for the user. The utilities can override these quotas to avoid failures.
 See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel parameters controlling these permissions. This parameter is used only for XFS file system.
-
