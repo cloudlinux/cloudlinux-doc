@@ -1066,7 +1066,7 @@ Knowing the location where PHP sessions are stored (described above), you can al
 
 ### Creating new user account
 
-When user or admin account has been created, you should execute an appropriate hook script, so all needed actions are performed.
+When user or admin account has been created, you should execute an appropriate hook script.
 More about CloudLinux hooks subsystem: [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
 :::tip Note
@@ -1087,7 +1087,7 @@ rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.
 :::
 
 :::warning IMPORTANT
-You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. This is required for CageFS to operate properly.
+You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. It is required for CageFS to operate properly.
 :::
 
 ### Modifying user accounts
@@ -1105,7 +1105,7 @@ USERDEL_CMD /usr/bin/userdel.cagefs
 ```
 </div>
 
-This script performs all needed actions when a user is being removed.
+This script performs all necessary actions when a user is being removed.
 Anyway, you should execute appropriate hook script when removing an account:
 [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
@@ -1133,7 +1133,7 @@ There are two major ways to add files and directories to CageFS:
 
 #### Copy files and directories to CageFS
 
-In order to copy files and directories to CageFS, you can manually create a custom config file in the <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
+In order to copy files and directories to CageFS, you can manually create a custom config file in <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
 
 Also, you can add files and directories that belong to `rpm` package to CageFS as follows:
 
@@ -1142,7 +1142,7 @@ Also, you can add files and directories that belong to `rpm` package to CageFS a
 
 There is a daily cron job that copies new and removes unneeded files and directories, i.e. updates cagefs-skeleton.
 
-You should execute <span class="notranslate">`cagefsctl --force-update`</span> after each change of system configuration or after installing new software. Otherwise, CageFS will be updated for 24 hours by a daily cron job.
+You should execute <span class="notranslate">`cagefsctl --force-update`</span> after each change of system configuration or after installing new software. Otherwise, CageFS will only be updated every 24 hours by a daily cron job.
 
 The benefits of this approach:
 * users in CageFS cannot modify files in the real file system (for example, in case of wrong permissions), because files in cagefs-skeleton are the copies of files from the real file system (and not mounted to CageFS)
@@ -1152,12 +1152,12 @@ You can find more info [here](/cloudlinux_os_components/#file-system-templates).
 
 #### Mount an entire directory with needed files to CageFS
 
-The second way to add files and directories to CageFS is to mount the entire directory with needed files to CageFS.
+The second way to add files and directories to CageFS is to mount the entire directory containing the files to CageFS.
 
-This approach should be used for frequently updated files (like UNIX sockets) or for directories with a large number of files or with a big size of data.
+This approach should be used for frequently updated files (like UNIX sockets) or for directories with a large number of files or with files that occupy much disk space.
 
 The benefits of this approach:
-* no delay between update of the file in the real file system and update of the file in CageFS; when file or directory is changed in the real file system, then they will be changed in CageFS immediately
+* no delay between update of the file in the real file system and update of the file in CageFS; when file or directory is changed in the real file system they will be changed in CageFS immediately
 * data is mounted but not copied to CageFS, so this minimizes IO load while updating cagefs-skeleton
 
 Please make sure that the mounted directory does not contain sensitive data.
@@ -1185,22 +1185,22 @@ The modes of mounting users' home directories into CageFS are described here:
 
 ### Excluding files from CageFS
 
-CageFS has a default set of files and directories that are visible to users inside CageFS. If you wish to exclude some of these files or directories from CageFS, you can do this like described below:
+CageFS has a default set of files and directories that are visible to users inside CageFS. If you wish to exclude some of these files or directories from CageFS, you can do this as described below:
 [Excluding files](/cloudlinux_os_components/#excluding-files) 
 
 ### Executing commands outside CageFS via proxyexec
 
 SUID programs cannot run inside CageFS due to “nosuid” mounts. But you can give users in CageFS the ability to execute some specific commands outside CageFS via `proxyexec`.
 
-Typically, these commands are suid programs or other programs that cannot run inside CageFS (due to complex dependencies, for example). Examples are <span class="notranslate">`passwd`</span>, <span class="notranslate">`exim`</span> or <span class="notranslate">`sendmail`</span> commands.
+Typically, these commands are suid programs or other programs that cannot run inside CageFS (due to complex dependencies, for example). Examples of such programs are <span class="notranslate">`passwd`</span>, <span class="notranslate">`exim`</span> or <span class="notranslate">`sendmail`</span> commands.
 
-* Regular (not suid) commands will be executed as user inside the user’s LVE, but outside CageFS.
-* SUID commands will be executed in the user’s LVE outside CageFS with the effective UID set to the owner of the file being executed.
+* Regular (not suid) commands will be executed as user inside the user’s LVE, but outside of CageFS.
+* SUID commands will be executed in the user’s LVE outside of CageFS with the effective UID set to the owner of the file being executed.
 
 You can find more details [here](/cloudlinux_os_components/#executing-by-proxy).
 
 :::tip Note
-You should use this feature with caution because it gives users the ability to execute specified commands outside CageFS. SUID commands are extremely dangerous because they are executed not as a user, but as an owner of the file (typically root). You should give users the ability to execute safe commands only. These commands should not have known vulnerabilities.
+You should use this feature with caution because it gives users the ability to execute specified commands outside of CageFS. SUID commands are extremely dangerous because they are executed not as a user, but as an owner of the file (typically root). You should give users the ability to execute safe commands only. These commands should not have known vulnerabilities.
 You should check that users cannot use these commands to get sensitive information on a server. You can disable specific _dangerous_ options of programs executed via proxyexec (see below).
 :::
 
