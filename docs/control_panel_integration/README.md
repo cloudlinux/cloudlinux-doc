@@ -748,7 +748,7 @@ After removing the administrator, the following command should be called by the 
 
 ### Managing users
 
-To manage user limits properly, CloudLinux utilities need information about the following events occurred in the control panel.
+To manage user limits properly, CloudLinux utilities need information about the following control panel events.
 
 After creating a new user, the following script should be called:
 
