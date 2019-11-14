@@ -4549,7 +4549,7 @@ See also PHP Selector [CLI](/command-line_tools/#php-selector)
 
 ### Integration with control panels
 
-This is the list of commands that we use to integrate <span class="notranslate"> PHP Selector </span> with control panels. If you need to integrate <span class="notranslate"> PHP Selector </span> with a custom control panel, you might find all the commands here:
+This is the list of commands that we use to integrate <span class="notranslate">PHP Selector</span> with control panels.
 
 **PHP summary:**
 
