@@ -6400,6 +6400,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_criu_use_shm](/cloudlinux_os_components/#lsapi-criu-use-shm)
 * [lsapi_backend_semtimedwait](/cloudlinux_os_components/#lsapi-backend-semtimedwait)
 * [lsapi_reset_criu_on_apache_restart](/cloudlinux_os_components/#lsapi-reset-criu-on-apache-restart)
+* [lsapi_criu_debug](/cloudlinux_os_components/#lsapi-criu-debug)
 
 [PHP configuration management](/cloudlinux_os_components/#php-configuration-management):
 * [lsapi_process_phpini](/cloudlinux_os_components/#lsapi-process-phpini)
@@ -6822,6 +6823,17 @@ Use semaphore for checking when lsphp process will be started. Speed of start ls
 This option allows cleaning all CRIU images on Apache restart.  
 Setting lsapi_reset_criu_on_apache_restart to On means that on each Apache restart the CRIU images which are stored in directory specified by lsapi_criu_imgs_dir_path directive will be recreated on new request to domain(only after restart).  
 If this option set to Off then CRIU images won’t be recreated on Apache restart.
+
+----
+
+#### **lsapi_criu_debug**
+
+**Syntax**: lsapi_criu_debug On/Off  
+**Default**: lsapi_criu_debug Off  
+**Context**: httpd.conf, virtualhost  
+
+**Description** :  
+Enable/disable CRIU related debug logging.
 
 ----
 
