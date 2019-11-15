@@ -6925,7 +6925,7 @@ If lsapi_enable_user_ini option is set to On, then enable/disable processing .us
 **Context** : httpd.conf, .htaccess  
 
 **Description** :  
-If set to On, always keep backend's response status as mod_php do. If set to Off, response status can be overridden by Apache as suphp do (in case of call via ErrorDocument directive).
+If set to On, always keep backend's response status as mod_php does. If set to Off, response status can be overridden by Apache as suphp does (in case of call via ErrorDocument directive).
 
 ---
 
