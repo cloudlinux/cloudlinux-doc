@@ -973,7 +973,7 @@ CageFS is enabled for su, ssh and cron services by default.
 [PAM Configuration](/cloudlinux_os_components/#pam-configuration)
 
 Also you can enable CageFS for any service that uses PAM.
-{LVE PAM Module](/cloudlinux_os_components/#lve-pam-module)
+[LVE PAM Module](/cloudlinux_os_components/#lve-pam-module)
 
 :::tip
 It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS is enabled.
