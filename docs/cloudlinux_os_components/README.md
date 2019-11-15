@@ -25,14 +25,14 @@ See the comparison Table with types of limits.
 | |  |  | |
 |-|--|--|-|
 |**Limits** | **Reseller limits** | **Reseller’s end user limits** | **Hoster’s end user limits**|
-|<span class="notranslate"> [SPEED</span>| Yes | Yes | Yes|
-|<span class="notranslate"> [PMEM</span>| Yes | Yes | Yes|
-|<span class="notranslate"> [IO</span>| Yes | Yes | Yes|
-|<span class="notranslate"> [IOPS</span>| Yes | Yes | Yes|
-|<span class="notranslate"> [EP</span>| Yes | Yes | Yes|
-|<span class="notranslate"> [NPROC</span>| Yes | Yes | Yes|
-|<span class="notranslate"> Inodes </span> | Yes (default for all users) | No | Yes|
-|<span class="notranslate"> MySQL Limits </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
+|<span class="notranslate">SPEED</span>| Yes | Yes | Yes|
+|<span class="notranslate">PMEM</span>| Yes | Yes | Yes|
+|<span class="notranslate">IO</span>| Yes | Yes | Yes|
+|<span class="notranslate">IOPS</span>| Yes | Yes | Yes|
+|<span class="notranslate">EP</span>| Yes | Yes | Yes|
+|<span class="notranslate">NPROC</span>| Yes | Yes | Yes|
+|<span class="notranslate">Inodes </span> | Yes (default for all users) | No | Yes|
+|<span class="notranslate">MySQL Limits </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
 
 #### What happens when reseller or reseller's end user hits the limit?
 
@@ -256,6 +256,10 @@ Main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</sp
   * Value `v1` enables compatibility with old version of <span class="notranslate">lveinfo</span>.
   * Value `v2` enables <span class="notranslate">`extended`</span> output mode, but can break LVE plugins for control panels (statistics in <span class="notranslate">LVE Manager</span>, <span class="notranslate">Resource Usage</span>, etc). Support of `v2` mode will be added to LVE plugins in the recent future. When mode parameter is absent, later version of <span class="notranslate">lveinfo</span> is implied.
 * <span class="notranslate">`disable_snapshots`</span> - disable snapshots and incidents.
+  Possible values:
+    * <span class="notranslate">`true`</span>
+    * <span class="notranslate">`false`</span>
+* <span class="notranslate">`hide_lve_more_than_maxuid`</span> - disable displaying of lve ids more than max uid in resource usage.
   Possible values:
     * <span class="notranslate">`true`</span>
     * <span class="notranslate">`false`</span>
@@ -2205,7 +2209,7 @@ to prevent symlink from being removed.
 #### PAM configuration
 
 
-CageFS depends on <span class="notranslate"> **pam_lve** </span> module tor PAM enabled services. When installed, the module is automatically installed for following services:
+CageFS depends on <span class="notranslate"> **pam_lve** </span> module for PAM enabled services. When installed, the module is automatically installed for following services:
 
 * sshd
 * crond
@@ -4549,7 +4553,7 @@ See also PHP Selector [CLI](/command-line_tools/#php-selector)
 
 ### Integration with control panels
 
-This is the list of commands that we use to integrate <span class="notranslate"> PHP Selector </span> with control panels. If you need to integrate <span class="notranslate"> PHP Selector </span> with a custom control panel, you might find all the commands here:
+This is the list of commands that we use to integrate <span class="notranslate">PHP Selector</span> with control panels.
 
 **PHP summary:**
 
@@ -6400,6 +6404,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_criu_use_shm](/cloudlinux_os_components/#lsapi-criu-use-shm)
 * [lsapi_backend_semtimedwait](/cloudlinux_os_components/#lsapi-backend-semtimedwait)
 * [lsapi_reset_criu_on_apache_restart](/cloudlinux_os_components/#lsapi-reset-criu-on-apache-restart)
+* [lsapi_criu_debug](/cloudlinux_os_components/#lsapi-criu-debug)
 
 [PHP configuration management](/cloudlinux_os_components/#php-configuration-management):
 * [lsapi_process_phpini](/cloudlinux_os_components/#lsapi-process-phpini)
@@ -6822,6 +6827,17 @@ Use semaphore for checking when lsphp process will be started. Speed of start ls
 This option allows cleaning all CRIU images on Apache restart.  
 Setting lsapi_reset_criu_on_apache_restart to On means that on each Apache restart the CRIU images which are stored in directory specified by lsapi_criu_imgs_dir_path directive will be recreated on new request to domain(only after restart).  
 If this option set to Off then CRIU images won’t be recreated on Apache restart.
+
+----
+
+#### **lsapi_criu_debug**
+
+**Syntax**: lsapi_criu_debug On/Off  
+**Default**: lsapi_criu_debug Off  
+**Context**: httpd.conf, virtualhost  
+
+**Description** :  
+Enable/disable CRIU related debug logging.
 
 ----
 

@@ -115,11 +115,11 @@ You can find more details on how to configure CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
-### Expected structure of replies
+### Expected scripts responses
 
-A reply from any integration script should be a valid JSON and UTF-8 encoding is required.
+Any integration script should return a valid UTF-8 encoded JSON.
 
-There are two expected formats of integration script replies. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
+There are two expected formats of integration script responses. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
 
 <div class="notranslate">
 
@@ -133,11 +133,11 @@ There are two expected formats of integration script replies. In case of success
 ```
 </div>
 
-In case of error, the output should be one of the following.
+In case of error, the output should be one of the following: Internal errors, Restricted access, Error in arguments,  Nonexistent entities. 
 
 #### Internal errors
 
-In case when data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the output is as follows:
+When data is temporarily unavailable due to internal errors in the integration script (database unavailable, file access problems, etc), the output is as follows:
 
 <div class="notranslate">
 
@@ -161,7 +161,7 @@ In case when data is temporarily unavailable due to internal errors in the integ
 
 #### Restricted access
 
-In case when data is unavailable due to restricted access of a user that called the script, the output is as follows: 
+When data is unavailable due to restricted access of a user that called the script, the output is as follows: 
 
 <div class="notranslate">
 
@@ -191,7 +191,7 @@ E.g., when a user named <span class="notranslate">`user1`</span> is running <spa
 
 #### Error in arguments
 
-In case when known to be false arguments are passed to the utility, for example:
+When wrong arguments are passed to the utility, for example:
 * unknown argument
 * unknown fields in `--fields`
 
@@ -220,7 +220,7 @@ The output is as follows:
 
 #### Nonexistent entities
 
-In case when during data filtering the target entity doesn't exist in the control panel, the output is as follows:
+When during data filtering the target entity doesn't exist in the control panel, the output is as follows:
 
 <div class="notranslate">
 
@@ -251,7 +251,7 @@ This kind of error should be used only in the filtering case. In case when some 
 
 #### <span class="notranslate">panel_info</span>
 
-Returns the information about the control panel in the format specified.
+Returns the information about the control panel in the specified format.
 
 **Usage example**
 
@@ -295,7 +295,7 @@ Returns the information about the control panel in the format specified.
 Returns the information about databases that are available to the control panel users and are managed by the control panel.
 
 :::warning WARNING!
-For now, CloudLinux supports control panels with only one MySQL database.
+For now, CloudLinux supports control panels only with MySQL databases.
 :::
 
 Integration script is optional, when there is no script, [lve-stats won’t collect SQL snapshots](cloudlinux_os_components/#plugins).
@@ -413,7 +413,7 @@ The package is an abstraction that represents a group of users that have the sam
 
 Returns information about UNIX users, created and managed by the control panel. You will be able to manage the limits of these users via LVE Manager.
 
-If a reseller or administrator except for the account in the control panel has UNIX-user in the system, it should be included in this list.
+If a reseller user or administrator user has a corresponding UNIX-user in the system, this user should be included into this list.
 
 **Usage example**
 
@@ -588,7 +588,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 
 #### <span class="notranslate">resellers</span>
 
-Gives information about resellers who can be users owners in the control panel. Resellers do not obligatory have their own same-name UNIX accounts in the system and could exist only as an account in the control panel.
+This script returns the information about resellers. A reseller is an entity that can own users in the control panel. Resellers do not obligatory have UNIX account with the same name. It can exist only as an account in the control panel.
 
 **Usage example**
 
@@ -706,7 +706,7 @@ Gives information about panel’s administrators, output information about all p
 
 ## Control panel hooks integration
 
-For CloudLinux proper operation, you should implement hooks mechanism. These hooks are called with the specified arguments in the proper time. All scripts should be executed by the control panel from the system root user.
+For proper CloudLinux operation, you should implement a hooks mechanism. Hooks are scripts that control panel invokes with the exact arguments at a specific time. The control panel is responsible for executing these scripts as a system root user.
 
 ### Managing administrators
 
@@ -748,7 +748,7 @@ After removing the administrator, the following command should be called by the 
 
 ### Managing users
 
-To manage user limits properly, CloudLinux utilities need information about the following events occurred in the control panel.
+To manage user limits properly, CloudLinux utilities need information about the following control panel events.
 
 After creating a new user, the following script should be called:
 
@@ -825,7 +825,7 @@ After removing the user, you should call the following command:
 
 ### Managing domains
 
-We expect that all domain-related data is stored inside the user's home directory. If your control panel stores domain-related data outside the user's home directory and that data may be later changed, please contact us so we can add support for this to our integration mechanism.
+We expect that all domain-related data is stored inside the user's home directory. If your control panel stores domain-related data outside the user's home directory and that data can potentially change, please contact us so we can add support for this to our integration mechanism.
 
 After renaming a domain (or any equivalent domain removal operation with transfer of all data to another domain), the following command should be run:
 
@@ -848,8 +848,7 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 
 ### ui-user-info script
 
-This script should return information about the current user opening Web UI
-Used only in UI part of the LVE Manager and utilities.
+This script should return information about the current user opening Web UI. It is only used in UI part of the LVE Manager and utilities.
 
 * Input value (first positional argument) — the current authentication token, passed on plugin open (for example, <span class="notranslate">`open.php?token=hash`</span>)
 * Expected data format
@@ -881,7 +880,7 @@ The following configuration file parameters are used to determine the location o
 
 * **<span class="notranslate">base_path</span>** - the path to copy file assets to make them available from the control panel. Optional if <span class="notranslate">`/usr/share/l.v.e-manager/commons`</span> and <span class="notranslate">`/usr/share/l.v.e-manager/panelless-version/lvemanager`</span> are available from the control panel and the paths to this directory in web server are set.
 Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
-* **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it equals 1 then when installing or updating LVE Manager, we enable and run the web server with LVE Manager
+* **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it is set to 1 when installing or updating LVE Manager, we enable and run the web server with LVE Manager
 * **<span class="notranslate">service_port</span>** - a port used for running a web server for access LVE Manager without the control panel
 
 ## PHP-based integration of WEB UI with the control panel
@@ -926,11 +925,11 @@ Queries to the backend are created separately in the points (PHP files) which ar
 
 ### UI with CageFS enabled
 
-LVE Manager scripts are run outside CageFS (on production systems). When calling API, LVE Manager scripts enter into CageFS if needed (Node.js Selector, Python Selector). PHP Selector API does not work if the script is started inside CageFS and returns an error.
+LVE Manager scripts run outside of CageFS (on production systems). When calling API, LVE Manager scripts enter CageFS if needed (Node.js Selector, Python Selector). PHP Selector API does not work if the script is started inside CageFS and returns an error.
 
-In case of Node.js Selector and Python Selector, this is due to the possibility of starting scripts from the UI (npm run, pip install). They are run inside LVE.
+As for Node.js Selector and Python Selector, they are supposed to be contained inside CageFS because end-users can start scripts from UI (npm run, pip install). That is the reason why they should run inside LVE.
 
-In case of PHP Selector, there is not possible. When PHP Selector is called, the resources for such queries are not limited and when the user’s site is reaching limits, the UI will work without enforcing limits.
+PHP Selector run outside of CageFS. When PHP Selector is called, it is not limited by LVE which allows an end-user whose web site is reaching its limits to use PHP Selector UI without problems.
 
 ## How to integrate CageFS with a control panel
 
@@ -945,7 +944,7 @@ You can obtain current MIN_UID value by executing the following command:
 <div class="notranslate">
 
 ```
-cagefsctl --get-min-uid`
+cagefsctl --get-min-uid
 ```
 </div>
 
@@ -973,7 +972,7 @@ CageFS is enabled for su, ssh and cron services by default.
 [PAM Configuration](/cloudlinux_os_components/#pam-configuration)
 
 Also you can enable CageFS for any service that uses PAM.
-{LVE PAM Module](/cloudlinux_os_components/#lve-pam-module)
+[LVE PAM Module](/cloudlinux_os_components/#lve-pam-module)
 
 :::tip
 It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS is enabled.
@@ -984,7 +983,7 @@ It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS
 You should apply CloudLinux patches to integrate CageFS with Apache. Details can be found here:
 [Integration of Apache modules with Control Panels](/control_panel_integration/#integration-of-apache-modules-with-control-panels)
 
-Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after rebuild of Apache in order to update CageFS.
+Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after Apache rebuild in order to update CageFS.
 
 ### Running commands inside CageFS
 
@@ -998,7 +997,7 @@ You may want to execute commands inside CageFS for security reasons. To do so, y
 ```
 </div>
 
-The commands above require root privileges. You can use the following command when running as user:
+The commands above require root privileges. You can use the following command when running as a user:
 
 <div class="notranslate">
 
@@ -1066,7 +1065,7 @@ Knowing the location where PHP sessions are stored (described above), you can al
 
 ### Creating new user account
 
-When user or admin account has been created, you should execute an appropriate hook script, so all needed actions are performed.
+When user or admin account has been created, you should execute an appropriate hook script.
 More about CloudLinux hooks subsystem: [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
 :::tip Note
@@ -1087,7 +1086,7 @@ rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.
 :::
 
 :::warning IMPORTANT
-You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. This is required for CageFS to operate properly.
+You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. It is required for CageFS to operate properly.
 :::
 
 ### Modifying user accounts
@@ -1105,7 +1104,7 @@ USERDEL_CMD /usr/bin/userdel.cagefs
 ```
 </div>
 
-This script performs all needed actions when a user is being removed.
+This script performs all necessary actions when a user is being removed.
 Anyway, you should execute appropriate hook script when removing an account:
 [Control Panel Hooks Integration](/control_panel_integration/#control-panel-hooks-integration)
 
@@ -1133,7 +1132,7 @@ There are two major ways to add files and directories to CageFS:
 
 #### Copy files and directories to CageFS
 
-In order to copy files and directories to CageFS, you can manually create a custom config file in the <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
+In order to copy files and directories to CageFS, you can manually create a custom config file in <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
 
 Also, you can add files and directories that belong to `rpm` package to CageFS as follows:
 
@@ -1142,7 +1141,7 @@ Also, you can add files and directories that belong to `rpm` package to CageFS a
 
 There is a daily cron job that copies new and removes unneeded files and directories, i.e. updates cagefs-skeleton.
 
-You should execute <span class="notranslate">`cagefsctl --force-update`</span> after each change of system configuration or after installing new software. Otherwise, CageFS will be updated for 24 hours by a daily cron job.
+You should execute <span class="notranslate">`cagefsctl --force-update`</span> after each change of system configuration or after installing new software. Otherwise, CageFS will only be updated every 24 hours by a daily cron job.
 
 The benefits of this approach:
 * users in CageFS cannot modify files in the real file system (for example, in case of wrong permissions), because files in cagefs-skeleton are the copies of files from the real file system (and not mounted to CageFS)
@@ -1152,12 +1151,12 @@ You can find more info [here](/cloudlinux_os_components/#file-system-templates).
 
 #### Mount an entire directory with needed files to CageFS
 
-The second way to add files and directories to CageFS is to mount the entire directory with needed files to CageFS.
+The second way to add files and directories to CageFS is to mount the entire directory containing the files to CageFS.
 
-This approach should be used for frequently updated files (like UNIX sockets) or for directories with a large number of files or with a big size of data.
+This approach should be used for frequently updated files (like UNIX sockets) or for directories with a large number of files or with files that occupy much disk space.
 
 The benefits of this approach:
-* no delay between update of the file in the real file system and update of the file in CageFS; when file or directory is changed in the real file system, then they will be changed in CageFS immediately
+* no delay between update of the file in the real file system and update of the file in CageFS; when file or directory is changed in the real file system they will be changed in CageFS immediately
 * data is mounted but not copied to CageFS, so this minimizes IO load while updating cagefs-skeleton
 
 Please make sure that the mounted directory does not contain sensitive data.
@@ -1185,22 +1184,22 @@ The modes of mounting users' home directories into CageFS are described here:
 
 ### Excluding files from CageFS
 
-CageFS has a default set of files and directories that are visible to users inside CageFS. If you wish to exclude some of these files or directories from CageFS, you can do this like described below:
+CageFS has a default set of files and directories that are visible to users inside CageFS. If you wish to exclude some of these files or directories from CageFS, you can do this as described below:
 [Excluding files](/cloudlinux_os_components/#excluding-files) 
 
 ### Executing commands outside CageFS via proxyexec
 
 SUID programs cannot run inside CageFS due to “nosuid” mounts. But you can give users in CageFS the ability to execute some specific commands outside CageFS via `proxyexec`.
 
-Typically, these commands are suid programs or other programs that cannot run inside CageFS (due to complex dependencies, for example). Examples are <span class="notranslate">`passwd`</span>, <span class="notranslate">`exim`</span> or <span class="notranslate">`sendmail`</span> commands.
+Typically, these commands are suid programs or other programs that cannot run inside CageFS (due to complex dependencies, for example). Examples of such programs are <span class="notranslate">`passwd`</span>, <span class="notranslate">`exim`</span> or <span class="notranslate">`sendmail`</span> commands.
 
-* Regular (not suid) commands will be executed as user inside the user’s LVE, but outside CageFS.
-* SUID commands will be executed in the user’s LVE outside CageFS with the effective UID set to the owner of the file being executed.
+* Regular (not suid) commands will be executed as user inside the user’s LVE, but outside of CageFS.
+* SUID commands will be executed in the user’s LVE outside of CageFS with the effective UID set to the owner of the file being executed.
 
 You can find more details [here](/cloudlinux_os_components/#executing-by-proxy).
 
 :::tip Note
-You should use this feature with caution because it gives users the ability to execute specified commands outside CageFS. SUID commands are extremely dangerous because they are executed not as a user, but as an owner of the file (typically root). You should give users the ability to execute safe commands only. These commands should not have known vulnerabilities.
+You should use this feature with caution because it gives users the ability to execute specified commands outside of CageFS. SUID commands are extremely dangerous because they are executed not as a user, but as an owner of the file (typically root). You should give users the ability to execute safe commands only. These commands should not have known vulnerabilities.
 You should check that users cannot use these commands to get sensitive information on a server. You can disable specific _dangerous_ options of programs executed via proxyexec (see below).
 :::
 
@@ -1233,7 +1232,7 @@ cagefsctl --setup-cl-selector
 to apply changes.
 More details: [Native PHP Configuration](/cloudlinux_os_components/#native-php-configuration)
 
-You can configure CloudLinux PHP Selector to allow your customers an ability to select any custom PHP version specific to your control panel. Here's how to do this:
+You can configure CloudLinux PHP Selector to allow your customers to select any custom PHP version specific to your control panel. Here's how to do this:
 [Roll your own PHP](/cloudlinux_os_components/#roll-your-own-php)
 
 Also, you can compile and add your own PHP extensions to CloudLinux PHP Selector:
@@ -1241,7 +1240,7 @@ Also, you can compile and add your own PHP extensions to CloudLinux PHP Selector
 
 ## Integration of Apache modules in control panels
 
-We provide control panels with the ability to build their own Apache packages with modules such as alt-mod-passenger, mod_lsapi, mod_hostinglimits. This is due to the fact that control panels often have own custom Apache. At the same time, the modules must be compiled with the version of Apache and APR libraries that control panels use. Therefore, if your control panel uses an Apache that is provided by CloudLinux OS, you can use native packages with modules. The following table represents the RPM package compatibility.
+We provide control panels with the ability to build their own Apache packages with modules such as alt-mod-passenger, mod_lsapi, mod_hostinglimits. This is due to the fact that control panels often have their own customly-built Apache. At the same time, the modules must be compiled with the version of Apache and APR libraries that control panels use. Therefore, if your control panel uses Apache that is provided by CloudLinux OS, you can use native packages with modules. The following table represents the RPM package compatibility.
 
 
 RPMs of Apache provided by CloudLinux, if you are using:
@@ -1521,7 +1520,7 @@ yum install governor-mysql
 
 8. MySQL Governor CLI tools description can be found in the following [section](/command-line_tools/#mysql-governor)
 
-9. After you've configured the mapping, use `dbtop` to see the current user load on the database (you'd need to make some database queries).
+9. Having configured the mapping use `dbtop` to see the current user load on the database (you'd need to make some database queries).
 
 <div class="notranslate">
 
@@ -1538,7 +1537,7 @@ dbtop
 If you are using Apache from the CloudLinux repository (such as httpd or httpd24-httpd), skip this section.
 :::
 
-If you use custom Apache, you need to apply patches so that the processes launched by the Apache are worked with LVE and CageFS properly. 
+If you use custom Apache, you need to apply patches so that the processes launched by the Apache are working with LVE and CageFS properly. 
 Cloudlinux provides patches for the following packages: 
 
 * `suphp`
@@ -1667,11 +1666,11 @@ If the [admins](/control_panel_integration/#admins) list script exists when inst
 
 CloudLinux kernels have symlink attacks protection. When this protection is enabled, the system does not allow users to create symlinks (and hard links) to non-existent/not their own files.
 
-For details see [here](/cloudlinux_os_kernel/#link-traversal-protection). Here you can find all protection mechanism parameters.
+[Here](/cloudlinux_os_kernel/#link-traversal-protection) you can find all protection mechanism parameters.
 
 See also: [the special module to protect web-server](/cloudlinux_os_kernel/#symlink-owner-match-protection).
 
-You can run <span class="notranslate">`cldiag`</span> utility with the <span class="notranslate">`--check-symlinkowngid`</span> parameter to check web-server protection mechanism proper set-up.
+You can run <span class="notranslate">`cldiag`</span> utility with the <span class="notranslate">`--check-symlinkowngid`</span> parameter to check whether your web-server protection mechanisms are correctly set-up.
 
 <div class="notranslate">
 
@@ -1694,11 +1693,11 @@ There are 0 errors found.
 
 #### How to enable symlink protection
 
-Set the <span class="notranslate">`symlinkown_gid`</span> parameter to the value of the GID group, which the web-server process has.
+Set the <span class="notranslate">`symlinkown_gid`</span> parameter to the value of the GID group of the web-server process.
 
 Before enabling symlink protection, ensure it does not break the control panel functionality.
 
-For example, if an unprivileged user is allowed to create symlinks or hard links to files or directories he doesn’t own then when enabling symlink traversal protection he will not be able to do it.
+For example, if an unprivileged user is allowed to create symlinks or hard links to files or directories he doesn’t own then when enabling symlink traversal protection he will not be able to do so.
 
 To allow an unprivileged user to create such symlink or hard link, a file/directory which symlink is referred to should have <span class="notranslate">`linksafe`</span> group.
 
@@ -1708,4 +1707,3 @@ Some of CloudLinux OS utilities (`cagefsctl`, `selectorctl`, `cloudlinux-selecto
 
 So they are subject to the disk quotas if any are set for the user. The utilities can override these quotas to avoid failures.
 See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel parameters controlling these permissions. This parameter is used only for XFS file system.
-
