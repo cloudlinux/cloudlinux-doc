@@ -925,11 +925,11 @@ Queries to the backend are created separately in the points (PHP files) which ar
 
 ### UI with CageFS enabled
 
-LVE Manager scripts are run outside CageFS (on production systems). When calling API, LVE Manager scripts enter into CageFS if needed (Node.js Selector, Python Selector). PHP Selector API does not work if the script is started inside CageFS and returns an error.
+LVE Manager scripts run outside of CageFS (on production systems). When calling API, LVE Manager scripts enter CageFS if needed (Node.js Selector, Python Selector). PHP Selector API does not work if the script is started inside CageFS and returns an error.
 
-In case of Node.js Selector and Python Selector, this is due to the possibility of starting scripts from the UI (npm run, pip install). They are run inside LVE.
+As for Node.js Selector and Python Selector, they are supposed to be contained inside CageFS because end-users can start scripts from UI (npm run, pip install). That is the reason why they should run inside LVE.
 
-In case of PHP Selector, there is not possible. When PHP Selector is called, the resources for such queries are not limited and when the user’s site is reaching limits, the UI will work without enforcing limits.
+PHP Selector run outside of CageFS. When PHP Selector is called, it is not limited by LVE which allows an end-user whose web site is reaching its limits to use PHP Selector UI without problems.
 
 ## How to integrate CageFS with a control panel
 
@@ -983,7 +983,7 @@ It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS
 You should apply CloudLinux patches to integrate CageFS with Apache. Details can be found here:
 [Integration of Apache modules with Control Panels](/control_panel_integration/#integration-of-apache-modules-with-control-panels)
 
-Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after rebuild of Apache in order to update CageFS.
+Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after Apache rebuild in order to update CageFS.
 
 ### Running commands inside CageFS
 
@@ -997,7 +997,7 @@ You may want to execute commands inside CageFS for security reasons. To do so, y
 ```
 </div>
 
-The commands above require root privileges. You can use the following command when running as user:
+The commands above require root privileges. You can use the following command when running as a user:
 
 <div class="notranslate">
 
