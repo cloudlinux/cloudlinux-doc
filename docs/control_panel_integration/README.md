@@ -945,7 +945,7 @@ You can obtain current MIN_UID value by executing the following command:
 <div class="notranslate">
 
 ```
-cagefsctl --get-min-uid`
+cagefsctl --get-min-uid
 ```
 </div>
 
