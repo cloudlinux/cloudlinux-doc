@@ -413,7 +413,7 @@ The package is an abstraction that represents a group of users that have the sam
 
 Returns information about UNIX users, created and managed by the control panel. You will be able to manage the limits of these users via LVE Manager.
 
-If a reseller or administrator except for the account in the control panel has UNIX-user in the system, it should be included in this list.
+If a reseller user or administrator user has a corresponding UNIX-user in the system, this user should be included into this list.
 
 **Usage example**
 
