@@ -295,7 +295,7 @@ Returns the information about the control panel in the specified format.
 Returns the information about databases that are available to the control panel users and are managed by the control panel.
 
 :::warning WARNING!
-For now, CloudLinux supports control panels with only one MySQL database.
+For now, CloudLinux supports control panels only with MySQL databases.
 :::
 
 Integration script is optional, when there is no script, [lve-stats won’t collect SQL snapshots](cloudlinux_os_components/#plugins).
