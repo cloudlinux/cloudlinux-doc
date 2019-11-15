@@ -825,7 +825,7 @@ After removing the user, you should call the following command:
 
 ### Managing domains
 
-We expect that all domain-related data is stored inside the user's home directory. If your control panel stores domain-related data outside the user's home directory and that data may be later changed, please contact us so we can add support for this to our integration mechanism.
+We expect that all domain-related data is stored inside the user's home directory. If your control panel stores domain-related data outside the user's home directory and that data can potentially change, please contact us so we can add support for this to our integration mechanism.
 
 After renaming a domain (or any equivalent domain removal operation with transfer of all data to another domain), the following command should be run:
 
@@ -848,8 +848,7 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 
 ### ui-user-info script
 
-This script should return information about the current user opening Web UI
-Used only in UI part of the LVE Manager and utilities.
+This script should return information about the current user opening Web UI. It is only used in UI part of the LVE Manager and utilities.
 
 * Input value (first positional argument) — the current authentication token, passed on plugin open (for example, <span class="notranslate">`open.php?token=hash`</span>)
 * Expected data format
@@ -870,7 +869,7 @@ Used only in UI part of the LVE Manager and utilities.
 </div>
 
 * **<span class="notranslate">userName</span>** is used in queries to Selectors.
-* **<span class="notranslate">userId</span>** - system user ID if exist. May be used in future functions.
+* **<span class="notranslate">userId</span>** - system user ID if exist. Can be used in future functions.
 * **<span class="notranslate">userType</span>** - can have the following values: “user”, “reseller”, “admin”
 * **<span class="notranslate">lang</span>** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
 * **<span class="notranslate">userDomain</span>** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
@@ -881,7 +880,7 @@ The following configuration file parameters are used to determine the location o
 
 * **<span class="notranslate">base_path</span>** - the path to copy file assets to make them available from the control panel. Optional if <span class="notranslate">`/usr/share/l.v.e-manager/commons`</span> and <span class="notranslate">`/usr/share/l.v.e-manager/panelless-version/lvemanager`</span> are available from the control panel and the paths to this directory in web server are set.
 Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
-* **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it equals 1 then when installing or updating LVE Manager, we enable and run the web server with LVE Manager
+* **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it is set to 1 when installing or updating LVE Manager, we enable and run the web server with LVE Manager
 * **<span class="notranslate">service_port</span>** - a port used for running a web server for access LVE Manager without the control panel
 
 ## PHP-based integration of WEB UI with the control panel
