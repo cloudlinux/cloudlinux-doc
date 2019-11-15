@@ -869,7 +869,7 @@ This script should return information about the current user opening Web UI. It 
 </div>
 
 * **<span class="notranslate">userName</span>** is used in queries to Selectors.
-* **<span class="notranslate">userId</span>** - system user ID if exist. Can be used in future functions.
+* **<span class="notranslate">userId</span>** - system user ID if exist.
 * **<span class="notranslate">userType</span>** - can have the following values: “user”, “reseller”, “admin”
 * **<span class="notranslate">lang</span>** - used to identify a current locale in the user interface (‘en’, ‘ru’ - two-character language code)
 * **<span class="notranslate">userDomain</span>** - a current user domain. It can be the default domain or any selected user domain. Used to display in Selector. For example, in DirectAdmin the control panel opens only if a domain is selected — the selected domain is set. In cPanel, a domain is not selected — the default domain is set. If a domain is absent —  leave empty.
