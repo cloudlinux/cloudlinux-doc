@@ -251,7 +251,7 @@ This kind of error should be used only in the filtering case. In case when some 
 
 #### <span class="notranslate">panel_info</span>
 
-Returns the information about the control panel in the format specified.
+Returns the information about the control panel in the specified format.
 
 **Usage example**
 
@@ -588,7 +588,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 
 #### <span class="notranslate">resellers</span>
 
-Gives information about resellers who can be users owners in the control panel. Resellers do not obligatory have their own same-name UNIX accounts in the system and could exist only as an account in the control panel.
+This script returns the information about resellers. A reseller is an entity that can own users in the control panel. Resellers do not obligatory have UNIX account with the same name. It can exist only as an account in the control panel.
 
 **Usage example**
 
