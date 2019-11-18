@@ -981,7 +981,7 @@ It is safe to enable an interactive shell (e.g. /bin/bash) for users when CageFS
 ### Integrating CageFS with Apache
 
 You should apply CloudLinux patches to integrate CageFS with Apache. Details can be found here:
-[Integration of Apache modules with Control Panels](/control_panel_integration/#integration-of-apache-modules-with-control-panels)
+[Integration of Apache modules in Control Panels](/control_panel_integration/#integration-of-apache-modules-in-control-panels)
 
 Note that it may be required to execute <span class="notranslate">`cagefsctl --force-update`</span> after Apache rebuild in order to update CageFS.
 
