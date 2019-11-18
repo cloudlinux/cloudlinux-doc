@@ -636,18 +636,20 @@ tuned-adm off
 
 ## Kernel config variables
 
-Starting from **lvemanager 4.0-25.5** , **lve-utils 3.0-21.2** , and **cagefs-6.1-26** , CloudLinux OS utilities can read/write kernel config variables from a custom config /etc/sysctl.d/90-cloudlinux.conf (earlier, the parameters were read/written only from sysctl.conf ).
+Starting from **lvemanager 4.0-25.5**, **lve-utils 3.0-21.2**, and **cagefs-6.1-26**, CloudLinux OS utilities can read/write kernel config variables from a custom config /etc/sysctl.d/90-cloudlinux.conf (earlier, the parameters were read/written only from sysctl.conf ).
 
-CloudLinux OS utilities get parameter by using _sysctl_ system utility. So for now, even if a config variable is not set in the _sysctl.conf_ and in the _/etc/sysctl.d_ config files, this variable will be read by _sysctl_ utility directly from _/proc/sys_ .
+CloudLinux OS utilities get parameter by using `sysctl` system utility. So for now, even if a config variable is not set in the `sysctl.conf` and in the `/etc/sysctl.d` config files, this variable will be read by `sysctl` utility directly from `/proc/sys`.
 
-If some kernel variable was set in _/etc/sysctl.d/90-cloudlinux.conf_ do
+If you changed some kernel variables in `/etc/sysctl.d/90-cloudlinux.conf` you need to apply these changes to the kernel parameter by running the command:
+
 <div class="notranslate">
 
 ```
 sysctl --system
 ```
 </div>
-to apply the parameters before reading and after writing.
+
+After that, the variable can be read by the sysctl utility.
 
 Starting from **cagefs-6.1-27**,  fs.proc_can_see_other_uid will be migrated (one time) from /etc/sysctl.conf into /etc/sysctl.d/90-cloudlinux.conf . If this variable is not set in either file, it will default to 0.
 It is strongly advised against setting this variable in 90-cloudlinux.conf . Define it in /etc/sysctl.conf or in some other config file with an index number greater than 90-cloudlinux.conf , e.g. `/etc/sysctl.d/95-custom.conf`.
