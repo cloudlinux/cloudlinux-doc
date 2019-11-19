@@ -51,7 +51,7 @@ Reseller Limits are only supported in kernel starting with the version **3.10.0-
 :::
 
 :::tip Note
-To use new Reseller Limits functionality, you will have to migrate to <span class="notranslate">CloudLinux 6 Hybrid</span> kernel first.
+In case you wish to use the new Reseller limits features and you use CloudLinux 6 kernel, you have to migrate to <span class="notranslate">CloudLinux 6 Hybrid</span> kernel first.
 :::
 
 ### Installation, enabling, and disabling
