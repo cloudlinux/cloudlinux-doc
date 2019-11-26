@@ -635,7 +635,7 @@ To install CloudLinux 7 on Linode Xen please perform the following steps:
 timeout 5
 title CloudLinux 7.1, $KVERSION
 root (hd0)
-kernel /boot/vmlinuz-$KVERSION root=/dev/xvda ro quiet
+kernel /boot/vmlinuz-$KVERSION root=/dev/xvda1 ro quiet
 initrd /boot/initramfs-$KVERSION.img
 ```
 </div>
