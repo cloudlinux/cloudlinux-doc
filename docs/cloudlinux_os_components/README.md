@@ -2305,71 +2305,194 @@ It is possible to verify that a path specified as a parameter for an option does
 #### Executing by proxy
 
 
-Some software has to run outside CageFS to be able to complete its job. This includes such programs as <span class="notranslate">**passwd, sendmail**</span>, etc.
+Some software has to run outside CageFS to be able to complete its job. This includes such programs as passwd, sendmail, etc. CageFS provides proxyexec technology to accomplish this goal: you can define any program to run outside CageFS, by specifying it in any file located in /etc/cagefs/ that ends with ".proxy.commands". In the examples below we use custom.proxy.commands, but you can use any other name, e.g. mysuperfile.proxy.commands.
 
-CloudLinux uses <span class="notranslate"> proxyexec </span> technology to accomplish this goal. You can define any program to run outside CageFS, by specifying it in <span class="notranslate"> _/etc/cagefs/custom.proxy.commands_ </span> file. Do not edit existing <span class="notranslate"> _/etc/cagefs/proxy.commands_ </span> as it will be overwritten with next CageFS update.
+::: tip Warning
+Do not edit existing /etc/cagefs/proxy.commands as it will be overwritten with next CageFS update.
+:::
+
+The syntax of /etc/cagefs/[*.]proxy.commands file is as follows:
+```
+ALIAS[:wrapper_name]=[username:]path_to_executable
+```
+
+| Parameter          | Description |
+| ------------------ | ----------- |
+| ALIAS              | Any name which is unique within all /etc/cagefs/\[*.\]proxy.commands files. Used as identifier.|
+| wrapper_name       | Optional field. The name of the wrapper file, which is used as a replacement for executable file (set by path_to_executable) inside CageFS. <br><br>Possible values:<br>- any wrapper name that you place into /usr/share/cagefs/safeprograms directory;<br>- noproceed - reserved word which means that wrapper is not needed, e.g. when it is already installed by the other ALIAS. Often used for the commands with several ALIAS, as in the example below.<br>- omit this field - default wrapper cagefs.proxy.program will be used.<br><br>Used in cases when you want to give access only to the part of binary functions, but it is not possible to do that using options filtering.<br>Note: wrapper works inside CageFS with user rights and executes “real” scripts using proxy daemon. |
+| path_to_executable | The path to executable file which will run via proxyexec.|
+| username           | Optional field. The name of a user on whose behalf path_to_executable will run in the real system. If username is not specified, then path_to_executable will run on behalf the same user that is inside CageFS. |
+
 
 Once program is defined, run this command to populate the skeleton:
-<div class="notranslate">
 
 ```
-$ cagefsctl --update
+$ cagefsctl --force-update
 ```
-</div>
 
-All the cPanel scripts located in <span class="notranslate">`/usr/local/cpanel/cgi-sys/`</span> that user might need to execute should be added to <span class="notranslate">`proxy.commands`</span>.
-
-The syntax of <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files is as follows:  
-<span class="notranslate">`ALIAS:wrapper_name=username:path_to_executable`</span>
-
-
-Mandatory parameters are <span class="notranslate">`ALIAS`</span> and <span class="notranslate">`path_to_executable`</span>.
-
-* <span class="notranslate">`ALIAS`</span> - any name which is unique within all <span class="notranslate">`/etc/cagefs/*.proxy.commands`</span> files;
-
-* <span class="notranslate">`wrapper_name`</span> - the name of wrapper file, which is used as a replacement for executable file <span class="notranslate">`path_to_executable_ inside CageFS`</span>. Wrapper files are located in <span class="notranslate">`/usr/share/cagefs/safeprograms`</span>. If wrapper name is not specified, then default wrapper <span class="notranslate">`/usr/share/cagefs/safeprograms/cagefs.proxy.program`</span> is used. Also, a reserved word <span class="notranslate">`noproceed`</span> can be used, it will intend that wrapper is not in use (installed before) - applied for the commands with several <span class="notranslate">`ALIAS`</span>, as in the example below.
-
-* <span class="notranslate">`username`</span> - the name of a user on whose behalf <span class="notranslate">`path_to_executable`</span> will run in the real system. If <span class="notranslate">`username`</span> is not specified, then <span class="notranslate">`path_to_executable`</span> will run on behalf the same user that is inside CageFS.
-
-* <span class="notranslate">`path_to_executable`</span> - the path to executable file which will run via <span class="notranslate">`proxyexec`</span>.
-
-Example of a simple command executed via <span class="notranslate">`proxyexec`</span>:
-<div class="notranslate">
-
-```
-SENDMAIL=/usr/sbin/sendmail
-```
-</div>
-
-Example of <span class="notranslate"> crontab </span> command execution with custom wrapper under <span class="notranslate">root</span> (privilege escalation). The command uses two <span class="notranslate">ALIAS</span> , that is why in the second line <span class="notranslate">`noproceed`</span> is specified instead of wrapper name.
-<div class="notranslate">
-
-```
-CRONTAB_LIST:cagefs.proxy.crontab=root:/usr/bin/crontab
-CRONTAB_SAVE:noproceed=root:/usr/bin/crontab
-```
-</div>
-
-**Users with duplicate UIDs**
-
+##### Users with duplicate UIDs
 
 Sometimes hosters may have users with non unique <span class="notranslate">UIDs</span>. Thus, <span class="notranslate">`proxyexec`</span> may traverse users directory to find a specific one. That behavior turns into inappropriate if users directory is not cached locally (for example LDAP is in use).
 
 To turn this feature off:
-<div class="notranslate">
-
 ```
 touch /etc/cagefs/proxy.disable.duid
 ```
-</div>
 
 Or to activate it back:
-<div class="notranslate">
-
 ```
 rm /etc/cagefs/proxy.disable.duid
 ```
-</div>
+
+
+##### Examples
+
+Imaging that you need a script, let’s name it `superscript` and place it into /my/scripts/ directory, that must do some stuff outside CageFS and return result to user. In examples below, I will use this small script that checks if it works in- or outside of CageFS and prints amount of users in the /etc/passwd file. We use /etc/passwd because it is truncated inside cage by default and we can easily see the difference between CageFS and “real” system by just counting lines in it.
+
+    $ cat /opt/scripts/superbinary
+    #!/usr/bin/env bash
+    if [[ -e /var/cagefs ]]; then
+      echo "I am running without cagefs"
+    else
+      echo "I am running in cagefs"
+    fi;
+    echo "I am running as: `whoami`"
+    echo "Number or records in /etc/passwd: `cat /etc/passwd | wc -l`"
+
+First, let’s check that CageFS works. Create user and disable cage:
+
+    useradd test
+    cagefsctl --disable test
+
+Then run following command as `root` and you will see the following output:
+
+    [root ~]# su - test -c "/my/scripts/superbinary"
+    I am running without cagefs
+    I am running as: test
+    Number or records in /etc/passwd: 49
+
+Now enable CageFS for test user and run command again:
+
+    [root ~]# cagefsctl --enable test
+    [root ~]# su - test -c "/my/scripts/superbinary"
+    -bash: /my/scripts/superbinary: No such file or directory
+
+As you can see, now access to the file is restricted by CageFS.
+
+###### Example 1. Make users in CageFS be able to execute script which must work outside CageFS.
+Add the following line into `/etc/cagefs/custom.proxy.commands`:
+
+    MYSUPERBINARY=/my/scripts/superbinary
+
+Then run cagefsctl --force-update, which will place special wrapper instead of your script inside CageFS, and run your script again:
+
+    [root ~]# su - test -c "/my/scripts/superbinary"
+    I am running without cagefs
+    I am running as: test
+    Number or records in /etc/passwd: 49
+
+For comparison, let’s count the number of users in /etc/passwd directly:
+
+    [root ~]# su - test -c "cat /etc/passwd | wc -l"
+    25
+
+Result: our script escapes from CageFS and has access to all files that user with disabled cage has.
+
+###### Example 2. Permissions escalation.
+Imaging that you need to give users the ability to run script which gets information about their domains from apache.conf. To do that, you need root permissions and this is how you can achieve that with proxyexec:
+
+    echo "MYSUPERBINARY=root:/my/scripts/superbinary" > /etc/cagefs/custom.proxy.commands
+
+And run example script again:
+
+    [root ~]# su - test -c "/my/scripts/superbinary"
+    I am running without cagefs
+    I am running as: root
+    Number or records in /etc/passwd: 49
+
+As you can see, script now works with root permissions, as set in custom.proxy.commands file. In order to get information about user who run script, use the following environment variables:
+
+
+    PROXYEXEC_UID
+    PROXYEXEC_GID
+
+Example:
+
+
+    [root ~]# id test
+    uid=1226(test) gid=1227(test) groups=1227(test)
+    [root ~]# su - test -c "/my/scripts/superbinary"                                                
+    I am running without cagefs                                                                          
+    I am running as: root
+    Number or records in /etc/passwd: 49
+    PROXYEXEC_UID=1226
+    PROXYEXEC_GID=1227
+
+Result: users can run script which gains root permissions and work outside CageFS. Of course, you can set any other user instead of root in custom.proxy.commands.
+
+###### Example 3. Custom proxyexec wrapper.
+Let’s modify our test binary in the next way:
+
+    [root ~]# cat /my/scripts/superbinary
+    #!/usr/bin/env bash
+    FILE="$1"
+    if [[ -e /var/cagefs ]]; then
+      echo "I am running without cagefs"
+    else
+      echo "I am running in cagefs"
+    fi;
+    echo "I am running as: `whoami`"
+    echo "Number or records in ${FILE}: `cat ${FILE} | wc -l`"
+    echo "PROXYEXEC_UID=${PROXYEXEC_UID}"
+    echo "PROXYEXEC_GID=${PROXYEXEC_GID}"
+
+Now users can pass any path to the file as argument. In order to restrict possible parameters (file paths) that users can pass, you can use the custom proxyexec wrapper.
+First, duplicate default wrapper and give it any name you want, e.g. cagefs.proxy.mysuperbinary.
+
+
+    [root ~]# cp /usr/share/cagefs/safeprograms/cagefs.proxy.program /usr/share/cagefs/safeprograms/cagefs.proxy.mysuperbinary
+
+Default wrapper already contains check that does not allow to run it by root user:
+
+    #!/bin/bash
+    ##CageFS proxyexec wrapper - ver 15
+    
+    if [[ $EUID -eq 0 ]]; then
+        echo 'Cannot be run as root'
+        exit 1
+    fi
+    ...
+
+Add new check below:
+
+    if [[ $1 == "/etc/passwd" ]]; then                                                    
+       echo "it is not allowed for user to view this file!"                  
+       exit 1      
+    fi 
+
+Now, set custom binary name in custom.proxy.commands:
+
+    [root ~]# cat /etc/cagefs/custom.proxy.commands
+    MYSUPERBINARY:cagefs.proxy.mysuperbinary=root:/my/scripts/superbinary
+
+Run skeleton update and check that everything works as expected:
+
+    [root ~]# cagefsctl --force-update
+    [root ~]# su - test -c "/my/scripts/superbinary /etc/passwd"
+    it is not allowed for user to view this file!
+    [root ~]# su - test -c "/my/scripts/superbinary /etc/group"
+    I am running without cagefs
+    I am running as: root
+    Number or records in /etc/group: 76
+    PROXYEXEC_UID=1226
+    PROXYEXEC_GID=1227
+
+##### Notes and Warnings
+
+1. Make sure that directory with your script is not listed in `/etc/cagefs/cagefs.mp` (is not mounted inside cage). Otherwise, proxyexec will not work because CageFS will not be able to replace your script with special wrapper inside cage.
+2. You should use this feature with caution because it gives users the ability to execute specified commands outside of CageFS. SUID commands are extremely dangerous because they are executed not as a user, but as an owner of the file (typically root). You should give users the ability to execute safe commands only. These commands should not have known vulnerabilities. You should check that users cannot use these commands to get sensitive information on a server. You can disable specific dangerous options of programs executed via proxyexec using [filtering of options](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec).
+3. Using cPanel, all the scripts located in `/usr/local/cpanel/cgi-sys/` that user might need to execute should be added to the custom *.proxy.commands file.
+
 
 
 #### Custom /etc files per customer
