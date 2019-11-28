@@ -428,6 +428,10 @@ Set the frequency of email notifications sending to:
 
 Allows to reset inode limits and show/hide end-user inode usage.
 
+:::tip Note
+Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin.
+:::
+
 #### User interface settings
 
 ![](/images/user-interface-settings.png)
