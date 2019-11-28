@@ -439,7 +439,6 @@ Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and
 Allows to manage user interface settings:
 
 * **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
-* **<span class="notranslate">Hide PHP extension selection</span>** - a user will not be able to select PHP extensions in his web interface
 * **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
 
 #### CageFS
@@ -513,11 +512,13 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 <span class="notranslate"> Selector</span> tab allows controlling <span class="notranslate">PHP Selector</span> settings.
 
-In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
-
-In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
-
-In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
+* In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
+* In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
+* In <span class="notranslate">_Hide php extensions for end-user_</span> you can enable/disable the ability for end-user to select PHP extensions in his web interface.
+:::tip Note
+Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin.
+:::
+* In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
 
 Choose default modules from the list for a proper PHP version or for native.
 
