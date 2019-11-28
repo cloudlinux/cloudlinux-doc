@@ -312,32 +312,68 @@ To expand the list of users click on the number above and in the dropdown choose
 
 </div>
 
-Choose <span class="notranslate"> Users</span> tab to view the list of all users of the system and manage their limits.
+Choose <span class="notranslate">_Users_</span> tab to view the list of all users in the system and manage their limits.
 
-Click <span class="notranslate">_Filter by_</span> to apply filters. The following filters available in the dropdown:
+![](/images/LVEManagerUsersTab.png)
 
-* <span class="notranslate"> Username</span>
-* <span class="notranslate"> Domain</span>
-* <span class="notranslate"> LVE ID</span>
+The following filters are available:
+* <span class="notranslate">Manage by</span>
+  * <span class="notranslate">End users</span>
+  * <span class="notranslate">Resellers</span>
+  * <span class="notranslate">Reseller's end users</span>
+  * <span class="notranslate">Reseller's end users (no Reseller limit)</span>
+* <span class="notranslate">Show only</span>
+  * <span class="notranslate">Ignored users</span> - show users with ignored MySQL Governor.
+  * <span class="notranslate">Users with CageFS enabled</span>
 
-![](/images/man_02_zoom79.png)
+Also, you can search user by his <span class="notranslate">Username</span>, <span class="notranslate">domain</span> or <span class="notranslate">LVE ID</span> in the <span class="notranslate">_Search_</span> field.
 
-Actions column – click on a pencil icon in <span class="notranslate"> Actions</span> column to edit a proper user limits.
+#### Actions
 
-Set proper LVE values:
-* <span class="notranslate">SPEED</span>
-* <span class="notranslate">PMEM</span>
-* <span class="notranslate">VMEM</span>
-* <span class="notranslate">EP</span>
-* <span class="notranslate">IO</span>
-* <span class="notranslate">IOPS</span>
-* <span class="notranslate">NPROC</span>
-* <span class="notranslate">INODES</span>
+* **Edit limits**
 
-![](/images/man_03_zoom86.png)
-![](/images/man_04_zoom86.png)
+  Click ![](/images/pencil.png) in the <span class="notranslate">_Actions_</span> column to edit limits for a proper user.
 
-Click <span class="notranslate"> _Save_ </span> to apply changes or <span class="notranslate"> _Cancel_ </span> to close the window.
+    * <span class="notranslate">SPEED</span>
+    * <span class="notranslate">PMEM</span>
+    * <span class="notranslate">VMEM</span>
+    * <span class="notranslate">EP</span>
+    * <span class="notranslate">IO</span>
+    * <span class="notranslate">IOPS</span>
+    * <span class="notranslate">NPROC</span>
+    * <span class="notranslate">INODES</span>
+
+  ![](/images/man_03_zoom86.png)
+  ![](/images/man_04_zoom86.png)
+
+  Click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the pop-up.
+
+* **View history**
+
+  Click ![](/images/history.png) in the <span class="notranslate">_Actions_</span> column to view statistics for a proper user.
+
+#### Group actions for users with enabled CageFS
+
+:::warning Note
+If CageFS is disabled, group actions are not available. See how you can enable CageFS:
+* [Managing users](/cloudlinux_os_components/#managing-users)
+* [CageFS CLI](/command-line_tools/#cagefs)
+* via cPanel CageFS User Manager plugin.
+:::
+
+* **View users with enabled CageFS**
+  
+  To view users with enabled CageFS, click <span class="notranslate">_Show only >> Users with CageFS enabled_</span>
+  ![](/images/CageFSEnabledUsers.png)
+
+* **Disable CageFS for several users**
+
+  To disable CageFS for several users, do the following.
+
+  * Select a particular user or select all users
+  * Click <span class="notranslate">_CageFS_ >> _Disable_</span>.
+
+  ![](/images/GroupDisableCageFS.png)
 
 <div class="notranslate">
 
