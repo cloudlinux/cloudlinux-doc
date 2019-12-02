@@ -203,13 +203,8 @@ Log in as administrator to get access to the following functionality:
 * <span class="notranslate">Options</span> tab - allows setting LVE Faults email notifications for users;
 * <span class="notranslate">Packages</span> allows managing packages limits;
 * <span class="notranslate">PHP Selector</span> tab.
-* ImunifyAV allows to get access to a brand new malware scanner installed with LVE Manager. Click ImunifyAV on the main menu to go to ImunifyAV interface and use the next-generation, automated security solution that automatically scans the file system for malware injection and quarantines infected files.
 
 For more details, please go to the [ImunifyAV documentation](https://docs.imunifyav.com/).
-
-:::tip Note
-Available starting from LVE Manager Beta version 4.0-26.8.
-:::
 
 <div class="notranslate">
 
@@ -218,7 +213,7 @@ Available starting from LVE Manager Beta version 4.0-26.8.
 </div>
 
 :::tip Note
-Available starting from LVE Manager Beta version 4.0-26.8
+Available starting from LVE Manager 4.0-26.8
 :::
 
 CloudLinux dashboard provides a quick overview of statistics and all administrative information for server administrators.
@@ -703,8 +698,8 @@ To display all changes immediately click <span class="notranslate"> _Refresh_ </
 
 #### How to enable/disable Node.js
 
-* To enable Node.js move the slider to <span class="notranslate"> _Enable_ </span> .
-* To disable Node.js move the slider back to <span class="notranslate"> _Disable_ </span> . 
+* To enable Node.js move the slider to <span class="notranslate">_Enable_</span>.
+* To disable Node.js move the slider back to <span class="notranslate">_Disable_</span>. 
 
 ::: tip Note
 If you disable Node.js, its version for all your applications will not be changed, but you can not add a new application to this version.
