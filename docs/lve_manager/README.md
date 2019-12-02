@@ -460,7 +460,7 @@ Set the frequency of email notifications sending to:
 Allows to reset inode limits and show/hide end-user inode usage.
 
 :::tip Note
-Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin.
+Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin. Before it was available only in cPanel.
 :::
 
 #### User interface settings
@@ -471,7 +471,7 @@ Allows to manage user interface settings:
 
 * **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
   :::tip Note
-  Starting from LVE Manager 5.3.7-1 this option is available for cPanel, Plesk, and DirectAdmin control panels.
+  Starting from LVE Manager 5.3.7-1 this option is available for cPanel, Plesk, and DirectAdmin control panels. Before it was available only in cPanel.
   :::
 * **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
 
@@ -550,7 +550,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
 * In <span class="notranslate">_Hide php extensions for end-user_</span> you can enable/disable the ability for end-user to select PHP extensions in his web interface.
 :::tip Note
-Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin.
+Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin. Before it was available only in cPanel.
 :::
 * In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
 
