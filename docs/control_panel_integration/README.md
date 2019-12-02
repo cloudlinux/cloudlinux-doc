@@ -883,6 +883,19 @@ Files are copied or replaced by <span class="notranslate">`yum update lvemanager
 * **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it is set to 1 when installing or updating LVE Manager, we enable and run the web server with LVE Manager
 * **<span class="notranslate">service_port</span>** - a port used for running a web server for access LVE Manager without the control panel
 
+#### Known issues for GUI unification
+
+A user can run standalone services to provide access to LVE Manager without UI integration. These services use system authentication for users and the integration script <span class="notranslate">`ui-user-info script`</span> to get information about the current user.
+
+These services have some issues:
+
+* The ability to download log files from <span class="notranslate">CloudLinux Wizard</span> is missed
+* Incorrect layout for some UI forms (Node.js Selector/Python Selector)
+* Dashboard does not open CageFS options
+* Some errors are not displayed
+
+These issues will be fixed in the near future.
+
 ## PHP-based integration of WEB UI with the control panel
 
 The first use case:
