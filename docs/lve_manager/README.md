@@ -475,6 +475,9 @@ Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and
 Allows to manage user interface settings:
 
 * **<span class="notranslate">Hide LVE end user usage statistic</span>** - a user will not be able to see his usage statistic in his web interface
+  :::tip Note
+  Starting from LVE Manager 5.3.7-1 this option is available for cPanel, Plesk, and DirectAdmin control panels.
+  :::
 * **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
 
 #### CageFS
