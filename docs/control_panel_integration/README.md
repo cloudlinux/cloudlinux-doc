@@ -112,7 +112,7 @@ Some integration scripts required to be called not only from root but from end-u
 This means that either:
 * all required information (a code, all its dependencies, all called binaries, all configs/files/caches it reads) should be available in CageFS;
 * you should use [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
-* use both: suid and [proxyexec](/cloudlinux_os_components/#executing-by-proxy)'s if you need it to read some credentials or other files that shouldn't be disclosed to end-user. SUID mechanism is needed for cases when CageFS it not installed or enabled for user and `proxyexec` is needed when user executes script in CageFS (suid programs cannot run inside CageFS due to “nosuid” mounts and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) provides you alternative way to escalate privileges).
+* use both: suid and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) if your scripts needs to read some credentials or other files that shouldn't be disclosed to end-user. SUID mechanism is needed for cases when CageFS it not installed or enabled for user and `proxyexec` is needed when user executes script in CageFS (suid programs cannot run inside CageFS due to “nosuid” mounts and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) provides you alternative way to escalate privileges).
 
 You can find more details on how to configure your scripts in CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
