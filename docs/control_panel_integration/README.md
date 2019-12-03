@@ -107,11 +107,14 @@ You can use different scripts for different CPAPI methods or only one script and
 
 ### Working with CPAPI & CageFS
 
-Some integration scripts required to be called not only from root but from end-user too, so they should be able to work inside [CageFS](/cloudlinux_os_components/#cagefs) too. This means that all required information (a code, all its dependencies, all called binaries, all configs/files/caches it reads) should either:
-* be available in CageFS
-* the script itself should be run in the real system via [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism
+Some integration scripts required to be called not only from root but from end-user too, so they should be able to work when called as end-user unix user (no matter, with or without [CageFS](/cloudlinux_os_components/#cagefs) enabled).
 
-You can find more details on how to configure CageFS properly here:
+This means that either:
+* all required information (a code, all its dependencies, all called binaries, all configs/files/caches it reads) should be available in CageFS;
+* you should use [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
+* use both: suid and [proxyexec](/cloudlinux_os_components/#executing-by-proxy)'s if you need it to read some credentials or other files that shouldn't be disclosed to end-user. SUID mechanism is needed for cases when CageFS it not installed or enabled for user and `proxyexec` is needed when user executes script in CageFS (suid programs cannot run inside CageFS due to “nosuid” mounts and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) provides you alternative way to escalate privileges).
+
+You can find more details on how to configure your scripts in CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
