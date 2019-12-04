@@ -208,6 +208,29 @@ For more details, please go to the [ImunifyAV documentation](https://docs.imunif
 
 <div class="notranslate">
 
+#### Notifications color codes <sup><Badge text="LVE Manager 5.3.7-1+"/></sup>
+
+In the LVE Manager UI we use the following color codes for notifications:
+
+* ![](/images/pic_warning.png) warning
+* ![](/images/pic_error.png) error
+* ![](/images/pic_info.png) information
+* ![](/images/pic_success.png) success
+
+The following actions are available in the action notifications (error, success)
+ * follow a link
+ * copy a command
+ * copy a whole traceback
+
+The following actions are available in the system notifications (information, warning):
+* follow a link
+* copy a command
+* copy a whole message
+* mark a notification as “Read”
+* snooze a notification
+
+
+
 ### Dashboard
 
 </div>
