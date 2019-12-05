@@ -107,12 +107,54 @@ You can use different scripts for different CPAPI methods or only one script and
 
 ### Working with CPAPI & CageFS
 
-Some integration scripts required to be called not only from root but from end-user too, so they should be able to work when called as end-user unix user (no matter, with or without [CageFS](/cloudlinux_os_components/#cagefs) enabled).
+Working with CPAPI & CageFS
 
-This means that either:
-* all required information (a code, all its dependencies, all called binaries, all configs/files/caches it reads) should be available in CageFS;
-* you should use [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
-* use both: suid and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) if your scripts needs to read some credentials or other files that shouldn't be disclosed to end-user. SUID mechanism is needed for cases when CageFS it not installed or enabled for user and `proxyexec` is needed when user executes script in CageFS (suid programs cannot run inside CageFS due to “nosuid” mounts and [proxyexec](/cloudlinux_os_components/#executing-by-proxy) provides you alternative way to escalate privileges).
+Some integration scripts required to be called not only from root but from end-user too, 
+so they should be able to work when called as end-user unix user. Developing that scripts,
+you should keep in mind that CageFS is an optional component, so anything that works
+in CageFS must also work when it's disabled for particular user or not installed on the 
+server at all and wise versa.
+
+This means that you should do one of the following:
+- all required information (a code, all its dependencies, all called binaries, 
+  all configs/files/caches it reads) should be available for user (even in CageFS);
+- you should use CageFS's [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
+- use both: configured sudo and proxyexec if your script needs privileges escalation (e.g. to read some credentials or other files that
+  shouldn't be disclosed to end-user). SUDO mechanism is needed for cases when CageFS it not installed 
+  or enabled for user and proxyexec is needed when user executes script in CageFS.
+
+When using SUDO you should make the wrapper that will call your script using SUDO command, like this:
+```
+[root]# cat /opt/cpvendor/bin/domains
+#!/usr/bin/env bash
+sudo opt/cpvendor/bin/domains_real
+```
+Of course you must configure it /etc/sudoers.
+
+:::tip Info
+Your script will run with `root` permissions, but limited with user's LVE. 
+You may see following warning:
+```
+***************************************************************************
+*                                                                         *
+*             !!!!  WARNING: YOU ARE INSIDE LVE !!!!                      *
+*IF YOU RESTART ANY SERVICES STABILITY OF YOUR SYSTEM WILL BE COMPROMIZED *
+*        CHANGE YOUR USER'S GROUP TO wheel to safely use SU/SUDO          *
+*                             MORE INFO:                                  *
+*      http://docs.cloudlinux.com/index.html?lve_pam_module.html          *
+*                                                                         *
+***************************************************************************
+```
+This is the default behaviour so users cannot overload server with lot of api requests.
+:::
+
+:::tip Warning
+When using sudo, you must configure sudo with NOSETENV tag in order to forbid user to
+override `SUDO_USER` environment or use `logname` command to user who run comannd through sudo.
+:::
+
+As an alternative for sudo you can use regular SUID scripts, but we strongly recommend 
+using SUDO because of builtin logging of permissions escalation.
 
 You can find more details on how to configure your scripts in CageFS properly here:
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
