@@ -2,27 +2,50 @@
 title: LVE Manager
 ---
 <gtranslate-io>
-# LVE Manager
 
-## Информационная панель
+# LVE Manager
 
 ## Мастер установки CloudLinux
 
-### Краткое описание
+## LVE Manager
 
-### Настройка
+### Dashboard
 
-### Компоненты CloudLinux
+### Current usage
 
-### Установка и возможные ошибки
+### Users
 
-## cPanel LVE Manager
+### Statistics
 
-### Параметры LVE Manager
+### Options
 
-### Снапшоты процессов сервера
+### Packages
+
+### PHP Selector
+
+### Python Selector
+
+### Node.js Selector
+
+### Reseller limits
+
+### Клиентские плагины
 
 ### Брендинг LVE-плагинов
 
-## Пользовательские сообщения для определенных версий PHP
+### Пользовательские сообщения для определенных версий PHP
+
+## inodes
+
+## Руководство по интеграции с панелями управления
+
+### Определение CloudLinux и работа с ней
+
+### Отображение лимитов CPU, memory и IO 
+
+### Расширение LVE в cPanel  
+
+
+
+
 </gtranslate-io>

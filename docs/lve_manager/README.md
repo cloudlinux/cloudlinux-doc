@@ -427,13 +427,13 @@ The following parameters are displayed in the statistics table:
 The following sections are available to set the required options:
 
 * <span class="notranslate">[LVE Faults Email Notifications](/lve_manager/#lve-faults-email-notifications)</span> - allows to set the required type of notification
-* [Faults to include](/lve_manager/#faults-to-include) - allows to include required limits to the notifications
-* [Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify) - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
-* [Inode limits](/lve_manager/#inode-limits) - allows to manage inode limits
-* [User interface settings](/lve_manager/#user-interface-settings) - allows to manage user interface settings
-* [MySQL Governor settings](/lve_manager/#mysql-governor-settings) - allows to manage MySQL Governor settings (if MySQL Governor is installed)
-* [CageFS](/lve_manager/#cagefs-2) - allows to manage CageFS settings
-* [Node.js](/lve_manager/#node-js) - allows to enable/disable and manage Node.js Selector
+* <span class="notranslate">[Faults to include](/lve_manager/#faults-to-include)</span> - allows to include required limits to the notifications
+* <span class="notranslate">[Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify)</span> - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
+* <span class="notranslate">[Inode limits](/lve_manager/#inode-limits)</span> - allows to manage inode limits
+* <span class="notranslate">[User interface settings](/lve_manager/#user-interface-settings)</span> - allows to manage user interface settings
+* <span class="notranslate">[MySQL Governor settings](/lve_manager/#mysql-governor-settings)</span> - allows to manage MySQL Governor settings (if MySQL Governor is installed)
+* <span class="notranslate">[CageFS](/lve_manager/#cagefs-2)</span> - allows to manage CageFS settings
+* <span class="notranslate">[Node.js](/lve_manager/#node-js)</span> - allows to enable/disable and manage Node.js Selector
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-section)</span> - allows to enable/disable and manage Python Selector
 
 ![](/images/options-general.png)
@@ -505,64 +505,63 @@ Allows to manage user interface settings:
 
 Allows to manage MySQL Governor settings.
 
-**MySQL Governor Mode of operation**
+<span class="notranslate">**MySQL Governor Mode of operation**</span>
 
 * <span class="notranslate">**Off**</span> - monitor Only – not throttle customer's queries, only monitor MySQL usage.
-* **Single** - single restricted LVE for all restricted customers – all queries for all restricted customers  well be sharing the same LVE.
-* **Abusers** - use LVE for a user to restrict queries (default mode) –  if a user goes over the limits, all his queries will execute inside his LVE.
-* **All** - always run queries inside user's LVE – limits are applied to both PHP & MySQL queries at the same time.
+* <span class="notranslate">**Single**</span> - single restricted LVE for all restricted customers – all queries for all restricted customers  well be sharing the same LVE.
+* <span class="notranslate">**Abusers**</span> - use LVE for a user to restrict queries (default mode) –  if a user goes over the limits, all his queries will execute inside his LVE.
+* <span class="notranslate">**All**</span> - always run queries inside user's LVE – limits are applied to both PHP & MySQL queries at the same time.
 
-**MySQL Governor restrict type mode**
+<span class="notranslate">**MySQL Governor restrict type mode**</span>
 
-* Period – allows to restrict users for a specified time period
-* Limit (default mode) – allows to restrict/automatically unrestrict users that hit limits/don't hit limits during 'unlimit=time'
+* <span class="notranslate">Period</span> – allows to restrict users for a specified time period
+* <span class="notranslate">Limit</span> (default mode) – allows to restrict/automatically unrestrict users that hit limits/don't hit limits during 'unlimit=time'
 
-**Unlimit users automatically in**
+<span class="notranslate">**Unlimit users automatically in**</span>
 
 Allows to unlimit users automatically if they don't hit the limits during the specified number of seconds/minutes/hours/days.
 
-**Restricted time periods**
+<span class="notranslate">**Restricted time periods**</span>
 
 User restriction time period for different levels of restriction and the timeout to apply a higher restriction level.
 
-* Level1
-* Level2
-* Level3
-* Level4
-* Timeout
+* <span class="notranslate">Level1</span>
+* <span class="notranslate">Level2</span>
+* <span class="notranslate">Level3</span>
+* <span class="notranslate">Level4</span>
+* <span class="notranslate">Timeout</span>
 
-**User maximum connections**
+<span class="notranslate">**User maximum connections**<span>
 
 The number of simultaneous connections of a restricted user (in the LVE mode).
 
-**Path to script**
+<span class="notranslate">**Path to script**</span>
 
 To be triggered when account is restricted.
 
-**MySQL Governor restrict-log file URL and format**
+<span class="notranslate">**MySQL Governor restrict-log file URL and format**</span>
 
-* URL – where the log file is placed in the file system
-* Format – log file format: short, medium, long, very long
+* <span class="notranslate">URL</span> – where the log file is placed in the file system
+* <span class="notranslate">Format</span> – log file format: <span class="notranslate">short</span>, <span class="notranslate">medium</span>, <span class="notranslate">long</span>, <span class="notranslate">very long</span>
 
-**MySQL Governor error-log file URL and logging level**
+<span class="notranslate">**MySQL Governor error-log file URL and logging level**</span>
 
-* URL – where the log file is placed in the file system
-* Level – logging level: error, debug
+* <span class="notranslate">URL</span> – where the log file is placed in the file system
+* <span class="notranslate">Level</span> – logging level: error, debug
 
-**Kill slow SELECT queries**
+<span class="notranslate">**Kill slow SELECT queries**</span>
 
-* Kill slow queries – stop running slow select queries
-* URL – log file URL, where killed queries will be saved 
-* Timeout – number of seconds while slow request can be finished, otherwise, it will be canceled
+* <span class="notranslate">Kill slow queries</span> – stop running slow select queries
+* <span class="notranslate">URL</span> – log file URL, where killed queries will be saved 
+* <span class="notranslate">Timeout</span> – number of seconds while slow request can be finished, otherwise, it will be canceled
 
-**Gather data for detailed statistics**
-
-Tick if yes.
-
-**Log restricted user's queries**
+<span class="notranslate">**Gather data for detailed statistics**</span>
 
 Tick if yes.
 
+<span class="notranslate">**Log restricted user's queries**</span>
+
+Tick if yes.
 
 
 #### CageFS
