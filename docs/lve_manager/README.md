@@ -431,6 +431,7 @@ The following sections are available to set the required options:
 * [Minimum number of Faults to notify](/lve_manager/#minimum-number-of-faults-to-notify) - allows to set a number of faults required for the notification to be sent for hoster, reseller, and user
 * [Inode limits](/lve_manager/#inode-limits) - allows to manage inode limits
 * [User interface settings](/lve_manager/#user-interface-settings) - allows to manage user interface settings
+* [MySQL Governor settings](/lve_manager/#mysql-governor-settings) - allows to manage MySQL Governor settings (if MySQL Governor is installed)
 * [CageFS](/lve_manager/#cagefs-2) - allows to manage CageFS settings
 * [Node.js](/lve_manager/#node-js) - allows to enable/disable and manage Node.js Selector
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-section)</span> - allows to enable/disable and manage Python Selector
@@ -497,6 +498,72 @@ Allows to manage user interface settings:
   Starting from LVE Manager 5.3.7-1 this option is available for cPanel, Plesk, and DirectAdmin control panels. Before it was available only in cPanel.
   :::
 * **<span class="notranslate">Hide Ruby App in web-interface</span>** - a user will not be able to see Ruby Selector in his web interface
+
+#### MySQL Governor settings
+
+![](/images/mysql-governor-settings.png)
+
+Allows to manage MySQL Governor settings.
+
+**MySQL Governor Mode of operation**
+
+* <span class="notranslate">**Off**</span> - monitor Only – not throttle customer's queries, only monitor MySQL usage.
+* **Single** - single restricted LVE for all restricted customers – all queries for all restricted customers  well be sharing the same LVE.
+* **Abusers** - use LVE for a user to restrict queries (default mode) –  if a user goes over the limits, all his queries will execute inside his LVE.
+* **All** - always run queries inside user's LVE – limits are applied to both PHP & MySQL queries at the same time.
+
+**MySQL Governor restrict type mode**
+
+* Period – allows to restrict users for a specified time period
+* Limit (default mode) – allows to restrict/automatically unrestrict users that hit limits/don't hit limits during 'unlimit=time'
+
+**Unlimit users automatically in**
+
+Allows to unlimit users automatically if they don't hit the limits during the specified number of seconds/minutes/hours/days.
+
+**Restricted time periods**
+
+User restriction time period for different levels of restriction and the timeout to apply a higher restriction level.
+
+* Level1
+* Level2
+* Level3
+* Level4
+* Timeout
+
+**User maximum connections**
+
+The number of simultaneous connections of a restricted user (in the LVE mode).
+
+**Path to script**
+
+To be triggered when account is restricted.
+
+**MySQL Governor restrict-log file URL and format**
+
+* URL – where the log file is placed in the file system
+* Format – log file format: short, medium, long, very long
+
+**MySQL Governor error-log file URL and logging level**
+
+* URL – where the log file is placed in the file system
+* Level – logging level: error, debug
+
+**Kill slow SELECT queries**
+
+* Kill slow queries – stop running slow select queries
+* URL – log file URL, where killed queries will be saved 
+* Timeout – number of seconds while slow request can be finished, otherwise, it will be canceled
+
+**Gather data for detailed statistics**
+
+Tick if yes.
+
+**Log restricted user's queries**
+
+Tick if yes.
+
+
 
 #### CageFS
 
