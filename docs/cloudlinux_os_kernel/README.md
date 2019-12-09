@@ -118,7 +118,7 @@ The protection requires setting multiple kernel options to be enabled.
 ### Symlink owner match protection
 
 
-**_fs.enforce_symlinksifowner_**
+#### fs.enforce_symlinksifowner
 
 To protect against symlink attack where attacker tricks Apache web server to read some other user PHP config files, or other sensitive file, enable:
 <div class="notranslate">
@@ -149,7 +149,7 @@ When <span class="notranslate"> _fs.enforce_symlinksifowner_ </span> set to 1, p
 Please, note that <span class="notranslate"> _fs.enforce_symlinksifowner = 2_ </span> is deprecated and can cause issues for the system operation.
 <span class="notranslate"> </span>
 
-**_fs.symlinkown_gid_**
+#### fs.symlinkown_gid
 
 On standard <span class="notranslate"> RPM Apache </span> installation, <span class="notranslate"> Apache </span> is usually running under <span class="notranslate"> GID </span> 48.
 On <span class="notranslate"> cPanel </span> servers, <span class="notranslate"> Apache </span> is running under user nobody, <span class="notranslate"> GID </span> 99.
@@ -191,6 +191,29 @@ It is recommended to set _/proc/sys/fs/global_root_enable=0_ by default. If need
 ::: tip Note
 Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd service user and fs.proc_super_gid for nagios service user is written to /etc/sysctl.d/90-cloudlinux.conf.
 :::
+
+#### fs.process_symlinks_by_task <Badge text="CloudLinux 7 hybrid"/> <Badge text="cPanel"/> 
+
+To protect against symlink vulnerability where an attacker might get access to files out of the CageFS via cPanel tools: File Manager, WebDAV, Webmail, etc.
+
+When a symlink is accessed from cPanel tools (non-root user case) we check whether the current process UID matches the symlink target UID.
+
+To enable (the default value) the protection for CloudLinux 7 hybrid, set the <span class="notranslate">`fs.process_symlinks_by_task`</span> parameter to 1:
+<div class="notranslate">
+
+```
+fs.process_symlinks_by_task=1
+```
+</div>
+
+To disable the protection for CloudLinux 7 hybrid, set the <span class="notranslate">`fs.process_symlinks_by_task`</span> parameter to 0:
+<div class="notranslate">
+
+```
+fs.process_symlinks_by_task=0
+```
+</div>
+
 
 
 ### Link traversal protection 
@@ -837,6 +860,17 @@ By adding <span class="notranslate"> xen_blkfront.sda_is_xvda=0 </span> to kerne
 By default, this option is set to 1 in the kernel, and drives are detected as <span class="notranslate"> xvda </span> .
 This is needed only for CloudLinux 6 and <span class="notranslate"> Hybrid </span> kernels.
 
+## Umask behavior
+
+:::tip Note
+CloudLinux 6, CloudLinux 6 hybrid, CloudLinux 7, CloudLinux 7 hybrid kernels.
+::: 
+ 
+Starting from the kernel module **lve-kmod-2.0-10**, the behavior of umask is changed.
+
+Now, when entering LVE task's original umask value is preserved, instead of using LVE's umask value.
+This behavior is typical for all kernels: CloudLinux 6, CloudLinux 6 hybrid, CloudLinux 7, CloudLinux 7 hybrid kernels. 
+
 ## IO limits latency
 
 **[lve1.2.29+]**
@@ -1004,5 +1038,22 @@ To disable quota checking in <span class="notranslate"> **XFS** </span> file sys
 
 ```
 # echo 1 > /proc/sys/fs/xfs/cap_res_quota_disable
+```
+</div>
+
+## Enter LVE when using cPanel utilities <Badge text="cPanel"/> <Badge text="CloudLinux 7 hybrid"/> <Badge text="experimental" type="warn"/>
+
+cPanel tools might use more resources than desired, so to limit resource usage, you might want to enter the corresponding LVE when using cPanel tools on-behalf of a non-root user.
+
+This feature is considered experimental, as in this case there might be contention for LVE limits between cPanel tools and web-requests for a given user, which might not be suitable.
+
+The <span class="notranslate">`lve_setuid_enter`</span> parameter controls whether you want to enter the corresponding LVE when using cPanel tools on behalf of a non-root user.
+
+By default, the feature is disabled (0), to enable it, run the following for CloudLinux 7 hybrid:
+
+<div class="notranslate">
+
+```
+# echo 1 > /sys/module/kmodlve/parameters/lve_setuid_enter
 ```
 </div>
