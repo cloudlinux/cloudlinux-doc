@@ -112,16 +112,16 @@ Working with CPAPI & CageFS
 Some integration scripts required to be called not only from root but from end-user too, 
 so they should be able to work when called as end-user unix user. Developing that scripts,
 you should keep in mind that CageFS is an optional component, so anything that works
-in CageFS must also work when it's disabled for particular user or not installed on the 
-server at all and wise versa.
+in CageFS must also work even if it's disabled for particular user or not installed on the
+server at all.
 
 This means that you should do one of the following:
 - all required information (a code, all its dependencies, all called binaries, 
   all configs/files/caches it reads) should be available for user (even in CageFS);
 - you should use CageFS's [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
 - use both: configured sudo and proxyexec if your script needs privileges escalation (e.g. to read some credentials or other files that
-  shouldn't be disclosed to end-user). SUDO mechanism is needed for cases when CageFS it not installed 
-  or enabled for user and proxyexec is needed when user executes script in CageFS.
+  shouldn't be disclosed to end-user). SUDO mechanism is needed for cases when CageFS it not installed or 
+  it's disabled for the user and proxyexec is needed when the user executes script in CageFS
 
 When using SUDO you should make the wrapper that will call your script using SUDO command, like this:
 ```
@@ -129,7 +129,7 @@ When using SUDO you should make the wrapper that will call your script using SUD
 #!/usr/bin/env bash
 sudo opt/cpvendor/bin/domains_real
 ```
-Of course you must configure it /etc/sudoers.
+Of course you must configure `/etc/sudoers` to make it work without password prompt and with enough security.
 
 :::tip Info
 Your script will run with `root` permissions, but limited with user's LVE. 
@@ -150,7 +150,8 @@ This is the default behaviour so users cannot overload server with lot of api re
 
 :::tip Warning
 When using sudo, you must configure sudo with NOSETENV tag in order to forbid user to
-override `SUDO_USER` environment or use `logname` command to user who run comannd through sudo.
+override `SUDO_USER` environment or use other secure methods (e.g. `logname`) to get the 
+user who ran the command through sudo.
 :::
 
 As an alternative for sudo you can use regular SUID scripts, but we strongly recommend 
