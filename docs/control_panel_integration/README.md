@@ -434,9 +434,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 |<span class="notranslate">--package-owner</span>|False|Used in pair with package.name. Set the owner of the specified package.|
 |<span class="notranslate">--username</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
 |<span class="notranslate">--unix-id</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
-|<span class="notranslate">--fields</span>|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.|
-
-The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux will work more slowly.
+|<span class="notranslate">--fields</span>|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.<br><br>The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux will work more slowly.|
 
 **Output example**
 
