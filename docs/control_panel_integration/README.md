@@ -107,33 +107,29 @@ You can use different scripts for different CPAPI methods or only one script and
 
 ### Working with CPAPI & CageFS
 
-Working with CPAPI & CageFS
-
-Some integration scripts required to be called not only from root but from end-user too, 
-so they should be able to work when called as end-user unix user. Developing that scripts,
-you should keep in mind that CageFS is an optional component, so anything that works
-in CageFS must also work even if it's disabled for particular user or not installed on the
-server at all.
+Some integration scripts required to be called not only from root but from end-user. Developing such scripts, you should keep in mind that CageFS is an optional component, so anything that works in CageFS must also work even if CageFS is disabled for a particular user or not installed at all.
 
 This means that you should do one of the following:
-- all required information (a code, all its dependencies, all called binaries, 
-  all configs/files/caches it reads) should be available for user (even in CageFS);
-- you should use CageFS's [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in real system, but with user privileges;
-- use both: configured sudo and proxyexec if your script needs privileges escalation (e.g. to read some credentials or other files that
-  shouldn't be disclosed to end-user). SUDO mechanism is needed for cases when CageFS it not installed or 
-  it's disabled for the user and proxyexec is needed when the user executes script in CageFS
+* all required information (code, all its dependencies, all called binaries, all configs/files/caches it reads) should be available for a user (even in CageFS)
+* you should use CageFS's [proxyexec](/cloudlinux_os_components/#executing-by-proxy) mechanism to make your script run itself in a real system but with user privileges
+* use both configured sudo and proxyexec if your script needs privilege escalation (e.g. to read some credentials or other files that shouldn't be disclosed to end-user). SUDO mechanism is needed for cases when CageFS is not installed or disabled for a user and proxyexec is needed when a user executes script in CageFS
 
-When using SUDO you should make the wrapper that will call your script using SUDO command, like this:
+When using SUDO you should create the wrapper that will call your script using SUDO command, like this:
+
+<div class="notranslate">
+
 ```
 [root]# cat /opt/cpvendor/bin/domains
 #!/usr/bin/env bash
 sudo opt/cpvendor/bin/domains_real
 ```
-Of course you must configure `/etc/sudoers` to make it work without password prompt and with enough security.
+</div>
 
-:::tip Info
-Your script will run with `root` permissions, but limited with user's LVE. 
-You may see following warning:
+Of course, you must configure <span class="notranslate">`/etc/sudoers`</span> to make it work without a password prompt and with enough security.
+
+:::tip Note
+Your script will run with <span class="notranslate">`root`</span> permissions, but limited with user's LVE. 
+You may see the following warning:
 ```
 ***************************************************************************
 *                                                                         *
@@ -145,19 +141,17 @@ You may see following warning:
 *                                                                         *
 ***************************************************************************
 ```
-This is the default behaviour so users cannot overload server with lot of api requests.
+This is the default behavior so users cannot overload a server with a lot of API requests.
 :::
 
-:::tip Warning
-When using sudo, you must configure sudo with NOSETENV tag in order to forbid user to
-override `SUDO_USER` environment or use other secure methods (e.g. `logname`) to get the 
-user who ran the command through sudo.
+:::warning Warning
+When using sudo, you must configure sudo with <span class="notranslate">NOSETENV</span> tag in order to forbid the user to override <span class="notranslate">`SUDO_USER`</span> environment or use other secure methods (e.g. <span class="notranslate">`logname`</span>) to get the user who ran the command through sudo.
 :::
 
-As an alternative for sudo you can use regular SUID scripts, but we strongly recommend 
-using SUDO because of builtin logging of permissions escalation.
+As an alternative for sudo you can use regular SUID scripts, but we strongly recommend using SUDO because of builtin logging of permissions escalation.
 
 You can find more details on how to configure your scripts in CageFS properly here:
+
 * [Configuration. General information](/cloudlinux_os_components/#configuration-2)
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
@@ -165,7 +159,7 @@ You can find more details on how to configure your scripts in CageFS properly he
 
 Any integration script should return a valid UTF-8 encoded JSON.
 
-There are two expected formats of integration script responses. In case of success, the metadata.result field is `ok` and the data field contains data according to the specification of the specific integration script. Return code is `0`.
+There are two expected formats of integration script responses. In case of success, the <span class="notranslate">`metadata.result`</span> field is <span class="notranslate">`ok`</span> and the data field contains data according to the specification of the specific integration script. Return code is `0`.
 
 <div class="notranslate">
 
