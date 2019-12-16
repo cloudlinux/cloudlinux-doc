@@ -5209,8 +5209,10 @@ Large number of PHP extensions are bundled with each version of PHP.
 |apcu <br>bcmath <br>bitset <br>brotli <br>bz2 <br>calendar <br>core <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dom <br>eio <br>enchant <br>exif <br>fileinfo <br>filter <br>ftp <br>gd <br>gender | geoip <br>gettext <br>gmagick <br>gmp <br>gnupg <br>gRPC <br>hash <br>htscanner <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>json <br>ldap <br>libsodium <br>libxml <br>lzf <br>mailparse <br>mbstring <br>mcrypt | memcached <br>mongodb <br>mysqli <br>mysqlnd <br>nd_mysqli <br>nd_pdo_mysql <br>_newrelic_ <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pdo_sqlsrv <br>pgsql <br>phalcon3 <br>phar | posix <br>propro <br>pspell <br>raphf <br>rar <br>readline <br>redis <br>reflection <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>sqlite3 <br>sqlsrv <br>ssh2 <br>standard <br>stats <br>suhosin <br>sysvmsg | sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>uploadprogress <br>uuid <br>vips <br>wddx <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>yaml <br>yaz <br>zip <br>zlib <br>zmq|
 </div>
 
-* Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
+::: tip Note
+To use <span class="notranslate">`newrelic`</span> extension you should set your own <span class="notranslate">`New Relic License Key`</span> in your own <span class="notranslate">`/opt/alt/php7*/etc/php.ini`</span> file.
+Please find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate">[New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
+:::
 
 
 #### PHP 7.1 extensions
@@ -5223,8 +5225,10 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 |apcu <br>bcmath <br>brotli <br>bz2 <br>calendar <br>core <br>ctype <br>curl <br>date <br>dba <br>dbase <br>dom <br>eio <br>enchant <br>exif <br>fileinfo <br>filter <br>ftp <br>gd <br>gender <br>geoip <br>gettext | gmagick <br>gmp <br>gnupg <br>gRPC <br>hash <br>htscanner <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>json <br>ldap <br>libsodium <br>libxml <br>lzf <br>mailparse <br>mbstring <br>mcrypt <br>memcached | mongodb <br>mysqli <br>mysqlnd <br>nd_mysqli <br>nd_pdo_mysql <br>_newrelic_ <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pdo_sqlsrv <br>pgsql <br>phalcon3 <br>phar  | posix <br>propro <br>pspell <br>raphf <br>rar <br>readline <br>redis <br>reflection <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>sourceguardian <br>spl <br>sqlite3 <br>sqlsrv <br>ssh2 <br>standard <br>stats <br>suhosin <br>sysvmsg | sysvsem <br>sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>uploadprogress <br>uuid <br>vips <br>wddx <br>xdebug <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>yaml <br>zip <br>zlib <br>zmq|
 </div>
 
-* Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
+::: tip Note
+To use <span class="notranslate">`newrelic`</span> extension you should set your own <span class="notranslate">`New Relic License Key`</span> in your own <span class="notranslate">`/opt/alt/php7*/etc/php.ini`</span> file.
+Please find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate">[New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
+:::
 
 #### PHP 7.2 extensions
 
@@ -5236,8 +5240,10 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 |apcu <br>bcmath <br>brotli <br>bz2 <br>calendar <br>core <br>ctype <br>curl <br>date <br>dba <br>dom <br>eio <br>enchant <br>exif <br>fileinfo <br>filter <br>ftp <br>gd <br>gender <br>geoip <br>gettext | gmagick <br>gmp <br>gnupg <br>gRPC <br>hash <br>http <br>iconv <br>igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>ioncube_loader <br>json <br>ldap <br>libxml <br>lzf <br>mailparse <br>mbstring <br>memcached <br>mongodb | mysqli <br>mysqlnd <br>nd_mysqli <br>nd_pdo_mysql <br>_newrelic_ <br>oauth <br>oci8 <br>odbc <br>opcache <br>openssl <br>pcntl <br>pcre <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_mysql <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pdo_sqlsrv <br>pgsql <br>phalcon3 <br>phar | posix <br>propro <br>pspell <br>raphf <br>readline <br>redis <br>reflection <br>session <br>shmop <br>simplexml <br>snmp <br>soap <br>sockets <br>spl <br>sqlite3 <br>sqlsrv <br>ssh2 <br>standard <br>stats <br>sysvmsg <br>sysvsem | sysvshm <br>tidy <br>timezonedb <br>tokenizer <br>trader <br>uploadprogress <br>uuid <br>vips <br>wddx <br>xml <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>yaml <br>zip <br>zlib <br>zmq|
 </div>
 
-* Please note that to use <span class="notranslate"> **newrelic** </span> extension you should set your own <span class="notranslate"> _New Relic License Key_ </span> in your own <span class="notranslate"> _/opt/alt/php7*/etc/php.ini_ </span> file.
-Please find more info about <span class="notranslate"> New Relic License Key </span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key) </span>.
+::: tip Note 
+To use <span class="notranslate">`newrelic`</span> extension you should set your own <span class="notranslate">`New Relic License Key`</span> in your own <span class="notranslate">`/opt/alt/php7*/etc/php.ini`</span> file.
+You can find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate">[New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
+:::
 
 
 #### PHP 7.3 extensions
@@ -5252,8 +5258,18 @@ Please find more info about <span class="notranslate"> New Relic License Key </s
 
 :::tip Note
 To use <span class="notranslate">`newrelic`</span> extension you should set your own <span class="notranslate">`New Relic License Key`</span> in your own <span class="notranslate">`/opt/alt/php7*/etc/php.ini`</span> file.
-You can find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate"> [New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
+You can find more info about <span class="notranslate">New Relic License Key</span> in the <span class="notranslate">[New Relic documentation](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key)</span>.
 :::
+
+#### PHP 7.4 extensions
+
+
+<div class="notranslate">
+
+| |  |  |  | |
+|-|-|-|-|-|
+|apcu <br>eio <br>gender <br>geos <br>gmagick <br>gnupg | grpc <br>http <br>igbinary <br>imagick <br>inotify <br>leveldb |lzf <br>memcached <br>mongodb <br>pdf <br>pdo_sqlsrv <br>propro| raphf <br>redis <br>sqlsrv <br>stats <br>swoole <br>timezonedb | trader <br>uploadprogress <br>uuid <br>xdebug <br>yaml|
+</div>
 
 ## Python Selector
 
