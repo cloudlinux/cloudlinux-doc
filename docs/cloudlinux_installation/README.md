@@ -47,7 +47,7 @@ $ reboot
 ```
 </div>
 
-Once you have rebooted, you are running CloudLinux kernel with LVE enabled.
+Once you reboot, you are running CloudLinux kernel with LVE enabled.
 
 * For CloudLinux 6 — (RHEL) 2.6 kernel 
 * For CloudLinux 6 hybrid — (RHEL) 3.10 kernel
@@ -230,6 +230,27 @@ Once you install server from the ISO, make sure you [register your system](/clou
 :::warning Note
 We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
 :::
+
+
+## Installing CloudLinux OS 8 beta from ISO image
+
+You can download and install CloudLinux OS 8 beta from [this ISO image](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-netinst-x86_64-8.1.beta.iso). Mount and boot the image, then follow the following steps.
+
+
+1. Configure a network connection as shown below.
+   
+   ![](/images/network_settings.png)
+
+2. Configure installation sources:
+   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/`</span>.
+   * also, add the additional AppStream repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/`</span>
+   
+   ![](/images/repository_settings.png)
+
+3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
+   
+   ![](/images/software_selection.png)
+
 
 
 
