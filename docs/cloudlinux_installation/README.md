@@ -15,35 +15,61 @@ At this moment we are aware of only one such case:
 
 ## Converting existing servers
 
-It is easy to switch server from CentOS 6.x or 7.x to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+It is easy to convert your existing CentOS 6.x, 7.x, 8.x server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
-* Download script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
-* Execute <span class="notranslate">`sh cldeploy -k <activation_key>`</span> (if you have IP based license, execute <span class="notranslate">`sh cldeploy -i`</span>).
-* Reboot.
+* Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
+* If you have an activation key, run the following commands:
+  
+<div class="notranslate">
 
-If you have activation key:
-<span class="notranslate"> </span>
 ```
 $ wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
 $ sh cldeploy -k <activation_key>
 ```
-If you have IP-based license:
-<span class="notranslate"> </span>
+</div>
+
+* If you have an IP-based license, run the following commands:
+  
+<div class="notranslate">
+
 ```
 $ sh cldeploy -i
+```
+</div>
+
+* Reboot by running the following command:
+  
+<div class="notranslate">
+
+```
 $ reboot
 ```
+</div>
 
 Once you have rebooted, you are running CloudLinux kernel with LVE enabled.
 
+* For CloudLinux 6 — (RHEL) 2.6 kernel 
+* For CloudLinux 6 hybrid — (RHEL) 3.10 kernel
+* For CloudLinux 7 — (RHEL) 3.10 kernel
+* For CloudLinux 7 hybrid —  (RHEL) 4.18 kernel
+* For CloudLinux 8 —  CloudLinux 8 will follow the upstream (RHEL) 4.18 kernel mainline. All CloudLinux-specific features are added as a separate module (lve-kmod).
+
 The script automatically detects and supports the following control panels:
-* cPanel with EA4 (EA3 till September 1st.)
+* cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
 * Plesk
 * DirectAdmin
-* InterWorx.
+* InterWorx <sup>*</sup>
   
 It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cagefs/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
+
+:::tip *
+For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. LVE Manager is not installed.
+:::
+
+:::warning Warning
+Note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+:::
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
@@ -71,11 +97,38 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 * Checks that <span class="notranslate">`/etc/fstab`</span> has correct <span class="notranslate">`/dev/root`</span>
 * Checks for efi.
 * Installs CL kernel, lve-utils, liblve, lve-stats RPMs.
-* Installs LVE Manager for cPanel, Plesk, DirectAdmin, ISPManager & InterWorx
-* Installs mod_hostinglimits apache module:
+* Installs LVE Manager for cPanel, Plesk, DirectAdmin, and ISPManager<sup>*</sup>
+* Installs mod_hostinglimits Apache module <sup>*</sup>:
   * RPM install for Plesk, ISPManager & InterWorx;
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
   * custombuild for DirectAdmin.
+
+:::warning *
+Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+:::
+
+#### CloudLinux 8 kernel-related features and improvements
+
+#### Memory
+
+* Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
+* Non-Uniform Memory Access (NUMA) node count has been increased from 4 NUMA nodes to 8 NUMA nodes, for even bigger servers.
+
+#### Security
+
+* Code implementing the ext4 file system has been cleaned up, making it better at preventing malicious file system images.
+* The TCP listener handling is now completely lockless, making TCP servers faster and more scalable, and improving protection against DDoS attacks.
+
+#### Performance
+
+* Spectre V2 mitigation default changed from IBRS to Retpolines for better performance.
+* Intel Omni-Path Architecture (OPA) provides Host Fabric Interface (HFI) hardware with initialization and setup for high-performance data transfers. This gives you high bandwidth, high message rates, and low latency between compute and I/O nodes in clustered environments.
+* IOMMU passthrough is now enabled by default. This is beneficial for customers who want to pass-through hardware devices to virtual machines.
+* A new writecache module has been implemented for the Device Mapper, allowing SSD drives or other persistent memory to be used as a cache for block write operations. (Note, Caching of read operations is not implemented, since such operations are cached in the RAM pages cache.)
+* A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
+* Improvements were made to on-the-fly resizing of file systems that use bigalloc.
+* On ext4 file systems, inode generation scalability on SMP systems is improved.
+
 
 Script for converting back:
 
@@ -85,9 +138,14 @@ Script for converting back:
 
 The kernel is not removed - to prevent condition when server has no kernels and wouldn't boot. The command line to remove the kernel is provided.
 
-On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.
+On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
 
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
+
+:::warning *
+Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+:::
+
 
 
 #### Common issues and troubleshooting during conversion
