@@ -7324,7 +7324,6 @@ See next table for more details:
 |Could not determine uid/gid for request |No need to check this log.  | UID/GID are not set in  virtualhost. Set <span class="notranslate"> lsapi_use_default_uid On </span> in lsapi.conf (it is <span class="notranslate"> On </span> by default since 0.1-98 version, this solution is for older versions).|
 |Own id for script file (/xxxx/xxx/xxxx) is xxx; should be xxxx |No need to check this log.  | File is not owned by the user PHP executed by. To overwrite (insecure), set <span class="notranslate"> lsapi_target_perm Off </span> in lsapi.conf. |
 |Could not connect to lsphp backend: connect to lsphp failed: 111 Connection refused |Entering jail error  | Check if СageFS enabled. Try running <span class="notranslate"> cagefsctl --remount-all. </span>|
-|connect_lsphp: connect to lsphp failed: tries XXX exceeded with timeout XXXXX  Could not connect to lsphp backend: connect to lsphp failed: 111 Connection refused |uid: (xxx/xxxxxxxx)  gid: (xxx/xxxxxxxxxx)  cmd: /usr/local/bin/lsphp | Check if <span class="notranslate"> /tmp/lshttpd (global /tmp </span> is not inside CageFS) exists and owner should be apache: apache for DirectAdmin, Plesk, iWorx, ISPManager and nobody for cPanel.|
 |Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: backend process reset connection: errno 104 (possibly memory limit for LVE ID XXXX too small) |uid: (xxx/xxxxxxxx)  gid: (xxx/xxxxxxxxxx)  cmd: /usr/local/bin/lsphp  | Increase PMEM limits for the user UID.|
 |Reached max children process limit: XX, extra: 0, current: XX, please increase LSAPI_CHILDREN.<br><br>Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: backend process reset connection: errno 104 (possibly memory limit for LVE ID XXXX too small) |uid: (xxx/xxxxxxxx)  gid: (xxx/xxxxxxxxxx)  cmd: /usr/local/bin/lsphp  | Increase value of <span class="notranslate"> lsapi_backend_children </span> for UID in vhost.conf or globally in lsapi.conf.|
 |fork() failed, please increase process limit: Cannot allocate memory<br><br>Backend error on sending request(GET /XXXX HTTP/1.1); uri(/XXXX) content-length(0) (lsphp is killed?): ReceiveAckHdr: backend process reset connection: errno 104 (possibly memory limit for LVE ID XXXX too small) |uid:(xxx); gid:(xxx); uid limit warning: EP should be < than NPROC, current EP: XX, NPROC: XX<br><br>uid: (xxx/xxxxxxxx) gid: (xxx/xxxxxxxxxx) cmd: /usr/local/bin/lsphp  | Increase NPROC limits for the UID. It should be greater than EP and <span class="notranslate"> lsapi_backend_children. </span>|
@@ -7357,7 +7356,7 @@ This will:<br>
 
 Check if SuExecUserGroup specified for virtual hosts. This parameter is used by mod_lsapi for user identification.
 
-**Could not connect to lsphp backend: connect(/tmp/lshttpd/lsapi_application-x-httpd-lsphp_XXX.sock) failed: 111 Connection refused**
+**Could not connect to lsphp backend: connect failed: 111 Connection refused**
 
 * Switch in lsapi.conf or <span class="notranslate"> mod_lsapi.conf </span> value to: <span class="notranslate"> lsapi_terminate_backends_on_exit Off </span>
 
