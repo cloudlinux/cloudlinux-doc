@@ -8738,7 +8738,22 @@ You can use the following commands that allow to specify user name instead of us
 |<span class="notranslate"> `list-user  ` </span> | List loaded LVEs, display username instead of user ID.|
 |<span class="notranslate"> `delete-user ` </span> | Delete LVE and set configuration for that user to defaults.|
 
-If the limits for users are set with <span class="notranslate"> cPanel LVE Extension </span>, then turnkey billing solutions can be applied (e.g. WHMCS).
+If the limits for users are set with <span class="notranslate"> cPanel LVE Extension</span>, then turnkey billing solutions can be applied (e.g. WHMCS).
+
+
+#### lvectl commands in the cPanel/WHM JSON API (JSONHandler)
+
+|  |  |  |
+|----|----|--|
+|**Action**|**lvectl command**|**JSONHandler**|
+|enable  reseller limits|<span class="notranslate">`lvectl set-reseller res1 --speed=35%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-reseller&lveid=res1&speed=30%&io=2048`|
+|disable reseller limits|<span class="notranslate">`lvectl remove-reseller res1`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=remove-reseller&lveid=res1`|
+|set default limits for reseller|<span class="notranslate">`lvectl set-reseller-default res1 --speed=91%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-reseller-default&lveid=res1&speed=30%`|
+|set limits for package, created by reseller|<span class="notranslate">`lvectl package-set res1_pack1 --reseller res1 --speed=88%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=package-set&lveid=res1_pack1&reseller=res1&speed=30%`|
+|set limits for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --speed=77%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&speed=30%`|
+|set unlimited for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --unlimited`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&unlimited`|
+
+
 
 ### mod_proctitle
 
