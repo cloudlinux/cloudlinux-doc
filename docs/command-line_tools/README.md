@@ -1385,6 +1385,8 @@ All end user settings are contained in individual user's alt_php.ini files and c
 | |<span class="notranslate"> $ selectorctl --enable-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
 |<span class="notranslate"> --disable-user-extensions (-d): </span> | Disables extensions provided as comma-separated list. Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
 | |<span class="notranslate"> $ selectorctl --disable-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
+|<span class="notranslate">--for-all-users:</span> | Allows to enable/disable extensions for all users with the required PHP version. Works only with <span class="notranslate">`--enable-user-extensions`</span> or <span class="notranslate">`--disable-user-extensions`</span> option.|
+| |<span class="notranslate">`$ selectorctl --enable-user-extensions=gd --version=5.3 --for-all-users`</span><br><br><span class="notranslate">`$ selectorctl  --disable-user-extensions=gd --version=5.3 --for-all-users`</span>|
 |<span class="notranslate"> --replace-user-extensions (-r): </span> | Replaces extensions with a provided comma-separated list of extensions Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options:|
 | |<span class="notranslate"> $ selectorctl --replace-user-extensions=pdo,phar --version=5.2 --user=user1 </span>|
 |<span class="notranslate"> --reset-user-extensions (-t): </span> | Resets extensions for end user to default list of extensions as defined in <span class="notranslate"> default.cfg </span> . Requires <span class="notranslate"> `--version` </span> and <span class="notranslate"> `--user` </span> options.|
