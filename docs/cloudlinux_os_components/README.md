@@ -8741,7 +8741,7 @@ You can use the following commands that allow to specify user name instead of us
 If the limits for users are set with <span class="notranslate"> cPanel LVE Extension</span>, then turnkey billing solutions can be applied (e.g. WHMCS).
 
 
-#### lvectl commands in the cPanel/WHM JSON API (JSONHandler)
+#### Manage reseller limits/users/packages via cPanel/WHM JSON API (JSONHandler)
 
 |  |  |  |
 |----|----|--|
