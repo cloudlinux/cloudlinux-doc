@@ -159,7 +159,7 @@ Please note that CloudLinux 8 is not supported by control panels automatically y
 ## Activation
 ### Getting trial license
 
-You will need a trial activation key to be able to convert your CentOS server to CloudLinux.  The trial subscription will work for 30 days.
+You will need a trial activation key to be able to convert your CentOS server to CloudLinux. The trial license subscription will work for 30 days.
 
 If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
 

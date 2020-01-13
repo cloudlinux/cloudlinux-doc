@@ -2649,7 +2649,7 @@ $ cldeploy --hostinglimits           # update httpd and install mod_hostinglimit
 
 **lvectl syntax**
 
-**Usage**: <span class="notranslate">`lvectl command [veid] [options]`</span>
+**Usage**: <span class="notranslate">`lvectl command [lveid] [options]`</span>
 
 **Commands**
 
