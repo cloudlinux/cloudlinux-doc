@@ -6027,7 +6027,7 @@ To use <span class="notranslate">Node.js Selector</span>, install <span class="n
 <div class="notranslate">
 
 ```
-yum groupinstall alt-nodejs6 alt-nodejs8 alt-nodejs9
+yum groupinstall alt-nodejs
 ```
 </div>
 Also, please install <span class="notranslate"> LVE Manager, LVE Utils and Fusion Passenger </span> by running the following command:
