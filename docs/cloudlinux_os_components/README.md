@@ -1756,6 +1756,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
   
   * [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)  
 
+  * [How to hide directory inside mount point](/cloudlinux_os_components/#how-to-hide-directory-inside-mount-point)
+
 * [Base home directory](/cloudlinux_os_components/#base-home-directory)
 
 * [PostgreSQL support](/cloudlinux_os_components/#postgresql-support)
@@ -2071,6 +2073,30 @@ This new mounting mode is enabled by default. You can switch to old mounting mod
 :::tip Note
 New mounting mode will be disabled automatically when "mounting base home directory" mode is enabled <span class="notranslate"> (`mount_basedir=1` setting in _/etc/cagefs/cagefs.base.home.dirs_ </span> file).
 :::
+
+#### How to hide directory inside mount point <sup><Badge type="warning" text="CageFS 6.4.7-1 +"/></sup>
+
+:::tip Note
+For files outside a mount point, use blacklisting, see: [Excluding files](/cloudlinux_os_components/#excluding-files)
+:::
+
+To hide directories inside a mount point, create a file in the <span class="notranslate">`/etc/cagefs/empty.dirs`</span> directory (you can use any name) with a list of directories to be hidden (these directories will look like empty for users in CageFS).
+:::tip Note
+Please do not edit the supplied config file (<span class="notranslate">`/etc/cagefs/empty.dirs/emptied_dirs.default`</span>).
+:::
+
+#### Example
+
+Let’s take a <span class="notranslate">`/var/www`</span> directory which contains the following folders: <span class="notranslate">`icons`</span> and <span class="notranslate">`html`</span>.
+To hide the <span class="notranslate">`/var/www`</span> directory content from users inside CageFS, we will do the following:
+
+* Create the <span class="notranslate">`custom.empty`</span> file with a single record: <span class="notranslate">`/var/www`</span>
+* Place the <span class="notranslate">`custom.empty`</span> file to the <span class="notranslate">`/etc/cagefs/empty.dirs`</span> directory
+* Run the <span class="notranslate">`cagefs --remount-all`</span> command
+
+Now, all users inside CageFS will see the <span class="notranslate">`/var/www`</span> directory as an empty directory even if there is <span class="notranslate">`/var/www/html`</span> in the <span class="notranslate">`/etc/cagefs/cagefs.mp`</span>.
+
+
 
 #### Base home directory
 
