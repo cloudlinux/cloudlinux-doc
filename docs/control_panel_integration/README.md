@@ -520,7 +520,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 <div class="notranslate">
 
 ```
-/scripts/users --filter=id,email
+/scripts/users --fields=id,email
 ```
 </div>
 
