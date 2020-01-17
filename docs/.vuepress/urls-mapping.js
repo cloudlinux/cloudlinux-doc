@@ -2423,5 +2423,6 @@ module.exports = {
   "/cldiag.html#check_phpselector": "/command-line_tools/#cldiag",
   "/control_panel_integration/#expected-structure-of-replies": "/control_panel_integration/#expected-scripts-responses",
   "/ru/cldiag.html#check_phpselector": "/ru/command-line_tools/#cldiag",
-  "/ru/control_panel_integration/#expected-structure-of-replies": "/ru/control_panel_integration/#expected-scripts-responses"
+  "/ru/control_panel_integration/#expected-structure-of-replies": "/ru/control_panel_integration/#expected-scripts-responses",
+  "/cldiag.html#check_suexec": "/cloudlinux_os_components/#apache-suexec-module"
 };
