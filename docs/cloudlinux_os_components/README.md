@@ -6370,6 +6370,7 @@ Installation process is done with custombuild script:
 <div class="notranslate">
 
 ```
+$ yum install liblsapi liblsapi-devel
 $ cd /usr/local/directadmin/custombuild
 $ ./build update
 $ ./build set php1_mode lsphp
