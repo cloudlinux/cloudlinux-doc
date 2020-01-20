@@ -240,9 +240,12 @@ fs.protected_hardlinks_create = 1
 We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
 :::   
 
-Here are some examples of what may go wrong on cPanel servers. If _fs.protected_symlinks_create=1_ is set on the server, it can cause the following issues:
-* rsync is failed
-If you use the _rsync_ to copy/transfer files and they contain symlinks, you'll see the errors like these:
+Here are some examples of what may go wrong on cPanel servers. If <span class="notranslate">`fs.protected_symlinks_create=1`</span> is set on the server, it can cause the following issues:
+
+* `rsync` is failed
+
+If you use the `rsync` to copy/transfer files and they contain symlinks, you'll see the errors like these:
+
 <div class="notranslate">
 
 ```
@@ -250,9 +253,10 @@ If you use the _rsync_ to copy/transfer files and they contain symlinks, you'll 
 ```
 </div> 
 
- It affects rsync tasks as well as cPanel transfer tools.
+ It affects `rsync` tasks as well as cPanel transfer tools.
 
-* Backup extracting may not work. Errors during the restoration:
+* backup extracting may not work. Errors during the restoration:
+  
 <div class="notranslate">
 
 ```
@@ -263,7 +267,8 @@ Permission denied. /bin/tar: .cagefs/tmp/.s.PGSQL.5432: Cannot create symlink to
 
  Any backup for accounts (including cPanel backup) cannot be extracted.
 
-* dmesg is flooded with the _may_create_sym_link_ messages like:
+* `dmesg` is flooded with the <span class="notranslate">`may_create_sym_link`</span> messages like:
+
 <div class="notranslate">
 
 ```
@@ -273,7 +278,7 @@ etc
 ```
 </div> 
 
- It's popping up each second and may increase the size of /var/log/messages file.
+ It's popping up each second and may increase the size of the <span class="notranslate">`/var/log/messages`</span> file.
 
 
 ::: tip Note
@@ -1055,7 +1060,7 @@ _For <span class="notranslate"> CloudLinux </span> 7:_
 ```
 </div>
 
-Also, add the following to <span class="notranslate"> _/etc/sysctl.conf_ </span> file to apply the same during boot:
+Also, add the following to <span class="notranslate">`/etc/sysctl.conf`</span> file to apply the same during boot:
 <div class="notranslate">
 
 ```
@@ -1067,9 +1072,9 @@ kernel.memcg_oom_disable=1
 ## File system quotas
 
 
-In <span class="notranslate"> **Ext4** </span> file system, the process with enabled capability <span class="notranslate"> CAP_SYS_RESOURCE </span> is not checked on the quota exceeding by default. It allows userland utilities <span class="notranslate"> _selectorctl_ </span> and <span class="notranslate"> _cagefs_ </span> to operate without fails even if a user exceeds a quota.
+In <span class="notranslate">**Ext4**</span> file system, the process with enabled capability <span class="notranslate"> CAP_SYS_RESOURCE </span> is not checked on the quota exceeding by default. It allows userland utilities <span class="notranslate"> _selectorctl_ </span> and <span class="notranslate"> _cagefs_ </span> to operate without fails even if a user exceeds a quota.
 
-To disable quota checking in <span class="notranslate"> **XFS** </span> file system set <span class="notranslate"> _cap_res_quota_disable_ </span> option to 1 using the following command:
+To disable quota checking in <span class="notranslate">**XFS**</span> file system set <span class="notranslate">`cap_res_quota_disable`</span> option to 1 using the following command:
 <div class="notranslate">
 
 ```
