@@ -240,6 +240,8 @@ fs.protected_hardlinks_create = 1
 We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
 :::   
 
+#### Known issues with fs.protected_symlinks_create=1 on cPanel servers
+
 Here are some examples of what may go wrong on cPanel servers. If <span class="notranslate">`fs.protected_symlinks_create=1`</span> is set on the server, it can cause the following issues:
 
 * `rsync` is failed
