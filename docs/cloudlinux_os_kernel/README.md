@@ -240,6 +240,42 @@ fs.protected_hardlinks_create = 1
 We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
 :::   
 
+Here are some examples of what may go wrong on cPanel servers. If _fs.protected_symlinks_create=1_ is set on the server, it can cause the following issues:
+* rsync is failed
+If you use the _rsync_ to copy/transfer files and they contain symlinks, you'll see the errors like these:
+<div class="notranslate">
+
+```
+"rsync error: some files could not be transferred (code 23)" and the transfer will be failed. 
+```
+</div> 
+
+ It affects rsync tasks as well as cPanel transfer tools.
+
+* Backup extracting may not work. Errors during the restoration:
+<div class="notranslate">
+
+```
+Error extracting /home/domain/backups/home.tar.gz : /bin/tar: .cagefs/tmp/mysql.sock: Cannot create symlink to `/var/lib/mysql/mysql.sock'.
+Permission denied. /bin/tar: .cagefs/tmp/.s.PGSQL.5432: Cannot create symlink to `/var/run/postgres/.s.PGSQL.5432': No such file or directory.
+```
+</div> 
+
+ Any backup for accounts (including cPanel backup) cannot be extracted.
+
+* dmesg is flooded with the _may_create_sym_link_ messages like:
+<div class="notranslate">
+
+```
+may_create_sym_link: can't find ea-phpXX in cron
+may_create_sym_link: can't find ea-phpXX in ea-php-cli
+etc
+```
+</div> 
+
+ It's popping up each second and may increase the size of /var/log/messages file.
+
+
 ::: tip Note
 Link Traversal Protection is disabled by default for the new CloudLinux OS installations/convertations.
 :::
