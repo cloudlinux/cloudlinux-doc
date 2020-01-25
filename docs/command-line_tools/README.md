@@ -3176,7 +3176,7 @@ Options marked with `*` are for reseller use only
 <div class="notranslate">
 
 ```
-$ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}‌}}'
+$ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":false, "hidePythonApp":false}}}'
 ```
 </div>
 
