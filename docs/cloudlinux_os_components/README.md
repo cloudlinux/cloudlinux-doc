@@ -1785,7 +1785,11 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 
 #### File system templates
 
-CageFS creates a filesystem template in <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> directory. CageFS template will be mounted for each customer.  The template is created by running:
+:::warning Note
+Please do not modify any existing files in the <span class="notranslate">`/etc/cagefs/conf.d`</span> directory because they may be overwritten while updating CageFS package. You should create a new file with a unique name instead.
+:::
+
+CageFS creates a filesystem template in <span class="notranslate">`/usr/share/cagefs-skeleton`</span> directory. CageFS template will be mounted for each customer. The template is created by running:
 <div class="notranslate">
 
 ```
