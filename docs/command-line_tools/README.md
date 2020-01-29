@@ -2587,6 +2587,7 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 * [cldiag](/command-line_tools/#cldiag)
 * [cloudlinux-config](/command-line_tools/#cloudlinux-config)
 * [cl-quota](/command-line_tools/#cl-quota)
+* [cloudlinux-limits](/command-line_tools/#cloudlinux-limits)
 
 
 ### cldeploy
@@ -3457,3 +3458,321 @@ Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoi
 # cl-quota -YC
 ```
 </div>
+
+
+### cloudlinux-limits
+
+<span class="notranslate">`cloudlinux-limits`</span> is an alternative to `lvectl` CLI tool for LVE management. <span class="notranslate">`cloudlinux-limits`</span> utility allows you to get/set any CloudLinux limits.
+
+#### Usage:
+
+<div class="notranslate">
+
+```
+cloudlinux-limits command [options] [options]
+```
+</div>
+
+#### Commands
+
+| | |
+|-|-|
+|<span class="notranslate">`set`</span>|set parameters for <span class="notranslate">LVE/username/reseller</span>|
+|<span class="notranslate">`get`</span> |get information about <span class="notranslate">LVE/username/reseller</span>|
+
+#### Options
+
+| | |
+|-|-|
+|<span class="notranslate">`--json`</span>|return data in JSON format|
+|<span class="notranslate">`--lve-id <int>`</span>|Display record only for that LVE ID|
+|<span class="notranslate">`--username <str>`</span>|Execute command only for that specific user|
+|<span class="notranslate">`--reseller-name <str>`</span>|Execute command only for that specific reseller|
+|<span class="notranslate">`--reseller-id <int>`</span>|Execute command only for that specific reseller ID|
+|<span class="notranslate">`--all`</span>|Execute command for all resellers|
+|<span class="notranslate">`--for-reseller <str>`</span>|Use a supplied reseller for get/set data|
+|<span class="notranslate">`--domain <str>`</span>|Show data only for that specific domain|
+|<span class="notranslate">`--limits <keys>`</span>|Available keys: <span class="notranslate">`speed`</span>, <span class="notranslate">`nproc`</span>, <span class="notranslate">`pmem`</span>, <span class="notranslate">`vmem`</span>, <span class="notranslate">`maxEntryProcs`</span>, <span class="notranslate">`io`</span>, <span class="notranslate">`iops`</span>, <span class="notranslate">`mysql-gov`</span>, <span class="notranslate">`mysql-cpu`</span>, <span class="notranslate">`mysql-io`</span>, <span class="notranslate">`cagefs`</span>, <span class="notranslate">`inodes`</span>|
+|<span class="notranslate">`--human-readable-numbers`</span>|Return <span class="notranslate">`PMEM`</span> and <span class="notranslate">`VMEM`</span> limits in KBytes, MBytes or GBytes|
+|<span class="notranslate">`--unlimited`</span>|Set all limits to unlimited|
+|<span class="notranslate">`--default [limits]`</span>|Reset limits to the Package defaults. List of comma-separated limits to reset them to default or <span class="notranslate">`all`</span>|
+|<span class="notranslate">`--mysql-gov <ignored|watched>`</span>|Monitor or ignore by MySQL Governor|
+|<span class="notranslate">`--cagefs <enabled|disabled>`</span>|Enable or disable CageFS for a user|
+|<span class="notranslate">`--mysql-restrict <[un]restricted>`</span>|Set user restrict status with dbctl (<span class="notranslate">`restricted`</span> or <span class="notranslate">`unrestricted`</span>)|
+|<span class="notranslate">`--mysql-unrestrict-all`</span>|Unrestrict all restricted users with dbctl|
+|<span class="notranslate">`--speed <str>`</span>|Limit CPU usage for LVE | LVP|
+|<span class="notranslate">`--pmem <str>`</span>|Limit physical memory usage for applications inside LVE | LVP|
+|<span class="notranslate">`--vmem <str>`</span>|Limit virtual memory for applications inside LVE|
+|<span class="notranslate">`--nproc <str>`</span>|Limit number of processes for LVE | LVP|
+|<span class="notranslate">`--io <str>`</span>|Define IO limits for LVE | LVP (KB/s)|
+|<span class="notranslate">`--iops <str>`</span>|Limit IO per second for LVE | LVP|
+|<span class="notranslate">`--maxEntryProcs <str>`</span>|Limit number of entry processes for LVE | LVP|
+|<span class="notranslate">`--mysql-cpu <int>`</span>|Set MySQL Governor CPU limit (pct)|
+|<span class="notranslate">`--mysql-io <int>`</span>|Set MySQL Governor IO limit (read + write MB/s)|
+|<span class="notranslate">`--inodes <N,M>`</span>|Set inode limits. `N` - soft, `M` - hard|
+|<span class="notranslate">`--save-all-parameters`</span>|Save all parameters even if they match with default settings|
+|<span class="notranslate">`-h`</span>, <span class="notranslate">`--help`</span>|Show this help message and exit|
+|<span class="notranslate">`disable-reseller-limits`</span> |disable <span class="notranslate">Reseller Limits</span> for a reseller/all resellers|
+|<span class="notranslate">`enable-reseller-limits`</span> |enable <span class="notranslate">Reseller Limits</span> for a reseller/all resellers|
+
+<span class="notranslate">`cloudlinux-limits`</span> allows you to manage limits and states for the next types of users:
+
+* users, created by admin; 
+* users, created by resellers with reseller limits enabled (see [documentation](/cloudlinux_os_components/#reseller-limits))
+* users, created by resellers without reseller limits enabled. 
+
+For resellers' users with reseller limits enabled admin should use the <span class="notranslate">`--for-reseller`</span> option.
+
+#### Examples
+
+1. Get limits
+
+     * Return data in JSON format
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --json 
+    ```
+    </div>
+
+    * Get data for the user <span class="notranslate">`user1`</span> in JSON format
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --username user1  --json 
+    ```
+    </div>
+
+    * Get data for the reseller <span class="notranslate">`res1`</span> in JSON format
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --reseller-name res1 --json
+    ```
+    </div>
+
+    * Get data for the domain <span class="notranslate">`myapp.com`</span> in JSON format
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --domain myapp.com --json
+    ```
+    </div>
+
+    * Get data about entry processes and virtual memory for LVE for the user <span class="notranslate">`myapp`</span> in JSON format
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --username myapp --limits=maxEntryProcs,vmem  --json
+    ```
+    </div>
+
+2. Change CageFS status
+    :::warning Note
+    * CageFS should be installed and initialized
+    * <span class="notranslate">`--cagefs`</span> option is not compatible with the <span class="notranslate">`--reseller-name`</span>, <span class="notranslate">`--for-reseller`</span> options
+    :::
+
+    * Enable CageFS for the user <span class="notranslate">`user1`</span>.
+    :::tip Note
+    This example is suitable for any type of user.
+    :::
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username user1 --cagefs enable --json
+    ```
+    </div>
+
+3. Change <span class="notranslate">MySQL Governor</span> status <span class="notranslate">`ignored`|`watched`, `restricted`|`unrestricted`</span>
+    :::warning Note
+    * <span class="notranslate">MySQL Governor</span> should be installed; see [documentation](/cloudlinux_os_components/#installation-and-update-3)
+    * <span class="notranslate">`--mysql-gov`</span> and <span class="notranslate">`--mysql-restrict`</span> options are not compatible with the <span class="notranslate">`--reseller-name`</span>, <span class="notranslate">`--for-reseller`</span> options
+    :::
+
+    :::tip Note
+    These examples are suitable for any type of user.
+    :::
+
+    * Change <span class="notranslate">MySQL Governor</span> status to <span class="notranslate">`ignored`</span> for the user <span class="notranslate">`user1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username user1 --mysql-gov ignored --json
+    ```
+    </div>
+
+
+    * Change <span class="notranslate">MySQL Governor</span> status to <span class="notranslate">`restricted`</span> for the user <span class="notranslate">`user1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username user1 --mysql-restrict restricted --json
+    ```
+    </div>
+
+4. Change limits for a user
+    :::warning Note
+    *  <span class="notranslat">MySQL Governor</span> should be [installed](/cloudlinux_os_components/#installation-and-update-3) to change the <span class="notranslate">`mysql-cpu`</span> and <span class="notranslate">`mysql-io`</span> options
+    *  <span class="notranslate">`--inodes`</span>, <span class="notranslate">`--mysql-cpu`</span>, and <span class="notranslate">`--mysql-io`</span> options are not compatible with the <span class="notranslate">`--for-reseller`</span> and <span class="notranslate">`--reseller-name`</span> options
+    *  <span class="notranslate">`--username`</span> option is suitable for any type of user
+    :::
+
+    * Set <span class="notranslate">`speed`</span>, <span class="notranslate">`io`</span>, <span class="notranslate">`nproc`</span>, <span class="notranslate">`pmem`</span>, <span class="notranslate">`vmem`</span>, <span class="notranslate">`iops`</span>, <span class="notranslate">`inodes`</span>, <span class="notranslate">`maxEntryProcs`</span>, <span class="notranslate">`mysql-cpu`</span>, and <span class="notranslate">`mysql-io`</span> limits for the LVE ID 1000
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --lve-id 1000 --speed 78% --io 8090 --nproc 900 --pmem 300 --vmem 800 --iops 900 --inodes 9090,8989 --maxEntryProcs 90 --mysql-cpu 30 --mysql-io 500 --json 
+    ```
+    </div>
+
+    * Set <span class="notranslate">`speed`</span>, <span class="notranslate">`io`</span>, <span class="notranslate">`nproc`</span>, <span class="notranslate">`pmem`</span>, <span class="notranslate">`vmem`</span>, <span class="notranslate">`iops`</span>, and <span class="notranslate">`maxEntryProcs`</span> limits for the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --reseller-name res1 --speed 78% --io 8090 --nproc 900 --pmem 300 --vmem 800 --iops 900 --maxEntryProcs 90 --json
+    ```
+    </div>
+
+5. Set limits for a <span class="notranslate">`DEFAULT`</span> user 
+   :::tip Note
+   A <span class="notranslate">`default`</span> user is used to set some preselected limits for just created user\package.
+   :::
+ 
+    * Set limits for the admin's <span class="notranslate">`default`</span> user
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --lve-id DEFAULT --speed 78% --io 8090 --nproc 900 --pmem 300 --vmem 800 --iops 900 --inodes 9090,8989 --maxEntryProcs 90 --mysql-cpu 30 --mysql-io 500 --json
+    ```
+    </div>
+
+
+    * Set limits for the reseller's (with reseller limits enabled) <span class="notranslate">`default`</span> user
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --lve-id DEFAULT --speed 48% --io 8990 --nproc 900 --pmem 300 --vmem 800 --iops 900 --maxEntryProcs 90 --for-reseller res1 --json
+    ```
+    </div>
+
+6. Reset all limits to default values (package limits) for a user
+
+    * Reset all limits to default values for the user <span class="notranslate">`user1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username user1 --default all --json
+    ```
+    </div>
+
+    * Reset all limits to default values for the reseller's <span class="notranslate">`res1`</span> user <span class="notranslate">`r1user1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username r1user1 --default all --for-reseller res1 --json
+    ```
+    </div>
+
+7. Reset all limits to unlimited values for a user 
+
+    * Reset all limits to <span class="notranslate">`unlimited`</span> for the user <span class="notranslate">`user1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username user1 --unlimited --json
+    ```
+    </div>
+
+    * Reset all limits to <span class="notranslate">`unlimited`</span> for the reseller's <span class="notranslate">`res1`</span> user <span class="notranslate">`r1user1`</span> 
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --username r1user1 --unlimited --for-reseller res1 --json
+    ```
+    </div>
+
+8. Enable reseller limits
+
+    * Enable reseller limits for the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits enable-reseller-limits --reseller-name res1 --json
+    ```
+    </div>
+
+
+9. Get info about a reseller
+    
+    * Get info about the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits get --reseller-name res1 --json 
+    ```
+    </div>
+
+
+10. Change reseller limits
+    
+    * Change <span class="notranslate">`speed`</span> limit for the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --reseller-name res1 --speed 78% --json
+    ```
+    </div>
+
+    * Reset all limits to <span class="notranslate">`unlimited`</span> for the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --reseller-name res1 --unlimited --json
+    ```
+    </div>
+
+    * Reset all limits to <span class="notranslate">`default`</span> for the reseller <span class="notranslate">`res1`</span>
+
+    <div class="notranslate">
+
+    ```
+    cloudlinux-limits set --reseller-name res1 --default all --json
+    ```
+    </div>
+
+    
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
