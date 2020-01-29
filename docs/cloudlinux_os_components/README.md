@@ -2096,7 +2096,7 @@ To hide the <span class="notranslate">`/var/www`</span> directory content from u
 
 * Create the <span class="notranslate">`custom.empty`</span> file with a single record: <span class="notranslate">`/var/www`</span>
 * Place the <span class="notranslate">`custom.empty`</span> file to the <span class="notranslate">`/etc/cagefs/empty.dirs`</span> directory
-* Run the <span class="notranslate">`cagefs --remount-all`</span> command
+* Run the <span class="notranslate">`cagefsctl --remount-all`</span> command
 
 Now, all users inside CageFS will see the <span class="notranslate">`/var/www`</span> directory as an empty directory even if there is <span class="notranslate">`/var/www/html`</span> in the <span class="notranslate">`/etc/cagefs/cagefs.mp`</span>.
 
