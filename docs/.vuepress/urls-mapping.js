@@ -1687,8 +1687,6 @@ module.exports = {
   "/ru/mysql_governor.html": "/ru/cloudlinux_os_components/#mysql-governor",
   "/ru/index.html?mysql_governor.html": "/ru/cloudlinux_os_components/#mysql-governor",
   "/ru/mysql_governor/": "/ru/cloudlinux_os_components/#mysql-governor",
-  "/?mysql_governor.html(.*)": "/cloudlinux_os_components/#mysql-governor",
-  "/ru/?mysql_governor.html(.*)": "/ru/cloudlinux_os_components/#mysql-governor",
   "/ru/mysql_governor_installation.html/": "/ru/cloudlinux_os_components/#installation-and-update-3",
   "/ru/mysql_governor_installation.html": "/ru/cloudlinux_os_components/#installation-and-update-3",
   "/ru/index.html?mysql_governor_installation.html": "/ru/cloudlinux_os_components/#installation-and-update-3",
