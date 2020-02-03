@@ -5281,9 +5281,10 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
 
 <div class="notranslate">
 
-| |  |  |  | |
-|-|-|-|-|-|
-|apcu <br>bcmath <br>dba <br>dbase <br>dom <br>eio <br>enchant <br>fileinfo <br>gd <br>gender <br>geoip <br>gmagick <br>gnupg <br>grpc <br>http  | igbinary <br>imagick <br>imap <br>inotify <br>interbase <br>intl <br>json <br>ldap <br>lzf <br>mailparse <br>mbstring <br>memcached <br>mongodb <br>mysqlnd <br>nd_mysqli | nd_pdo_mysql <br>_newrelic_ <br>oauth <br>oci8 <br>odbc <br>opcache <br>pdf <br>pdo <br>pdo_dblib <br>pdo_firebird <br>pdo_oci <br>pdo_odbc <br>pdo_pgsql <br>pdo_sqlite <br>pdo_sqlsrv <br>pgsql | phar <br>posix <br>propro <br>pspell <br>raphf <br>redis <br>snmp <br>soap <br>sockets <br>sqlsrv <br>ssh2 <br>stats <br>sysvmsg <br>sysvsem <br>sysvshm <br>tidy | timezonedb <br>trader <br>uploadprogress <br>uuid <br>vips <br>wddx <br>xdebug <br>xmlreader <br>xmlrpc <br>xmlwriter <br>xsl <br>yaf <br>yaml <br>zip <br>zmq|
+| |  |  |  | | |
+|-|-|-|-|-|-|
+|apcu <br>enchant <br>gnupg <br>interbase <br>luasandbox <br>mysqlnd <br>opcache <br>pdo_pgsql <br>phar <br>snmp <br>stats <br>trader <br>xmlreader <br>bcmath <br>fileinfo |grpc <br>intl <br>lzf <br>nd_mysqli <br>pdf <br>pdo <br>posix <br>snuffleupagus <br>swoole <br>uploadprogress <br>xmlrpc <br>brotli <br>gd <br>http <br>ioncube_loader |mbstring <br>nd_pdo_mysql <br>pdo_dblib <br>pdo_sqlite <br>propro <br>soap <br>sysvmsg <br>uuid <br>xmlwriter <br>dbase <br>gender <br>igbinary <br>ixed.7.3.lin <br>mcrypt <br>newrelic |pdo_firebird <br>pdo_sqlsrv <br>pspell <br>sockets <br>sysvsem <br>vips <br>xsl <br>dba <br>geoip <br>imagick <br>json <br>memcached <br>oauth <br>pdo_mysql <br>pgsql |raphf <br>sodium <br>sysvshm <br>vld <br>yaml <br>dom <br>geos <br>imap <br>ldap <br>mongodb <br>oci8 <br>pdo_oci <br>phalcon3 <br>recode <br>sqlsrv |tidy <br>wddx <br>yaz <br>eio <br>gmagick <br>inotify <br>leveldb <br>mysqli <br>odbc <br>pdo_odbc <br>phalcon4 <br>redis <br>ssh2 <br>timezonedb <br>xdebug <br>zip| 
+
 </div>
 
 :::tip Note
@@ -5298,7 +5299,7 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
 
 | |  |  |  | |
 |-|-|-|-|-|
-|apcu <br>eio <br>gender <br>geos <br>gmagick <br>gnupg | grpc <br>http <br>igbinary <br>imagick <br>inotify <br>leveldb |lzf <br>memcached <br>mongodb <br>pdf <br>pdo_sqlsrv <br>propro| raphf <br>redis <br>sqlsrv <br>stats <br>swoole <br>timezonedb | trader <br>uploadprogress <br>uuid <br>xdebug <br>yaml|
+|apcu <br>eio <br>geos <br>imagick <br>leveldb <br>uuid <br>mysqli <br>odbc <br>pdo_oci <br>pgsql <br>raphf <br>sqlite3 <br>sysvshm <br>vips <br>yaml <br>bcmath <br>enchant | xsl <br>gmagick <br>imap <br>luasandbox <br>mysqlnd <br>opcache <br>pdo_odbc <br>phalcon4 <br>redis <br>sqlsrv <br>tidy <br>xdebug <br>zip <br>brotli <br>fileinfo <br>gnupg | inotify <br>lzf <br>nd_mysqli <br>pdf <br>pdo_pgsql <br>phar <br>snmp <br>stats <br>timezonedb <br>xmlreader <br>dbase <br>gd <br>grpc <br>intl <br>mbstring | nd_pdo_mysql <br>pdo_dblib <br>pdo <br>posix <br>soap <br>swoole <br>trader <br>xmlrpc <br>dba <br>gender <br>http <br>json <br>memcached <br>oauth <br>pdo_firebird | pdo_sqlite <br>propro <br>sockets <br>sysvmsg <br>uploadprogress <br>xmlwriter <br>dom <br>geoip <br>igbinary <br>ldap <br>mongodb <br>oci8 <br>pdo_mysql <br>pdo_sqlsrv <br>pspell <br>sodium <br>sysvsem | 
 </div>
 
 ## Python Selector
