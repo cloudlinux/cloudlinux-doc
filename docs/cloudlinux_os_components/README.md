@@ -3,6 +3,11 @@
 ## Reseller limits
 ### General information and requirements
 
+* [Types of Users](/cloudlinux_os_components/#types-of-users)
+* [Types of Limits](/cloudlinux_os_components/#types-of-limits)
+* [What happens when reseller or reseller's end user hits the limit?](/cloudlinux_os_components/#what-happens-when-reseller-or-reseller-s-end-user-hits-the-limit)
+* [Requirements](/cloudlinux_os_components/#requirements)
+
 <span class="notranslate">Reseller limits</span> is a feature that allows hosters to set limits for the resources each reseller can operate with. Hoster also provides controls to the reseller on what resources each reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
 
 When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
@@ -152,6 +157,11 @@ See also [Reseller limits UI](/lve_manager/#reseller-limits).
 
 ## LVE-Stats 2
 ### General information and requirements
+
+* [Why is it needed?](/cloudlinux_os_components/#why-is-it-needed)
+* [Major improvements and features](/cloudlinux_os_components/#major-improvements-and-features)
+* [What features will be implemented in the future?](/cloudlinux_os_components/#what-features-will-be-implemented-in-the-future)
+
 #### Why is it needed?
 
 * Old LVE-statistics store averages as integer numbers, as % of <span class="notranslate">CPU</span> usage. If user used 100% of <span class="notranslate">CPU</span> for 1 second within an hour, it is only 1-2% for a minute, and 0 for 5 minutes. Data in old LVE-statistics is aggregated to 1-hour intervals. So, such peak load will noExat be recorded and we need to store data with much higher precision.
@@ -180,6 +190,8 @@ See also [Reseller limits UI](/lve_manager/#reseller-limits).
 * Suspend/notify plugin: would detect that user is being throttled for 10 minutes, and suspend him (just because), or notify, or increase limits.
 
 ### Installation and update
+
+* [Downgrade](/cloudlinux_os_components/#downgrade)
 
 To install, please execute:
 
@@ -322,6 +334,10 @@ You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
 :::
 
 ### LVE-stats2 and DB servers compatible work setup
+
+* [LVE-stats2 and MySQL DB server compatible work setup](/cloudlinux_os_components/#lve-stats2-and-mysql-db-server-compatible-work-setup)
+* [LVE-stats2 and PostgreSQL DB server compatible work setup](/cloudlinux_os_components/#lve-stats2-and-postgresql-db-server-compatible-work-setup)
+* [Customize LVE-stats2 notifications](/cloudlinux_os_components/#customize-lve-stats2-notifications)
 
 #### LVE-stats2 and MySQL DB server compatible work setup
 
@@ -881,6 +897,18 @@ Your Friendly Web Hosting Support Team
 
 
 ### Plugins
+
+* [Creating a plugin for LVE-stats2](/cloudlinux_os_components/#creating-a-plugin-for-lve-stats2)
+* [Introduction](/cloudlinux_os_components/#introduction)
+* [Server plugin arrangement](/cloudlinux_os_components/#server-plugin-arrangement)
+* [Plugin configuration](/cloudlinux_os_components/#plugin-configuration)
+* [Types of plugins](/cloudlinux_os_components/#types-of-plugins)
+* [Examples of plugins](/cloudlinux_os_components/#examples-of-plugins)
+  * [Collector](/cloudlinux_os_components/#collector)
+  * [Analyzer](/cloudlinux_os_components/#analyzer)
+  * [Persistor](/cloudlinux_os_components/#persistor)
+  * [Notifier](/cloudlinux_os_components/#notifier)
+* [File info and format for /var/lve/info file](/cloudlinux_os_components/#file-info-and-format-for-var-lve-info-file)
 
 LVE-stats2 comes with a set of generic plugins:
 
@@ -1542,6 +1570,9 @@ There is <span class="notranslate">`/var/log/lve-stats.log`</span> file with add
 ## CageFS
 
 ### General information and requirements
+
+* [Minimum Requirements](/cloudlinux_os_components/#minimum-requirements)
+* [CageFS quirks](/cloudlinux_os_components/#cagefs-quirks)
 
 CageFS is a virtualized file system and a set of tools to contain each user in its own 'cage'. Each customer will have its own fully functional CageFS, with all the system files, tools, etc.
 
@@ -3036,6 +3067,10 @@ when the size of the `/dev/shm` is specified in percentage of user’s physical 
 
 ### Integration with control panels
 
+* [cPanel](/cloudlinux_os_components/#cpanel)
+* [Plesk](/cloudlinux_os_components/#plesk)
+* [ISPManager](/cloudlinux_os_components/#ispmanager)
+
 CageFS comes with a plugin for various control panels.
 
 The plugin allows to:
@@ -3119,6 +3154,9 @@ When customer is restricted, the customer will be placed into special LVE with I
 
 
 ### Installation and update
+
+* [Installation](/cloudlinux_os_components/#installation)
+* [Upgrading database server](/cloudlinux_os_components/#upgrading-database-server)
 
 #### Installation
 
@@ -3287,6 +3325,13 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --delete
 The script will install original MySQL server, and remove <span class="notranslate">MySQL Governor</span>.
 
 ### Configuration and operation
+
+* [Configuration](/cloudlinux_os_components/#configuration-3)
+* [Modes of operation](/cloudlinux_os_components/#modes-of-operation)
+* [Starting and stopping](/cloudlinux_os_components/#starting-and-stopping)
+* [Mapping a user to a database](/cloudlinux_os_components/#mapping-a-user-to-a-database)
+* [Log files](/cloudlinux_os_components/#log-files)
+* [Change MySQL version](/cloudlinux_os_components/#change-mysql-version)
 
 #### Configuration
 
@@ -3582,6 +3627,7 @@ See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
 
 ### Backing up MySQL
 
+* [abrt plugin](/cloudlinux_os_components/#abrt-plugin)
 
 On <span class="notranslate"> cPanel </span> server disable MySQL service monitoring before doing the job:
 <div class="notranslate">
@@ -3716,6 +3762,8 @@ PHP Selector is not supported for H-Sphere.
 See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
+
+* [Update](/cloudlinux_os_components/#update)
 
 The installation of <span class="notranslate"> PHP Selector </span> presumes that you already have  [CageFS](/cloudlinux_os_components/#cagefs) & <span class="notranslate">[LVE Manager](/lve_manager/) installed.</span>
 
@@ -3930,6 +3978,8 @@ You might need to edit/modify wrappers for existing users if you want them to be
 
 ### Uninstalling
 
+* [Disabling PHP extension globally](/cloudlinux_os_components/#disabling-php-extension-globally)
+
 It is not possible to remove <span class="notranslate"> PHP Selector </span> from the system completely as it is an essential part of <span class="notranslate"> LVE Manager </span> and CageFS packages. However, you can make PHP Selector unavailable for cPanel and Plesk users.
 
 To do so, go to <span class="notranslate"> _LVE Manager → PHP Selector_ </span> and check <span class="notranslate"> _Disabled_ as PHP Selector </span> status. Doing so allows you to disable web-interface of the <span class="notranslate"> PHP Selector </span> in the user interface but does not reset custom settings (choosing a version of PHP and modules).
@@ -3968,6 +4018,25 @@ Reinstalling of <span class="notranslate">`alt-php`</span> packages will not res
 
 ### Configuration and using
 
+* [Setting default version and modules](/cloudlinux_os_components/#setting-default-version-and-modules)
+* [Individual PHP.ini files](/cloudlinux_os_components/#individual-php-ini-files)
+* [How to add additional php.ini file for a user inside CageFS](/cloudlinux_os_components/#how-to-add-additional-php-ini-file-for-a-user-inside-cagefs)
+* [Substitute global php.ini for individual customer](/cloudlinux_os_components/#substitute-global-php-ini-for-individual-customer)
+* [How to substitute global php.ini for individual customer on cPanel server with EasyApache4](/cloudlinux_os_components/#how-to-substitute-global-php-ini-for-individual-customer-on-cpanel-server-with-easyapache4)
+* [Managing interpreter version](/cloudlinux_os_components/#managing-interpreter-version)
+* [Including PHP Selector only with some packages - cPanel](/cloudlinux_os_components/#including-php-selector-only-with-some-packages-cpanel)
+* [PHP extensions](/cloudlinux_os_components/#php-extensions)
+* [FFmpeg](/cloudlinux_os_components/#ffmpeg)
+* [Native PHP configuration](/cloudlinux_os_components/#native-php-configuration)
+* [How to configure alt-php72-zts to use with PHP Selector](/cloudlinux_os_components/#how-to-configure-alt-php72-zts-to-use-with-php-selector)
+* [Using](/cloudlinux_os_components/#using)
+* [Custom PHP.ini options](/cloudlinux_os_components/#custom-php-ini-options)
+* [End user files and directories](/cloudlinux_os_components/#end-user-files-and-directories)
+* [Compiling your own extensions](/cloudlinux_os_components/#compiling-your-own-extensions)
+* [Roll your own PHP](/cloudlinux_os_components/#roll-your-own-php)
+* [Detect user's PHP version](/cloudlinux_os_components/#detect-user-s-php-version)
+* [PHP Selector without CageFS](/cloudlinux_os_components/#php-selector-without-cagefs)
+* [Configuring "global” php.ini options for all Alt-PHP versions](/cloudlinux_os_components/#configuring-global%E2%80%9D-php-ini-options-for-all-alt-php-versions)
 
 #### Setting default version and modules
 
@@ -4832,6 +4901,15 @@ See also PHP Selector [CLI](/command-line_tools/#php-selector)
 
 
 ### Integration with control panels
+
+* [PHP Selector integration with cPanel’s MultiPHP Manager](/cloudlinux_os_components/#php-selector-integration-with-cpanel%E2%80%99s-multiphp-manager)
+* [Overview](/cloudlinux_os_components/#overview)
+* [Prerequisites](/cloudlinux_os_components/#prerequisites)
+* [Configuration](/cloudlinux_os_components/#configuration-4)
+* [More about PHP Selector’s configuration](/cloudlinux_os_components/#more-about-php-selector%E2%80%99s-configuration)
+  * [Setting up the PHP version on customer’s end (in cPanel)](/cloudlinux_os_components/#setting-up-the-php-version-on-customer%E2%80%99s-end-in-cpanel)
+  * [PHP directives and their priorities](/cloudlinux_os_components/#php-directives-and-their-priorities)
+  * [PHP version in the command-line interface (CLI)](/cloudlinux_os_components/#php-version-in-the-command-line-interface-cli)
 
 This is the list of commands that we use to integrate <span class="notranslate">PHP Selector</span> with control panels.
 
