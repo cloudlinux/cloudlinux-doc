@@ -5252,6 +5252,19 @@ See also [PHP Selector CLI tools](/command-line_tools/#php-selector).
 
 Large number of PHP extensions are bundled with each version of PHP.
 
+* [PHP 4.4 extensions](/cloudlinux_os_components/#php-4-4-extensions)
+* [PHP 5.1 extensions](/cloudlinux_os_components/#php-5-1-extensions)
+* [PHP 5.2 extensions](/cloudlinux_os_components/#php-5-2-extensions)
+* [PHP 5.3 extensions](/cloudlinux_os_components/#php-5-3-extensions)
+* [PHP 5.4 extensions](/cloudlinux_os_components/#php-5-4-extensions)
+* [PHP 5.5 extensions](/cloudlinux_os_components/#php-5-5-extensions)
+* [PHP 5.6 extensions](/cloudlinux_os_components/#php-5-6-extensions)
+* [PHP 7.0 extensions](/cloudlinux_os_components/#php-7-0-extensions)
+* [PHP 7.1 extensions](/cloudlinux_os_components/#php-7-1-extensions)
+* [PHP 7.2 extensions](/cloudlinux_os_components/#php-7-2-extensions)
+* [PHP 7.3 extensions](/cloudlinux_os_components/#php-7-3-extensions)
+* [PHP 7.4 extensions](/cloudlinux_os_components/#php-7-4-extensions)
+
 #### PHP 4.4 extensions
 
 
@@ -5406,6 +5419,8 @@ This documentation is for the new version of Python Selector. You can find docum
 
 <span class="notranslate">Python Selector</span> is a CloudLinux component that allows each user to easily deploy and manage Python applications via application server.
 
+* [Requirements](/cloudlinux_os_components/#requirements-2)
+
 #### Requirements
 
 :::danger Important!
@@ -5427,6 +5442,8 @@ Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already mi
 
 
 ### Migration to the new Python Selector 
+
+* [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
 
 The new Python Selector has a bunch of new features:
 
@@ -5469,6 +5486,9 @@ If you face any issue during the migration, please [contact our support team](ht
 ### Installation and update
 
 New clients can install Python Selector using the [CloudLinux Installation Wizard](/lve_manager/#cloudlinux-installation-wizard).
+
+* [cPanel](/cloudlinux_os_components/#cpanel-2)
+* [DirectAdmin](/cloudlinux_os_components/#directadmin)
 
 #### cPanel
 
@@ -5546,6 +5566,9 @@ cagefsctl --force-update
 * See also [Python Selector CLI](/command-line_tools/#python-selector).
 
 ### Deploying Trac using Python Selector
+
+* [Trac with MySQL](/cloudlinux_os_components/#trac-with-mysql)
+* [EasyApache 4](/cloudlinux_os_components/#easyapache-4)
 
 1. In <span class="notranslate">**Setup Python App**</span> create an application. <span class="notranslate">Trac</span> project <span class="notranslate">WSGI</span> script will be located in <span class="notranslate">**App Directory**</span> (e.g. <span class="notranslate">`trac`</span>).
 
@@ -5919,6 +5942,11 @@ See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
 
 ### Configuration and using
 
+* [End user access](/cloudlinux_os_components/#end-user-access-2)
+* [Hide Ruby Selector icon](/cloudlinux_os_components/#hide-ruby-selector-icon)
+* [Deploying Redmine using Ruby Selector](/cloudlinux_os_components/#deploying-redmine-using-ruby-selector)
+* [EasyApache 4](/cloudlinux_os_components/#easyapache-4-2)
+
 #### End user access
 
 1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Ruby Environment_</span>.
@@ -6128,6 +6156,8 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 ## Node.js Selector
 ### General information and requirements
 
+* [Requirements](/cloudlinux_os_components/#requirements-3)
+
 <span class="notranslate"> Node.js Selector </span>  is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
 
 #### **Requirements**
@@ -6228,6 +6258,9 @@ yum install cagefs
 * The first approach - remote usage of Node.js Interpreters of different versions
 * The second approach - remote usage of the cloudlinux-selector utility.
 
+* [Remote usage of Node.js interpreters](/cloudlinux_os_components/#remote-usage-of-node-js-interpreters)
+* [Remote usage of the cloudlinux-selector utility](/cloudlinux_os_components/#remote-usage-of-the-cloudlinux-selector-utility)
+
 #### Remote usage of Node.js interpreters
 
 1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
@@ -6317,6 +6350,8 @@ To apply all changes, restart the application.
 * See also [Node.js Selector UI](/lve_manager/#node-js-selector-2).
 
 ### Troubleshooting
+
+* [Debugging errors](/cloudlinux_os_components/#debugging-errors)
 
 #### Debugging errors
 
