@@ -317,15 +317,16 @@ Root password: <span class="notranslate">`cloudlinux`</span>
 
 To install CloudLinux over network:
 
-1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso](https://repo.cloudlinux.com/cloudlinux/6.10/iso/x86_64/CloudLinux-6.10-x86_64-netinstall.iso). It will boot into CloudLinux installer.
+1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/7.7/iso/x86_64/CloudLinux-netinst-x86_64-7.7.iso](https://repo.cloudlinux.com/cloudlinux/7.7/iso/x86_64/CloudLinux-netinst-x86_64-7.7.iso). It will boot into CloudLinux installer.
 
-    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/images/pxeboot/)
+    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/images/pxeboot/)
 
-2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/) and continue with installation.
+2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/) and continue with installation.
 
-To install CloudLinux 5.11 instead of 6.10 use the following URL: [http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/](http://repo.cloudlinux.com/cloudlinux/5.11/netinstall/x86_64/)
+To install CloudLinux 6.10 instead of 7.7, use the following URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
+
 
 ## Provider-specific guidelines
 
