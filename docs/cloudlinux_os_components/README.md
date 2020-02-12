@@ -6718,6 +6718,7 @@ Now mod_lsapi PRO is fully uninstalled.
 
 ### Configuration
 
+* [Configuration references](/cloudlinux_os_components/#configuration-references)
 
 In order to get mod_lsapi PRO work properly, you'll need to configure Apache. To do this, we use a separate _lsapi.conf_ file.
 
@@ -8017,6 +8018,8 @@ should not be empty.
 
 ### LVE wrappers
 
+* [Placing programs inside LVE](/cloudlinux_os_components/#placing-programs-inside-lve)
+
 LVE wrappers are the set of tools that allow system administrator to run various users, programs & daemons within Lightweight Virtual Environment. This allows system administrator to have control over system resources such program can have. Additionally it prevents misbehaving programs running within LVE to drain system resources and slow down or take down the whole system. The tools are provided by lve-wrappers RPM.
 
 You can install them by running:
@@ -8098,6 +8101,24 @@ Directives which can be used by Apache with <span class="notranslate"> ITK </spa
 * <span class="notranslate">`LVEUser`</span> - overrides user to use to retrieve LVE ID, instead of AssignUserID
 
 ### HostingLimits module for Apache
+
+* [Additional notes](/cloudlinux_os_components/#additional-notes)
+* [Installation](/cloudlinux_os_components/#installation-4)
+* [Directives](/cloudlinux_os_components/#directives)
+  * [SecureLinks](/cloudlinux_os_components/#securelinks)
+  * [SkipErrors](/cloudlinux_os_components/#skiperrors)
+  * [AllowedHandlers](/cloudlinux_os_components/#allowedhandlers)
+  * [DenyHandlers](/cloudlinux_os_components/#denyhandlers)
+  * [LVEErrorCode](/cloudlinux_os_components/#lveerrorcode)
+  * [LVEid](/cloudlinux_os_components/#lveid)
+  * [LVEUser](/cloudlinux_os_components/#lveuser)
+  * [LVEUserGroupID](/cloudlinux_os_components/#lveusergroupid)
+  * [LVERetryAfter](/cloudlinux_os_components/#lveretryafter)
+  * [LVESitesDebug](/cloudlinux_os_components/#lvesitesdebug)
+  * [LVEParseMode](/cloudlinux_os_components/#lveparsemode)
+  * [LVEPathRegexp](/cloudlinux_os_components/#lvepathregexp)
+  * [LVELimitRecheckTimeout](/cloudlinux_os_components/#lvelimitrechecktimeout)
+  * [LVEUse429](/cloudlinux_os_components/#lveuse429)
 
 mod_hostinglimits works with existing <span class="notranslate"> CGI/PHP </span> modules, to put them into LVE context. In most cases the <span class="notranslate"> CGI/PHP </span> process will be placed into LVE with the ID of the user that sites belongs to. mod_hostinglimits detects the user from `SuexecUserGroup` (<span class="notranslate">suexec</span> module), <span class="notranslate">`SuPHP_UserGroup`</span> (from mod_suphp), `AssignUserID` (<span class="notranslate">MPM ITK</span>), <span class="notranslate">`RUidGid` (mod_ruid2 </span> ) directives.
 
@@ -8708,6 +8729,10 @@ Available for RPM based panels, EasyApache 4 and DirectAdmin.
 
 ### Redis support for HostingLimits
 
+* [LVERedisSocket](/cloudlinux_os_components/#lveredissocket)
+* [LVERedisAddr](/cloudlinux_os_components/#lveredisaddr)
+* [LVERedisTimeout](/cloudlinux_os_components/#lveredistimeout)
+
 Redis support provides a way to query Redis database for LVE id, based on domain in the HTTP request. Given a database like:
 
 <div class="notranslate">
@@ -8817,6 +8842,9 @@ LVERedisTimeout 120
 
 ### cPanel/WHM JSON API
 
+* [Parameters](/cloudlinux_os_components/#parameters)
+* [Manage reseller limits/users/packages via cPanel/WHM JSON API - JSONHandler](cloudlinux_os_components/#manage-reseller-limits-users-packages-via-cpanel-whm-json-api-jsonhandler)
+
 CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
 
 <div class="notranslate">
@@ -8916,6 +8944,9 @@ If the limits for users are set with <span class="notranslate"> cPanel LVE Exten
 
 
 ### mod_proctitle
+
+* [How to read mod_proctitle information](/cloudlinux_os_components/#how-to-read-mod-proctitle-information)
+* [Tuning parameters](/cloudlinux_os_components/#tuning-parameters)
 
 mod_proctitle is a module for gathering URL information per request. It is available only for Apache 2.4 now.
 
@@ -9158,6 +9189,8 @@ Nginx support is currently experimental.
 
 ### General information and requirements
 
+* [How does it work with CloudLinux?](/cloudlinux_os_components/#how-does-it-work-with-cloudlinux)
+
 This module is used by the Apache HTTP Server to switch to another user before executing CGI programs. The suEXEC feature provides users of the Apache HTTP Server with the ability to run CGI and SSI programs under user IDs different from the user ID of the calling web server (<span class="notranslate">apache/nobody</span>). Normally, when a CGI or SSI program executes, it runs as the same user who is running the web server.
 
 If we are talking about shared hosting where different accounts are launched on the same server, the installation of this module is necessary to ensure security.
@@ -9192,6 +9225,11 @@ Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the 
 ### Installation
 
 The installation process varies depending on the control panel and Apache.
+
+* [Installing on cPanel servers with EasyApache 4](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4-2)
+* [Installing on Plesk servers](/cloudlinux_os_components/#installing-on-plesk-servers-2)
+* [Installing on DirectAdmin servers](/cloudlinux_os_components/#installing-on-directadmin-servers-2)
+* [Installing on servers with no control panel](/cloudlinux_os_components/#installing-on-servers-with-no-control-panel-2)
 
 #### Installing on cPanel servers with EasyApache 4
 
