@@ -15,6 +15,8 @@ At this moment we are aware of only one such case:
 
 ## Converting existing servers
 
+* [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
+
 It is easy to convert your existing CentOS 6.x, 7.x, 8.x server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
@@ -107,7 +109,7 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
 :::
 
-#### CloudLinux 8 kernel-related features and improvements
+### CloudLinux 8 kernel-related features and improvements
 
 #### Memory
 
@@ -232,7 +234,7 @@ We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` p
 :::
 
 
-## Installing CloudLinux OS 8 beta from ISO image
+### Installing CloudLinux OS 8 beta from ISO image
 
 You can download and install CloudLinux OS 8 beta from [this ISO image](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-netinst-x86_64-8.1.beta.iso). Mount and boot the image, then follow the following steps.
 
@@ -336,6 +338,10 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 * [Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
 
 ### H-Sphere
+
+* [Requirements](/cloudlinux_installation/#requirements)
+* [Converting from mod_fastcgi to mod_fcgid](/cloudlinux_installation/#converting-from-mod-fastcgi-to-mod-fcgid)
+* [Older versions of H-Sphere](/cloudlinux_installation/#older-versions-of-h-sphere)
 
 :::tip Note
 For H-Sphere 3.5+
@@ -583,6 +589,8 @@ After updating H-Sphere software on web server with CloudLinux you need to re-ap
 
 ### DigitalOcean
 
+* [Adding CloudLinux OS image to DigitalOcean](/cloudlinux_installation/#adding-cloudlinux-os-image-to-digitalocean)
+
 How to make CloudLinux work on DigitalOcean:
 
 DigitalOcean doesn't support custom kernels. The droplet (VM) always runs DigitalOcean's kernel. CloudLinux requires its own kernel. To enable CloudLinux work on DigitalOcean droplets, we provide ability to boot into CloudLinux kernel using `kexec` functionality.
@@ -658,6 +666,9 @@ You can find more information about creating/adding SSH keys in [this article](h
 
 
 ### Linode
+
+* [CloudLinux on Linode KVM](/cloudlinux_installation/#cloudlinux-on-linode-kvm)
+* [CloudLinux on Linode Xen](/cloudlinux_installation/#cloudlinux-on-linode-xen)
 
 #### CloudLinux on Linode KVM
 
@@ -735,6 +746,7 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 
 ### Virtuozzo and OpenVZ
 
+* [Installation](/cloudlinux_installation/#installation-2)
 
 :::warning Note
 We’ll be ending support for Virtuozzo and OpenVZ containers on November 1st, 2019.
@@ -947,7 +959,13 @@ Some of the packages from CloudLinux repo will still be present. They are the sa
 
 ## Migration to EasyApache 4
 
-### Advices and limitations
+* [Advices and limitations](/cloudlinux_installation/#advices-and-limitations)
+* [CentOS with EeasyApache 4](/cloudlinux_installation/#centos-with-eeasyapache-4)
+* [CentOS without EasyApache 4](/cloudlinux_installation/#centos-without-easyapache-4)
+* [CloudLinux without EasyApache 4](/cloudlinux_installation/#cloudlinux-without-easyapache-4)
+* [More about cloudlinux_ea3_to_ea4 script](/cloudlinux_installation/#more-about-cloudlinux-ea3-to-ea4-script)
+
+#### Advices and limitations
 
 * Use cPanel 11.55.999.66(55.999.66) or higher version.
 * <span class="notranslate">Hardened EA4</span> limitations:
@@ -955,7 +973,7 @@ Some of the packages from CloudLinux repo will still be present. They are the sa
 
 Follow the instructions [here](/apache_mod_lsapi/#installation) to install and configure mod_lsapi.
 
-### CentOS with EeasyApache 4
+#### CentOS with EeasyApache 4
 
 If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
@@ -963,7 +981,7 @@ If EasyApache 4 was installed earlier on your CentOS server and you would like t
 
 2. Restart Apache service.
 
-### CentOS without EasyApache 4
+#### CentOS without EasyApache 4
 
 If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
@@ -980,7 +998,7 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 
 (Find examples of <span class="notranslate">`cloudlinux_ea3_to_ea4`</span> script usage below).
 
-### CloudLinux without EasyApache 4
+#### CloudLinux without EasyApache 4
 
 Install EasyApache4 on clean CloudLinux from ISO image or migrate to EasyApache4 on existings CloudLinux servers:
 
@@ -997,7 +1015,7 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 (Find examples of `cloudlinux_ea3_to_ea4` script usage below).
 
 
-### More about cloudlinux_ea3_to_ea4 script
+#### More about cloudlinux_ea3_to_ea4 script
 
 About `cloudlinux_ea3_to_ea4` migration script parameters:
 
