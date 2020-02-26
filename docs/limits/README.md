@@ -482,7 +482,7 @@ Set NPROC limit greater than (EP + 15).
 |Apache / FCGID | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / CGI | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / PHP-FPM | Yes<sup> 3</sup> | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | No|
-|Apache / mod_php | Yes | No | Yes | Yes | Yes | No | No|
+|Apache / mod_php (DSO) | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / mod_ruid2 | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / MPM ITK | Yes | No | Yes | Yes | Yes | Yes<sup> 1</sup> | No|
 |LiteSpeed | Yes | Yes<sup> 2</sup> | Yes | Yes | Yes | Yes | Yes|
