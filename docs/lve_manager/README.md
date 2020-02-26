@@ -1337,14 +1337,16 @@ Go to the <span class="notranslate">_Current Usage_</span> tab to see the detail
 
 ![](/images/RU-current-usage.png)
 
+:::tip Note
 It's possible to add the <span class="notranslate">`normalized_user_cpu = N`</span> value in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> file in order to see for example CPU Usage X/200 (%) in the scenario where a user's LVE CPU limit is 200%. If the value is equal to `Y`, CPU Usage cannot get greater than 100%.
+:::
 
 
 #### Current Usage table
 
 The <span class="notranslate">_Current Usage_</span> table displays resource usage.
 
-:::warning Note
+:::warning Warning
 **<span class="notranslate">Inodes</span>** usage is displayed if it is enabled and **<span class="notranslate">Inodes</span>** limits are set for the user. cPanel only.
 :::
 
