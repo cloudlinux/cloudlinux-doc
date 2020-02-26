@@ -531,7 +531,7 @@ User restriction time period for different levels of restriction and the timeout
 * <span class="notranslate">Level4</span>
 * <span class="notranslate">Timeout</span>
 
-<span class="notranslate">**User maximum connections**<span>
+<span class="notranslate">**User maximum connections**</span>
 
 The number of simultaneous connections of a restricted user (in the LVE mode).
 
@@ -1336,6 +1336,9 @@ If your site is not limited, you will see the plain <span class="notranslate">Da
 Go to the <span class="notranslate">_Current Usage_</span> tab to see the detailed information about resource usage on your server.
 
 ![](/images/RU-current-usage.png)
+
+It's possible to add the <span class="notranslate">`normalized_user_cpu = N`</span> value in the <span class="notranslate">`/etc/sysconfig/cloudlinux`</span> file in order to see for example CPU Usage X/200 (%) in the scenario where a user's LVE CPU limit is 200%. If the value is equal to `Y`, CPU Usage cannot get greater than 100%.
+
 
 #### Current Usage table
 
