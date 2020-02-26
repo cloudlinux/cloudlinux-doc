@@ -670,6 +670,11 @@ You can find more information about creating/adding SSH keys in [this article](h
 * [CloudLinux on Linode KVM](/cloudlinux_installation/#cloudlinux-on-linode-kvm)
 * [CloudLinux on Linode Xen](/cloudlinux_installation/#cloudlinux-on-linode-xen)
 
+:::warning Warning
+If you are installing CloudLinux 8, please make sure you’ve read [https://www.linode.com/community/questions/19397/i-just-upgraded-my-centos-8-linode-and-now-it-wont-boot-how-do-i-fix-this-proble](https://www.linode.com/community/questions/19397/i-just-upgraded-my-centos-8-linode-and-now-it-wont-boot-how-do-i-fix-this-proble)
+:::
+
+
 #### CloudLinux on Linode KVM
 
 To install CloudLinux 7 on Linode KVM server you should perform the following steps:
