@@ -1178,102 +1178,45 @@ $dbctl list --bb
 
 #### lveinfo --dbgov
 
-
-<span class="notranslate"> lveinfo </span> tool is a part of <span class="notranslate"> lve-stats </span> package. It was extended to collect historical information about MySQL usage.
-
-<span class="notranslate"> $ lveinfo --dbgov --help </span>
 <div class="notranslate">
 
 ```
-Displays information about historical Db Governor usage
-Usage: lveinfo [OPTIONS] 
-
--h --help              : this help run report from date and time in YYYY-MM-DD HH:MM format if not present last 10 mscreen
--v, --version          : version number
--f, --from=            : inutes are assumed
--t, --to=              : run report up to date and time in YYYY-MM-DD HH:MM format
-      if not present, reports results up to now
-	  --period=          : time period
-      usage            : specify minutes with m,  h - hours, days with d, and values:
-	  : today, yesterday; 5m - last 5 minutes, 4h -- last four hours,
-	  : 2d - last 2 days, as well as today
--o, --order-by=        : orders results by one of the following:
-      con              : average connections
-      cpu              : average CPU usage
-      read             : average READ usage
-      write            : average WRITE usage
--u, --user=            : mysql username
--l, --limit=           : max number of results to display, 10 by default
--c, --csv              : display output in CSV format
--b, --format           : show only specific fields into output
-      available values:
-      ts               : timestamp records
-      username         : user name
-      con              : average connections
-      cpu              : average CPU usage
-      read             : average READ usage
-      write            : average WRITE usage
-      lcpu             : CPU limit
-      lread            : READ limit
-      lwrite           : WRITE limit
-	  --show-all         : full output (show all limits); brief output is default 
-	  
--o, --order-by=        : orders results by one of the following:
-      ts               : timestamp records
-      username         : user name
-      max_sim_req      : max simultaneous requests
-      sum_cpu          : average CPU usage
-      sum_write        : average WRITE usage
-      sum_read         : average READ usage
-      num_of_rest      : number of restricts
-      limit_cpu_end    : limit CPU on period end
-      limit_read_end   : limit READ on period end
-      limit_write_end  : limit WRITE on period end
-	  --id=              : LVE id -- will display record only for that LVE id
-	  -u, --user=            : Use username instead of LVE id, and show only record for that user
-	  -l, --limit=           : max number of results to display, 10 by default
-	  -c, --csv              : display output in CSV format
-	  -b, --by-usage         : show LVEs with usage (averaged or max) within 90% percent of the limit
-      available values:
-      sum_cpu          : average CPU usage
-      sum_write        : average WRITE usage
-      sum_read         : average READ usage
-      num_of_rest      : number of restricts
-      limit_cpu_end    : limit CPU on period end
-      limit_read_end   : limit READ on period end
-      limit_write_end  : limit WRITE on period end
-	  --show-all         : full output (show all limits); brief output is default 
-	  
-	  TS                     : timestamp records
-	  USER                   : user name
-	  CPU                    : average CPU usage
-	  READ                   : average READ usage
-	  WRITE                  : average WRITE usage
-	  CON                    : average connections
-	  lCPU                   : CPU limit
-	  lREAD                  : READ limit
-	  lWRITE                 : WRITE limit
-	  RESTRICT               : C-cpu restrict, R- read restrict, W- write restrict
+$ lveinfo --dbgov --help
 ```
 </div>
 
-Example:
+Displays information about DB Governor historical usage
+
+**Usage**:
+
 <div class="notranslate">
 
 ```
-root@cpanel1 [~/ttttt]# lveinfo --dbgov --user=dbgov --period=1d --limit=10
-TS                   USER   CPU     READ    WRITE   CON     lCPU    lREAD   lWRITE   RESTRICT  
-2012-12-06 11:14:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:13:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:12:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:11:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:10:49  dbgov   9       0.0     0.0     1       90      1000    1000                
-2012-12-06 11:09:49  dbgov   90      0.0     0.0     1       90      1000    1000     C          
-2012-12-06 11:08:49  dbgov   0       0.0     0.0     0       400     1000    1000                
-2012-12-06 11:07:49  dbgov   0       0.0     0.0     0       400     1000    1000                
-2012-12-06 11:06:49  dbgov   0       0.0     0.0     0       400     1000    1000   
+lveinfo [OPTIONS]
 ```
 </div>
+
+**Optional arguments**:
+
+| | |
+|-|-|
+|`-h`, <span class="notranslate">`--help`</span>|show this help message and exit|
+|<span class="notranslate">`-u USER`</span>, <span class="notranslate">`--user USER`</span>|system user name|
+|<span class="notranslate">`--id ID`</span>|user id|
+|<span class="notranslate">`-l LIMIT`</span>, <span class="notranslate">`--limit LIMIT`</span>|max number of results to display, if 0 – no limit|
+|<span class="notranslate">`--by-usage ALIAS [ALIAS ...]`</span>|show LVEs with usage (averaged) within 90 percent of the limit;<br>available values:<br><span class="notranslate">`COLUMN_NAME`–`ALIAS`</span>–DESCRIPTION<br><span class="notranslate">`cpu`–`CPU`–`average CPU usage`</span><br><span class="notranslate">`io`–`IO`–`average IO usage`</span>|
+|<span class="notranslate">`-p 0..100`</span>, <span class="notranslate">`--percentage 0..100`</span>|defines percentage for the <span class="notranslate">`--by-usage`</span> option; default is 90|
+|<span class="notranslate">`-o ALIAS`</span>, <span class="notranslate">`--order-by ALIAS`</span>|orders results by one of the following:<br><span class="notranslate">`ALIAS`</span> – DESCRIPTION<br><span class="notranslate">`con`</span> – average connections (deprecated)<br><span class="notranslate">`cpu`</span> – average CPU usage<br><span class="notranslate">`read`</span> – average READ usage<br><span class="notranslate">`write`</span> – average WRITE usage<br><span class="notranslate">`io`</span> – average READ+WRITE usage|
+|<span class="notranslate">`-b ALIAS [ALIAS ...]`</span>, <span class="notranslate">`--format ALIAS [ALIAS ...]`</span>|show only specific fields into output:<br>COLUMN_NAME – <span class="notranslate">`ALIAS`</span> – DESCRIPTION<br><span class="notranslate">`ts`</span> – <span class="notranslate">`TS`</span> – timestamp records<br><span class="notranslate">`username`</span> – <span class="notranslate">`USER`</span> – user name<br><span class="notranslate">`id`</span> – <span class="notranslate">`ID`</span>user id</span><br><span class="notranslate">`cpu`</span> – <span class="notranslate">`CPU`</span> – average CPU usage<br><span class="notranslate">`read`</span> – <span class="notranslate">`READ`</span> – average READ usage<br><span class="notranslate">`write`</span> – <span class="notranslate">`WRITE`</span> – average WRITE usage<br><span class="notranslate">`con`</span> – <span class="notranslate">`CON`</span> – average connections (deprecated)<br><span class="notranslate">`lcpu`</span> – <span class="notranslate">`lCPU`</span> – CPU limit<br><span class="notranslate">`lread`</span> – <span class="notranslate">`lREAD`</span> – READ limit<br><span class="notranslate">`lwrite`</span> – <span class="notranslate">`lWRITE`</span> – WRITE limit<br><span class="notranslate">`-`</span> – <span class="notranslate">`RESTRICT`</span> – <span class="notranslate">`C`</span> - CPU restrict, <span class="notranslate">`R`</span> - read restrict, <span class="notranslate">`W`</span> - write restrict |
+|<span class="notranslate">`--show-all`</span>|full output (show all limits); brief output is default|
+|<span class="notranslate">`--server_id SERVER_ID`</span>, <span class="notranslate">`--server-id SERVER_ID`</span>|used with central database for multiple servers, default is <span class="notranslate">`2d823047-a`</span>|
+|<span class="notranslate">`--time-unit TIME_UNIT`</span>|time step for grouping statistic in minutes; 1 min. by default; can use <span class="notranslate">`m`,`h`,`d`</span> suffixes or can use <span class="notranslate">`dyn[amic]`</span> for using in the <span class="notranslate">`v1`</span> mode; for example: <span class="notranslate">`1h`</span> or <span class="notranslate">`1h30m`</span> or <span class="notranslate">`1d12h`</span>|
+|<span class="notranslate">`-c [PATH]`</span>, <span class="notranslate">`--csv [PATH]`</span>|save statistics in CSV format; <span class="notranslate">`-`</span> by default (output to screen)|
+|<span class="notranslate">`-j`</span>, <span class="notranslate">`--json`</span>|display output in JSON format|
+|<span class="notranslate">`-f FROM`</span>, <span class="notranslate">`--from FROM`</span>|run report from date and time in the <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, the last 10 minutes are assumed|
+|<span class="notranslate">`-t TO`</span>, <span class="notranslate">`--to TO`</span>|run a report up to date and time in the <span class="notranslate">`[YY]YY-MM-DD[ HH:MM]`</span> format; if not present, reports results up to now|
+|<span class="notranslate">`--period PERIOD`</span>|time period; specify minutes with <span class="notranslate">`m`</span>, hours with <span class="notranslate">`h`</span>, days with <span class="notranslate">`d`</span> and values: <span class="notranslate">`today`, `yesterday`; `5m`</span> - last 5 minutes, <span class="notranslate">`4h`</span> - last four hours, <span class="notranslate">`2d`</span> - last 2 days, as well as <span class="notranslate">`today`</span>|
+
 
 #### dbgovchart
 
