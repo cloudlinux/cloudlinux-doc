@@ -297,7 +297,6 @@ module.exports = {
   "/lve-stats_2/#lve-create-db": "/command-line_tools/#lve-create-db",
   "/cloudlinux_top.html/": "/command-line_tools/#cloudlinux-top",
   "/cloudlinux_top.html": "/command-line_tools/#cloudlinux-top",
-  "/cloudlinux_installation/#xen-images": "/introduction/#cloudlinux-os-lifecycle",
   "/index.html?cloudlinux_top.html": "/command-line_tools/#cloudlinux-top",
   "/lve-stats_2/#cloudlinux-top": "/command-line_tools/#cloudlinux-top",
   "/cloudlinux-statistics.html/": "/command-line_tools/#cloudlinux-statistics",
@@ -2426,5 +2425,6 @@ module.exports = {
   "/ru/cldiag.html#check_phpselector": "/ru/command-line_tools/#cldiag",
   "/ru/control_panel_integration/#expected-structure-of-replies": "/ru/control_panel_integration/#expected-scripts-responses",
   "/cldiag.html#check_suexec": "/cloudlinux_os_components/#apache-suexec-module",
-  "/ru/cloudlinux_installation/#xen-images": "/ru/cloudlinux_installation/#installing-new-servers"
+  "/ru/cloudlinux_installation/#xen-images": "/ru/cloudlinux_installation/#installing-new-servers",
+  "/cloudlinux_installation/#xen-images": "/cloudlinux_installation/#installing-new-servers"
 };
