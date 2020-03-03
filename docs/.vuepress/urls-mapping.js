@@ -2425,6 +2425,5 @@ module.exports = {
   "/ru/cldiag.html#check_phpselector": "/ru/command-line_tools/#cldiag",
   "/ru/control_panel_integration/#expected-structure-of-replies": "/ru/control_panel_integration/#expected-scripts-responses",
   "/cldiag.html#check_suexec": "/cloudlinux_os_components/#apache-suexec-module",
-  "/cloudlinux_installation/#xen-images": "/cloudlinux_installation/#installing-new-servers",
-  "/ru/cloudlinux_installation/#xen-images": "/ru/cloudlinux_installation/#installing-new-servers"
+  "/cloudlinux_installation/#xen-images": "/cloudlinux_installation/#installing-new-servers"
 };
