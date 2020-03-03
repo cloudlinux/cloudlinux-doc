@@ -254,8 +254,6 @@ You can download and install CloudLinux OS 8 beta from [this ISO image](https://
    ![](/images/software_selection.png)
 
 
-
-
 ## CloudLinux OS images
 
 
@@ -264,56 +262,10 @@ You can download and install CloudLinux OS 8 beta from [this ISO image](https://
 * [Google Cloud Engine](https://download.cloudlinux.com/cloudlinux/images/#gce-tab)
 * [Amazon Web Services](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
-* [Xen](/cloudlinux_installation/#xen-images)
 
-#### Xen images
-
-
-To start using Xen image:
-
-* Decompress xen image to: <span class="notranslate">`/var/lib/xen/images/`</span> (depends on your setup)
-* Create a config file in <span class="notranslate">`/etc/xen`</span>
-
-Like:
-
-<div class="notranslate">
-
-```
-name = "cl6-sample"
-uuid = "4230bccf-5882-2ac6-7e1c-0e2a60208001"
-maxmem = 1024
-memory = 1024
-vcpus = 1
-bootloader = "/usr/bin/pygrub"
-on_poweroff = "destroy"
-on_reboot = "restart"
-on_crash = "restart"
-vfb = [ "type=vnc,vncunused=1,key=en-us" ]
-disk = [ "tap:aio:/var/lib/xen/images/cl6-sample.img,sda,w" ]
-vif = [ "mac=00:16:3e:23:09:10,bridge=xenbr0,script=vif-bridge" ]
-```
-</div>
-
-where:
-
-* <span class="notranslate">`name = "cl6-sample"`</span> - a unique name of the server
-* <span class="notranslate">`disk = [ "tap:aio:/var/lib/xen/images/cl6-sample.img,sda,w" ]`</span> - path to image file
-* <span class="notranslate">`uuid = "4230bccf-5882-2ac6-7e1c-0e2a60208001"`</span> - a unique id for that server
-* <span class="notranslate">`vif = [ "mac=00:16:3e:23:09:10,bridge=xenbr0,script=vif-bridge" ]`</span> - unique MAC
-* <span class="notranslate">`[maxmem = 1024 memory = 1024 vcpus = 1]`</span> – resources
-
-
-Root password: <span class="notranslate">`cloudlinux`</span>
-
-**Disk Images**
-
-* CloudLinux 6 Minimal: [http://download.cloudlinux.com/images/cl6-7/cl6-hvm-base.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl6-hvm-base.img.tgz)
-* CloudLinux 7 Minimal: [http://download.cloudlinux.com/images/cl6-7/cl7-hvm-base.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl7-hvm-base.img.tgz)
-* CloudLinux 6 + cPanel: [http://download.cloudlinux.com/images/cl6-7/cl6-hvm-cPanel.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl6-hvm-cPanel.img.tgz)
-* CloudLinux 6 + Parallels Plesk: [http://download.cloudlinux.com/images/cl6-7/cl6-hvm-Plesk.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl6-hvm-Plesk.img.tgz)
-* CloudLinux 6 + DirectAdmin: [http://download.cloudlinux.com/images/cl6-7/cl6-hvm-da.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl6-hvm-da.img.tgz)
-* CloudLinux 7 + DirectAdmin: [http://download.cloudlinux.com/images/cl6-7/cl7-hvm-da.img.tgz](http://download.cloudlinux.com/images/cl6-7/cl7-hvm-da.img.tgz)
-
+:::tip Note
+We do not provide Xen images of CloudLinux OS anymore.
+:::
 
 ## Net install
 
