@@ -709,8 +709,8 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 * [Installation](/cloudlinux_installation/#installation-2)
 
 :::warning Note
-We’ll be ending support for Virtuozzo and OpenVZ containers on November 1st, 2019.
-If you are running Virtuozzo and OpenVZ, you will still be able to use CloudLinux OS but you will need to run hypervisors. See detail on how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
+Starting from November 1st, 2019, we do not support Virtuozzo and OpenVZ **containers**.
+However, you can run CloudLinux OS on OpenVZ 6 and Virtuozzo 6 **hypervisors**. The hypervisor virtualization is the same as for **Xen/KVM/VMware**. Check how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
 :::
 
 :::tip Note
@@ -729,8 +729,6 @@ CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only
 * max entry processes
 * mod_lsapi
 * MySQL Governor
-
-No other limits work so far.
 
 #### Installation
 
