@@ -45,6 +45,10 @@ Bellow you can find recommendations for your typical shared hosting setup. The r
 
 ## Understanding limits
 
+* [Checking if LVE is installed](/limits/#checking-if-lve-is-installed)
+* [Controlling LVE limits](/limits/#controlling-lve-limits)
+* [Checking LVE usage](/limits/#checking-lve-usage)
+
 LVE is a kernel level technology developed by the CloudLinux team. The technology has common roots with container based virtualization and uses cgroups in its latest incarnation. It is lightweight and transparent. The goal of LVE is to make sure that no single web site can bring down your web server.
 
 Today, a single site can consume all <span class="notranslate"> CPU, IO, Memory</span> resources or Apache processes - and bring the server to a halt. LVE prevents that. It is done via collaboration of Apache module, PAM module and kernel.
@@ -207,7 +211,9 @@ When LVE goes over physical memory limit, CloudLinux will first free up memory u
 
 ### Troubleshooting
 
-#### **Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)**
+* [Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)](/limits/#checking-personal-users-disk-cache-if-lveinfo-shows-memory-usage-but-there-are-no-processes-there)
+
+#### Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)
 
 If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there):
 
@@ -392,6 +398,10 @@ Network limits are supported only for processes inside LVE. By default it does n
 
 
 ## Limits validation
+
+* [Exceptions list (validation is not supported)](/limits/#exceptions-list-validation-is-not-supported)
+* [Existing limits validation](/limits/#existing-limits-validation)
+* [Best practice](/limits/#best-practice)
 
 Starting from <span class="notranslate">**lve-utils**</span> **version 3.1-1**, the validation of EP and NPROC limits is supported. If an administrator sets the NPROC limit less than (EP + 15), the following warning is shown:
 

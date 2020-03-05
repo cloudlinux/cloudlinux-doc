@@ -622,6 +622,9 @@ Further reading: [http://kb.cloudlinux.com/tag/optimumcache/](http://kb.cloudlin
 
 ### Installation
 
+* [Requirements](/deprecated/#requirements)
+* [Installation](/deprecated/#installation-2)
+
 :::tip NOTE
 OPTIMUMCACHE IS NO LONGER SUPPORTED
 :::
@@ -1076,6 +1079,15 @@ Optional Arguments:
 
 ### cloudlinux-collect: collect system load statistics
 
+* [cloudlinux-collectl: quick start](/deprecated/#cloudlinux-collectl-quick-start)
+* [Install](/deprecated/#install)
+* [Measure web site response time](/deprecated/#measure-web-site-response-time)
+* [To watch what is being collected](/deprecated/#to-watch-what-is-being-collected)
+* [Statistics being collected in details](/deprecated/#statistics-being-collected-in-details)
+* [Statistics manual configuration](/deprecated/#statistics-manual-configuration)
+* [Running statistics daemon: collectl-cloudlinux](/deprecated/#running-statistics-daemon-collectl-cloudlinux)
+* [Analyzing the results](/deprecated/#analyzing-the-results)
+
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED
 :::
@@ -1337,6 +1349,14 @@ If uninstall OptimumCache process lasts for too long, please find the solution i
 
 
 ### Troubleshooting
+
+* [Installing for FS is different from Ext4](/deprecated/#installing-for-fs-is-different-from-ext4)
+* [Yum fails to install Perl rpms coming with OptimumCache](/deprecated/#yum-fails-to-install-perl-rpms-coming-with-optimumcache)
+* [OptimumCache prior 0.2-23: Cannot unmount old ploop image](/deprecated/#optimumcache-prior-0-2-23-cannot-unmount-old-ploop-image)
+* [High IO rate](/deprecated/#high-io-rate)
+* [High CPU utilization](/deprecated/#high-cpu-utilization)
+* [Uninstalling OptimumCache lasts for too long](/deprecated/#uninstalling-optimumcache-lasts-for-too-long)
+* [‘Failed to attach peer: Invalid argument’ appears in syslog](/deprecated/#‘failed-to-attach-peer-invalid-argument’-appears-in-syslog)
 
 :::tip Note
 OPTIMUMCACHE IS NO LONGER SUPPORTED

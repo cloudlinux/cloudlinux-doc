@@ -2,7 +2,6 @@
 
 ## Hybrid Kernels
 
-
 <span class="notranslate">**CloudLinux 6 Hybrid kernel**</span>
 
 <span class="notranslate"> CloudLinux </span> 6 Hybrid Kernel is <span class="notranslate"> CloudLinux </span> 7 (3.10.0) kernel compiled for CloudLinux 6 OS. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux 7 OS </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
@@ -117,6 +116,10 @@ The protection requires setting multiple kernel options to be enabled.
 
 ### Symlink owner match protection
 
+* [fs.enforce_symlinksifowner](/cloudlinux_os_kernel/#fs-enforce-symlinksifowner)
+* [fs.symlinkown_gid](/cloudlinux_os_kernel/#fs-symlinkown-gid)
+* [fs.process_symlinks_by_task](/cloudlinux_os_kernel/#fs-process-symlinks-by-task)
+
 
 #### fs.enforce_symlinksifowner
 
@@ -216,7 +219,9 @@ fs.process_symlinks_by_task=0
 
 
 
-### Link traversal protection 
+### Link traversal protection
+
+* [Known issues with fs.protected_symlinks_create=1 on cPanel servers](/cloudlinux_os_kernel/#known-issues-with-fs-protected-symlinks-create-1-on-cpanel-servers)
 
 
 <span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .

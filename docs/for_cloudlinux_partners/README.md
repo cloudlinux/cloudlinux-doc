@@ -106,15 +106,15 @@ _Fig 2: CloudLinux License For WHMCS add-on module main page._
 
 In this section you can find two ways of linking license product with your server product as well as other possibilities of the module.
 
-[Link Via Add-on. Optional License](/for_cloudlinux_partners/#link-via-add-on-optional-license)  
-[Link Products Directly](/for_cloudlinux_partners/#link-products-directly)  
-[Link Via Configurable Options](/for_cloudlinux_partners/#link-via-configurable-options)  
-[Link Add-ons Directly](/for_cloudlinux_partners/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
-[Order](/for_cloudlinux_partners/#order)  
-[Admin Area](/for_cloudlinux_partners/#admin-area)  
-[Client Area](/for_cloudlinux_partners/#client-area)  
-[Licenses List](/for_cloudlinux_partners/#licenses-list)  
-[Add-on Licenses List](/for_cloudlinux_partners/#add-on-licenses-list) (for WHMCS 7.2.x and later)
+* [Link Via Add-on. Optional License](/for_cloudlinux_partners/#link-via-add-on-optional-license)  
+* [Link Products Directly](/for_cloudlinux_partners/#link-products-directly)  
+* [Link Via Configurable Options](/for_cloudlinux_partners/#link-via-configurable-options)  
+* [Link Add-ons Directly](/for_cloudlinux_partners/#link-add-ons-directly) (for WHMCS 7.2.x and later)  
+* [Order](/for_cloudlinux_partners/#order)  
+* [Admin Area](/for_cloudlinux_partners/#admin-area)  
+* [Client Area](/for_cloudlinux_partners/#client-area)  
+* [Licenses List](/for_cloudlinux_partners/#licenses-list)  
+* [Add-on Licenses List](/for_cloudlinux_partners/#add-on-licenses-list) (for WHMCS 7.2.x and later)
 
 
 #### Link via add-on. Optional license

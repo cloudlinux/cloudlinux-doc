@@ -19,6 +19,19 @@ $ yum install lvemanager
 
 ## CloudLinux installation wizard
 
+* [Overview](/lve_manager/#overview)
+* [Set up](/lve_manager/#set-up)
+* [CloudLinux components](/lve_manager/#cloudlinux-components)
+  * [CageFS](/lve_manager/#cagefs)
+  * [LSAPI](/lve_manager/#lsapi)
+  * [MySQL Governor](/lve_manager/#mysql-governor)
+  * [Node.js Selector](/lve_manager/#node-js-selector)
+  * [Ruby Selector](/lve_manager/#ruby-selector)
+  * [Python Selector](/lve_manager/#python-selector)
+  * [PHP Selector](/lve_manager/#php-selector)
+* [Installation process and possible errors](/lve_manager/#installation-process-and-possible-errors)
+  * [Wizard fatal error](/lve_manager/#wizard-fatal-error)
+
 #### Overview
 
 <span class="notranslate">CloudLinux Installation Wizard </span> allows you to easily install and set up CloudLinux OS components on your server with cPanel, Plesk or DirectAdmin.
@@ -188,6 +201,8 @@ You can contact our support team for further assistance anytime by [submitting a
 
 ## LVE Manager
 
+* [Notifications color codes](/lve_manager/#notifications-color-codes)
+
 <span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
 
 Administrator credentials allow controlling limits for host users.
@@ -329,6 +344,11 @@ To expand the list of users click on the number above and in the dropdown choose
 ### Users
 
 </div>
+
+* [Actions](/lve_manager/#actions)
+* [Group actions for users with enabled CageFS](/lve_manager/#group-actions-for-users-with-enabled-cagefs)
+
+
 
 Choose <span class="notranslate">_Users_</span> tab to view the list of all users in the system and manage their limits.
 
@@ -655,6 +675,13 @@ You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 
 ### Python Selector
 
+* [How to enable/disable Python Selector](/lve_manager/#how-to-enable-disable-python-selector)
+* [How to manage Python Selector](/lve_manager/#how-to-manage-python-selector)
+* [Enable and disable particular Python version](/lve_manager/#enable-and-disable-particular-python-version)
+* [Install and delete particular Python version](/lve_manager/#install-and-delete-particular-python-version)
+* [Make a particular Python version as a default](/lve_manager/#make-a-particular-python-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column)
+
 Hoster interface allows to enable and disable Python Selector and manage individual Python versions.
 
 Go to <span class="notranslate">LVE Manager → Options Tab → Python Selector</span>.
@@ -770,6 +797,15 @@ See also: [Python Selector client plugin](/lve_manager/#python-selector-client-p
 
 
 ### Node.js Selector
+
+* [How to enable/disable Node.js](/lve_manager/#how-to-enable-disable-node-js)
+* [How to manage Node.js](/lve_manager/#how-to-manage-node-js)
+* [Enable and disable particular Node.js version](/lve_manager/#enable-and-disable-particular-node-js-version)
+* [Install and delete particular Node.js version](/lve_manager/#install-and-delete-particular-node-js-version)
+* [Make a particular Node.js version as a default](/lve_manager/#make-a-particular-node-js-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column-2)
+* [Application error log](/lve_manager/#application-error-log)
+
 
 Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
 
@@ -893,6 +929,21 @@ By default, <span class="notranslate">Passenger</span> log messages are all writ
 See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
 ### Reseller limits
+
+* [Hoster interface](/lve_manager/#hoster-interface)
+  * <span class="notranslate">[Current Usage](/lve_manager/#current-usage-2)</span>
+  * <span class="notranslate">[Users](/lve_manager/#users-2)</span>
+  * <span class="notranslate">[Statistics](/lve_manager/#statistics-2)</span>
+  * <span class="notranslate">[Options](/lve_manager/#options-2)</span>
+  * <span class="notranslate">[Packages](/lve_manager/#packages-2)</span>
+  * <span class="notranslate">[Selector](/lve_manager/#selector)</span>
+* [Reseller Interface](/lve_manager/#reseller-interface)
+  * <span class="notranslate">[Current Usage](/lve_manager/#current-usage-tab)</span>
+  * <span class="notranslate"> [Historical Usage](/lve_manager/#historical-usage-tab)</span>
+  * <span class="notranslate"> [Users](/lve_manager/#users-tab)</span>
+  * <span class="notranslate"> [Statistics](/lve_manager/#statistics-tab)</span>
+  * <span class="notranslate"> [Options](/lve_manager/#options-tab)</span>
+  * <span class="notranslate"> [Packages](/lve_manager/#packages-tab)</span>
 
 #### Hoster interface
 
@@ -1303,6 +1354,40 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 
 ### Client plugins
+
+* [Resource Usage client plugin](/lve_manager/#resource-usage-client-plugin)
+* [Dashboard](/lve_manager/#dashboard-2)
+* [Current Usage](/lve_manager/#current-usage-3)
+* [Current Usage table](/lve_manager/#current-usage-table)
+* [Filters](/lve_manager/#filters)
+* [Charts](/lve_manager/#charts)
+* [Usage](/lve_manager/#usage)
+* [Snapshot](/lve_manager/#snapshot)
+* [Server processes snapshots](/lve_manager/#server-processes-snapshots)
+* [Process list](/lve_manager/#process-list)
+* [Database queries (cPanel only)](/lve_manager/#database-queries-cpanel-only)
+* [HTTP queries](/lve_manager/#http-queries)
+* [Python Selector client plugin](/lve_manager/#python-selector-client-plugin)
+* [How to manage an application](/lve_manager/#how-to-manage-an-application)
+* [Create application](/lve_manager/#create-application)
+* [Start application](/lve_manager/#start-application)
+* [Stop application](/lve_manager/#stop-application)
+* [Restart application](/lve_manager/#restart-application)
+* [Remove application](/lve_manager/#remove-application)
+* [Edit application](/lve_manager/#edit-application)
+* [Migrate application](/lve_manager/#migrate-application)
+* [Node.js Selector client plugin](/lve_manager/#node-js-selector-client-plugin)
+* [How to manage application](/lve_manager/#how-to-manage-application)
+* [Start application](/lve_manager/#start-application-2)
+* [Stop application](/lve_manager/#stop-application-2)
+* [Restart application](/lve_manager/#restart-application-2)
+* [Remove application](/lve_manager/#remove-application-2)
+* [Edit application](/lve_manager/#edit-application-2)
+* [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
+* [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
+* [LVE Manager options](/lve_manager/#lve-manager-options)
+* [Changing settings manually](/lve_manager/#changing-settings-manually)
+* [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
 
 #### Resource Usage client plugin
 
@@ -1951,6 +2036,9 @@ Memory is defined in 4KB pages (so, 1024 would mean 1024 4KB pages, or 4MB).
 <span class="notranslate"> CPU </span> is defined as % of total number of cores on a server.
 
 ### cPanel LVE Extension
+
+* [Add Package Extension](/lve_manager/#add-package-extension)
+* [Edit Package Extensions](/lve_manager/#edit-package-extensions)
 
 :::tip Note
 <span class="notranslate">LVE Manager</span> 1.0-9.8+
