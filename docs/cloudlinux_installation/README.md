@@ -264,6 +264,8 @@ You can download and install CloudLinux OS 8 beta from [this ISO image](https://
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
 * [Xen](/cloudlinux_installation/#installing-new-servers)
 
+#### Xen images
+
 :::tip Note
 We do not provide Xen images of CloudLinux OS anymore.
 :::
