@@ -1788,6 +1788,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
   * [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)  
 
   * [How to hide directory inside mount point](/cloudlinux_os_components/#how-to-hide-directory-inside-mount-point)
+  
+  * [Example](/cloudlinux_os_components/#example)
 
 * [Base home directory](/cloudlinux_os_components/#base-home-directory)
 
@@ -1798,6 +1800,16 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 * [Filtering options for commands executed by proxyexec](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec)
 
 * [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
+
+* [Users with duplicate UIDs](/cloudlinux_os_components/#users-with-duplicate-uids)
+
+* [Examples](/cloudlinux_os_components/#examples)
+
+  * [Example 1. Make users in CageFS be able to execute a script which must work outside CageFS](/cloudlinux_os_components/#example-1-make-users-in-cagefs-be-able-to-execute-a-script-which-must-work-outside-cagefs)
+
+  * [Example 2. Permissions escalation](/cloudlinux_os_components/#example-2-permissions-escalation)
+
+  * [Example 3. Custom proxyexec wrapper](/cloudlinux_os_components/#example-3-custom-proxyexec-wrapper)
 
 * [Custom /etc files per customer](/cloudlinux_os_components/#custom-etc-files-per-customer)
 

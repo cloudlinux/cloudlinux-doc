@@ -111,6 +111,11 @@ Please note that CloudLinux 8 is not supported by control panels automatically y
 
 ### CloudLinux 8 kernel-related features and improvements
 
+* [Memory](/cloudlinux_installation/#memory)
+* [Security](/cloudlinux_installation/#security)
+* [Performance](/cloudlinux_installation/#performance)
+* [Common issues and troubleshooting during conversion](/cloudlinux_installation/#common-issues-and-troubleshooting-during-conversion)
+
 #### Memory
 
 * Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
