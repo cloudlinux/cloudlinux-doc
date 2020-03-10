@@ -182,6 +182,10 @@ See also [Reseller limits UI](/lve_manager/#reseller-limits).
 * more pretty, scalable, interactive charts;
 * snapshots include HTTP-requests.
 
+:::tip Note
+[`mod_proctitle`](/cloudlinux_os_components/#mod-proctitle) has to be enabled for HTTP request collection to be available
+:::
+
 #### What features will be implemented in the future?
 
 * Notifications for control panels other than CPanel.
