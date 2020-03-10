@@ -113,6 +113,14 @@ Use the detailed instruction below:
     </div>
 
 
+:::tip Note
+When you move a user from one reseller to another on DirectAdmin, the LVE Manager's Reset function does not consider package limits of the end-user and reset them to defaults.
+To solve this, you can do one of the following:
+1. Change a package to one of Reseller's package for the moved users.
+2. Create a package with the same name and limits for the Reseller with the moved users.
+:::
+
+
 ### How to enable and disable Reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
