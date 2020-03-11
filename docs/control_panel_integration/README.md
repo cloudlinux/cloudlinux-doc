@@ -1,3 +1,4 @@
+
 # Control panel integration
 
 :::tip Note
@@ -328,7 +329,17 @@ Returns the information about the control panel in the specified format.
 	"data": {
 		"name": "SomeCoolWebPanel",
 		"version": "1.0.1",
-		"user_login_url": "https://{domain}:1111/"
+		"user_login_url": "https://{domain}:1111/",
+		"supported_cl_features": {
+			"php_selector": true,
+			"ruby_selector": true,
+			"python_selector": true,
+			"nodejs_selector": false,
+			"mod_lsapi": true,
+			"mysql_governor": true,
+			"cagefs": true,
+			"reseller_limits": true
+		}
 	},
 	"metadata": {
 		"result": "ok"
@@ -345,6 +356,11 @@ Returns the information about the control panel in the specified format.
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
 |<span class="notranslate">user_login_url_template</span>|True|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
+|<span class="notranslate">supported_cl_features</span>|True|Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>Features that you can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li><ul>|
+
+:::info Changelog
+1. New `public_cp_vendors_api` key added. In order to use it we recommend you to add `Conficts: public_cp_vendors_api < 1.1` to the rpm spec or the package that you use to provide your vendor's scripts. When `public_cp_vendors_api` is omitted, we assume that all modules are supported. We recommend you to always return complete object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning. 
+:::
 
 
 #### <span class="notranslate">db_info</span>
