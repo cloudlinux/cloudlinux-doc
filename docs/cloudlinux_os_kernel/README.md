@@ -224,6 +224,16 @@ fs.process_symlinks_by_task=0
 * [Known issues with fs.protected_symlinks_create=1 on cPanel servers](/cloudlinux_os_kernel/#known-issues-with-fs-protected-symlinks-create-1-on-cpanel-servers)
 
 
+:::warning Warning
+When used outside CageFS (from cPanel tools for instance), <span class="notranslate">`fs.protected_symlinks_create`</span> isn't sufficient for symlink protection.
+To fully protect symlink access in this case, use <span class="notranslate">`fs.process_symlinks_by_task=1`</span> in addition to <span class="notranslate">`fs.protected_symlinks_create=1`</span>.
+:::
+
+:::tip Note
+<span class="notranslate">`fs.process_symlinks_by_task`</span> is only available for CloudLinux 7 Hybrid for now and supports cPanel only. 
+:::
+
+
 <span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
 
 Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
