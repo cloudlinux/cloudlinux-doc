@@ -9254,11 +9254,15 @@ Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the 
 The installation process varies depending on the control panel and Apache.
 
 * [Installing on cPanel servers with EasyApache 4](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4-2)
+  * [Via command line](/cloudlinux_os_components/#via-command-line)
+  * [Via administrator interface](/cloudlinux_os_components/#via-administrator-interface)
 * [Installing on Plesk servers](/cloudlinux_os_components/#installing-on-plesk-servers-2)
 * [Installing on DirectAdmin servers](/cloudlinux_os_components/#installing-on-directadmin-servers-2)
 * [Installing on servers with no control panel](/cloudlinux_os_components/#installing-on-servers-with-no-control-panel-2)
 
 #### Installing on cPanel servers with EasyApache 4
+
+#### Via command line
 
 1. Install `mod_suexec` through YUM package manager as follows:
 
@@ -9281,6 +9285,23 @@ The installation process varies depending on the control panel and Apache.
   $ service httpd restart
   ```
   </div>
+
+#### Via administrator interface
+
+1. Open EasyApache4 page.
+2. Click <span class="notranslate">_Customize_</span> for <span class="notranslate">_Currently installed Packages_</span>.
+
+  ![](/images/mod_suexec_admin_ui_1.png)
+
+3. Click <span class="notranslate">_Apache Modules_</span>. Find <span class="notranslate">`mod_suexec`</span> and click <span class="notranslate">_Yes_</span> to install it.
+
+  ![](/images/mod_suexec_admin_ui_2.png)
+
+4. Select <span class="notranslate">_Review_</span> and <span class="notranslate">_Provision_</span>.
+
+  ![](/images/mod_suexec_admin_ui_3.png)
+
+5. Wait while <span class="notranslate">_Provision_</span> will be finished.
 
 #### Installing on Plesk servers
 
