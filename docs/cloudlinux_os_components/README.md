@@ -9251,7 +9251,7 @@ Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the 
 
 ### Installation
 
-The installation process varies depending on the control panel and Apache.
+The <span class="notranslate">`mod_suexec`</span> installation process varies depending on the control panel and Apache.
 
 * [Installing on cPanel servers with EasyApache 4](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4-2)
   * [Via command line](/cloudlinux_os_components/#via-command-line)
