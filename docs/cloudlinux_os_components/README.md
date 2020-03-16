@@ -9286,9 +9286,9 @@ The installation process varies depending on the control panel and Apache.
   ```
   </div>
 
-    :::tip Note
-    If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
-    :::
+  :::tip Note
+  If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
+  :::
 
 #### Via administrator interface
 
