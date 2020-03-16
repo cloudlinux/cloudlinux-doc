@@ -9286,6 +9286,10 @@ The installation process varies depending on the control panel and Apache.
   ```
   </div>
 
+    :::tip Note
+    If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
+    :::
+
 #### Via administrator interface
 
 1. Open EasyApache4 page.
@@ -9302,6 +9306,10 @@ The installation process varies depending on the control panel and Apache.
   ![](/images/mod_suexec_admin_ui_3.png)
 
 5. Wait while <span class="notranslate">_Provision_</span> will be finished.
+   
+   :::tip Note
+   If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
+   :::
 
 #### Installing on Plesk servers
 
