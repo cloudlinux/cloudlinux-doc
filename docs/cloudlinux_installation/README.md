@@ -223,13 +223,6 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
   * Last updated: July 05, 2018
 
 
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
 :::
@@ -239,9 +232,14 @@ We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` p
 :::
 
 
-### Installing CloudLinux OS 8 beta from ISO image
+### Installing CloudLinux OS 8 from ISO image
 
-You can download and install CloudLinux OS 8 beta from [this ISO image](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-netinst-x86_64-8.1.beta.iso). Mount and boot the image, then follow the following steps.
+You can download and install CloudLinux OS 8 beta from the following repositories:
+
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso) - network installation ISO
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso) - DVD installation ISO
+
+Mount and boot the image, then follow the following steps.
 
 
 1. Configure a network connection as shown below.

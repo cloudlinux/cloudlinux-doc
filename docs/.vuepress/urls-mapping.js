@@ -2427,5 +2427,6 @@ module.exports = {
   "/cldiag.html#check_suexec": "/cloudlinux_os_components/#apache-suexec-module",
   "/ru/cloudlinux_installation/#xen-images": "/ru/cloudlinux_installation/#installing-new-servers",
   "/cloudlinux_installation/#xen-images": "/cloudlinux_installation/#installing-new-servers",
-  "/cldiag.html#check_symlinkowngid": "/command-line_tools/#_6-check-symlinkowngid" 
+  "/cldiag.html#check_symlinkowngid": "/command-line_tools/#_6-check-symlinkowngid",
+  "/cloudlinux_installation/#installing-cloudlinux-os-8-beta-from-iso-image": "/cloudlinux_installation/#installing-cloudlinux-os-8-from-iso-image"
 };
