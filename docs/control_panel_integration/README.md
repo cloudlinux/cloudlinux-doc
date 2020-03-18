@@ -55,14 +55,14 @@ We recommend to deliver a set of scripts for CPAPI and integration file as a sep
 Assumed that this package contains a list of paths to the integration scripts (or to the one script if it deals with all `cpapi` commands). You can specify default script arguments in the <span class="notranslate">`integration_scripts`</span> section, additional arguments like <span class="notranslate">`filter`</span> and <span class="notranslate">`--name`</span> will be automatically added after the defined ones.
 
 ### Versioning
-We provide information about the current version of the API in the form `Provides public_cp_vendors_api = VERSION` added to our packages. While improving integration API, we may add new features and scripts and the `VERSION` will change.
+We provide information about the current version of the API in the form of rpm package capability (`Provides public_cp_vendors_api = VERSION`) added to our packages. While improving integration API, we may add new features and scripts and change `VERSION`.
 
-That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
+That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the spec of rpm package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
 
 ### Changelog
 :::info Changelog
 Version 1.1
-1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec (see [versioning](/control_panel_integration/#versioning)).
+1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
 2. New `supported_cl_features` key added to `panel_info` script. You can specify CloudLinux features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
 :::
 
