@@ -282,7 +282,9 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
   * <span class="notranslate">Applications</span> — number of installed/all applications for the account.
 * <span class="notranslate">[PHP Selector](/lve_manager/#php-selector-2)</span> block displays the following data:
   * <span class="notranslate">Default version</span> — the default version of PHP binaries.
-  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.
+  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.<br>
+  PHP Selector (cPanel) has malfunctions warnings about [the most common issues](/lve_manager/#errors).
+  ![](/images/PHPSelectorDashboardMalfunction.png)
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-2)</span> block displays the following data:
   * <span class="notranslate">Python Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span> — displays a current status of the Python Selector.
   
@@ -656,7 +658,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * [Admin interface (cPanel)](/lve_manager/#admin-interface)
 * [Diagnostic tool](/lve_manager/#diagnostic-tool)
 * [Errors](/lve_manager/#errors)
-* [Errors in the UI][/lve_manager/#errors-in-the-ui]
+* [Errors in the UI](/lve_manager/#errors-in-the-ui)
 
 
 
@@ -1491,6 +1493,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * [Edit application](/lve_manager/#edit-application-2)
 * [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
 * [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
+* [PHP Selector cPanel user interface](/lve_manager/#php-selector-user-interface)
 * [LVE Manager options](/lve_manager/#lve-manager-options)
 * [Changing settings manually](/lve_manager/#changing-settings-manually)
 * [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
@@ -1894,6 +1897,31 @@ To manage PHP options, click <span class="notranslate">_Switch to PHP options_</
 * <span class="notranslate">`session.save_path`</span>. The directory where PHP writes session data (files). For example: <span class="notranslate">`/dir/tmp`</span>
 * <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
 * <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
+
+#### PHP Selector user interface <Badge text="cPanel" />
+
+The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
+
+![](/images/MyDomainsTab.png)
+
+A user can configure a domain to use CloudLinux <span class="notranslate">PHP Selector</span>.
+
+1. Click <span class="notranslate">_Use PHP Selector_</span>
+  
+![](/images/UsePHPSelector1.png)
+
+2. Set a version in <span class="notranslate">PHP Selector</span>
+
+![](/images/SetVersion.png)
+
+:::tip Note
+If `php-fpm` is enabled for a domain the only administrator can set it to <span class="notranslate">_disable_</span>.
+:::
+
+
+
+
+
 
 #### LVE Manager options
 
