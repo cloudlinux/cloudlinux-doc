@@ -8,17 +8,17 @@ CloudLinux has support for the following limits:
 |<span class="notranslate"> [SPEED](/limits/#speed-limit) </span> | % of a core, or HZ | 100% | <span class="notranslate"> CPU </span> speed limit, relative to a single core, or specified in HZ (portable across <span class="notranslate"> CPU </span> s) | all|
 |<span class="notranslate">[CPU](/deprecated/#cpu-limits)</span> [deprecated] | % of <span class="notranslate"> CPU </span> | 25% | <span class="notranslate"> CPU </span> Limit (smallest of <span class="notranslate"> CPU </span> & NCPU is used) | all|
 |[NCPU](/deprecated/#cpu-limits) [deprecated] | number of cores | 1 CORE | Max number of cores (smallest of <span class="notranslate"> CPU </span> & NCPU used) | all|
-|[PMEM](/limits/#physical-memory-limit) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | CL5 hybrid kernel, CL5 lve1.x+ kernel, CL6 and CL7|
+|[PMEM](/limits/#physical-memory-limit) | KB | 1024MB | Physical memory limit (RSS field in ps/RES in top). Also includes shared memory and disk cache | all|
 |[VMEM](/limits/#virtual-memory-limit) | KB | 0 | Virtual memory limit (VSZ field in ps/VIRT in top) | all|
-|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL7, CL6 lve1.1.9+ kernel|
-|[IOPS](/limits/#iops) [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | CL7 and CL6  kernel|
-|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | CL6 and CL7 kernels|
+|[IO](/limits/#io) | KB/sec | 1024KB/sec | IO throughput - combines both read & write operations | CL8, CL7, CL6 lve1.1.9+ kernel|
+|[IOPS](/limits/#iops) [lve1.3+] | Operations per second | 1024 | Restricts total number of read/write operations per second. | all|
+|[NPROC](/limits/#number-of-processes) | number | 100 | Max number of processes within LVE | all|
 |[EP](/limits/#entry-processes) | number | 20 | Limit on entry processes. Usually represents max number of concurrent connections to apache dynamic scripts as well as SSH and cron jobs running simultaneously. | all|
 
 
 
 ::: warning Note
-It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6/7 system and are causing unexpected issues.
+It is always better to disable VMEM limits (set them to 0) in your system at all because they are deprecated and are causing unexpected issues.
 :::
 
 Bellow you can find recommendations for your typical shared hosting setup. The recommendations don't depend on the power of your server. They only depend on how "fast" you want your hosting accounts to be.
@@ -80,7 +80,7 @@ $ uname -r
 ```
 </div>
 
-You should see something like 2.6.18-294.8.1.el5.lve0.8.60. The kernel should have lve in its name. To see if lve kernel module is loaded run:
+You should see something like 2.6.32-896.16.1.lve1.4.53.el6.x86_64. The kernel should have lve in its name. To see if lve kernel module is loaded run:
 
 <div class="notranslate">
 
@@ -495,13 +495,12 @@ Set NPROC limit greater than (EP + 15).
 |Apache / mod_php (DSO) | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / mod_ruid2 | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / MPM ITK | Yes | No | Yes | Yes | Yes | Yes<sup> 1</sup> | No|
-|LiteSpeed | Yes | Yes<sup> 2</sup> | Yes | Yes | Yes | Yes | Yes|
+|LiteSpeed | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |NGINX / PHP-FPM | Yes<sup> 3</sup> | Yes | No | Yes | Yes | Yes | No|
 |SSH | Yes | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | Yes|
 |<span class="notranslate"> Cron Jobs </span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 
 1. Requires patched version of MPM-ITK. CL httpd RPM has ITK worker with the patch. Patch is also available at: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
-2. CloudLinux 7 and CloudLinux 6 kernels only.
 3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
