@@ -3769,21 +3769,19 @@ After applying the command MySQL <span class="notranslate">Governor</span> succe
 
 ### General information and requirements
 
-:::warning Note
-To PHP Selector proper operation, make sure you have installed and configured `mod_suexec` package. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module).
-:::
+The main requirements:
 
-<span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
-
-<span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate"> _suPHP, mod_fcgid, CGI (suexec), LiteSpeed_ </span> .
-
-It is **not compatible** with <span class="notranslate">`mod_php/DSO`</span>, including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate">`MPM ITK`</span>
+* CageFS is installed
+* Alt-PHP packages are installed
+* Mod_suexec is installed. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module)
+* CageFS is initialized without errors
+* CageFS is enabled for a domain user-owner
+* An appropriate PHP handler is selected for PHP version which is system version. <span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate">_suPHP, mod_fcgid, CGI (suexec), LiteSpeed_</span>. See also [Compatibility Matrix](/limits/#compatibility-matrix).
+* PHP version in the CloudLinux PHP selector does not equal to the Native PHP version
 
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
 :::
-
-See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
 
@@ -3858,6 +3856,97 @@ This command allows to install newly released versions in <span class="notransla
 :::tip Note
 See also PHP Selector [CLI](/command-line_tools/#php-selector)
 :::
+
+### Installation instructions for cPanel users
+
+1. Install CageFS as root via SSH:
+
+<div class="notranslate">
+
+```
+yum install cagefs
+```
+</div>
+
+2. Install `alt-php` packages as root:
+
+<div class="notranslate">
+
+```
+yum groupinstall alt-php
+```
+</div>
+
+3. Install `mod_suexec` package as root. See installation instructions [here](/cloudlinux_os_components/#installation-5).
+4. Verify that CageFS is initialized successfully.
+
+  * via SSH by running the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --check-cagefs-initialized
+  ```
+  </div>
+
+  * via cPanel admin interface
+  
+  Go to <span class="notranslate">cPanel → Admin interface → LVE Manager → Dashboard</span> → click <span class="notranslate">_Refresh_</span>
+
+  ![](/images/cageFS-verify.png)
+
+  If there is a problem you can see _Not initialized_
+
+  ![](/images/not-initialized.png)
+
+5. Initilize CageF (if it is not initialized)
+
+  * Via SSH
+
+  <div clas="code">
+
+  ```
+  cagefsctl --init
+  ```
+  </div>
+
+  * Via cPanel admin interface
+
+    Go to cPanel → <span class="notranslate">Admin interface → LVE manager → Options → CageFS INIT</span>
+
+    ![](/images/CageFS-init.png)
+
+  If CageFS was initialized after refreshing Dashboard you will see that CageFS is enabled:
+
+  ![](/images/CageFS-enabled.png)
+
+6. Enable CageFS to a user
+
+  Go to <span class="notranslate">cPanel → Admin interface → LVE manager → Users</span>
+
+  ![](/images/enable-CageFS-to-user.png)
+
+  * For one user by individual slider (for LVE 1001 in the picture above)
+  * For a group of user by the _CageFS_ button (for LVE 1002 and 1003 in the picture above)
+
+7. Check that system PHP version is not `alt-php` (it should be `ea-php`)
+
+  Go to <span class="notranslate">cPanel → Admin interface → MultiPHP Manager → PHP versions</span>
+
+  ![](/images/check-ea-php.png)
+
+8. Check that an appropriate PHP handler is selected for PHP version which is system version
+
+  Go to <span class="notranslate">cPanel Admin interface → MultiPHP Manager → PHP Handlers</span>
+
+  ![](/images/php-handlers.png)
+
+9. Check version for domain in MultiPHP Selector. It should be equal to the system default version
+
+Go to <span class="notranslate">cPanel Admin interface → MultiPhp Manager → PHP versions</span> → scroll to <span class="notranslate">_Set PHP Version per Domain_</span>
+
+10. Version for domain in User’s interface in PHP Selector should not be equal to the <span class="notranslate">Native</span> version.
+
 
 ### LiteSpeed support
 
