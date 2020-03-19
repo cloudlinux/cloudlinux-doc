@@ -653,6 +653,13 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 </div>
 
+* [Admin interface (cPanel)](/lve_manager/#admin-interface)
+* [Diagnostic tool](/lve_manager/#diagnostic-tool)
+* [Errors](/lve_manager/#errors)
+* [Errors in the UI][/lve_manager/#errors-in-the-ui]
+
+
+
 <span class="notranslate"> Selector</span> tab allows controlling <span class="notranslate">PHP Selector</span> settings.
 
 * In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
@@ -671,6 +678,105 @@ Choose default modules from the list for a proper PHP version or for native.
 :::tip Note
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
+
+#### Admin interface <Badge text="cPanel"/>
+
+Go to cPanel admin interface → LVE manager → Selector
+
+![](/images/NewSelector.png)
+
+<span class="notranslate">_Selector_</span> tab has two sub tabs: <span class="notranslate">_Main settings_</span> and <span class="notranslate">_Domains_</span>.
+
+* <span class="notranslate">_Main settings_</span> sub tab allows to config general settings for PHP Selector
+  * <span class="notranslate">_Selector is_</span>: allows to enable/disable PHP Selector
+  * <span class="notranslate">_Default PHP version_</span>: allows to set PHP version by default
+  * <span class="notranslate">_Hide PHP extensions for end-user_</span>: allows to hide PHP extensions
+  * <span class="notranslate">_Hide "My domains" page for end-user_</span>: allows to disable such tab for end-user
+  * <span class="notranslate">_Supported versions_</span>: allows to select supported PHP versions 
+* <span class="notranslate">_Domains_</span> sub tab contains the list of User-Domain pairs to visualize which PHP Selector is used by a domain
+
+![](/images/Domains.png)
+
+Admin can filter the list:
+
+![](/images/SelectorFilters.png)
+
+If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <span class="notranslate">_Action_</span> table, the PHP version for a domain in MultiPHP Selector is changed to the system default version and <span class="notranslate">`php-fpm`</span> is disabled. Users' websites will use the version set in CloudLinux PHP Selector (user interface). Group operation also can be used.
+
+![](/images/UsePHPSelector.png)
+
+#### Diagnostic tool
+
+The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
+
+![](/images/RunDiagnostic.png)
+
+#### Errors
+
+The most popular errors:
+
+1. `mod_suexec`, `mod_suphp` can work in CageFS
+   
+**Solution**: use EasyApach4 manage interface to install correct packages
+
+2. A current PHP engine is not supported by CloudLinux PHP Selector
+   
+**Solution**: install `mod_suexec` (see instructions [here](/cloudlinux_os_components/#installation-5)) and then run the following command:
+
+<div class="notranslate">
+
+```
+cagefsctl --force-update
+```
+</div>
+
+3. The <span class="notranslate">`/etc/cl.selector/php.conf`</span> and <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> config files have correct format
+       
+**Solution**: correct the file format via SSH.
+
+4. Some domains have neither PHP version selected in MultiPHP Manager no system default version or have `php-fpm` enabled.
+
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+5. PHP system version is `alt-php`
+ 
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.
+
+#### Errors in the UI
+
+1. <span class="notranslate">PHP Selector cannot be activated for this domain. Initialize CageFS in the Options tab first</span>.
+
+![](/images/Error1.png)
+
+**Solution**
+
+Initialize CageFS in the Options tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSInit.png)
+
+2. <span class="notranslate">PHP Selector cannot be activated for this domain. Enable CageFS for this user in the Users tab first</span>.
+
+![](/images/Error2.png)
+
+**Solution**
+
+Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSEnable.png)
+
+* You can enable CageFS for one user by individual slider (for lve 1001 in the picture above)
+* You can enable CageFS for a group of user by the CageFS button (for lve 1002, 1003 in the picture above)
+
+3. Some PHP related issues need to be resolved in order to enable domain management. Find the list of PHP related issues that prevent domain management above.
+
+![](/images/Error3.png)
+
+**Solution**
+
+Restart the diagnostic tool and fix an issue. You can use [these instructions](/lve_manager/#errors).
+
 
 
 ### Python Selector
