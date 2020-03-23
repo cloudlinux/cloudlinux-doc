@@ -1500,7 +1500,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * [Edit application](/lve_manager/#edit-application-2)
 * [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
 * [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
-* [PHP Selector cPanel user interface](/lve_manager/#php-selector-user-interface)
+* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab)
 * [LVE Manager options](/lve_manager/#lve-manager-options)
 * [Changing settings manually](/lve_manager/#changing-settings-manually)
 * [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
@@ -1905,7 +1905,7 @@ To manage PHP options, click <span class="notranslate">_Switch to PHP options_</
 * <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
 * <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
 
-#### PHP Selector user interface <Badge text="cPanel" />
+#### PHP Selector. My Domains tab <Badge text="cPanel" />
 
 The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
 
