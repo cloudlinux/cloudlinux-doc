@@ -656,10 +656,9 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 </div>
 
 * [Selector tab](/lve_manager/#selector-tab)
-* [Admin interface (cPanel)](/lve_manager/#admin-interface)
-  * [Errors in the UI](/lve_manager/#errors-in-the-ui)
-  * [Diagnostic tool](/lve_manager/#diagnostic-tool)
-  * [Errors](/lve_manager/#errors)
+* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)
+  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)
+* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)
 
 #### Selector tab
 
@@ -682,7 +681,7 @@ Choose default modules from the list for a proper PHP version or for native.
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
 
-#### Admin interface <Badge text="cPanel"/>
+####  Selector tab additional features <Badge text="cPanel"/>
 
 Go to cPanel admin interface → LVE manager → Selector
 
@@ -708,7 +707,8 @@ If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <s
 
 ![](/images/UsePHPSelector.png)
 
-#### Errors in the UI
+#### PHP Selector troubleshooting <Badge text="cPanel"/>
+
 
 You can see the following errors in the <span class="notranslate">_Domains_</span> tab.
 
@@ -744,21 +744,17 @@ Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_c
 Restart the diagnostic tool and fix an issue. You can use [these instructions](/lve_manager/#errors).
 
 
-#### Diagnostic tool
+#### PHP Selector diagnostic tool and notifications
 
 The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
 
 ![](/images/RunDiagnostic.png)
 
-#### Errors
-
 The most popular errors and solutions:
 
-1. `mod_suexec`, `mod_suphp` can work in CageFS
-   
-**Solution**: use EasyApach4 manage interface to install correct packages
+1. Your PHP Handler does not support CLoudLinux PHP Selector
 
-2. A current PHP engine is not supported by CloudLinux PHP Selector
+![](/images/Issue1.png)
    
 **Solution**: install `mod_suexec` (see instructions [here](/cloudlinux_os_components/#installation-5)) and then run the following command:
 
@@ -769,16 +765,22 @@ cagefsctl --force-update
 ```
 </div>
 
-3. The <span class="notranslate">`/etc/cl.selector/php.conf`</span> and <span class="notranslate">`/etc/cl.selector/defaults.cfg`</span> config files have correct format
+2. Incorrect config file format
+
+![](/images/Issue2.png)
        
 **Solution**: correct the file format via SSH.
 
-4. Some domains have neither PHP version selected in MultiPHP Manager no system default version or have `php-fpm` enabled.
+3. Some domains have neither PHP version selected in MultiPHP Manager no system default version or have `php-fpm` enabled.
+
+![](/images/Issue3.png)
 
 **Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
 
-5. PHP system version is `alt-php`
- 
+4. MultiPHP system default version is not ea-php
+
+![](/images/Issue4.png)
+
 **Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
 
 In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.

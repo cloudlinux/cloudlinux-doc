@@ -2428,5 +2428,13 @@ module.exports = {
   "/ru/cloudlinux_installation/#xen-images": "/ru/cloudlinux_installation/#installing-new-servers",
   "/cloudlinux_installation/#xen-images": "/cloudlinux_installation/#installing-new-servers",
   "/cldiag.html#check_symlinkowngid": "/command-line_tools/#_6-check-symlinkowngid",
-  "/cloudlinux_installation/#installing-cloudlinux-os-8-beta-from-iso-image": "/cloudlinux_installation/#installing-cloudlinux-os-8-from-iso-image"
+  "/cloudlinux_installation/#installing-cloudlinux-os-8-beta-from-iso-image": "/cloudlinux_installation/#installing-cloudlinux-os-8-from-iso-image",
+  "/lve_manager/#admin-interface": "/lve_manager/#selector-tab-additional-features",
+  "/ru/lve_manager/#admin-interface": "/ru/lve_manager/#selector-tab-additional-features",
+  "/lve_manager/#errors-in-the-ui": "/lve_manager/#php-selector-troubleshooting",
+  "/ru/lve_manager/#errors-in-the-ui": "/ru/lve_manager/#php-selector-troubleshooting",
+  "/lve_manager/#diagnostic-tool": "/lve_manager/#php-selector-diagnostic-tool-and-notifications",
+  "/ru/lve_manager/#diagnostic-tool": "/ru/lve_manager/#php-selector-diagnostic-tool-and-notifications",
+  "/lve_manager/#errors": "/lve_manager/#php-selector-diagnostic-tool-and-notifications",
+  "/ru/lve_manager/#errors": "/ru/lve_manager/#php-selector-diagnostic-tool-and-notifications"
 };
