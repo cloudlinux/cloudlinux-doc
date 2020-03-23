@@ -741,8 +741,7 @@ Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_c
 
 **Solution**
 
-Restart the diagnostic tool and fix an issue. You can use [these instructions](/lve_manager/#errors).
-
+If you cannot see Diagnostic tool notifications, you can restart it. Then you can fix the issues using [these instructions](/lve_manager/#php-selector-diagnostic-tool-and-notifications).
 
 #### PHP Selector diagnostic tool and notifications
 
