@@ -2,9 +2,9 @@
 
 ## Hardware compatibility
 
-CloudLinux supports all the hardware supported by RHEL/CentOS 6.x, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
-At this moment we are aware of only one such case:
+At this moment (for CL6) we are aware of only one such case:
 
 | |  | |
 |-|--|-|
@@ -17,7 +17,7 @@ At this moment we are aware of only one such case:
 
 * [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
 
-It is easy to convert your existing CentOS 6.x, 7.x, 8.x server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+It is easy to convert your existing CentOS server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
@@ -938,7 +938,7 @@ Follow the instructions [here](/apache_mod_lsapi/#installation) to install and c
 
 If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
-1. Convert server from CentOS  6.x or 7.x to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+1. Convert server from CentOS  to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
 
 2. Restart Apache service.
 
@@ -946,7 +946,7 @@ If EasyApache 4 was installed earlier on your CentOS server and you would like t
 
 If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
-1. Convert server from CentOS  6.x or 7.x to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+1. Convert server from CentOS to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
 
 2. Run:
    
