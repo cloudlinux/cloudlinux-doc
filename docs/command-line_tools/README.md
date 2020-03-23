@@ -3102,6 +3102,14 @@ Each Level1 option can have nested Level2 options specified using the same synta
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyReseller`</span><sup> *</sup>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller|
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyCustomers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to users|
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifyCharset`**</span>| |<span class="notranslate">`utf-8`/null</span>|Set charset used in email|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifyFromEmail`**</span> | |<span class="notranslate">`admin@email.com`/null</span>|Set email to notify from|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifySubject`**</span> | |<span class="notranslate">`Subject`/null</span>|Set email subject|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`reportAdminEmail`**</span> | |<span class="notranslate">`admin@email.com`/null</span>|Set admin email for notifications|
+
+:::tip Note
+To reset options marked with ** set `null`.
+:::
 
 ::: tip Note  
 Options marked with `*` are for reseller use only
