@@ -656,9 +656,9 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 </div>
 
 * [Selector tab](/lve_manager/#selector-tab)
-* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)
-  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)
-* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)
+* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> LVE Manager 6.0.1-2</sup>
+  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)<sup> LVE Manager 6.0.1-2</sup>
+* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)<sup> LVE Manager 6.0.1-2</sup>
 
 #### Selector tab
 
@@ -681,7 +681,7 @@ Choose default modules from the list for a proper PHP version or for native.
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
 
-####  Selector tab additional features <Badge text="cPanel"/>
+####  Selector tab additional features <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
 
 Go to cPanel admin interface → LVE manager → Selector
 
@@ -707,7 +707,7 @@ If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <s
 
 ![](/images/UsePHPSelector.png)
 
-#### PHP Selector troubleshooting <Badge text="cPanel"/>
+#### PHP Selector troubleshooting <Badge text="cPanel"/> <Badge text="LVE Manager 6.0.1-2" />
 
 
 You can see the following errors in the <span class="notranslate">_Domains_</span> tab.
@@ -743,7 +743,7 @@ Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_c
 
 If you cannot see Diagnostic tool notifications, you can restart it. Then you can fix the issues using [these instructions](/lve_manager/#php-selector-diagnostic-tool-and-notifications).
 
-#### PHP Selector diagnostic tool and notifications
+#### PHP Selector diagnostic tool and notifications <Badge text="LVE Manager 6.0.1-2" />
 
 The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
 
@@ -1499,7 +1499,7 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * [Edit application](/lve_manager/#edit-application-2)
 * [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
 * [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
-* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab)
+* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
 * [LVE Manager options](/lve_manager/#lve-manager-options)
 * [Changing settings manually](/lve_manager/#changing-settings-manually)
 * [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
@@ -1904,7 +1904,7 @@ To manage PHP options, click <span class="notranslate">_Switch to PHP options_</
 * <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
 * <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
 
-#### PHP Selector. My Domains tab <Badge text="cPanel" />
+#### PHP Selector. My Domains tab <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
 
 The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
 
