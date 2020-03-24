@@ -67,6 +67,7 @@ CloudLinux supports the same end-of-life policy as RHEL. Using a supported opera
 
 Currently supported:
 
+| |  | |
 |-|--|-|
 |Operating System | Released | End of Life & Support|
 |CloudLinux 8 | Mar 17, 2020 | TBA|
