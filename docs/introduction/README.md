@@ -74,5 +74,5 @@ Currently supported:
 |CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024|
 |CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 (Extended Support - June 30, 2024)|
 
-Read more about the Extended Support for ClouxLinux 6 [here](https://blog.cloudlinux.com/cloudlinux-6-extended-support-get-more-from-your-rhel/centos-6-investment).
+Read more about the Extended Support for ClouxLinux 6 [here](https://www.cloudlinux.com/extended-lifecycle).
 

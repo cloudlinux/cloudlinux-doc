@@ -70,7 +70,7 @@ For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats p
 :::
 
 :::warning Warning
-Note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
@@ -106,7 +106,7 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
   * custombuild for DirectAdmin.
 
 :::warning *
-Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 ### CloudLinux 8 kernel-related features and improvements
@@ -150,7 +150,7 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
 :::warning *
-Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 
