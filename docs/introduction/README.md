@@ -72,7 +72,4 @@ Currently supported:
 |Operating System | Released | End of Life & Support|
 |CloudLinux 8 | Mar 17, 2020 | May 31, 2029|
 |CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024|
-|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 (Extended Support - June 30, 2024)|
-
-Read more about the Extended Support for ClouxLinux 6 [here](https://www.cloudlinux.com/extended-lifecycle).
-
+|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support - June 30, 2024](https://www.cloudlinux.com/extended-support-cloudlinux-os-6))|
