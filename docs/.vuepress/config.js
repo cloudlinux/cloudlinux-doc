@@ -63,7 +63,6 @@ module.exports = {
     sidebarDepth: 2,
     logo: "/logo.svg",
     try_free: "https://cloudlinux.com/trial",
-	submit_request: "https://hubs.ly/H0pk7990",
 
     social: [
       { url: "https://www.facebook.com/cloudlinux/", logo: "/fb.png" },
@@ -90,7 +89,7 @@ module.exports = {
           },
           {
             text: "Contact support",
-            url: submit_request
+            url: "https://hubs.ly/H0pk7990"
           },
           { text: "Blog", url: "https://www.cloudlinux.com/blog" }
         ],
@@ -167,7 +166,7 @@ module.exports = {
             },
             {
                 text: "Техподдержка",
-                url: submit_request
+                url: "https://hubs.ly/H0pk7990"
             },
             { text: "Блог", url: "https://www.cloudlinux.com/blog" }
         ],
