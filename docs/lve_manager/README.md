@@ -628,6 +628,10 @@ When you've done with settings, click <span class="notranslate">**Save Changes**
 
 <span class="notranslate"> Packages</span> tab allows setting the limits for as many users as you need by editing packages of proper limits. Each account belonging to a proper package adheres to those limits.
 
+:::tip Note
+Limits from the package will not be applied if the package’s owner differs from the owner of the account you’re trying to apply limits to. Default limits will be applied instead.
+:::
+
 Choose <span class="notranslate">_Packages_</span> tab to view and modify:
 
 * limits for hosts user’s packages (Created by Admin);
