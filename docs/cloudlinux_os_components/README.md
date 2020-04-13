@@ -295,7 +295,7 @@ Configuration files for plugins are located in <span class="notranslate">`/etc/s
 * <span class="notranslate">`period_between_incidents`</span> - the minimal interval of time between incidents (in seconds). If minimal interval of time between LVE faults is greater than value specified, than new "incident" will begin and new snapshots will be saved. Default value is 300 seconds.
 * <span class="notranslate">`snapshots_per_minute`</span> - the maximum number of snapshots saved per minute for specific LVE id (default is `2`).
 * <span class="notranslate">`max_snapshots_per_incident`</span> - the maximum number of snapshots saved for one "incident". Default is `10`.
-* <span class="notranslate">`litespeed`</span> - enable or disable data import from litespeed, default is `auto` (autodetect); `On`|`on`|`1` - force use litespeed; `Off`|`off`|`0` - force use apache
+* <span class="notranslate">`litespeed`</span> - enable or disable data import from LiteSpeed, default is `auto` (autodetect); `On`|`on`|`1` - force use litespeed; `Off`|`off`|`0` - force use apache
 
 <span class="notranslate">`/etc/sysconfig/lvestats.config/StatsNotifier.cfg`</span> contains the following options:
 
