@@ -20,6 +20,12 @@ module.exports = {
       }
     ],
     [
+      "script",
+      {
+        src: "/js/smooth-scroll.js"
+      }
+    ],
+    [
       "link",
       {
         rel: "icon",
