@@ -53,8 +53,7 @@ module.exports = {
       description: "Документация CloudLinux"
     }
   },
-  // theme: "cloudlinux",
-  theme: '/Users/azamat/Projects/cl/js/cloudlinux-doc-theme', // local path
+  theme: "cloudlinux",
   markdown: {
     slugify: (s) => {
       if (sidebarUrls[s]) {
