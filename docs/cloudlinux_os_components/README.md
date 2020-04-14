@@ -113,6 +113,14 @@ Use the detailed instruction below:
     </div>
 
 
+:::tip Note
+When you move a user from one reseller to another on DirectAdmin, the LVE Manager's Reset function does not consider package limits of the end-user and reset them to defaults.
+To solve this, you can do one of the following:
+1. Change a package to one of Reseller's package for the moved users.
+2. Create a package with the same name and limits for the Reseller with the moved users.
+:::
+
+
 ### How to enable and disable Reseller limits
 
 To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
@@ -182,6 +190,10 @@ See also [Reseller limits UI](/lve_manager/#reseller-limits).
 * more pretty, scalable, interactive charts;
 * snapshots include HTTP-requests.
 
+:::tip Note
+[`mod_proctitle`](/cloudlinux_os_components/#mod-proctitle) has to be enabled for HTTP request collection to be available
+:::
+
 #### What features will be implemented in the future?
 
 * Notifications for control panels other than CPanel.
@@ -244,7 +256,7 @@ You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
 
 ### Configuration
 
-Main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</span> contains the following options:
+The main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`</span> contains the following options:
 
 * <span class="notranslate">`db_type`</span> - selects appropriate database type to use;
 * <span class="notranslate">`connect-string`</span> - connection string for <span class="notranslate">PostGreSQL</span> and MySQL database, has the following form:
@@ -283,6 +295,7 @@ Configuration files for plugins are located in <span class="notranslate">`/etc/s
 * <span class="notranslate">`period_between_incidents`</span> - the minimal interval of time between incidents (in seconds). If minimal interval of time between LVE faults is greater than value specified, than new "incident" will begin and new snapshots will be saved. Default value is 300 seconds.
 * <span class="notranslate">`snapshots_per_minute`</span> - the maximum number of snapshots saved per minute for specific LVE id (default is `2`).
 * <span class="notranslate">`max_snapshots_per_incident`</span> - the maximum number of snapshots saved for one "incident". Default is `10`.
+* <span class="notranslate">`litespeed`</span> - enable or disable data import from LiteSpeed, default is `auto` (autodetect); `On`|`on`|`1` - force use litespeed; `Off`|`off`|`0` - force use apache
 
 <span class="notranslate">`/etc/sysconfig/lvestats.config/StatsNotifier.cfg`</span> contains the following options:
 
@@ -302,6 +315,7 @@ Configuration files for plugins are located in <span class="notranslate">`/etc/s
 * <span class="notranslate">`NOTIFY_INTERVAL_USER`</span> – period of time to notify customer (default `12h`);
 * <span class="notranslate">`NOTIFY_FROM_EMAIL`</span> - sender email address. For example: <span class="notranslate">`NOTIFY_FROM_EMAIL=main_admin@host.com`;</span>
 * <span class="notranslate">`NOTIFY_FROM_SUBJECT`</span> - email message subject. For example: <span class="notranslate">`NOTIFY_FROM_SUBJECT=Message from notifier`</span>
+* <span class="notranslate">`REPORT_ADMIN_EMAIL`</span> - custom email for admin reporting. For example: <span class="notranslate">`REPORT_ADMIN_EMAIL=report_email@host.com`</span>
 * <span class="notranslate">`NOTIFY_CHARSET_EMAIL`</span> – charset type for email. Available for <span class="notranslate">__lve-stats-2.9.4-1__</span> and later. Default is <span class="notranslate">`us-ascii`</span>. For example: <span class="notranslate">`NOTIFY_CHARSET_EMAIL=utf-8`</span>
 
 These values can also be set using [cloudlinux-config CLI](/command-line_tools/#cloudlinux-config) utility
@@ -1788,6 +1802,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
   * [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)  
 
   * [How to hide directory inside mount point](/cloudlinux_os_components/#how-to-hide-directory-inside-mount-point)
+  
+  * [Example](/cloudlinux_os_components/#example)
 
 * [Base home directory](/cloudlinux_os_components/#base-home-directory)
 
@@ -1798,6 +1814,16 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 * [Filtering options for commands executed by proxyexec](/cloudlinux_os_components/#filtering-options-for-commands-executed-by-proxyexec)
 
 * [Executing by proxy](/cloudlinux_os_components/#executing-by-proxy)
+
+* [Users with duplicate UIDs](/cloudlinux_os_components/#users-with-duplicate-uids)
+
+* [Examples](/cloudlinux_os_components/#examples)
+
+  * [Example 1. Make users in CageFS be able to execute a script which must work outside CageFS](/cloudlinux_os_components/#example-1-make-users-in-cagefs-be-able-to-execute-a-script-which-must-work-outside-cagefs)
+
+  * [Example 2. Permissions escalation](/cloudlinux_os_components/#example-2-permissions-escalation)
+
+  * [Example 3. Custom proxyexec wrapper](/cloudlinux_os_components/#example-3-custom-proxyexec-wrapper)
 
 * [Custom /etc files per customer](/cloudlinux_os_components/#custom-etc-files-per-customer)
 
@@ -3745,21 +3771,19 @@ After applying the command MySQL <span class="notranslate">Governor</span> succe
 
 ### General information and requirements
 
-:::warning Note
-To PHP Selector proper operation, make sure you have installed and configured `mod_suexec` package. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module).
-:::
+The main requirements:
 
-<span class="notranslate"> PHP Selector </span> is a CloudLinux component that sits on top of CageFS. It allows each user to select PHP version and module based on their needs. <span class="notranslate"> PHP Selector </span> requires account to have CageFS enabled to work.
-
-<span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate"> _suPHP, mod_fcgid, CGI (suexec), LiteSpeed_ </span> .
-
-It is **not compatible** with <span class="notranslate">`mod_php/DSO`</span>, including <span class="notranslate"> _mod_ruid2_ </span> and <span class="notranslate">`MPM ITK`</span>
+* CageFS is installed
+* Alt-PHP packages are installed
+* Mod_suexec is installed. You can find installation instruction [here](/cloudlinux_os_components/#apache-suexec-module)
+* CageFS is initialized without errors
+* CageFS is enabled for a domain user-owner
+* An appropriate PHP handler is selected for PHP version which is system version. <span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate">_suPHP, mod_fcgid, CGI (suexec), LiteSpeed_</span>. See also [Compatibility Matrix](/limits/#compatibility-matrix).
+* PHP version in the CloudLinux PHP selector does not equal to the Native PHP version
 
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
 :::
-
-See also [Compatibility Matrix](/limits/#compatibility-matrix).
 
 ### Installation and update
 
@@ -3834,6 +3858,97 @@ This command allows to install newly released versions in <span class="notransla
 :::tip Note
 See also PHP Selector [CLI](/command-line_tools/#php-selector)
 :::
+
+### Installation instructions for cPanel users
+
+1. Install CageFS as root via SSH:
+
+<div class="notranslate">
+
+```
+yum install cagefs
+```
+</div>
+
+2. Install `alt-php` packages as root:
+
+<div class="notranslate">
+
+```
+yum groupinstall alt-php
+```
+</div>
+
+3. Install `mod_suexec` package as root. See installation instructions [here](/cloudlinux_os_components/#installation-5).
+4. Verify that CageFS is initialized successfully.
+
+  * via SSH by running the following command:
+
+  <div class="notranslate">
+
+  ```
+  cagefsctl --check-cagefs-initialized
+  ```
+  </div>
+
+  * via cPanel admin interface
+  
+  Go to <span class="notranslate">cPanel → Admin interface → LVE Manager → Dashboard</span> → click <span class="notranslate">_Refresh_</span>
+
+  ![](/images/cageFS-verify.png)
+
+  If there is a problem you can see _Not initialized_
+
+  ![](/images/not-initialized.png)
+
+5. Initilize CageF (if it is not initialized)
+
+  * Via SSH
+
+  <div clas="code">
+
+  ```
+  cagefsctl --init
+  ```
+  </div>
+
+  * Via cPanel admin interface
+
+    Go to cPanel → <span class="notranslate">Admin interface → LVE manager → Options → CageFS INIT</span>
+
+    ![](/images/CageFS-init.png)
+
+  If CageFS was initialized after refreshing Dashboard you will see that CageFS is enabled:
+
+  ![](/images/CageFS-enabled.png)
+
+6. Enable CageFS to a user
+
+  Go to <span class="notranslate">cPanel → Admin interface → LVE manager → Users</span>
+
+  ![](/images/enable-CageFS-to-user.png)
+
+  * For one user by individual slider (for LVE 1001 in the picture above)
+  * For a group of user by the _CageFS_ button (for LVE 1002 and 1003 in the picture above)
+
+7. Check that system PHP version is not `alt-php` (it should be `ea-php`)
+
+  Go to <span class="notranslate">cPanel → Admin interface → MultiPHP Manager → PHP versions</span>
+
+  ![](/images/check-ea-php.png)
+
+8. Check that an appropriate PHP handler is selected for PHP version which is system version
+
+  Go to <span class="notranslate">cPanel Admin interface → MultiPHP Manager → PHP Handlers</span>
+
+  ![](/images/php-handlers.png)
+
+9. Check version for domain in MultiPHP Selector. It should be equal to the system default version
+
+Go to <span class="notranslate">cPanel Admin interface → MultiPhp Manager → PHP versions</span> → scroll to <span class="notranslate">_Set PHP Version per Domain_</span>
+
+10. Version for domain in User’s interface in PHP Selector should not be equal to the <span class="notranslate">Native</span> version.
+
 
 ### LiteSpeed support
 
@@ -9227,14 +9342,18 @@ Control panels such as cPanel, Plesk, and DirectAdmin add this directive to the 
 
 ### Installation
 
-The installation process varies depending on the control panel and Apache.
+The <span class="notranslate">`mod_suexec`</span> installation process varies depending on the control panel and Apache.
 
 * [Installing on cPanel servers with EasyApache 4](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4-2)
+  * [Via command line](/cloudlinux_os_components/#via-command-line)
+  * [Via administrator interface](/cloudlinux_os_components/#via-administrator-interface)
 * [Installing on Plesk servers](/cloudlinux_os_components/#installing-on-plesk-servers-2)
 * [Installing on DirectAdmin servers](/cloudlinux_os_components/#installing-on-directadmin-servers-2)
 * [Installing on servers with no control panel](/cloudlinux_os_components/#installing-on-servers-with-no-control-panel-2)
 
 #### Installing on cPanel servers with EasyApache 4
+
+#### Via command line
 
 1. Install `mod_suexec` through YUM package manager as follows:
 
@@ -9257,6 +9376,31 @@ The installation process varies depending on the control panel and Apache.
   $ service httpd restart
   ```
   </div>
+
+  :::tip Note
+  If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
+  :::
+
+#### Via administrator interface
+
+1. Open EasyApache4 page.
+2. Click <span class="notranslate">_Customize_</span> for <span class="notranslate">_Currently installed Packages_</span>.
+
+  ![](/images/mod_suexec_admin_ui_1.png)
+
+3. Click <span class="notranslate">_Apache Modules_</span>. Find <span class="notranslate">`mod_suexec`</span> and click <span class="notranslate">_Yes_</span> to install it.
+
+  ![](/images/mod_suexec_admin_ui_2.png)
+
+4. Select <span class="notranslate">_Review_</span> and <span class="notranslate">_Provision_</span>.
+
+  ![](/images/mod_suexec_admin_ui_3.png)
+
+5. Wait while <span class="notranslate">_Provision_</span> will be finished.
+   
+   :::tip Note
+   If you use CageFS + PHP Selector, you should run the <span class="notranslate">`cagefsctl --force-update`</span> command.
+   :::
 
 #### Installing on Plesk servers
 

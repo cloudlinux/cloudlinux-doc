@@ -14,6 +14,9 @@ The list of the commands (CLI) you can use to manage CloudLinux OS components.
 
 ## CageFS
 
+* [Running command inside CageFS](/command-line_tools/#running-command-inside-cagefs)
+* [Sanity check](/command-line_tools/#sanity-check)
+
 `cagefsctl` is used to manage CageFS. It allows initializing and updating CageFS, as well as enabling/disabling CageFS for individual users.
 
 Use the following syntax to manage CageFS:
@@ -188,6 +191,24 @@ In case if at least one of the checks resulted neither <span class="notranslate"
 
 
 ## LVE-stats 2
+
+* [lveinfo](/command-line_tools/#lveinfo)
+* [lvechart](/command-line_tools/#lvechart)
+* [dbgovchart](/command-line_tools/#dbgovchart)
+* [lve-read-snapshot](/command-line_tools/#lve-read-snapshot)
+* [lve-create-db](/command-line_tools/#lve-create-db)
+* [cloudlinux-top](/command-line_tools/#cloudlinux-top)
+  * [Usage](/command-line_tools/#usage)
+  * [Output format](/command-line_tools/#output-format)
+  * [Units of measurement](/command-line_tools/#units-of-measurement)
+  * [Errors handling](/command-line_tools/#errors-handling)
+  * [Examples](/command-line_tools/#examples)
+* [cloudlinux-statistics](/command-line_tools/#cloudlinux-statistics)
+  * [Usage](/command-line_tools/#usage-2)
+  * [Output format](/command-line_tools/#output-format-2)
+  * [Units of measurement](/command-line_tools/#units-of-measurement-2)
+  * [Errors handling](/command-line_tools/#errors-handling-2)
+  * [Examples](/command-line_tools/#examples-2)
 
 | | |
 |-|-|
@@ -977,6 +998,11 @@ The format of the error message is the same as in the other <span class="notrans
 
 ## MySQL Governor
 
+* [dbtop](/command-line_tools/#dbtop)
+* [dbctl](/command-line_tools/#dbctl)
+* [lveinfo --dbgov](/command-line_tools/#lveinfo-dbgov)
+* [dbgovchart](/command-line_tools/#dbgovchart-2)
+
 * <span class="notranslate">`dbtop`</span> monitors MySQL usage on per user bases.
 * <span class="notranslate">`dbctl`</span> is a command line tool to manage <span class="notranslate">DB Governor</span> configuration.
 * <span class="notranslate">`lveinfo --dbgov`</span> provides historical information about usage and customer restrictions. 
@@ -1253,6 +1279,8 @@ Charts examples:
 
 ## PHP Selector
 
+* [selectorctl](/command-line_tools/#selectorctl)
+
 | | |
 |-|-|
 |<span class="notranslate"> /usr/bin/alt-php-mysql-reconfigure.py </span> | Reconfigures <span class="notranslate"> alt-php </span> extensions to use correct MySQL library, based on the one installed in the system.|
@@ -1372,6 +1400,10 @@ All end user settings are contained in individual user's alt_php.ini files and c
 
 ### New Python Selector
 
+* [Hoster](/command-line_tools/#hoster)
+* [Examples](/command-line_tools/#examples-3)
+* [Examples](/command-line_tools/#examples-4)
+* [End user](/command-line_tools/#end-user)
 
 :::warning Warning!
 selectorctl command line tool is not supported in the new Python Selector. You can use cloudlinux-selector command line tool instead.
@@ -1870,7 +1902,6 @@ To start all users CLI commands use <span class="notranslate">`cagefs_enter`</sp
 
 ### Old Python Selector
 
-
 :::warning Warning!
 selectorctl command line tool is not supported in the new Python Selector. You can use cloudlinux-selector command line tool instead.
 :::
@@ -2031,6 +2062,9 @@ selectorctl --interpreter=ruby --user=$USER -v 2.0
 </div>
 
 ## Node.js Selector
+
+* [Hoster](/command-line_tools/#hoster-2)
+* [End user](/command-line_tools/#end-user-2)
 
 Below is a list of commands hoster and end user can run in a command line.
 
@@ -2769,6 +2803,8 @@ testuser5 0  2   2   1%    52   0    0
 
 ### cldetect
 
+* [clsupergid auto-configuration](/command-line_tools/#clsupergid-auto-configuration)
+
 :::tip Note
 <span class="notranslate">lve-utils 1.2-10+</span>
 :::
@@ -2874,7 +2910,7 @@ The utility includes several built-in checkers, and can also import and run chec
 
 Currently implemented checkers:
 
-1. <span class="notranslate">`--diag-cp`</span>
+#### 1. --diag-cp
 
 Checks control panel and its configuration (for DirectAdmin only).
 
@@ -2882,7 +2918,7 @@ Checking control panel availability, thereby detecting it with our code. Display
 
 Fails if <span class="notranslate">`/usr/local/directadmin/custombuild/options.conf`</span> does not contain <span class="notranslate">`cloudlinux=yes`</span> line (for DirectAdmin control panel).
 
-2. <span class="notranslate">`--symlinksifowner`</span>
+#### 2. --symlinksifowner
 
 Checks fs.enforce_symlinksifowner is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
@@ -2891,7 +2927,7 @@ Checking specified kernel setup described in [this docs section](/cloudlinux_os_
 Fails if <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span> contains value `2` (it is deprecated and can cause issues for the system operation).
  
 
-3. <span class="notranslate">`--check-suexec`</span>
+#### 3. --check-suexec
 
 Checks suexec has <span class="notranslate">cagefs</span> jail.
 
@@ -2900,7 +2936,7 @@ In case if <span class="notranslate">CageFS</span> is installed and SuEXEC is on
 Fails if CageFS is not enabled for suexec binary.
 
 
-4. <span class="notranslate">`--check-suphp`</span>
+#### 4. --check-suphp
 
 Checks suphp has <span class="notranslate">cagefs</span> jail.
 
@@ -2908,7 +2944,7 @@ In case if <span class="notranslate">CageFS</span> is installed and SuPHP is on,
  
 Fails if CageFS is not enabled for suphp binary.
 
-5. <span class="notranslate">`--check-usepam`</span>
+#### 5. --check-usepam
 
 Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
 
@@ -2916,7 +2952,7 @@ Checking if <span class="notranslate">`/etc/ssh/sshd_config`</span> config file 
  
 Fails if <span class="notranslate">`/etc/ssh/sshd_config`</span> contains <span class="notranslate">`UsePAM no`</span> line. 
 
-6. <span class="notranslate">`--check-symlinkowngid`</span>
+#### 6. --check-symlinkowngid
 
 Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
@@ -2924,7 +2960,7 @@ First checking if user <span class="notranslate">`Apache`</span> is available in
  
 Fails if Apache user is not in the group specified in <span class="notranslate">`/proc/sys/fs/symlinkown_gid`</span>.
 
-7. <span class="notranslate">`--check-cpanel-packages`</span>
+#### 7. --check-cpanel-packages
 
 Checks existence of all user's packages (cPanel only)
 
@@ -2933,7 +2969,7 @@ Reading <span class="notranslate">`PLAN=`</span> for all users from <span class=
 Fails if users from <span class="notranslate">`/var/cpanel/users/`</span> directory have non-existing packages (packages do not exist in <span class="notranslate">`/var/cpanel/packages/`</span> directory, except for <span class="notranslate">`undefined`</span> and <span class="notranslate">`default`</span>). 
  
 
-8. <span class="notranslate">`--check-defaults-cfg`</span>
+#### 8. --check-defaults-cfg
 
 Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>.
 
@@ -2945,13 +2981,13 @@ Possible reasons for failure:
    * Default version is undefined, which means <span class="notranslate">`/etc/cl.selector/default.cfg`</span> file does not contain section [versions] with the defined default version. 
    * Default PHP version is disabled.
 
-9. <span class="notranslate">`--check-cagefs`</span>
+#### 9. --check-cagefs
 
 All checks for CageFS are described separately in [this docs section](/command-line_tools/#sanity-check) and their start from cagefsctl utility is completely equivalent to the start from cldiag and is designed only for a better experience.
  
 This checker includes a set of CageFS sub-checkers, failure of one (or more) of them causes general checker failure.
 
-10. <span class="notranslate">`--check-php-conf`</span>
+#### 10. --check-php-conf
 
 Checks <span class="notranslate">`/etc/cl.selector/php.conf`</span>.
 
@@ -2963,7 +2999,7 @@ Fails if <span class="notranslate">`/etc/cl.selector/php.conf`</span> has incorr
   
  * File contains an invalid setting for the parameter <span class="notranslate">`Type`</span> (valid settings for the  <span class="notranslate">`Type`</span> parameter: <span class="notranslate">`value`, `list`, `bool`</span>)
 
-11.  <span class="notranslate">`--check-phpselector`</span>
+#### 11. --check-phpselector
 
 Checks compatibility for the <span class="notranslate">PHP Selector</span>
 
@@ -2980,13 +3016,13 @@ The following checkers are available in <span class="notranslate">**lve-utils >=
 :::
  
 
-12. <span class="notranslate">`--check-lve-limits`</span>
+#### 12. --check-lve-limits
 
 Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#limits-validation).
 
-13. <span class="notranslate">`--check-rpmdb`</span>
+#### 13. --check-rpmdb
 
 :::warning Warning
 This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can in some cases hang up during `rpmdb` check, which can brake access to the database for `rpm/yum` utilities.
@@ -3066,6 +3102,14 @@ Each Level1 option can have nested Level2 options specified using the same synta
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyReseller`</span><sup> *</sup>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to reseller|
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyCustomers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notifications to users|
 |<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`notifyResellers`</span>| | |<span class="notranslate">`true`</span>/<span class="notranslate">`false`</span>| Send faults notification to resellers|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifyCharset`**</span>| |<span class="notranslate">`utf-8`/null</span>|Set charset used in email|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifyFromEmail`**</span> | |<span class="notranslate">`admin@email.com`/null</span>|Set email to notify from|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`notifySubject`**</span> | |<span class="notranslate">`Subject`/null</span>|Set email subject|
+|<span class="notranslate">`faultsNotification`</span>|<span class="notranslate">`email`</span>|<span class="notranslate">`reportAdminEmail`**</span> | |<span class="notranslate">`admin@email.com`/null</span>|Set admin email for notifications|
+
+:::tip Note
+To reset options marked with ** set `null`.
+:::
 
 ::: tip Note  
 Options marked with `*` are for reseller use only
@@ -3126,6 +3170,13 @@ $ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":f
 
 
 ### cl-quota
+
+* [General provisions](/command-line_tools/#general-provisions)
+* [Setting limits and integration with panel packages](/command-line_tools/#setting-limits-and-integration-with-panel-packages)
+* [Limits inheritance](/command-line_tools/#limits-inheritance)
+* [Caching and synchronizing the limits](/command-line_tools/#caching-and-synchronizing-the-limits)
+* [Quotas DB file](/command-line_tools/#quotas-db-file)
+* [CLI options/examples](/command-line_tools/#cli-options-examples)
 
 <span class="notranslate">**cl-quota**</span> utility is designed to control <span class="notranslate">disk quotas</span> and provides:
 
@@ -3404,6 +3455,11 @@ Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoi
 
 
 ### cloudlinux-limits
+
+* [Usage](/command-line_tools/#usage-3)
+* [Commands](/command-line_tools/#commands)
+* [Options](/command-line_tools/#options)
+* [Examples](/command-line_tools/#examples-5)
 
 <span class="notranslate">`cloudlinux-limits`</span> is an alternative to `lvectl` CLI tool for LVE management. <span class="notranslate">`cloudlinux-limits`</span> utility allows you to get/set any CloudLinux limits.
 

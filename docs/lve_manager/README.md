@@ -19,6 +19,19 @@ $ yum install lvemanager
 
 ## CloudLinux installation wizard
 
+* [Overview](/lve_manager/#overview)
+* [Set up](/lve_manager/#set-up)
+* [CloudLinux components](/lve_manager/#cloudlinux-components)
+  * [CageFS](/lve_manager/#cagefs)
+  * [LSAPI](/lve_manager/#lsapi)
+  * [MySQL Governor](/lve_manager/#mysql-governor)
+  * [Node.js Selector](/lve_manager/#node-js-selector)
+  * [Ruby Selector](/lve_manager/#ruby-selector)
+  * [Python Selector](/lve_manager/#python-selector)
+  * [PHP Selector](/lve_manager/#php-selector)
+* [Installation process and possible errors](/lve_manager/#installation-process-and-possible-errors)
+  * [Wizard fatal error](/lve_manager/#wizard-fatal-error)
+
 #### Overview
 
 <span class="notranslate">CloudLinux Installation Wizard </span> allows you to easily install and set up CloudLinux OS components on your server with cPanel, Plesk or DirectAdmin.
@@ -188,6 +201,8 @@ You can contact our support team for further assistance anytime by [submitting a
 
 ## LVE Manager
 
+* [Notifications color codes](/lve_manager/#notifications-color-codes)
+
 <span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
 
 Administrator credentials allow controlling limits for host users.
@@ -267,7 +282,9 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
   * <span class="notranslate">Applications</span> — number of installed/all applications for the account.
 * <span class="notranslate">[PHP Selector](/lve_manager/#php-selector-2)</span> block displays the following data:
   * <span class="notranslate">Default version</span> — the default version of PHP binaries.
-  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.
+  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.<br>
+  PHP Selector (cPanel) has malfunctions warnings about [the most common issues](/lve_manager/#errors).
+  ![](/images/PHPSelectorDashboardMalfunction.png)
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-2)</span> block displays the following data:
   * <span class="notranslate">Python Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span> — displays a current status of the Python Selector.
   
@@ -329,6 +346,11 @@ To expand the list of users click on the number above and in the dropdown choose
 ### Users
 
 </div>
+
+* [Actions](/lve_manager/#actions)
+* [Group actions for users with enabled CageFS](/lve_manager/#group-actions-for-users-with-enabled-cagefs)
+
+
 
 Choose <span class="notranslate">_Users_</span> tab to view the list of all users in the system and manage their limits.
 
@@ -606,6 +628,10 @@ When you've done with settings, click <span class="notranslate">**Save Changes**
 
 <span class="notranslate"> Packages</span> tab allows setting the limits for as many users as you need by editing packages of proper limits. Each account belonging to a proper package adheres to those limits.
 
+:::tip Note
+Limits from the package will not be applied if the package’s owner differs from the owner of the account you’re trying to apply limits to. Default limits will be applied instead.
+:::
+
 Choose <span class="notranslate">_Packages_</span> tab to view and modify:
 
 * limits for hosts user’s packages (Created by Admin);
@@ -633,6 +659,13 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 </div>
 
+* [Selector tab](/lve_manager/#selector-tab)
+* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> LVE Manager 6.0.1-2</sup>
+  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)<sup> LVE Manager 6.0.1-2</sup>
+* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)<sup> LVE Manager 6.0.1-2</sup>
+
+#### Selector tab
+
 <span class="notranslate"> Selector</span> tab allows controlling <span class="notranslate">PHP Selector</span> settings.
 
 * In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
@@ -652,8 +685,120 @@ Choose default modules from the list for a proper PHP version or for native.
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
 
+####  Selector tab additional features <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+
+Go to cPanel admin interface → LVE manager → Selector
+
+![](/images/NewSelector.png)
+
+<span class="notranslate">_Selector_</span> tab has two sub tabs: <span class="notranslate">_Main settings_</span> and <span class="notranslate">_Domains_</span>.
+
+* <span class="notranslate">_Main settings_</span> sub tab allows to config general settings for PHP Selector
+  * <span class="notranslate">_Selector is_</span>: allows to enable/disable PHP Selector
+  * <span class="notranslate">_Default PHP version_</span>: allows to set PHP version by default
+  * <span class="notranslate">_Hide PHP extensions for end-user_</span>: allows to hide PHP extensions
+  * <span class="notranslate">_Hide "My domains" page for end-user_</span>: allows to disable such tab for end-user
+  * <span class="notranslate">_Supported versions_</span>: allows to select supported PHP versions 
+* <span class="notranslate">_Domains_</span> sub tab contains the list of User-Domain pairs to visualize which PHP Selector is used by a domain
+
+![](/images/Domains.png)
+
+Admin can filter the list:
+
+![](/images/SelectorFilters.png)
+
+If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <span class="notranslate">_Action_</span> table, the PHP version for a domain in MultiPHP Selector is changed to the system default version and <span class="notranslate">`php-fpm`</span> is disabled. Users' websites will use the version set in CloudLinux PHP Selector (user interface). Group operation also can be used.
+
+![](/images/UsePHPSelector.png)
+
+#### PHP Selector troubleshooting <Badge text="cPanel"/> <Badge text="LVE Manager 6.0.1-2" />
+
+
+You can see the following errors in the <span class="notranslate">_Domains_</span> tab.
+
+1. <span class="notranslate">PHP Selector cannot be activated for this domain. Initialize CageFS in the Options tab first</span>.
+
+![](/images/Error1.png)
+
+**Solution**
+
+Initialize CageFS in the Options tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSInit.png)
+
+2. <span class="notranslate">PHP Selector cannot be activated for this domain. Enable CageFS for this user in the Users tab first</span>.
+
+![](/images/Error2.png)
+
+**Solution**
+
+Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)).
+
+![](/images/CageFSEnable.png)
+
+* You can enable CageFS for one user by individual slider (for lve 1001 in the picture above)
+* You can enable CageFS for a group of user by the CageFS button (for lve 1002, 1003 in the picture above)
+
+3. Some PHP related issues need to be resolved in order to enable domain management. Find the list of PHP related issues that prevent domain management above.
+
+![](/images/Error3.png)
+
+**Solution**
+
+If you cannot see Diagnostic tool notifications, you can restart it. Then you can fix the issues using [these instructions](/lve_manager/#php-selector-diagnostic-tool-and-notifications).
+
+#### PHP Selector diagnostic tool and notifications <Badge text="LVE Manager 6.0.1-2" />
+
+The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
+
+![](/images/RunDiagnostic.png)
+
+The most popular errors and solutions:
+
+1. Your PHP Handler does not support CLoudLinux PHP Selector
+
+![](/images/Issue1.png)
+   
+**Solution**: install `mod_suexec` (see instructions [here](/cloudlinux_os_components/#installation-5)) and then run the following command:
+
+<div class="notranslate">
+
+```
+cagefsctl --force-update
+```
+</div>
+
+2. Incorrect config file format
+
+![](/images/Issue2.png)
+       
+**Solution**: correct the file format via SSH.
+
+3. Some domains have neither PHP version selected in MultiPHP Manager no system default version or have `php-fpm` enabled.
+
+![](/images/Issue3.png)
+
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+4. MultiPHP system default version is not ea-php
+
+![](/images/Issue4.png)
+
+**Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
+
+In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.
+
+
+
 
 ### Python Selector
+
+* [How to enable/disable Python Selector](/lve_manager/#how-to-enable-disable-python-selector)
+* [How to manage Python Selector](/lve_manager/#how-to-manage-python-selector)
+* [Enable and disable particular Python version](/lve_manager/#enable-and-disable-particular-python-version)
+* [Install and delete particular Python version](/lve_manager/#install-and-delete-particular-python-version)
+* [Make a particular Python version as a default](/lve_manager/#make-a-particular-python-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column)
 
 Hoster interface allows to enable and disable Python Selector and manage individual Python versions.
 
@@ -770,6 +915,15 @@ See also: [Python Selector client plugin](/lve_manager/#python-selector-client-p
 
 
 ### Node.js Selector
+
+* [How to enable/disable Node.js](/lve_manager/#how-to-enable-disable-node-js)
+* [How to manage Node.js](/lve_manager/#how-to-manage-node-js)
+* [Enable and disable particular Node.js version](/lve_manager/#enable-and-disable-particular-node-js-version)
+* [Install and delete particular Node.js version](/lve_manager/#install-and-delete-particular-node-js-version)
+* [Make a particular Node.js version as a default](/lve_manager/#make-a-particular-node-js-version-as-a-default)
+* [Applications column](/lve_manager/#applications-column-2)
+* [Application error log](/lve_manager/#application-error-log)
+
 
 Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
 
@@ -893,6 +1047,21 @@ By default, <span class="notranslate">Passenger</span> log messages are all writ
 See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
 ### Reseller limits
+
+* [Hoster interface](/lve_manager/#hoster-interface)
+  * <span class="notranslate">[Current Usage](/lve_manager/#current-usage-2)</span>
+  * <span class="notranslate">[Users](/lve_manager/#users-2)</span>
+  * <span class="notranslate">[Statistics](/lve_manager/#statistics-2)</span>
+  * <span class="notranslate">[Options](/lve_manager/#options-2)</span>
+  * <span class="notranslate">[Packages](/lve_manager/#packages-2)</span>
+  * <span class="notranslate">[Selector](/lve_manager/#selector)</span>
+* [Reseller Interface](/lve_manager/#reseller-interface)
+  * <span class="notranslate">[Current Usage](/lve_manager/#current-usage-tab)</span>
+  * <span class="notranslate"> [Historical Usage](/lve_manager/#historical-usage-tab)</span>
+  * <span class="notranslate"> [Users](/lve_manager/#users-tab)</span>
+  * <span class="notranslate"> [Statistics](/lve_manager/#statistics-tab)</span>
+  * <span class="notranslate"> [Options](/lve_manager/#options-tab)</span>
+  * <span class="notranslate"> [Packages](/lve_manager/#packages-tab)</span>
 
 #### Hoster interface
 
@@ -1304,6 +1473,41 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 
 ### Client plugins
 
+* [Resource Usage client plugin](/lve_manager/#resource-usage-client-plugin)
+* [Dashboard](/lve_manager/#dashboard-2)
+* [Current Usage](/lve_manager/#current-usage-3)
+* [Current Usage table](/lve_manager/#current-usage-table)
+* [Filters](/lve_manager/#filters)
+* [Charts](/lve_manager/#charts)
+* [Usage](/lve_manager/#usage)
+* [Snapshot](/lve_manager/#snapshot)
+* [Server processes snapshots](/lve_manager/#server-processes-snapshots)
+* [Process list](/lve_manager/#process-list)
+* [Database queries (cPanel only)](/lve_manager/#database-queries-cpanel-only)
+* [HTTP queries](/lve_manager/#http-queries)
+* [Python Selector client plugin](/lve_manager/#python-selector-client-plugin)
+* [How to manage an application](/lve_manager/#how-to-manage-an-application)
+* [Create application](/lve_manager/#create-application)
+* [Start application](/lve_manager/#start-application)
+* [Stop application](/lve_manager/#stop-application)
+* [Restart application](/lve_manager/#restart-application)
+* [Remove application](/lve_manager/#remove-application)
+* [Edit application](/lve_manager/#edit-application)
+* [Migrate application](/lve_manager/#migrate-application)
+* [Node.js Selector client plugin](/lve_manager/#node-js-selector-client-plugin)
+* [How to manage application](/lve_manager/#how-to-manage-application)
+* [Start application](/lve_manager/#start-application-2)
+* [Stop application](/lve_manager/#stop-application-2)
+* [Restart application](/lve_manager/#restart-application-2)
+* [Remove application](/lve_manager/#remove-application-2)
+* [Edit application](/lve_manager/#edit-application-2)
+* [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
+* [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
+* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
+* [LVE Manager options](/lve_manager/#lve-manager-options)
+* [Changing settings manually](/lve_manager/#changing-settings-manually)
+* [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
+
 #### Resource Usage client plugin
 
 Client resource usage plugin for cPanel, Plesk, and DirectAdmin allows host’s end users to view and monitor resource usage.
@@ -1704,6 +1908,31 @@ To manage PHP options, click <span class="notranslate">_Switch to PHP options_</
 * <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
 * <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
 
+#### PHP Selector. My Domains tab <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+
+The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
+
+![](/images/MyDomainsTab.png)
+
+A user can configure a domain to use CloudLinux <span class="notranslate">PHP Selector</span>.
+
+1. Click <span class="notranslate">_Use PHP Selector_</span>
+  
+![](/images/UsePHPSelector1.png)
+
+2. Set a version in <span class="notranslate">PHP Selector</span>
+
+![](/images/SetVersion.png)
+
+:::tip Note
+If `php-fpm` is enabled for a domain the only administrator can set it to <span class="notranslate">_disable_</span>.
+:::
+
+
+
+
+
+
 #### LVE Manager options
 
 You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
@@ -1951,6 +2180,9 @@ Memory is defined in 4KB pages (so, 1024 would mean 1024 4KB pages, or 4MB).
 <span class="notranslate"> CPU </span> is defined as % of total number of cores on a server.
 
 ### cPanel LVE Extension
+
+* [Add Package Extension](/lve_manager/#add-package-extension)
+* [Edit Package Extensions](/lve_manager/#edit-package-extensions)
 
 :::tip Note
 <span class="notranslate">LVE Manager</span> 1.0-9.8+

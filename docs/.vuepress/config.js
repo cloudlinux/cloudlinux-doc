@@ -89,7 +89,7 @@ module.exports = {
           },
           {
             text: "Contact support",
-            url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
+            url: "https://hubs.ly/H0pk7990"
           },
           { text: "Blog", url: "https://www.cloudlinux.com/blog" }
         ],
@@ -166,7 +166,7 @@ module.exports = {
             },
             {
                 text: "Техподдержка",
-                url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
+                url: "https://hubs.ly/H0pk7990"
             },
             { text: "Блог", url: "https://www.cloudlinux.com/blog" }
         ],

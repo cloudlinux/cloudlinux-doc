@@ -2,9 +2,9 @@
 
 ## Hardware compatibility
 
-CloudLinux supports all the hardware supported by RHEL/CentOS 6.x, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
-At this moment we are aware of only one such case:
+At this moment (for CL6) we are aware of only one such case:
 
 | |  | |
 |-|--|-|
@@ -17,7 +17,7 @@ At this moment we are aware of only one such case:
 
 * [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
 
-It is easy to convert your existing CentOS 6.x, 7.x, 8.x server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+It is easy to convert your existing CentOS server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
@@ -70,7 +70,7 @@ For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats p
 :::
 
 :::warning Warning
-Note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
@@ -106,10 +106,15 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
   * custombuild for DirectAdmin.
 
 :::warning *
-Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 ### CloudLinux 8 kernel-related features and improvements
+
+* [Memory](/cloudlinux_installation/#memory)
+* [Security](/cloudlinux_installation/#security)
+* [Performance](/cloudlinux_installation/#performance)
+* [Common issues and troubleshooting during conversion](/cloudlinux_installation/#common-issues-and-troubleshooting-during-conversion)
 
 #### Memory
 
@@ -145,7 +150,7 @@ On cPanel servers, rebuild of Apache with EasyApache will complete the conversio
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
 :::warning *
-Please note that CloudLinux 8 is not supported by control panels automatically yet. Support will be added in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
 
@@ -218,13 +223,6 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
   * Last updated: July 05, 2018
 
 
-* **Latest stable CloudLinux 5.11 ISO (OBSOLETE)**:  
-
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/x86_64/CloudLinux-5.11-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/5.11/iso/i386/CloudLinux-5.11-i386-DVD.iso)
-  * Last updated: Oct 10, 2014
-
-
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
 :::
@@ -234,9 +232,14 @@ We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` p
 :::
 
 
-### Installing CloudLinux OS 8 beta from ISO image
+### Installing CloudLinux OS 8 from ISO image
 
-You can download and install CloudLinux OS 8 beta from [this ISO image](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-netinst-x86_64-8.1.beta.iso). Mount and boot the image, then follow the following steps.
+You can download and install CloudLinux OS 8 beta from the following repositories:
+
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso) - network installation ISO
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso) - DVD installation ISO
+
+Mount and boot the image, then follow the following steps.
 
 
 1. Configure a network connection as shown below.
@@ -262,6 +265,9 @@ You can download and install CloudLinux OS 8 beta from [this ISO image](https://
 * [Google Cloud Engine](https://download.cloudlinux.com/cloudlinux/images/#gce-tab)
 * [Amazon Web Services](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
+* [Xen](/cloudlinux_installation/#installing-new-servers)
+
+#### Xen images
 
 :::tip Note
 We do not provide Xen images of CloudLinux OS anymore.
@@ -706,8 +712,8 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 * [Installation](/cloudlinux_installation/#installation-2)
 
 :::warning Note
-We’ll be ending support for Virtuozzo and OpenVZ containers on November 1st, 2019.
-If you are running Virtuozzo and OpenVZ, you will still be able to use CloudLinux OS but you will need to run hypervisors. See detail on how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
+Starting from November 1st, 2019, we do not support Virtuozzo and OpenVZ **containers**.
+However, you can run CloudLinux OS on OpenVZ 6 and Virtuozzo 6 **hypervisors**. The hypervisor virtualization is the same as for **Xen/KVM/VMware**. Check how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
 :::
 
 :::tip Note
@@ -726,8 +732,6 @@ CloudLinux provides limited support for OpenVZ and Virtuozzo. At this stage only
 * max entry processes
 * mod_lsapi
 * MySQL Governor
-
-No other limits work so far.
 
 #### Installation
 
@@ -934,7 +938,7 @@ Follow the instructions [here](/apache_mod_lsapi/#installation) to install and c
 
 If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
-1. Convert server from CentOS  6.x or 7.x to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+1. Convert server from CentOS  to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
 
 2. Restart Apache service.
 
@@ -942,7 +946,7 @@ If EasyApache 4 was installed earlier on your CentOS server and you would like t
 
 If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
-1. Convert server from CentOS  6.x or 7.x to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+1. Convert server from CentOS to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
 
 2. Run:
    

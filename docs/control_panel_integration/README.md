@@ -24,6 +24,8 @@ Most of the integration is done within a few steps:
 
 ## General
 
+* [Example of the integration config](/control_panel_integration/#example-of-the-integration-config)
+
 To integrate CloudLinux into a control panel, you should implement the following interfaces required by the CloudLinux OS utilities:
 * [CPAPI](/control_panel_integration/#control-panel-api-integration) — a small scripts/files-type interface to get the required information from the control panel
 * [CP Hooks Integration](/control_panel_integration/#control-panel-hooks-integration) — a set of the CloudLinux OS scripts/commands. Control panel calls this set in response to its internal events
@@ -84,6 +86,8 @@ To integrate CPAPI, set the paths to the scripts in the integration file in the 
 You can use different scripts for different CPAPI methods or only one script and call it with different arguments. The script is any executable file written in any programming language, that returns a valid JSON file of the specified format in response to arguments it is expected to be called.
 
 ### Integration scripts requirements
+
+* [Legend](/control_panel_integration/#legend)
 
 * By default, integration scripts should run only from UNIX user with the same credentials as LVE Manager is run, unless otherwise stated in the script description.
 * Some scripts are run from both root and end-user. If the script is run from end-user it should return information related to this user only, filtering the irrelevant data for security/isolation purposes or return <span class="notranslate">`PermissionDenied`</span> if script is not intended to be run as this user at all.
@@ -156,6 +160,11 @@ You can find more details on how to configure your scripts in CageFS properly he
 * [How to integrate CageFS with any control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
 
 ### Expected scripts responses
+
+* [Internal errors](/control_panel_integration/#internal-errors)
+* [Restricted access](/control_panel_integration/#restricted-access)
+* [Error in arguments](/control_panel_integration/#error-in-arguments)
+* [Nonexistent entities](/control_panel_integration/#nonexistent-entities)
 
 Any integration script should return a valid UTF-8 encoded JSON.
 
@@ -288,6 +297,14 @@ This kind of error should be used only in the filtering case. In case when some 
 |message|False|Error message for an administrator printed by CloudLinux utility|
 
 ### The list of the integration scripts
+
+* [panel_info](/control_panel_integration/#panel-info)
+* [db_info](/control_panel_integration/#db-info)
+* [packages](/control_panel_integration/#packages)
+* [users](/control_panel_integration/#users)
+* [domains](/control_panel_integration/#domains)
+* [resellers](/control_panel_integration/#resellers)
+* [admins](/control_panel_integration/#admins)
 
 #### <span class="notranslate">panel_info</span>
 
@@ -886,6 +903,8 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 
 ### ui-user-info script
 
+* [Known issues for GUI unification](/control_panel_integration/#known-issues-for-gui-unification)
+
 This script should return information about the current user opening Web UI. It is only used in UI part of the LVE Manager and utilities.
 
 * Input value (first positional argument) — the current authentication token, passed on plugin open (for example, <span class="notranslate">`open.php?token=hash`</span>)
@@ -1177,6 +1196,9 @@ to apply changes and check that the command shows <span class="notranslate">_Dis
 [Excluding users](/cloudlinux_os_components/#excluding-users)
 
 ### How to add a file or a directory to CageFS
+
+* [Copy files and directories to CageFS](/control_panel_integration/#copy-files-and-directories-to-cagefs)
+* [Mount an entire directory with needed files to CageFS](/control_panel_integration/#mount-an-entire-directory-with-needed-files-to-cagefs)
 
 There are two major ways to add files and directories to CageFS:
 
@@ -1690,6 +1712,8 @@ For details, see [PHP Selector Installation and Update](/cloudlinux_os_component
 
 ### /proc filesystem access control
 
+* [Integrating control panel with CloudLinux](/control_panel_integration/#integrating-control-panel-with-cloudlinux)
+
 CloudLinux kernel allows the server administrator to control the user access to the `/proc` filesystem with the special parameters.
 Unprivileged system users will not be able to see the processes of other system users, they can only see their processes. See details [here](/cloudlinux_os_kernel/#virtualized-proc-filesystem).
 
@@ -1721,6 +1745,8 @@ This command is a hook that the control panel should call after adding the admin
 If the [admins](/control_panel_integration/#admins) list script exists when installing <span class="notranslate">`lve-utils`</span> package then the existing administrators will be processed automatically. It the script does not exist, you should run the above mentioned command for each administrator.
 
 ### Symlink protection
+
+* [How to enable symlink protection](/control_panel_integration/#how-to-enable-symlink-protection)
 
 CloudLinux kernels have symlink attacks protection. When this protection is enabled, the system does not allow users to create symlinks (and hard links) to non-existent/not their own files.
 
