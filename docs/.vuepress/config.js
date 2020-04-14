@@ -20,6 +20,18 @@ module.exports = {
       }
     ],
     [
+      "script",
+      {
+        src: "/js/dependencies/smooth-scroll.min.js"
+      }
+    ],
+    [
+      "script",
+      {
+        src: "/js/index.js"
+      }
+    ],
+    [
       "link",
       {
         rel: "icon",
