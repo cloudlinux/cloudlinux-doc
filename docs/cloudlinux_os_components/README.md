@@ -9174,7 +9174,7 @@ alt-suexec package brings suEXEC binaries pre-compiled for specific locations, l
 
 **How to switch suEXEC with alt-suexec**
 
-Based on httpd 2.2 basic for 6 and httpd 2.4 basic for CloudLinux 7, the package brings to server a set of suEXECs with different <span class="notranslate"> DOCUMENT ROOT </span> s and <span class="notranslate"> MIN_UID/MIN_GID </span> parameters. The first set of suEXECs is listed by such modes:
+Based on httpd 2.2.16 basic for Cloudlinux 6, httpd 2.4.6 basic for CloudLinux 7 and httpd 2.4.37 basic for CloudLinux 8, the package brings to a server a set of suEXECs with different <span class="notranslate">DOCUMENT ROOTs</span> and <span class="notranslate">MIN_UID/MIN_GID</span> parameters. The first set of suEXECs is listed by such modes:
 
 <div class="notranslate">
 
