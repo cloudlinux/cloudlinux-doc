@@ -22,7 +22,13 @@ module.exports = {
     [
       "script",
       {
-        src: "/js/smooth-scroll.js"
+        src: "/js/dependencies/smooth-scroll.min.js"
+      }
+    ],
+    [
+      "script",
+      {
+        src: "/js/index.js"
       }
     ],
     [
@@ -47,7 +53,8 @@ module.exports = {
       description: "Документация CloudLinux"
     }
   },
-  theme: "cloudlinux",
+  // theme: "cloudlinux",
+  theme: '/Users/azamat/Projects/cl/js/cloudlinux-doc-theme', // local path
   markdown: {
     slugify: (s) => {
       if (sidebarUrls[s]) {
