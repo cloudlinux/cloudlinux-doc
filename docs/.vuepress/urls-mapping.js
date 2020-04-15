@@ -243,6 +243,7 @@ module.exports = {
   "/options_tab2.html": "/lve_manager/#options-tab",
   "/index.html?options_tab2.html": "/lve_manager/#options-tab",
   "/reseller_limits/#options": "/lve_manager/#options-tab",
+  "/?substitute_global_php_ini_for_.html": "/cloudlinux_os_components/#substitute-global-php-ini-for-individual-customer",
   "/packages_tab2.html/": "/lve_manager/#packages-tab",
   "/packages_tab2.html": "/lve_manager/#packages-tab",
   "/index.html?packages_tab2.html": "/lve_manager/#packages-tab",
