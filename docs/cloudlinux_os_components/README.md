@@ -3791,6 +3791,8 @@ Here are some instructions for different control panels:
 1. [for cPanel](https://documentation.cpanel.net/display/EA4/EasyApache+4+and+the+ea-php-cli+Package)
 2. [for Plesk](https://support.plesk.com/hc/en-us/articles/115004177974-How-to-install-PHP-by-OS-vendor-in-Plesk-for-Linux)
 3. [for DirectAdmin](https://help.directadmin.com/item.php?id=345)
+
+After installing native php please run `cloudlinux-selector setup --interpreter=php --json` in order to reconfigure cagefs and lvemanager.
 :::
 
 ### Installation and update
