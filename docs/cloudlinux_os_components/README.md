@@ -3785,6 +3785,16 @@ The main requirements:
 PHP Selector is not supported for H-Sphere.
 :::
 
+::: tip Note
+PHP Selector requires native PHP to be installed, otherwise you will get an error message with a proposal to install PHP package.
+Here are some instructions for different control panels:
+1. [for cPanel](https://documentation.cpanel.net/display/EA4/EasyApache+4+and+the+ea-php-cli+Package)
+2. [for Plesk](https://support.plesk.com/hc/en-us/articles/115004177974-How-to-install-PHP-by-OS-vendor-in-Plesk-for-Linux)
+3. [for DirectAdmin](https://help.directadmin.com/item.php?id=345)
+
+After installing native PHP, please run the `cloudlinux-selector setup --interpreter=php --json` command in order to reconfigure CageFS and LVE Manager.
+:::
+
 ### Installation and update
 
 * [Update](/cloudlinux_os_components/#update)
