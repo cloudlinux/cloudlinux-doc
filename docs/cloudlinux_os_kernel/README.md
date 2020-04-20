@@ -770,6 +770,12 @@ fs.proc_super_gid=XX
 
 The fs.proc_super_gid sets group ID which will see system files in /proc, add any users to that group so they will see all files in /proc. Usually needed by some monitoring users like nagios or zabbix and [cldetect utility](/command-line_tools/#cldetect) can configure few most commonly used monitoring software automatically.
 
+#### Automatic configuration of a group in the fs.proc_super_gid
+
+Starting from **lve-utils v.4.2.0-1**, when installing (not updating) the `lve-utils` package it automatically creates the `clsupergid` group and registers this group in the `fs.proc_super_gid` (if this group was not created before).
+If a group was created in the `fs.proc_super_gid` earlier all stays the same.
+
+
 Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
 <div class="notranslate">
 
