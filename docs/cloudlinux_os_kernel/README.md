@@ -182,7 +182,7 @@ $ sysctl -p
 </div>  
 
 ::: danger
-/proc/sys/fs/global_root_enable [CloudLinux 7 kernel only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+]
+/proc/sys/fs/global_root_enable [CloudLinux 7 and 7 hybrid kernels only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+ and CloudLinux 7 Hybrid with lve-kmod 2.0-11+ ]
 :::
 
 <span class="notranslate"> _proc/sys/fs/global_root_enable_ </span> flag enables following the <span class="notranslate"> symlink </span> with root ownership. If <span class="notranslate"> _global_root_enable=0_ </span> , then <span class="notranslate"> Symlink Owner Match Protection </span> does not verify the <span class="notranslate"> symlink </span> owned by <span class="notranslate"> root.  </span>
