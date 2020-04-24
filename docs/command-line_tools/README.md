@@ -2910,7 +2910,7 @@ The utility includes several built-in checkers, and can also import and run chec
 
 Currently implemented checkers:
 
-#### 1. --diag-cp
+#### diag-cp
 
 Checks control panel and its configuration (for DirectAdmin only).
 
@@ -2918,7 +2918,7 @@ Checking control panel availability, thereby detecting it with our code. Display
 
 Fails if <span class="notranslate">`/usr/local/directadmin/custombuild/options.conf`</span> does not contain <span class="notranslate">`cloudlinux=yes`</span> line (for DirectAdmin control panel).
 
-#### 2. --symlinksifowner
+#### symlinksifowner
 
 Checks fs.enforce_symlinksifowner is correctly enabled in <span class="notranslate">`/etc/sysctl.conf`</span>.
 
@@ -2927,7 +2927,7 @@ Checking specified kernel setup described in [this docs section](/cloudlinux_os_
 Fails if <span class="notranslate">`/proc/sys/fs/enforce_symlinksifowner`</span> contains value `2` (it is deprecated and can cause issues for the system operation).
  
 
-#### 3. --check-suexec
+#### check-suexec
 
 Checks suexec has <span class="notranslate">cagefs</span> jail.
 
@@ -2936,7 +2936,7 @@ In case if <span class="notranslate">CageFS</span> is installed and SuEXEC is on
 Fails if CageFS is not enabled for suexec binary.
 
 
-#### 4. --check-suphp
+#### check-suphp
 
 Checks suphp has <span class="notranslate">cagefs</span> jail.
 
@@ -2944,7 +2944,7 @@ In case if <span class="notranslate">CageFS</span> is installed and SuPHP is on,
  
 Fails if CageFS is not enabled for suphp binary.
 
-#### 5. --check-usepam
+#### check-usepam
 
 Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
 
@@ -2952,7 +2952,7 @@ Checking if <span class="notranslate">`/etc/ssh/sshd_config`</span> config file 
  
 Fails if <span class="notranslate">`/etc/ssh/sshd_config`</span> contains <span class="notranslate">`UsePAM no`</span> line. 
 
-#### 6. --check-symlinkowngid
+#### check-symlinkowngid
 
 Checks <span class="notranslate">`fs.symlinkown_gid`</span>.
 
@@ -2960,7 +2960,7 @@ First checking if user <span class="notranslate">`Apache`</span> is available in
  
 Fails if Apache user is not in the group specified in <span class="notranslate">`/proc/sys/fs/symlinkown_gid`</span>.
 
-#### 7. --check-cpanel-packages
+#### check-cpanel-packages
 
 Checks existence of all user's packages (cPanel only)
 
@@ -2969,7 +2969,7 @@ Reading <span class="notranslate">`PLAN=`</span> for all users from <span class=
 Fails if users from <span class="notranslate">`/var/cpanel/users/`</span> directory have non-existing packages (packages do not exist in <span class="notranslate">`/var/cpanel/packages/`</span> directory, except for <span class="notranslate">`undefined`</span> and <span class="notranslate">`default`</span>). 
  
 
-#### 8. --check-defaults-cfg
+#### check-defaults-cfg
 
 Checks <span class="notranslate">`/etc/cl.selector/default.cfg`</span>.
 
@@ -2981,13 +2981,13 @@ Possible reasons for failure:
    * Default version is undefined, which means <span class="notranslate">`/etc/cl.selector/default.cfg`</span> file does not contain section [versions] with the defined default version. 
    * Default PHP version is disabled.
 
-#### 9. --check-cagefs
+#### check-cagefs
 
 All checks for CageFS are described separately in [this docs section](/command-line_tools/#sanity-check) and their start from cagefsctl utility is completely equivalent to the start from cldiag and is designed only for a better experience.
  
 This checker includes a set of CageFS sub-checkers, failure of one (or more) of them causes general checker failure.
 
-#### 10. --check-php-conf
+#### check-php-conf
 
 Checks <span class="notranslate">`/etc/cl.selector/php.conf`</span>.
 
@@ -2999,7 +2999,7 @@ Fails if <span class="notranslate">`/etc/cl.selector/php.conf`</span> has incorr
   
  * File contains an invalid setting for the parameter <span class="notranslate">`Type`</span> (valid settings for the  <span class="notranslate">`Type`</span> parameter: <span class="notranslate">`value`, `list`, `bool`</span>)
 
-#### 11. --check-phpselector
+#### check-phpselector
 
 Checks compatibility for the <span class="notranslate">PHP Selector</span>
 
@@ -3016,13 +3016,13 @@ The following checkers are available in <span class="notranslate">**lve-utils >=
 :::
  
 
-#### 12. --check-lve-limits
+#### check-lve-limits
 
 Checks the validity of LVE limits on the server.
 
 [See this page for detailed description](/limits/#limits-validation).
 
-#### 13. --check-rpmdb
+#### check-rpmdb
 
 :::warning Warning
 This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can in some cases hang up during `rpmdb` check, which can brake access to the database for `rpm/yum` utilities.
