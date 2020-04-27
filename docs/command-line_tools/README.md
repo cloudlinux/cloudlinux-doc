@@ -2633,7 +2633,7 @@ Examples:
 
 ```
 $ cldeploy --key xx-xxxxxx                            # convert RHEL/CentOS to CL by using activation key, install control panel components
-$ cldeploy --key xx-xxxxxx --auto-hybridize           # convert RHEL/CentOS 7 to CL7h by using activation key, install control panel components
+$ cldeploy --key xx-xxxxxx --force-hybridize           # convert RHEL/CentOS 7 to CL7h by using activation key, install control panel components
 $ cldeploy --byip --conversion-only                   # convert RHEL/CentOS to CL by ip, don't install control panel components
 $ cldeploy --components-only                          # install control panel components on already converted system
 $ cldeploy --hostinglimits                            # update httpd and install mod_hostinglimits 
