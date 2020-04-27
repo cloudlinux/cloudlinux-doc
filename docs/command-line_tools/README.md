@@ -2606,6 +2606,7 @@ Usage:
 |<span class="notranslate">`--skip-kmod-check`</span>|Skip check for unsupported kmods|
 |<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
 |<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
+|<span class="notranslate">`--force-hybridize`</span>|Option allows to convert CloudLinux 7 to CloudLinux 7 Hybrid which has a newer kernel|
 
 The script will install the following to the server:
 
@@ -2631,10 +2632,11 @@ Examples:
 <div class="notranslate">
 
 ```
-$ cldeploy --key xx-xxxxxx           # convert RHEL/CentOS to CL by using activation key, install control panel components
-$ cldeploy --byip --conversion-only  # convert RHEL/CentOS to CL by ip, don't install control panel components
-$ cldeploy --components-only         # install control panel components on already converted system
-$ cldeploy --hostinglimits           # update httpd and install mod_hostinglimits 
+$ cldeploy --key xx-xxxxxx                            # convert RHEL/CentOS to CL by using activation key, install control panel components
+$ cldeploy --key xx-xxxxxx --auto-hybridize           # convert RHEL/CentOS 7 to CL7h by using activation key, install control panel components
+$ cldeploy --byip --conversion-only                   # convert RHEL/CentOS to CL by ip, don't install control panel components
+$ cldeploy --components-only                          # install control panel components on already converted system
+$ cldeploy --hostinglimits                            # update httpd and install mod_hostinglimits 
 ```
 </div>
 
