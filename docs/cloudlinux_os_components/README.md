@@ -8947,6 +8947,7 @@ LVERedisTimeout 120
 
 * [Parameters](/cloudlinux_os_components/#parameters)
 * [Manage reseller limits/users/packages via cPanel/WHM JSON API - JSONHandler](cloudlinux_os_components/#manage-reseller-limits-users-packages-via-cpanel-whm-json-api-jsonhandler)
+* [Using a WHM API token](/cloudlinux_os_components/#using-a-whm-api-token)
 
 CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
 
@@ -9044,6 +9045,22 @@ If the limits for users are set with <span class="notranslate"> cPanel LVE Exten
 |set limits for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --speed=77%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&speed=30%`|
 |set unlimited for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --unlimited`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&unlimited`|
 
+#### Using a WHM API token
+
+You can use a WHM API token with curl as follows:
+
+<div clas="code">
+
+```
+curl -X POST -k -s -H "Authorization: whm root:WHM_TOKEN" "https://SERVER_IP:2087/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=LVE_METHOD&PARAMETERS
+```
+</div>
+
+Where:
+
+* <span class="notranslate">`WHM_TOKEN`</span> – a generated WHM API token (see: [Creating an API token](https://documentation.cpanel.net/display/DD/Guide+to+API+Authentication+-+API+Tokens+in+WHM#0ac291c40e454694a8b981c45988c1cb))
+* <span class="notranslate">`LVE_METHOD`</span> – lvectl method (for example: <span class="notranslate">`list`</span>. See also: [lvectl](/command-line_tools/#lvectl))
+* <span class="notranslate">`PARAMETERS`</span> – all other parametrs and options for a method according to the [documentation](/command-line_tools/#lvectl)
 
 
 ### mod_proctitle
