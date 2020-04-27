@@ -2439,5 +2439,7 @@ module.exports = {
   "/lve_manager/#errors": "/lve_manager/#php-selector-diagnostic-tool-and-notifications",
   "/ru/lve_manager/#errors": "/ru/lve_manager/#php-selector-diagnostic-tool-and-notifications",
   "/lve_manager/#php-selector-user-interface": "/lve_manager/#php-selector-my-domains-tab",
-  "/ru/lve_manager/#php-selector-user-interface": "/ru/lve_manager/#php-selector-my-domains-tab"
+  "/ru/lve_manager/#php-selector-user-interface": "/ru/lve_manager/#php-selector-my-domains-tab",
+  "/cloudlinux_os_components/#abrt-plugin": "/cloudlinux_os_components/#backing-up-mysql",
+  "/ru/cloudlinux_os_components/#abrt-plugin": "/ru/cloudlinux_os_components/#backing-up-mysql"
 };

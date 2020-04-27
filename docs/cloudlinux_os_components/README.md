@@ -3653,8 +3653,6 @@ See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
 
 ### Backing up MySQL
 
-* [abrt plugin](/cloudlinux_os_components/#abrt-plugin)
-
 On <span class="notranslate"> cPanel </span> server disable MySQL service monitoring before doing the job:
 <div class="notranslate">
 
@@ -3688,29 +3686,6 @@ $ whmapi1 configureservice service=mysql enabled=1 monitored=1
 ::: tip Note
 This operation may take some time.
 :::
-
-#### abrt plugin
-
-
-We have created a plugin for <span class="notranslate"> abrt </span> tool to automatically upload core dumps in case <span class="notranslate"> MySQL Governor </span> crashes.
-
-To install the plugin:
-<div class="notranslate">
-
-```
-$ yum install cl-abrt-plugin --enablerepo=cloudlinux-updates-testing
-```
-</div>
-
-It will monitor crash reports for <span class="notranslate"> `/usr/sbin/db_governor, /usr/sbin/dbtop and /usr/sbin/dbctl` </span>
-
-You can modify <span class="notranslate"> `/etc/libreport/plugins/dropbox.conf` </span> to monitor other software as well by adding them to <span class="notranslate"> AppList</span>.
-<div class="notranslate">
-
-```
-AppLists=/usr/sbin/db_governor,/usr/sbin/dbtop,/usr/sbin/dbctl
-```
-</div>
 
 See also [MySQL Governor CLI tools](/command-line_tools/#mysql-governor).
 
