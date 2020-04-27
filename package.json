@@ -5,7 +5,10 @@
   },
   "dependencies": {
     "vue": "~2.5.16",
-    "vuepress": "^0.14.8",
+    "vue-server-renderer": "~2.5.16",
+    "vue-template-compiler": "~2.5.16",
+    "vuepress": "^1.0.2",
+    "vuepress-plugin-container": "^2.1.0",
     "vuepress-theme-cloudlinux": "https://github.com/cloudlinux/cloudlinux-doc-theme.git"
   },
   "resolutions": {
