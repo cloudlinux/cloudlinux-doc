@@ -47,6 +47,7 @@ It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#ho
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
+From version 1.61:
 After the end of conversion from CentOS 7.x to CloudLinux 7 cldeploy converts CloudLinux 7 to CloudLinux 7 Hybrid which has a newer kernel if a machine has new hardware:
 
 * AMD processors with from the follow cpu families:
