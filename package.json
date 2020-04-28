@@ -4,11 +4,13 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+    "@vuepress/plugin-google-analytics": "^1.4.1",
     "vue": "~2.5.16",
     "vue-server-renderer": "~2.5.16",
     "vue-template-compiler": "~2.5.16",
     "vuepress": "^1.0.2",
     "vuepress-plugin-container": "^2.1.0",
+    "vuepress-plugin-disqus": "^0.2.0",
     "vuepress-theme-cloudlinux": "https://github.com/cloudlinux/cloudlinux-doc-theme.git"
   },
   "resolutions": {
