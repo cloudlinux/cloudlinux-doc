@@ -234,7 +234,7 @@ We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` p
 
 ### Installing CloudLinux OS 8 from ISO image
 
-You can download and install CloudLinux OS 8 beta from the following repositories:
+You can download and install CloudLinux OS 8 from the following repositories:
 
 * [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso) - network installation ISO
 * [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso) - DVD installation ISO
