@@ -1,8 +1,4 @@
-<div class="notranslate">
-
 # User interface (LVE Manager)
-
-</div>
 
 <span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
 
