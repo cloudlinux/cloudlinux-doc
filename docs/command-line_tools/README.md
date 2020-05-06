@@ -3242,13 +3242,13 @@ When installing/reading the limits, the following peculiarities are applied:
 
 3. If <span class="notranslate"> cl-quota </span> is running under <span class="notranslate"> root </span> , it will display the limits returned by <span class="notranslate"> repquota </span> utility with no changes. If it is running under some other user, it will return data from a special cache file, see [Quotas cache and synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
 
-4. Limits setting only works for panel users, for all other users limits are not set (the command is ignored). The only exception - <span class="notranslate"> uid=0 </span> . The limits are never set for the <span class="notranslate"> root </span> user <span class="notranslate"> (uid=0) </span> , but they are stored in <span class="notranslate"> DB </span> file and are used by inheritance mechanism. See [Limits Inheritance](/lve_manager/#limits-inheritance).
+4. Limits setting only works for panel users, for all other users limits are not set (the command is ignored). The only exception - <span class="notranslate"> uid=0 </span> . The limits are never set for the <span class="notranslate"> root </span> user <span class="notranslate"> (uid=0) </span> , but they are stored in <span class="notranslate"> DB </span> file and are used by inheritance mechanism. See [Limits Inheritance](/command-line_tools/#limits-inheritance).
 
 5. <span class="notranslate"> Hard </span> and <span class="notranslate"> soft </span> limits are completely independent, <span class="notranslate"> сl-quota </span> does not apply any interdependencies to them. Setting only one of them (any) is acceptable, the other one will not change.
 
-<span class="notranslate"> cl-quota </span> utility also supports package limits set/read. When setting package limits, they are set for all users of a particular package except for those whose limits are set individually. See also [Limits Inheritance](/lve_manager/#limits-inheritance).
+<span class="notranslate"> cl-quota </span> utility also supports package limits set/read. When setting package limits, they are set for all users of a particular package except for those whose limits are set individually. See also [Limits Inheritance](/command-line_tools/#limits-inheritance).
 
-If package name is <span class="notranslate"> "default" </span> , then setting limits command is ignored. If some limits are set for this package in <span class="notranslate"> DB </span> file, they will be displayed along with all the others, but will not be used. See also [Limits inheritance](/lve_manager/#limits-inheritance).
+If package name is <span class="notranslate"> "default" </span> , then setting limits command is ignored. If some limits are set for this package in <span class="notranslate"> DB </span> file, they will be displayed along with all the others, but will not be used. See also [Limits inheritance](/command-line_tools/#limits-inheritance).
 
 Any positive numbers are allowed as limit values. <span class="notranslate"> cl-quota </span> neither controls nor changes these values except the following cases:
 
@@ -3262,7 +3262,7 @@ Then these values are transmitted directly to <span class="notranslate"> setquot
 
 Thus <span class="notranslate"> cl-quota </span> has two limit values, which are processed in a special way:
 
-* 0: Means inheritance of the limit from the package where the user is located, or from <span class="notranslate"> uid=0 </span> . See also [Limits inheritance](/lve_manager/#limits-inheritance) for more detailed information.
+* 0: Means inheritance of the limit from the package where the user is located, or from <span class="notranslate"> uid=0 </span> . See also [Limits inheritance](/command-line_tools/#limits-inheritance) for more detailed information.
 
 * -1: The real limits are set to 0, which means no limits, literally "unlimited". This is legit both for individual and for package limits. Limit value -1 is stored in the database as well as any other but is never displayed.
 
@@ -3318,7 +3318,7 @@ When saving the limits to a file, the following rules are applied:
 
 * The words <span class="notranslate"> “default” </span> and <span class="notranslate"> “unlimited” </span> are saved as 0 and -1 respectively.
 
-* If both limits for a user/package were set as 0, then such user/package is not saved in the file, and if it was previously there - it will be removed. Therefore, if a user/package is not mentioned in the file, then all its limits are inherited. See [Limits Inheritance](/lve_manager/#limits-inheritance) section.
+* If both limits for a user/package were set as 0, then such user/package is not saved in the file, and if it was previously there - it will be removed. Therefore, if a user/package is not mentioned in the file, then all its limits are inherited. See [Limits Inheritance](/command-line_tools/#limits-inheritance) section.
 
 The lists of panel users, packages, and user-package correspondence are not saved anywhere, this information is always subtracted from the panel.
 
