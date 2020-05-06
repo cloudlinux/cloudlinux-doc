@@ -2857,7 +2857,7 @@ Starting from <span class="notranslate">**_lve-utils 3.0-21_**</span> a behaviou
 | |  | |
 |-|--|--|
 | | **Old behavior** | **New behavior**|
-|If <span class="notranslate">**fs.proc_super_gid**</span> is 0 (which means it’s not configured) or it’s set to some GID that doesn’t exist in the system.| Command will set <span class="notranslate">`sysctl fs.proc_super_gid`</span> to point to Nagios GID. | Command will create special <span class="notranslate">`clsupergid`</span> group, setup <span class="notranslate">`sysctl fs.proc_super_gid`</span> to point to it’s GID and add Nagios user to this group.|
+|If <span class="notranslate">**fs.proc_super_gid**</span> is 0 (which means it’s not configured) or it’s set to some GID that doesn’t exist in the system.| Command will set <span class="notranslate">`sysctl fs.proc_super_gid`</span> to point to Nagios GID. | Command will create special <span class="notranslate">`clsupergid`</span> group, setup <span class="notranslate">`sysctl fs.proc_super_gid`</span> to point to it’s GID and add Nagios user to this group. If no such user exists, then no actions with the group will be done.|
 
 If **fs.proc_super_gid** was configured by an admin to some existing group, the command will just add Nagios user to this group.
 
