@@ -24,7 +24,7 @@ module.exports = {
     ['disqus', { shortname: 'cldocs' }],
     ['@vuepress/google-analytics',
       {
-        'ga': 'UA-12711721-12'
+        'ga': 'UA-12711721-15'
       }
     ]
   ],
