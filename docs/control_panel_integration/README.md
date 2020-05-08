@@ -1,3 +1,5 @@
+
+
 # Control panel integration
 
 :::tip Note
@@ -51,6 +53,19 @@ The control panel vendor decides where to put CPAPI scripts (CloudLinux utils wi
 We recommend to deliver a set of scripts for CPAPI and integration file as a separate RPM package. This can greatly simplify support for vendors as they will be able to release any updates and compatibility fixes separately from the panel updates and use dependencies/conflicts management provided by a package manager.
 
 Assumed that this package contains a list of paths to the integration scripts (or to the one script if it deals with all `cpapi` commands). You can specify default script arguments in the <span class="notranslate">`integration_scripts`</span> section, additional arguments like <span class="notranslate">`filter`</span> and <span class="notranslate">`--name`</span> will be automatically added after the defined ones.
+
+### Versioning
+We provide information about the current version of the API in the form of rpm package capability (`Provides public_cp_vendors_api = VERSION`) added to our packages. While improving integration API, we may add new features and scripts and change `VERSION`.
+
+That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the spec of rpm package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
+
+### Changelog
+:::info Changelog
+Version 1.1
+1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
+2. New `supported_cl_features` key added to `panel_info` script. You can specify CloudLinux features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
+:::
+
 
 #### Example of the integration config
 
@@ -328,7 +343,17 @@ Returns the information about the control panel in the specified format.
 	"data": {
 		"name": "SomeCoolWebPanel",
 		"version": "1.0.1",
-		"user_login_url": "https://{domain}:1111/"
+		"user_login_url": "https://{domain}:1111/",
+		"supported_cl_features": {
+			"php_selector": true,
+			"ruby_selector": true,
+			"python_selector": true,
+			"nodejs_selector": false,
+			"mod_lsapi": true,
+			"mysql_governor": true,
+			"cagefs": true,
+			"reseller_limits": true
+		}
 	},
 	"metadata": {
 		"result": "ok"
@@ -344,7 +369,8 @@ Returns the information about the control panel in the specified format.
 |Key|Nullable|Description|
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
-|<span class="notranslate">user_login_url_template</span>|True|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
+|<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
+|<span class="notranslate">supported_cl_features</span>|False|Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li><ul> <br> Available since API v1.1 (see [versioning](/control_panel_integration/#versioning))|
 
 
 #### <span class="notranslate">db_info</span>
