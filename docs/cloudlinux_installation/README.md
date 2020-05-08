@@ -218,17 +218,15 @@ $ /usr/sbin/clnreg_ks --force
 
 You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
 
-* **Latest stable CloudLinux 7.7 ISO**:
+* **Latest stable CloudLinux 7 ISO**:
 
-    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-DVD-x86_64-7.7.iso)
-    * Last updated: August 16, 2019
+    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/)
 
 
-* **Latest stable CloudLinux 6.10 ISO**:
+* **Latest stable CloudLinux 6 ISO**:
 
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/CloudLinux-6.10-x86_64-DVD.iso)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/CloudLinux-6.10-i386-DVD.iso)
-  * Last updated: July 05, 2018
+  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
+  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
 
 
 :::tip Note
@@ -244,8 +242,7 @@ We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` p
 
 You can download and install CloudLinux OS 8 from the following repositories:
 
-* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-boot.iso) - network installation ISO
-* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.1-x86_64-dvd1.iso) - DVD installation ISO
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
 
 Mount and boot the image, then follow the following steps.
 
@@ -285,13 +282,13 @@ We do not provide Xen images of CloudLinux OS anymore.
 
 To install CloudLinux over network:
 
-1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/7.7/iso/x86_64/CloudLinux-netinst-x86_64-7.7.iso](https://repo.cloudlinux.com/cloudlinux/7.7/iso/x86_64/CloudLinux-netinst-x86_64-7.7.iso). It will boot into CloudLinux installer.
+1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/7.8/iso/x86_64/CloudLinux-netinst-x86_64-7.8.iso](https://repo.cloudlinux.com/cloudlinux/7.8/iso/x86_64/CloudLinux-netinst-x86_64-7.8.iso). It will boot into CloudLinux installer.
 
-    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/images/pxeboot/)
+    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/)
 
-2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/7.7/install/x86_64/) and continue with installation.
+2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/) and continue with installation.
 
-To install CloudLinux 6.10 instead of 7.7, use the following URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
+To install CloudLinux 6.10 instead of 7.8, use the following URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
