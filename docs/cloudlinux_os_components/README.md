@@ -3794,9 +3794,9 @@ $ yum update cagefs lvemanager
 ```
 </div>
 
-<span class="notranslate">**cPanel/WHM**: Make sure 'Select PHP version' </span> is enabled in <span class="notranslate"> Feature Manager </span> .
+<span class="notranslate">**cPanel/WHM**: Make sure 'Select PHP version' </span> is enabled in <span class="notranslate"> Feature Manager </span>.
 
-:::danger IMPORTANT
+:::warning IMPORTANT
 Please, do not use settings like <span class="notranslate">`SuPHP_ConfigPath`, `PHPRC`, `PHP_INI_SCAN_DIR`</span>. Do not redefine path to <span class="notranslate">`php.ini`</span> and ini-files for PHP modules. Doing that can break <span class="notranslate">PHP Selector</span> functionality.
 :::
 
