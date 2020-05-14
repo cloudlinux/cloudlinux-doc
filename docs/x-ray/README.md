@@ -34,6 +34,15 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     ```
     </div>
 
+    If the `rhn_check` command is not found, run the following command:
+
+    <div class="notranslate">
+
+    ```
+    command yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+    ```
+    </div>
+
 3. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
