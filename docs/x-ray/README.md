@@ -39,7 +39,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     <div class="notranslate">
 
     ```
-    command yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+    # yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
     ```
     </div>
 
