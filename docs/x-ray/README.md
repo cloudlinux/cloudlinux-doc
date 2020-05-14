@@ -1,6 +1,6 @@
 # X-Ray (BETA)
 
-:::tip Note
+:::warning Note
 Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products).
 :::
 
@@ -16,8 +16,6 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ## Installation
 
-If you become [CloudLinux+](https://lp.cloudlinux.com/cloudlinux-plus) client you can use the <span class="notranslate">X-Ray</span> application.
-
 1. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
    
    <div class="notranslate">
@@ -27,7 +25,16 @@ If you become [CloudLinux+](https://lp.cloudlinux.com/cloudlinux-plus) client yo
     ```
     </div>
 
-2. Then install the <span class="notranslate">`alt-php-xray`</span> package
+2. Run the following command:
+
+   <div class="notranslate">
+
+    ```
+    # rhn_check
+    ```
+    </div>
+
+3. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
         * Go to the <span class="notranslate">_X-Ray_</span> tab.
@@ -44,7 +51,7 @@ If you become [CloudLinux+](https://lp.cloudlinux.com/cloudlinux-plus) client yo
     ```
     </div>
 
-3. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
+4. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
 
 ![](/images/XRayStartTracing.png)
 
