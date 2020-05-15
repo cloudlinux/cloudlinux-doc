@@ -65,11 +65,11 @@ The script automatically detects and supports the following control panels:
   
 It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cagefs/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
-:::tip *
-For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. LVE Manager is not installed.
+:::tip 
+* For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. LVE Manager is not installed.
 :::
 
-:::warning Warning
+:::warning
 Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
@@ -117,6 +117,22 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
 Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
+### Script for converting back:
+
+* Restores CentOS repositories, and centos-release/release-notes/logos.
+* Removes lve, mod_hostinglimits, lve-stats, lvemanager.
+* mod_hostinglimits RPM is removed.
+
+The kernel is not removed - to prevent condition when server has no kernels and wouldn't boot. The command line to remove the kernel is provided.
+
+On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
+
+On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
+
+:::warning
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
+:::
+
 ### CloudLinux 8 kernel-related features and improvements
 
 * [Memory](/cloudlinux_installation/#memory)
@@ -143,23 +159,6 @@ Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Supp
 * A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
 * Improvements were made to on-the-fly resizing of file systems that use bigalloc.
 * On ext4 file systems, inode generation scalability on SMP systems is improved.
-
-
-Script for converting back:
-
-* Restores CentOS repositories, and centos-release/release-notes/logos.
-* Removes lve, mod_hostinglimits, lve-stats, lvemanager.
-* mod_hostinglimits RPM is removed.
-
-The kernel is not removed - to prevent condition when server has no kernels and wouldn't boot. The command line to remove the kernel is provided.
-
-On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
-
-On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
-
-:::warning *
-Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
-:::
 
 
 
