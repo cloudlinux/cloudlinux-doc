@@ -1,7 +1,7 @@
 # X-Ray (BETA)
 
 :::warning Note
-Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products).
+Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). When the CLN manager has approved your registration, you will be able to use the X-Ray tool.
 :::
 
 ## Description
