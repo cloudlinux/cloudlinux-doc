@@ -215,7 +215,7 @@ When LVE goes over physical memory limit, CloudLinux will first free up memory u
 
 #### Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)
 
-If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there):
+If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there) for CloudLinux 6:
 
 <div class="notranslate">
 
@@ -224,7 +224,7 @@ cat /proc/bc/XXX/meminfo
 ```
 </div>
 
-On CloudLinux 7 and CloudLinux 6 Hybrid systems, the file is different:
+On **CloudLinux 7 and CloudLinux 6 Hybrid** systems, the file is different:
 
 <div class="notranslate">
 
@@ -239,7 +239,18 @@ Cached: 67300 kB
 
 …
 
-where XXX is user id, could be taken with:
+On **CloudLinux 8 and CloudLinux 7 Hybrid** systems:
+
+<div class="notranslate">
+
+```
+cat /sys/fs/cgroup/memory/lveXXX/memory.stat
+```
+</div>
+
+Look for this line: <span class="notranslate"> `cache 1662976` </span>
+
+where XXX is a user id, could be found out by:
 
 <div class="notranslate">
 

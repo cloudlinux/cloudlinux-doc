@@ -20,7 +20,11 @@ You can find more information on 4.18 kernel branch using this link:
 
 [https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel)
 
-How to migrate from the normal to hybrid channel (**CL6h**): 
+<span class="notranslate"> **CloudLinux 8 kernel** </span>
+
+You can find more information about CloudLinux 8 kernel features [here](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
+
+#### How to migrate from the normal to hybrid channel (**CL6h**): 
 
 ::: tip Note
 The system must be registered in CLN.
@@ -42,7 +46,7 @@ reboot
 ```
 </div>
 
-How to migrate from the normal to hybrid channel (**CL7h**): 
+#### How to migrate from the normal to hybrid channel (**CL7h**): 
 
 ::: tip Note
 The system must be registered in CLN.
@@ -64,7 +68,7 @@ reboot
 ```
 </div>
 
-How to migrate from hybrid to the normal channel (for both CL6h and CL7h):
+#### How to migrate from hybrid to the normal channel (for both CL6h and CL7h):
 
 ::: tip Note
 The system should be registered in CLN.
