@@ -1,7 +1,14 @@
 # X-Ray (BETA)
 
 :::warning Note
-Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). When the CLN manager has approved your registration, you will be able to use the X-Ray tool.
+Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the X-Ray tool after receiving the CLN manager approval.
+:::
+
+:::warning Warning!
+X-Ray is available for cPanel only.
+* ETA for Plesk is May 22nd.
+* ETA for DirectAdmin is May 29th.
+* ETA for non-panel is June 2020.
 :::
 
 ## Description
