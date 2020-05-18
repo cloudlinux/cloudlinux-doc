@@ -233,11 +233,7 @@ cat /proc/bc/lveXXX/meminfo
 ```
 </div>
 
-…
-
-Cached: 67300 kB
-
-…
+Look for this line: <span class="notranslate"> `Cached: 67300 kB` </span>
 
 On **CloudLinux 8 and CloudLinux 7 Hybrid** systems:
 
