@@ -5491,7 +5491,7 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
 
 | |  |  |  | | |
 |-|-|-|-|-|-|
-|40-snuffleupagus <br> 40-vld <br> apcu <br> bz2 <br> calendar <br> core <br> ctype <br> curl <br> date <br> exif <br>enchant <br> filter <br> ftp <br> gettext <br> gmp <br>gnupg <br> hash <br> iconv <br> interbase <br> luasandbox | libxml <br>mysqlnd <br>opcache <br> openssl <br> pcntl <br> pcre <br>pdo_pgsql <br> phar <br> readline <br> reflection <br> session <br> shmop <br> simplexml <br> sourceguardian <br> spl <br> sqlite3 <br>standard <br> snmp <br> stats <br> tokenizer | trader <br>xmlreader <br>bcmath <br>fileinfo <br> grpc <br>intl <br>lzf <br>nd_mysqli <br>pdf <br>pdo <br>posix <br>swoole <br>uploadprogress <br>xmlrpc <br>brotli <br>gd <br>http <br>ioncube_loader <br> mbstring | nd_pdo_mysql <br>pdo_dblib <br>pdo_sqlite <br>propro <br>soap <br>sysvmsg <br>uuid <br>xmlwriter <br>dbase <br>gender <br>igbinary <br>mcrypt <br>newrelic <br> pdo_firebird <br>pdo_sqlsrv <br>pspell <br>sockets <br>sysvsem <br>vips <br>xsl | dba <br>geoip <br>imagick <br>json <br>memcached <br>oauth <br>pdo_mysql <br>pgsql <br> raphf <br>sodium <br>sysvshm <br>yaml <br>dom <br>geos <br>imap <br>ldap <br>mongodb <br>oci8 <br>pdo_oci | phalcon3 <br>recode <br>sqlsrv <br> tidy <br>wddx <br>yaz <br>eio <br>gmagick <br>inotify <br>leveldb <br>mysqli <br>odbc <br>pdo_odbc <br>phalcon4 <br>redis <br>ssh2 <br>timezonedb <br>xdebug <br>zip <br> xml <br> zlib| 
+|40-snuffleupagus <br> 40-vld <br> apcu <br> bz2 <br> brotli <br> calendar <br> core <br> ctype <br> curl <br> date <br> exif <br>enchant <br> filter <br> ftp <br> gettext <br> gmp <br>gnupg <br> hash <br> iconv <br> interbase <br> luasandbox | libxml <br>mysqlnd <br>opcache <br> openssl <br> pcntl <br> pcre <br>pdo_pgsql <br> phar <br> readline <br> reflection <br> session <br> shmop <br> simplexml <br> sourceguardian <br> spl <br> sqlite3 <br>standard <br> snmp <br> stats <br> tokenizer | trader <br>xmlreader <br>bcmath <br>fileinfo <br> grpc <br>intl <br>lzf <br>nd_mysqli <br>pdf <br>pdo <br>posix <br>swoole <br>uploadprogress <br>xmlrpc <br>gd <br>http <br>ioncube_loader <br> mbstring | nd_pdo_mysql <br>pdo_dblib <br>pdo_sqlite <br>propro <br>soap <br>sysvmsg <br>uuid <br>xmlwriter <br>dbase <br>gender <br>igbinary <br>mcrypt <br>newrelic <br> pdo_firebird <br>pdo_sqlsrv <br>pspell <br>sockets <br>sysvsem <br>vips <br>xsl | dba <br>geoip <br>imagick <br>json <br>memcached <br>oauth <br>pdo_mysql <br>pgsql <br> raphf <br>sodium <br>sysvshm <br>yaml <br>dom <br>geos <br>imap <br>ldap <br>mongodb <br>oci8 <br>pdo_oci | phalcon3 <br>recode <br>sqlsrv <br> tidy <br>wddx <br>yaz <br>eio <br>gmagick <br>inotify <br>leveldb <br>mysqli <br>odbc <br>pdo_odbc <br>phalcon4 <br>redis <br>ssh2 <br>timezonedb <br>xdebug <br>zip <br> xml <br> zlib| 
 
 </div>
 
@@ -8829,119 +8829,6 @@ LVEUse429 on
 </div>
 
 Available for RPM based panels, EasyApache 4 and DirectAdmin.
-
-### Redis support for HostingLimits
-
-* [LVERedisSocket](/cloudlinux_os_components/#lveredissocket)
-* [LVERedisAddr](/cloudlinux_os_components/#lveredisaddr)
-* [LVERedisTimeout](/cloudlinux_os_components/#lveredistimeout)
-
-Redis support provides a way to query Redis database for LVE id, based on domain in the HTTP request. Given a database like:
-
-<div class="notranslate">
-
-```
-xyz.com 10001
-bla.com  10002
-....
-```
-</div>
-
-The module will retrieve corresponding LVE id from the database.
-
-To enable Redis support, compile from source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
-
-The compilation requires hiredis library.
-
-<div class="notranslate">
-
-```
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz
-$ yum install cmake
-$ tar -zxvf mod_hostinglimits*.tar.gz
-$ cd mod_hostinglimits*
-$ cmake -DREDIS:BOOL=TRUE .
-$ make
-$ make install
-```
-</div>
-
-To enable Redis mode, specify:
-
-<div class="notranslate">
-
-```
-LVEParseMode REDIS
-```
-</div>
-
-<div class="notranslate">
-
-#### **LVERedisSocket**
-
-</div>
-
-| | |
-|-|-|
-|**Description**| Socket to use to connect to Redis database.|
-|**Syntax**|<span class="notranslate">`LVERedisSocket path`</span>|
-|**Default**|<span class="notranslate">`/tmp/redis.sock`</span>|
-|**Context**| server config|
-
-Used to specify location of Redis socket.
-
-**Example**:
-
-<div class="notranslate">
-
-```
-LVERedisSocket /var/run/redis.sock
-```
-</div>
-
-<div class="notranslate">
-
-#### **LVERedisAddr**
-
-</div>
-
-| | |
-|-|-|
-|**Description**| IP/port used to connect to Redis database instead of socket.|
-|**Syntax**|<span class="notranslate">`LVERedisAddr IP PORT`</span>|
-|**Default**| <span class="notranslate">`none`</span>|
-|**Context**|<span class="notranslate">server config</span>|
-
-Used to specify IP and port to connect to Redis instead of using Socket
-
-**Example**:
-
-<div class="notranslate">
-
-```
-LVERedisAddr 127.0.0.1 6993
-```
-</div>
-
-#### **LVERedisTimeout**
-
-| | |
-|-|-|
-|**Descriptin**| Number of seconds to wait before attempting to re-connect to Redis.|
-|**Syntax**|<span class="notranslate">`LERetryAfter SECONDS`</span>|
-|**Default**| 60 seconds|
-|**Context**|<span class="notranslate">server config</span>|
-
-Number of seconds to wait before attempting to reconnect to Redis after the last unsuccessful attempt to connect.
-
-**Example**:
-
-<div class="notranslate">
-
-```
-LVERedisTimeout 120
-```
-</div>
 
 ### cPanel/WHM JSON API
 

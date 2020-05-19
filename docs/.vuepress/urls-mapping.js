@@ -2441,5 +2441,13 @@ module.exports = {
   "/lve_manager/#php-selector-user-interface": "/lve_manager/#php-selector-my-domains-tab",
   "/ru/lve_manager/#php-selector-user-interface": "/ru/lve_manager/#php-selector-my-domains-tab",
   "/cloudlinux_os_components/#abrt-plugin": "/cloudlinux_os_components/#backing-up-mysql",
-  "/ru/cloudlinux_os_components/#abrt-plugin": "/ru/cloudlinux_os_components/#backing-up-mysql"
+  "/ru/cloudlinux_os_components/#abrt-plugin": "/ru/cloudlinux_os_components/#backing-up-mysql",
+  "/cloudlinux_os_components/#redis-support-for-hostinglimits": "/deprecated/#redis-support-for-hostinglimits",
+  "/ru/cloudlinux_os_components/#redis-support-for-hostinglimits": "/ru/deprecated/#redis-support-for-hostinglimits",
+  "/cloudlinux_os_components/#lveredissocket": "/deprecated/#lveredissocket",
+  "/ru/cloudlinux_os_components/#lveredissocket": "/ru/deprecated/#lveredissocket",
+  "/cloudlinux_os_components/#lveredisaddr": "/deprecated/#lveredisaddr",
+  "/ru/cloudlinux_os_components/#lveredisaddr": "/ru/deprecated/#lveredisaddr",
+  "/cloudlinux_os_components/#lveredistimeout": "/deprecated/#lveredistimeout",
+  "/ru/cloudlinux_os_components/#lveredistimeout": "/ru/deprecated/#lveredistimeout"
 };
