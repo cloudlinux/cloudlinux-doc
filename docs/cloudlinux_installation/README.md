@@ -925,7 +925,7 @@ Some of the packages from CloudLinux repo will still be present. They are the sa
 ## Migration to EasyApache 4
 
 * [Advices and limitations](/cloudlinux_installation/#advices-and-limitations)
-* [CentOS with EeasyApache 4](/cloudlinux_installation/#centos-with-eeasyapache-4)
+* [CentOS with EasyApache 4](/cloudlinux_installation/#centos-with-easyapache-4)
 * [CentOS without EasyApache 4](/cloudlinux_installation/#centos-without-easyapache-4)
 * [CloudLinux without EasyApache 4](/cloudlinux_installation/#cloudlinux-without-easyapache-4)
 * [More about cloudlinux_ea3_to_ea4 script](/cloudlinux_installation/#more-about-cloudlinux-ea3-to-ea4-script)
@@ -938,7 +938,7 @@ Some of the packages from CloudLinux repo will still be present. They are the sa
 
 Follow the instructions [here](/apache_mod_lsapi/#installation) to install and configure mod_lsapi.
 
-#### CentOS with EeasyApache 4
+#### CentOS with EasyApache 4
 
 If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux:
 
