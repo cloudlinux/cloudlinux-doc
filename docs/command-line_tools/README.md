@@ -3762,7 +3762,7 @@ For resellers' users with reseller limits enabled admin should use the <span cla
     ```
     </div>
 
-    
+<Disqus/>    
 
 
 
