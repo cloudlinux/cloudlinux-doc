@@ -210,10 +210,10 @@ The <span class="notranslate">_System functions_</span> section displays the fol
 
 The list of currently supported PHP versions:
 
-| | |
-|-|-|
-|**ALT PHP**:|**EA PHP**:|
-| <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|
+| | | |
+|-|-|-|
+|**ALT PHP**:|**EA PHP**:|**Plesk PHP**|
+| <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|
 
 ### Functions that X-Ray client can hook
 
@@ -426,6 +426,34 @@ If you cannot see that section, try to restart PHP processes for that user (the 
     ![](/images/XRayPHPInfoRemoteAddr.png)
 
 4. If, after checking the previous items, the issue persists, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
+
+### What to do if X-Ray is not found in the phpinfo() page?
+
+If you managed to create a tracing task, this means that the <span class="notranslate">`xray.ini`</span> file was created in a system. Therefore, there may be two reasons why it did not appear in the phpinfo page of the domain.
+
+1. PHP process wasn't reloaded after adding the xray.ini. To solve this, you should restart the Apache or fpm service for the domain on which the tracing was started. At the moment, this is done automatically by the <span class="notranslate">X-Ray</span> manager after creating the task.
+2. Your domain uses a PHP version different from the one which was detected by the <span class="notranslate">X-Ray</span> manager. To solve this, check the scan dir for additional ini files for your domain.
+
+    ![](/images/XRayScanDir.png)
+
+    Then check the `ini_location` that was passed to the <span class="notranslate">X-Ray</span> manager by running the following command:
+
+    <div class="notranslate">
+
+    ```
+    # cat /usr/share/alt-php-xray/manager.log | grep ini_location
+    ```
+    </div>
+
+    Find your tracing task in the output and check that the <span class="notranslate">`xray.ini`</span> exists in this directory, also check that the `ini` path is the same in the phpinfo page output and in the <span class="notranslate">`ini_location`</span> directive for your tracing task. If they are the same, you should reload your PHP. If they are different that means that the <span class="notranslate">X-Ray</span> manager could not correctly determine the PHP version your domain uses. In this case, contact our support team at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/requests/new).
+
+
+### I use LiteSpeed, X-Ray is enabled and it is shown in the phpinfo() page but does not collect data when sending requests to a site. What to do?
+
+Check for the <span class="notranslate">`CacheLookup on`</span> option in the `htaccess` file for your domain.
+If the option is there, LiteSpeed processes requests bypassing the PHP X-Ray extension.
+In this case, to get tracing information, you should remove the <span class="notranslate">`CacheLookup on`</span> option.
+
 
 <Disqus/>
 
