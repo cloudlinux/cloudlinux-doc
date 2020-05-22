@@ -11,7 +11,7 @@ X-Ray is available only for CloudLinux OS licenses purchased directly, NOT VIA R
 :::warning Warning!
 X-Ray is available for cPanel and Plesk.
 * ETA for DirectAdmin is May 29th.
-* ETA for non-panel is June 2020.
+* X-Ray for non-panel installations is not planned.
 :::
 
 
