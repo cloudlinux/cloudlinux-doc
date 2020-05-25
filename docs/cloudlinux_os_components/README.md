@@ -1966,7 +1966,7 @@ CageFS creates individual namespace for each user, making it impossible for user
 (a list of such directories is defined in /etc/cagefs/cagefs.mp)
 3. <span class="notranslate"> /var/cagefs/[prefix]/username </span> directory for each user. Prefix is defined as last two digits of user id. User id is taken from <span class="notranslate"> /etc/passwd </span> file.
 4. Separate /etc directory is created and populated for each user inside <span class="notranslate"> /var/cagefs/[prefix]/username </span>
-5. /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs-tmp directory </span>
+5. /tmp directory is mounted for each user separately into <span class="notranslate"> ~username/.cagefs/tmp directory </span>
 6. Additional custom directories can be mounted for each user by defining them in /etc/cagefs/cagefs.mp
 7. You can define custom directories per user using [virt.mp](/cloudlinux_os_components/#per-user-virtual-mount-points) files _[CageFS 5.1 and higher]_
 
