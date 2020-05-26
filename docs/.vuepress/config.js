@@ -9,6 +9,15 @@ const slugifyLinks = (s) => {
   return _slugify(s);
 };
 
+// set your global autometa options
+const autoMetaOptions = {
+  site: {
+    name   : 'Cloudlinux OS Documentation',
+    // twitter: 'cl_docs',
+  },
+  canonical_base: 'https://docs.cloudlinux.com/',
+};
+
 module.exports = {
   plugins: [
     ['container', {
@@ -31,7 +40,8 @@ module.exports = {
       {
         'ga': 'UA-12711721-15'
       }
-    ]
+    ],
+    [ 'autometa', autoMetaOptions ]
   ],
   configureWebpack: {
     resolve: {
