@@ -12,7 +12,7 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux docs',
+    name   : 'Cloudlinux OS Documentation',
     // twitter: 'cl_docs',
   },
   canonical_base: 'https://docs.cloudlinux.com/',
