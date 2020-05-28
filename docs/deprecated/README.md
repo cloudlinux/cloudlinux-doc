@@ -26,7 +26,7 @@ $ yum install git
 </div>
 
 
-To install [git](http://git-scm.com/) on cPanel servers:
+To install [git](https://git-scm.com/) on cPanel servers:
 
 <div class="notranslate">
 
@@ -617,8 +617,6 @@ OptimumCache is a de-duplicating file cache optimized specifically for shared ho
 ![](/images/embim1.png)
 
 With OptimumCache, if a duplicate of an already loaded file is requested, the file gets loaded from filesystem cache. By doing that, system bypasses disk IO, significantly improving the speed of reading that file, while lowering load on the hard disk. As the file had been read from disk just once, it is cached by filesystem cache just once, minimizing amount of duplicates in file system cache and improving overall cache efficiency. This in turn reduces memory usage, decreases the number of disk operations - all while improving the websites response time.
-
-Further reading: [http://kb.cloudlinux.com/tag/optimumcache/](http://kb.cloudlinux.com/tag/optimumcache/)
 
 
 ### Installation
@@ -1723,14 +1721,14 @@ bla.com  10002
 
 The module will retrieve corresponding LVE id from the database.
 
-To enable Redis support, compile from source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
+To enable Redis support, compile from source: [https://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
 
 The compilation requires hiredis library.
 
 <div class="notranslate">
 
 ```
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz
+$ wget https://repo.cloudlinux.com/cloudlinux/sources/da/mod_hostinglimits.tar.gz
 $ yum install cmake
 $ tar -zxvf mod_hostinglimits*.tar.gz
 $ cd mod_hostinglimits*

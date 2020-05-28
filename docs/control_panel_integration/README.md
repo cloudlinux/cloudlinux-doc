@@ -156,7 +156,7 @@ You may see the following warning:
 *IF YOU RESTART ANY SERVICES STABILITY OF YOUR SYSTEM WILL BE COMPROMIZED *
 *        CHANGE YOUR USER'S GROUP TO wheel to safely use SU/SUDO          *
 *                             MORE INFO:                                  *
-*      http://docs.cloudlinux.com/index.html?lve_pam_module.html          *
+*      https://docs.cloudlinux.com/index.html?lve_pam_module.html          *
 *                                                                         *
 ***************************************************************************
 ```
@@ -1618,7 +1618,7 @@ yum install governor-mysql
 ```
 </div>
 
-5. After installation, check that the database server is working properly. If you have any problems, contact [support](http://helpdesk.cloudlinux.com/)
+5. After installation, check that the database server is working properly. If you have any problems, contact [support](https://helpdesk.cloudlinux.com/)
 
 6. Configure user mapping to the database. The mapping format is described in the following [section](/cloudlinux_os_components/#mapping-a-user-to-a-database). The control panel should automatically generate such mapping and write it to <span class="notranslate">`/etc/container/dbuser-map`</span>. Usually, it is enough to write a hook when adding, deleting or renaming a database for a user. The control panel should implement such a mechanism for MySQL Governor to operate properly. MySQL Governor automatically applies changes from the dbuser-map file every five minutes.
 

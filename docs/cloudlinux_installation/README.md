@@ -9,9 +9,9 @@ At this moment (for CL6) we are aware of only one such case:
 | |  | |
 |-|--|-|
 |**Device** | **Binary Driver** | **Source**|
-|<span class="notranslate"> B110i Smart Array RAID controller </span> | hpahcisr | [http://h10032.www1.hp.com/ctg/Manual/c01754456](http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
-|<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [http://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](http://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
-|<span class="notranslate"> SanDisk DAS Cache </span> |  | [http://www.dell.com/en-us/work/learn/server-technology-components-caching](http://www.dell.com/en-us/work/learn/server-technology-components-caching)|
+|<span class="notranslate"> B110i Smart Array RAID controller </span> | hpahcisr | [https://h10032.www1.hp.com/ctg/Manual/c01754456](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
+|<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [https://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
+|<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 ## Converting existing servers
 
@@ -224,8 +224,8 @@ You can download the latest CloudLinux ISO and use it to install CloudLinux on y
 
 * **Latest stable CloudLinux 6 ISO**:
 
-  * x86_64 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](http://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
-  * i386 version: [http://repo.cloudlinux.com/cloudlinux/6/iso/i386/](http://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
+  * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
+  * i386 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/i386/](https://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
 
 
 :::tip Note
@@ -285,9 +285,9 @@ To install CloudLinux over network:
 
     Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/)
 
-2. During the CloudLinux installation, select URL as installation source and enter URL: [http://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/) and continue with installation.
+2. During the CloudLinux installation, select URL as installation source and enter URL: [https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/) and continue with installation.
 
-To install CloudLinux 6.10 instead of 7.8, use the following URL: [http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](http://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
+To install CloudLinux 6.10 instead of 7.8, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
@@ -388,7 +388,7 @@ H-Sphere 3.6.3+
 <div class="notranslate">
 
 ```
-$ wget -O /hsphere/local/config/httpd2/fcgi.conf http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
+$ wget -O /hsphere/local/config/httpd2/fcgi.conf https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
 ```
 </div>
 
@@ -430,7 +430,7 @@ Include /hsphere/local/config/httpd2/fcgi.conf
 
 ```
 $ yum install gcc liblve-devel zlib-devel openssl-devel 
-$ wget http://apache.osuosl.org//httpd/mod_fcgid/mod_fcgid-2.3.9.tar.gz
+$ wget https://apache.osuosl.org//httpd/mod_fcgid/mod_fcgid-2.3.9.tar.gz
 $ tar zxvf mod_fcgid-2.3.9.tar.gz
 $ cd mod_fcgid-2.3.9/
 $ APXS=/hsphere/shared/apache2/bin/apxs ./configure.apxs 
@@ -439,12 +439,12 @@ $ mv modules/fcgid/.libs/mod_fcgid.so /hsphere/shared/apache2/modules
 ```
 </div>
 
-2. Download and apply patch [http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch](http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch) to `/hsphere/local/config/scripts/usemodule.phpmode`:
+2. Download and apply patch [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch) to `/hsphere/local/config/scripts/usemodule.phpmode`:
    
  <div class="notranslate">
 
 ```
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch 
+$ wget https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/usemodule.phpmode.patch 
 $ patch /hsphere/local/config/scripts/usemodule.phpmode usemodule.phpmode.patch
 ```
 
@@ -459,33 +459,33 @@ $ cp -rp /hsphere/local/config/httpd2/httpd.conf.tmpl /hsphere/local/config/http
 ```
 </div>
 
-Download and apply patch [http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch](http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch) to the <span class="notranslate">`/hsphere/local/config/httpd2/httpd.conf.tmpl.custom`</span>:
+Download and apply patch [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch) to the <span class="notranslate">`/hsphere/local/config/httpd2/httpd.conf.tmpl.custom`</span>:
 
 <div class="notranslate">
 
 ```
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch 
+$ wget https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/httpd.conf.tmpl.patch 
 $ patch --fuzz=3 /hsphere/local/config/httpd2/httpd.conf.tmpl.cusom  httpd.conf.tmpl.patch
 ```
 
 </div>
 
-4. Download pre-defined config file [http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf](http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf) to `/hsphere/local/config/httpd2`:
+4. Download pre-defined config file [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf) to `/hsphere/local/config/httpd2`:
 
 <div class="notranslate">
 
 ```
-$ wget -O /hsphere/local/config/httpd2/fcgi.conf http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
+$ wget -O /hsphere/local/config/httpd2/fcgi.conf https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/fcgi.conf
 ```
 
 </div>
 
-5. Download our wrapper file [http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper](http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper) into <span class="notranslate">`/hsphere/shared/php5/bin/`</span> and make it executable:
+5. Download our wrapper file [https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper](https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper) into <span class="notranslate">`/hsphere/shared/php5/bin/`</span> and make it executable:
 
 <div class="notranslate">
 
 ```
-$ wget -O /hsphere/shared/php5/bin/php-wrapper http://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper
+$ wget -O /hsphere/shared/php5/bin/php-wrapper https://repo.cloudlinux.com/cloudlinux/sources/mod_fcgid-hsphere/php-wrapper
 $ chmod 755 /hsphere/shared/php5/bin/php-wrapper
 ```
 
@@ -754,7 +754,7 @@ Please make sure you have <span class="notranslate">`vzkernel-headers`</span> an
 ```
 yum install vzkernel-headers vzkernel-devel
 
-$ wget -P /etc/yum.repos.d/ http://repo.cloudlinux.com/vzlve/vzlve.repo
+$ wget -P /etc/yum.repos.d/ https://repo.cloudlinux.com/vzlve/vzlve.repo
 $ yum install lve-kernel-module
 ```
 

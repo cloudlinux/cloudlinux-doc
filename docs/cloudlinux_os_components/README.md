@@ -3115,7 +3115,7 @@ CageFS plugin for cPanel is located in <span class="notranslate"> Plugins </span
 
 It allows to initialize CageFS, select users CageFS will be enabled for, as well as update CageFS skeleton.
 
-![](/images/_img1_zoom73.png)
+![](/images/img1-zoom73.png)
 
 To enable CageFS for a proper user (users), in <span class="notranslate"> CageFS User Manager </span> choose a user from the list on the right ( <span class="notranslate"> Disabled </span> users) and click <span class="notranslate"> Toggle </span> . The user will move to the list on the left ( <span class="notranslate"> Enabled </span> users).
 
@@ -3123,7 +3123,7 @@ To disable a user (users), choose a user from the list on the left ( <span class
 
 To update CageFS skeleton, click <span class="notranslate"> Update CageFS Skeleton </span> .
 
-![](/images/_img2_zoom71.png)
+![](/images/img2-zoom71.png)
 
 #### Plesk
 
@@ -3148,7 +3148,7 @@ CageFS comes with plugin for <span class="notranslate"> ISP Manager </span> to e
 ![](/images/ispmanager_cagefs_user_zoom98.png)
 
 Or you can manage global CageFS settings via CageFS menu
-![](/images/_img3.jpg)
+![](/images/img3.jpg)
 
 
 See also [CageFS CLI tools](/command-line_tools/#cagefs).
@@ -6145,7 +6145,7 @@ For that, you’d need to first uncheck <span class="notranslate">`Hide Ruby App
 #### Deploying Redmine using Ruby Selector
 
 ::: tip Note
-Provided instructions are valid for older <span class="notranslate"> Redmine </span> version 2.6.0. New versions guide could be found at [http://kb.cloudlinux.com/2016/12/how-to-run-redmine-with-ruby-selector/](http://kb.cloudlinux.com/2016/12/how-to-run-redmine-with-ruby-selector/)
+Provided instructions are valid for older <span class="notranslate"> Redmine </span> version 2.6.0. New versions guide could be found [here](https://cloudlinux.zendesk.com/hc/en-us/articles/115004495049-How-to-run-Redmine-with-Ruby-Selector)
 :::
 
 1. In cPanel create MySQL database and add user to it. In the example given, the databace <span class="notranslate"> _redminet_redmine_ </span> was created and user <span class="notranslate"> _redminet_redmine_ </span> was added.
@@ -6366,7 +6366,7 @@ yum install cagefs
 
 #### Remote usage of Node.js interpreters
 
-1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](http://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
+1. Create a Node.js project in <span class="notranslate"> IntelliJ IDEA/WebStorm </span> . You can download [this archive](https://docs.cloudlinux.com/nodejs_example.zip) and use it as a basis.
 2. Install <span class="notranslate"> alt-nodejs </span> packages on the server in use. See [installation instructions](/cloudlinux_os_components/#installation-and-update-7).
 3. Create an application on the server. You can do it by three ways:
   * Via UI of the Node.js plugin.
@@ -7604,7 +7604,7 @@ If apache runs under a username other than <span class="notranslate"> "apache" <
 
 ```
 $ yum install liblsapi liblsapi-devel   
-$ cd ~$ wget [http://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz)  
+$ cd ~$ wget [https://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz)  
 $ tar zxvf mod_lsapi.tar.gz  
 $ cd mod-lsapi-0.1-37  
 $ cmake -DHTTPD_USER=<new user name> .  
@@ -7643,7 +7643,7 @@ If you need to run PHP using mod_lsapi using users with UID < 99, you would need
 ```
 $ yum install liblsapi liblsapi-devel
 $ cd ~
-$ wget [http://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz)
+$ wget [https://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz)
 $ tar zxvf mod_lsapi.tar.gz
 $ cd mod-lsapi-0.1-XX
 $ cmake -DUID_MIN=80 -DGID_MIN=80 .
@@ -7662,7 +7662,7 @@ will be installed<br>
 ```
 $ yum install liblsapi liblsapi-devel 
 $ cd ~
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz        
+$ wget https://repo.cloudlinux.com/cloudlinux/sources/da/mod_lsapi.tar.gz        
 $ tar zxvf mod_lsapi.tar.gz
 $ cd mod-lsapi-0.1-XX
 $ cmake -DPARENT_NAME="<apache binary name>".
@@ -8189,7 +8189,7 @@ lve_suwrapper LVE_ID <command_to_run>
 
 CloudLinux <span class="notranslate">httpd RPM</span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
 
-* Download file: [http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+* Download file: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 * Extract: <span class="notranslate">apache2.2-mpm-itk-seculrelve12.patch</span>
 * And apply this patch to your Apache source code.
 
@@ -8378,12 +8378,12 @@ $ yum install mod_hostinglimits
 
 **Custom Apache installation**
 
-Compile from the source: [http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
+Compile from the source: [https://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz)
 
 <div class="notranslate">
 
 ```
-$ wget http://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz
+$ wget https://repo.cloudlinux.com/cloudlinux/sources/mod_hostinglimits.tar.gz
 $ yum install cmake
 $ tar -zxvf mod_hostinglimits*.tar.gz
 $ cd mod_hostinglimits*
@@ -9205,7 +9205,7 @@ If we are talking about shared hosting where different accounts are launched on 
 #### How does it work with CloudLinux?
 
 The DirectAdmin and CloudLinux (for httpd, httpd24-httpd and cPanel EasyApache 4) both provide a patched version of suexec. For other distributions you can use patches available here:
-[http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](http://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+[https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 1. Besides the ability to run CGI programs under user IDs, suexec with CloudLinux patch adds the ability to run that script under CageFS. 
   :::tip NOTE
