@@ -9,8 +9,7 @@ X-Ray is available only for CloudLinux OS licenses purchased directly, NOT VIA R
 :::
 
 :::warning Warning!
-X-Ray is available for cPanel and Plesk.
-* ETA for DirectAdmin is May 29th.
+X-Ray is available for cPanel, Plesk, and DirectAdmin.
 * X-Ray for non-panel installations is not planned.
 :::
 
