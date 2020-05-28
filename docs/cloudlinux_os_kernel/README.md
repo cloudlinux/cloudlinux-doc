@@ -108,7 +108,7 @@ sysctl -w fs.enforce_symlinksifowner=0
 ```
 </div>
 
-Find more details on [symlink owner match protection](/kernel_settings/#securelinks).
+Find more details on [symlink owner match protection](/cloudlinux_os_kernel/#securelinks).
 
 
 ## SecureLinks

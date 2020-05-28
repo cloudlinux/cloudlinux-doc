@@ -6032,7 +6032,7 @@ yum install alt-python27-devel
 </div>
 
 ::: tip Note
-After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> VE Manager Options</span> tab to show <span class="notranslate">Ruby App</span> in web-interface. Find the instructions on the [link](/ruby_selector/#hide-ruby-selector-icons).
+After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> VE Manager Options</span> tab to show <span class="notranslate">Ruby App</span> in web-interface. Find the instructions on the [link](/cloudlinux_os_components/#hide-ruby-selector-icons).
 :::
 
 ::: tip Note

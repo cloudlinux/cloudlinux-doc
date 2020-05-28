@@ -39,7 +39,7 @@ $ yum install git-cpanel
 ## LVE-Stats 0.x
 
 :::tip Note
-LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/cloudlinux_os_components/#lve-stats-2)
 :::
 
 
@@ -209,7 +209,7 @@ web2        1        6        10        0        0        25        10M        1
 ### Storing statistics in MySQL
 
 :::tip Note
-LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/cloudlinux_os_components/#lve-stats-2)
 :::
 
  You have to install MySQL-python rpm to store lve-stats on centralized server. Run:
@@ -451,7 +451,7 @@ You just need to execute it once, as it will be later executed via cron job. Tha
 ### Storing statistics in PostgreSQL
 
 :::tip Note
-LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/cloudlinux_os_components/#lve-stats-2)
 :::
 
 You have to install <span class="notranslate">`postgresql-python rpm`</span> to store lve-stats on centralized server.
@@ -592,7 +592,7 @@ You are done!
 ### Compacting in multi-server settings
 
 :::tip Note
-LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/lve-stats_2/)
+LVE-STATS-0.X IS NO LONGER SUPPORTED, PLEASE USE [LVE-STATS 2](/cloudlinux_os_components/#lve-stats-2)
 :::
 
 [lve-stats 0.10+]

@@ -63,7 +63,7 @@ The script automatically detects and supports the following control panels:
 * DirectAdmin
 * InterWorx <sup>*</sup>
   
-It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cagefs/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
+It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cloudlinux_os_components/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
 :::tip 
 * For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. LVE Manager is not installed.
@@ -936,7 +936,7 @@ Some of the packages from CloudLinux repo will still be present. They are the sa
 * <span class="notranslate">Hardened EA4</span> limitations:
   * **ea-php51** and **ea-php52** have no PHP-FPM support. Please use **mod_lsapi** instead.
 
-Follow the instructions [here](/apache_mod_lsapi/#installation) to install and configure mod_lsapi.
+Follow the instructions [here](/cloudlinux_os_components/#installation-3) to install and configure mod_lsapi.
 
 #### CentOS with EasyApache 4
 

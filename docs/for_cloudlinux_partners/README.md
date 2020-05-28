@@ -149,7 +149,7 @@ If you want to offer server along with the license, perform the following steps.
 
 **_Note._** _Please do not set up pricing for license provisioning product. In exchange, you can increase a price for server provisioning product._
 
-1. Prepare license provisioning product as described in the [Configuration of Product](/cloudlinux_whmcs_plugin/#configuration-of-product) section of this documentation.
+1. Prepare license provisioning product as described in the [Configuration of Product](/for_cloudlinux_partners/#configuration-of-product) section of this documentation.
 2. Go to <span class="notranslate"> _Add-ons → CloudLinux Licenses Add-on → Products Relations_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
 3. Select server provisioning product from the <span class="notranslate"> _Main Product_ </span> drop-down list and license provisioning product from <span class="notranslate"> _Linked Product With License_ </span> and click <span class="notranslate"> _Add Relation_ </span> .
 
