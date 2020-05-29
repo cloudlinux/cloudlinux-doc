@@ -5002,15 +5002,6 @@ See also PHP Selector [CLI](/command-line_tools/#php-selector)
 
 ### Integration with control panels
 
-* [PHP Selector integration with cPanel’s MultiPHP Manager](/cloudlinux_os_components/#php-selector-integration-with-cpanel%E2%80%99s-multiphp-manager)
-* [Overview](/cloudlinux_os_components/#overview)
-* [Prerequisites](/cloudlinux_os_components/#prerequisites)
-* [Configuration](/cloudlinux_os_components/#configuration-4)
-* [More about PHP Selector’s configuration](/cloudlinux_os_components/#more-about-php-selector%E2%80%99s-configuration)
-  * [Setting up the PHP version on customer’s end (in cPanel)](/cloudlinux_os_components/#setting-up-the-php-version-on-customer%E2%80%99s-end-in-cpanel)
-  * [PHP directives and their priorities](/cloudlinux_os_components/#php-directives-and-their-priorities)
-  * [PHP version in the command-line interface (CLI)](/cloudlinux_os_components/#php-version-in-the-command-line-interface-cli)
-
 This is the list of commands that we use to integrate <span class="notranslate">PHP Selector</span> with control panels.
 
 **PHP summary:**
@@ -5237,114 +5228,6 @@ OPTIONS=`echo disable_functions:exec,syslog|base64 -w 0`,`echo display_errors:of
 echo $OPTIONS
 ```
 </div>
-
-
-#### PHP Selector integration with cPanel’s MultiPHP Manager
-
-:::tip Note
-Requires CageFS 5.5-6.18+
-:::
-
-#### Overview
-
-Earlier, when EasyApache 3 was in trend, CloudLinux with PHP Selector would work seamlessly; you would set up the EasyApache profile which is compatible with PHP Selector, and you are ready to go. However, with EasyApache 4 cPanel introduced the built-in [MultiPHP Manager](https://documentation.cpanel.net/display/68Docs/MultiPHP+Manager+for+cPanel) which changed everything.
-
-![](/images/MultiPHPManager.jpg)
-
-The main advantage of MultiPHP Manager is allowing users to select __different PHP versions for each domain__.
-With CloudLinux, you can also make use of a similar feature: PHP Selector. PHP Selector has an important advantage over MultiPHP Manager: it allows a single cPanel user to manage PHP extensions without the need to contact his/her hoster. The user can enable/disable PHP extensions as he pleases. PHP Selector also leaves the choice of PHP version to the end user, but the switch is made for the __whole user, not for a separate website__ (as with MultiPHP Manager).
-
-:::tip Note
-The main question a hoster should answer is which of the above features he will provide for his clients: MultiPHP Manager or PHP Selector. Using both can be confusing for the end users. You can manage which features to show to your cPanel end-users in WHM Home » Packages » Feature Manager » Feature Lists.
-:::
-
-If you'd like to use PHP Selector on a cPanel server, continue reading this document to understand how to integrate MultiPHP Manager and PHP Selector.
-
-#### Prerequisites
-
-Before integrating PHP Selector with cPanel, make sure that you have the following components installed:
-
-* LVE Manager
-* CageFS
-* CloudLinux alt-php package
-
-#### Configuration
-
-Once you’re done with PHP Selector [installation](/cloudlinux_os_components/#installation-and-update-4), there are a few things that you need to check on cPanel servers. You need to make sure that MultiPHP Manager settings are correct and that CageFS is enabled for the users. Let us cover the steps in detail.
-
-Go to WHM -> MultiPHP Manager -> PHP Versions tab.
-
-![](/images/MultiPHPManager_setup.jpg)
-
-1) Make sure that the System PHP Version is set to one of the __ea-phpXX__ ones. 
-   :::warning Attention
-   Selecting the __alt-phpXX__ (as a “System PHP Version”) will break the PHP Selector. 
-   :::
-2) Switch the PHP-FPM to Off; the PHP Selector is not compatible with it.
-   :::tip Note
-   If you have PHP-FPM enabled for existing websites, you need to disable it for them.
-   :::
-3) Last but not least, make sure that the domains/accounts (where you'd like to use the PHP Selector) use the __Inherited__ version. You need to do that because MultiPHP Manager has higher priority than PHP Selector. So, if any other PHP version is set in this menu, it will overwrite the PHP version selected in PHP Selector for that domain.
-
-That’s it! You are all set. The only thing that’s left is to make sure that you use the “[Enable for all users](/cloudlinux_os_components/#managing-users)” mode for CageFS if you’d like to keep PHP Selector for all users.
-
-See also: [FAQ on PHP Selector integration with cPanel’s MultiPHP Manager](https://cloudlinux.zendesk.com/hc/en-us/articles/360007615820-FAQ-on-PHP-Selector-integration-with-cPanel-s-MultiPHP-Manager).
-
-#### More about PHP Selector’s configuration
-
-#### __Setting up the PHP version on customer’s end (in cPanel)__
-
-It is possible to change the current PHP Version for MultiPHP Manager on the user’s end. Here’s how the settings would look like by default:
-
-![](/images/cpanel_01.jpg)
-
-As end-user can change that and select any version, other than Inherited one. Just like with WHM’s MultiPHP Manager, the PHP Selector __won’t work correctly in this case__. We recommend leaving either PHP Selector or MultiPHP Manager enabled for the end-user. That way, your end users will have only one place where to configure PHP which will make things easier.
-
-#### __PHP directives and their priorities__
-
-Given the way cPanel handles the PHP versions, it could be quite confusing to understand which PHP.ini directive will get higher priority over another. Let's discuss it here.
-
-__Directives priority - if PHP Selector is enabled__
-
-If the PHP Selector is configured properly, its options would have the highest priority. You can find them in cPanel -> Select PHP Version -> Switch to PHP Options.
-
-![](/images/PHPVersion.png)
-
-You can add custom php.ini options here too! Check [this article](/cloudlinux_os_components/#custom-php-ini-options) to find out how to do that.
-The lower priority would have the php.ini (or .user.ini for some of the PHP handlers) configuration file, but you could also type in the PHP values there.
-
-__Directives priority - if PHP Selector isn’t used__
-
-If you haven’t configured the PHP Selector, and you’d like to simply change PHP.ini parameters for particular __alt-phpXX__ or __ea-phpXX__ versions, you could manage them in WHM -> MultiPHP INI Editor. cPanel end-user can also customize php.ini directives in cPanel -> MultiPHP INI Editor. For more information, read the official documentation [here](https://documentation.cpanel.net/display/68Docs/MultiPHP+INI+Editor+for+WHM) and [here](https://documentation.cpanel.net/display/74Docs/MultiPHP+INI+Editor+for+cPanel).
-
-#### __PHP version in the command-line interface (CLI)__
-
-Shell commands, starting with `/usr/bin/php` and `/usr/local/bin/php` would use the same version that you select in the PHP Selector (if it’s already [set up](/cloudlinux_os_components/#configuration-and-using)). That PHP will also load PHP directives selected in PHP Selector. For example, if we have a setup like this:
-
-![](/images/command_line_01.jpg)
-
-We should get the 7.2 version in the `php -v` output if nothing was changed in the PHP Selector. This is exactly what we get:
-
-```
-/usr/local/bin/php -v
-PHP 7.2.14 (cli) (built: Feb 10 2019 18:20:08) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.2.14, Copyright (c) 1999-2018, by Zend Technologies
-```
-
-But if we change the PHP version in the PHP Selector, the `php -v` output will change as well. 
-
-![](/images/set_current.png)
-
-```
-/usr/local/bin/php -v
-PHP 7.3.2 (cli) (built: Feb  7 2019 13:36:44) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.3.2, Copyright (c) 1998-2018 Zend Technologies
-```
-
-However, PHP version chosen in MultiPHP Manager can also be applied to console commands `/usr/bin/php` and `/usr/local/bin/php`. Whether it will be applied or not depends on the current working directory. `.htaccess` file search is performed in the current directory and in parent directories. If the file is found, then the PHP version specified in it is applied, if not found, then System default PHP version is applied. System default PHP version for a specific user can be changed via PHP Selector.
 
 See also [PHP Selector CLI tools](/command-line_tools/#php-selector).
 
