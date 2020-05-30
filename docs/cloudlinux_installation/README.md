@@ -294,10 +294,17 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 
 ## Provider-specific guidelines
 
+* [Amazon Web Services](/cloudlinux_installation/#AWS)
 * [H-Sphere](/cloudlinux_installation/#h-sphere)
 * [DigitalOcean](/cloudlinux_installation/#digitalocean)
 * [Linode](/cloudlinux_installation/#linode)
 * [Virtuozzo and OpenVZ](/cloudlinux_installation/#virtuozzo-and-openvz)
+
+### AWS
+
+CloudLinux OS image list can be found at [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=3d97f559-e78b-45de-94a3-4335c33346ad)
+
+If you are going to use Cloudlinux OS with cPanel image, you may find useful the following [article](https://cloudlinux.zendesk.com/hc/en-us/articles/360014130320-How-to-get-CloudLinux-OS-with-cPanel-AMI-working-on-AWS)
 
 ### H-Sphere
 
