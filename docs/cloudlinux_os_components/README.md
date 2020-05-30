@@ -5002,6 +5002,10 @@ See also PHP Selector [CLI](/command-line_tools/#php-selector)
 
 ### Integration with control panels
 
+* [PHP Selector integration with cPanel/WHM](https://cloudlinux.zendesk.com/hc/en-us/articles/360014084800-PHP-Selector-Integration-with-cPanel)
+* [PHP Selector integration with Plesk](https://cloudlinux.zendesk.com/hc/en-us/articles/115004582105-PHP-Selector-Integration-with-Plesk-Panel)
+* [PHP Selector integration with DirectAdmin](https://cloudlinux.zendesk.com/hc/en-us/articles/360010322460-PHP-Selector-Integration-with-DirectAdmin)
+
 This is the list of commands that we use to integrate <span class="notranslate">PHP Selector</span> with control panels.
 
 **PHP summary:**
