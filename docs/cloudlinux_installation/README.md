@@ -294,7 +294,7 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 
 ## Provider-specific guidelines
 
-* [Amazon Web Services](/cloudlinux_installation/#AWS)
+* [Amazon Web Services](/cloudlinux_installation/#aws)
 * [H-Sphere](/cloudlinux_installation/#h-sphere)
 * [DigitalOcean](/cloudlinux_installation/#digitalocean)
 * [Linode](/cloudlinux_installation/#linode)
