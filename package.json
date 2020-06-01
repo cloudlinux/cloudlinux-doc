@@ -11,6 +11,7 @@
     "vuepress": "^1.0.2",
     "vuepress-plugin-autometa": "^0.1.13",
     "vuepress-plugin-container": "^2.1.0",
+    "vuepress-plugin-separate-pages": "^0.1.2",
     "vuepress-plugin-disqus": "^0.2.0",
     "vuepress-theme-cloudlinux": "https://github.com/cloudlinux/cloudlinux-doc-theme.git"
   },

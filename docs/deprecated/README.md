@@ -1747,11 +1747,7 @@ LVEParseMode REDIS
 ```
 </div>
 
-<div class="notranslate">
-
 ### **LVERedisSocket**
-
-</div>
 
 | | |
 |-|-|
@@ -1771,11 +1767,7 @@ LVERedisSocket /var/run/redis.sock
 ```
 </div>
 
-<div class="notranslate">
-
 ### **LVERedisAddr**
-
-</div>
 
 | | |
 |-|-|
@@ -1788,12 +1780,9 @@ Used to specify IP and port to connect to Redis instead of using Socket
 
 **Example**:
 
-<div class="notranslate">
-
 ```
 LVERedisAddr 127.0.0.1 6993
 ```
-</div>
 
 ### **LVERedisTimeout**
 
