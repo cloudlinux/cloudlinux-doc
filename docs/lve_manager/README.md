@@ -11,9 +11,9 @@ $ yum install lvemanager
 ```
 </div>
 
-<div class="notranslate">
-
 ## CloudLinux installation wizard
+
+<div class="notranslate">
 
 * [Overview](/lve_manager/#overview)
 * [Set up](/lve_manager/#set-up)
@@ -54,7 +54,7 @@ Click <span class="notranslate">_Finish and Install_</span> to complete installa
 You can find a complete description of the CloudLinux components below.
 
 #### CloudLinux components
-
+</div>
 <div class="notranslate">
 
 #### **CageFS**
@@ -241,10 +241,8 @@ The following actions are available in the system notifications (information, wa
 * snooze a notification
 
 
-
-### Dashboard
-
 </div>
+### Dashboard
 
 :::tip Note
 Available starting from LVE Manager 4.0-26.8
@@ -323,7 +321,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 
 ### Current usage
 
-</div>
+
 
 Choose <span class="notranslate">_Current usage_</span> tab to monitor users resource usage at the moment displayed in the table.
 
@@ -337,11 +335,7 @@ To expand the list of users click on the number above and in the dropdown choose
 
 ![](/images/man_01_zoom73.png)
 
-<div class="notranslate">
-
 ### Users
-
-</div>
 
 * [Actions](/lve_manager/#actions)
 * [Group actions for users with enabled CageFS](/lve_manager/#group-actions-for-users-with-enabled-cagefs)
@@ -411,11 +405,7 @@ If CageFS is disabled, group actions are not available. See how you can enable C
 
   ![](/images/GroupDisableCageFS.png)
 
-<div class="notranslate">
-
 ### Statistics
-
-</div>
 
 Choose <span class="notranslate">Statistics</span> tab to view hosts users resource usage statistics.
 
@@ -436,11 +426,7 @@ The following parameters are displayed in the statistics table:
 
 ![](/images/man_05_zoom92.png)
 
-<div class="notranslate">
-
 ### Options
-
-</div>
 
 The following sections are available to set the required options:
 
@@ -616,11 +602,7 @@ See more:
 
 When you've done with settings, click <span class="notranslate">**Save Changes**</span> to apply changes.
 
-<div class="notranslate">
-
 ### Packages
-
-</div>
 
 <span class="notranslate"> Packages</span> tab allows setting the limits for as many users as you need by editing packages of proper limits. Each account belonging to a proper package adheres to those limits.
 
@@ -649,11 +631,7 @@ To modify package limits click on a pencil icon in <span class="notranslate">Act
 
 When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
 
-<div class="notranslate">
-
 ### PHP Selector
-
-</div>
 
 * [Selector tab](/lve_manager/#selector-tab)
 * [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> LVE Manager 6.0.1-2</sup>

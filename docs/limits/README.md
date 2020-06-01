@@ -255,11 +255,7 @@ id username
 ```
 </div>
 
-<div class="notranslate">
-
 ## IO
-
-</div>
 
 IO limits restrict the data throughput for the customer. They are in KB/s. When limit is reached, the processes are throttled (put to sleep). This makes sure that processes within LVE cannot go over the limit,. Yet don't stop working, nor getting killed – they just work slower when the limit is reached.
 
@@ -267,19 +263,11 @@ IO limits are available with kernels **el6.lve1.x** and higher.
 
 The IO limits will only affect <span class="notranslate"> DISK IO</span>, and will have no effect on network. It also doesn't take into consideration any disk cache accesses. So, even if file is loaded from disk cache 1000 times – it will not be counted towards <span class="notranslate">IO</span> limits.
 
-<div class="notranslate">
-
 ## IOPS
-
-</div>
 
 <span class="notranslate">IOPS</span> limits restrict the total number of read/write operations per second. When the limit is reached the read/write operations stop until current second expires.
 
-<div class="notranslate">
-
 ## Entry processes
-
-</div>
 
 <span class="notranslate"> Entry processes </span> limit controls the number of entries into LVE. Each time a process 'enters' into LVE, we increment the counter. Each time process exits LVE, we decrement the counter. We don't count processes that are created inside LVE itself. It is also know as <span class="notranslate"> 'Apache concurrent connections' </span> limit.
 
@@ -289,11 +277,7 @@ This limit was created to prevent DoS attacks against web server. One of the fai
 
 To solve that, we have created entry processes (often called concurrent connections) limit. It will limit the number of concurrent connections to Apache, causing web server to serve error 508 page (<span class="notranslate"> Resource Limit Reached</span>), once there number of concurrent requests for the site goes above the limit.
 
-<div class="notranslate">
-
 ## Number of processes
-
-</div>
 
 <span class="notranslate"> NPROC </span> controls the total number of processes and threads within LVE. Once the limit is reached, no new process can be created (until another one dies). When that happens <span class="notranslate"> NPROC </span> counter is incremented. Apache might return 500 or 503 errors in such case.
 
