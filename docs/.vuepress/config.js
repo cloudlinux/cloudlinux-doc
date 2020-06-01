@@ -41,7 +41,8 @@ module.exports = {
         'ga': 'UA-12711721-15'
       }
     ],
-    [ 'autometa', autoMetaOptions ]
+    [ 'autometa', autoMetaOptions ],
+    [ 'separate-pages' ]
   ],
   configureWebpack: {
     resolve: {
@@ -57,18 +58,6 @@ module.exports = {
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/icon?family=Material+Icons"
-      }
-    ],
-    [
-      "script",
-      {
-        src: "/js/dependencies/smooth-scroll.min.js"
-      }
-    ],
-    [
-      "script",
-      {
-        src: "/js/index.js"
       }
     ],
     [
