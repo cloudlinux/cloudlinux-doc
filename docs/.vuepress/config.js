@@ -42,7 +42,7 @@ module.exports = {
       }
     ],
     [ 'autometa', autoMetaOptions ],
-    [ 'separate-pages' ]
+    [ 'separate-pages', { alwaysVisibleBlocks: ['#disqus_thread'] } ]
   ],
   configureWebpack: {
     resolve: {
