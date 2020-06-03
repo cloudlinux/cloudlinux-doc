@@ -7534,10 +7534,10 @@ vuepress-plugin-disqus@^0.2.0:
   dependencies:
     vue-disqus "^3.0.5"
 
-vuepress-plugin-separate-pages@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-separate-pages/-/vuepress-plugin-separate-pages-0.1.2.tgz#9bad0ae3f673cf502e79341a7936f8507377f3bf"
-  integrity sha512-1m+JzZz8T8NSjuhpV6Sb+pUzcX32SfmepIyDgak595XLCne0pY/zVnfQ6lNtxbCOpmkZ58gMmT9BKBL5MpivKQ==
+vuepress-plugin-separate-pages@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-separate-pages/-/vuepress-plugin-separate-pages-0.1.3.tgz#ff322ba9ab9cefd072506b2ef1456f6b5b22ab17"
+  integrity sha512-5hGI3VlIQtrIvUnWrqeOT2DKgR+BJbhJZdlENiD8LEjU/avZkebwuAfo4Kk7FEmXy+ALSCOfVpKKWw8rEquT3w==
   dependencies:
     jquery "^3.5.1"
 

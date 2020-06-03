@@ -60,7 +60,7 @@ We provide information about the current version of the API in the form of rpm p
 That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the spec of rpm package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
 
 ### Changelog
-:::info Changelog
+::: tip Changelog
 Version 1.1
 1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
 2. New `supported_cl_features` key added to `panel_info` script. You can specify CloudLinux features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
