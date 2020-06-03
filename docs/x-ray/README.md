@@ -420,11 +420,12 @@ If you cannot see that section, try to restart PHP processes for that user (the 
 
 
 2. If you can see the <span class="notranslate">**xray**</span> extension in the phpinfo, check that <span class="notranslate">X-Ray</span> agent service is running with the service xray-agent status command. If it is not running, start it with the <span class="notranslate">`service xray-agent start`</span> command.
-3. If you set a client’s IP when creating the tracing task, check that your requests come to the server with this IP via phpinfo (since there may be NAT between your local machine and the server).
+3. <span class="notranslate">X-Ray</span> may not send data if a site uses a caching plugin, as the caching plugin is outputting HTML, thus there are no PHP scripts to examine. We encountered such issues with sites that use <span class="notranslate">LSCache</span> and <span class="notranslate">WP Super Cache</span> plugins. Check that your site does not use caching plugins. If so, disable it while tracing a site to get information from <span class="notranslate">X-Ray</span>.
+4. If you set a client’s IP when creating the tracing task, check that your requests come to the server with this IP via phpinfo (since there may be NAT between your local machine and the server).
    
     ![](/images/XRayPHPInfoRemoteAddr.png)
 
-4. If, after checking the previous items, the issue persists, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
+5. If, after checking the previous items, the issue persists, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
 
 ### What to do if X-Ray is not found in the phpinfo() page?
 
@@ -452,6 +453,17 @@ If you managed to create a tracing task, this means that the <span class="notran
 Check for the <span class="notranslate">`CacheLookup on`</span> option in the `htaccess` file for your domain.
 If the option is there, LiteSpeed processes requests bypassing the PHP X-Ray extension.
 In this case, to get tracing information, you should remove the <span class="notranslate">`CacheLookup on`</span> option.
+
+### What is the proper format for the URL?
+
+All of the examples below are correct:
+
+* `http://domain.com`
+* `http://domain.com/`
+* `https://domain.com`
+* `https://domain.com/`
+
+You can use any of them with a prefix `www.` and it is also correct.
 
 
 <Disqus/>
