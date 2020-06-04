@@ -1,5 +1,16 @@
 # Installation
 
+* [Hardware compatibility](/cloudlinux_installation/#hardware-compatibility)
+* [Converting existing servers](/cloudlinux_installation/#converting-existing-servers)
+* [Activation](/cloudlinux_installation/#activation)
+* [Installing new servers](/cloudlinux_installation/#installing-new-servers)
+* [CloudLinux OS images](/cloudlinux_installation/#cloudlinux-os-images)
+* [Net install](/cloudlinux_installation/#net-install)
+* [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
+* [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
+* [Uninstalling](/cloudlinux_installation/#uninstalling)
+* [Migration to EasyApache 4](/cloudlinux_installation/#migration-to-easyapache-4)
+
 ## Hardware compatibility
 
 CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
@@ -302,7 +313,7 @@ Same URLs can be used to install para-virtualized Xen using either command-line 
 
 ### AWS
 
-CloudLinux OS image list can be found at [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=3d97f559-e78b-45de-94a3-4335c33346ad)
+CloudLinux OS image list can be found [here](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
 
 If you are going to use Cloudlinux OS with cPanel image, you may find useful the following [article](https://cloudlinux.zendesk.com/hc/en-us/articles/360014130320-How-to-get-CloudLinux-OS-with-cPanel-AMI-working-on-AWS)
 
