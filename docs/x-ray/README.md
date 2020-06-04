@@ -1,5 +1,12 @@
 # X-Ray (BETA)
 
+* [Description](/x-ray/#description)
+* [Installation](/x-ray/#installation)
+* [How to manage X-Ray](/x-ray/#how-to-manage-x-ray)
+* [X-Ray client](/x-ray/#x-ray-client)
+* [X-Ray service](/x-ray/#x-ray-agent)
+* [FAQ](/x-ray/#faq)
+
 :::warning Note
 Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the X-Ray tool after receiving the CLN manager approval.
 :::
@@ -12,13 +19,6 @@ X-Ray is available only for CloudLinux OS licenses purchased directly, NOT VIA R
 X-Ray is available for cPanel, Plesk, and DirectAdmin.
 * X-Ray for non-panel installations is not planned.
 :::
-
-* [Description](/x-ray/#description)
-* [Installation](/x-ray/#installation)
-* [How to manage X-Ray](/x-ray/#how-to-manage-x-ray)
-* [X-Ray client](/x-ray/#x-ray-client)
-* [X-Ray service](/x-ray/#x-ray-agent)
-* [FAQ](/x-ray/#faq)
 
 ## Description
 
