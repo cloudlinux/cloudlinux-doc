@@ -11,7 +11,7 @@
 * [Uninstalling](/cloudlinux_installation/#uninstalling)
 * [Migration to EasyApache 4](/cloudlinux_installation/#migration-to-easyapache-4)
 
-## Hardware compatibility
+### Hardware compatibility
 
 CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
@@ -24,7 +24,7 @@ At this moment (for CL6) we are aware of only one such case:
 |<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [https://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
-## Converting existing servers
+### Converting existing servers
 
 * [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
 

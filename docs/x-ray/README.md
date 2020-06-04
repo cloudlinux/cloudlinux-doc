@@ -20,7 +20,7 @@ X-Ray is available for cPanel, Plesk, and DirectAdmin.
 * X-Ray for non-panel installations is not planned.
 :::
 
-## Description
+### Description
 
 <span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
 

@@ -1,12 +1,25 @@
 # Introduction
 
 * [What is CloudLinux OS](/introduction/#what-is-cloudlinux-os)
-* [Description of the CloudLinux OS components](/introduction/#description-of-the-cloudlinux-os-components)
 * [CloudLinux OS lifecycle](/introduction/#cloudlinux-os-lifecycle)
+* [Description of the CloudLinux OS components](/introduction/#description-of-the-cloudlinux-os-components)
 
-## What is CloudLinux OS
+### What is CloudLinux OS
 
 CloudLinux OS is designed for shared hosting providers. It isolates each customer into a separate “Lightweight Virtualized Environment” (LVE), which partitions, allocates, and limits server resources, like memory, CPU, and connections, for each tenant. This ensures that tenants cannot jeopardize the stability of your servers, causing all sites to slow down or even come to a halt. CloudLinux OS also “cages” tenants from one another to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, causing severe harm.
+
+### CloudLinux OS lifecycle
+
+CloudLinux supports the same end-of-life policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
+
+Currently supported:
+
+| |  | |
+|-|--|-|
+|Operating System | Released | End of Life & Support|
+|CloudLinux 8 | Mar 17, 2020 | May 31, 2029|
+|CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024|
+|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support - June 30, 2024](https://www.cloudlinux.com/extended-support-cloudlinux-os-6))|
 
 ## Description of the CloudLinux OS components
 
@@ -64,18 +77,5 @@ CloudLinux OS is designed for shared hosting providers. It isolates each custome
     LVE-stats 2 collects LVE usage statistics (CPU, memory, disk space usage) and allows to query the data.
 
     [See more](/cloudlinux_os_components/#lve-stats-2).
-
-## CloudLinux OS lifecycle
-
-CloudLinux supports the same end-of-life policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
-
-Currently supported:
-
-| |  | |
-|-|--|-|
-|Operating System | Released | End of Life & Support|
-|CloudLinux 8 | Mar 17, 2020 | May 31, 2029|
-|CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024|
-|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support - June 30, 2024](https://www.cloudlinux.com/extended-support-cloudlinux-os-6))|
 
 <Disqus/>
