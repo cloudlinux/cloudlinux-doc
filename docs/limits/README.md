@@ -1,5 +1,16 @@
 # Limits
 
+* [Understanding limits](/limits/#understanding-limits)
+* [SPEED limit](/limits/#speed-limit)
+* [Memory limit](/limits/#memory-limit)
+* [IO](/limits/#io)
+* [IOPS](/limits/#iops)
+* [Entry processes](/limits/#entry-processes)
+* [Number of processes](/limits/#number-of-processes)
+* [Network traffic bandwidth control and accounting system](/limits/#network-traffic-bandwidth-control-and-accounting-system)
+* [Limits validation](/limits/#limits-validation)
+* [Compatibility matrix](/limits/#compatibility-matrix)
+
 CloudLinux has support for the following limits:
 
 | |  |  |  | |

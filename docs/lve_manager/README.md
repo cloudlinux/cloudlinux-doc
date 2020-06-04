@@ -1,5 +1,10 @@
 # User interface (LVE Manager)
 
+* [CloudLinux installation wizard](/lve_manager/#cloudlinux-installation-wizard)
+* [LVE Manager](/lve_manager/#lve-manager)
+* [inodes](/lve_manager/#inodes)
+* [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
+
 <span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
 
 <span class="notranslate">LVE Manager</span> is installed by default on most servers. If it is missing you can always install it by running:
