@@ -2,6 +2,7 @@
 
 * [Hardware compatibility](/cloudlinux_installation/#hardware-compatibility)
 * [Converting existing servers](/cloudlinux_installation/#converting-existing-servers)
+* [CloudLinux 8 kernel-related features and improvements](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
 * [Activation](/cloudlinux_installation/#activation)
 * [Installing new servers](/cloudlinux_installation/#installing-new-servers)
 * [CloudLinux OS images](/cloudlinux_installation/#cloudlinux-os-images)
@@ -144,7 +145,14 @@ On DirectAdmin servers, rebuild of Apache with custombuild will complete the con
 Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
 :::
 
-### CloudLinux 8 kernel-related features and improvements
+#### Common issues and troubleshooting during conversion
+
+| | |
+|-|-|
+|**Issue**|**Solution**|
+|Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
+
+## CloudLinux 8 kernel-related features and improvements
 
 * [Memory](/cloudlinux_installation/#memory)
 * [Security](/cloudlinux_installation/#security)
@@ -171,17 +179,8 @@ Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Supp
 * Improvements were made to on-the-fly resizing of file systems that use bigalloc.
 * On ext4 file systems, inode generation scalability on SMP systems is improved.
 
-
-
-#### Common issues and troubleshooting during conversion
-
-| | |
-|-|-|
-|**Issue**|**Solution**|
-|Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
-
-
 ## Activation
+
 ### Getting trial license
 
 You will need a trial activation key to be able to convert your CentOS server to CloudLinux. The trial license subscription will work for 30 days.
