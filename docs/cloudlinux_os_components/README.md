@@ -1,6 +1,20 @@
 #  CloudLinux OS components
 
+* [Reseller limits](/cloudlinux_os_components/#reseller-limits)
+* [LVE-Stats 2](/cloudlinux_os_components/#lve-stats-2)
+* [CageFS](/cloudlinux_os_components/#cagefs)
+* [MySQL Governor](/cloudlinux_os_components/#mysql-governor)
+* [PHP Selector](/cloudlinux_os_components/#php-selector)
+* [Python Selector](/cloudlinux_os_components/#python-selector)
+* [Python Selector (Old)](/cloudlinux_os_components/#python-selector-old)
+* [Ruby Selector](/cloudlinux_os_components/#ruby-selector)
+* [Node.js Selector](/cloudlinux_os_components/#node-js-selector)
+* [Apache mod_lsapi PRO](/cloudlinux_os_components/#apache-mod-lsapi-pro)
+* [Additional integration components](/cloudlinux_os_components/#additional-integration-components)
+* [Apache suexec module](/cloudlinux_os_components/#apache-suexec-module)
+
 ## Reseller limits
+
 ### General information and requirements
 
 * [Types of Users](/cloudlinux_os_components/#types-of-users)
