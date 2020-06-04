@@ -2,6 +2,21 @@
 
 # Control panel integration
 
+* [Introduction](/control_panel_integration/#introduction)
+* [New API in a nutshell](/control_panel_integration/#new-api-in-a-nutshell)
+* [General](/control_panel_integration/#general)
+* [Control panel API integration](/control_panel_integration/#control-panel-api-integration)
+* [Control panel hooks integration](/control_panel_integration/#control-panel-hooks-integration)
+* [Web UI integration](/control_panel_integration/#web-ui-integration)
+* [PHP-based integration of WEB UI with the control panel](/control_panel_integration/#php-based-integration-of-web-ui-with-the-control-panel)
+* [How to integrate CageFS with a control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
+* [Integrating CloudLinux PHP Selector](/control_panel_integration/#integrating-cloudlinux-php-selector)
+* [Integration of Apache modules in control panels](/control_panel_integration/#integration-of-apache-modules-in-control-panels)
+* [MySQL Governor](/control_panel_integration/#mysql-governor)
+* [CloudLinux LVE and CageFS patches](/control_panel_integration/#cloudlinux-lve-and-cagefs-patches)
+* [Hardened PHP](/control_panel_integration/#hardened-php)
+* [CloudLinux kernel set-up](/control_panel_integration/#cloudlinux-kernel-set-up)
+
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
 :::
