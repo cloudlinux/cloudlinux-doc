@@ -1,5 +1,9 @@
 # Introduction
 
+* [What is CloudLinux OS](/introduction/#what-is-cloudlinux-os)
+* [Description of the CloudLinux OS components](/introduction/#description-of-the-cloudlinux-os-components)
+* [CloudLinux OS lifecycle](/introduction/#cloudlinux-os-lifecycle)
+
 ## What is CloudLinux OS
 
 CloudLinux OS is designed for shared hosting providers. It isolates each customer into a separate “Lightweight Virtualized Environment” (LVE), which partitions, allocates, and limits server resources, like memory, CPU, and connections, for each tenant. This ensures that tenants cannot jeopardize the stability of your servers, causing all sites to slow down or even come to a halt. CloudLinux OS also “cages” tenants from one another to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, causing severe harm.
