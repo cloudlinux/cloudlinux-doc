@@ -1,10 +1,13 @@
 # For CloudLinux partners
 
-## License portal (CLN)
+* [License portal (CLN)](/for_cloudlinux_partners/#license-portal-cln)
+* [CloudLinux WHMCS plugin](/for_cloudlinux_partners/#cloudlinux-whmcs-plugin)
+
+### License portal (CLN)
 
 You can find the complete documentation for the CloudLinux Network (CLN) [here](https://docs.cln.cloudlinux.com/).
 
-## CloudLinux WHMCS plugin
+### CloudLinux WHMCS plugin
 
 [Overview](/for_cloudlinux_partners/#overview)  
 [Installation & configuration](/for_cloudlinux_partners/#installation-configuration)  
