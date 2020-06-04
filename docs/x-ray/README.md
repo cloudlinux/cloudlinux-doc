@@ -13,6 +13,12 @@ X-Ray is available for cPanel, Plesk, and DirectAdmin.
 * X-Ray for non-panel installations is not planned.
 :::
 
+* [Description](/x-ray/#description)
+* [Installation](/x-ray/#installation)
+* [How to manage X-Ray](/x-ray/#how-to-manage-x-ray)
+* [X-Ray client](/x-ray/#x-ray-client)
+* [X-Ray service](/x-ray/#x-ray-agent)
+* [FAQ](/x-ray/#faq)
 
 ## Description
 
