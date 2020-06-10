@@ -91,6 +91,14 @@ php <whmcs_root>/clDeploy.php --migrate
 7. Fill <span class="notranslate"> _Username_ </span> and <span class="notranslate"> _Password_ </span> with your CloudLinux API access details and select **_CloudLinux_** from <span class="notranslate"> _License Type_ </span> drop-down.
 8. Click <span class="notranslate"> _Save Changes_ </span> to confirm.
 
+:::tip Note
+You can use the CloudLinux license module as an individual product. By default, for IP license a client’s IP address defined while ordering is used. You can change license IP in service settings (as an administrator or a user). If you want to use a custom field to get the correct IP during the order, you should create a custom field with any field name where IP phrase is used.
+:::
+
+Example:
+
+![](/images/WHMCSCustomField.png)
+
 #### Configuration of add-on
 
 
