@@ -510,8 +510,8 @@ Set NPROC limit greater than (EP + 15).
 Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm is also a PHP Handler just as mod_lsapi.
 :::
 
-:::warning Note
-LiteSpeed is not compatible with <span class="notranslate">`mod_lsapi`</span> so we recommend it being disabled before installing LiteSpeed. The reason is that all the functionality that <span class="notranslate">`mod_lsapi`</span> offers is already built directly in LiteSpeed and by using <span class="notranslate">`mod_lsapi`</span> it can cause issues and performance decreases.
+:::tip Note
+<span class="notranslate">`mod_lsapi`</span> is an Apache module whilst LiteSpeed is a standalone solution and does not use any of Apache modules (since it provides its own implementation of these modules). Moreover, it is advised to leave your Apache configuration as is just in case you decide to switch back from LiteSpeed.
 :::
 
 <Disqus/>
