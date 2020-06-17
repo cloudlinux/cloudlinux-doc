@@ -2767,31 +2767,7 @@ $ cagefsctl --init
 ```
 </div>
 
-2. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> already exists:
-
-<div class="notranslate">
-
-```
-$ cagefsctl --disable-cagefs 
-$ cagefsctl --unmount-all
-# To ensure that the following command prints empty output: 
-$ cat /proc/mounts | grep cagefs 
-# if you see any cagefs entries, execute "cagefsctl --unmount-all" again.
-$ mv /usr/share/cagefs-skeleton /home/cagefs-skeleton 
-$ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
-$ cagefsctl --enable-cagefs
-```
-</div>
-
-On cPanel servers, if you place skeleton into <span class="notranslate">`/home`</span> directory, then you should configure the following option:
-
-In _cPanel WHM_ choose <span class="notranslate"> _Server Configuration_ </span> and go to <span class="notranslate"> _Basic cPanel/WHM Setup_ </span> , then in <span class="notranslate"> _Basic Config_ </span> change <span class="notranslate"> _Additional home directories_   </span> default value to blank (not <span class="notranslate"> "home" </span> ).
-
-::: tip Note
-If this option is not set, then cPanel will create new accounts in incorrect places.
-:::
-
-
+2. If <span class="notranslate"> _/usr/share/cagefs-skeleton_ </span> already exists, see [this article](https://cloudlinux.zendesk.com/hc/en-us/articles/115004560129-How-do-I-move-usr-share-cagefs-skeleton-to-other-place-because-of-low-disk-space)
 
 #### Moving /var/cagefs directory
 
