@@ -25,6 +25,17 @@ At this moment (for CL6) we are aware of only one such case:
 |<span class="notranslate"> B120i/B320i Smart Array SATA RAID Controller </span>  | hpvsa | [https://www8.hp.com/h20195/v2/GetPDF.aspx/c04168333.pdf](https://h20000.www2.hp.com/bizsupport/TechSupport/Document.jsp?objectID=c01732801)|
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
+
+The list of unsupported LSI SAS devices in RHEL 8 (CloudLinux 8/CloudLinux 7 Hybrid)
+
+* LSI SAS 1064 (PCI ID: 0x1000:0x0050)
+* LSI SAS 1068 (PCI ID: 0x1000:0x005C)
+* LSI SAS 1064E (PCI ID: 0x1000:0x0056)
+* LSI SAS 1068E (PCI ID: 0x1000:0x005E)
+* LSI SAS 1078 (PCI ID: 0x1000:0x0062)
+* LSI SAS 1068_820XELP (PCI ID: 0x1000:0x0059)
+
+
 ### Converting existing servers
 
 * [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
