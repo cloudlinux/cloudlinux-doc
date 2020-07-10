@@ -2,22 +2,22 @@
 
 * [Description](/x-ray/#description)
 * [Installation](/x-ray/#installation)
-* [How to manage X-Ray](/x-ray/#how-to-manage-x-ray)
-* [X-Ray client](/x-ray/#x-ray-client)
-* [X-Ray service](/x-ray/#x-ray-agent)
+* [How to manage <span class="notranslate">X-Ray</span>](/x-ray/#how-to-manage-x-ray)
+* [<span class="notranslate">X-Ray</span> client](/x-ray/#x-ray-client)
+* [<span class="notranslate">X-Ray</span> service](/x-ray/#x-ray-agent)
 * [FAQ](/x-ray/#faq)
 
 :::warning Note
-Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the X-Ray tool after receiving the CLN manager approval.
+Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
 :::
 
 :::warning Warning!
-X-Ray is available only for CloudLinux OS licenses purchased directly, NOT VIA RESELLERS.
+<span class="notranslate">X-Ray</span> is available only for CloudLinux OS licenses purchased directly, NOT VIA RESELLERS.
 :::
 
 :::warning Warning!
-X-Ray is available for cPanel, Plesk, and DirectAdmin.
-* X-Ray for non-panel installations is not planned.
+<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin.
+* <span class="notranslate">X-Ray</span> for non-panel installations is not planned.
 :::
 
 ### Description
@@ -80,7 +80,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ![](/images/XRayStartTracing.png)
 
-## How to manage X-Ray 
+## How to manage X-Ray
 
 ### Create a new tracing task
 
@@ -92,8 +92,8 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ![](/images/XRayTracingTask.png)
 
-* **URL** should be a valid URL of the domain which exists on the current hosting server. The URL field supports wildcard matching. To learn more about wildcard matching, click _How to use special characters_.
-* **Advanced settings** allow you to set an IP address and tracing options: by time or by number of queries.
+* <span class="notranslate">**URL**</span> should be a valid URL of the domain which exists on the current hosting server. The URL field supports wildcard matching. To learn more about wildcard matching, click _How to use special characters_.
+* <span class="notranslate">**Advanced settings**</span> allow you to set an IP address and tracing options: by time or by number of queries.
 
     ![](/images/XRayAdvanced.png)
 
@@ -158,11 +158,11 @@ The slowest request is highlighted.
 
 <span class="notranslate">X-Ray</span> collects the following data for each request:
 
-* **Top issues** – the slowest items of a request
-* **Software modules/plugins** by execution time (only for WordPress plugins)
-* **Database queries** by execution time 
-* **External requests** by execution time
-* **Other system functions** by execution time 
+* <span class="notranslate">**Top issues**</span> – the slowest items of a request
+* <span class="notranslate">**Software modules/plugins**</span> by execution time (only for WordPress plugins)
+* <span class="notranslate">**Database queries**</span> by execution time 
+* <span class="notranslate">**External requests**</span> by execution time
+* <span class="notranslate">**Other system functions**</span> by execution time 
 
 #### Software modules/plugins
 
@@ -170,10 +170,10 @@ The slowest request is highlighted.
 
 The <span class="notranslate">_Software modules/plugins_</span> section displays the following data:
 
-* **Software type** – a type a module/plugin. For now, <span class="notranslate">X-Ray</span> can analyze only WordPress software
-* **Software module** – a name of the WordPress plugin
-* **Duration** – plugin execution time
-* **Duration (%)** – plugin execution time as a percentage of the total duration of the request
+* <span class="notranslate">**Software type**</span> – a type a module/plugin. For now, <span class="notranslate">X-Ray</span> can analyze only WordPress software
+* <span class="notranslate">**Software module**</span> – a name of the WordPress plugin
+* <span class="notranslate">**Duration**</span> – plugin execution time
+* <span class="notranslate">**Duration (%)**</span> – plugin execution time as a percentage of the total duration of the request
 
 #### Database queries
 
@@ -181,11 +181,11 @@ The <span class="notranslate">_Software modules/plugins_</span> section displays
 
 The <span class="notranslate">_Database queries_</span> section displays the following data:
 
-* **Query** – the executed SQL-query
-* **File** – the file and the line of the executed query and backtrace
-* **Software module** – a WordPress plugin name from which the request was completed. If the request does not belong to any of the WordPress plugin, the name of the function that executed the given request is displayed
-* **Calls** – the number of identical SQL queries
-* **Duration** – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
+* <span class="notranslate">**Query**</span> – the executed SQL-query
+* <span class="notranslate">**File**</span> – the file and the line of the executed query and backtrace
+* <span class="notranslate">**Software module**</span> – a WordPress plugin name from which the request was completed. If the request does not belong to any of the WordPress plugin, the name of the function that executed the given request is displayed
+* <span class="notranslate">**Calls**</span> – the number of identical SQL queries
+* <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
  
 #### External requests
 
@@ -193,9 +193,9 @@ The <span class="notranslate">_Database queries_</span> section displays the fol
 
 The <span class="notranslate">_External requests_</span> section displays the following data:
 
-* **URL** – the URL of the executed request
-* **File** – the file and the line of the executed request and backtrace
-* **Duration** – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
+* <span class="notranslate">**URL**</span> – the URL of the executed request
+* <span class="notranslate">**File**</span> – the file and the line of the executed request and backtrace
+* <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
  
 #### System functions
 
@@ -203,9 +203,9 @@ The <span class="notranslate">_External requests_</span> section displays the fo
 
 The <span class="notranslate">_System functions_</span> section displays the following data:
 
-* **Function** – the executed function
-* **File** – the file and the line of the executed request
-* **Duration** – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
+* <span class="notranslate">**Function**</span> – the executed function
+* <span class="notranslate">**File**</span> – the file and the line of the executed request
+* <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
 
 ## X-Ray client
 
@@ -224,21 +224,21 @@ The list of currently supported PHP versions:
 
 #### Database queries
 
-* Functions from [MySQL](https://www.php.net/manual/ru/book.mysql.php) extension:
-    * `mysql_query`
-    * `mysql_db_query`
-    * `mysql_unbuffered_query`
-* Functions from [MySQLi](https://www.php.net/manual/ru/book.mysqli.php) extension:
-    * `mysqli_query`
-    * `mysqli::query`
-    * `mysqli_multi_query`
-    * `mysqli::multi_query`
-    * `mysqli_real_query`
-    * `mysqli::real_query`
-* Functions from [PDO](https://www.php.net/manual/ru/book.pdo.php) extension:
-    * `PDO::exec`
-    * `PDO::query`
-    * `PDOStatement::execute`
+* Functions from the [MySQL](https://www.php.net/manual/ru/book.mysql.php) extension:
+    * <span class="notranslate">`mysql_query`</span>
+    * <span class="notranslate">`mysql_db_query`</span>
+    * <span class="notranslate">`mysql_unbuffered_query`</span>
+* Functions from the [MySQLi](https://www.php.net/manual/ru/book.mysqli.php) extension:
+    * <span class="notranslate">`mysqli_query`</span>
+    * <span class="notranslate">`mysqli::query`</span>
+    * <span class="notranslate">`mysqli_multi_query`</span>
+    * <span class="notranslate">`mysqli::multi_query`</span>
+    * <span class="notranslate">`mysqli_real_query`</span>
+    * <span class="notranslate">`mysqli::real_query`</span>
+* Functions from the [PDO](https://www.php.net/manual/ru/book.pdo.php) extension:
+    * <span class="notranslate">`PDO::exec`</span>
+    * <span class="notranslate">`PDO::query`</span>
+    * <span class="notranslate">`PDOStatement::execute`</span>
 
 #### External requests
 
@@ -246,130 +246,174 @@ The list of currently supported PHP versions:
 
 #### System PHP functions
 
-It may be any PHP system function which can be related to a PHP engine or other PHP extension, for example `fopen()` or `json_encode()`. A list of these functions can be found [here](https://www.php.net/manual/en/indexes.functions.php).
+It may be any PHP system function which can be related to a PHP engine or other PHP extension, for example <span class="notranslate">`fopen()`</span> or <span class="notranslate">`json_encode()`</span>. A list of these functions can be found [here](https://www.php.net/manual/en/indexes.functions.php).
 
 ### Configuration Options
 
+<div class="notranslate">
+
 #### xray.enabled
 
-**Syntax**: `xray.enabled=On/Off`
+</div>
 
-**Default**: On
+**Syntax**: <span class="notranslate">`xray.enabled=On/Off`</span>
 
-**Changeable**: PHP_INI_SYSTEM
+**Default**: <span class="notranslate">On</span>
+
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: Enable or disable <span class="notranslate">X-Ray</span> extension from php.ini
 
 -----
 
+<div class="notranslate">
+
 #### xray.database_queries
 
-**Syntax**: `xray.database_queries=[number]`
+</div>
+
+**Syntax**: <span class="notranslate">`xray.database_queries=[number]`</span>
 
 **Default**: 20
 
-**Changeable**: PHP_INI_SYSTEM 
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: The number of the slowest SQL queries which will be sent to the <span class="notranslate">X-Ray</span> agent. The min value is 0 and the max value is 100. If the variable value is more, the default value will be used.
 
 -----
 
+<div class="notranslate">
+
 #### xray.external_requests
 
-**Syntax**: `xray.external_requests=[number]`
+</div>
+
+**Syntax**: <span class="notranslate">`xray.external_requests=[number]`</span>
 
 **Default**: 20
 
-**Changeable**: PHP_INI_SYSTEM  
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: The number of the slowest external requests (the curl_exec function) which will be sent to the <span class="notranslate">X-Ray</span> agent. The min value is 0 and the max value is 100. If the variable value is more, the default value will be used.
 
 -----
 
+<div class="notranslate">
+
 #### xray.system_functions
 
-**Syntax**: `xray.system_functions=[number]`
+</div>
+
+**Syntax**: <span class="notranslate">`xray.system_functions=[number]`</span>
 
 **Default**: 20
 
-**Changeable**: PHP_INI_SYSTEM  
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: The number of the slowest system functions which will be sent to the <span class="notranslate">X-Ray</span> agent. 
 The min value is 0 and the max value is 100. If the variable value is more, the default value will be used.
 
 -----
 
+<div class="notranslate">
+
 #### xray.backtrace_depth
 
-**Syntax**: `xray.backtrace_depth=[number]`
+</div>
+
+**Syntax**: <span class="notranslate">`xray.backtrace_depth=[number]`</span>
 
 **Default**: 10
 
-**Changeable**: PHP_INI_SYSTEM  
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: The backtrace depth to the main() function which will be sent to the <span class="notranslate">X-Ray</span> agent. The min value is 0 and the max value is 20. If the variable value is more, the default value will be used.
 
 -----
 
+<div class="notranslate">
+
 #### xray.processor
 
-**Syntax**: `xray.processor=[processor_name]`
+</div>
 
-**Default**: xray
 
-**Changeable**:  PHP_INI_SYSTEM 
+**Syntax**: <span class="notranslate">`xray.processor=[processor_name]`</span>
+
+**Default**: <span class="notranslate">xray</span>
+
+**Changeable**:  <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: Tells the <span class="notranslate">X-Ray</span> client which processor to use. The new processors may be added in the future. The default processor is xray which means to send data to the <span class="notranslate">X-Ray</span> agent.
 
 -----
 
+<div class="notranslate">
+
 #### xray.tasks
 
-**Syntax**: `xray.tasks=host:uri:ip:id`
+</div>
 
-**Default**: no value
+**Syntax**: <span class="notranslate">`xray.tasks=host:uri:ip:id`</span>
 
-**Changeable**:  PHP_INI_SYSTEM 
+**Default**: <span class="notranslate">no value</span>
+
+**Changeable**:  <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: The current tracing tasks for the given PHP request. This directive is added automatically by the <span class="notranslate">X-Ray</span> manager when creating a task. It is not allowed to edit manually, as <span class="notranslate">X-Ray</span> may stop working.
 
 -----
 
+<div class="notranslate">
+
 #### xray.to_file
 
-**Syntax**: `xray.to_file=On/Off`
+</div>
 
-**Default**: Off
+**Syntax**: <span class="notranslate">`xray.to_file=On/Off`</span>
 
-**Changeable**:  PHP_INI_SYSTEM 
+**Default**: <span class="notranslate">Off</span>
+
+**Changeable**:  <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: Only for debug purposes. Writes to a file data which is sent to the processor.
 
 -----
 
+<div class="notranslate">
+
 #### xray.debug
 
-**Syntax**: `xray.debug=On/Off`
+</div>
 
-**Default**: Off
+**Syntax**: <span class="notranslate">`xray.debug=On/Off`</span>
 
-**Changeable**: PHP_INI_SYSTEM 
+**Default**: <span class="notranslate">Off</span>
+
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: Only for debug purposes. Enables debug output during request processing. In the On mode can slow down the domain.
 
 -----
 
+<div class="notranslate">
+
 #### xray.debug_file
 
-**Syntax**: `xray.debug_file=[path_to_file]`
+</div>
 
-**Default**: `/tmp/xray-debug.log`
+**Syntax**: <span class="notranslate">`xray.debug_file=[path_to_file]`</span>
 
-**Changeable**: PHP_INI_SYSTEM 
+**Default**: <span class="notranslate">`/tmp/xray-debug.log`</span>
+
+**Changeable**: <span class="notranslate">PHP_INI_SYSTEM</span>
 
 **Description**: Only for debug purposes. Specifies a file for logging debug information.
 
+
 ## X-Ray agent 
+
+
 This is a service that receives data from the <span class="notranslate">X-Ray</span> client and sends it to the remote storage.
 
 ### Managing X-Ray service
@@ -414,11 +458,11 @@ The <span class="notranslate">X-Ray</span> agent is managed by the <span class="
 
 This warning means that you already have a task to trace this URL in the list of your tracing tasks. If you see this warning, a new task can be created only with the <span class="notranslate">_On hold_</span> status and you will be able to run it only when the previous task with the same URL will be completed.
 
-Note that the URL field supports wildcard matching and you can have a case when <span class="notranslate">X-Ray</span> is tracing the `URL=domain.com/*` and you are trying to create a new task with `URL=domain.com/xray.php`. In this case, you will see that warning because the `*` URLs array includes `xray.php`.
+Note that the URL field supports wildcard matching and you can have a case when <span class="notranslate">X-Ray</span> is tracing the <span class="notranslate">`URL=domain.com/*`</span> and you are trying to create a new task with <span class="notranslate">`URL=domain.com/xray.php`</span>. In this case, you will see that warning because the `*` URLs array includes <span class="notranslate">`xray.php`</span>.
 
 ###  I started a tracing task and made requests to URL but did not see any results in the UI. What should I do?
 
-1. Check that <span class="notranslate">**xray**</span> extension is enabled for the domain. To do so, go to the `phpinfo()` page and make a request. In the phpinfo output try to find the following section:
+1. Check that <span class="notranslate">**xray**</span> extension is enabled for the domain. To do so, go to the <span class="notranslate">`phpinfo()`</span> page and make a request. In the phpinfo output try to find the following section:
    
     ![](/images/XRayPHPInfo.png)
 
@@ -442,7 +486,7 @@ If you managed to create a tracing task, this means that the <span class="notran
 
     ![](/images/XRayScanDir.png)
 
-    Then check the `ini_location` that was passed to the <span class="notranslate">X-Ray</span> manager by running the following command:
+    Then check the <span class="notranslate">`ini_location`</span> that was passed to the <span class="notranslate">X-Ray</span> manager by running the following command:
 
     <div class="notranslate">
 

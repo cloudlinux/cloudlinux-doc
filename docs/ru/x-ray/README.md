@@ -1,6 +1,22 @@
 ---
-title: X-Ray
+title: X-Ray (BETA)
 ---
 <gtranslate-io>
-# X-Ray
+
+# X-Ray (BETA)
+
+## Как управлять X-Ray
+
+## X-Ray клиент
+
+### Функции, которые может подключать X-Ray клиент
+
+## X-Ray агент
+
+### Управление сервисом X-Ray
+
+### Влияет ли X-Ray на производительность сайта?
+
+### Что делать, если я вижу предупреждение "Task is duplicated by URL"?
+
 </gtranslate-io>
