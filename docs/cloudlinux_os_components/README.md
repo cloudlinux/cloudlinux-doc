@@ -9069,6 +9069,33 @@ Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux. Here 
 Nginx support is currently experimental.
 :::
 
+### How to use Certbot with alt-python36
+
+To run Certbot with <span class="notranslate">`alt-python36`</span>, follow the next steps:
+
+1. Add a path to the <span class="notranslate">`alt-python36`</span> in the environment variable <span class="notranslate">`PATH`</span> as the first element: <span class="notranslate">`/opt/alt/python36/bin/`</span>.
+2. Run Certbot with the <span class="notranslate">`--no-bootstrap`</span> parameter.
+
+**Example:**
+
+The old command to run Certbot on CentOS 6/Cloudlinux OS 6:
+
+<div class="notranslate">
+
+```
+# certbot-auto --nginx
+```
+</div>
+
+The new command to run Certbot on CentOS 6/CloudLinux OS 6:
+
+<div class="notranslate">
+
+```
+# PATH="/opt/alt/python36/bin/:$PATH" certbot-auto --no-bootstrap --nginx
+```
+</div>
+
 ## Apache suexec module
 
 ### General information and requirements
