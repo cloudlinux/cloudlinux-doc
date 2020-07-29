@@ -1,26 +1,25 @@
 # X-Ray (BETA)
 
-* [Description](/x-ray/#description)
+* [Description](/x-ray/#installation)
 * [Installation](/x-ray/#installation)
 * [How to manage <span class="notranslate">X-Ray</span>](/x-ray/#how-to-manage-x-ray)
 * [<span class="notranslate">X-Ray</span> client](/x-ray/#x-ray-client)
 * [<span class="notranslate">X-Ray</span> service](/x-ray/#x-ray-agent)
 * [FAQ](/x-ray/#faq)
 
+## Installation
+
 :::warning Note
 Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
 :::
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> is available only for CloudLinux OS licenses purchased directly, NOT VIA RESELLERS.
+<span class="notranslate">X-Ray</span> beta can be started only in NON-RESELLER CLN accounts.
 :::
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin.
-* <span class="notranslate">X-Ray</span> for non-panel installations is not planned.
+<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin. Non-panel installations is not planned.
 :::
-
-### Description
 
 <span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
 
@@ -30,7 +29,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 <span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/x-ray/#list-of-supported-php-versions)) or WordPress.
 
-## Installation
+#### Installation Instructions
 
 1. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
    
@@ -449,18 +448,18 @@ The <span class="notranslate">X-Ray</span> agent is managed by the <span class="
 
 ## FAQ
 
-### Does X-Ray affect website performance?
+#### Does X-Ray affect website performance?
 
 <span class="notranslate">X-Ray</span> affects website performance. Our tests show 5-10 % overhead from a website loading time with <span class="notranslate">X-Ray</span> tracing enabled.
 <span class="notranslate">X-Ray</span> allows you to find website performance issues and should not be enabled permanently. If your website is very slow, you can enable <span class="notranslate">X-Ray</span> to find the cause and then disable it.
 
-### What should I do if I see the warning "Task is duplicated by URL"?
+#### What should I do if I see the warning "Task is duplicated by URL"?
 
 This warning means that you already have a task to trace this URL in the list of your tracing tasks. If you see this warning, a new task can be created only with the <span class="notranslate">_On hold_</span> status and you will be able to run it only when the previous task with the same URL will be completed.
 
 Note that the URL field supports wildcard matching and you can have a case when <span class="notranslate">X-Ray</span> is tracing the <span class="notranslate">`URL=domain.com/*`</span> and you are trying to create a new task with <span class="notranslate">`URL=domain.com/xray.php`</span>. In this case, you will see that warning because the `*` URLs array includes <span class="notranslate">`xray.php`</span>.
 
-###  I started a tracing task and made requests to URL but did not see any results in the UI. What should I do?
+####  I started a tracing task and made requests to URL but did not see any results in the UI. What should I do?
 
 1. Check that <span class="notranslate">**xray**</span> extension is enabled for the domain. To do so, go to the <span class="notranslate">`phpinfo()`</span> page and make a request. In the phpinfo output try to find the following section:
    
@@ -477,7 +476,7 @@ If you cannot see that section, try to restart PHP processes for that user (the 
 
 5. If, after checking the previous items, the issue persists, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
 
-### What to do if X-Ray is not found in the phpinfo() page?
+#### What to do if X-Ray is not found in the phpinfo() page?
 
 If you managed to create a tracing task, this means that the <span class="notranslate">`xray.ini`</span> file was created in a system. Therefore, there may be two reasons why it did not appear in the phpinfo page of the domain.
 
@@ -498,13 +497,13 @@ If you managed to create a tracing task, this means that the <span class="notran
     Find your tracing task in the output and check that the <span class="notranslate">`xray.ini`</span> exists in this directory, also check that the `ini` path is the same in the phpinfo page output and in the <span class="notranslate">`ini_location`</span> directive for your tracing task. If they are the same, you should reload your PHP. If they are different that means that the <span class="notranslate">X-Ray</span> manager could not correctly determine the PHP version your domain uses. In this case, contact our support team at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/requests/new).
 
 
-### I use LiteSpeed, X-Ray is enabled and it is shown in the phpinfo() page but does not collect data when sending requests to a site. What to do?
+#### I use LiteSpeed, X-Ray is enabled and it is shown in the phpinfo() page but does not collect data when sending requests to a site. What to do?
 
 Check for the <span class="notranslate">`CacheLookup on`</span> option in the `htaccess` file for your domain.
 If the option is there, LiteSpeed processes requests bypassing the PHP X-Ray extension.
 In this case, to get tracing information, you should remove the <span class="notranslate">`CacheLookup on`</span> option.
 
-### What is the proper format for the URL?
+#### What is the proper format for the URL?
 
 All of the examples below are correct:
 
