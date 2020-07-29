@@ -6002,7 +6002,7 @@ See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
 
 It is possible to hide or show <span class="notranslate">Ruby Selector</span> icon by marking or unmarking proper checkboxes in <span class="notranslate"> LVE Manager Options</span> tab.
 
-![](/images/CL-hide-python-ruby.png)
+![](/images/CL-hide-ruby.png)
 
 
 The same result can be accomplished in CLI by running:
