@@ -1,13 +1,13 @@
 # X-Ray (BETA)
 
-* [Description](/x-ray/#installation)
+* [Description](/x-ray/#description)
 * [Installation](/x-ray/#installation)
 * [How to manage <span class="notranslate">X-Ray</span>](/x-ray/#how-to-manage-x-ray)
 * [<span class="notranslate">X-Ray</span> client](/x-ray/#x-ray-client)
 * [<span class="notranslate">X-Ray</span> service](/x-ray/#x-ray-agent)
 * [FAQ](/x-ray/#faq)
 
-## Installation
+## Description
 
 :::warning Note
 Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
@@ -29,7 +29,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 <span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/x-ray/#list-of-supported-php-versions)) or WordPress.
 
-#### Installation Instructions
+### Installation
 
 1. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
    
