@@ -31,7 +31,9 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ### Installation
 
-1. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
+1. Make sure you are an approved X-Ray beta-tester (only non-reseller accounts apply)
+
+2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
    
    <div class="notranslate">
 
@@ -40,7 +42,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     ```
     </div>
 
-2. Run the following command:
+3. Run the following command:
 
    <div class="notranslate">
 
@@ -58,7 +60,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     ```
     </div>
 
-3. Then install the <span class="notranslate">`alt-php-xray`</span> package
+4. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
         * Go to the <span class="notranslate">_X-Ray_</span> tab.
@@ -75,7 +77,7 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
     ```
     </div>
 
-4. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
+5. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
 
 ![](/images/XRayStartTracing.png)
 
