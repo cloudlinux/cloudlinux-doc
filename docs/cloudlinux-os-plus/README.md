@@ -1,13 +1,34 @@
-# X-Ray (BETA)
+# CloudLinux OS+ (BETA)
 
-* [Description](/x-ray/#description)
-* [Installation](/x-ray/#installation)
-* [How to manage <span class="notranslate">X-Ray</span>](/x-ray/#how-to-manage-x-ray)
-* [<span class="notranslate">X-Ray</span> client](/x-ray/#x-ray-client)
-* [<span class="notranslate">X-Ray</span> service](/x-ray/#x-ray-agent)
-* [FAQ](/x-ray/#faq)
+* [X-Ray](/cloudlinux-os-plus/#x-ray)
+  * [Description](/cloudlinux-os-plus/#description)
+  * [Installation](/cloudlinux-os-plus/#installation)
+  * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
+  * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
+  * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
+  * [FAQ](/cloudlinux-os-plus/#faq)
+* [Centralized Monitoring](/cloudlinux-os-plus/#centralized-monitoring)
+  * [Description](/cloudlinux-os-plus/#description-2)
+  * [Installation](/cloudlinux-os-plus/#installation-2)
+  * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+  * [FAQ](/cloudlinux-os-plus/#faq-2)
+  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
-## Description
+
+<div class="notranslate">
+
+## X-Ray <Badge text="beta" type="warning"/>
+
+</div>
+
+* [Description](/cloudlinux-os-plus/#description)
+* [Installation](/cloudlinux-os-plus/#installation)
+* [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
+* [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
+* [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
+* [FAQ](/cloudlinux-os-plus/#faq)
+
+### Description
 
 :::warning Note
 Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
@@ -27,7 +48,7 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
 
 First release of <span class="notranslate">X-Ray</span> is offered for cPanel administrators and support to find the cause of website performance issues.
 
-<span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/x-ray/#list-of-supported-php-versions)) or WordPress.
+<span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/cloudlinux-os-plus/#list-of-supported-php-versions)) or WordPress.
 
 ### Installation
 
@@ -81,9 +102,9 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ![](/images/XRayStartTracing.png)
 
-## How to manage X-Ray
+### How to manage X-Ray
 
-### Create a new tracing task
+#### Create a new tracing task
 
 1. Go to the <span class="notranslate">_X-Ray_</span> tab
 2. Click the <span class="notranslate">_Start tracing_</span> button to create a new task
@@ -109,7 +130,7 @@ After creating, the task appears in the list of tracing tasks.
 
 ![](/images/XRayTrcingTaskList.png)
 
-### View tracing tasks list
+#### View tracing tasks list
 
 ![](/images/XRayTrcingTaskList1.png)
 
@@ -122,7 +143,7 @@ A tracing task can have the following statuses:
 * <span class="notranslate">**On hold**</span> – the same URL already exists in the lists. Task processing will not start automatically. Administrator should start it manually.
 * <span class="notranslate">**Completed**</span> – period of time is finished or number of requests is reached.
 
-### Stop tracing task
+#### Stop tracing task
 
 Click ![](/images/XRayStop.png) to stop the tracing task.
 
@@ -130,7 +151,7 @@ Click ![](/images/XRayStop.png) to stop the tracing task.
 
 The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
 
-### Delete tracing task 
+#### Delete tracing task 
 
 Click ![](/images/XRayDelete.png) to delete the tracing task.
 
@@ -138,7 +159,7 @@ Click ![](/images/XRayDelete.png) to delete the tracing task.
 When you have deleted a tracing task, all collected data will be unavailable.
 :::
 
-### View collected requests for tracing task
+#### View collected requests for tracing task
 
 :::warning Warning!
 Collected requests are available in the UI for two weeks.
@@ -208,11 +229,11 @@ The <span class="notranslate">_System functions_</span> section displays the fol
 * <span class="notranslate">**File**</span> – the file and the line of the executed request
 * <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
 
-## X-Ray client
+### X-Ray client
 
 <span class="notranslate">X-Ray</span> client is a PHP extension named <span class="notranslate">`xray.so`</span>. It analyzes the processing time of the entire request and its parts and then sends the data to the <span class="notranslate">X-Ray</span> agent.
 
-### List of supported PHP versions
+#### List of supported PHP versions
 
 The list of currently supported PHP versions:
 
@@ -221,7 +242,7 @@ The list of currently supported PHP versions:
 |**ALT PHP**:|**EA PHP**:|**Plesk PHP**|
 | <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|
 
-### Functions that X-Ray client can hook
+#### Functions that X-Ray client can hook
 
 #### Database queries
 
@@ -249,7 +270,7 @@ The list of currently supported PHP versions:
 
 It may be any PHP system function which can be related to a PHP engine or other PHP extension, for example <span class="notranslate">`fopen()`</span> or <span class="notranslate">`json_encode()`</span>. A list of these functions can be found [here](https://www.php.net/manual/en/indexes.functions.php).
 
-### Configuration Options
+#### Configuration Options
 
 <div class="notranslate">
 
@@ -412,12 +433,12 @@ The min value is 0 and the max value is 100. If the variable value is more, the 
 **Description**: Only for debug purposes. Specifies a file for logging debug information.
 
 
-## X-Ray agent 
+### X-Ray agent 
 
 
 This is a service that receives data from the <span class="notranslate">X-Ray</span> client and sends it to the remote storage.
 
-### Managing X-Ray service
+#### Managing X-Ray service
 
 The <span class="notranslate">X-Ray</span> agent is managed by the <span class="notranslate">`service`</span> utility.
 
@@ -448,7 +469,7 @@ The <span class="notranslate">X-Ray</span> agent is managed by the <span class="
     ```
     </div>
 
-## FAQ
+### FAQ
 
 #### Does X-Ray affect website performance?
 
@@ -516,6 +537,346 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
+<div class="notranslate">
+
+## Centralized Monitoring <Badge text="beta" type="warning"/>
+
+</div>
+
+* [Description](/cloudlinux-os-plus/#description-2)
+* [Installation](/cloudlinux-os-plus/#installation-2)
+* [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+* [FAQ](/cloudlinux-os-plus/#faq-2)
+* [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
+
+### Description
+
+<span class="notranslate">Centralized Monitoring</span> is a tool that allows hosting administrators to monitor load for all their servers and users.
+
+<span class="notranslate">Centralized Monitoring</span> allows you to:
+
+* View system metrics for all clients’ end servers
+* View the LVE statistics per user for all clients’ end servers
+
+#### Server overhead
+
+:::warning Warning
+<span class="notranslate">Centralized Monitoring</span> tool might produce an additional load for the client’s end server.
+:::
+
+All metrics collected on the centralized database are available to view/analyze within one month. 
+
+Collectors on the client’s end server that send statistics to the centralized database (`cm.cloudlinux.com`) might cause some additional load.
+
+The load for the server with 250 users:
+
+* Idle CPU = 3.5 %
+* Peak CPU = 10.5 %
+* Idle MEM = 50 Мb
+* Peak MEM = 70 Мb
+* Network traffic ~ 9  Mb/hour | 216  Mb/day | 6.3  Gb/month
+
+:::tip Note
+Make sure that `cm.cloudlinux.com` is available on your end server.
+:::
+
+
+
+### Installation
+
+1. Send a request to become the <span class="notranslate">Centralized Monitoring</span> beta tester here: [https://cln.cloudlinux.com/console/dashboard/products](https://cln.cloudlinux.com/console/dashboard/products)
+2. Wait for the approval from the manager.
+3. Register CloudLinux+ servers or use the existing servers.
+4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
+5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
+6. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
+
+<div class="notranslate">
+
+```
+yum update/install lve-uitls --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+7.  **Beta**
+
+    Set up your server to send statistics. Run this command
+
+    <div class="notranslate">
+
+    ```
+    /usr/share/cloudlinux/cl_plus/manage_clplus enable
+    ```
+    </div>
+
+    to install the <span class="notranslate">`cl-end-server-tools`</span> package and start service collecting and sending statistics to the central database. Then, check that the <span class="notranslate">`cl-end-server-tools`</span> package is installed successfully:
+
+    <div class="notranslate">
+
+    ```
+    rpm -q cl-end-server-tools
+    ```
+    </div>
+
+    **Production (not available yet)** 
+
+    Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
+
+8. Check the status of service by running this command:
+
+<div class="notranslate">
+
+```
+service cl_plus_sender status
+```
+</div>
+
+
+9. Check that all collectors are initiated:
+
+<div class="notranslate">
+
+```
+cat /var/log/clplus_sender.log
+```
+</div>
+
+10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
+11. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
+
+<div class="notranslate">
+
+### Centralized Monitoring user interface
+
+</div>
+
+<div class="notranslate">
+
+You can access <span class="notranslate">Centralized Monitoring</span> in your [CLN account](https://cln.cloudlinux.com/).
+Click <span class="notranslate">C-Monitoring</span> in the left menu.
+
+![](/images/CMCLNAccount.png)
+
+#### Servers
+
+</div>
+
+This page contains the list of all clients’ end servers. The server appears in the list after finishing [Installation](/cloudlinux-os-plus/#installation-2). By default, there is a descending sort by CPU usage.
+
+![](/images/CMAllServers.png)
+
+The following values are available for each server:
+
+* <span class="notranslate">**Load Avg 15m**</span> – average system load for the last 15 min
+* <span class="notranslate">**CPU Usage**</span> – CPU usage for the last 15 min (the number of cores can be found in the hint)
+* <span class="notranslate">**Memory Usage**</span> – free available memory, the second value is the total memory for the last 15 min
+* <span class="notranslate">**IO read/write**</span> – disk read bytes/disk written bytes for the last 15 min
+
+:::tip Note
+The values are calculated using a 15 min time period but the metric state is updated automatically every minute by default or you can choose from one of the predefined periods.
+:::
+
+* <span class="notranslate">**Idle state**</span> – there were no statistics for the server for the last minute. 
+* <span class="notranslate">**N/A state**</span> – there were no statistics for the server for the last 30 days. This can happen if a new server was added but statistics sending was not configured.
+
+There is no pagination on the <span class="notranslate">_All servers_</span> page and all columns can be sorted by absolute value.
+Use the search tool to operate with the data.
+
+#### Servers details
+
+To get the detailed statistics for the server via charts, click a desired server line in the table.
+All charts are auto-refreshed and there is an ability to select the period for metrics data to be updated for the chart.
+
+![](/images/CMUPdates.png)
+
+#### Charts
+
+#### Visualization of the most popular server states
+
+![](/images/CMMostPopularStates.png)
+
+#### Disk space usage
+
+![](/images/CMDiskSpaceUsage.png)
+
+#### Open file descriptor/Context switches
+
+![](/images/CMOpenFileDescriptorContextSwitches.png)
+
+#### System load 1m , 5m, 15m
+
+![](/images/CMSystemLoad.png)
+
+#### CPU usage (total, system, user, iowait, steal)
+
+![](/images/CMSCPUUsag.png)
+
+#### Network traffic usage
+
+![](/images/CMNetworkTrafficUsage.png)
+
+#### Disk space usage
+
+![](/images/CMDiskSpaceUsageBasics.png)
+
+#### Memory usage (total, used, available)
+
+![](/images/CMMemoryUsage.png)
+
+#### Time spent doing I/Os
+
+![](/images/CMTimeSpentDoingIO.png)
+
+#### Disk IOps Completed
+
+![](/images/CMDiskIOpsCompleted.png)
+
+#### Disk read/write data
+
+![](/images/CMDiskReadWriteData.png)
+
+#### Disk read/write time
+
+![](/images/CMDiskReadWriteTime.png)
+
+#### Apache connections (number)/Number of requests per minute/Max connections
+
+:::warning Note
+In the current version, we collect these metrics for the cPanel end servers only. We are planning to add other panels support soon.
+:::
+
+#### MySQL queries
+
+![](/images/CMMySQLQueries.png)
+
+#### The most loaded server users for the last minute
+
+![](/images/CMMostLoadedUsers.png)
+
+We calculate the user’s load by LVE statistics that we collect on the end server.
+The idle state for the user means that the LVE statistics were not collected for the last minute for some reason.
+
+In each cell there are current usage/limit values for the basic LVE limits:
+
+* CPU Usage
+* Entry Processes
+* Physical Memory Usage
+* IOPS
+* IO Usage
+* Number of Processes
+* MySQL CPU
+* MySQL IO
+
+In the hint, there is a number of faults for each limit. The values in the columns are underlined (it is red if load-to-limit ratio >=90%  and it is yellow if load-to-limit ratio >= 50%). For the current implementation, the only sort by the load-to-limit ratio is available.
+By default, there is a descending sort by the CPU usage column.
+
+When sorting by a column, the lines with the load-to-limit ratio >=90% for this column will have the red background color, and lines with the load-to-limit ratio >=50% for this column will have the yellow background color.
+
+:::tip Note
+The users with unlimited resources (∞) will be at the bottom of the table. 
+:::
+
+#### Users
+
+This page contains all users for the all server of the client and their LVE statistics for the last minute. You can select the number of users on this page and search by user’s data.
+
+The description of this page is the same as [*The most loaded server users for the last minute*](/cloudlinux-os-plus/#the-most-loaded-server-users-for-the-last-minute) of the top 5 loaded users.
+
+![](/images/CMUsers.png)
+
+### FAQ
+
+#### How can I disable collecting and sending statistics on a client’s server?
+
+Run this command:
+
+<div class="notranslate">
+
+```
+/usr/share/cloudlinux/cl_plus/manage_clplus disable
+```
+</div>
+
+
+#### Where can I view all my servers load?
+
+You can find all your servers load in your CM personal account here: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or in your CLN personal account here: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring).
+
+
+#### Where can I view all my users load?
+
+You can find all your users load in your CM personal account here: [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) or in your CLN personal account here: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring)
+
+
+#### Where can I view a server load details for a period?
+
+Click the desired server in the server list in the UI.
+
+#### Where can I view a user load details for the period?
+
+Click the desired user in the user list in the UI.
+
+#### How long are statistics stored in the central database?
+
+30 days.
+
+#### How can I change the charts period on the details page?
+
+Choose the desired period in the upper right corner or select it directly on the chart.
+
+#### I don’t understand how to read the user load chart.
+
+The user load chart contains three lines:
+
+* limit
+* current load
+* count of faults
+  
+Limit and current load are drawing regarding the left vertical axis, the count of faults is drawing regarding the right vertical axis. You can focus on a particular line by clicking a required legend.
+
+### Troubleshooting
+
+#### I can't see a server statistics
+
+1. Check that your server is registered by key or by IP license of the CloudLinux+ account, i.e., it should be seen in the list of servers in your CLN account here: [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
+2. Check that the following required packages are installed on the end server:
+* <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.1-1
+* <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-1
+* <span class="notranslate">`rhn-client-tools`</span>
+    * CloudLinux 6 >= 1.1.15-3.el6.cloudlinux.26
+    * CloudLinux 7 >= 2.0.2-31.el7.clouldinux
+    * CloudLinux 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
+* <span class="notranslate">`lve-stats`</span> >= 3.0.6-1
+* <span class="notranslate">`lve-utils`</span> >= 4.2.11-1
+* <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.8-1
+3. Check that service collecting and sending statistics is running:
+
+<div class="notranslate">
+
+```
+service cl_plus_sender status
+```
+</div>
+
+4. Check that log of the <span class="notranslate">_cl_plus_sender_</span> service doesn't contain errors:
+   
+<div class="notranslate">
+
+```
+/var/log/clplus_sender.log
+```
+</div>
+
+#### Where can I view the events log on the client's server?
+
+You can view the events log on the client's server here: 
+
+<div class="notranslate">
+
+```
+/var/log/clplus_sender.log
+```
+</div>
 
 <Disqus/>
 
