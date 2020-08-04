@@ -15,11 +15,9 @@
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
 
-<div class="notranslate">
 
 ## X-Ray <Badge text="beta" type="warning"/>
 
-</div>
 
 * [Description](/cloudlinux-os-plus/#description)
 * [Installation](/cloudlinux-os-plus/#installation)
@@ -537,11 +535,9 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
-<div class="notranslate">
 
 ## Centralized Monitoring <Badge text="beta" type="warning"/>
 
-</div>
 
 * [Description](/cloudlinux-os-plus/#description-2)
 * [Installation](/cloudlinux-os-plus/#installation-2)
@@ -644,13 +640,9 @@ cat /var/log/clplus_sender.log
 10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
 11. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
 
-<div class="notranslate">
 
 ### Centralized Monitoring user interface
 
-</div>
-
-<div class="notranslate">
 
 You can access <span class="notranslate">Centralized Monitoring</span> in your [CLN account](https://cln.cloudlinux.com/).
 Click <span class="notranslate">C-Monitoring</span> in the left menu.
@@ -659,7 +651,6 @@ Click <span class="notranslate">C-Monitoring</span> in the left menu.
 
 #### Servers
 
-</div>
 
 This page contains the list of all clients’ end servers. The server appears in the list after finishing [Installation](/cloudlinux-os-plus/#installation-2). By default, there is a descending sort by CPU usage.
 
