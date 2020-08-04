@@ -580,6 +580,10 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 
 ### Installation
 
+:::tip Note
+Skip the first and second steps and start from the third step if you are already an X-Ray beta tester.
+:::
+
 1. Send a request to become the <span class="notranslate">Centralized Monitoring</span> beta tester here: [https://cln.cloudlinux.com/console/dashboard/products](https://cln.cloudlinux.com/console/dashboard/products)
 2. Wait for the approval from the manager.
 3. Register CloudLinux+ servers or use the existing servers.
@@ -824,6 +828,12 @@ The user load chart contains three lines:
 * count of faults
   
 Limit and current load are drawing regarding the left vertical axis, the count of faults is drawing regarding the right vertical axis. You can focus on a particular line by clicking a required legend.
+
+#### Do I need to submit a request to be a Centralized Monitoring beta tester if I'm already an X-Ray beta tester?
+
+No, you don't need, just [follow the <span class="notranslate">Centralized Monitoring</span> instruction](/cloudlinux-os-plus/#installation-2) starting from the third step.
+
+
 
 ### Troubleshooting
 
