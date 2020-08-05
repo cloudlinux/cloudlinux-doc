@@ -594,7 +594,7 @@ Skip the first and second steps and start from the third step if you are already
 <div class="notranslate">
 
 ```
-yum update/install lve-uitls --enablerepo=cloudlinux-updates-testing
+yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
 ```
 </div>
 
