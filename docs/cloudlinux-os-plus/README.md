@@ -747,7 +747,7 @@ In the current version, we collect these metrics for the cPanel end servers only
 :::
 
 :::warning Note
-In the current version, we collect these metrics only for Apache (NOT for LiteSpeed, Nginx, etc..)
+In the current version, we collect these metrics only for Apache (NOT for LiteSpeed, Nginx, etc.). The charts will be empty for LiteSpeed, Nginx, etc..
 :::
 
 #### MySQL queries
