@@ -741,8 +741,13 @@ All charts are auto-refreshed and there is an ability to select the period for m
 
 #### Apache connections (number)/Number of requests per minute/Max connections
 
+
 :::warning Note
 In the current version, we collect these metrics for the cPanel end servers only. We are planning to add other panels support soon.
+:::
+
+:::warning Note
+In the current version, we collect these metrics only for Apache (NOT for LiteSpeed, Nginx, etc..)
 :::
 
 #### MySQL queries
