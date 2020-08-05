@@ -547,6 +547,7 @@ You can use any of them with a prefix `www.` and it is also correct.
 
 ### Description
 
+
 <span class="notranslate">Centralized Monitoring</span> is a tool that allows hosting administrators to monitor load for all their servers and users.
 
 <span class="notranslate">Centralized Monitoring</span> allows you to:
@@ -579,6 +580,10 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 
 
 ### Installation
+
+:::warning Warning!
+Centralized Monitoring beta can be started only in NON-RESELLER CLN accounts.
+:::
 
 :::tip Note
 Skip the first and second steps and start from the third step if you are already an X-Ray beta tester.
