@@ -8718,7 +8718,7 @@ CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. Yo
 <div class="notranslate">
 
 ```
-https:/IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list
 ```
 </div>
 
