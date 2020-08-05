@@ -889,6 +889,10 @@ You can view the events log on the client's server here:
 ```
 </div>
 
+#### Can I get monitoring metrics from LiteSpeed, Nginx or other (Not Apache) web server?
+
+No, you can not. We will announce in our blog when we implement this.
+
 <Disqus/>
 
 
