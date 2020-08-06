@@ -617,7 +617,7 @@ If the `rhn_check` command is not found, run the following command:
 <div class="notranslate">
 
 ```
-# yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+# yum install rhn-check rhn-setup
 ```
 </div>
 
