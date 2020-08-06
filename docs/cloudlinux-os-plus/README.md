@@ -603,7 +603,25 @@ yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
 ```
 </div>
 
-7.  **Beta**
+7. Run the following command:
+
+<div class="notranslate">
+
+```
+# rhn_check
+```
+</div>
+
+If the `rhn_check` command is not found, run the following command:
+
+<div class="notranslate">
+
+```
+# yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+```
+</div>
+
+8.  **Beta**
 
     Set up your server to send statistics. Run this command
 
@@ -627,7 +645,7 @@ yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
 
     Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
 
-8. Check the status of service by running this command:
+9. Check the status of service by running this command:
 
 <div class="notranslate">
 
@@ -637,7 +655,7 @@ service cl_plus_sender status
 </div>
 
 
-9. Check that all collectors are initiated:
+10. Check that all collectors are initiated:
 
 <div class="notranslate">
 
@@ -646,8 +664,8 @@ cat /var/log/clplus_sender.log
 ```
 </div>
 
-10. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
-11. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
+11. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
+12. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
 
 
 ### Centralized Monitoring user interface
