@@ -594,30 +594,22 @@ Skip the first and second steps and start from the third step if you are already
 3. Register CloudLinux+ servers or use the existing servers.
 4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
 5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
+6. Update/install the <span class="notranslate">`rhn-client-tool`</span> package version 2.0.2-31.cl7 for CloudLinux 7 and version  1.1.15-3.el6 for CloudLinux 6, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
+
+<div class="notranslate">
+
+```
+yum update/install rhn-client-tool rhn-check rhn-setup
+rhn_check
+```
+</div>
+
+7. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
 
 <div class="notranslate">
 
 ```
 yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
-```
-</div>
-
-7. Run the following command:
-
-<div class="notranslate">
-
-```
-# rhn_check
-```
-</div>
-
-If the `rhn_check` command is not found, run the following command:
-
-<div class="notranslate">
-
-```
-# yum install rhn-check rhn-setup
 ```
 </div>
 
