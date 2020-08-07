@@ -594,7 +594,7 @@ Skip the first and second steps and start from the third step if you are already
 3. Register CloudLinux+ servers or use the existing servers.
 4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
 5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`rhn-client-tool`</span> package version 2.0.2-31.cl7 for CloudLinux 7 and version  1.1.15-3.el6 for CloudLinux 6, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
+6. Update/install the <span class="notranslate">`rhn-client-tool`</span> package version 2.0.2-31.cl7 for CloudLinux 7, version  1.1.15-3.el6 for CloudLinux 6, version 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2 for CloudLinux 8, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
 
 <div class="notranslate">
 
