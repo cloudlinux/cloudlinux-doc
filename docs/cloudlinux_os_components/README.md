@@ -1672,7 +1672,30 @@ $ ln -s /home/cagefs-skeleton /usr/share/cagefs-skeleton
 ```
 </div>
 
-::: danger
+The commands above should be executed before the <span class="notranslate">`cagefsctl --init`</span>.
+
+Also, it is needed approximately 4Kb of disk space per one user for the <span class="notranslate">`/var/cagefs`</span> directory. You should place the <span class="notranslate">`/var/cagefs`</span> directory on partition, which is large enough and has disk quota enabled.
+
+For example, to create the <span class="notranslate">`/var/cagefs`</span> directory on the <span class="notranslate">`/home`</span> partition, execute the following commands before the <span class="notranslate">`cagefsctl --init`</span>:
+
+<div class="notranslate">
+
+```
+mkdir /home/cagefs
+ln -s /home/cagefs /var/cagefs
+```
+</div>
+
+
+:::danger IMPORTANT
+Please make sure to turn on disk quota for a partition where the <span class="notranslate">`/var/cagefs`</span> directory is located, or move the <span class="notranslate">`/var/cagefs`</span> to a partition where disk quota is enabled. This is needed to prevent users from abusing disk quota inside CageFS.
+:::
+
+If the `/var/cagefs` directory is already created, you can move it. How to move the `/var/cagefs` directory:
+[https://docs.cloudlinux.com/cloudlinux_os_components/#moving-var-cagefs-directory](https://docs.cloudlinux.com/cloudlinux_os_components/#moving-var-cagefs-directory)
+
+
+::: danger IMPORTANT
 If you are placing skeleton in <span class="notranslate">`/home`</span> directory on cPanel servers, you must configure the following option in cPanel WHM: <span class="notranslate"> **WHM -> Server Configuration -> Basic cPanel/WHM Setup -> Basic Config -> Additional home directories** </span>  
 Change the value to blank (not default <span class="notranslate"> Home </span> ). Without changing this option, cPanel will create new accounts in incorrect places.
 :::
