@@ -1077,6 +1077,10 @@ More info on <span class="notranslate"> flashcache </span> : [https://github.com
 
 When <span class="notranslate">LVE</span> reaches its memory limit, the processes inside that <span class="notranslate"> LVE </span> are killed by <span class="notranslate"> OOM Killer </span> and appropriate message is written to <span class="notranslate"> /var/log/messages </span> . When any <span class="notranslate"> LVE </span> hits huge number of memory limits in short period of time, then <span class="notranslate"> OOM Killer </span> could cause system overload. Starting from kernel 2.6.32-673.26.1.lve1.4.15 ( <span class="notranslate"> CloudLinux </span> 6) and from kernel 3.10.0-427.18.2.lve1.4.14 ( <span class="notranslate"> CloudLinux </span> 7) heavy <span class="notranslate"> OOM Killer </span> could be disabled. If so - lightweight <span class="notranslate"> SIGKILL </span> will be used instead.
 
+:::tip Note
+It is recommended to disable OOM killer for LVE processes and use SIGKILL instead
+:::
+
 By default <span class="notranslate"> OOM Killer </span> is enabled, to disable it please run:
 
 _For <span class="notranslate"> CloudLinux </span> 6_ :
