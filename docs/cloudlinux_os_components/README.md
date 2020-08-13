@@ -15,6 +15,8 @@
 
 ## Reseller limits
 
+See also [Reseller limits UI](/lve_manager/#reseller-interface).
+
 ### General information and requirements
 
 * [Types of Users](/cloudlinux_os_components/#types-of-users)
