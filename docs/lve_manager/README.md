@@ -1229,7 +1229,123 @@ Click pencil icon in a package row to set the following limits for a package:
 When limits are set click <span class="notranslate">_Save_</span> to apply changes.
 
 
-### Client plugins
+
+
+### LVE plugins branding
+
+:::tip Note
+Requires <span class="notranslate">LVE Manager</span> 2.0-33+
+:::
+
+It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
+
+* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
+
+* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
+
+* Make this script executable by running the command:
+
+<div class="notranslate">
+
+```
+chmod a+x /usr/share/l.v.e-manager/branding_script
+```
+</div>
+
+When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
+
+:::tip Note
+Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
+:::
+
+
+### User message for PHP version
+
+Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
+
+For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
+
+<div class="notranslate">
+
+```
+/opt/alt/php44/name_modifier:
+
+echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
+```
+</div>
+
+As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_admin.png)|
+| Figure 1.1 cPanel LVE Manager (administrator)| 
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_admin.png)|
+| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_cPanel_user.png)|
+| Figure 2.1 cPanel LVE Manager (user)|
+
+
+| |
+|:---:|
+|![](/images/PHP_version_message_DirectAdmin_user.png)|
+| Figure 2.2 DirectAdmin LVE Manager (user)| 
+
+:::tip Note
+*For cPanel and DirectAdmin only.
+:::
+
+
+### inodes
+
+
+:::tip Note
+Supported on cPanel, Plesk, and DirectAdmin control panels
+:::
+
+<span class="notranslate"> LVE Manager inodes </span> limits extension allows setting <span class="notranslate"> inode </span> limits for the customers. An <span class="notranslate"> inode </span> is a data structure on a file system used to keep information about a file or a folder. The number of <span class="notranslate"> inodes </span> indicates the number of files and folders an account has. <span class="notranslate"> inodes </span> limits work on the level of <span class="notranslate"> disk quota </span> , and will be enabled on <span class="notranslate"> /home </span> partition only.
+
+<span class="notranslate"> LVE Manager </span> allows to set <span class="notranslate"> soft </span> and <span class="notranslate"> hard IO </span> limit.
+
+* <span class="notranslate"> Hard </span> limit prevents a user from writing data to disk.
+
+* <span class="notranslate"> Soft </span> limit can be exceeded for a period of time. The grace period can be set using: <span class="notranslate"> edquota -t </span> .
+
+* You can set <span class="notranslate"> inodes </span> limits using <span class="notranslate"> LVE Manager </span> , the same way you would set any other LVE Limits:
+
+::: tip Note
+We do not collect statistical information on the inodes like we do for other LVE limits.
+:::
+
+![](/images/inodes_zoom70.png)
+
+
+The limits can be set on the level of individual account or package:
+
+![](/images/inodespackages_zoom70.png)
+
+
+Sometimes <span class="notranslate">disk quota</span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate">_Options_</span> tab of <span class="notranslate">LVE Manager</span>:
+
+![](/images/inodelimitsoptions_zoom70.png)
+
+The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
+
+End users can monitor their inodes usage through cPanel only (not available on Plesk and DirectAdmin):
+
+![](/images/inodescpanel.png)
+
+End user can also see the usage inside resource usage menu.
+
+## Client plugins
 
 * [Resource Usage client plugin](/lve_manager/#resource-usage-client-plugin)
 * [Dashboard](/lve_manager/#dashboard-2)
@@ -1736,120 +1852,6 @@ After modifying the config files directly, you should execute the following comm
 /usr/share/l.v.e-manager/utils/dynamicui.py --sync-conf=all
 ```
 </div>
-
-### LVE plugins branding
-
-:::tip Note
-Requires <span class="notranslate">LVE Manager</span> 2.0-33+
-:::
-
-It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
-
-* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
-
-* Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
-
-* Make this script executable by running the command:
-
-<div class="notranslate">
-
-```
-chmod a+x /usr/share/l.v.e-manager/branding_script
-```
-</div>
-
-When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
-
-:::tip Note
-Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
-:::
-
-
-### User message for PHP version
-
-Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
-
-For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
-
-<div class="notranslate">
-
-```
-/opt/alt/php44/name_modifier:
-
-echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
-```
-</div>
-
-As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
-
-| |
-|:---:|
-|![](/images/PHP_version_message_cPanel_admin.png)|
-| Figure 1.1 cPanel LVE Manager (administrator)| 
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_DirectAdmin_admin.png)|
-| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_cPanel_user.png)|
-| Figure 2.1 cPanel LVE Manager (user)|
-
-
-| |
-|:---:|
-|![](/images/PHP_version_message_DirectAdmin_user.png)|
-| Figure 2.2 DirectAdmin LVE Manager (user)| 
-
-:::tip Note
-*For cPanel and DirectAdmin only.
-:::
-
-
-## inodes
-
-
-:::tip Note
-Supported on cPanel, Plesk, and DirectAdmin control panels
-:::
-
-<span class="notranslate"> LVE Manager inodes </span> limits extension allows setting <span class="notranslate"> inode </span> limits for the customers. An <span class="notranslate"> inode </span> is a data structure on a file system used to keep information about a file or a folder. The number of <span class="notranslate"> inodes </span> indicates the number of files and folders an account has. <span class="notranslate"> inodes </span> limits work on the level of <span class="notranslate"> disk quota </span> , and will be enabled on <span class="notranslate"> /home </span> partition only.
-
-<span class="notranslate"> LVE Manager </span> allows to set <span class="notranslate"> soft </span> and <span class="notranslate"> hard IO </span> limit.
-
-* <span class="notranslate"> Hard </span> limit prevents a user from writing data to disk.
-
-* <span class="notranslate"> Soft </span> limit can be exceeded for a period of time. The grace period can be set using: <span class="notranslate"> edquota -t </span> .
-
-* You can set <span class="notranslate"> inodes </span> limits using <span class="notranslate"> LVE Manager </span> , the same way you would set any other LVE Limits:
-
-::: tip Note
-We do not collect statistical information on the inodes like we do for other LVE limits.
-:::
-
-![](/images/inodes_zoom70.png)
-
-
-The limits can be set on the level of individual account or package:
-
-![](/images/inodespackages_zoom70.png)
-
-
-Sometimes <span class="notranslate">disk quota</span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate">_Options_</span> tab of <span class="notranslate">LVE Manager</span>:
-
-![](/images/inodelimitsoptions_zoom70.png)
-
-The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
-
-End users can monitor their inodes usage through cPanel only (not available on Plesk and DirectAdmin):
-
-![](/images/inodescpanel.png)
-
-End user can also see the usage inside resource usage menu.
 
 ## Control panel integration guide
 
