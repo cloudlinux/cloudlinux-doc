@@ -175,7 +175,7 @@ To disable Reseller limits, please do the following:
 If you disable Reseller limits everything will work the same as before. All the end user limits set by the reseller will be saved. But all custom default reseller limits will be disabled.
 :::
 
-See also [Reseller limits UI](/lve_manager/#reseller-limits).
+See also [Reseller limits UI](/lve_manager/#reseller-interface).
 
 ## LVE-Stats 2
 ### General information and requirements

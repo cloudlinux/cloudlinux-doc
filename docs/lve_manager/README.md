@@ -292,7 +292,7 @@ The <span class="notranslate">Cloudlinux Dashboard</span> provides the following
 
     * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Python Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Python Selector</span>.
   * <span class="notranslate">Applications</span> —  number of installed/all applications for the account.
-* [Reseller Limits](/lve_manager/#reseller-limits) block displays the following data:
+* [Reseller Limits](/lve_manager/#reseller-interface) block displays the following data:
   * <span class="notranslate">Reseller Limits</span> status (<span class="notranslate">Enabled/Disabled</span>). To manage <span class="notranslate">Reseller Limits</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Users</span> tab.
   * Reseller’s accounts with Reseller Limits/all —  the number of Reseller accounts with Reseller Limits enabled versus the total number of Reseller accounts.
   * Reseller’s End Users with enabled Reseller Limits/all — the number of end users with Reseller Limits enabled versus all End Users that belong to all resellers.
@@ -1054,7 +1054,7 @@ By default, <span class="notranslate">Passenger</span> log messages are all writ
 
 See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
-### Reseller limits
+### Reseller interface
 
 Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.
 
