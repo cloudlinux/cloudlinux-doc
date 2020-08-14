@@ -1716,13 +1716,15 @@ Go to <span class="notranslate">_cPanel → Software Section → Select PHP Vers
 
 PHP Extensions page opens.
 
-![](/images/PHPSelectorExtensions.png)
+![](/images/php_selector_customer.png)
 
 Here you can choose extensions for the particular PHP version, the current PHP version and reset to default.
 
 To manage PHP options, click <span class="notranslate">_Switch to PHP options_</span>.
 
-![](/images/PHPSelectorOptions.png)
+![](/images/php_selector_options.png)
+
+All changes are saved automatically.
 
 * <span class="notranslate">`allow_url_fopen`</span>. Allows PHP file functions to retrieve data from remote locations over FTP or HTTP. This option is a great security risk, thus do not turn it on without necessity.
 * <span class="notranslate">`display_errors`</span>. Determines whether errors should be printed to the screen as part of the output or if they should not be shown to a user.

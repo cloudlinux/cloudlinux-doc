@@ -4610,20 +4610,7 @@ Once <span class="notranslate">PHP Selector</span> is installed, you will see th
 
 <span class="notranslate"> PHP Selector </span> lets you select default PHP version, as well as modules that will be available to user out of the box.
 
-
-Inside <span class="notranslate"> cPanel </span>, User will be able to change PHP version they would have:
-
-![](/images/php_selector_user.png)
-
-as well as extensions that they want to use:
-
-![](/images/php_selector_customer.png)
-
-and php.ini settings
-
-![](/images/php_selector_options.png)
-
-All changes are saved automatically.
+Customers can use [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin) to change their PHP Selctor related settings.
 
 #### Custom PHP.ini options
 
