@@ -4604,11 +4604,7 @@ And replace them with the lines with the new paths:
 
 #### Using
 
-Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">**Selector**</span> tab in the <span class="notranslate">**LVE Manager**</span>.
-
-![](/images/php_selector.png)
-
-<span class="notranslate"> PHP Selector </span> lets you select default PHP version, as well as modules that will be available to user out of the box.
+Once <span class="notranslate">PHP Selector</span> is installed, you will see the <span class="notranslate">[**Selector**](/lve_manager/#selector-tab)</span> tab in the <span class="notranslate">**LVE Manager**</span>.
 
 Customers can use [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin) to change their PHP Selctor related settings.
 

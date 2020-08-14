@@ -679,15 +679,11 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 * In <span class="notranslate">_Selector is_</span> section choose <span class="notranslate">`Enabled`</span> or <span class="notranslate">`Disabled`</span> from the dropdown list to enable or disable <span class="notranslate">PHP Selector</span>.
 * In <span class="notranslate">_Default PHP version_</span> choose a proper PHP version or <span class="notranslate"> Native</span> from dropdown list to apply.
 * In <span class="notranslate">_Hide php extensions for end-user_</span> you can enable/disable the ability for end-user to select PHP extensions in his web interface.
-:::tip Note
-Starting from LVE Manager 5.3.7-1 this option is available in cPanel, Plesk, and DirectAdmin. Before it was available only in cPanel.
-:::
 * In <span class="notranslate">_Supported versions_</span> choose required PHP versions to support.
 
 Choose default modules from the list for a proper PHP version or for native.
 
-![](/images/lveman_092.jpg)
-![](/images/lveman_093.jpg)
+![](/images/php_selector.png)
 
 :::tip Note
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
