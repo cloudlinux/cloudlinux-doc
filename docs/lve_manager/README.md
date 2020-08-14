@@ -2,7 +2,7 @@
 
 * [CloudLinux installation wizard](/lve_manager/#cloudlinux-installation-wizard)
 * [LVE Manager](/lve_manager/#lve-manager)
-* [inodes](/lve_manager/#inodes)
+* [inodes](/limits/#inodes)
 * [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
 
 <span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
@@ -1302,48 +1302,6 @@ As a result, <span class="notranslate">LVE Manager</span> will automatically pic
 :::tip Note
 *For cPanel and DirectAdmin only.
 :::
-
-
-### inodes
-
-
-:::tip Note
-Supported on cPanel, Plesk, and DirectAdmin control panels
-:::
-
-<span class="notranslate"> LVE Manager inodes </span> limits extension allows setting <span class="notranslate"> inode </span> limits for the customers. An <span class="notranslate"> inode </span> is a data structure on a file system used to keep information about a file or a folder. The number of <span class="notranslate"> inodes </span> indicates the number of files and folders an account has. <span class="notranslate"> inodes </span> limits work on the level of <span class="notranslate"> disk quota </span> , and will be enabled on <span class="notranslate"> /home </span> partition only.
-
-<span class="notranslate"> LVE Manager </span> allows to set <span class="notranslate"> soft </span> and <span class="notranslate"> hard IO </span> limit.
-
-* <span class="notranslate"> Hard </span> limit prevents a user from writing data to disk.
-
-* <span class="notranslate"> Soft </span> limit can be exceeded for a period of time. The grace period can be set using: <span class="notranslate"> edquota -t </span> .
-
-* You can set <span class="notranslate"> inodes </span> limits using <span class="notranslate"> LVE Manager </span> , the same way you would set any other LVE Limits:
-
-::: tip Note
-We do not collect statistical information on the inodes like we do for other LVE limits.
-:::
-
-![](/images/inodes_zoom70.png)
-
-
-The limits can be set on the level of individual account or package:
-
-![](/images/inodespackages_zoom70.png)
-
-
-Sometimes <span class="notranslate">disk quota</span> breaks, so do <span class="notranslate"> inodes </span> limits. You can reset them through the <span class="notranslate">_Options_</span> tab of <span class="notranslate">LVE Manager</span>:
-
-![](/images/inodelimitsoptions_zoom70.png)
-
-The same can be achieved using [cloudlinux-config](/command-line_tools/#cloudlinux-config) CLI utility
-
-End users can monitor their inodes usage through cPanel only (not available on Plesk and DirectAdmin):
-
-![](/images/inodescpanel.png)
-
-End user can also see the usage inside resource usage menu.
 
 ## Client plugins
 
