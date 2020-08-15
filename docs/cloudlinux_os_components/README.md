@@ -4610,20 +4610,15 @@ Customers can use [PHP Selector client plugin](/lve_manager/#php-selector-client
 
 #### Custom PHP.ini options
 
-:::tip Note
-Requires <span class="notranslate">LVE Manager</span> 0.6+
-:::
-
 <span class="notranslate">PHP Selector</span> allows customer to edit php.ini settings. Admin has a full control over which settings can be modified.
 
-To allow settings to be modifiable, it has to be whitelisted in <span class="notranslate"> /etc/cl.selector/php.conf </span>.
+To allow settings to be modifiable, it has to be whitelisted in <span class="notranslate">`/etc/cl.selector/php.conf`</span>.
 
 Here are some of the examples of allowed directives:
 <div class="notranslate">
 
 ```
 Directive = safe_mode
-Default   = Off
 Type      = bool
 Remark    = <5.4.0
 Comment   = Enables PHP safe mode. This mode puts a number of restrictions on scripts (say, access to file system) mainly for security reasons.
@@ -4643,13 +4638,12 @@ Comment   = If PHP is in the safe mode and a script tries to access some files, 
 | | |
 |-|-|
 |Directive | php.ini setting|
-|Default | Default value|
 |Type | bool, value (any text), list|
 |Range | list of values for list Type|
 |Comment | explanation of the setting to display in UI|
 
 Default values, that are shown in <span class="notranslate"> PHP Selector </span> web interface, are taken from <span class="notranslate"> '/opt/alt/phpXX/usr/bin/php -i' </span> runtime values, if
-directive is not there, it will use ' <span class="notranslate"> default </span> ' value that was set in <span class="notranslate"> php.conf </span> . So, if you wish to change default value of any option for
+directive is not there, it will use the output of phpinfo() function. So, if you wish to change default value of any option for
 "alternative" php version, please modify <span class="notranslate"> /opt/alt/phpXX/etc/php.ini </span> files (where XX = 55, 54, 53, etc according to php version).
 
 Admin can modify the settings using <span class="notranslate"> [selectorctl](/command-line_tools/#selectorctl) </span> command.
