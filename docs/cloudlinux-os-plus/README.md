@@ -555,31 +555,11 @@ You can use any of them with a prefix `www.` and it is also correct.
 * View system metrics for all clients’ end servers
 * View the LVE statistics per user for all clients’ end servers
 
-#### Server overhead
-
-:::warning Warning
-<span class="notranslate">Centralized Monitoring</span> tool might produce an additional load for the client’s end server.
-:::
-
-All metrics collected on the centralized database are available to view/analyze within one month. 
-
-Collectors on the client’s end server that send statistics to the centralized database (`cm.cloudlinux.com`) might cause some additional load.
-
-The load for the server with 250 users:
-
-* Idle CPU = 3.5 %
-* Peak CPU = 10.5 %
-* Idle MEM = 50 Мb
-* Peak MEM = 70 Мb
-* Network traffic ~ 9  Mb/hour | 216  Mb/day | 6.3  Gb/month
+### Installation
 
 :::tip Note
 Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
-
-
-
-### Installation
 
 :::warning Warning!
 Centralized Monitoring beta can be started only in NON-RESELLER CLN accounts.
