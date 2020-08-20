@@ -527,18 +527,18 @@ Set NPROC limit greater than (EP + 15).
 |Apache / suPHP | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / FCGID | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |Apache / CGI | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
-|Apache / PHP-FPM | Yes<sup> 3</sup> | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | No|
+|Apache / PHP-FPM | Yes<sup> 2</sup> | Yes | Yes | Yes | Yes | Yes<sup> 2</sup> | No|
 |Apache / mod_php (DSO) | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / mod_ruid2 | Yes | No | Yes | Yes | Yes | No | No|
 |Apache / MPM ITK | Yes | No | Yes | Yes | Yes | Yes<sup> 1</sup> | No|
 |LiteSpeed | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
-|NGINX / PHP-FPM | Yes<sup> 3</sup> | Yes | No | Yes | Yes | Yes | No|
-|SSH | Yes | Yes | Yes | Yes | Yes | Yes<sup> 3</sup> | Yes|
+|NGINX / PHP-FPM | Yes<sup> 2</sup> | Yes | No | Yes | Yes | Yes | No|
+|SSH | Yes | Yes | Yes | Yes | Yes | Yes<sup> 2</sup> | Yes|
 |<span class="notranslate">Cron Jobs</span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 |<span class="notranslate">Apache / mod_lsapi</span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 
 1. Requires patched version of MPM-ITK. CL httpd RPM has ITK worker with the patch. Patch is also available at: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
-3. The DirectAdmin and CloudLinux PHP provide patched version. For other PHP distributions, please use patches available here: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+2. DirectAdmin and CloudLinux PHP provide patched versions. For PHP binaries from other sources, recomplile with patches available here: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
 :::tip Note
