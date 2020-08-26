@@ -127,8 +127,8 @@ module.exports = {
             url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
           },
           {
-            text: "Contact support",
-            url: "https://hubs.ly/H0pk7990"
+            text: "Report an error in documentation",
+            url: "https://direct.lc.chat/7898891/5"
           },
           { text: "Blog", url: "https://www.cloudlinux.com/blog" }
         ],
