@@ -538,7 +538,7 @@ Set NPROC limit greater than (EP + 15).
 |<span class="notranslate">Apache / mod_lsapi</span> | Yes | Yes | Yes | Yes | Yes | Yes | Yes|
 
 1. Requires patched version of MPM-ITK. CL httpd RPM has ITK worker with the patch. Patch is also available at: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
-2. DirectAdmin and CloudLinux PHP provide patched versions. For PHP binaries from other sources, recomplile with patches available here: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
+2. PHP binaries from sources other than DirectAdmin/CloudLinux OS require recompile with patches available at: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
 
 :::tip Note
