@@ -5870,6 +5870,7 @@ For that, you’d need to first uncheck <span class="notranslate">`Hide Python A
 :::
 
 ## Ruby Selector
+
 ### General information and requirements
 
 We have the ability to deploy <span class="notranslate">Ruby</span> applications via an application server. <span class="notranslate">Ruby Selector</span> uses <span class="notranslate">`mod_passenger`</span> to host <span class="notranslate"> Ruby</span> applications.
@@ -5902,63 +5903,26 @@ yum groupinstall alt-ruby
 </div>
 
 ::: tip Note
-After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> VE Manager Options</span> tab to show <span class="notranslate">Ruby App</span> in web-interface. Find the instructions on the [link](/cloudlinux_os_components/#hide-ruby-selector-icons).
+After installation, please make sure that you have unmarked appropriate checkboxes in <span class="notranslate"> VE Manager Options</span> tab to show <span class="notranslate">Ruby App</span> in web-interface. Find the instructions on the [link](/cloudlinux_os_components/#hide-ruby-selector-icon).
 :::
 
 ::: tip Note
 Adding Ruby modules requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run: <span class="notranslate">`cagefsctl --force-update`</span>
 :::
 
-:::tip Note
-See also Ruby Selector [CLI](/command-line_tools/#ruby-selector)
-:::
-
 ### Configuration and using
 
-* [End user access](/cloudlinux_os_components/#end-user-access-2)
+* [End user access](/lve_manager/#ruby-selector-client-plugin)
 * [Hide Ruby Selector icon](/cloudlinux_os_components/#hide-ruby-selector-icon)
 * [Deploying Redmine using Ruby Selector](/cloudlinux_os_components/#deploying-redmine-using-ruby-selector)
 * [EasyApache 4](/cloudlinux_os_components/#easyapache-4-2)
 
 #### End user access
 
-1. In <span class="notranslate">_Software/Services_</span> area choose <span class="notranslate">_Select Ruby Environment_</span>.
-
-![](/images/clip000133.jpg)
-
-
-2. Setup Ruby App form will appear. Choose interpreter version for your application, application folder name (project path) and <span class="notranslate"> URI </span> for accessing your application. Click <span class="notranslate"> “Setiup” </span> to create the application.
-
-After a little while a new application entry will be appended to the web-page.
-
-Click <span class="notranslate"> Remove </span> to delete the application - the application folder itself will remain untouched.
-
 You can find an example of Ruby application setup [here](https://cloudlinux.zendesk.com/hc/en-us/articles/115004495049-How-to-run-Redmine-with-Ruby-Selector)
 
-* CLI-based application setup
-
-When creating an application you can use the key <span class="notranslate">`--domain`</span>, which attaches application to domain. If <span class="notranslate">`--domain`</span> key is not specified, then the main users domain will be used by default.
-
-To create application using CLI, run:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> --version=VERSION[--user=USER] [--domain=DOMAIN] [--print-summary] [--json]–-create-webapp <FOLDER_NAME> <URI>
-```
-</div>
-
-When changing application URI, <span class="notranslate">`--domain`</span> key can be used simultaneously, in this case not only <span class="notranslate"> URI </span> will be changed, but also the application domain.
-
-To change application <span class="notranslate"> URI </span> run:
-<div class="notranslate">
-
-```
-/usr/bin/selectorctl --interpreter=<ruby> [--user=USER][--domain=NEW_DOMAIN] [--print-summary] [--json] --transit-webapp<FOLDER_NAME> <NEW_URI> 
-```
-</div>
-
 :::tip Note
-Find more information about Ruby Selector [CLI](/command-line_tools/#ruby-selector)
+See also Ruby Selector [CLI](/command-line_tools/#ruby-selector) section.
 :::
 
 #### Hide Ruby Selector icon
@@ -5991,9 +5955,8 @@ You can find <span class="notranslate"> Redmine </span> version 2.6.0 and newer 
 
 Since cPanel/WHM version 66 provides <span class="notranslate">ea-ruby24-mod_passenger</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
 
-CloudLinux already has <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selector </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span> . However, it does not allow using <span class="notranslate"> cPanel application manager </span> .
-
-It is not correct to install both of those packages on the server because they contain the same <span class="notranslate"> passenger </span> module for Apache web server.
+CloudLinux OS features its own <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selectors </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span> . However, it conflicts with <span class="notranslate"> cPanel application manager </span> .
+Thus, installing <span class="notranslate"> passenger </span> packages from both sources on the same server because is not advised.
 
 The new <span class="notranslate"> ea-ruby24-mod_passenger </span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
