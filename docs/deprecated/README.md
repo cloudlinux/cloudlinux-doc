@@ -1,6 +1,6 @@
 ﻿# Deprecated
 
-* [Python Selector (Old)[/deprecated/#python-selector-old)
+* [Python Selector (Old)](/deprecated/#python-selector-old)
 * [Git for cPanel](/deprecated/#git-for-cpanel)
 * [LVE-Stats 0.x](/deprecated/#lve-stats-0-x)
 * [OptimumCache](/deprecated/#optimumcache)
