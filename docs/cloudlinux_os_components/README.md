@@ -6,7 +6,6 @@
 * [MySQL Governor](/cloudlinux_os_components/#mysql-governor)
 * [PHP Selector](/cloudlinux_os_components/#php-selector)
 * [Python Selector](/cloudlinux_os_components/#python-selector)
-* [Python Selector (Old)](/cloudlinux_os_components/#python-selector-old)
 * [Ruby Selector](/cloudlinux_os_components/#ruby-selector)
 * [Node.js Selector](/cloudlinux_os_components/#node-js-selector)
 * [Apache mod_lsapi PRO](/cloudlinux_os_components/#apache-mod-lsapi-pro)
@@ -5797,14 +5796,14 @@ You can find <span class="notranslate"> Redmine </span> version 2.6.0 and newer 
 
 #### EasyApache 4
 
-Since cPanel/WHM version 66 provides <span class="notranslate">ea-ruby24-mod_passenger</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
+Starting with cPanel/WHM version 66 provides <span class="notranslate">ea-ruby24-mod_passenger</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
 
-CloudLinux OS features its own <span class="notranslate"> Python </span> and <span class="notranslate"> Ruby Selectors </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span> . However, it conflicts with <span class="notranslate"> cPanel application manager </span> .
-Thus, installing <span class="notranslate"> passenger </span> packages from both sources on the same server because is not advised.
+CloudLinux OS features its own <span class="notranslate"> Python and  Ruby Selectors </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span>. However, it conflicts with <span class="notranslate"> cPanel application manager </span> .
+Thus, avoid installing <span class="notranslate"> passenger </span> packages from both sources on the same server.
 
 The new <span class="notranslate"> ea-ruby24-mod_passenger </span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
-To install run:
+To install, run:
 <div class="notranslate">
 
 ```
