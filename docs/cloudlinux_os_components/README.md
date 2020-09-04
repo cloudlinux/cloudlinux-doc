@@ -45,14 +45,14 @@ See the comparison Table with types of limits.
 | |  |  | |
 |-|--|--|-|
 |**Limits** | **Reseller limits** | **Reseller’s end user limits** | **Hoster’s end user limits**|
-|<span class="notranslate">SPEED</span>| Yes | Yes | Yes|
-|<span class="notranslate">PMEM</span>| Yes | Yes | Yes|
-|<span class="notranslate">IO</span>| Yes | Yes | Yes|
-|<span class="notranslate">IOPS</span>| Yes | Yes | Yes|
-|<span class="notranslate">EP</span>| Yes | Yes | Yes|
-|<span class="notranslate">NPROC</span>| Yes | Yes | Yes|
-|<span class="notranslate">Inodes </span> | Yes (default for all users) | No | Yes|
-|<span class="notranslate">MySQL Limits </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
+|<span class="notranslate">[SPEED](/limits/#speed-limit)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[PMEM](/limits/#physical-memory-limit)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[IO](/limits/#io)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[IOPS](/limits/#iops)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[EP](/limits/#entry-processes)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[NPROC](/limits/#number-of-processes)</span>| Yes | Yes | Yes|
+|<span class="notranslate">[Inodes](/limits/#inodes) </span> | Yes (default for all users) | No | Yes|
+|<span class="notranslate">[MySQL Limits](/cloudlinux_os_components/#mysql-governor) </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
 
 #### What happens when reseller or reseller's end user hits the limit?
 
