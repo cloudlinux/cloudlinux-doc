@@ -2,7 +2,6 @@
 
 * [Hardware compatibility](/cloudlinux_installation/#hardware-compatibility)
 * [Converting existing servers](/cloudlinux_installation/#converting-existing-servers)
-* [CloudLinux 8 kernel-related features and improvements](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
 * [Activation](/cloudlinux_installation/#activation)
 * [Installing new servers](/cloudlinux_installation/#installing-new-servers)
 * [CloudLinux OS images](/cloudlinux_installation/#cloudlinux-os-images)
@@ -162,33 +161,6 @@ Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Supp
 |-|-|
 |**Issue**|**Solution**|
 |Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
-
-## CloudLinux 8 kernel-related features and improvements
-
-* [Memory](/cloudlinux_installation/#memory)
-* [Security](/cloudlinux_installation/#security)
-* [Performance](/cloudlinux_installation/#performance)
-* [Common issues and troubleshooting during conversion](/cloudlinux_installation/#common-issues-and-troubleshooting-during-conversion)
-
-#### Memory
-
-* Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
-* Non-Uniform Memory Access (NUMA) node count has been increased from 4 NUMA nodes to 8 NUMA nodes, for even bigger servers.
-
-#### Security
-
-* Code implementing the ext4 file system has been cleaned up, making it better at preventing malicious file system images.
-* The TCP listener handling is now completely lockless, making TCP servers faster and more scalable, and improving protection against DDoS attacks.
-
-#### Performance
-
-* Spectre V2 mitigation default changed from IBRS to Retpolines for better performance.
-* Intel Omni-Path Architecture (OPA) provides Host Fabric Interface (HFI) hardware with initialization and setup for high-performance data transfers. This gives you high bandwidth, high message rates, and low latency between compute and I/O nodes in clustered environments.
-* IOMMU passthrough is now enabled by default. This is beneficial for customers who want to pass-through hardware devices to virtual machines.
-* A new writecache module has been implemented for the Device Mapper, allowing SSD drives or other persistent memory to be used as a cache for block write operations. (Note, Caching of read operations is not implemented, since such operations are cached in the RAM pages cache.)
-* A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
-* Improvements were made to on-the-fly resizing of file systems that use bigalloc.
-* On ext4 file systems, inode generation scalability on SMP systems is improved.
 
 ## Activation
 

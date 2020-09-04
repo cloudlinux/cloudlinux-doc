@@ -1,5 +1,6 @@
 ﻿# CloudLinux OS kernel
 
+* [CloudLinux 8 kernel-related features and improvements](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
 * [SecureLinks](/cloudlinux_os_kernel/#securelinks)
 * [File change API](/cloudlinux_os_kernel/#file-change-api)
@@ -15,6 +16,33 @@
 * [OOM killer for LVE processes](/cloudlinux_os_kernel/#oom-killer-for-lve-processes)
 * [File system quotas](/cloudlinux_os_kernel/#file-system-quotas)
 * [Enter LVE when using cPanel utilities](/cloudlinux_os_kernel/#enter-lve-when-using-cpanel-utilities)
+
+## CloudLinux 8 kernel-related features and improvements
+
+* [Memory](/cloudlinux_installation/#memory)
+* [Security](/cloudlinux_installation/#security)
+* [Performance](/cloudlinux_installation/#performance)
+* [Common issues and troubleshooting during conversion](/cloudlinux_installation/#common-issues-and-troubleshooting-during-conversion)
+
+#### Memory
+
+* Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
+* Non-Uniform Memory Access (NUMA) node count has been increased from 4 NUMA nodes to 8 NUMA nodes, for even bigger servers.
+
+#### Security
+
+* Code implementing the ext4 file system has been cleaned up, making it better at preventing malicious file system images.
+* The TCP listener handling is now completely lockless, making TCP servers faster and more scalable, and improving protection against DDoS attacks.
+
+#### Performance
+
+* Spectre V2 mitigation default changed from IBRS to Retpolines for better performance.
+* Intel Omni-Path Architecture (OPA) provides Host Fabric Interface (HFI) hardware with initialization and setup for high-performance data transfers. This gives you high bandwidth, high message rates, and low latency between compute and I/O nodes in clustered environments.
+* IOMMU passthrough is now enabled by default. This is beneficial for customers who want to pass-through hardware devices to virtual machines.
+* A new writecache module has been implemented for the Device Mapper, allowing SSD drives or other persistent memory to be used as a cache for block write operations. (Note, Caching of read operations is not implemented, since such operations are cached in the RAM pages cache.)
+* A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
+* Improvements were made to on-the-fly resizing of file systems that use bigalloc.
+* On ext4 file systems, inode generation scalability on SMP systems is improved.
 
 ## Hybrid Kernels
 
