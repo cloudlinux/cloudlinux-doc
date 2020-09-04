@@ -2867,7 +2867,9 @@ If **fs.proc_super_gid** was configured by an admin to some existing group, the 
 
 * server diagnostics performed by a server administrator for detecting the most common errors in the configuration or software operation;
 * the focused check of the servers for typical errors performed by the support engineers before proceeding to the detailed analysis of the customer tickets;
-* servers automatic check by cron with the following generation of the reports and email them to the server administrator.
+* servers automatic check by cron with the following generation of the reports and email them to the server administrator (_only for cPanel_).
+    * Set option `ENABLE_CLDIAG` to `false` in config `/etc/sysconfig/cloudlinux` if you want to disable automatic check by cron permanently
+    * Use cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18</span>)
 
 In all cases, for the negative checker result, the exit code will be > 0 (at the moment it will be equal to the number of failed checkers).
 
