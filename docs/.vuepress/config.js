@@ -163,12 +163,12 @@ module.exports = {
             children: [
               "/introduction/",
               "/cloudlinux_installation/",
-              "/control_panel_integration/",
               "/limits/",
-              "/command-line_tools/",
               "/lve_manager/",
               "/cloudlinux-os-plus/",
               "/cloudlinux_os_components/",
+              "/command-line_tools/",
+              "/control_panel_integration/",
               "/cloudlinux_os_kernel/",
               "/for_cloudlinux_partners/",
               "/deprecated/"
@@ -217,12 +217,12 @@ module.exports = {
             children: [
               "/ru/introduction/",
               "/ru/cloudlinux_installation/",
-              "/ru/control_panel_integration/",
               "/ru/limits/",
-              "/ru/command-line_tools/",
               "/ru/lve_manager/",
               "/ru/cloudlinux-os-plus/",
               "/ru/cloudlinux_os_components/",
+              "/ru/command-line_tools/",
+              "/ru/control_panel_integration/",
               "/ru/cloudlinux_os_kernel/",
               "/ru/for_cloudlinux_partners/",
               "/ru/deprecated/"
