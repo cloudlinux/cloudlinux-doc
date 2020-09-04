@@ -1,6 +1,6 @@
 ﻿# CloudLinux OS kernel
 
-* [CloudLinux 8 kernel-related features and improvements](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
+* [CloudLinux 8 kernel-related features and improvements](/cloudlinux_os_kernel/#cloudlinux-8-kernel-related-features-and-improvements)
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
 * [SecureLinks](/cloudlinux_os_kernel/#securelinks)
 * [File change API](/cloudlinux_os_kernel/#file-change-api)
