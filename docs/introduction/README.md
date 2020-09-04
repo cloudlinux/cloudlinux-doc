@@ -24,7 +24,7 @@ Currently, the following version are supported:
 * **LVE Manager**
 
   LVE is a Lightweight Virtualized Environment.
-  LVE Manager allows you to maintain fine-tuned control over your resources, including CPU, IO rate, memory, inodes <span class="notranslate"> (inodes) </span>, numbers of processes, and concurrent connections, that any single account can use. Now you can limit resource abuse, while allowing good customers to use what they need.
+  LVE Manager allows you to maintain fine-tuned control over your resources, including CPU, IO rate, memory, inodes, numbers of processes, and concurrent connections, that any single account can use. Now you can limit resource abuse, while allowing good customers to use what they need.
 
   [See more](/lve_manager/).
 * **CageFS**
@@ -34,7 +34,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#cagefs).
 * **MySQL Governor**
 
-    MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using LVE limits. By using the [dbtop](/command-line_tools/#dbtop) utility, it is possible to see usage on a per-customer basis, ensuring that the system admin always know what is going on.
+    MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using LVE limits. By using the [dbtop](/command-line_tools/#dbtop) utility, it is possible to see the database usage on a per-customer basis, ensuring that the system admin always know what is going on.
 
     [See more](/cloudlinux_os_components/#mysql-governor).
 * **PHP Selector**
@@ -49,7 +49,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#ruby-selector).
 * **Python Selector**
 
-    Python Selector allows end users to choose the Python version for applications and install additional modules. Python Selector uses `mod_passenger` to get the best performance from Python applications.
+    <span class="notranslate"> Python Selector </span> allows end users to choose the Python version for applications and install additional modules. <span class="notranslate"> Python Selector </span> uses `mod_passenger` to get the best performance from Python applications.
 
     [See more](/cloudlinux_os_components/#python-selector).
 * <span class="notranslate"> **Node.js Selector** </span>
@@ -64,7 +64,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#apache-mod-lsapi-pro).
 * **Reseller limits**
 
-    Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. Server admin also provides controls to the Reseller on what resources each Reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
+    Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. Server admin also provides controls on what resources each Reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
 
     When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
