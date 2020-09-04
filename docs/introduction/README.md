@@ -49,7 +49,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#ruby-selector).
 * **Python Selector**
 
-    <span class="notranslate"> Python Selector </span> allows end users to choose the Python version for applications and install additional modules. <span class="notranslate"> Python Selector </span> uses `mod_passenger` to get the best performance from Python applications.
+    Python Selector allows end users to choose the Python version for applications and install additional modules. Python Selector uses `mod_passenger` to get the best performance from Python applications.
 
     [See more](/cloudlinux_os_components/#python-selector).
 * <span class="notranslate"> **Node.js Selector** </span>
@@ -64,7 +64,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#apache-mod-lsapi-pro).
 * **Reseller limits**
 
-    Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. Server admin also provides controls on what resources each Reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
+    Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. Server admin also provides controls on what resources each end user or the reseller will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
 
     When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
