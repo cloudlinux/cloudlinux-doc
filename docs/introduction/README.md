@@ -1,8 +1,6 @@
 # Introduction
 
-* [What is CloudLinux OS](/introduction/#what-is-cloudlinux-os)
-* [CloudLinux OS lifecycle](/introduction/#cloudlinux-os-lifecycle)
-* [Description of the CloudLinux OS components](/introduction/#description-of-the-cloudlinux-os-components)
+[[toc]]
 
 ### What is CloudLinux OS
 
@@ -21,7 +19,7 @@ Currently supported:
 |CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024|
 |CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support - June 30, 2024](https://www.cloudlinux.com/extended-support-cloudlinux-os-6))|
 
-## Description of the CloudLinux OS components
+### Description of the CloudLinux OS components
 
 * **LVE Manager**
 
