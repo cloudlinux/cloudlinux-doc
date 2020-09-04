@@ -52,7 +52,7 @@ Currently, the following version are supported:
     Python Selector allows end users to choose the Python version as an application and install additional modules. Python Selector uses `mod_passenger` to get the best performance from Python applications.
 
     [See more](/cloudlinux_os_components/#python-selector).
-* **<span class="notranslate">Node.js Selector</span>**
+* <span class="notranslate"> **Node.js Selector** </span>
 
     Node.js Selector is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
 
@@ -69,9 +69,9 @@ Currently, the following version are supported:
     When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
 
     [See more](/cloudlinux_os_components/#reseller-limits).
-* **<span class="notranslate">LVE-stats 2</span>**
+* <span class="notranslate"> **LVE-stats 2** </span>
 
-    <span class="notranslate">LVE-stats 2</span> collects LVE usage statistics (CPU, memory, disk space usage) and allows to collect the usage data.
+    <span class="notranslate"> LVE-stats 2 </span> collects LVE usage statistics (CPU, memory, disk space usage) and allows to collect the usage data.
 
     [See more](/cloudlinux_os_components/#lve-stats-2).
 
