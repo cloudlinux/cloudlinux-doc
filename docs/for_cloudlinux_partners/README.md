@@ -5,7 +5,7 @@
 
 ### License portal (CLN)
 
-You can find the complete documentation for the CloudLinux Network (CLN) [here](https://docs.cln.cloudlinux.com/).
+You can find the complete documentation for <span class="notranslate"> CloudLinux Network (CLN) </span> [here](https://docs.cln.cloudlinux.com/).
 
 ### CloudLinux WHMCS plugin
 
