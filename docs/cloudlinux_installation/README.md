@@ -29,7 +29,7 @@ With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer s
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement
 
 
-### Converting existing servers
+## Converting existing servers
 
 It is easy to convert your existing CentOS server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
@@ -128,7 +128,7 @@ By its design, CloudLinux OS is very close to the upstream operating system, Cen
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
   * custombuild for DirectAdmin.
 
-### CLDeploy Explained - reverting back to CentOS:
+#### CLDeploy Explained - reverting back to CentOS:
 
 Here's what the cldeploy script does, if one runs it to revert the system back to CentOS:
 
