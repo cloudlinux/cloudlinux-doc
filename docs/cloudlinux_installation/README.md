@@ -15,7 +15,7 @@
 
 CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
-At this moment (for CL6) we are aware of only one such case:
+There are some incompatible devices with **CL 6**:
 
 | |  | |
 |-|--|-|
@@ -25,14 +25,8 @@ At this moment (for CL6) we are aware of only one such case:
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 
-The list of unsupported LSI SAS devices in RHEL 8 (CloudLinux 8/CloudLinux 7 Hybrid)
-
-* LSI SAS 1064 (PCI ID: 0x1000:0x0050)
-* LSI SAS 1068 (PCI ID: 0x1000:0x005C)
-* LSI SAS 1064E (PCI ID: 0x1000:0x0056)
-* LSI SAS 1068E (PCI ID: 0x1000:0x005E)
-* LSI SAS 1078 (PCI ID: 0x1000:0x0062)
-* LSI SAS 1068_820XELP (PCI ID: 0x1000:0x0059)
+With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer supported. You can check the entire list here:
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement
 
 
 ### Converting existing servers
