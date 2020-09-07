@@ -7433,7 +7433,7 @@ See also mod_lsapi PRO FAQ [here](https://cloudlinux.zendesk.com/hc/articles/360
 
 
 :::tip Note
-<span class="notranslate"> CloudLinux </span> 7 and <span class="notranslate"> CloudLinux </span> 8 only
+<span class="notranslate"> CloudLinux </span> 7, <span class="notranslate"> CloudLinux </span> 7 Hybrid, and <span class="notranslate"> CloudLinux </span> 8 only
 :::
 
 CRIU is <span class="notranslate"> _Checkpoint/Restore In Userspace_ </span> , (pronounced <span class="notranslate"> kree-oo </span> ), is a software tool for Linux operating system. Using this tool, you can freeze a running application (or part of it) and checkpoint it as a collection of files on disk. You can then use the files to restore the application and run it exactly as it was during the time of freeze (more information on the link [https://criu.org/Main_Page](https://criu.org/Main_Page) ).
