@@ -91,7 +91,7 @@ Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Supp
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
-**Starting from version 1.61**, at the end of conversion from CentOS 7.x to CloudLinux 7, the cldeploy script converts CloudLinux 7 to CloudLinux 7 Hybrid. CloudLinux 7 Hybrid is a newer kernel for machines with new hardware.
+**Starting from version 1.61**, at the end of conversion from CentOS 7.x to CloudLinux 7, the cldeploy script converts CloudLinux 7 to [CloudLinux 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 
 Automatic hybridization will be performed for the AMD processors with the following CPU families:
 
