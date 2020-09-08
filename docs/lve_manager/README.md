@@ -1960,4 +1960,3 @@ To edit package extensions, go to <span class="notranslate">LVE Manager</span> |
 
 To learn how to work with package extensions limits using WHM API, please read the official cPanel documentation: [https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes](https://documentation.cpanel.net/display/SDK/Guide+to+Package+Extensions+-+Data+Behavior+and+Changes)
 
-<Disqus/>

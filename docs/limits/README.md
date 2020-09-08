@@ -549,4 +549,3 @@ Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm
 <span class="notranslate">`mod_lsapi`</span> is an Apache module whilst LiteSpeed is a standalone solution and does not use any of Apache modules (since it provides its own implementation of these modules). Moreover, it is advised to leave your Apache configuration as is just in case you decide to switch back from LiteSpeed.
 :::
 
-<Disqus/>

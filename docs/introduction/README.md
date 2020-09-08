@@ -75,4 +75,3 @@ Currently, the following version are supported:
 
     [See more](/cloudlinux_os_components/#lve-stats-2).
 
-<Disqus/>

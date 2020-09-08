@@ -1833,4 +1833,3 @@ Some of CloudLinux OS utilities (`cagefsctl`, `selectorctl`, `cloudlinux-selecto
 So they are subject to the disk quotas if any are set for the user. The utilities can override these quotas to avoid failures.
 See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel parameters controlling these permissions. This parameter is used only for XFS file system.
 
-<Disqus/>

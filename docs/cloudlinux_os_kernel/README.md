@@ -1174,4 +1174,3 @@ By default, the feature is disabled (0), to enable it, run the following for Clo
 ```
 </div>
 
-<Disqus/>
