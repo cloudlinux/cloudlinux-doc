@@ -15,7 +15,7 @@
 
 CloudLinux supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
-At this moment (for CL6) we are aware of only one such case:
+There are some incompatible devices with **CL 6**:
 
 | |  | |
 |-|--|-|
@@ -25,21 +25,15 @@ At this moment (for CL6) we are aware of only one such case:
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 
-The list of unsupported LSI SAS devices in RHEL 8 (CloudLinux 8/CloudLinux 7 Hybrid)
-
-* LSI SAS 1064 (PCI ID: 0x1000:0x0050)
-* LSI SAS 1068 (PCI ID: 0x1000:0x005C)
-* LSI SAS 1064E (PCI ID: 0x1000:0x0056)
-* LSI SAS 1068E (PCI ID: 0x1000:0x005E)
-* LSI SAS 1078 (PCI ID: 0x1000:0x0062)
-* LSI SAS 1068_820XELP (PCI ID: 0x1000:0x0059)
+With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer supported. You can check the entire list here:
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement
 
 
-### Converting existing servers
-
-* [Explanation of changes](/cloudlinux_installation/#explanation-of-changes)
+## Converting existing servers
 
 It is easy to convert your existing CentOS server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+
+* [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
@@ -97,13 +91,12 @@ Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Supp
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
 
-Starting from version 1.61, after the end of conversion from CentOS 7.x to CloudLinux 7, the cldeploy script converts CloudLinux 7 to CloudLinux 7 Hybrid. CloudLinux 7 Hybrid has a newer kernel for machines with new hardware.
+**Starting from version 1.61**, at the end of conversion from CentOS 7.x to CloudLinux 7, the cldeploy script converts CloudLinux 7 to [CloudLinux 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 
 Automatic hybridization will be performed for the AMD processors with the following CPU families:
 
-* Zen / Zen+ / Zen 2
+* Zen / Zen+ / Zen 2 / Zen 3
 * Hygon Dhyana
-* Zen 3
 
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
@@ -112,9 +105,9 @@ We normally recommend to install `lvemanager`, `lve-utils`, `lve-stats`, and `ca
 But when you deploy CloudLinux from the ISO image, these packages will be preinstalled. You can reinstall them after installing the control panel.
 :::
 
-#### Explanation of changes
+#### CLDeploy Explained
 
-CloudLinux uses the fact that it is very close to CentOS and RHEL to convert systems in place, requiring just one reboot. Our conversion script does the following actions:
+By its design, CloudLinux OS is very close to the upstream operating system, CentOS. This makes the conversion process relatively straightforward, requiring just one reboot. Here's what the cldeploy script does when you run it:
 
 * Backups the original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
 * Backups RHEL system ID into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
@@ -135,32 +128,24 @@ CloudLinux uses the fact that it is very close to CentOS and RHEL to convert sys
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
   * custombuild for DirectAdmin.
 
-:::warning *
-Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
-:::
+#### CLDeploy Explained - reverting back to CentOS:
 
-### Script for converting back:
+Here's what the cldeploy script does, if one runs it to revert the system back to CentOS:
 
 * Restores CentOS repositories, and centos-release/release-notes/logos.
 * Removes lve, mod_hostinglimits, lve-stats, lvemanager.
 * mod_hostinglimits RPM is removed.
 
-The kernel is not removed - to prevent condition when server has no kernels and wouldn't boot. The command line to remove the kernel is provided.
+Note that **cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, we provie the instructions on how you could remove it manually later, when it is safe to do so.
 
 On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
 
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
-:::warning
-Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
-:::
-
 #### Common issues and troubleshooting during conversion
 
-| | |
-|-|-|
-|**Issue**|**Solution**|
-|Double registration issue with the error: <span class="notranslate">`Maximum usage count of 1 reached`</span>|If you want to use the license on another server or reuse it on the same server after reinstalling, you need to remove the server from CLN and then register the license on your new server. You may use the following page for a reference to remove the server from CLN: [https://docs.cln.cloudlinux.com/index.html?servers.htm](https://docs.cln.cloudlinux.com/index.html?servers.htm) Please don't remove the license, remove only the server.|
+If you receive any troubles during the conversion process, most likely it is because of some licensing CLN (CloudLinux Network)-related issues. Check our troubleshooting guides here to resolve them:
+https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919
 
 ## Activation
 
@@ -1062,4 +1047,5 @@ sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
 </div>
 
 See also: [FAQ](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ)
+
 
