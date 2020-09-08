@@ -14,169 +14,85 @@
 
 ## Reseller limits
 
-See also [Reseller limits UI](/lve_manager/#reseller-interface).
+**Reseller limits** is a feature that allows hosters to limit the resources each reseller can operate. Reseller limits put a restriction on the cumulative resources this reseller and his end-users can use at any given moment in time.  
 
-### General information and requirements
+Reseller limits feature also enables hosters to give their resellers controls over the end-user’s resources. Resellers can assign limits to their end-users as they want, even if they are higher than the limits assigned to the reseller. The reseller’s end-users will not be limited by the reseller limits unless their **cumulative usage** goes above the limits the hoster assigned to their reseller.
 
-* [Types of Users](/cloudlinux_os_components/#types-of-users)
-* [Types of Limits](/cloudlinux_os_components/#types-of-limits)
-* [What happens when reseller or reseller's end user hits the limit?](/cloudlinux_os_components/#what-happens-when-reseller-or-reseller-s-end-user-hits-the-limit)
-* [Requirements](/cloudlinux_os_components/#requirements)
+- [Design](/cloudlinux_os_components/#design)
+- [Requirements](/cloudlinux_os_components/#requirements)
+- [Configuration of Reseller Limits](/cloudlinux_os_components/#configuration-of-reseller-limits)
+    - [Enabling Reseller limits ](/cloudlinux_os_components/#enabling-reseller-limits)
+    - [How to disable Reseller limits](/cloudlinux_os_components/#how-to-disable-reseller-limits)
+    - [More resources](/cloudlinux_os_components/#more-resources)
 
-<span class="notranslate">Reseller limits</span> is a feature that allows hosters to set limits for the resources each reseller can operate with. Hoster also provides controls to the reseller on what resources each reseller’s end user will have. Reseller limits set by a hoster limit the total amount of resources resellers’ end users can consume altogether.
+### Design
 
-When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to set limits for his end users within the Reseller Interface.
+#### General information and requirements
 
-#### Types of Users
+To understand the qwirks of how Reseller Limits operate, we need to look more closely into the four types of users that a typical shared hosting server has:
 
-Starting from the **version 3.0-18**, <span class="notranslate">LVE Manager</span> operates with four types of users and their resource usage limits.
+![](/images/ResellerLimits-diagram.png)
 
-The types of users are as follows:
+Reseller himself (green box on the scheme) is a virtual entity. When a hoster enables reseller limits, the entity itself cannot hit the limits. There is usually an end-user with the same username as the reseller that acts as a regular reseller’s end-user. When the hoster sets Reseller limits, he limits the group of end-users he owns, including the reseller's end-user with the same username.  
 
-* <span class="notranslate">**End User**</span> is a type of user that purchases hosting directly from a hoster and uses it for his own purposes;
-* <span class="notranslate">**Reseller**</span> is a type of user that buys hosting from a hoster and resells it to his end users;
-* <span class="notranslate">**Reseller’s End User**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes.
-* <span class="notranslate">**Reseller’s End User (no Reseller limit)**</span> is a type of user that purchases hosting from a reseller and uses it for his own purposes but does not have limits set by a reseller. These limits are set by the hoster.
+Resellers can configure their end-users limits differently. There are several scenarios when Reseller limits will get activated:  
 
-#### Types of Limits
+- A reseller can assign limits to their end-users that are higher than the limits hoster assigned to this reseller. In this case, the end-user will be limited by reseller limit when he reaches it. 
+- A reseller can assign limits to their end-users that are lower than the limits hoster assigned to this reseller. In this case, the end-user will be limited by his limit and not by the reseller limits when he reaches it.
+- Reseller limits will get activated when all reseller’s resources are consumed by his users at any given moment.
 
-See the comparison Table with types of limits.
+As you probably have already understood, the reseller will technically be able to assign his/her end-users limits higher than his Reseller limits. However, it won’t be possible for the end-users to go over the reseller limits no matter what his individual limit is.
 
-| |  |  | |
-|-|--|--|-|
-|**Limits** | **Reseller limits** | **Reseller’s end user limits** | **Hoster’s end user limits**|
-|<span class="notranslate">[SPEED](/limits/#speed-limit)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[PMEM](/limits/#physical-memory-limit)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[IO](/limits/#io)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[IOPS](/limits/#iops)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[EP](/limits/#entry-processes)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[NPROC](/limits/#number-of-processes)</span>| Yes | Yes | Yes|
-|<span class="notranslate">[Inodes](/limits/#inodes) </span> | Yes (default for all users) | No | Yes|
-|<span class="notranslate">[MySQL Limits](/cloudlinux_os_components/#mysql-governor) </span> | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes (supported only for <span class="notranslate"> MySQL Governor ALL </span> mode) | Yes|
+### Requirements
 
-#### What happens when reseller or reseller's end user hits the limit?
+1. CloudLinux OS should be [installed](/cloudlinux_installation) on the server.
+2. You also need to check that your kernel supports Reseller limits feature
+    * CloudLinux 6 and kernels **2.16+**: not supported, you need to [migrate to Hybrid](/cloudlinux_os_kernel/#how-to-migrate-from-the-normal-to-hybrid-channel-cl6h).
+    * CloudLinux 6 Hybrid: supported starting from **3.10.0-714.10.2.lve1.5.3.el6h** kernel.
+    * CloudLinux 7: supported starting from **3.10.0-714.10.2.lve1.5.3.el7** kernel.
+    * CloudLinux 7 Hybrid: supported
+    * CloudLinux 8: supported 
+3. lvemanager package version **3.0-18+** and later installed. If you don’t have it, update your system
 
-:::tip Note
-<span class="notranslate">**Reseller**</span> is a virtual entity. So, he cannot hit the limit. There is reseller's end user with the same name as reseller. This end user is limited as any other reseller's end user. When hoster sets Reseller limits he limits the group of resellers' end users including reseller's end user with the same name as the reseller.
+### Configuration of Reseller Limits
+
+#### Enabling Reseller limits 
+
+If you have decided to jump on board and enable Reseller limits for your resellers you should do the following:
+
+1. Make sure that you run CloudLinux with the kernel and lvemanager that meets the [necessary requirements](/cloudlinux_os_components/#requirements). 
+2. Log in with a hoster access.
+3. You can create a new reseller account or configure an existing reseller account to have Reseller limits enabled. Consult your control panel documentation on how to do that.
+4. For cPanel servers when creating an account, make sure to tick two checkboxes **Make this account a reseller** and **Make the account own itself** in the _Reseller Settings_ box.
+
+![](/images/ResellerLimits-cPanel.png)
+
+Selecting **Make the account own itself** makes the reseller full owner of all his accounts, including the end-user account with the same username. This option is integral to making reseller limits work for the reseller account. If you don’t select it, Reseller limits will not be applied. If the reseller account you want to limit with Reseller limits has already existed, you need to make sure it is properly owned. Go to _WHM_ -> _Modify account_ -> find the account with the same username as your reseller -> change the owner to the username of your reseller.
+
+5. Now that preparations are done, go to _CloudLinux LVE Manager_ -> _Users_ tab, choose a reseller and click on the pencil icon.
+6. When the pop-up opens, move the slider _Manage Limits_ -> Click _AGREE_  when asked _Are you sure you want to enable limits_ -> assign the limits to that reseller. Finally, click _Save_.
+
+![](/images/ResellerLimits-enabling.png)
+
+:::tip 
+When you move a user from one reseller to another on DirectAdmin you need to manually change its package because the packages aren’t moved together with users. If you don’t reassign the package, the limits for the user you have moved will be reset to default. 
 :::
 
-* Reseller's end user can hit reseller limit when end user's limit is bigger than reseller's limit. In such case end user will be limited by reseller limit.
-* Reseller limit can be hit when all resellers’ end users in total use as much resources as reseller limit.
-* Reseller's end user can hit his limit when end user limit is lower than reseller limit. In such case end user will be limited by his limit.
+#### How to disable Reseller limits
 
-#### Requirements
+1. Go to the _Users_ tab, choose a particular reseller and click on the pencil icon.
+2. In the pop-up move the slider _Manage Limits_. Click _AGREE_ for the question _Are you sure you want to disable limits_. Then click _Save_.
 
-:::tip Note
-Reseller Limits are only supported in kernel starting with the version **3.10.0-714.10.2.lve1.5.3.el7** for <span class="notranslate"> CloudLinux 7 kernel </span> and **3.10.0-714.10.2.lve1.5.3.el6h** for <span class="notranslate"> CloudLinux 6 Hybrid kernel </span>.
-:::
-
-:::tip Note
-In case you wish to use the new Reseller limits features and you use CloudLinux 6 kernel, you have to migrate to <span class="notranslate">CloudLinux 6 Hybrid</span> kernel first.
-:::
-
-### Installation, enabling, and disabling
-
-Use the detailed instruction below:
-
-1. Install CloudLinux 7 or <span class="notranslate">CloudLinux 6 Hybrid</span> on a new server. Follow the instructions described [here](/cloudlinux_installation/#installing-new-servers). Or you can convert your CentOS 6.x or CentOS 7.x system to CloudLinux 6 or CloudLinux 7 respectively. To do this, follow the instructions described on the [link](/cloudlinux_installation/#converting-existing-servers).
-2. If you have installed the CloudLinux 6, please convert it to the <span class="notranslate"> CloudLinux 6 Hybrid Kernel</span>. Follow the instructions described [here](/cloudlinux_os_kernel/#hybrid-kernels).
-3. Install <span class="notranslate">LVE Manager</span> with <span class="notranslate">Reseller Limit</span> support or update it up to version 3.0-18 (or later) by running the following commands:
-
-    <div class="notranslate">
-
-    ```
-    yum install kernel lve cagefs lvemanager lve-utils lve-stats --disableexcludes=main
-    ```
-    </div>
-
-
-    <div class="notranslate">
-
-    ```
-    yum update
-    ```
-    </div>
-
-    <div class="notranslate">
-
-    ```
-    reboot
-    ```
-    </div>
-
-    For <span class="notranslate">CloudLinux 6 Hybrid</span> kernel with <span class="notranslate">Reseller Limit</span> support, please run the following commands:
-
-    <div class="notranslate">
-
-    ```
-    yum install kernel lve cagefs lvemanager lve-utils lve-stats --disableexcludes=main
-    ```
-    </div>
-
-    <div class="notranslate">
-
-    ```
-    yum update
-    ```
-    </div>
-
-    <div class="notranslate">
-
-    ```
-    reboot
-    ```
-    </div>
-
-
-:::tip Note
-When you move a user from one reseller to another on DirectAdmin, the LVE Manager's Reset function does not consider package limits of the end-user and reset them to defaults.
-To solve this, you can do one of the following:
-1. Change a package to one of Reseller's package for the moved users.
-2. Create a package with the same name and limits for the Reseller with the moved users.
-:::
-
-
-### How to enable and disable Reseller limits
-
-To start using a new feature <span class="notranslate">**Reseller limits**</span> you would have to enable reseller limits for a particular reseller first.
-
-To enable <span class="notranslate">**Reseller**</span> access, please do the following:
-
-1. Log in with a Hoster access.
-2. You can create a new account or give privileges to an existing account.
-3. For new account tick a checkbox <span class="notranslate">`Make this account a reseller`</span> in the <span class="notranslate">`Reseller Settings`</span> box.
-
-![](/images/resellersettings.png)
-
-:::tip Note
-If checkbox **<span class="notranslate">Make the account own itself</span> (i.e., the user can modify the account)**  is not selected when creating Reseller in cPanel WHM, then user account <span class="notranslate">**Reseller**</span> will belong to root, not to reseller <span class="notranslate">**Reseller**</span>. In such case, the user <span class="notranslate">**Reseller**</span> will be managed by the root. So, LVE limits specified by the root will be applied to the user <span class="notranslate">**Reseller**</span>. User <span class="notranslate">**Reseller**</span> will not be limited by <span class="notranslate">Reseller limits</span>.
-
-When the checkbox is selected, user <span class="notranslate">**Reseller**</span> will be limited by Reseller limits (in addition to personal user limits set by Reseller).
-:::
-
-4. Give privileges to the proper Reseller account to make all features work.
-5. Go to the <span class="notranslate">_Users_</span> tab and choose a particular reseller you want to enable Reseller limits for and click on the pencil icon.
-6. In the pop-up move the slider <span class="notranslate">_Manage Limits_</span>. Click <span class="notranslate">_AGREE_</span> for the question <span class="notranslate">_Are you sure you want to enable limits_</span>, set limits for that reseller if you you want them to be different from the default limits, otherwise default server limits will be applied. Than click the <span class="notranslate">_Save_</span>.
-
-![](/images/hmfile_hash_00664772.png)
-
-    
-:::tip Note
-Resellers’ end users can use as much resources in total as it is provided for that particular reseller by a hoster. The summary usage of all end users that belong to that particular reseller will not exceed the amount of resources provided to reseller by a hoster. If no Reseller Limits are set, reseller’s end user will be limited by default limits set by a hoster.
-:::
-
-### How to disable Reseller limits
-
-To disable Reseller limits, please do the following:
-
-1. Go to the <span class="notranslate">_Users_</span> tab, choose a particular reseller and click on the pencil icon.
-2. In the pop-up move the slider <span class="notranslate">_Manage Limits_</span>. Click <span class="notranslate">_AGREE_</span> for the question <span class="notranslate">_Are you sure you want to disable limits_</span>. Than click <span class="notranslate">_Save_</span>.
-
-:::tip Note
 If you disable Reseller limits everything will work the same as before. All the end user limits set by the reseller will be saved. But all custom default reseller limits will be disabled.
-:::
 
-See also [Reseller limits UI](/lve_manager/#reseller-interface).
+
+#### More resources
+
+It is possible that you still have some questions left unanswered about Reseller limits. That’s why we have more knowledge sources that you can check out:
+
+- [FAQ section in our support knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/articles/115005515269-CloudLinux-Reseller-Limits-FAQ)
+- [Reseller limits UI explained](/lve_manager/#reseller-interface)
+
 
 ## LVE-Stats 2
 ### General information and requirements
