@@ -54,7 +54,7 @@ As you probably have already understood, the reseller will technically be able t
     * CloudLinux 8: supported 
 3. lvemanager package version **3.0-18+** and later installed. If you don’t have it, update your system
 
-### Configuration of reseller Limits
+### Configuration of Reseller Limits
 
 #### Enabling Reseller limits 
 
