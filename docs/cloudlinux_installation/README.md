@@ -26,7 +26,7 @@ There are some incompatible devices with **CL 6**:
 
 
 With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer supported. You can check the entire list here:
-https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement
+[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
 
 
 ## Converting existing servers
@@ -145,7 +145,7 @@ On DirectAdmin servers, rebuild of Apache with custombuild will complete the con
 #### Common issues and troubleshooting during conversion
 
 If you receive any troubles during the conversion process, most likely it is because of some licensing CLN (CloudLinux Network)-related issues. Check our troubleshooting guides here to resolve them:
-https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919
+[https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919](https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919)
 
 ## Activation
 
