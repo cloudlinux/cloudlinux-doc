@@ -6385,7 +6385,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_max_idle](/cloudlinux_os_components/#lsapi-backend-max-idle)
 * [lsapi_backend_max_reqs](/cloudlinux_os_components/#lsapi-backend-max-reqs)
 
-[CRIU support (CloudLinux 7 only)](/cloudlinux_os_components/#criu-support-cloudlinux7-only):
+[CRIU support](/cloudlinux_os_components/#criu-support-cloudlinux7-only):
 * [lsapi_criu](/cloudlinux_os_components/#lsapi-criu)
 * [lsapi_criu_socket_path](/cloudlinux_os_components/#lsapi-criu-socket-path)
 * [lsapi_criu_imgs_dir_path](/cloudlinux_os_components/#lsapi-criu-imgs-dir-path)
@@ -6738,7 +6738,7 @@ It is relevant only with lsapi_with_connection_pool option switched on. Controls
 
 ---
 
-#### **CRIU support (CloudLinux 7 only)**
+#### **CRIU support**
 
 #### **lsapi_criu**
 
