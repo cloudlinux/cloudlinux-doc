@@ -20,12 +20,14 @@ Reseller limits feature also enables hosters to give their resellers controls ov
 
 - [Design](/cloudlinux_os_components/#design)
 - [Requirements](/cloudlinux_os_components/#requirements)
-- [Configuration](/cloudlinux_os_components/#configuration)
+- [Configuration of Reseller Limits](/cloudlinux_os_components/#configuration-of-reseller-limits)
     - [Enabling Reseller limits ](/cloudlinux_os_components/#enabling-reseller-limits)
     - [How to disable Reseller limits](/cloudlinux_os_components/#how-to-disable-reseller-limits)
     - [More resources](/cloudlinux_os_components/#more-resources)
 
 ### Design
+
+#### General information and requirements
 
 To understand the qwirks of how Reseller Limits operate, we need to look more closely into the four types of users that a typical shared hosting server has:
 
@@ -52,7 +54,7 @@ As you probably have already understood, the reseller will technically be able t
     * CloudLinux 8: supported 
 3. lvemanager package version **3.0-18+** and later installed. If you don’t have it, update your system
 
-### Configuration 
+### Configuration of reseller Limits
 
 #### Enabling Reseller limits 
 
