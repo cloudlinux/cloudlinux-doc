@@ -6379,6 +6379,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_accept_notify](/cloudlinux_os_components/#lsapi-backend-accept-notify)
 * [lsapi_backend_pgrp_max_reqs](/cloudlinux_os_components/#lsapi-backend-pgrp-max-reqs)
 * [lsapi_backend_pgrp_max_crashes](/cloudlinux_os_components/#lsapi-backend-pgrp-max-crashes)
+* [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info)
  
 [Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
 * [lsapi_with_connection_pool](/cloudlinux_os_components/#lsapi-with-connection-pool)
@@ -6700,6 +6701,17 @@ Controls how many requests a control process will process before it exits. Shoul
 
 **Description** :  
 Controls how many crashes of its worker processes a control process will detect before it exits. Should be more or equal to 0. In the case of wrong format, a default value will be used. Optional, the default value is 0, which means an unlimited number of crashes.
+
+---
+
+#### **lsapi_backend_loglevel_info**
+
+**Syntax** : lsapi_backend_loglevel_info [On/Off]
+**Default** : lsapi_backend_loglevel_info Off
+**Context** : httpd.conf, virtualhost
+
+**Description** :  
+Controls which log level will be used to write PHP warnings and notices into Apache’s error_log. Optional, the default value is `Off`. In that case `LOG_WARNING` log level will be used. Otherwise, with `On` value, `LOG_INFO` log level will be used.
 
 ---
 
