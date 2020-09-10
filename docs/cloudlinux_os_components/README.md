@@ -6379,7 +6379,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_accept_notify](/cloudlinux_os_components/#lsapi-backend-accept-notify)
 * [lsapi_backend_pgrp_max_reqs](/cloudlinux_os_components/#lsapi-backend-pgrp-max-reqs)
 * [lsapi_backend_pgrp_max_crashes](/cloudlinux_os_components/#lsapi-backend-pgrp-max-crashes)
-* [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info)
+* [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info) Beta
  
 [Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
 * [lsapi_with_connection_pool](/cloudlinux_os_components/#lsapi-with-connection-pool)
@@ -6704,7 +6704,7 @@ Controls how many crashes of its worker processes a control process will detect 
 
 ---
 
-#### **lsapi_backend_loglevel_info**
+#### **lsapi_backend_loglevel_info** <Badge text="beta" />
 
 **Syntax** : lsapi_backend_loglevel_info [On/Off]
 **Default** : lsapi_backend_loglevel_info Off
