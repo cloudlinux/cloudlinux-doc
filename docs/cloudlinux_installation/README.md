@@ -216,22 +216,6 @@ Once you install server from the ISO, make sure you [register your system](/clou
 We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
 :::
 
-Mount and boot the image, then follow the steps.
-
-1. Configure a network connection as shown below.
-   
-   ![](/images/network_settings.png)
-
-2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/os/x86_64/Packages/`</span> for CloudLinux 6 and <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.8/os/x86_64/Packages/`</span> for CloudLinux 7.
-   * also, add the additional AppStream repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/updates/x86_64/Packages/`</span> for CloudLinux 6 and <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.8/updates/x86_64/Packages/`</span> for CloudLinux7.
-   
-   ![](/images/repository_settings_6_and_7.png)
-
-3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
-   
-   ![](/images/software_selection.png)
-
 
 ### Installing CloudLinux OS 8 from ISO image
 
