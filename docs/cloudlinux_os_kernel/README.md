@@ -790,6 +790,7 @@ Variables setting guidelines are the same as for CageFS (see above).
 
 As requested by some our customers, we've implemented a new kernel setting to hide `/proc/net/{tcp,udp,unix}` files for additional security/isolation.
 You can hide them by runnign `sysctl -w kernel.proc_disable_net=1` command, and by default, it's `0` (nothing hidden).
+Currently this is implemented for CloudLinux OS 7 only.
 
 ## Virtualized /proc filesystem
 
