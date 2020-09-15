@@ -4038,6 +4038,10 @@ cagefsctl --cl-selector-reset-modules
 These commands can affect PHP version of your clients’ web sites. Use them with caution as improper usage might cause your clients’ web sites down.
 :::
 
+::: Note
+It is possible to manually uninstall the integral parts of PHP Selector - **alt-php** packages. However, since CloudLinux components heavily rely on them, we do not recommend doing so. Proceed with caution and keep an eye on yum dependencies if you decide to uninstall the packages.
+:::
+
 #### Disabling PHP extension globally
 
 If you want to disable PHP extension globally, you don't need to remove file <span class="notranslate"> /opt/alt/phpXX/etc/php.d.all/$EXTENSION.ini </span> . You should just comment out <span class="notranslate"> "extension=" </span> directives in it.
