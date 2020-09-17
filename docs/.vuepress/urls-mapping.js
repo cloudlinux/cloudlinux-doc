@@ -179,6 +179,7 @@ module.exports = {
   "/user_message.html/": "/lve_manager/#user-message-for-php-version",
   "/user_message.html": "/lve_manager/#user-message-for-php-version",
   "/index.html?user_message.html": "/lve_manager/#user-message-for-php-version",
+  "/cloudlinux_os_components/#reseller-limits": "/limits/#reseller-limits",
   "/reseller_limits.html/": "/limits/#reseller-limits",
   "/reseller_limits.html": "/limits/#reseller-limits",
   "/index.html?reseller_limits.html": "/limits/#reseller-limits",
