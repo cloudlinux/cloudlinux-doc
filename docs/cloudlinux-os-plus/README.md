@@ -883,6 +883,22 @@ You can view the events log on the client's server here:
 
 No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
 
+Starting from `cl-end-server-tools` v.1.0.6-1, the statistics collection daemon allows to log data sent to pushgateway to its log `/var/log/clplus_sender.log`.
 
+To start logging, run the following command: 
 
+```
+touch /var/lve/cmt_debug_logging
+```
 
+To stop logging, run the following command: 
+
+```
+rm -f /var/lve/cmt_debug_logging
+```
+
+You don't need to restart the daemon after starting/stopping logging. The presence of a control file is evaluated "on the fly".
+
+:::warning Warning
+Use this logging with caution because when it is enabled, the size of the daemon log `/var/log/clplus_sender.log` will increase each minute minimum on 3-4 KB. The actual increase size depends on the number of active users' processes on a server.
+:::
