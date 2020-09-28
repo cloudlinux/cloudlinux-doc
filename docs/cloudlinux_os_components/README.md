@@ -3038,6 +3038,10 @@ When customer is restricted, the customer will be placed into special LVE with I
 
 #### Installation
 
+:::danger IMPORTANT
+Please note that MariaDB 10.4 is not supported by cPanel. You can find details here: [https://features.cpanel.net/topic/maria-10-4-support](https://features.cpanel.net/topic/maria-10-4-support).
+:::
+
 ::: danger IMPORTANT
 Please make full database backup (including system tables) before you upgrade MySQL or switch to MariaDB. This action will prevent data loss in case if something goes wrong.
 :::
