@@ -3032,6 +3032,34 @@ Checks the validity of LVE limits on the server.
 This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can in some cases hang up during `rpmdb` check, which can brake access to the database for `rpm/yum` utilities.
 :::
 
+#### check-hidepid
+
+A new checker `check-hidepid` is available starting from `lve-utils-4.2.18-1` and later. It checks if CageFS is installed and if `/proc` is mounted without the `hidepid=2` parameter.
+
+Available options: `--all` and `--cron-check`.
+
+* If CageFS is not installed, `check-hidepid` skips and outputs the following:
+
+  ```
+    Check mount with hidepid=2 option:
+	    SKIPPED: Cagefs is not installed
+  ```
+
+* If `check-hidepid` triggers and finds an issue, it outputs the following:
+
+  ```
+    Check mount with hidepid=2 option:
+	    FAILED: Details: hidepid protection disabled.
+    Please, mount system with hidepid=2 for better security.
+    Read more about hidepid option here: https://docs.cloudlinux.com/cloudlinux_os_kernel/#remounting-procfs-with-hidepid-option
+  ```
+
+* If `check-hidepid` triggers and it's OK, it outputs the following:
+
+  ```
+    Check mount with hidepid=2 option:
+	    OK: hidepid protection enabled
+  ```
 
 ### cloudlinux-config
 
