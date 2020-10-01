@@ -44,10 +44,6 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
 
 <span class="notranslate">X-Ray</span> can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the client’s website.
 
-First release of <span class="notranslate">X-Ray</span> is offered for cPanel administrators and support to find the cause of website performance issues.
-
-<span class="notranslate">X-Ray</span> can monitor websites that were developed on cPanel hosts and use PHP (see [PHP version list](/cloudlinux-os-plus/#list-of-supported-php-versions)) or WordPress.
-
 ### Installation
 
 1. Make sure you are an approved X-Ray beta-tester (only non-reseller accounts apply)
@@ -102,7 +98,43 @@ First release of <span class="notranslate">X-Ray</span> is offered for cPanel ad
 
 ### How to manage X-Ray
 
-#### Create a new tracing task
+X-Ray provides two options for monitoring domain requests speed: Tracing task and Continuous task.
+
+:::warning Warning
+To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+```
+yum update lvemanager alt-php-xray  --enablerepo cloudlinux-updates-testing
+```
+::: 
+
+* **Tracing task** is a task created manually for a specific URL to collect server requests. The task will end either after a specified number of requests to the URL or after a specified time (maximum after two days). It is not possible here to automatically email a report but it is possible to export the report in PDF and send to a user.
+
+* **Continuous task** is a task that initiates a daily hourly tracing requests for a specified domain and email a monitoring report. Continuous task can't stop automatically, you need to stop it manually.
+
+In fact, continuous task allows to automatically create a tracing task for each new day, with the ability to get a report for the past day.
+
+#### Tracing tasks tab
+
+The *Tracing tasks* tab contains a list of all tracing tasks created both manually and automatically via continuous tasks.
+
+![](/images/XRayTracingTaskCreated.png)
+
+The *Created* column shows how a task was created – automatically (by continuous task) or manually.
+
+#### Continuous tracing tab
+
+:::warning Warning
+To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
+```
+yum update lvemanager alt-php-xray  --enablerepo cloudlinux-updates-testing
+```
+::: 
+  
+The *Continuous tracing* tab contains a list of continuous tasks for which tracing tasks will be created automatically for a new day for a specific domain.
+
+![](/images/XRayContinuousTasksList.png)
+
+#### Creating a new tracing task manually
 
 1. Go to the <span class="notranslate">_X-Ray_</span> tab
 2. Click the <span class="notranslate">_Start tracing_</span> button to create a new task
@@ -128,6 +160,24 @@ After creating, the task appears in the list of tracing tasks.
 
 ![](/images/XRayTrcingTaskList.png)
 
+#### Creating a new continuous task
+
+1. Click the *Create continuous tracing*  button 
+
+![](/images/XRayCreateContinuousTaskBtn.png)
+
+2. Specify URL in the *Domain* field and email in the *Email for reports* field and click the *Create* button.
+
+![](/images/XRayCreateContinuousTaskForm.png)
+
+3. You can see a new task in the *Continuous tracing* tab in the X-Ray UI.
+
+![](/images/XRayContinuousTracingTab.png)
+
+4. If you stop a continuous tracing task, a new task for the next 24 hours will not be created. The task for the current day will be finished at midnight and the report will be emailed.
+
+5. If you delete a continuous tracing task, the task for the current day will be finished at midnight and the report will be emailed.
+
 #### View tracing tasks list
 
 ![](/images/XRayTrcingTaskList1.png)
@@ -141,7 +191,7 @@ A tracing task can have the following statuses:
 * <span class="notranslate">**On hold**</span> – the same URL already exists in the lists. Task processing will not start automatically. Administrator should start it manually.
 * <span class="notranslate">**Completed**</span> – period of time is finished or number of requests is reached.
 
-#### Stop tracing task
+#### Stopping tracing task
 
 Click ![](/images/XRayStop.png) to stop the tracing task.
 
@@ -149,13 +199,27 @@ Click ![](/images/XRayStop.png) to stop the tracing task.
 
 The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
 
-#### Delete tracing task 
+
+#### Stopping automatic tracing task
+
+Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
+#### Deleting tracing task 
 
 Click ![](/images/XRayDelete.png) to delete the tracing task.
 
 :::warning Warning!
 When you have deleted a tracing task, all collected data will be unavailable.
 :::
+
+#### Deleting automatic tracing task
+
+Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
 
 #### View collected requests for tracing task
 
