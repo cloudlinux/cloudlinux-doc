@@ -134,7 +134,9 @@ The *Continuous tracing* tab contains a list of continuous tasks for which traci
 
 ![](/images/XRayContinuousTasksList.png)
 
-#### Creating a new tracing task manually
+### Managing tracing task
+
+#### Creating a new tracing task
 
 1. Go to the <span class="notranslate">_X-Ray_</span> tab
 2. Click the <span class="notranslate">_Start tracing_</span> button to create a new task
@@ -149,7 +151,7 @@ The *Continuous tracing* tab contains a list of continuous tasks for which traci
 
     ![](/images/XRayAdvanced.png)
 
-#### Advanced settings
+**Advanced settings**
 
 * <span class="notranslate">**Client’s IP**</span>: it is an IPv4 address of a machine to trace. For example, if you have a production website that processes requests from different IP addresses and you do not want to add these requests to the tracing task. So, you can set a specific IP address and <span class="notranslate">X-Ray</span> will analyze requests only from this specific IP address.
 Record for
@@ -160,27 +162,11 @@ After creating, the task appears in the list of tracing tasks.
 
 ![](/images/XRayTrcingTaskList.png)
 
-#### Creating a new continuous task
-
-1. Click the *Create continuous tracing*  button 
-
-![](/images/XRayCreateContinuousTaskBtn.png)
-
-2. Specify URL in the *Domain* field and email in the *Email for reports* field and click the *Create* button.
-
-![](/images/XRayCreateContinuousTaskForm.png)
-
-3. You can see a new task in the *Continuous tracing* tab in the X-Ray UI.
-
-![](/images/XRayContinuousTracingTab.png)
-
-4. If you stop a continuous tracing task, a new task for the next 24 hours will not be created. The task for the current day will be finished at midnight and the report will be emailed.
-
-5. If you delete a continuous tracing task, the task for the current day will be finished at midnight and the report will be emailed.
-
-#### View tracing tasks list
+#### Viewing tracing tasks list
 
 ![](/images/XRayTrcingTaskList1.png)
+
+Tasks created *Manually* are simply tracing tasks.
 
 #### Tracing status
 
@@ -191,37 +177,7 @@ A tracing task can have the following statuses:
 * <span class="notranslate">**On hold**</span> – the same URL already exists in the lists. Task processing will not start automatically. Administrator should start it manually.
 * <span class="notranslate">**Completed**</span> – period of time is finished or number of requests is reached.
 
-#### Stopping tracing task
-
-Click ![](/images/XRayStop.png) to stop the tracing task.
-
-![](/images/XRayStopped.png)
-
-The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
-
-
-#### Stopping automatic tracing task
-
-Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
-
-To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/cloudlinux-os-plus/#creating-a-new-continuous-task).
-
-#### Deleting tracing task 
-
-Click ![](/images/XRayDelete.png) to delete the tracing task.
-
-:::warning Warning!
-When you have deleted a tracing task, all collected data will be unavailable.
-:::
-
-#### Deleting automatic tracing task
-
-Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
-
-To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/cloudlinux-os-plus/#creating-a-new-continuous-task).
-
-
-#### View collected requests for tracing task
+#### Collected requests for tracing task
 
 :::warning Warning!
 Collected requests are available in the UI for two weeks.
@@ -290,6 +246,101 @@ The <span class="notranslate">_System functions_</span> section displays the fol
 * <span class="notranslate">**Function**</span> – the executed function
 * <span class="notranslate">**File**</span> – the file and the line of the executed request
 * <span class="notranslate">**Duration**</span> – execution time as a percentage of the total duration of a request and the function processing time (in brackets)
+
+#### Stopping tracing task
+
+Click ![](/images/XRayStop.png) to stop the tracing task.
+
+![](/images/XRayStopped.png)
+
+The tracing task status will be changed to <span class="notranslate">**Stopped**</span>. Data will not be collected anymore but you can see already collected information or continue tracing later by clicking ![](/images/XRayStart.png).
+
+#### Deleting tracing task 
+
+Click ![](/images/XRayDelete.png) to delete the tracing task.
+
+:::warning Warning!
+When you have deleted a tracing task, all collected data will be unavailable.
+:::
+
+### Managing continuous tasks
+
+#### Creating a new continuous task
+
+1. Click the *Create continuous tracing*  button 
+
+![](/images/XRayCreateContinuousTaskBtn.png)
+
+2. Specify URL in the *Domain* field and email in the *Email for reports* field and click the *Create* button.
+
+![](/images/XRayCreateContinuousTaskForm.png)
+
+3. You can see a new task in the *Continuous tracing* tab in the X-Ray UI.
+
+![](/images/XRayContinuousTracingTab.png)
+
+4. If you stop a continuous tracing task, a new task for the next 24 hours will not be created. The task for the current day will be finished at midnight and the report will be emailed.
+
+5. If you delete a continuous tracing task, the task for the current day will be finished at midnight and the report will be emailed.
+
+#### Viewing continuous tasks list
+
+You can find a list of continuous tracing tasks in the _Continuous tracing_ tab.
+
+![](/images/XRayContinuousTracingTasksList.png)
+
+You can find automatically created tasks in the _Tracing tasks_ tab marked as _Automatically_ in the _Created_ column.
+
+![](/images/XRayContinuousTracingTasksListCreated.png)
+
+The [statuses for automatically created tasks](/cloudlinux-os-plus/#tracing-status) are the same as for tracing task.
+
+To view detailed info about an automatically created task, click ![](/images/XRayView1.png). You will get requests grouped by hour.
+
+![](/images/XRayContinuousTracingTasksListGrouped.png)
+
+Click to a group to open a list of the requests.
+
+![](/images/XRayContinuousTracingTasksRequestsList.png)
+
+The following data is collected for each request:
+
+* Software modules/plugins by execution time (only for WordPress plugins)
+* Database queries by execution time
+* External requests by execution time
+* Other system functions by execution time
+
+#### Stopping automatic tracing task
+
+Stopping automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To stop the continuous tracing task completely, see [Creating a new continuous task, paragraph 4](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
+
+#### Deleting automatic tracing task
+
+Deleting automatic tracing task (a part of continuous tracing task) affects only the automatic tracing task for the current day. A new task for the next day will be created at the end of the day.
+
+To delete the continuous tracing task completely, see [Creating a new continuous task, paragraph 5](/cloudlinux-os-plus/#creating-a-new-continuous-task).
+
+
+#### Continuous task daily report
+
+1. Users get daily reports on their emails. An example of a report is shown below:
+
+    ![](/images/XRayContinuousTaskDaylyReportExample.png)
+
+2. Click the link in the email to show the detailed report:
+
+    ![](/images/XRayContinuousTaskDaylyReportCollectedRequests.png)
+
+3. You can view requests grouped by hour:
+
+    ![](/images/XRayContinuousTaskDaylyReportByHourRequests.png)
+
+4. You can also view the detailed information about request:
+
+    ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
 
 ### X-Ray client
 
