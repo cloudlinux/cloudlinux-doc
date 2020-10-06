@@ -16,6 +16,7 @@
 * [OOM killer for LVE processes](/cloudlinux_os_kernel/#oom-killer-for-lve-processes)
 * [File system quotas](/cloudlinux_os_kernel/#file-system-quotas)
 * [Enter LVE when using cPanel utilities](/cloudlinux_os_kernel/#enter-lve-when-using-cpanel-utilities)
+* [Proactive reporting kernel crash events with Sentry and Kernel Panic Receiver](/cloudlinux_os_kernel/#proactive-reporting-kernel-crash-events-with-sentry-and-kernel-panic-receiver)
 
 ## CloudLinux 8 kernel-related features and improvements
 
@@ -1129,6 +1130,7 @@ ubc.ubc_oom_disable=1
 </div>
 
 _For <span class="notranslate"> CloudLinux </span> 7:_
+
 <div class="notranslate">
 
 ```
@@ -1137,6 +1139,7 @@ _For <span class="notranslate"> CloudLinux </span> 7:_
 </div>
 
 Also, add the following to <span class="notranslate">`/etc/sysctl.conf`</span> file to apply the same during boot:
+
 <div class="notranslate">
 
 ```
@@ -1151,6 +1154,7 @@ kernel.memcg_oom_disable=1
 In <span class="notranslate">**Ext4**</span> file system, the process with enabled capability <span class="notranslate"> CAP_SYS_RESOURCE </span> is not checked on the quota exceeding by default. It allows userland utilities <span class="notranslate"> _selectorctl_ </span> and <span class="notranslate"> _cagefs_ </span> to operate without fails even if a user exceeds a quota.
 
 To disable quota checking in <span class="notranslate">**XFS**</span> file system set <span class="notranslate">`cap_res_quota_disable`</span> option to 1 using the following command:
+
 <div class="notranslate">
 
 ```
@@ -1161,6 +1165,7 @@ To disable quota checking in <span class="notranslate">**XFS**</span> file syste
 ## Enter LVE when using cPanel utilities <Badge text="cPanel"/> <Badge text="CloudLinux 7 hybrid"/> <Badge text="experimental" type="warn"/>
 
 cPanel tools might use more resources than desired, so to limit resource usage, you might want to enter the corresponding LVE when using cPanel tools on-behalf of a non-root user.
+
 
 This feature is considered experimental, as in this case there might be contention for LVE limits between cPanel tools and web-requests for a given user, which might not be suitable.
 
@@ -1175,3 +1180,55 @@ By default, the feature is disabled (0), to enable it, run the following for Clo
 ```
 </div>
 
+## Proactive reporting kernel crash events with Sentry and Kernel Panic Receiver
+
+As updating the kernel is one of the most sensitive tasks, we'd like to achieve the maximum stability along the way.
+In case something goes wrong, proactive reacting to kernel crashes can help tremendously.
+
+Our new tool, _Kernel Panic Receiver_, released in [June 2020](https://blog.cloudlinux.com/kernel-panic-receiver-a-new-tool-to-organize-kernel-panic-logs) allows you to to organize kernel panic logs.
+Kernel Panic Receiver is an open-source component designed to pre-emptively resolve any kernel-related issues.
+
+Visit the [Kernel Panic Receiver project GitHub page](https://github.com/cloudlinux/kernel_panic_receiver).
+
+#### Usage
+
+To send required kernel logs from the clients' machines to _Kernel Panic Receiver_, we configure the default Linux kernel feature called _netconsole_.
+
+The configuration is done by the `initscripts` package, starting from the following versions:
+
+* For CloudLinux 6: `9.03.61-1.cloudlinux`
+* For CloudLinux 7: `9.49.49-1.cloudlinux`
+* For CloudLinux 8: `10.00.4-1.cloudlinux`
+
+To update the `initscripts` package, run the following command:
+
+```
+yum update initscripts --enablerepo=cloudlinux-updates-testing
+```
+
+When a kernel panic occurs, the _netconsole_ module sends logs to our server as plain text via the UDP protocol.
+
+#### What data is transferred by netconsole?
+
+The _netconsole_ sends only OOPs-related messages from the kernel ring buffer. It doesn't transfer any sensitive data, such as usernames, encryption keys, paths, etc. So, there are no security problems you should worry about.
+
+### Disabling the feature
+
+If you don't want to send us the data, you can turn the _netconsole_ service off (we don't recommend it, though).
+To disable transferring the data, just comment the `SYSLOGADDR` parameter in the _netconsole_ config file (`/etc/sysconfig/netconsole`):
+
+```
+# For more information about this data transmission, check this page:
+# https://cloudlinux.zendesk.com/hc/en-us/articles/360016481200
+# SYSLOGADDR=sentrykernel.cloudlinux.com
+```
+
+And stop the _netconsole_ service by running the following command:
+
+```
+service netconsole stop
+```
+
+:::tip Note
+_Netconsole_ is used only for Kernel Panic Receiver, so disabling it doesn't lead to issues with other CloudLinux services.
+:::
