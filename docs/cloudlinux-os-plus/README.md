@@ -1,4 +1,4 @@
-# CloudLinux OS+ (BETA)
+# CloudLinux OS+
 
 * [X-Ray](/cloudlinux-os-plus/#x-ray)
   * [Description](/cloudlinux-os-plus/#description)
@@ -11,12 +11,13 @@
   * [Description](/cloudlinux-os-plus/#description-2)
   * [Installation](/cloudlinux-os-plus/#installation-2)
   * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+  * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
   * [FAQ](/cloudlinux-os-plus/#faq-2)
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
 
 
-## X-Ray <Badge text="beta" type="warning"/>
+## X-Ray
 
 
 * [Description](/cloudlinux-os-plus/#description)
@@ -28,12 +29,8 @@
 
 ### Description
 
-:::warning Note
-Please note that <span class="notranslate">X-Ray</span> is a new experimental tool. It is in beta testing now. If you’d like to be a beta tester, please fill out [this form](https://cln.cloudlinux.com/console/dashboard/products). You will be able to use the <span class="notranslate">X-Ray</span> tool after receiving the CLN manager approval.
-:::
-
 :::warning Warning!
-<span class="notranslate">X-Ray</span> beta can be started only in NON-RESELLER CLN accounts.
+<span class="notranslate">X-Ray</span> is available only in NON-RESELLER CLN accounts.
 :::
 
 :::warning Warning!
@@ -46,18 +43,29 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
 
 ### Installation
 
-1. Make sure you are an approved X-Ray beta-tester (only non-reseller accounts apply)
+1. Make sure you have CloudLinux OS+ subscription (only non-reseller accounts apply)
 
-2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install it with the following command:
+2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install or update it with the following commands:
+   * installation
+
+   <div class="notranslate">
+
+    ```
+    # yum install lvemanager
+    ```
+    </div>
+
+    * update
    
    <div class="notranslate">
 
     ```
-    # yum install lvemanager --enablerepo=cloudlinux-updates-testing
+    # yum update lvemanager
     ```
     </div>
+3. X-Ray will be activated on all your servers during 4 hours. You will see the X-Ray tab in the LVE Manager UI.
 
-3. Run the following command:
+4. For instant activation, run the following command:
 
    <div class="notranslate">
 
@@ -71,11 +79,11 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
     <div class="notranslate">
 
     ```
-    # yum install rhn-check rhn-setup --enablerepo=cloudlinux-updates-testing
+    # yum install rhn-check rhn-setup
     ```
     </div>
 
-4. Then install the <span class="notranslate">`alt-php-xray`</span> package
+5. Then install the <span class="notranslate">`alt-php-xray`</span> package
 
     * Via user interface
         * Go to the <span class="notranslate">_X-Ray_</span> tab.
@@ -88,11 +96,11 @@ Please note that <span class="notranslate">X-Ray</span> is a new experimental to
     <div class="notranslate">
 
     ```
-    # yum install lvemanager alt-php-xray --enablerepo=cloudlinux-updates-testing
+    # yum install lvemanager alt-php-xray
     ```
     </div>
 
-5. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
+6. After installation, use the <span class="notranslate">_Start tracing_</span> button to create your first tracing task for a slow site.
 
 ![](/images/XRayStartTracing.png)
 
@@ -103,7 +111,7 @@ X-Ray provides two options for monitoring domain requests speed: Tracing task an
 :::warning Warning
 To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
 ```
-yum update lvemanager alt-php-xray  --enablerepo cloudlinux-updates-testing
+yum update lvemanager alt-php-xray
 ```
 ::: 
 
@@ -126,7 +134,7 @@ The *Created* column shows how a task was created – automatically (by continuo
 :::warning Warning
 To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
 ```
-yum update lvemanager alt-php-xray  --enablerepo cloudlinux-updates-testing
+yum update lvemanager alt-php-xray
 ```
 ::: 
   
@@ -650,13 +658,22 @@ All of the examples below are correct:
 
 You can use any of them with a prefix `www.` and it is also correct.
 
+#### What packages are required for X-Ray?
 
-## Centralized Monitoring <Badge text="beta" type="warning"/>
+Required packages:
+
+* `lvemanager` >= 6.2.10-1
+* `alt-php-xray` >= 0.2-1
+
+
+
+## Centralized Monitoring
 
 
 * [Description](/cloudlinux-os-plus/#description-2)
 * [Installation](/cloudlinux-os-plus/#installation-2)
 * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
+* [Alert Manager](/cloudlinux-os-plus/#alert-manager)
 * [FAQ](/cloudlinux-os-plus/#faq-2)
 * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
@@ -677,83 +694,36 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
 
 :::warning Warning!
-Centralized Monitoring beta can be started only in NON-RESELLER CLN accounts.
+Centralized Monitoring is available only in NON-RESELLER CLN accounts.
 :::
 
-:::tip Note
-Skip the first and second steps and start from the third step if you are already an X-Ray beta tester.
-:::
-
-1. Send a request to become the <span class="notranslate">Centralized Monitoring</span> beta tester here: [https://cln.cloudlinux.com/console/dashboard/products](https://cln.cloudlinux.com/console/dashboard/products)
-2. Wait for the approval from the manager.
-3. Register CloudLinux+ servers or use the existing servers.
-4. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
-5. You can find the list of servers in the <span class="notranslate">Centralized Monitoring</span> UI: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) or you can find the list of servers in your CLN account: [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring). Servers will have the <span class="notranslate">`N/A`</span> status.
-6. Update/install the <span class="notranslate">`rhn-client-tools`</span> package version 2.0.2-31.cl7 for CloudLinux 7, version  1.1.15-3.el6 for CloudLinux 6, version 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2 for CloudLinux 8, and  <span class="notranslate">`rhn-check`</span> and  <span class="notranslate">`rhn-setup`</span> packages:
-
-<div class="notranslate">
-
-```
-yum update/install rhn-client-tools rhn-check rhn-setup
-rhn_check
-```
-</div>
-
-7. Update/install the <span class="notranslate">`lve-utils`</span> package version 4.2.11-1 or higher:
-
-<div class="notranslate">
-
-```
-yum update/install lve-utils --enablerepo=cloudlinux-updates-testing
-```
-</div>
-
-8.  **Beta**
-
-    Set up your server to send statistics. Run this command
-
-    <div class="notranslate">
-
+1. Make sure you have a CloudLinux OS+ subscription.
+2. Make sure you have installed the **lve-utils** package version 4.2.20-2 or later. You can install or update it with the following commands:
+    * installation
     ```
-    /usr/share/cloudlinux/cl_plus/manage_clplus enable
+    yum install lve-utils
     ```
-    </div>
-
-    to install the <span class="notranslate">`cl-end-server-tools`</span> package and start service collecting and sending statistics to the central database. Then, check that the <span class="notranslate">`cl-end-server-tools`</span> package is installed successfully:
-
-    <div class="notranslate">
-
+    * update
     ```
-    rpm -q cl-end-server-tools
+    yum update lve-utils
     ```
-    </div>
-
-    **Production (not available yet)** 
-
-    Within an hour the <span class="notranslate">`cl-end-server-tools`</span> package will be installed on your server and the collecting and sending statistics daemon will be turned on.
-
-9. Check the status of service by running this command:
-
-<div class="notranslate">
-
-```
-service cl_plus_sender status
-```
-</div>
-
-
-10. Check that all collectors are initiated:
-
-<div class="notranslate">
-
-```
-cat /var/log/clplus_sender.log
-```
-</div>
-
-11. Wait some minutes and check the server statistics in the <span class="notranslate">Centralized Monitoring</span> UI | servers list: [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers) for those servers where the <span class="notranslate">_cl_plus_sender_</span> service works.
-12. List of users [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users) contains users from all servers where the <span class="notranslate">_cl_plus_sender_</span> service works and have had any load during the last 30 days.
-
+3. Log in to the [https://cm.cloudlinux.com/](https://cm.cloudlinux.com/) using CLN credentials (if you are already logged in via CLN, authorization via CM is not necessary, it uses SSO).
+4. Activate statistics collection on all your servers via the Centralized Monitoring UI ([https://cm.cloudlinux.com](https://cm.cloudlinux.com)) or via the CLN UI [https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring](https://cln.cloudlinux.com/console/cloudlinux/centralized-monitoring).
+    ![](/images/CMInstallationProd.png)
+5. Within 5 hours from the activation, statistics collection and sending to the central server will be set up automatically: all required packages and components will be installed. For new, just registered servers, statistics collection and sending will be set up automatically within 5 hours.
+6. For instant set up of a registered server without the automatic setup, run the following commands for all servers:
+    ```
+    # rhn_check	
+    # /usr/share/cloudlinux/cl_plus/manage_clplus enable
+    ```
+    **Note**: If the `rhn_check` command is not found, run the following command:
+    ```
+    # yum install/update rhn-check rhn-setup
+    ```
+7. After 5 hours (or after the manual setup), check that statistics for all registered servers is collected via [https://cm.cloudlinux.com/#/servers](https://cm.cloudlinux.com/#/servers). And check that user statistics on the servers is collected via [https://cm.cloudlinux.com/#/users](https://cm.cloudlinux.com/#/users).
+    :::tip Note
+    User statistics will be available only for users that were loaded starting from connecting the server to the Centralized Monitoring.
+    :::
 
 ### Centralized Monitoring user interface
 
@@ -794,7 +764,11 @@ All charts are auto-refreshed and there is an ability to select the period for m
 
 ![](/images/CMUPdates.png)
 
-#### Charts
+:::warning Note
+We store the metrics data for one month only.
+:::
+
+#### Charts for server metrics
 
 #### Visualization of the most popular server states
 
@@ -892,7 +866,182 @@ This page contains all users for the all server of the client and their LVE stat
 
 The description of this page is the same as [*The most loaded server users for the last minute*](/cloudlinux-os-plus/#the-most-loaded-server-users-for-the-last-minute) of the top 5 loaded users.
 
+
 ![](/images/CMUsers.png)
+
+User’s metrics data can be sorted by the load-to-limit ratio and by the absolute value.
+
+The absolute value is used to analyse the load produced by unlimited users.
+
+The value of the load-to-limit ratio is convenient to use in the analysis of how many resources the users consume and whether they need to change the limits.
+
+The values like this ![](/images/CMvalue.png) means that the resource is unlimited and 500.2 MB is the current usage of it.
+
+Metrics data of _Idle users_ is not used in the sorting, so such users always will be at the end of the list.  The sorting can be done for only one metric.
+
+#### Charts for Users metrics 
+
+:::warning Note
+We store the metrics data for one month only.
+:::
+
+On the user details page, the admin can find the charts for all LVE limits.
+
+![](/images/CMUsersCharts.png)
+
+
+### Alert Manager
+
+Alert Manager allows you to create a server or user alert for selected metrics and email the triggered events.
+
+#### Alert Manager page
+
+![](/images/CMAlertManager1.png)
+
+The Alert Manager page contains a table with the following:
+
+* **Alert name** - a unique alert name
+* **Tracking metric** - a name of a server/user metric which will trigger the alert notification
+* **# of servers** - number of servers on which the metric will be tracked
+  * click ![](/images/CMAlertManager2.png) to view a list of servers host names
+* **# of users** - number of users for which the metric will be tracked
+  * click ![](/images/CMAlertManager2.png) to view a list of users names
+* **Value** - a condition for the alert rule which will be applied to the tracking metrics
+* **Email** - email to send the triggered events notifications
+* **Type** - a type of the alert rule
+* **# of triggered events** - the number of events from the time, when alert rule was created
+  * ![](/images/CMAlertManager3.png) the event is still firing
+* **Time  of the last trigger** - the time of last triggered event, it is the time in your browser time zone
+* **Actions** - click ![](/images/CMAlertManager4.png) to edit and ![](/images/CMAlertManager5.png) to delete the alert rule
+
+**Color Codes**
+
+* **Red** color means that the event with the condition "more than" is still firing.
+* **Green** color means that the event with the condition "less than" is still firing.
+
+#### Creating an alert
+
+To create a new alert, click the _Create alert_ button.
+
+![](/images/CMAlertManager7.png)
+
+Next, fill out the opened popup.
+
+![](/images/CMAlertManager6.png)
+
+* **Name of alert** - a unique alert name
+* **Alert type** - an admin can create a **user** or a **server** alert. [What is the difference between them?](/cloudlinux-os-plus/#difference-between-the-server-alert-and-the-user-alert)
+* **Select user/server** - admin will see such dropdown depending on a [case of alert creating](/cloudlinux-os-plus/#cases-of-alert-creating)
+* **Notify me** - the condition of the alert trigger
+* **Duration** - how much time the condition should be actual to trigger the notification
+* **Notify me on email** - the email to send notifications
+
+#### Editing an alert
+
+An admin can edit the alert rule and change the following fields:
+* Alert name
+* Value of alert rule condition
+* Time duration
+* Email for notifications
+
+#### Difference between the server alert and the user alert
+
+The **server alert** is used to track the state of the  whole server, it does not track user state on the server.
+The **server alert** tracks the next list of metrics:
+
+1. Context switches
+2. System load (1m)
+3. System load (5m)
+4. System load (15m)
+5. CPU Basic (total)
+6. CPU Basic (system)
+7. CPU Basic (user)
+8. CPU Basic (iowait)
+9. CPU Basic (steal)
+10. Network Traffic Basic (`eht0_receive`)
+11. Network Traffic Basic (`eht0_transmit`)
+12. Network Traffic Basic (`ehtN_receive`)
+13. Network Traffic Basic (`ehtN_transmit`)
+14. Disk Space Used Basic (`mountpoint: <0>`)
+15. Disk Space Used Basic (`mountpoint: <1>`)
+16. Disk Space Used Basic (`mountpoint: <N>`)
+17. Memory Basic (available)
+18. Memory Basic (used)
+19. Time spent Doing I/Os
+20. Disk IOps Writes Completed
+21. Disk IOps Reads Completed
+22. Disk Read Data
+23. Disk Write Data
+24. Disk Read Time
+25. Disk Write Time
+26. Apache connections
+27. Number of requests per minute
+28. MySQL queries
+29. Hardware Temperature (`chip<0>`)
+30. Hardware Temperature (`sensor<0>`)
+31. Hardware Temperature (`chip<N>`)
+32. Hardware Temperature (`sensor<N>`)
+33. Open File Description
+
+During creating a server alert an admin should select the type of metrics as the first step. The list of servers will be collected according to the availability of these metrics on the server.
+
+For example, for now, we do not collect Apache metrics for non-cPanel servers, so you will get only cPanel servers as a list of servers for these metrics.
+
+We're planning to implement support for other panels/web servers in the next releases.
+
+:::tip Small limitation
+We collect the server list according to having their statistics in our database (this behavior will be changed in the next releases).
+:::
+
+For example, if server state is N/A or idle more than 24 hours, it will not be visible in the list for the alert.
+
+The **user alert** tracks the next list of LVE metrics:
+
+1. CPU Usage (current usage)
+2. CPU Usage (faults)
+3. Entry Processes (current usage)
+4. Entry Processes (faults)
+5. Physical Memory Usage (current usage)
+6. Physical Memory Usage (faults)
+7. IOPS (current usage)
+8. IOPS (faults)
+9. IO Usage (current usage)
+10. IO Usage (faults)
+11. Number of Processes (current usage)
+12. Number of Processes (faults)
+13. MySQL CPU (current usage)
+14. MySQL CPU (faults)
+15. MySQL IO (current usage)
+
+:::tip Small limitation
+We collect the server list according to having their statistics in our database (this behavior will be changed in the next releases).
+:::
+
+For example, if the user state is N/A or idle more than 24 hours, it will not be visible in the list for the alert.
+
+#### Cases of alert creating
+
+* Creating a server alert for the selected metrics for one server
+* Creating a server alert for the selected metrics for all servers (the default value)
+  
+In this two cases, you will not see the dropdown for selecting users because the metrics will track the server state. 
+
+* Creating a user alert for one user, so admin can select a server and a user.
+* Creating a user alert for all users on several servers/all servers (in this case admin can't select users - all users will be selected automatically)
+
+#### What is the Firing state of the alert?
+
+This is the state of an alert that has been active for longer than the configured threshold duration.
+
+
+#### Alert notifications
+
+![](/images/CMAlertManager8.png)
+
+* **Alert name** - the link to the alert page
+* **Firing target** - the link to the server details page
+
+
 
 ### FAQ
 
@@ -944,11 +1093,6 @@ The user load chart contains three lines:
   
 Limit and current load are drawing regarding the left vertical axis, the count of faults is drawing regarding the right vertical axis. You can focus on a particular line by clicking a required legend.
 
-#### Do I need to submit a request to be a Centralized Monitoring beta tester if I'm already an X-Ray beta tester?
-
-No, you don't need, just [follow the <span class="notranslate">Centralized Monitoring</span> instruction](/cloudlinux-os-plus/#installation-2) starting from the third step.
-
-
 
 ### Troubleshooting
 
@@ -956,15 +1100,16 @@ No, you don't need, just [follow the <span class="notranslate">Centralized Monit
 
 1. Check that your server is registered by key or by IP license of the CloudLinux+ account, i.e., it should be seen in the list of servers in your CLN account here: [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
 2. Check that the following required packages are installed on the end server:
-* <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.1-1
-* <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-1
+* <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.7-1
+* <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-2
 * <span class="notranslate">`rhn-client-tools`</span>
     * CloudLinux 6 >= 1.1.15-3.el6.cloudlinux.26
     * CloudLinux 7 >= 2.0.2-31.el7.clouldinux
     * CloudLinux 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
-* <span class="notranslate">`lve-stats`</span> >= 3.0.6-1
-* <span class="notranslate">`lve-utils`</span> >= 4.2.11-1
-* <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.8-1
+* <span class="notranslate">`lve-stats`</span> >= 3.0.7-2
+* <span class="notranslate">`lve-utils`</span> >= 4.2.20-1
+* <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.13-1
+* `lvemanager` >= 6.2.10-1
 3. Check that service collecting and sending statistics is running:
 
 <div class="notranslate">
@@ -998,6 +1143,8 @@ You can view the events log on the client's server here:
 
 No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
 
+#### Logging data sent to pushgateway to the statistics collection daemon log
+
 Starting from `cl-end-server-tools` v.1.0.6-1, the statistics collection daemon allows to log data sent to pushgateway to its log `/var/log/clplus_sender.log`.
 
 To start logging, run the following command: 
@@ -1017,3 +1164,10 @@ You don't need to restart the daemon after starting/stopping logging. The presen
 :::warning Warning
 Use this logging with caution because when it is enabled, the size of the daemon log `/var/log/clplus_sender.log` will increase each minute minimum on 3-4 KB. The actual increase size depends on the number of active users' processes on a server.
 :::
+
+### Known issues
+
+* MySQL Governor statistics in some cases is collected incorrectly
+* Sorting by MySQL Governor statistics ignores idle users
+* Sorting from the search result set does not work
+* Sorting by ratio for unlimited users works incorrectly
