@@ -698,7 +698,7 @@ Centralized Monitoring is available only in NON-RESELLER CLN accounts.
 :::
 
 1. Make sure you have a CloudLinux OS+ subscription.
-2. Make sure you have installed the **lve-utils** package version 4.2.20-2 or later. You can install or update it with the following commands:
+2. Make sure you have installed the **lve-utils** package version 4.2.21-2 or later. You can install or update it with the following commands:
     * installation
     ```
     yum install lve-utils
@@ -1107,7 +1107,7 @@ Limit and current load are drawing regarding the left vertical axis, the count o
     * CloudLinux 7 >= 2.0.2-31.el7.clouldinux
     * CloudLinux 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
 * <span class="notranslate">`lve-stats`</span> >= 3.0.7-2
-* <span class="notranslate">`lve-utils`</span> >= 4.2.20-1
+* <span class="notranslate">`lve-utils`</span> >= 4.2.21-2
 * <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.13-1
 * `lvemanager` >= 6.2.10-1
 3. Check that service collecting and sending statistics is running:
