@@ -1050,6 +1050,79 @@ By default, <span class="notranslate">Passenger</span> log messages are all writ
 
 See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 
+<!--
+### Website monitoring tool and Slow Site analyzer
+
+* [Website monitoring tab](/lve_manager/#website-monitoring-tab)
+* [Main](/lve_manager/#main)
+* [PHP Site analyzer](/lve_manager/#php-site-analyzer)
+* [Settings](/lve_manager/#settings)
+* [Email notifications](/lve_manager/#email-notifications)
+
+**Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics.
+
+**Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs.
+ 
+**Installation**
+
+Update the `lvemanager` package to version 6.3.0-1 and higher and you'll get the `alt-php-ssa` and the `cl-web-monitoring-tool` packages as a dependency.
+
+**Uninstall**
+
+To uninstall the tool, run the following commands:
+
+```
+yum downgrade lvemanager --enablerepo=cloudlinux-updates-testing
+yum erase alt-php-ssa cl-web-monitoring-tool
+```
+
+#### Website monitoring tab
+
+The configuration of the Website monitoring tool and the Slow Site analyzer can be done in the LVE Manager -> Website monitoring tab.
+
+There are Main, PHP Site analyzer, and Settings subtabs.
+
+#### Main
+
+This subtab views the latest report (for the previous day) of the Website monitoring tool.
+
+![](/images/WebsiteMonitoringMain.png)
+
+Here, the slowest websites are the sites that respond slowly to the simple cURL request like this `curl http://domain.com`.
+
+#### PHP Site analyzer
+
+![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
+
+This is an example of a report from the Slow Site analyzer. The report shows the number of slow requests per domain and its URLs and the average duration of each slow URL.
+
+#### Settings
+
+Here, an admin can config the Website monitoring and the PHP Site analyzer.
+
+To enable or disable **Website monitoring**, use the following slider.
+
+![](/images/WebsiteMonitoringSlider.png)
+
+* **Number of domains for report** – this number (N) will be used to select the top N domains from the list of all domains, sorted by a response duration (Slowest websites list). And this number also will be used to select the top N domains from the list of all domains, sorted by the number of errors (Websites with most errors list).
+* **Send request period** -  is a period in seconds between requests to the same domain.
+* **Domain response timeout** - if there is no answer from the website for this period of time, the Website Monitoring tool will regard this behaviour as the `HTTP 408` error.
+* **Concurrent requests limit** - how many concurrent requests can be done by the Website Monitoring tool.
+
+To enable or disable the **Slow site analyzer**, use the following slider.
+
+![](/images/WebsiteMonitoringSlider1.png)
+
+* **Top slow domains** - this number (N) will be used to select the top N domains from the list of all domains, marked as slow.
+* **Top slow URLs** - this number (N) will be used to select the top N URLs for each domain, marked as slow.
+* **Request duration** - the duration of a request in seconds. 
+* **Request number & Time** - how many requests with a certain request duration should be done in time to mark the domain as a slow one.
+
+
+#### Email notifications
+
+-->
+
 ### Reseller interface
 
 Reseller interface is designed to manage limits for resellers’ end users, to monitor statistics and the history of resource usage and to modify reseller’s end user packages limits.

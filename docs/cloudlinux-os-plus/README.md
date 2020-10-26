@@ -1141,7 +1141,34 @@ You can view the events log on the client's server here:
 
 #### Can I get monitoring metrics from LiteSpeed, Nginx or other (Not Apache) web server?
 
-No, you can not. We will announce in our [blog](https://blog.cloudlinux.com/) when we implement this.
+Starting from end-server-tools-1.0.7, it supports collecting and sending statistics from the Apache and LiteSpeed web servers.
+
+LiteSpeed is supported on cPanel and DirectAdmin control panels.
+
+Each minute the statistics collection daemon checks which web server is started. If LiteSpeed is started, the daemon will collect data from it, otherwise, it checks if Apache is started.
+
+When the daemon detects that the server is changed, it writes the following line into the statistics collection daemon log `/var/log/clplus_sender.log`:
+
+```
+2020-10-09 17:25:31,462: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Using Apache
+```
+or
+
+```
+2020-10-09 18:13:03,897: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Using Litespeed
+```
+
+If the daemon can't detect either Apache or LiteSpeed, it writes to the log the following:
+
+```
+2020-10-09 17:33:38,399: (CL+_sender_daemon) [INFO] Apache/Litespeed collector: Apache or Litespeed stopped or absent, collector will not work
+```
+
+The statistics collection daemon reacts to the server changing automatically, no need to restart it.
+
+:::warning Warning
+Please note that the daemon checks the server type once in a minute, so the data sent on a minute of switching can be unreliable.
+:::
 
 #### Logging data sent to pushgateway to the statistics collection daemon log
 
