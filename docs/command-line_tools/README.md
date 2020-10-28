@@ -2869,7 +2869,7 @@ If **fs.proc_super_gid** was configured by an admin to some existing group, the 
 * the focused check of the servers for typical errors performed by the support engineers before proceeding to the detailed analysis of the customer tickets;
 * servers automatic check by cron with the following generation of the reports and email them to the server administrator (_only for cPanel_).
     * Set option `ENABLE_CLDIAG` to `false` in config `/etc/sysconfig/cloudlinux` if you want to disable automatic check by cron permanently
-    * Use cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18</span>)
+    * Use the cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18-1</span>)
 
 In all cases, for the negative checker result, the exit code will be > 0 (at the moment it will be equal to the number of failed checkers).
 
@@ -3817,19 +3817,3 @@ For resellers' users with reseller limits enabled admin should use the <span cla
     cloudlinux-limits set --reseller-name res1 --default all --json
     ```
     </div>
-
-<Disqus/>    
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
