@@ -2869,7 +2869,7 @@ If **fs.proc_super_gid** was configured by an admin to some existing group, the 
 * the focused check of the servers for typical errors performed by the support engineers before proceeding to the detailed analysis of the customer tickets;
 * servers automatic check by cron with the following generation of the reports and email them to the server administrator (_only for cPanel_).
     * Set option `ENABLE_CLDIAG` to `false` in config `/etc/sysconfig/cloudlinux` if you want to disable automatic check by cron permanently
-    * Use the cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18-1</span>)
+    * Use cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18</span>)
 
 In all cases, for the negative checker result, the exit code will be > 0 (at the moment it will be equal to the number of failed checkers).
 
@@ -3060,6 +3060,32 @@ Available options: `--all` and `--cron-check`.
     Check mount with hidepid=2 option:
 	    OK: hidepid protection enabled
   ```
+
+#### check-jwt-token
+
+This new checker is available starting from `<insert_lve_utils_version>`
+
+Checks the validity and presence of the JWT token which is required for correct work of client part of Centralized Monitoring.
+
+Failure reasons:
+* The JWT token is absent in path `/etc/sysconfig/rhn/jwt.token`
+* The JWT token is malformed
+* The JWT token is expired.
+* The issuer of JWT token is invalid.
+
+In all cases try running <span class="notranslate">`rhn_check`</span> for getting a new token.
+
+#### check-cm-all
+
+This new checker is available starting from `<insert_lve_utils_version>`
+
+Checks the things on a server of client which are required for correct work of client part of Centralized Monitoring:
+* Checks the validity and presence of JWT token
+* Checks that service <span class="notranslate">`cl_plus_sender`</span> is present, enabled and active
+* Checks that service <span class="notranslate">`node_exporter`</span> is present, enabled and active
+* Checks that service <span class="notranslate">`lvestats`</span> is present, enabled and active
+* Checks that RPM packages <span class="notranslate">`cl-end-server-tools`</span> and <span class="notranslate">`cl-node-exporter`</span> are installed
+* Checks that executing <span class="notranslate">`rhn_check`</span> doesn't cause the errors
 
 ### cloudlinux-config
 
@@ -3792,7 +3818,7 @@ For resellers' users with reseller limits enabled admin should use the <span cla
     ```
     </div>
 
-   
+<Disqus/>    
 
 
 
