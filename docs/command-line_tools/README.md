@@ -3085,7 +3085,6 @@ Checks the things on a server of client which are required for correct work of c
 * Checks that service <span class="notranslate">`node_exporter`</span> is present, enabled and active
 * Checks that service <span class="notranslate">`lvestats`</span> is present, enabled and active
 * Checks that RPM packages <span class="notranslate">`cl-end-server-tools`</span> and <span class="notranslate">`cl-node-exporter`</span> are installed
-* Checks that executing <span class="notranslate">`rhn_check`</span> doesn't cause the errors
 
 ### cloudlinux-config
 
