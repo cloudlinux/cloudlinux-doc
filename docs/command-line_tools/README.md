@@ -3063,7 +3063,7 @@ Available options: `--all` and `--cron-check`.
 
 #### check-jwt-token
 
-This new checker is available starting from `<insert_lve_utils_version>`
+This new checker is available starting from LVE-Utils 4.2.21-2
 
 Checks the validity and presence of the JWT token which is required for correct work of client part of Centralized Monitoring.
 
@@ -3077,7 +3077,7 @@ In all cases try running <span class="notranslate">`rhn_check`</span> for gettin
 
 #### check-cm-all
 
-This new checker is available starting from `<insert_lve_utils_version>`
+This new checker is available starting from LVE-Utils 4.2.21-2
 
 Checks the things on a server of client which are required for correct work of client part of Centralized Monitoring:
 * Checks the validity and presence of JWT token
