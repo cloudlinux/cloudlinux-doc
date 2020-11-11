@@ -3061,6 +3061,31 @@ Available options: `--all` and `--cron-check`.
 	    OK: hidepid protection enabled
   ```
 
+#### check-jwt-token
+
+This new checker is available starting from LVE-Utils 4.2.21-2
+
+Checks the validity and presence of the JWT token which is required for correct work of client part of Centralized Monitoring.
+
+Failure reasons:
+* The JWT token is absent in path `/etc/sysconfig/rhn/jwt.token`
+* The JWT token is malformed
+* The JWT token is expired.
+* The issuer of JWT token is invalid.
+
+In all cases try running <span class="notranslate">`rhn_check`</span> for getting a new token.
+
+#### check-cm-all
+
+This new checker is available starting from LVE-Utils 4.2.21-2
+
+Checks the things on a server of client which are required for correct work of client part of Centralized Monitoring:
+* Checks the validity and presence of JWT token
+* Checks that service <span class="notranslate">`cl_plus_sender`</span> is present, enabled and active
+* Checks that service <span class="notranslate">`node_exporter`</span> is present, enabled and active
+* Checks that service <span class="notranslate">`lvestats`</span> is present, enabled and active
+* Checks that RPM packages <span class="notranslate">`cl-end-server-tools`</span> and <span class="notranslate">`cl-node-exporter`</span> are installed
+
 ### cloudlinux-config
 
 **cloudlinux-config** utility shows/sets various parameters related to [LVE Manager](/lve_manager/#lve-manager-options) UI, [MySQL Governor](/cloudlinux_os_components/#configuration-and-operation) and [faults notifications for LVE-Stats 2](/cloudlinux_os_components/#configuration)
@@ -3791,19 +3816,3 @@ For resellers' users with reseller limits enabled admin should use the <span cla
     cloudlinux-limits set --reseller-name res1 --default all --json
     ```
     </div>
-
-   
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
