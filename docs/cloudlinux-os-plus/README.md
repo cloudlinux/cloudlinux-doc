@@ -30,10 +30,6 @@
 ### Description
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> is available only in NON-RESELLER CLN accounts.
-:::
-
-:::warning Warning!
 <span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin. Non-panel installations is not planned.
 :::
 
@@ -691,10 +687,6 @@ Required packages:
 
 :::tip Note
 Make sure that `cm.cloudlinux.com` is available on your end server.
-:::
-
-:::warning Warning!
-Centralized Monitoring is available only in NON-RESELLER CLN accounts.
 :::
 
 1. Make sure you have a CloudLinux OS+ subscription.
