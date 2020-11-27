@@ -1163,11 +1163,13 @@ Slow requests that represent bursts of activity and are weakly related to all ac
 
 Email notifications are created by the Web monitoring tools. 
 
-:::tip Note
-Email notifications from the Slow Site analyzer will be implemented in the next releases.
-:::
+**Example of the Web monitoring tools report**.
 
 ![](/images/EmailNotifications.png)
+
+**Example of the PHP Slow site analyzer report**.
+
+![](/images/SlowSiteAnalyzerEmailNotifications.png)
 
 ### Reseller interface
 
