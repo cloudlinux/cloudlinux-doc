@@ -557,6 +557,10 @@ Please note that mod_lsapi does not work when php-fpm is enabled because php-fpm
 
 Reseller limits feature also enables hosters to give their resellers controls over the end-user’s resources. Resellers can assign limits to their end-users as they want, even if they are higher than the limits assigned to the reseller. The reseller’s end-users will not be limited by the reseller limits unless their **cumulative usage** goes above the limits the hoster assigned to their reseller.
 
+:::warning
+Reseller cannot manage INODE or MYSQL limits. Neither his own, nor for his users.
+:::
+
 - [Design](/limits/#design)
 - [Requirements](/limits/#requirements)
 - [Configuration](/limits/#configuration)

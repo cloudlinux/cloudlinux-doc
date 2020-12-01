@@ -1184,7 +1184,9 @@ Log in under a particular reseller credentials to have access to the following f
 * <span class="notranslate"> [Options](/lve_manager/#options-tab)</span> tab allows to set LVE Faults email notifications.
 * <span class="notranslate"> [Packages](/lve_manager/#packages-tab)</span> tab allows to manage reseller’s end user packages limits.
 
-Please note that reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
+:::warning
+Reseller can manage all his end users via Reseller Interface. Reseller cannot manage <span class="notranslate"> INODE </span> or <span class="notranslate"> MYSQL </span> limits, neither his own nor for his users.
+:::
 
 <div class="notranslate">
 
@@ -1206,7 +1208,9 @@ You can refresh the table manually by clicking <span class="notranslate">_Refres
 
 Usage values will not change until the next manual refresh. To unfreeze click on <span class="notranslate">_unpause_</span> button. The countdown will continue.
 
+:::warning
 Reseller cannot manage <span class="notranslate">INODE</span> or MYSQL limits. Neither his own, nor for his users.
+:::
 
 The bottom line star in the table displays the total reseller resource usage. It means, that all the usage of resellers’ end users and of his own is displayed as a summary for each parameter.
 
