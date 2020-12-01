@@ -121,14 +121,14 @@ If a user has shell enabled - you can simply use:
 <div class="notranslate">
 
 ```
-$ /bin/su - $USERNAME  -c "_command_"
+$ /bin/su - $USERNAME  -c _command_
 ```
 </div>
 Yet, if a user have they shell disabled, it wouldn't work. To solve this issue, we have added command:
 <div class="notranslate">
 
 ```
-$ /sbin/cagefs_enter_user $USERNAME "_command_"
+$ /sbin/cagefs_enter_user $USERNAME _command_
 ```
 </div>
 
