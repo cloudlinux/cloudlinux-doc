@@ -731,8 +731,7 @@ To turn on the mode without session expired, follow the next steps:
 
     ![](/images/AutoLogout.png)
 
-Your session in cln.cloudlinux.com will expire in 10 min. But your session in cm.cloudlinux.com will not expire untill your browser tab will be opened (edited) 
-5:16
+Your session in the [cln.cloudlinux.com](https://cln.cloudlinux.com/console/) will expire in 10 min. But your session in the [cm.cloudlinux.com](https://cm.cloudlinux.com/#/servers) will not expire while your browser tab remains open.
 
 
 ### Centralized Monitoring user interface
