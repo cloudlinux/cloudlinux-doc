@@ -721,7 +721,7 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
 
 ### Centralized Monitoring: mode without session expired
 
-Starting from Centralized Monitoring version 1.0.6, users can monitor server’s or user’s load for a long time using the mode without session expired.
+Users can monitor server’s or user’s load for a long time using the mode without session expired.
 
 To turn on the mode without session expired, follow the next steps:
 
