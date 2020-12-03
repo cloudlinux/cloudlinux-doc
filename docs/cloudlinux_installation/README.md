@@ -174,7 +174,7 @@ To register your server with CloudLinux Network using activation key run:
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/rhnreg_ks --force --activationkey=<activation key>
+$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
 ```
 </div>
 
