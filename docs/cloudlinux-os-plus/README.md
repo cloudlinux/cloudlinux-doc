@@ -10,6 +10,7 @@
 * [Centralized Monitoring](/cloudlinux-os-plus/#centralized-monitoring)
   * [Description](/cloudlinux-os-plus/#description-2)
   * [Installation](/cloudlinux-os-plus/#installation-2)
+  * [Centralized Monitoring: mode without session expired](/cloudlinux-os-plus/#centralized-monitoring-mode-without-session-expired)
   * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
   * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
   * [FAQ](/cloudlinux-os-plus/#faq-2)
@@ -668,13 +669,13 @@ Required packages:
 
 * [Description](/cloudlinux-os-plus/#description-2)
 * [Installation](/cloudlinux-os-plus/#installation-2)
+* [Centralized Monitoring: mode without session expired](/cloudlinux-os-plus/#centralized-monitoring-mode-without-session-expired)
 * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
 * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
 * [FAQ](/cloudlinux-os-plus/#faq-2)
 * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
 ### Description
-
 
 <span class="notranslate">Centralized Monitoring</span> is a tool that allows hosting administrators to monitor load for all their servers and users.
 
@@ -716,6 +717,20 @@ Make sure that `cm.cloudlinux.com` is available on your end server.
     :::tip Note
     User statistics will be available only for users that were loaded starting from connecting the server to the Centralized Monitoring.
     :::
+
+
+### Centralized Monitoring: mode without session expired
+
+Starting from Centralized Monitoring version 1.0.6, users can monitor server’s or user’s load for a long time using the mode without session expired.
+
+To turn on the mode without session expired, follow the next steps:
+
+1. Log in to the [cln.cloudlinux.com](https://cln.cloudlinux.com/console/) via your account
+2. Open the [cm.cloudlinux.com](https://cm.cloudlinux.com/#/servers) in a new browser tab/window (please, use the same browser as in step 1)
+3. Use the toggle to turn on/off 10 min auto logout
+
+    ![](/images/AutoLogout.png)
+
 
 ### Centralized Monitoring user interface
 
@@ -930,11 +945,7 @@ Next, fill out the opened popup.
 
 #### Editing an alert
 
-An admin can edit the alert rule and change the following fields:
-* Alert name
-* Value of alert rule condition
-* Time duration
-* Email for notifications
+An admin can edit any field in the Alert except the Alert type.
 
 #### Difference between the server alert and the user alert
 
