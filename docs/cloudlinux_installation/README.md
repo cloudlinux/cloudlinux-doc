@@ -856,17 +856,17 @@ timeout=5
 
 ## Uninstalling
 
-You can always uninstall CloudLinux. In this case, we will 'convert' the system back to CentOS. Even if the original system was RHEL - we will still convert to CentOS state.
+You can always uninstall CloudLinux OS. In this case, the system will be converted back to CentOS (even if the original system was RHEL)
 
 The following actions will be taken:
 
 1. LVE related packages will be removed.
 2. CloudLinux repositories & <span class="notranslate">yum</span> plugin will be removed.
-3. CentOS repositories will be setup.
+3. CentOS repositories will be set up.
 
-At the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
+In the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
 
-To uninstall CloudLinux, do:
+To uninstall CloudLinux OS, run:
 
 <div class="notranslate">
 
@@ -878,7 +878,7 @@ $ sh cldeploy -c
 
 Now you have converted back to CentOS and it is the time to install kernel.
 
-To delete CloudLinux kernel, run:
+To delete CloudLinux kernel, run (change the kernel package name to the one you've been using):
 
 <div class="notranslate">
 
@@ -905,6 +905,8 @@ yum remove lve kmod*lve*
 Kernel package and related LVE packages should be deleted and the required kernel will be installed.
 
 Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
+
+Do not forget to free up a CloudLinux OS license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers).
 
 **For EasyApache 3:**
 
