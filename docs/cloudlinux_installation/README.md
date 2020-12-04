@@ -866,6 +866,10 @@ The following actions will be taken:
 
 In the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux kernel (manual step), and installation of CentOS kernel (if needed).
 
+:::warning
+Do not forget to free up a CloudLinux OS license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers). After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed for it. 
+:::
+
 To uninstall CloudLinux OS, run:
 
 <div class="notranslate">
@@ -905,8 +909,6 @@ yum remove lve kmod*lve*
 Kernel package and related LVE packages should be deleted and the required kernel will be installed.
 
 Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
-
-Do not forget to free up a CloudLinux OS license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers).
 
 **For EasyApache 3:**
 
