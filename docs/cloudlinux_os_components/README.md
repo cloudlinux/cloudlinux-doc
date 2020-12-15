@@ -7331,11 +7331,15 @@ When Apache module mod_lsapi detects CRIU enabled (lsapi_criu On) it prepares a 
 
 The images of the processes will be saved even if Apache is restarted. But all images will be deleted after server restart by default configuration. This can be modified by setting the new path <span class="notranslate"> lsapi_criu_imgs_dir_path </span> .
 
-**Important!** If php.ini or configuration file from php.d is changed, the images must be deleted manually.
+:::warning Important!
+If php.ini or configuration file from php.d is changed, the images must be deleted manually.
+:::
 
-**Note** that CRIU (version lower than criu-lve-3.6-1) can't correctly freeze <span class="notranslate"> lsphp </span> with <span class="notranslate"> PrivateTmp </span> enabled. For correct work, <span class="notranslate"> PrivateTmp </span> must be <span class="notranslate"> false </span> in <span class="notranslate"> httpd.service file </span> . For disabling:
+:::tip Note 
+CRIU (version lower than criu-lve-3.6-1) can't correctly freeze <span class="notranslate"> lsphp </span> with <span class="notranslate"> PrivateTmp </span> enabled. For correct work, <span class="notranslate"> PrivateTmp </span> must be disabled in <span class="notranslate"> httpd.service file </span> . 
+:::
 
-Copy <span class="notranslate"> _httpd.service_ </span> to <span class="notranslate"> _/etc/systemd/system_ </span> and change there <span class="notranslate"> PrivateTmp: 
+To disable it, copy <span class="notranslate"> _httpd.service_ </span> to <span class="notranslate"> _/etc/systemd/system_ </span> and change there <span class="notranslate"> PrivateTmp: 
   </span>
 <div class="notranslate">
 
@@ -7378,9 +7382,9 @@ and
 ```
 </div>
 
-**Installation**
+#### CRIU Installation
 
-Criu is installed with dependency to mod_lsapi-1.1 package. To activate it:
+Criu is installed with dependency to mod_lsapi package. To activate it:
 
 1. Enable service and start it:
 
@@ -7414,7 +7418,7 @@ service httpd restart
 ```
 </div>
 
-
+#### CRIU Image Cleanup
 
 1. An option added to the Apache configuration for cleaning all the images earlier saved by CRIU.
 
