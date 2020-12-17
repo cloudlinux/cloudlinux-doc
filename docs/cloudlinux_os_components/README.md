@@ -3039,7 +3039,8 @@ When customer is restricted, the customer will be placed into special LVE with I
 #### Installation
 
 :::danger IMPORTANT
-Please note that MariaDB 10.4 is not supported by cPanel. You can find details here: [https://features.cpanel.net/topic/maria-10-4-support](https://features.cpanel.net/topic/maria-10-4-support).
+Please note that MariaDB 10.4 and 10.5 are not supported by cPanel. You can find details here: [https://features.cpanel.net/topic/maria-10-4-support](https://features.cpanel.net/topic/maria-10-4-support).
+[https://features.cpanel.net/topic/mariadb-10-5-support](https://features.cpanel.net/topic/mariadb-10-5-support)
 :::
 
 ::: danger IMPORTANT
