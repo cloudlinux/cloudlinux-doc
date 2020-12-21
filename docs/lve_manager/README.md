@@ -1058,6 +1058,7 @@ See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 * [Settings](/lve_manager/#settings)
 * [What is the density threshold?](/lve_manager/#what-is-the-density-threshold)
 * [Email notifications](/lve_manager/#email-notifications)
+* [FAQ](/lve_manager/#faq)
 
 **Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
 
@@ -1072,17 +1073,14 @@ Slow Site analyzer is not available for CloudLinux 6.
 To install the tool, run the following command:
 
 ```
-yum update lvemanager --enablerepo=cloudlinux-updates-testing
+yum update lvemanager
 ```
 
-**Uninstall**
+:::warning Warning
+For now, there is no any possibility to remove the `alt-php-ssa` and `cl-web-monitoring-tool` packages so that the _Website monitoring_ tab will be removed. This possibility will be added in the future releases.
 
-To uninstall the tool, run the following commands:
-
-```
-yum downgrade lvemanager --enablerepo=cloudlinux-updates-testing
-yum erase alt-php-ssa cl-web-monitoring-tool
-```
+You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Settings](/lve_manager/#settings)_ subtab, so sites statistics will stop collecting and there will be no additional load on the server.
+:::
 
 #### Website monitoring tab
 
@@ -1122,7 +1120,7 @@ You can find the explanation of the **Slow requests density in period** [here](/
 
 #### Settings
 
-Here, an admin can config the Website monitoring and the PHP Site analyzer.
+Here, an admin can configure the Website monitoring and the PHP Site analyzer.
 
 :::tip Note
 All settings which was changed after starting Website monitoring and Slow site analyzer will be applied for the next 24h (from midnight).
@@ -1170,6 +1168,24 @@ Email notifications are created by the Web monitoring tools.
 **Example of the PHP Slow site analyzer report**.
 
 ![](/images/SlowSiteAnalyzerEmailNotifications.png)
+
+#### FAQ
+
+Q: Does this feature consume a lot server resources for collecting website and PHP data? If I enable it can this slow down the server?
+
+A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring should not create a significant load and you can keep it always on.
+
+---
+
+Q: Can I change the default value to 10, for example for the "Top N slow websites to show" setting?
+
+A: This number is simply the number of the slowest responding sites. All sites are sampled during the day. When generating a report, all sites' responses are sorted by response time from highest to lowest, and to make the report readable, only the first N sites are taken. You can specify N as all existing sites or only the 5 slowest. This number does not affect the server load, it only affects the report that will be visible in the UI or emailed to the administrator.
+
+---
+
+Q: What would you recommend: to enable the Website monitoring tool for some days and then disable or I can keep it always turned on?
+
+A: The load depends on the number of websites and the Website monitoring tool settings. Basically, the Website monitoring tool should not create a significant load and you can keep it always on.
 
 ### Reseller interface
 
