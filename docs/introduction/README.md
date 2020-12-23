@@ -17,7 +17,7 @@ Currently, the following version are supported:
 |Operating System | Release Date| End of Life and Support|
 |CloudLinux 8 | Mar 17, 2020 | May 31, 2029 |
 |CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024 |
-|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://www.cloudlinux.com/extended-support-cloudlinux-os-6)) |
+|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
 
 ### Description of CloudLinux components
 
