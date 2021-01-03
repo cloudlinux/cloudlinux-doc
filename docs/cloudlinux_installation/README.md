@@ -90,7 +90,7 @@ It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#ho
 :::
 
 :::warning
-Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later in 2020.
+Note that CloudLinux 8 supports only DirectAdmin as of the initial release. Support for cPanel and Plesk will be added later by the end of Q1 2021.
 :::
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
