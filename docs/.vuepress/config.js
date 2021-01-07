@@ -120,7 +120,7 @@ module.exports = {
           {
             text: "How to",
             url:
-              "https://cloudlinux.zendesk.com/hc/sections/115001344329-How-do-I"
+              "https://cloudlinux.zendesk.com/hc/en-us/categories/360002375940"
           },
           {
             text: "Getting started",
@@ -130,7 +130,7 @@ module.exports = {
             text: "Contact support",
             url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
           },
-          { text: "Blog", url: "https://www.cloudlinux.com/blog" }
+          { text: "Blog", url: "https://blog.cloudlinux.com/" }
         ],
 
         // text for the language dropdown title
