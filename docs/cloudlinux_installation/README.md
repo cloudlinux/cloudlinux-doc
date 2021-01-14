@@ -255,8 +255,8 @@ Mount and boot the image, then follow the following steps.
    ![](/images/network_settings.png)
 
 2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/`</span>.
-   * also, add the additional AppStream repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/`</span>
+   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span>.
+   * also, add the additional AppStream repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os`</span>
    
    ![](/images/repository_settings.png)
 
