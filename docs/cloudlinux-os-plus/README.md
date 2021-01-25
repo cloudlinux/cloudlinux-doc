@@ -4,6 +4,9 @@
   * [Description](/cloudlinux-os-plus/#description)
   * [Installation](/cloudlinux-os-plus/#installation)
   * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
+  * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
+  * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
+  * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
   * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
   * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
   * [FAQ](/cloudlinux-os-plus/#faq)
@@ -16,10 +19,7 @@
   * [FAQ](/cloudlinux-os-plus/#faq-2)
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
 
-
-
 ## X-Ray
-
 
 * [Description](/cloudlinux-os-plus/#description)
 * [Installation](/cloudlinux-os-plus/#installation)
@@ -346,6 +346,65 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 4. You can also view the detailed information about request:
 
     ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
+
+### End-user X-Ray plugin <Badge text="Beta"/>
+
+:::warning Warning
+To use the end-user X-Ray plugin, update your LVE Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` by running the following command:
+```
+# yum update lvemanager alt-php-xray --enablerepo=cloudlinux-updates-testing
+```
+:::
+
+#### How to enable/disable the end-user X-Ray plugin
+
+You can hide or show the end-user X-Ray plugin icon by ticking or unticking the proper checkbox in the LVE Manager.
+
+Go to _LVE Manager → Options Tab → User interface settings_.
+
+![](/images/HideXRayAppCheckbox.png)
+
+:::tip Note
+The X-Ray plugin icon in the end-user interface is hidden when the checkbox is ticked.
+:::
+
+![](/images/XRayAppUIIcon.png)
+
+#### How to manage the end-user X-Ray plugin
+
+The web interface of the end-user X-Ray plugin is almost the same as the X-Ray administrator interface.
+
+![](/images/XRayEndUserUI.png)
+
+But there are some differences and they are described further.
+
+* End-users can create tasks only for their domains from the drop-down list:
+    ![](/images/XRayEndUserUIStart.png)
+* To specify URL or wildcard, end-users should use the input field next to the domain:
+    ![](/images/XRayEndUserUiSpecifyURL.png)
+
+You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](/cloudlinux-os-plus/#managing-tracing-task).
+
+:::warning Note
+Tracing tasks created by an end-user will also be displayed in the administrator interface and administrators can manage the end-user's tasks the same way as they manage their own. At the same time, tasks created by the administrator or other end-users will not be displayed in the UI of the current user.
+:::
+
+#### End-user X-Ray plugin limitations
+
+* The end-user X-Ray plugin does not support creating continuous tasks.
+* The end-user has a limit of tracing tasks running at a time. Before starting the next task, the end-user should wait for the completion of the previous ones or forcefully stop the running ones. Otherwise, the user will get the next error:
+    
+    ![](/images/XRayEndUserUIError.png)
+    :::warning Note
+    The current limit is one tracing task per user. 
+    :::
+* The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once, the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
+* If continuous tracing is enabled for the domain, the end-user will not be able to create a new task for this domain because the same rule works - it will be a duplicate of the existing tracing tasks. The next warning will appear:
+    
+    ![](/images/XRayEndUserUIWarning.png)
+
+    To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/cloudlinux-os-plus/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
+
 
 ### X-Ray client
 
