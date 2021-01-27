@@ -1058,6 +1058,7 @@ See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 * [Settings](/lve_manager/#settings)
 * [What is the density threshold?](/lve_manager/#what-is-the-density-threshold)
 * [Email notifications](/lve_manager/#email-notifications)
+* [The cloudlinux-ssa-manager utility](/lve_manager/#the-cloudlinux-ssa-manager-utility)
 * [FAQ](/lve_manager/#faq)
 
 **Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.
@@ -1168,6 +1169,70 @@ Email notifications are created by the Web monitoring tools.
 **Example of the PHP Slow site analyzer report**.
 
 ![](/images/SlowSiteAnalyzerEmailNotifications.png)
+
+#### The cloudlinux-ssa-manager utility
+
+The `cloudlinux-ssa-manager` utility allows to manage Slow Site analyzer via CLI.
+
+**Usage**
+
+```
+# /usr/sbin/cloudlinux-ssa-manager [command] [--optional arguments]
+```
+
+**Optional arguments**:
+
+| | |
+|-|-|
+|`-h`, `--help`|show help message and exit|
+
+**Commands**:
+
+| | |
+|-|-|
+|`set-config`|set the SSA configuration|
+|`get-config`|get the SSA configuration|
+|`get-ssa-status`|get a current status of SSA|
+|`enable-ssa`|enable SSA|
+|`disable-ssa`|disable SSA|
+|`get-report`|get the latest report|
+
+You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
+
+Example of the `/usr/sbin/cloudlinux-ssa-manager set-config --help` command output:
+
+```
+# /usr/sbin/cloudlinux-ssa-manager set-config --help
+usage: cloudlinux-ssa-manager set-config [-h]
+                                         [--domains-number DOMAINS_NUMBER]
+                                         [--urls-number URLS_NUMBER]
+                                         [--requests-duration REQUESTS_DURATION]
+                                         [--request-number REQUEST_NUMBER]
+                                         [--time TIME]
+                                         [--correlation CORRELATION]
+                                         [--correlation-coefficient CORRELATION_COEFFICIENT]
+                                         [--ignore-list IGNORE_LIST]
+optional arguments:
+  -h, --help            show this help message and exit
+  --domains-number DOMAINS_NUMBER
+                        Size of TOP list for slow domains
+  --urls-number URLS_NUMBER
+                        Size of TOP list for slow urls
+  --requests-duration REQUESTS_DURATION
+                        The threshold value of request duration in seconds
+  --request-number REQUEST_NUMBER
+                        The threshold value of slow requests number in the
+                        period of time to mark URL as a slow one
+  --time TIME           Period of time in hours required to analyze these
+                        requests
+  --correlation CORRELATION
+                        Flag to enable or disable correlation
+  --correlation-coefficient CORRELATION_COEFFICIENT
+                        The threshold value of correlation coefficient
+  --ignore-list IGNORE_LIST
+                        List of URLs or domains that should not be included in
+                        the daily report
+```
 
 #### FAQ
 
