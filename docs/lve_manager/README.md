@@ -1058,7 +1058,8 @@ See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 * [Settings](/lve_manager/#settings)
 * [What is the density threshold?](/lve_manager/#what-is-the-density-threshold)
 * [Email notifications](/lve_manager/#email-notifications)
-* [The cloudlinux-ssa-manager utility](/command-line_tools/#the-cloudlinux-ssa-manager-utility)
+* [The cloudlinux-ssa-manager CLI utility](/command-line_tools/#the-cloudlinux-ssa-manager-utility)
+* [The wmt-api CLI utility](/command-line_tools/#the-wmt-api-utility)
 * [FAQ](/lve_manager/#faq)
 
 **Website monitoring tool** is a new tool that collects the statistics of the domains' availability and responsiveness, as well as errors that occur when accessing these domains. An admin can get email reports with the statistics. The website monitoring tool uses the simple curl request like `curl http://domain.com` to get domains’ statistics.

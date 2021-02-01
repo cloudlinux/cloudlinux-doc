@@ -2555,7 +2555,7 @@ The following table presents which `[OPTIONS]` are supported for various panels:
 |`stat` | + <br> _*without domain info_ | + <br> _*without domain info_ | + | + | + | + <br> _*without domain info_ | + <br> _*without domain info_|
 
 
-## Website monitoring tool and Slow Site analyzer
+## Website Monitoring tool and Slow Site analyzer
 
 ### The cloudlinux-ssa-manager utility
 
@@ -2620,6 +2620,43 @@ optional arguments:
                         List of URLs or domains that should not be included in
                         the daily report
 ```
+
+### The wmt-api utility
+
+The `wmt-api` utility allows to manage Website Monitoring tool via CLI.
+
+**Usage**
+
+```
+# /usr/share/web-monitoring-tool/wmtbin/wmt-api [command] [--optional arguments]
+```
+
+**Optional arguments**:
+
+| | |
+|-|-|
+|`-h`, `--help`|show help message and exit|
+
+**Commands**:
+
+| | |
+|-|-|
+|`config-change`|set the WMT configuration using the JSON string that follows|
+|`config-get`|get the WMT configuration as JSON|
+|`email-get`|get WMT email from the config file|
+|`report-generate`|Generate a report JSON file|
+|`send-clickhouse`|Send the summary report to ClickHouse|
+|`start`|Start the WMT system|
+|`status`|Check the status of the WMT system|
+|`stop`|Stop the WMT system|
+
+Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api` command usage:
+
+```
+# /usr/share/web-monitoring-tool/wmtbin/wmt-api -config-change "{\"ping_connections\":8,\"report_top\":5,\"report_email\":\"user@example.com\"}"
+```
+
+This way you can set all or only certain parameters.
 
 ## Other CLI tools
 
