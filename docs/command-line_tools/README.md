@@ -129,9 +129,14 @@ Yet, if a user have they shell disabled, it wouldn't work. To solve this issue, 
 <div class="notranslate">
 
 ```
-$ /sbin/cagefs_enter_user $USERNAME _command_
+$ /sbin/cagefs_enter_user [--root] [--no-fork] $USERNAME _command_
 ```
 </div>
+
+**Options**:
+
+* `--root` – tells the utility not to reset UID and GID to user ones. It might be dangerous to call untrusted commands.
+* `--no-fork` – do not create a child process for a called command. The called command will replace the cagefs_enter process with exec.
 
 If you disable CageFS for a user, then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> `proxyexec` </span> .
 
