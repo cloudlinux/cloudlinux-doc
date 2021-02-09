@@ -7,6 +7,7 @@
   * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
   * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
   * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
+  * [X-Ray automated throttling detection](/cloudlinux-os-plus/#x-ray-automated-throttling-detection)
   * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
   * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
   * [FAQ](/cloudlinux-os-plus/#faq)
@@ -404,6 +405,25 @@ Tracing tasks created by an end-user will also be displayed in the administrator
     ![](/images/XRayEndUserUIWarning.png)
 
     To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/cloudlinux-os-plus/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
+
+
+### X-Ray automated throttling detection
+
+The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU during the HTTP request execution. 
+
+If CPU limiting was detected for a particular request, it is indicated in the X-Ray UI that the system itself has slowed down the request processing and this is apparently not a performance issue in the PHP code.
+
+Requests with exceeded LVE limits are indicated in the administrator/user interface of the X-Ray plugin in the following way.
+
+![](/images/RecordedSessions.png)
+
+Requests with exceeded LVE limits are also marked if the administrator views the request.
+
+![](/images/LVEFaultsMarker.png)
+
+Requests with exceeded LVE limits are marked in the PDF report as well.
+
+![](/images/XRayMonitoringReport.png)
 
 
 ### X-Ray client
