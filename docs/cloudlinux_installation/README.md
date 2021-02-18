@@ -85,8 +85,8 @@ The script automatically detects and supports the following control panels:
   
 It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cloudlinux_os_components/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
 
-:::tip 
-* For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. LVE Manager is not installed.
+:::tip Note 
+\* For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. Find more about LVE Manager installation [here](https://www.interworx.com/support/faq/install-use-cloudlinux-plugin-interworx/)
 :::
 
 :::warning
