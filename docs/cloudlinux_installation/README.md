@@ -197,9 +197,11 @@ $ /usr/sbin/clnreg_ks --force
 
 ## Installing new servers
 
-#### Installing CloudLinux OS 6 and CloudLinux OS 7 from ISO image
-
 You can download the latest CloudLinux ISO and use it to install CloudLinux on your server:
+
+* **Latest stable CloudLinux 8 ISO**:
+
+* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
 
 * **Latest stable CloudLinux 7 ISO**:
 
@@ -229,40 +231,17 @@ Mount and boot the image, then follow the steps.
    ![](/images/network_settings.png)
 
 2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/os/x86_64/Packages/`</span> for CloudLinux 6 and <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.8/os/x86_64/Packages/`</span> for CloudLinux 7.
-   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/updates/x86_64/Packages/`</span> for CloudLinux 6 and <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.8/updates/x86_64/Packages/`</span> for CloudLinux7. 
+   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/os/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.9/os/x86_64/Packages/`</span> for CloudLinux 7
+   class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span> for CloudLinux 8.
+   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/updates/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.9/updates/x86_64/Packages/`</span> for CloudLinux 7 and
+   <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os/`</span> for CloudLinux 8.   
 
-   ![](/images/repository_settings_6_and_7.png)
-
-3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
-
-   ![](/images/software_selection.png)
-
-
-### Installing CloudLinux OS 8 from ISO image
-
-You can download and install CloudLinux OS 8 from the following repositories:
-
-* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
-
-Mount and boot the image, then follow the following steps.
-
-
-1. Configure a network connection as shown below.
-    * the network name depends on your operating system
-    * you can specify your hostname
-   
-   ![](/images/network_settings.png)
-
-2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span>.
-   * also, add the additional AppStream repository URL: <span class="notranslate">`https://www.repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os`</span>
-   
    ![](/images/repository_settings.png)
 
 3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
-   
+
    ![](/images/software_selection.png)
+
 
 ## CloudLinux OS images
 
