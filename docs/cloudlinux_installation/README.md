@@ -75,7 +75,7 @@ Once you reboot, you are running CloudLinux kernel with LVE enabled.
 * For CloudLinux 6 hybrid — (RHEL) 3.10 kernel
 * For CloudLinux 7 — (RHEL) 3.10 kernel
 * For CloudLinux 7 hybrid —  (RHEL) 4.18 kernel
-* For CloudLinux 8 —  CloudLinux 8 will follow the upstream (RHEL) 4.18 kernel mainline. All CloudLinux-specific features are added as a separate module (lve-kmod).
+* For CloudLinux 8 —  CloudLinux 8 follows the upstream (RHEL) 4.18 kernel mainline. All CloudLinux-specific features are added as a separate module (lve-kmod).
 
 The script automatically detects and supports the following control panels:
 * cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
@@ -231,9 +231,9 @@ Mount and boot the image, then follow the steps.
    ![](/images/network_settings.png)
 
 2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/os/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.9/os/x86_64/Packages/`</span> for CloudLinux 7
+   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/os/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/os/x86_64/Packages/`</span> for CloudLinux 7 <span
    class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span> for CloudLinux 8.
-   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6.10/updates/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7.9/updates/x86_64/Packages/`</span> for CloudLinux 7 and
+   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/updates/x86_64/Packages/`</span> for CloudLinux 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/updates/x86_64/Packages/`</span> for CloudLinux 7 and
    <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os/`</span> for CloudLinux 8.   
 
    ![](/images/repository_settings.png)
@@ -263,13 +263,23 @@ We do not provide Xen images of CloudLinux OS anymore.
 
 To install CloudLinux over network:
 
-1. Download & boot from netboot image from: [https://repo.cloudlinux.com/cloudlinux/7.8/iso/x86_64/CloudLinux-netinst-x86_64-7.8.iso](https://repo.cloudlinux.com/cloudlinux/7.8/iso/x86_64/CloudLinux-netinst-x86_64-7.8.iso). It will boot into CloudLinux installer.
+1. Download & boot using the netboot image from: 
 
-    Alternatively you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/images/pxeboot/)
+**For CloudLinux 8**: [https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.3-x86_64-boot.iso](https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.3-x86_64-boot.iso).
 
-2. During the CloudLinux installation, select URL as installation source and enter URL: [https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/7.8/install/x86_64/) and continue with installation.
+Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/)
 
-To install CloudLinux 6.10 instead of 7.8, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6.10/install/x86_64/)
+**For CloudLinux 7**: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso). It will boot into CloudLinux installer.
+
+    Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/)
+
+2. During the CloudLinux installation, select URL as installation source and enter URL: 
+
+**For CloudLinux 8**: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/) and continue with installation. 
+
+**For CloudLinux 7**: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/) and continue with installation.
+
+To install CloudLinux 6 instead, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
