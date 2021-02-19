@@ -256,7 +256,7 @@ Mount and boot the image, then follow the steps.
 #### Xen images
 
 :::tip Note
-We do not provide Xen images of CloudLinux OS anymore.
+We do not provide Xen images of CloudLinux OS anymore, use [ISO images](#installing-new-servers) instead 
 :::
 
 ## Net install
@@ -271,7 +271,7 @@ Alternatively, you can configure your PXE server using following folder as refer
 
 **For CloudLinux 7**: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso). It will boot into CloudLinux installer.
 
-    Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/)
+Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/)
 
 2. During the CloudLinux installation, select URL as installation source and enter URL: 
 
