@@ -90,7 +90,7 @@ It will install CloudLinux kernel, [Apache module](/cloudlinux_os_components/#ho
 :::
 
 :::warning
-CloudLinux 8 supports cPanel 11.92 and newer, Plesk Obsidian 18.0.33.0 and newer and DirectAdmin out of the box.
+CloudLinux 8 supports cPanel 11.94 and newer, Plesk Obsidian 18.0.33.0 and newer and DirectAdmin out of the box.
 :::
 
 ISPmanager 5 has native support for CloudLinux. To deploy CloudLinux on a server with ISPmanager 5, you would need to purchase CloudLinux license directly from ISPSystems and follow ISPmanager's deployment guide.
