@@ -1448,39 +1448,39 @@ As a result, <span class="notranslate">LVE Manager</span> will automatically pic
 * [Resource Usage client plugin](/lve_manager/#resource-usage-client-plugin)
 * [Dashboard](/lve_manager/#dashboard-2)
 * [Current Usage](/lve_manager/#current-usage-3)
-* [Current Usage table](/lve_manager/#current-usage-table)
-* [Filters](/lve_manager/#filters)
-* [Charts](/lve_manager/#charts)
-* [Usage](/lve_manager/#usage)
+  * [Current Usage table](/lve_manager/#current-usage-table)
+  * [Filters](/lve_manager/#filters)
+  * [Charts](/lve_manager/#charts)
+  * [Usage](/lve_manager/#usage)
 * [Snapshot](/lve_manager/#snapshot)
-* [Server processes snapshots](/lve_manager/#server-processes-snapshots)
-* [Process list](/lve_manager/#process-list)
-* [Database queries (cPanel only)](/lve_manager/#database-queries-cpanel-only)
-* [HTTP queries](/lve_manager/#http-queries)
+  * [Server processes snapshots](/lve_manager/#server-processes-snapshots)
+  * [Process list](/lve_manager/#process-list)
+  * [Database queries (cPanel only)](/lve_manager/#database-queries-cpanel-only)
+  * [HTTP queries](/lve_manager/#http-queries)
 * [Python Selector client plugin](/lve_manager/#python-selector-client-plugin)
-* [How to manage an application](/lve_manager/#how-to-manage-an-application)
-* [Create application](/lve_manager/#create-application)
-* [Start application](/lve_manager/#start-application)
-* [Stop application](/lve_manager/#stop-application)
-* [Restart application](/lve_manager/#restart-application)
-* [Remove application](/lve_manager/#remove-application)
-* [Edit application](/lve_manager/#edit-application)
-* [Migrate application](/lve_manager/#migrate-application)
+  * [How to manage an application](/lve_manager/#how-to-manage-an-application)
+  * [Create application](/lve_manager/#create-application)
+  * [Start application](/lve_manager/#start-application)
+  * [Stop application](/lve_manager/#stop-application)
+  * [Restart application](/lve_manager/#restart-application)
+  * [Remove application](/lve_manager/#remove-application)
+  * [Edit application](/lve_manager/#edit-application)
+  * [Migrate application](/lve_manager/#migrate-application)
 * [Node.js Selector client plugin](/lve_manager/#node-js-selector-client-plugin)
-* [How to manage application](/lve_manager/#how-to-manage-application)
-* [Start application](/lve_manager/#start-application-2)
-* [Stop application](/lve_manager/#stop-application-2)
-* [Restart application](/lve_manager/#restart-application-2)
-* [Remove application](/lve_manager/#remove-application-2)
-* [Edit application](/lve_manager/#edit-application-2)
+  * [How to manage application](/lve_manager/#how-to-manage-application)
+  * [Start application](/lve_manager/#start-application-2)
+  * [Stop application](/lve_manager/#stop-application-2)
+  * [Restart application](/lve_manager/#restart-application-2)
+  * [Remove application](/lve_manager/#remove-application-2)
+  * [Edit application](/lve_manager/#edit-application-2)
 * [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
 * [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
-* [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
+  * [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
 * [LVE Manager options](/lve_manager/#lve-manager-options)
-* [Changing settings manually](/lve_manager/#changing-settings-manually)
-* [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
+  * [Changing settings manually](/lve_manager/#changing-settings-manually)
+  * [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
 
-#### Resource Usage client plugin
+### Resource Usage client plugin
 
 Client resource usage plugin for cPanel, Plesk, and DirectAdmin allows host’s end users to view and monitor resource usage.
 
@@ -1639,7 +1639,7 @@ Displays information on HTTP queries in the selected snapshot.
 ![](/images/RU-HTTP-queries.png)
 
 
-#### Python Selector client plugin
+### Python Selector client plugin
 
 :::tip Note
 Python Selector icon in end user interface is hidden when Python is disabled
@@ -1752,7 +1752,7 @@ For details see [How to migrate an application to the new Python Selector](/clou
 You can also use [Python Selector CLI](/command-line_tools/#end-user)
 :::
 
-#### Node.js Selector client plugin
+### Node.js Selector client plugin
 
 :::tip Note
 <span class="notranslate">Node.js Selector</span> icon in end user interface is hidden when Node.js is disabled.
@@ -1829,7 +1829,7 @@ The following actions are available:
 You can also use [Node.js Selector CLI](/command-line_tools/#end-user-2)
 :::
 
-#### Ruby Selector client plugin
+### Ruby Selector client plugin
 
 End user interface allows end users to setup and manage Ruby for their web applications.
 
@@ -1846,7 +1846,7 @@ Here you can do the following:
 * Setup a new application.
 * View/edit/restart/remove the existing application.
 
-#### PHP Selector client plugin
+### PHP Selector client plugin
 
 End user interface allows end users to select and manage PHP extensions and options for the particular PHP version.
 
@@ -1907,7 +1907,7 @@ If `php-fpm` is enabled for a domain the only administrator can set it to <span 
 
 
 
-#### LVE Manager options
+### LVE Manager options
 
 You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
 
