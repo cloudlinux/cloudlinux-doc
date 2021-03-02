@@ -35,7 +35,7 @@ With RHEL 8 (**CloudLinux 8/CloudLinux 7 Hybrid**), some devices are no longer s
 
 ## Converting existing servers
 
-It is easy to convert your existing CentOS server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
+It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux. The process takes a few minutes and replaces just a handful of RPMs.
 
 * [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
 
