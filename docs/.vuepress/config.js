@@ -41,9 +41,8 @@ module.exports = {
         'ga': 'UA-12711721-15'
       }
     ],
-    [ 'autometa', autoMetaOptions ]
-//	,
-//    [ 'separate-pages', { alwaysVisibleBlocks: ['#disqus_thread'] } ]
+    [ 'autometa', autoMetaOptions ],
+    [ 'separate-pages', { alwaysVisibleBlocks: ['#disqus_thread'] } ]
   ],
   configureWebpack: {
     resolve: {
