@@ -199,8 +199,19 @@ The slowest request is highlighted.
 
 ![](/images/XRaySlowestRequest.png)
 
-* <span class="notranslate">**Collected requests**</span> displays how many requests were collected according to tasks requirements.
-* <span class="notranslate">**Pending requests**</span> displays how many of collected requests are not visible in the table yet.
+* <span class="notranslate">**Total**</span> displays how many requests were collected according to tasks requirements.
+* <span class="notranslate">**Pending**</span> displays how many of collected requests are not visible in the table yet.
+* <span class="notranslate">**Throttled**</span> displays the number of requests during the execution of which the LVE limits were exceeded.
+* <span class="notranslate">**Slow**</span> displays the number of requests lasting more than one second.
+
+There are filters for the request types and the indicator of a filter used now.
+
+![](/images/FilterIndicator.png)
+
+If slow requests were not detected during the tracing task, the following is displayed. Here, you can also view all requests.
+
+![](/images/RecordedSession.png)
+
 
 <span class="notranslate">X-Ray</span> collects the following data for each request:
 
