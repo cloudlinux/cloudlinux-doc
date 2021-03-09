@@ -135,7 +135,7 @@ You can use different scripts for different CPAPI methods or only one script and
 |<span class="notranslate">[db_info](/control_panel_integration/#db-info)</span>|Only for LVE-Stats, otherwise optional|admins (UNIX users)|-|
 |<span class="notranslate">[packages](/control_panel_integration/#packages)</span>|For limits functionality|admins (UNIX users)|-|
 |<span class="notranslate">[users](/control_panel_integration/#users)</span>|Always|admins (UNIX users)|-|
-|<span class="notranslate">[domains](/control_panel_integration/#domains)</span>|Selectors, some UI features|All UNIX users|+|
+|<span class="notranslate">[domains](/control_panel_integration/#domains)</span>|Selectors, some UI features/X-Ray|All UNIX users/admins (UNIX users)|+/-|
 |<span class="notranslate">[resellers](/control_panel_integration/#resellers)</span>|Always|admins (UNIX users)|-|
 |<span class="notranslate">[admins](/control_panel_integration/#admins)</span>|Always|admins (UNIX users)|-|
 
@@ -367,7 +367,8 @@ Returns the information about the control panel in the specified format.
 			"mod_lsapi": true,
 			"mysql_governor": true,
 			"cagefs": true,
-			"reseller_limits": true
+			"reseller_limits": true,
+			"xray": false
 		}
 	},
 	"metadata": {
@@ -385,7 +386,7 @@ Returns the information about the control panel in the specified format.
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
 |<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
-|<span class="notranslate">supported_cl_features</span>|False|Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li><ul> <br> Available since API v1.1 (see [versioning](/control_panel_integration/#versioning))|
+|<span class="notranslate">supported_cl_features</span>|False|Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li>    <li><a href="/cloudlinux-os-plus/#x-ray">xray</a></li><ul> <br> Available since API v1.1 (see [versioning](/control_panel_integration/#versioning))|
 
 
 #### <span class="notranslate">db_info</span>
@@ -624,6 +625,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 #### <span class="notranslate">domains</span>
 
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
+In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found <a href="/cloudlinux-os-plus/#x-ray">here</a>
 
 ::: warning WARNING
 To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS. When running this script as the user, you must limit answer scope to values, allowed for the user to view.
@@ -635,7 +637,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 <div class="notranslate">
 
 ```
-/scripts/domains ([--owner=<unix_user>] | [--name=<name>])
+/scripts/domains ([--owner=<unix_user>] | [--name=<name>] | [--with-php])
 ```
 </div>
 
@@ -646,6 +648,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |Key|Required|Description|
 |<span class="notranslate">--owner, -o</span>|False|Used for filtering output; set a name of the owner whose domains to print|
 |<span class="notranslate">--name, -n</span>|False|Used for filtering output; set a name of the domain, to display information about it|
+|<span class="notranslate">--with-php</span>|False (X-Ray support only)|Used for extending output with PHP configuration, required by X-Ray|
 
 **Output example**
 
@@ -672,6 +675,47 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 ```
 </div>
 
+**Output example with optional flag --with-php (X-Ray support only)**
+
+<div class="notranslate">
+
+```
+{
+  "data": {
+    "domain.com": {
+      "owner": "username",
+      "document_root": "/home/username/public_html/",
+      "is_main": true,
+      "interpreter": {
+        "php": {
+          "version": "56",
+          "ini_path": "/opt/alt/php56/link/conf",
+          "is_native": true
+        }
+      }
+
+    },
+    "subdomain.domain.com": {
+      "owner": "username",
+      "document_root": "/home/username/public_html/subdomain/",
+      "is_main": false,
+      "interpreter": {
+        "php": {
+          "version": "72",
+          "ini_path": "/opt/alt/php72/link/conf",
+          "fpm": "alt-php72-fpm"
+        }
+      }
+
+    }
+  },
+  "metadata": {
+    "result": "ok"
+  }
+}
+```
+</div>
+
 **Data description**
 
 | | | |
@@ -681,6 +725,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
 |<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
 |<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
+|<span class="notranslate">Nested dictionary interpeter</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details <a href="/cloudlinux-os-plus/#x-ray">here</a>|
 
 #### <span class="notranslate">resellers</span>
 
