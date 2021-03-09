@@ -686,27 +686,21 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
       "owner": "username",
       "document_root": "/home/username/public_html/",
       "is_main": true,
-      "interpreter": {
-        "php": {
-          "version": "56",
-          "ini_path": "/opt/alt/php56/link/conf",
-          "is_native": true
-        }
-      }
-
+      "php": {
+        "version": "56",
+        "ini_path": "/opt/alt/php56/link/conf",
+        "is_native": true
+       }
     },
     "subdomain.domain.com": {
       "owner": "username",
       "document_root": "/home/username/public_html/subdomain/",
       "is_main": false,
-      "interpreter": {
-        "php": {
-          "version": "72",
-          "ini_path": "/opt/alt/php72/link/conf",
-          "fpm": "alt-php72-fpm"
-        }
+      "php": {
+        "version": "72",
+        "ini_path": "/opt/alt/php72/link/conf",
+        "fpm": "alt-php72-fpm"
       }
-
     }
   },
   "metadata": {
@@ -725,7 +719,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
 |<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
 |<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
-|<span class="notranslate">Nested dictionary interpeter</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details <a href="/cloudlinux-os-plus/#x-ray">here</a>|
+|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details <a href="/cloudlinux-os-plus/#x-ray">here</a>|
 
 #### <span class="notranslate">resellers</span>
 
