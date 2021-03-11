@@ -16,6 +16,7 @@
 * [CloudLinux LVE and CageFS patches](/control_panel_integration/#cloudlinux-lve-and-cagefs-patches)
 * [Hardened PHP](/control_panel_integration/#hardened-php)
 * [CloudLinux kernel set-up](/control_panel_integration/#cloudlinux-kernel-set-up)
+* [How to integrate X-Ray with a conrol panel](/control_panel_integration/#xray-integration)
 
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
@@ -626,7 +627,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 #### <span class="notranslate">domains</span>
 
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
-In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found <a href="/cloudlinux-os-plus/#x-ray">here</a>
+In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found [here](/control_panel_integration/#xray-integration)
 
 ::: warning WARNING
 To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS. When running this script as the user, you must limit answer scope to values, allowed for the user to view.
@@ -720,7 +721,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
 |<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
 |<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
-|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details <a href="/cloudlinux-os-plus/#x-ray">here</a>|
+|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details [here](/control_panel_integration/#xray-integration)|
 
 #### <span class="notranslate">resellers</span>
 
@@ -1873,3 +1874,118 @@ Some of CloudLinux OS utilities (`cagefsctl`, `selectorctl`, `cloudlinux-selecto
 So they are subject to the disk quotas if any are set for the user. The utilities can override these quotas to avoid failures.
 See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel parameters controlling these permissions. This parameter is used only for XFS file system.
 
+## How to integrate X-Ray with a control panel
+
+:::warning WARNING!
+Please, note that cPanel, Plesk and DirectAdmin are already supported by X-Ray and do not require any integration effort.
+:::
+
+In order to integrate X-Ray into your panel, you should follow two simple steps.
+1. Extend the output of your existing [domains integration script](/control_panel_integration/#domains) as follows:
+
+1.1. Implement an optional flag <span class="notranslate">`--with-php`</span>, upon which all domains with their PHP configuration will be returned.
+Thus, if your [integration config file](/control_panel_integration/#example-of-the-integration-config) <span class="notranslate">`/opt/cpvendor/etc/integration.ini`</span> has
+<div class="notranslate">
+
+```
+domains = /opt/cpvendor/bin/vendor_integration_script domains
+```
+</div>
+
+in <span class="notranslate">`[integration_scripts]`</span> section, X-Ray would call this script as
+<div class="notranslate">
+
+```
+/opt/cpvendor/bin/vendor_integration_script domains --with-php
+```
+</div>
+
+1.2. In order to enable X-Ray support, the script output should return a representation of all domains on the server: a key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users) and PHP interpreter configuration. **If you are extending the existing domains integration script, you just include the PHP configuration.**
+PHP interpreter configuration for each domain is to be placed in the nested key-value object of the following format:
+<div class="notranslate">
+
+```
+“php”: {
+   “version”: str
+   “ini_path”: str
+   “is_native”: bool
+   “fpm”: str
+}
+```
+</div>
+
+**Output example**
+
+<div class="notranslate">
+
+```
+{
+  "data": {
+    "domain.com": {
+      "owner": "username",
+      "document_root": "/home/username/public_html/",
+      "is_main": true,
+      "php": {
+        "version": "56",
+        "ini_path": "/opt/alt/php56/link/conf",
+        "is_native": true
+       }
+    },
+    "subdomain.domain.com": {
+      "owner": "username",
+      "document_root": "/home/username/public_html/subdomain/",
+      "is_main": false,
+      "php": {
+        "version": "72",
+        "ini_path": "/opt/alt/php72/link/conf",
+        "fpm": "alt-php72-fpm"
+      }
+    }
+  },
+  "metadata": {
+    "result": "ok"
+  }
+}
+```
+</div>
+
+**Data description**
+
+| | | |
+|-|-|-|
+|Key|Required|Description|
+|<span class="notranslate">version</span>|True|The version of php that is selected by the end user or administrator in the panel for this domain. Should be presented in the format XY where XY is the exact version of PHP. List of supported versions is presented below.|
+|<span class="notranslate">ini_path</span>|True|Path where PHP expects additional .ini files to scan, usually compiled path into binary PHP.Example where to get this value:|
+|<span class="notranslate">is_native</span>|False|If your panel [has integrated CloudLinux PHP Selector](/control_panel_integration/#integrating-cloudlinux-php-selector), then there is the list of native PHP binaries in the native.conf (see details [here](/cloudlinux_os_components/#native-php-configuration)). The is_native value must be set to true if the binary of the above version of PHP is specified in the native.conf, false or omitted otherwise. This way the X-Ray will determine if CloudLinux PHP Selector is enabled for a given domain|
+|<span class="notranslate">fpm</span>|False|The name of the FPM service that uses specified domain, optional value. To make the X-Ray work on domains using FPM, you need to restart FPM service. In X-Ray added automatic restart of the FPM service if the tracing task is created for the domain that uses the FPM therefore we need this field, otherwise it can be omitted|
+
+2. After finishing the X-Ray integration script, enable X-Ray support through [panel_info integration script](/control_panel_integration/#panel-info): add xray component into <span class="notranslate">`supported_cl_features`</span> object.
+
+**Output example**
+
+<div class="notranslate">
+
+```
+{
+	"data": {
+		"name": "SomeCoolWebPanel",
+		"version": "1.0.1",
+		"user_login_url": "https://{domain}:1111/",
+		"supported_cl_features": {
+			"php_selector": true,
+			"ruby_selector": true,
+			"python_selector": true,
+			"nodejs_selector": false,
+			"mod_lsapi": true,
+			"mysql_governor": true,
+			"cagefs": true,
+			"reseller_limits": true,
+			"xray": true
+		}
+	},
+	"metadata": {
+		"result": "ok"
+	}
+}
+```
+</div>
