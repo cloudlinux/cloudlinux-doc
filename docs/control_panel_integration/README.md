@@ -16,7 +16,7 @@
 * [CloudLinux LVE and CageFS patches](/control_panel_integration/#cloudlinux-lve-and-cagefs-patches)
 * [Hardened PHP](/control_panel_integration/#hardened-php)
 * [CloudLinux kernel set-up](/control_panel_integration/#cloudlinux-kernel-set-up)
-* [How to integrate X-Ray with a conrol panel](control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
+* [How to integrate X-Ray with a conrol panel](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
@@ -627,7 +627,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 #### <span class="notranslate">domains</span>
 
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
-In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found [here](control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
+In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 
 ::: warning WARNING
 To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS. When running this script as the user, you must limit answer scope to values, allowed for the user to view.
@@ -721,7 +721,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
 |<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
 |<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
-|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details [here](control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)|
+|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)|
 
 #### <span class="notranslate">resellers</span>
 
