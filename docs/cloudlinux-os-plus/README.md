@@ -32,7 +32,7 @@
 ### Description
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin. Other panels should implement integration as described [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
+<span class="notranslate">X-Ray</span> is available "out-of-box" for cPanel, Plesk, and DirectAdmin. Other panels should implement integration as described [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 :::
 
 <span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
