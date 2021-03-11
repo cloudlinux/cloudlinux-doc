@@ -32,7 +32,7 @@
 ### Description
 
 :::warning Warning!
-<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin. Non-panel installations is not planned.
+<span class="notranslate">X-Ray</span> is available for cPanel, Plesk, and DirectAdmin. Other panels should implement integration as described [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 :::
 
 <span class="notranslate">X-Ray</span> is a tool developed for website performance monitoring and performance issues detection.
@@ -445,10 +445,14 @@ Requests with exceeded LVE limits are marked in the PDF report as well.
 
 The list of currently supported PHP versions:
 
-| | | |
-|-|-|-|
-|**ALT PHP**:|**EA PHP**:|**Plesk PHP**|
-| <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|
+| | | | | |
+|-|-|-|-|-|
+|**ALT PHP**:|**EA PHP**:|**Plesk PHP**|**DirectAdmin PHP**|**Other panels PHP**|
+| <ul><li>alt-php54</li><li>alt-php55</li><li>alt-php56</li><li>alt-php70</li><li>alt-php71</li><li>alt-php72</li><li>alt-php73</li><li>alt-php74</li></ul>|<ul><li>ea-php54</li><li>ea-php55</li><li>ea-php56</li><li>ea-php70</li><li>ea-php71</li><li>ea-php72</li><li>ea-php73</li><li>ea-php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|<ul><li>php54</li><li>php55</li><li>php56</li><li>php70</li><li>php71</li><li>php72</li><li>php73</li><li>php74</li></ul>|<ul><li>54</li><li>55</li><li>56</li><li>70</li><li>71</li><li>72</li><li>73</li><li>74</li></ul>|
+
+:::warning Warning!
+<span class="notranslate">[php-zts](/cloudlinux_os_components/#how-to-configure-alt-php72-zts-to-use-with-php-selector)</span> and [custom PHPs, rolled in selector](/cloudlinux_os_components/#roll-your-own-php), are not supported
+:::
 
 #### Functions that X-Ray client can hook
 
