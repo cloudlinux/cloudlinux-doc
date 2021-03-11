@@ -136,7 +136,7 @@ You can use different scripts for different CPAPI methods or only one script and
 |<span class="notranslate">[db_info](/control_panel_integration/#db-info)</span>|Only for LVE-Stats, otherwise optional|admins (UNIX users)|-|
 |<span class="notranslate">[packages](/control_panel_integration/#packages)</span>|For limits functionality|admins (UNIX users)|-|
 |<span class="notranslate">[users](/control_panel_integration/#users)</span>|Always|admins (UNIX users)|-|
-|<span class="notranslate">[domains](/control_panel_integration/#domains)</span>|Selectors, some UI features/X-Ray|All UNIX users/admins (UNIX users)|+/-|
+|<span class="notranslate">[domains](/control_panel_integration/#domains)</span>|Selectors, some UI features/X-Ray|All UNIX users/administrators (UNIX users)|+/-|
 |<span class="notranslate">[resellers](/control_panel_integration/#resellers)</span>|Always|admins (UNIX users)|-|
 |<span class="notranslate">[admins](/control_panel_integration/#admins)</span>|Always|admins (UNIX users)|-|
 
@@ -1877,14 +1877,16 @@ See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel p
 ## How to integrate X-Ray with a control panel
 
 :::warning WARNING!
-Please, note that cPanel, Plesk and DirectAdmin are already supported by X-Ray and do not require any integration effort.
+Please note that cPanel, Plesk and DirectAdmin are already supported by X-Ray and do not require any integration effort.
 :::
 
 In order to integrate X-Ray into your panel, you should follow two simple steps.
+
 1. Extend the output of your existing [domains integration script](/control_panel_integration/#domains) as follows:
 
 1.1. Implement an optional flag <span class="notranslate">`--with-php`</span>, upon which all domains with their PHP configuration will be returned.
 Thus, if your [integration config file](/control_panel_integration/#example-of-the-integration-config) <span class="notranslate">`/opt/cpvendor/etc/integration.ini`</span> has
+
 <div class="notranslate">
 
 ```
@@ -1901,7 +1903,9 @@ in <span class="notranslate">`[integration_scripts]`</span> section, X-Ray would
 </div>
 
 1.2. In order to enable X-Ray support, the script output should return a representation of all domains on the server: a key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users) and PHP interpreter configuration. **If you are extending the existing domains integration script, you just include the PHP configuration.**
+
 PHP interpreter configuration for each domain is to be placed in the nested key-value object of the following format:
+
 <div class="notranslate">
 
 ```
@@ -1955,7 +1959,7 @@ PHP interpreter configuration for each domain is to be placed in the nested key-
 |-|-|-|
 |Key|Required|Description|
 |<span class="notranslate">version</span>|True|The version of php that is selected by the end user or administrator in the panel for this domain. Should be presented in the format XY where XY is the exact version of PHP. List of supported versions is presented below.|
-|<span class="notranslate">ini_path</span>|True|Path where PHP expects additional .ini files to scan, usually compiled path into binary PHP.Example where to get this value:|
+|<span class="notranslate">ini_path</span>|True|Path where PHP expects additional .ini files to scan, usually compiled path into binary PHP.Example where to get this value: ![](/images/IniPath.png)|
 |<span class="notranslate">is_native</span>|False|If your panel [has integrated CloudLinux PHP Selector](/control_panel_integration/#integrating-cloudlinux-php-selector), then there is the list of native PHP binaries in the native.conf (see details [here](/cloudlinux_os_components/#native-php-configuration)). The is_native value must be set to true if the binary of the above version of PHP is specified in the native.conf, false or omitted otherwise. This way the X-Ray will determine if CloudLinux PHP Selector is enabled for a given domain|
 |<span class="notranslate">fpm</span>|False|The name of the FPM service that uses specified domain, optional value. To make the X-Ray work on domains using FPM, you need to restart FPM service. In X-Ray added automatic restart of the FPM service if the tracing task is created for the domain that uses the FPM therefore we need this field, otherwise it can be omitted|
 
