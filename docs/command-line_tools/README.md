@@ -2977,9 +2977,23 @@ If **fs.proc_super_gid** was configured by an admin to some existing group, the 
 
 * server diagnostics performed by a server administrator for detecting the most common errors in the configuration or software operation;
 * the focused check of the servers for typical errors performed by the support engineers before proceeding to the detailed analysis of the customer tickets;
-* servers automatic check by cron with the following generation of the reports and email them to the server administrator (_only for cPanel_).
+* servers automatic check by cron with the following generation of the reports and email them to the server administrator.
     * Set option `ENABLE_CLDIAG` to `false` in config `/etc/sysconfig/cloudlinux` if you want to disable automatic check by cron permanently
-    * Use the cldiag key `--disable-cron-checkers` for disabling separate checkers if you wnat to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18-1</span>)
+    * Use the cldiag key `--disable-cron-checkers` for disabling separate checkers if you want to disable only some checkers (<span class=“notranslate”>lve-utils >= 4.2.18-1</span>)
+    * A default email is `root@localhost.localdomain`. Note that the settings of the mail server can change the final email.
+
+You can change the email in the following ways:
+
+* In your control panel by changing the mail server settings
+* By changing the `/etc/sysconfig/cloudlinux` config:
+  * Set the desired email instead of the default CP value in the `EMAIL` option
+  * Set the `CP` value in the `EMAIL` option in the `license_check` section. Add an option with the path to the panel script for receiving emails:
+    ```
+    {PANEL_NAME}_getemail_script=/path/to/getemail_script)
+    ```
+  `{PANEL_NAME}` is the name of the panel from the `cldetect --detect-cp-name` command output.
+  * If there is no panel script, the default email (`root@localhost.localdomain`) will be used.
+  * The `/path/to/getemail_script` file should be executable and output to stdout the admin email to which an email with checks results will be sent. Note that the settings of the mail server can change the final email.
 
 In all cases, for the negative checker result, the exit code will be > 0 (at the moment it will be equal to the number of failed checkers).
 
@@ -3146,8 +3160,6 @@ This checker was removed from the cldiag utility as `cldiag --check-rpmdb` can i
 
 A new checker `check-hidepid` is available starting from `lve-utils-4.2.18-1` and later. It checks if CageFS is installed and if `/proc` is mounted without the `hidepid=2` parameter.
 
-Available options: `--all` and `--cron-check`.
-
 * If CageFS is not installed, `check-hidepid` skips and outputs the following:
 
   ```
@@ -3195,6 +3207,48 @@ Checks the things on a server of client which are required for correct work of c
 * Checks that service <span class="notranslate">`node_exporter`</span> is present, enabled and active
 * Checks that service <span class="notranslate">`lvestats`</span> is present, enabled and active
 * Checks that RPM packages <span class="notranslate">`cl-end-server-tools`</span> and <span class="notranslate">`cl-node-exporter`</span> are installed
+
+#### all
+
+Performs diagnostic checks from the list:
+
+* check_cp_diag
+* check_symlinksifowner
+* check_suexec
+* check_suphp
+* check_use_pam
+* check_symlinkowngid
+* check_existence_of_all_users_packages
+* check_phpselector
+* check_defaults_cfg
+* check_php_conf
+* check_lve_limits
+* check_hidepid
+* check_cagefs_partition_disk_quota
+* fake_cagefs_checker
+
+#### generate-email
+
+Performs diagnostic checks (from the list above) and generates HTML report sent to the administrator's email.
+
+#### cron-check
+
+Performs the same diagnostic checks as `generate-email` but with considering the `ENABLE_CLDIAG` option in the `/etc/sysconfig/cloudlinux`.
+
+Performs diagnostic checks from the list:
+
+* check_symlinksifowner
+* check_use_pam
+* check_symlinkowngid
+* check_existence_of_all_users_packages
+* check_lve_limits
+* check_hidepid
+* check_cagefs_partition_disk_quota
+* check_jwt_token
+* check_cl_plus_sender_service
+* check_node_exporter_service
+* check_cmt_packages
+* check_lvestats_service
 
 ### cloudlinux-config
 
