@@ -1294,7 +1294,7 @@ There are two major ways to add files and directories to CageFS:
 Please do not modify any existing files in the <span class="notranslate">`/etc/cagefs/conf.d`</span> directory because they may be overwritten while updating CageFS package. You should create a new file with a unique name instead.
 :::
 
-In order to copy files and directories to CageFS, you can manually create a custom config file in <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
+In order to copy files and directories to CageFS, you can manually create a custom config file with *.cfg extension in <span class="notranslate">`/etc/cagefs/conf.d`</span> directory.
 
 Also, you can add files and directories that belong to `rpm` package to CageFS as follows:
 
