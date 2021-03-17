@@ -80,8 +80,8 @@ That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the s
 
 Version 1.2
 1. `Provides public_cp_vendors_api = 1.2` added to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
-2. Possibilty to run [`domains` integration script](https://docs.cloudlinux.com/control_panel_integration/#domains) with optional flag `--with-php` added.
-3. New X-Ray feature added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now the X-Ray UI tab is hidden until the panel makes the support clear by setting the `xray` feature to `true`.
+2. [`domains` integration script](https://docs.cloudlinux.com/control_panel_integration/#domains) updated: new optional flag `--with-php` added. This option is required for X-Ray integration only.
+4. New X-Ray feature added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now the X-Ray UI tab is hidden by default until the panel makes the support clear by setting the `xray` feature to `true`.
 
 Version 1.1
 1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
