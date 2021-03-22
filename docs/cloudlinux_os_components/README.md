@@ -3178,6 +3178,10 @@ See also [MySQL Governor CLI](/command-line_tools/#mysql-governor)
 
 #### Upgrading database server
 
+::: danger Important
+Upgrade from MySQL 8 to MariaDB 10.x isn't supported due to compatibility issues between these database server versions and will break your database server completely. You can find more information about the compatibility issues [here](https://mariadb.com/kb/en/upgrading-from-mysql-to-mariadb/)
+:::
+
 In order to change MySQL version you should run the following commands:
 
 <div class="notranslate">
