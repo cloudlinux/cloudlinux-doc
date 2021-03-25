@@ -417,7 +417,11 @@ Tracing tasks created by an end-user will also be displayed in the administrator
 
     To solve this, the existing running tasks for the same Domain/URL should be stopped or completed. You can find more details about this in the [FAQ](/cloudlinux-os-plus/#what-should-i-do-if-i-see-the-warning-task-is-duplicated-by-url).
 
+* If a user's tracing task was created for a domain which is using the FPM handler there's an additional limitation.  To avoid  frequent reloads of the particular FPM service, **Start tracing** ,  **Stop tracing** or  **Continue tracing** action would be blocked in case if the latest reload of a corresponding FPM service was done less than 1 minute ago.  
+If a user gets such an error message - it means that  1 reload  in  1 minute for a particular FPM service has been already done.  Just try performing the same operation once again in a while.
 
+![](/images/XRayEndUserFPMerror.png)
+	
 ### X-Ray automated throttling detection
 
 The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU during the HTTP request execution. 
