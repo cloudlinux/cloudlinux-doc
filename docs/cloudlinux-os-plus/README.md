@@ -362,7 +362,7 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 ### End-user X-Ray plugin
 
 :::warning Warning
-To use the end-user X-Ray plugin, update your LVE Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` by running the following command:
+To use the end-user X-Ray plugin, update your LVE Manager and X-Ray packages to the `lvemanager-6.3.9-1` and `alt-php-xray-0.3-1` (or later) by running the following command:
 ```
 # yum update lvemanager alt-php-xray
 ```
