@@ -77,9 +77,17 @@ That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the s
 
 ### Changelog
 ::: tip Changelog
+
+Version 1.2
+
+Summary: ability to integrate X-Ray added.
+1. `Provides public_cp_vendors_api = 1.2` added to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
+2. [`domains` integration script](https://docs.cloudlinux.com/control_panel_integration/#domains) updated: new optional flag `--with-php` added. This option is required for X-Ray integration only.
+4. New X-Ray feature added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now the X-Ray UI tab is hidden by default until the panel makes the support clear by setting the `xray` feature to `true`.
+
 Version 1.1
 1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
-2. New `supported_cl_features` key added to `panel_info` script. You can specify CloudLinux features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
+2. New `supported_cl_features` key added to [`panel_info` script](/control_panel_integration/#panel-info). You can specify CloudLinux features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
 :::
 
 
@@ -387,7 +395,7 @@ Returns the information about the control panel in the specified format.
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
 |<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
-|<span class="notranslate">supported_cl_features</span>|False|Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li>    <li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul> <br> Available since API v1.1 (see [versioning](/control_panel_integration/#versioning))|
+|<span class="notranslate">supported_cl_features</span>|False|Available since API v1.1 (see [versioning](/control_panel_integration/#versioning)) <br> Object that describes which CloudLinux features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li></ul> Available since API v1.2 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul>|
 
 
 
@@ -627,7 +635,8 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 #### <span class="notranslate">domains</span>
 
 Returns key-value object, where a key is a domain (or subdomain) and a value is a key-value object contains the owner name (UNIX users), the path to the site root specified in the HTTP server config, and the domain status (main or alternative).
-In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
+
+X-Ray support is available since API v1.2 (see [versioning](/control_panel_integration/#versioning)). In order to enable X-Ray support, the value for each domain should include php configuration. Full X-Ray integration documentation can be found [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 
 ::: warning WARNING
 To make Python/Node.js/Ruby/PHP Selector workable, this script should be executed with user access and inside CageFS. When running this script as the user, you must limit answer scope to values, allowed for the user to view.
@@ -650,7 +659,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |Key|Required|Description|
 |<span class="notranslate">--owner, -o</span>|False|Used for filtering output; set a name of the owner whose domains to print|
 |<span class="notranslate">--name, -n</span>|False|Used for filtering output; set a name of the domain, to display information about it|
-|<span class="notranslate">--with-php</span>|False (X-Ray support only)|Used for extending output with PHP configuration, required by X-Ray|
+|<span class="notranslate">--with-php</span>|False (X-Ray support only)|Used for extending output with PHP configuration, required by X-Ray (available since API v1.2, see [versioning](/control_panel_integration/#versioning))|
 
 **Output example**
 
@@ -721,7 +730,7 @@ E.g. if the control panel has two domains: <span class="notranslate">`user1.com`
 |<span class="notranslate">owner</span>|False|UNIX user who is a domain owner|
 |<span class="notranslate">document_root</span>|False|Absolute path to the site root directory|
 |<span class="notranslate">is_main</span>|False|Is the domain the main domain for a user|
-|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)|
+|<span class="notranslate">Nested dictionary (named array) php</span>|True (False if X-Ray support is enabled)|PHP configuration for a domain, required by X-Ray, see details [here](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel) (available since API v1.2, see [versioning](/control_panel_integration/#versioning))|
 
 #### <span class="notranslate">resellers</span>
 
@@ -1878,6 +1887,10 @@ See [File system quotas](/cloudlinux_os_kernel/#file-system-quotas) for kernel p
 
 :::warning WARNING!
 Please note that cPanel, Plesk and DirectAdmin are already supported by X-Ray and do not require any integration effort.
+:::
+
+:::tip Note
+X-Ray support is available since API v1.2 (see [versioning](/control_panel_integration/#versioning))
 :::
 
 In order to integrate X-Ray into your panel, you should follow two simple steps.
