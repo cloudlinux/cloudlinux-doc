@@ -6527,13 +6527,13 @@ Change PATH variable in the environment of lsPHP processes. Default path /usr/lo
 **Context** : httpd.conf  
 
 **Description** :  
-Sets environment variable LSAPI_CHILDREN
-Maximum number of simultaneously running child backend processes.
-Optional, a default value is equal to EP.
-* The value of the directive is used if it's set to a number less than NPROC - 1.
-* If the value is set bigger than NPROC - 1, the value is automatically set to EP+1.
-* If the value is bigger than NPROC - 1 AND EP set to unlimited -> NPROC -1 is used.
-* If EP and NPROC are unlimited - the value is set to 120. 
+Sets maximum number of simultaneously running child backend processes. Optional, a default directive value is equal to 120.   LSAPI_CHILDREN environment variable is set according to the following rules:
+* If NPROC and EP are unlimited, the directive value is used.
+* If NPROC is set to any limited value and the directive value is set to a number less than NPROC-1, the directive value is used.
+* If the value is bigger than NPROC-1 and EP is set to unlimited, NPROC-1 is used.
+* If the value is bigger than NPROC-1 and EP is set to any limited value, EP+1 is used.
+
+For example, with the default lve settings NPROC=100 and EP=20, the effective LSAPI_CHILDREN will be EP+1, that is LSAPI_CHILDREN=21.
 
 ---
 
