@@ -139,7 +139,7 @@ The main configuration file <span class="notranslate">`/etc/sysconfig/lvestats2`
   Possible values:
     * <span class="notranslate">`true`</span>
     * <span class="notranslate">`false`</span>
-* <span class="notranslate">`use_big_uids`</span> - the option is available from <span class="notranslate">lvestats</span> version <span class="notranslate">`version_value`</span>. It allows using the user uids more than 10<sup>9</sup> and up to 2<sup>31</sup>-2 (2 147 483 646). Top border is the biggest value which <span class="notranslate">`kmodlve`</span> can use as <span class="notranslate">LVE ID</span>. You should recreate <span class="notranslate">lvestats</span> database by command <span class="notranslate">`lve-create-db --recreate`</span> if you change the option's value from <span class="notranslate">`false`</span> to <span class="notranslate">`true`</span>. 
+* <span class="notranslate">`use_big_uids`</span> - the option is available from <span class="notranslate">lvestats</span> version <span class="notranslate">`3.0.14-1`</span>. It allows using the user uids more than 10<sup>9</sup> and up to 2<sup>31</sup>-2 (2 147 483 646). Top border is the biggest value which <span class="notranslate">`kmodlve`</span> can use as <span class="notranslate">LVE ID</span>. You should recreate <span class="notranslate">lvestats</span> database by command <span class="notranslate">`lve-create-db --recreate`</span> if you change the option's value from <span class="notranslate">`false`</span> to <span class="notranslate">`true`</span>. 
   Possible values:
   * <span class="notranslate">`true`</span>
   * <span class="notranslate">`false`</span>
