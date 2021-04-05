@@ -1714,6 +1714,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
 
 * [Shared memory (/dev/shm) isolation in CageFS](/cloudlinux_os_components/#shared-memory-dev-shm-isolation-in-cagefs)
 
+* [Preventing process from entering CageFS on error](/cloudlinux_os_components/#preventing-process-from-entering-cagefs-on-error)
+
 
 #### File system templates
 
@@ -2941,6 +2943,27 @@ you should specify `mode=0777`. It is required for the proper operation of share
 :::tip Note
 when the size of the `/dev/shm` is specified in percentage of user’s physical memory limit (PMEM), you should remount CageFS after changing PMEM limit in order to change the size of shared memory allocated for the `/dev/shm` in user’s CageFS. To do so, execute `cagefsctl --remount-all`
 :::
+
+#### Preventing process from entering CageFS on error
+
+Starting from CageFS v.7.2.0-1, you can prevent a process from work if it can't enter to CageFS. The option is disabled by default.
+
+To enable it, run the following commands: 
+
+```
+touch /etc/cagefs/fail.on.error
+cagefsctl --remount-all (cagefsctl --remount <user>)
+```
+
+To disable it, run the following commands: 
+
+```
+rm -f /etc/cagefs/fail.on.error
+cagefsctl --remount-all (cagefsctl --remount <user>)
+```
+
+The message “Act like CageFS is disabled” in the `/var/log/messages` will be displayed regardless the file `/etc/cagefs/fail.on.error` is available or not.
+
 
 ### Integration with control panels
 
