@@ -826,7 +826,7 @@ Starting from **lve-utils v.4.2.0-1**, when installing (not updating) the `lve-u
 If a group was created in the `fs.proc_super_gid` earlier all stays the same.
 
 
-Virtualized /proc filesystem will only display following files (as well as directories for PIDs for the user) to unprivileged users:
+Virtualized /proc filesystem in CloudLinux OS 8/CloudLinux OS 7 hybrid will display all files to unprivileged users. But unprivileged users will have access only to the following files (as well as directories for PIDs for the user):
 <div class="notranslate">
 
 ```
