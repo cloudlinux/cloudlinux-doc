@@ -5376,9 +5376,15 @@ To use Python Selector, it is required to install the following:
     <div class="notranslate">
 
     ```
-    yum install lvemanager lve-utils alt-python-virtualenv ea-apache24-mod-alt-passenger
+    yum install lvemanager lve-utils alt-python-virtualenv
     ```
     </div>
+    
+    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+    
+    :::tip Note
+    ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
+    :::
  
 __For EasyApache 3:__
 
@@ -5585,12 +5591,19 @@ yum install alt-python27-devel --enablerepo=cloudlinux-updates-testing
 </div>
 
 #### EasyApache 4
+  
+:::tip Note
+```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
+:::
 
-CloudLinux has <span class="notranslate"> Python Selector</span>, which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger</span>. However, it does not allow using <span class="notranslate"> cPanel application manager</span>.
+CloudLinux has <span class="notranslate"> Python Selector</span>, which allows creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
 
-It is not correct to install both of those packages on the server because they contain the same <span class="notranslate"> passenger</span> module for Apache web server.
+* ```ea-ruby24-mod_passenger```
+* ```ea-ruby27-mod_passenger```
 
-The new <span class="notranslate">ea-ruby24-mod_passenger</span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux Python Selector</span>.
+Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+
+The <span class="notranslate">```ea-ruby2X-mod_passenger```</span> allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux Python Selector</span>.
 
 To install run:
 <div class="notranslate">
@@ -5598,6 +5611,16 @@ To install run:
 ```
 # yum install lvemanager alt-python-virtualenv
 # yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
+```
+</div>
+
+or:
+
+<div class="notranslate">
+
+```
+# yum install lvemanager alt-python-virtualenv
+# yum install ea-ruby27-mod_passenger --enablerepo=cl-ea4-testing
 ```
 </div>
 
@@ -5685,12 +5708,20 @@ You can find <span class="notranslate"> Redmine </span> version 2.6.0 and newer 
 
 #### EasyApache 4
 
-Starting with cPanel/WHM version 66 provides <span class="notranslate">ea-ruby24-mod_passenger</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
+:::tip Note
+```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
+:::
 
-CloudLinux OS features its own <span class="notranslate"> Python and  Ruby Selectors </span> , which allows creating applications with <span class="notranslate"> ea-apache24-mod-alt-passenger </span>. However, it conflicts with <span class="notranslate"> cPanel application manager </span> .
-Thus, avoid installing <span class="notranslate"> passenger </span> packages from both sources on the same server.
+Starting with cPanel/WHM version 66 provides <span class="notranslate">```ea-ruby24-mod_passenger```</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
 
-The new <span class="notranslate"> ea-ruby24-mod_passenger </span> is available for download from our <span class="notranslate"> updates-testing (beta) </span> repository which allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
+CloudLinux OS features its own <span class="notranslate">Python and  Ruby Selectors</span>, which allow creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
+
+* ```ea-ruby24-mod_passenger```
+* ```ea-ruby27-mod_passenger```
+
+Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+
+The <span class="notranslate"> ```ea-ruby2X-mod_passenger``` </span> allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
 To install, run:
 <div class="notranslate">
@@ -5698,6 +5729,16 @@ To install, run:
 ```
 # yum install lvemanager alt-python-virtualenv
 # yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
+```
+</div>
+
+or:
+
+<div class="notranslate">
+
+```
+# yum install lvemanager alt-python-virtualenv
+# yum install ea-ruby27-mod_passenger --enablerepo=cl-ea4-testing
 ```
 </div>
 
@@ -5735,13 +5776,20 @@ To use <span class="notranslate">Node.js Selector</span>, install <span class="n
 yum groupinstall alt-nodejs
 ```
 </div>
-Also, please install <span class="notranslate"> LVE Manager, LVE Utils and Fusion Passenger </span> by running the following command:
+Also, please install <span class="notranslate"> LVE Manager, LVE Utils and Phusion Passenger </span> by running the following command:
 <div class="notranslate">
 
 ```
-yum install lvemanager lve-utils ea-apache24-mod-alt-passenger
+yum install lvemanager lve-utils
 ```
 </div>
+
+Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+    
+:::tip Note
+```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
+:::
+
 For EasyApache 3:
 <div class="notranslate">
 
