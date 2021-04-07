@@ -5610,7 +5610,7 @@ To install run:
 
 ```
 # yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
+# yum install ea-ruby24-mod_passenger
 ```
 </div>
 
@@ -5620,7 +5620,7 @@ or:
 
 ```
 # yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby27-mod_passenger --enablerepo=cl-ea4-testing
+# yum install ea-ruby27-mod_passenger
 ```
 </div>
 
@@ -5728,7 +5728,7 @@ To install, run:
 
 ```
 # yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby24-mod_passenger --enablerepo=cl-ea4-testing
+# yum install ea-ruby24-mod_passenger
 ```
 </div>
 
@@ -5738,7 +5738,7 @@ or:
 
 ```
 # yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby27-mod_passenger --enablerepo=cl-ea4-testing
+# yum install ea-ruby27-mod_passenger
 ```
 </div>
 
