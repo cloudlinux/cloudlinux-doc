@@ -5380,7 +5380,7 @@ To use Python Selector, it is required to install the following:
     ```
     </div>
     
-    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
     
     :::tip Note
     ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
@@ -5601,7 +5601,7 @@ CloudLinux has <span class="notranslate"> Python Selector</span>, which allows c
 * ```ea-ruby24-mod_passenger```
 * ```ea-ruby27-mod_passenger```
 
-Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
 
 The <span class="notranslate">```ea-ruby2X-mod_passenger```</span> allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux Python Selector</span>.
 
@@ -5719,7 +5719,7 @@ CloudLinux OS features its own <span class="notranslate">Python and  Ruby Select
 * ```ea-ruby24-mod_passenger```
 * ```ea-ruby27-mod_passenger```
 
-Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
 
 The <span class="notranslate"> ```ea-ruby2X-mod_passenger``` </span> allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
@@ -5784,7 +5784,7 @@ yum install lvemanager lve-utils
 ```
 </div>
 
-Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. Ruby 2.7 is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** Ruby 2.4 and Ruby 2.7. If your system runs CloudLinux OS 8, you can **only** use Ruby 2.7.
+Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
     
 :::tip Note
 ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
