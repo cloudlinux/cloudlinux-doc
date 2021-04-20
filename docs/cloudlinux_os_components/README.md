@@ -6639,7 +6639,7 @@ Number of usec to wait while lsPHP starts (if not started on request).
 
 **Syntax** : lsapi_backend_max_process_time [number]  
 **Default** : lsapi_backend_max_process_time 300  
-**Context** : httpd.conf  
+**Context** : httpd.conf, virtualhost 
 
 **Description** :  
 Sets env variable LSAPI_MAX_PROCESS_TIME  
