@@ -3247,6 +3247,7 @@ The script will install original MySQL server, and remove <span class="notransla
 * [Mapping a user to a database](/cloudlinux_os_components/#mapping-a-user-to-a-database)
 * [Log files](/cloudlinux_os_components/#log-files)
 * [Change MySQL version](/cloudlinux_os_components/#change-mysql-version)
+* [PrivateDevices mode support](/cloudlinux_os_components/#privatedevices-mode-support)
 
 #### Configuration
 
@@ -3539,6 +3540,34 @@ cPanel does not officially support MySQL 8.0, that is why we don’t recommend t
 :::tip Note
 See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
 :::
+
+#### PrivateDevices mode support
+
+MySQL Governor v. 1.2-66 and later on Cloudlinux OS 7 and 8 supports the PrivateDevices mode for the mysqld service.
+
+To switch on the PrivateDevices mode, follow these steps.
+
+**On Cloudlinux OS 7**
+
+* Make sure that the systemd version is at least **219-78.2.cloudlinux.1**
+* Add the following instruction into the _Service_ section of the _mysqld_ service file:
+  ```
+  PrivateDevices=true
+  ```
+* Invoke `systemctl daemon-reload`
+* Restart _mysqld_ service
+
+
+**On Cloudlinux OS 8**
+
+* Add the following instructions into the _Service_ section of the _mysqld_ service file:
+  ```
+  PrivateDevices=true
+  DeviceAllow=/dev/lve
+  BindPaths=/dev/lve 
+  ```
+* Invoke `systemctl daemon-reload`
+* Restart _mysqld_ service
 
 ### Backing up MySQL
 
