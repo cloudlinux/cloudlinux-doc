@@ -114,7 +114,9 @@ base_path = /panel/path/lvemanager
 
 run_service = 1
 service_port = 9000
-
+use_ssl = 1
+ssl_cert = /path/to/domain_srv.crt
+ssl_key = /path/to/domain_srv.key
 ```
 </div>
 
@@ -1030,7 +1032,9 @@ The following configuration file parameters are used to determine the location o
 Files are copied or replaced by <span class="notranslate">`yum update lvemanager`</span> command.
 * **<span class="notranslate">run_service</span>** - enable LVE Manager web server. If it is set to 1 when installing or updating LVE Manager, we enable and run the web server with LVE Manager
 * **<span class="notranslate">service_port</span>** - a port used for running a web server for access LVE Manager without the control panel
-  
+* **<span class="notranslate">use_ssl</span>** - use HTTPS for LVE Manager web server.
+* **<span class="notranslate">ssl_cert</span>** - path to domain ssl cert file
+* **<span class="notranslate">ssl_key</span>** - path to domain ssl cert key file
 #### Known issues for GUI unification
 
 :::warning Known issues for GUI unification
@@ -1041,7 +1045,6 @@ These services have some issues:
 
 * The ability to download log files from <span class="notranslate">CloudLinux Wizard</span> is missed
 * Incorrect layout for some UI forms (Node.js Selector/Python Selector)
-* Dashboard does not open CageFS options
 * Some errors are not displayed
 
 These issues will be fixed in the near future.
