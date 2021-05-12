@@ -140,7 +140,7 @@ Here's what the cldeploy script does, if one runs it to revert the system back t
 * Removes lve, mod_hostinglimits, lve-stats, lvemanager.
 * mod_hostinglimits RPM is removed.
 
-Note that **cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, we provie the instructions on how you could remove it manually later, when it is safe to do so.
+Note that **cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, we provide the instructions on how you could remove it manually later, when it is safe to do so.
 
 On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
 
