@@ -922,6 +922,23 @@ Starting from lve-utils 3.0-21.2, lve_namespaces service can read parameters fro
 Even if fs.proc_can_see_other_uid and fs.proc_super_gid parameters are not set in config files but specified in /proc/sys, then when restarting lve_namespaces service the parameters from /proc/sys will be used. So, /proc will be remounted according to these parameters.
 :::
 
+### Remounting procfs on CloudLinux OS 8
+
+On CloudLinux 8, starting from the kernel version `4.18.0-193.28.1.lve1.el8.x86_64` remounting is controlled by the kernel.
+
+As before, admins are able to change the settings `fs.proc_can_see_other_uid` and `fs.proc_super_gid` in the `/etc/sysctl.d/90-cloudlinux.conf` or `/etc/sysctl.conf`.
+
+To apply changes, execute the following command:
+
+```
+sysctl --system
+```
+
+It is no longer needed to manually run the `/usr/share/cloudlinux/remount_proc.py` to remount `/proc`.
+
+::: tip Note
+On Cloudlinux OS 8, changing the `/etc/fstab` file for setting `/proc` remounting with the `hidepid=` option **will not cause any effect** as remounting is totally controlled by the kernel and depends on the `fs.proc_can_see_other_uid` option.
+:::
 
 ## Ptrace block
 
