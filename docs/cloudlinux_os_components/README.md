@@ -770,6 +770,43 @@ Your Friendly Web Hosting Support Team
 The email template should be in the UTF-8 encoding. The other encodings are not supported.
 :::
 
+Starting from lve-stats v. 3.0.15-1, it allows to localize the words that before were imported directly from the lve-stats program code and couldn't be changed.
+
+The email template looks like follows:
+
+```
+Dear {{TONAME}},
+Following accounts experienced issues in the past {{PERIOD}}{% if HOSTNAME is defined %} on host {{HOSTNAME}}{% endif %}
+
+{{STATS}}
+
+Sincerely,
+Your Friendly Web Hosting Support Team
+```
+
+Before, the `{TONAME}` was replaced with “Administrator”/”Reseller”/”Customer” according to the type of the addressee. The `{PERIOD}` was replaced with the duration of the period during which the limits faults were detected. The period duration includes the words "days"/"hour"/"minutes"/"seconds".
+
+In the new version, in order for the lve-stats notifier to include these words in the letter in the language corresponding to the addressee locale, you should create a file for the required locale `/usr/share/lve/emails/<encoding_name>/locale_defines.json` with the following content:
+
+```
+{
+ "NOTIFY_FROM_SUBJECT": "Your server has lve-stats faults",
+ "PERIOD": {
+   "days": "days", "hours": "hour(s)", "minutes": "minutes", "seconds": "seconds"
+ },
+ "TONAME": {
+   "admin": "Administrator", "reseller": "Reseller", "customer": "Customer"
+ }
+}
+```
+
+The file format should be JSON, and the file encoding should be UTF-8. If this file is found and successfully read, the words from it will be used in emails. 
+In case of any file reading/parsing error, a corresponding message will be written in the lve-stats log, and the contents of the file will be completely ignored.
+If a key in the JSON file content is missing, then lve-stats notifier uses the word contained in the body of the program (just like in previous lve-stats versions).
+Also, this file allows you to override/localize the subject of the email.
+
+It should be noted that this override of the subject line is the highest priority. I.e., if you want to use the subject from the configuration file `/etc/sysconfig/lvestats.config/StatsNotifier.cfg`, then do not specify the `NOTIFY_FROM_SUBJECT` key in  the `locale_defines.json`.
+
 
 ### Plugins
 
