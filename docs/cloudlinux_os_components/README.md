@@ -3912,33 +3912,54 @@ Go to <span class="notranslate">cPanel Admin interface → MultiPhp Manager → 
 LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
 :::
 
+:::tip Note
+If your LiteSpeed is installed to a non-standard, custom location path, create a symlink: `ln -s /path/to/custom/lsws /usr/local/lsws` then run `cagefsctl --setup-cl-selector`.
+:::
+
 If the settings were not applied, you can use the following steps to set up LiteSpeed to use <span class="notranslate"> PHP Selector. </span>
+
+1. Follow PHP Selector [installation guide](/cloudlinux_os_components/#installation-and-update-4).
+2. Make sure the following settings are set in the LSWS Web Admin console:
+  * Configuration ➞ Server ➞ General ➞ CloudLinux: `CageFS` or `CageFS without suEXEC`
+  * Configuration ➞ Server ➞ General ➞ PHP suEXEC: `Yes`
+
+**How to set up LiteSpeed version 5.3+ to use PHP Selector**
+
+**For Plesk**
+
+![](/images/LiteSpeedForPlesk.png)
+
+**For other control panels**
+
+![](/images/LiteSpeedForOtherCP.png)
+
+Additionally, we recommend setting up the following parameters:
+
+* Configuration ➞ Server ➞ PHP:
+* Click _Edit_ in the PHP Handler Defaults section
+* Set _Yes_ in the _Run On Startup_
+* Make sure to set _Max Idle Time_ (for example to 140)
+
+![](/images/LiteSpeedAdditionSettings.png)
 
 **How to set up LiteSpeed version lower than 5.3 to use PHP Selector**
 
-To enable <span class="notranslate"> PHP Selector </span> with <span class="notranslate"> LiteSpeed Web Server </span> follow <span class="notranslate"> PHP Selector  </span> [installation guide](/cloudlinux_os_components/#installation-and-update-4) , and then adjust following settings in <span class="notranslate"> LiteSpeed </span> :
+Go to the _External App_ tab, _External Application_ ➞ Add.
 
-1. <span class="notranslate">CloudLinux (Admin Console | Configuration | Server | General): CageFS </span>
-2. Enable <span class="notranslate">SuExec: Server | General | PHP SuEXEC | Yes </span>
-3. Go to <span class="notranslate">_External App_</span> tab, the new <span class="notranslate"> **lsphp_selector** </span> is here.
+![](/images/LiteSpeedExternalAppTab.png)
 
-:::tip Note
-You can select any other application or create a custom one.
-:::
+* The _Command line_ should be `/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper` on Plesk. 
+* For other control panels, the _Command line_ should be `/usr/local/bin/lsphp`.
+* The _Run On Start Up_ line must contain `Yes` or `No`.
 
-![](/images/litespeed1_zoom70.png)
+**For Plesk**
 
-4. The <span class="notranslate">_Command_</span> line should be <span class="notranslate"> **/var/www/cgi-bin/cgi_wrapper/cloudlinux_wrapper** </span> on <span class="notranslate"> Plesk </span> . For other control panels, <span class="notranslate"> _Command_ </span> line should be <span class="notranslate"> **/usr/local/bin/lsphp** </span> .
+![](/images/LiteSpeedPlesk.png)
 
-<span class="notranslate"> _Run On Start Up_ </span> line must contain <span class="notranslate"> **Yes** </span> or <span class="notranslate"> **No** </span>.
+**For other control panels**
 
-For <span class="notranslate">Plesk</span>:
+![](/images/LiteSpeedOtherCP.png)
 
-![](/images/litespeed3_zoom70.png)
-
-For other control panels:
-
-![](/images/litespeed2_zoom70.png)
 
 Settings in text format:
 
@@ -3969,33 +3990,21 @@ Settings in text format:
 |<span class="notranslate">Process Soft Limit</span>|`400`|
 |<span class="notranslate">Process Hard Limit</span>|`500`|
 
-1. Go to <span class="notranslate"> _Script Handler_ </span> tab. For required suffixes change the <span class="notranslate"> _Handler Name_ </span> to <span class="notranslate"> **lsphp_selector** </span> .
+Go to the _Script Handler_ tab. For required suffixes, change the _Handler Name_ to `lsphp_selector`.
 
-![](/images/litespeed4_zoom70.png)
+![](/images/LiteSpeedHandlerName.png)
 
 
-![](/images/litespeed5_zoom70.png)
+![](/images/LiteSpeedScriptHandler.png)
 
-**Additional settings for LiteSpeed version 5.3 +**
-
-Go to <span class="notranslate"> Server --> PHP </span> tab. Click <span class="notranslate"> _Edit_ </span> in the <span class="notranslate"> _PHP Handler Defaults_ </span> section. We recommend to set up the following settings:
-
-* Set <span class="notranslate"> _Yes_ </span> in the <span class="notranslate"> _Run On Startup_ </span>
-* Make sure to set <span class="notranslate"> _Max Idle Time_ </span> 
-
-![](/images/litespeed_4_zoom70.png)
-
-::: tip Note
-In order to use <span class="notranslate"> PHP Selector and custom php.ini, lsphp5 </span> needs to be in SuEXEC non-daemon mode.
+:::tip Note
+In order to use PHP Selector and custom php.ini, lsphp5 needs to be in SuEXEC non-daemon mode.
 :::
 
-::: tip Note
-Some PHP configurations require more memory for SuExec to work properly. If you are getting error 500 after switching suEXEC to non-daemon mode, try to increase <span class="notranslate"> Memory Soft Limit and Memory Hard Limit for external App </span> to at least 650/800M.
+:::tip Note
+Some PHP configurations require more memory for SuExec to work properly. If you are getting error 500 after switching suEXEC to non-daemon mode, try to increase Memory Soft Limit and Memory Hard Limit for external App to at least 650/800M.
 :::
 
-::: tip Note
-If you have LiteSpeed installed not in standard location path, please create a symlink: <span class="notranslate"> 'ln -s /path/to/custom/lsws /usr/local/lsws' then run 'cagefsctl --setup-cl-selector'. </span>
-:::
 
 ### ISPmanager support
 
