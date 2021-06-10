@@ -676,6 +676,16 @@ By default the templates for English are set: <span class="notranslate">`/usr/sh
 * <span class="notranslate">`reseller_notify.html` `reseller_notify.txt`</span> for reseller;
 * <span class="notranslate">`user_notify.txt`</span> for user.
 
+
+Starting from `lve-stats-4.1.2`, it allows server administrators to use their own lvestats notifier email notification templates. 
+
+To use the custom templates, place them and the `locales.json` file to the `/etc/cl.emails.d/LOCALE` directory. File names are the same as in general `/etc/cl.emails.d/LOCALE` file.
+
+If the `/etc/cl.emails.d/LOCALE` doesn't exist or doesn't contain the templates, you can use the `/usr/share/lve/emails/LOCALE` directory, as it was in previous versions of lve-stats.
+
+Please do not edit the templates in the the `/usr/share/lve/emails` and place the new updated templates in the `/etc/cl.emails.d` directory.
+
+
 The notification is formed as <span class="notranslate">_Multipart content type_</span> [RFC1341(MIME)](https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html).
 
 The plain text is taken from the <span class="notranslate">`.txt`</span> files, html version - from the <span class="notranslate">`.html`</span> template.
