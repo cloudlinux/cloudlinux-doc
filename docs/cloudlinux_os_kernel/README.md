@@ -840,17 +840,17 @@ Virtualized /proc filesystem in CloudLinux OS 8/CloudLinux OS 7 hybrid will disp
 /proc/cmdline
 /proc/meminfo
 /proc/mounts
-/proc/tcp
-/proc/tcp6
-/proc/udp
-/proc/udp6
-/proc/assocs
-/proc/raw
-/proc/raw6
-/proc/unix
-/proc/dev
+/proc/net/tcp
+/proc/net/tcp6
+/proc/net/udp
+/proc/net/udp6
+/proc/net/assocs
+/proc/net/raw
+/proc/net/raw6
+/proc/net/unix
+/proc/net/dev
 ```
-</div>   
+</div>
 
 :::tip Note
 Starting from lve-utils 3.0-21.2, fs.proc_super_gid parameter in da_add_admin utility is written to /etc/sysctl.d/90-cloudlinux.conf.
