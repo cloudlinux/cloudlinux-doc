@@ -172,12 +172,23 @@ Use it to register your system or to [convert CentOS server to CloudLinux]() ser
 
 ### License activation
 
-To register your server with CloudLinux Network using activation key run:
+To register your **CloudLinux OS 6/7** server with CloudLinux Network using activation key, run the following command:
 
 <div class="notranslate">
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
+$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
+```
+</div>
+
+
+To register your **CloudLinux OS 8** server with CloudLinux Network using activation key, run the following command:
+
+<div class="notranslate">
+
+```
+$ yum install rhn-setup --enablerepo=cloudlinux-baseos
 $ /usr/sbin/rhnreg_ks --activationkey=<activation key>
 ```
 </div>
