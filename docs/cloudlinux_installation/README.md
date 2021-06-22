@@ -188,7 +188,7 @@ To register your **CloudLinux OS 8** server with CloudLinux Network using activa
 <div class="notranslate">
 
 ```
-$ yum install rhn-setup --enablerepo=cloudlinux-baseos
+$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
 $ /usr/sbin/rhnreg_ks --activationkey=<activation key>
 ```
 </div>
