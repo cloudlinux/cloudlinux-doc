@@ -3477,7 +3477,7 @@ MySQL Governor allows setting the burstable limits for accounts. To provide that
 * `current` and `short` can be more than the LVE limit and should not be less
 * setting the `current` and `short` limits more than the LVE limit prevents bottlenecks in SQL request processing
 * `middle` and `long` on the contrary, should not be more than the LVE limit
-* aetting the `middle` and `long` limits less than the LVE limit prevents abuse of other processes in the account (Apache, PHP) by MySQL
+* setting the `middle` and `long` limits less than the LVE limit prevents abuse of other processes in the account (Apache, PHP) by MySQL
 
 **Example of choosing MySQL Governor limits**
 
