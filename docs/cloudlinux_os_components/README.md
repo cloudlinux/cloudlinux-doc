@@ -3092,7 +3092,7 @@ See also [CageFS CLI tools](/command-line_tools/#cagefs).
 :::
 
 :::warning Warning
-The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from September 1, 2021. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 <span class="notranslate"> MySQL Governor </span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
@@ -3300,6 +3300,7 @@ The script will install original MySQL server, and remove <span class="notransla
 
 * [Configuration](/cloudlinux_os_components/#configuration-3)
 * [Modes of operation](/cloudlinux_os_components/#modes-of-operation)
+* [MySQL Governor limits](/cloudlinux_os_components/#mysql-governor-limits)
 * [Starting and stopping](/cloudlinux_os_components/#starting-and-stopping)
 * [Mapping a user to a database](/cloudlinux_os_components/#mapping-a-user-to-a-database)
 * [Log files](/cloudlinux_os_components/#log-files)
@@ -3310,7 +3311,7 @@ The script will install original MySQL server, and remove <span class="notransla
 
 
 :::warning Warning
-The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from September 1, 2021. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 <span class="notranslate"> MySQL Governor </span> configuration is located in <span class="notranslate"> /etc/container/mysql-governor.xml </span> 
@@ -3420,26 +3421,72 @@ These values can also be set using [cloudlinux-config](/command-line_tools/#clou
 
 
 :::warning Warning
-The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from September 1, 2021. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 :::tip Note
 <span class="notranslate">MySQL Governor</span> 1.0+
 :::
 
-<span class="notranslate"> MySQL Governor </span> has multiple modes of operation. Some of them are experimental at this moment.  
-Mode:  
-<span class="notranslate"> **off -- Monitor Only** :  </span> In this mode <span class="notranslate"> MySQL Governor </span> will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment in time (and historically). This mode is good when you are just starting and want to see what is going on  
-<span class="notranslate"> **single -- Single restricted's LVE for all restricted customers (deprecated)** :  </span> In that mode once customer reaches the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing the same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available  
-<span class="notranslate"> **abusers - Use LVE for a user to restrict queries (default mode)** :  </span> In that mode, once user goes over the limits specified in the <span class="notranslate"> MySQL Governor </span> , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing fewer new queries being sent to MySQL. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_  
-<span class="notranslate"> **all - Always run queries inside user's LVE** :  </span> This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating <span class="notranslate"> MySQL Governor </span> . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires_ <span class="notranslate"> _dbuser-map_ </span> _file_
+**Active modes**
 
-If <span class="notranslate"> dbuser-map </span> file is absent on the server, " <span class="notranslate"> abusers </span> " mode emulates " <span class="notranslate"> single </span> ".
+* **abusers - Use LVE for a user to restrict queries (default mode)**: In that mode, once user goes over the limits specified in the MySQL Governor , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing fewer new queries being sent to MySQL. _Requires dbuser-map file_.
+* **off - Monitor Only**: In that mode MySQL Governor will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment in time (and historically). This mode is good when you are just starting and want to see what is going on.
 
-With <span class="notranslate"> **single**   </span> and <span class="notranslate"> **abusers**   </span> mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
+---
 
-You can specify modes of operation using <span class="notranslate"> [dbctl](/command-line_tools/#dbctl) </span> or by changing [configuration file](/cloudlinux_os_components/#configuration-3).
+**Deprecated modes**
+
+* **all - Always run queries inside user's LVE (will be deprecated on September 1, 2021)**: This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating MySQL Governor . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires dbuser-map file_.
+* **single - Single restricted's LVE for all restricted customers (deprecated)**: In that mode once customer reaches the limits specified in the MySQL Governor , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing the same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available.
+
+:::warning Note
+After the `all` mode will be deprecated on September 1, 2021:
+* the users, having it, will continue to work with this mode;
+* all new installation will not have the `all` mode;
+* moving to the `all` mode will be forbidden.
+:::
+
+If the `dbuser-map` file is absent on the server, the `abusers` mode emulates the `single`.
+
+With the `single` and `abusers` mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
+
+You can specify modes of operation using [dbctl](/command-line_tools/#dbctl) or by changing [configuration file](/cloudlinux_os_components/#configuration-3).
 <span class="notranslate"> dbuser-map </span> file is located in <span class="notranslate">`/etc/container/dbuser-map`</span>.
+
+#### MySQL Governor limits
+
+**MySQL Governor limit setting recommendations**
+
+:::tip Note
+Please note that these recommendations on setting limits for MySQL Governor are general. The exact values of the limits for the effective work of MySQL and the site as a whole depend on many factors.
+:::
+
+Here they are:
+
+* the load of the virtual server with incoming requests
+* the database size
+* SQL queries efficiency
+* absolute values of the LVE limits
+
+
+MySQL Governor allows setting the burstable limits for accounts. To provide that possibility, four levels of limits are defined: `current`, `short`, `middle`, and `long`. Correctly set limits can give users more CPU without having a bottleneck on MySQL. 
+
+**General principles of choosing the limits**:
+
+* `current` and `short` can be more than the LVE limit and should not be less
+* setting the `current` and `short` limits more than the LVE limit prevents bottlenecks in SQL request processing
+* `middle` and `long` on the contrary, should not be more than the LVE limit
+* aetting the `middle` and `long` limits less than the LVE limit prevents abuse of other processes in the account (Apache, PHP) by MySQL
+
+**Example of choosing MySQL Governor limits**
+
+* With the default LVE SPEED limit is `100`, the possible values of the MySQL Governor CPU limits can be 250/150/110/90. I.e., we admit the short-term exceeding of the limits for processing SQL requests.
+* If you face spike CPU consumption with these limits, it is recommended to reduce the excess of the `current` and `short` limits over the LVE limit. For example, to the values 150/110/100/90.
+* If the average level of CPU consumption is too high, then it is recommended to reduce the `middle` and `long` limits, too. For example, to the values 150/100/80/50.
+* Then MySQL processes will fall into LVE and be limited by LVE limits more often.
+* The same clues are applicable to the IO limits – the `current` and `short` IO limits for MySQL Governor can exceed IO LVE limits, but the `middle` and `long` cannot.
+
 
 #### Starting and stopping
 
@@ -5413,7 +5460,7 @@ Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already mi
 * New Python Selector requires LVE Manager version 4.2 or later.
 * It supports cPanel and DirectAdmin servers. On DirectAdmin only on Apache. Plesk will not be supported.
 * Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/).
-* Python Selector works with EasyApache 3 (note EOL at 1st September 2019), EasyApache 4 and LiteSpeed Web Server. Or Apache on DirectAdmin. 
+* Python Selector works with EasyApache 3 (note EOL on September 1, 2019), EasyApache 4 and LiteSpeed Web Server. Or Apache on DirectAdmin. 
 
 
 ### Migration to the new Python Selector 
