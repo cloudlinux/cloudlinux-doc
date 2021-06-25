@@ -3092,7 +3092,7 @@ See also [CageFS CLI tools](/command-line_tools/#cagefs).
 :::
 
 :::warning Warning
-The "All" mode will be deprecated starting with 1 September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 <span class="notranslate"> MySQL Governor </span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
@@ -3310,7 +3310,7 @@ The script will install original MySQL server, and remove <span class="notransla
 
 
 :::warning Warning
-The "All" mode will be deprecated starting with 1 September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 <span class="notranslate"> MySQL Governor </span> configuration is located in <span class="notranslate"> /etc/container/mysql-governor.xml </span> 
@@ -3420,7 +3420,7 @@ These values can also be set using [cloudlinux-config](/command-line_tools/#clou
 
 
 :::warning Warning
-The "All" mode will be deprecated starting with 1 September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
+The "All" mode will be deprecated starting from 1st September. You can read more [here.](https://blog.cloudlinux.com/mysql-governor-moving-from-all-to-abusers)
 :::
 
 :::tip Note
