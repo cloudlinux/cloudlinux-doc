@@ -424,17 +424,19 @@ If a user gets such an error message - it means that  1 reload  in  1 minute for
 	
 ### X-Ray automated throttling detection
 
-The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU during the HTTP request execution. 
+The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU or by IO/IOPS during the HTTP request execution. Requests with exceeded LVE limits are indicated in both X-Ray Administrator and X-Ray User plugins.
 
-If CPU limiting was detected for a particular request, it is indicated in the X-Ray UI that the system itself has slowed down the request processing and this is apparently not a performance issue in the PHP code.
+If CPU limiting was detected for a particular request, it is indicated in the X-Ray UI that the system itself has slowed down the request processing due to CPU throttling and this is apparently not a performance issue in the PHP code.
 
-Requests with exceeded LVE limits are indicated in the administrator/user interface of the X-Ray plugin in the following way.
+If limiting by IO and IOPS in total was detected for a particular request, it is indicated in the X-Ray UI in the same manner, except for the cause of slowing down the request -- IO throttling.
 
-![](/images/RecordedSessions.png)
+The case of both limiting for the request is also possible.
 
-Requests with exceeded LVE limits are also marked if the administrator views the request.
+![](/images/CPUIOLimiting.png)
 
-![](/images/LVEFaultsMarker.png)
+Requests with exceeded LVE limits are also marked in the request detailed view.
+
+![](/images/RequestDetails.png)
 
 Requests with exceeded LVE limits are marked in the PDF report as well.
 
