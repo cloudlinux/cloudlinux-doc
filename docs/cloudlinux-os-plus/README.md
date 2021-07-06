@@ -397,7 +397,7 @@ But there are some differences and they are described further.
 
 You can read about all other basic interface elements and managing tracing tasks in the [Managing tracing task section](/cloudlinux-os-plus/#managing-tracing-task).
 
-:::warning Note
+:::tip Note
 Tracing tasks created by an end-user will also be displayed in the administrator interface and administrators can manage the end-user's tasks the same way as they manage their own. At the same time, tasks created by the administrator or other end-users will not be displayed in the UI of the current user.
 :::
 
@@ -407,7 +407,7 @@ Tracing tasks created by an end-user will also be displayed in the administrator
 * The end-user has a limit of tracing tasks running at a time. Before starting the next task, the end-user should wait for the completion of the previous ones or forcefully stop the running ones. Otherwise, the user will get the next error:
     
     ![](/images/XRayEndUserUIError.png)
-    :::warning Note
+    :::tip Note
     The current limit is one tracing task per user. 
     :::
 * The administrator and the end-user can’t run the tracing task for the same Domain/URL at the same time. Once, the administrator started a specific tracing task, the end-user will not be able to duplicate it. And the same is true for the administrators – they will just see the running task for the specific domain and see the notification that they're trying to create a tracing task with a duplicated URL.
@@ -442,8 +442,9 @@ Requests with exceeded LVE limits are marked in the PDF report as well.
 
 ![](/images/XRayMonitoringReport.png)
 
-:::warning Note
+:::tip Note
 **CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
+
 **IO/IOPS throttling detection** is available since `alt-php-xray-0.3-7` and `lvemanager-xray-0.7-1`.
 - `kmod-lve-2.0-23` (and later) for CloudLinux 8 or CloudLinux 7 hybrid
 - `kernel-1.5-58` (and later) for CloudLinux 7 or CloudLinux 6 hybrid
