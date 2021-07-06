@@ -442,6 +442,19 @@ Requests with exceeded LVE limits are marked in the PDF report as well.
 
 ![](/images/XRayMonitoringReport.png)
 
+:::warning Note
+**CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
+**IO/IOPS throttling detection** is available since `alt-php-xray-0.3-7` and `lvemanager-xray-0.7-1`.
+- `kmod-lve-2.0-23` (and later) for CloudLinux 8 or CloudLinux 7 hybrid
+- `kernel-1.5-58` (and later) for CloudLinux 7 or CloudLinux 6 hybrid
+
+are also required to utilize the feature of **IO/IOPS throttling detection**.
+:::
+
+:::warning Warning
+X-Ray automated throttling detection feature is not supported for CloudLinux 6
+:::
+
 
 ### X-Ray client
 
