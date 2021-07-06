@@ -440,7 +440,7 @@ Requests with exceeded LVE limits are also marked in the request detailed view.
 
 Requests with exceeded LVE limits are marked in the PDF report as well.
 
-![](/images/XRayMonitoringReport.png)
+![](/images/PDFReport.png)
 
 :::tip Note
 **CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
