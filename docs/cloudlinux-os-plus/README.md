@@ -424,6 +424,20 @@ If a user gets such an error message - it means that  1 reload  in  1 minute for
 	
 ### X-Ray automated throttling detection
 
+:::tip Note
+**CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
+
+**IO/IOPS throttling detection** is available since `alt-php-xray-0.3-7` and `lvemanager-xray-0.7-1`.
+- `kmod-lve-2.0-23` (and later) for CloudLinux 8 or CloudLinux 7 hybrid
+- `kernel-1.5-58` (and later) for CloudLinux 7 or CloudLinux 6 hybrid
+
+are also required to utilize the feature of **IO/IOPS throttling detection**.
+:::
+
+:::warning Warning
+X-Ray automated throttling detection feature is not supported for CloudLinux 6
+:::
+
 The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU or by IO/IOPS during the HTTP request execution. Requests with exceeded LVE limits are indicated in both X-Ray Administrator and X-Ray User plugins.
 
 If CPU limiting was detected for a particular request, it is indicated in the X-Ray UI that the system itself has slowed down the request processing due to CPU throttling and this is apparently not a performance issue in the PHP code.
@@ -441,20 +455,6 @@ Requests with exceeded LVE limits are also marked in the request detailed view.
 Requests with exceeded LVE limits are marked in the PDF report as well.
 
 ![](/images/PDFReport.png)
-
-:::tip Note
-**CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
-
-**IO/IOPS throttling detection** is available since `alt-php-xray-0.3-7` and `lvemanager-xray-0.7-1`.
-- `kmod-lve-2.0-23` (and later) for CloudLinux 8 or CloudLinux 7 hybrid
-- `kernel-1.5-58` (and later) for CloudLinux 7 or CloudLinux 6 hybrid
-
-are also required to utilize the feature of **IO/IOPS throttling detection**.
-:::
-
-:::warning Warning
-X-Ray automated throttling detection feature is not supported for CloudLinux 6
-:::
 
 
 ### X-Ray client
