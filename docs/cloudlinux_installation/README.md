@@ -276,7 +276,7 @@ To install CloudLinux over network:
 
 1. Download & boot using the netboot image from: 
 
-**For CloudLinux 8**: [https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.4.1-x86_64-boot.iso](https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.4.1-x86_64-boot.iso).
+**For CloudLinux 8**: [https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.4.2-x86_64-boot.iso](https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.4.2-x86_64-boot.iso).
 
 Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/)
 
