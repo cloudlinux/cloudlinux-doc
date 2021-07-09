@@ -3161,7 +3161,7 @@ Please make sure to specify your current MySQL version instead of XX as follows:
 * 55 — MySQL v5.5
 * 56 — MySQL v5.6
 * 57 — MySQL v5.7
-* 80 — MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]
+* 80 — MySQL v8.0 (requires MySQL Governor 1.2-37+)
 
 If you are installing <span class="notranslate"> CloudLinux OS Shared </span> on a server running <span class="notranslate"> MariaDB </span> already, do instead:
 
@@ -3219,7 +3219,7 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 |mysql55 |MySQL v5.5 | 
 |mysql56 |MySQL v5.6 | 
 |mysql57 |MySQL v5.7 | 
-|mysql80 |MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages available in beta only, so use <span class="notranslate"> --install-beta flag instead of --install] </span> | 
+|mysql80 |MySQL v8.0 (requires MySQL Governor 1.2-37+)| 
 |mariadb55 |MariaDB v5.5 |
 |mariadb100 |MariaDB v10.0 |
 |mariadb101 |MariaDB v10.1 |
@@ -3619,7 +3619,7 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install-beta
 |mysql55 | MySQL v5.5|
 |mysql56 | MySQL v5.6|
 |mysql57 | MySQL v5.7|
-|mysql80 | MySQL v8.0 [requires MySQL Governor 1.2-37+; database packages are available in Beta only, so, please use `--install-beta` flag instead of ` --install` ]|
+|mysql80 | MySQL v8.0 (requires MySQL Governor 1.2-37+)|
 |mariadb55 | MariaDB v5.5|
 |mariadb100 | MariaDB v10.0|
 |mariadb101 | MariaDB v10.1|
