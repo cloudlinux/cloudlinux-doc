@@ -1,4 +1,4 @@
-# CloudLinux OS+
+# CloudLinux OS Shared Pro
 
 * [X-Ray](/cloudlinux-os-plus/#x-ray)
   * [Description](/cloudlinux-os-plus/#description)
@@ -41,7 +41,7 @@
 
 ### Installation
 
-1. Make sure you have CloudLinux OS+ subscription (only non-reseller accounts apply)
+1. Make sure you have CloudLinux OS Shared Pro subscription (only non-reseller accounts apply)
 
 2. Make sure you have installed **LVE Manager version 6.2 or later**. You can install or update it with the following commands:
    * installation
@@ -428,14 +428,15 @@ If a user gets such an error message - it means that  1 reload  in  1 minute for
 **CPU throttling detection** is available since `alt-php-xray-0.3-2` and `lvemanager-xray-0.5-2`.
 
 **IO/IOPS throttling detection** is available since `alt-php-xray-0.3-7` and `lvemanager-xray-0.7-1`.
-- `kmod-lve-2.0-23` (and later) for CloudLinux 8 or CloudLinux 7 hybrid
-- `kernel-1.5-58` (and later) for CloudLinux 7 or CloudLinux 6 hybrid
+
+- `kmod-lve-2.0-23` (and later) for CloudLinux OS Shared 8 or CloudLinux OS Shared 7 hybrid
+- `kernel-1.5-58` (and later) for CloudLinux OS Shared 7 or CloudLinux OS Shared 6 hybrid
 
 are also required to utilize the feature of **IO/IOPS throttling detection**.
 :::
 
 :::warning Warning
-X-Ray automated throttling detection feature is not supported for CloudLinux 6
+X-Ray automated throttling detection feature is not supported for CloudLinux OS Shared 6
 :::
 
 The X-Ray automated throttling detection system checks if the account exceeds LVE limits by CPU or by IO/IOPS during the HTTP request execution. Requests with exceeded LVE limits are indicated in both X-Ray Administrator and X-Ray User plugins.
@@ -716,18 +717,19 @@ Note that the URL field supports wildcard matching and you can have a case when 
 
 ####  I started a tracing task and made requests to URL but did not see any results in the UI. What should I do?
 
-1. Check that <span class="notranslate">**xray**</span> extension is enabled for the domain. To do so, go to the <span class="notranslate">`phpinfo()`</span> page and make a request. In the phpinfo output try to find the following section:
+1. <span class="notranslate">X-Ray</span> may not send data if a site uses a caching plugin, as the caching plugin is outputting HTML, thus there are no PHP scripts to examine. We encountered such issues with sites that use <span class="notranslate">LSCache</span> and <span class="notranslate">WP Super Cache</span> plugins. Check that your site does not use caching plugins. If so, disable it while tracing a site to get information from <span class="notranslate">X-Ray</span>.
+2. If you set a client’s IP when creating the tracing task, check that your requests come to the server with this IP via phpinfo (since there may be NAT between your local machine and the server).
+   
+    ![](/images/XRayPHPInfoRemoteAddr.png)
+
+3. Check that <span class="notranslate">**xray**</span> extension is enabled for the domain. To do so, go to the <span class="notranslate">`phpinfo()`</span> page and make a request. In the phpinfo output try to find the following section:
    
     ![](/images/XRayPHPInfo.png)
 
 If you cannot see that section, try to restart PHP processes for that user (the simplest way is to restart Apache) and check that you can see the <span class="notranslate">**xray**</span> extension.
 
 
-2. If you can see the <span class="notranslate">**xray**</span> extension in the phpinfo, check that <span class="notranslate">X-Ray</span> agent service is running with the service xray-agent status command. If it is not running, start it with the <span class="notranslate">`service xray-agent start`</span> command.
-3. <span class="notranslate">X-Ray</span> may not send data if a site uses a caching plugin, as the caching plugin is outputting HTML, thus there are no PHP scripts to examine. We encountered such issues with sites that use <span class="notranslate">LSCache</span> and <span class="notranslate">WP Super Cache</span> plugins. Check that your site does not use caching plugins. If so, disable it while tracing a site to get information from <span class="notranslate">X-Ray</span>.
-4. If you set a client’s IP when creating the tracing task, check that your requests come to the server with this IP via phpinfo (since there may be NAT between your local machine and the server).
-   
-    ![](/images/XRayPHPInfoRemoteAddr.png)
+4. If you can see the <span class="notranslate">**xray**</span> extension in the phpinfo, check that <span class="notranslate">X-Ray</span> agent service is running with the service xray-agent status command. If it is not running, start it with the <span class="notranslate">`service xray-agent start`</span> command.
 
 5. If, after checking the previous items, the issue persists, [contact our support team](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
 
@@ -804,7 +806,7 @@ Required packages:
 Make sure that `cm.cloudlinux.com` is available on your end server.
 :::
 
-1. Make sure you have a CloudLinux OS+ subscription.
+1. Make sure you have a CloudLinux OS Shared Pro subscription.
 2. Make sure you have installed the **lve-utils** package version 4.2.21-2 or later. You can install or update it with the following commands:
     * installation
     ```
@@ -1222,9 +1224,9 @@ Limit and current load are drawing regarding the left vertical axis, the count o
 * <span class="notranslate">`cl-end-server-tools`</span> >= 1.0.7-1
 * <span class="notranslate">`cl-node-exporter`</span> >= 1.1.0-2
 * <span class="notranslate">`rhn-client-tools`</span>
-    * CloudLinux 6 >= 1.1.15-3.el6.cloudlinux.26
-    * CloudLinux 7 >= 2.0.2-31.el7.clouldinux
-    * CloudLinux 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
+    * CloudLinux OS Shared 6 >= 1.1.15-3.el6.cloudlinux.26
+    * CloudLinux OS Shared 7 >= 2.0.2-31.el7.clouldinux
+    * CloudLinux OS Shared 8 >= 2.8.16-14.module_el8.1.0+6074+9dc6073e.cloudlinux.2
 * <span class="notranslate">`lve-stats`</span> >= 3.0.7-2
 * <span class="notranslate">`lve-utils`</span> >= 4.2.21-2
 * <span class="notranslate">`alt-python27-cllib`</span> >= 2.1.13-1
