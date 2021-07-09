@@ -1,4 +1,4 @@
-#  CloudLinux OS components
+#  CloudLinux OS Shared components
 
 * [Reseller limits](/limits/#reseller-limits)
 * [LVE-Stats 2](/cloudlinux_os_components/#lve-stats-2)
@@ -79,7 +79,7 @@ Settings of old <span class="notranslate">lve-stats</span> (ver. 0.x) are import
 
 SQLite database file is located in <span class="notranslate">`/var/lve/lvestats2.db`</span>, data from old <span class="notranslate">lve-stats</span> (ver. 0.x) are being migrated automatically in the background. Migrating process can last 2-8 hours (during this time lags are possible when admin is trying to check statistics, at the same time users will not be affected). Migrating the latest 30 days, <span class="notranslate">SQLite DB</span> stable migration is provided.
 
-Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux.
+Currently, the new <span class="notranslate">lve-stats</span> supports all databases available in CloudLinux OS Shared.
 
 :::tip Note
 You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
@@ -96,7 +96,7 @@ yum downgrade lve-stats
 ```
 </div>
 
-and contact CloudLinux support at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/en-us/requests/new)
+and contact CloudLinux OS Shared support at [https://cloudlinux.zendesk.com/hc/requests/new](https://cloudlinux.zendesk.com/hc/en-us/requests/new)
 
 :::tip Note
 You may need to rename `*.rpmsave` files to original ones in order to restore settings for old <span class="notranslate">lve-stats (`/etc/sysconfig/lvestats`, `/etc/sysconfig/cloudlinux-notify`</span>).
@@ -222,7 +222,7 @@ If MySQL Server is not installed, then install it according to control panel doc
 
 For non-panel system:
 
-* CloudLinux 6
+* CloudLinux OS Shared 6
   
   <div class="notranslate">
 
@@ -233,7 +233,7 @@ For non-panel system:
   ```
   </div>
 
-* CloudLinux 7
+* CloudLinux OS Shared 7
   
   <div class="notranslate">
 
@@ -424,9 +424,9 @@ Run all the commands below under <span class="notranslate">root</span>.
 
   For control panels use proper documentation for installation on the links: [сPanel](https://documentation.cpanel.net/display/CKB/Install+or+Update+PostgreSQL+on+Your+cPanel+Server), [Plesk](https://kb.plesk.com/en/123729).
 
-  For non-panel CloudLinux run the following commands:
+  For non-panel CloudLinux OS Shared, run the following commands:
 
-    * CloudLinux 6
+    * CloudLinux OS Shared 6
 
     <div class="notranslate">
 
@@ -438,7 +438,7 @@ Run all the commands below under <span class="notranslate">root</span>.
     ```
     </div>
 
-    * CloudLinux 7
+    * CloudLinux OS Shared 7
 
     <div class="notranslate">
 
@@ -730,7 +730,7 @@ service lvestats restart
 ```
 </div>
 
-for CloudLinux 7
+for CloudLinux OS Shared 7
 
 <div class="notranslate">
 
@@ -2152,9 +2152,9 @@ You should execute <span class="notranslate"> `cagefsctl --remount-all` </span> 
 #### PostgreSQL support
 
 
-CloudLinux 7:
+CloudLinux OS Shared 7:
 
-CageFS works with any PostgreSQL version installed from CloudLinux or CentOS repositories. PostgreSQL packages for CloudLinux 7 come from the upstream (CentOS) unmodified. PostgreSQL’s socket is located in <span class="notranslate"> _/var/run/postgresql_ </span> directory. This directory is mounted to CageFS by default (in cagefs-5.5-6.34 or later).
+CageFS works with any PostgreSQL version installed from CloudLinux OS Shared or CentOS repositories. PostgreSQL packages for CloudLinux OS Shared 7 come from the upstream (CentOS) unmodified. PostgreSQL’s socket is located in <span class="notranslate"> _/var/run/postgresql_ </span> directory. This directory is mounted to CageFS by default (in cagefs-5.5-6.34 or later).
 
 When PostgreSQL has been installed after CageFS install, please add line:
 <div class="notranslate">
@@ -2174,11 +2174,11 @@ cagefsctl --remount-all
 
 The steps above are enough to configure CageFS to work with PostgreSQL.
 
-CloudLinux 6:
+CloudLinux OS Shared 6:
 
 CageFS provides separate _/tmp_ directory for each end user. Yet, PostgreSQL keeps its Unix domain socket inside server's main _/tmp_ directory. In addition to that, the location is hard coded inside PostgreSQL libraries.
 
-To resolve the issue, CloudLinux provides a version of PostgreSQL with modified start up script that can store PostgreSQL's socket in <span class="notranslate"> _/var/run/postgres._ </span> The script automatically creates link from _/tmp_ to that socket to prevent PostgreSQL dependent applications from breaking.
+To resolve the issue, CloudLinux OS Shared provides a version of PostgreSQL with modified start up script that can store PostgreSQL's socket in <span class="notranslate"> _/var/run/postgres._ </span> The script automatically creates link from _/tmp_ to that socket to prevent PostgreSQL dependent applications from breaking.
 
 In addition to that, CageFS knows how to correctly link this socket inside end user's _/tmp_ directory.
 
@@ -3146,7 +3146,7 @@ Then configure <span class="notranslate"> MySQL Governor </span> properly.
 
 The installation is currently supported only on <span class="notranslate"> cPanel, Plesk, DirectAdmin, ISPmanager, InterWorx </span> , as well as on servers without control panel.
 
-If you are installing <span class="notranslate"> CloudLinux </span> on a server running MySQL already, set your current MySQL version before calling installation script:
+If you are installing <span class="notranslate"> CloudLinux OS Shared </span> on a server running MySQL already, set your current MySQL version before calling installation script:
 
 <div class="notranslate">
 
@@ -3163,7 +3163,7 @@ Please make sure to specify your current MySQL version instead of XX as follows:
 * 57 — MySQL v5.7
 * 80 — MySQL v8.0 [requires <span class="notranslate"> MySQL Governor </span> 1.2-37+; database packages are available in <span class="notranslate"> Beta </span> only, so, please use <span class="notranslate"> `--install-beta` </span> flag instead of <span class="notranslate"> `--install` </span> ]
 
-If you are installing <span class="notranslate"> CloudLinux </span> on a server running <span class="notranslate"> MariaDB </span> already, do instead:
+If you are installing <span class="notranslate"> CloudLinux OS Shared </span> on a server running <span class="notranslate"> MariaDB </span> already, do instead:
 
 <div class="notranslate">
 
@@ -3184,7 +3184,7 @@ Please make sure to specify your current <span class="notranslate"> MariaDB </sp
 * 105 - MariaDB v10.5 [requires <span class="notranslate">MySQL Governor</span> 1.2-62+]
 
 :::tip Note
-MariaDB version 10.4 is not available for CloudLinux 6 yet.
+MariaDB version 10.4 is not available for CloudLinux OS Shared 6 yet.
 :::
 
 
@@ -3199,7 +3199,7 @@ $ /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 </div>
 
 
-Please note that <span class="notranslate"> MySQL/MariaDB/Percona </span> will be updated from <span class="notranslate"> CloudLinux </span> repositories.
+Please note that <span class="notranslate"> MySQL/MariaDB/Percona </span> will be updated from <span class="notranslate">CloudLinux OS Shared</span> repositories.
 
 If you are installing <span class="notranslate"> MySQL Governor </span> on a server without MySQL at all, you have an opportunity to choose desired MySQL version to be installed with <span class="notranslate"> MySQL Governor </span> installation script. Use <span class="notranslate"> --mysql-version </span> flag before calling the installation script:
 
@@ -3636,7 +3636,7 @@ cPanel does not officially support MariaDB 10.4, that is why we don’t recommen
 :::
 
 :::tip Note
-MariaDB version 10.4 is not available for CloudLinux 6 yet.
+MariaDB version 10.4 is not available for CloudLinux OS Shared 6 yet.
 :::
 
 ::: tip Note
@@ -3657,11 +3657,11 @@ See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
 
 #### PrivateDevices mode support
 
-MySQL Governor v. 1.2-66 and later on Cloudlinux OS 7 and 8 supports the PrivateDevices mode for the mysqld service.
+MySQL Governor v. 1.2-66 and later on Cloudlinux OS Shared 7 and 8 supports the PrivateDevices mode for the mysqld service.
 
 To switch on the PrivateDevices mode, follow these steps.
 
-**On Cloudlinux OS 7**
+**On Cloudlinux OS Shared 7**
 
 * Make sure that the systemd version is at least **219-78.2.cloudlinux.1**
 * Add the following instruction into the _Service_ section of the _mysqld_ service file:
@@ -3672,7 +3672,7 @@ To switch on the PrivateDevices mode, follow these steps.
 * Restart _mysqld_ service
 
 
-**On Cloudlinux OS 8**
+**On Cloudlinux OS Shared 8**
 
 * Add the following instructions into the _Service_ section of the _mysqld_ service file:
   ```
@@ -3786,7 +3786,7 @@ The main requirements:
 * CageFS is initialized without errors
 * CageFS is enabled for a domain user-owner
 * An appropriate PHP handler is selected for PHP version which is system version. <span class="notranslate"> PHP Selector </span> is **compatible** with the following technologies: <span class="notranslate">_suPHP, mod_fcgid, CGI (suexec), LiteSpeed_</span>. See also [Compatibility Matrix](/limits/#compatibility-matrix).
-* PHP version in the CloudLinux PHP selector does not equal to the Native PHP version
+* PHP version in the CloudLinux OS Shared PHP selector does not equal to the Native PHP version
 
 ::: tip Note
 PHP Selector is not supported for H-Sphere.
@@ -3970,7 +3970,7 @@ Go to <span class="notranslate">cPanel Admin interface → MultiPhp Manager → 
 ### LiteSpeed support
 
 ::: tip Note
-LiteSpeed detects CloudLinux OS and applies all settings out-of-the-box.
+LiteSpeed detects CloudLinux OS Shared and applies all settings out-of-the-box.
 :::
 
 :::tip Note
@@ -3981,7 +3981,7 @@ If the settings were not applied, you can use the following steps to set up Lite
 
 1. Follow PHP Selector [installation guide](/cloudlinux_os_components/#installation-and-update-4).
 2. Make sure the following settings are set in the LSWS Web Admin console:
-  * Configuration ➞ Server ➞ General ➞ CloudLinux: `CageFS` or `CageFS without suEXEC`
+  * Configuration ➞ Server ➞ General ➞ CloudLinux OS Shared: `CageFS` or `CageFS without suEXEC`
   * Configuration ➞ Server ➞ General ➞ PHP suEXEC: `Yes`
 
 **How to set up LiteSpeed version 5.3+ to use PHP Selector**
@@ -4150,7 +4150,7 @@ These commands can affect PHP version of your clients’ web sites. Use them wit
 :::
 
 :::tip Note
-It is possible to manually uninstall the integral parts of PHP Selector - **alt-php** packages. However, since CloudLinux components heavily rely on them, we do not recommend doing so. Proceed with caution and keep an eye on yum dependencies if you decide to uninstall the packages.
+It is possible to manually uninstall the integral parts of PHP Selector - **alt-php** packages. However, since CloudLinux OS Shared components heavily rely on them, we do not recommend doing so. Proceed with caution and keep an eye on yum dependencies if you decide to uninstall the packages.
 :::
 
 #### Disabling PHP extension globally
@@ -4185,7 +4185,7 @@ Reinstalling of <span class="notranslate">`alt-php`</span> packages will not res
 
 #### Setting default version and modules
 
-Administrator can set default interpreter version and extensions for all users. All file operations are actually done by CageFS. CageFS takes settings from <span class="notranslate">  /etc/cl.selector/defaults.cfg. </span> Currently the <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> is created and handled by <span class="notranslate"> CloudLinux PHP Selector </span> scripts. It has the following format:
+Administrator can set default interpreter version and extensions for all users. All file operations are actually done by CageFS. CageFS takes settings from <span class="notranslate">  /etc/cl.selector/defaults.cfg. </span> Currently the <span class="notranslate"> /etc/cl.selector/defaults.cfg </span> is created and handled by <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> scripts. It has the following format:
 <div class="notranslate">
 
 ```
@@ -4328,7 +4328,7 @@ to apply changes to CageFS for specific users.
 #### How to substitute global php.ini for individual customer on cPanel server with EasyApache4
 
 :::tip Note
-It is enough to put `php.ini` in the directory where PHP script is located in order to run the PHP script with a custom `php.ini` when using SuPHP. Also, you can use <span class="notranslate">cPanel MultiPHP Manager</span> to create user’s custom `php.ini` file, and this approach should work for CGI, FCGI, and LSAPI. Recommended ways to manage `php.ini` settings per user are to use <span class="notranslate">cPanel MultiPHP</span> or <span class="notranslate">CloudLinux PHP Selector</span> interfaces.
+It is enough to put `php.ini` in the directory where PHP script is located in order to run the PHP script with a custom `php.ini` when using SuPHP. Also, you can use <span class="notranslate">cPanel MultiPHP Manager</span> to create user’s custom `php.ini` file, and this approach should work for CGI, FCGI, and LSAPI. Recommended ways to manage `php.ini` settings per user are to use <span class="notranslate">cPanel MultiPHP</span> or <span class="notranslate">CloudLinux OS Shared PHP Selector</span> interfaces.
 :::
 
 1. For each user that needs custom file, create directory <span class="notranslate">`/etc/cagefs/custom.etc/USER_NAME/php.ini`</span>.
@@ -4374,10 +4374,10 @@ It is enough to put `php.ini` in the directory where PHP script is located in or
 **Notes:**
 
 1. You should restart Apache web server after modifying virtual host configuration for the domains.
-2. Custom `php.ini` may break switching PHP version via <span class="notranslate">CloudLinux PHP Selector</span> or <span class="notranslate">cPanel MultiPHP Manager</span> for the appropriate users or domains.
+2. Custom `php.ini` may break switching PHP version via <span class="notranslate">CloudLinux OS Shared PHP Selector</span> or <span class="notranslate">cPanel MultiPHP Manager</span> for the appropriate users or domains.
 3. When using cPanel ea-php for the domains, additional `php.ini` files may not be loaded, so you should load all needed PHP extensions in custom `/etc/php.ini` file:
 ![](/images/custom_file_cPanel1.png)
-4. When using CloudLinux alt-php, additional `php.ini` files will be loaded:
+4. When using CloudLinux OS Shared alt-php, additional `php.ini` files will be loaded:
 ![](/images/custom_file_cPanel2.png)
 5. If you have modified anything in `/etc/cagefs/custom.etc` directory, you should execute one of the following:
 
@@ -4433,7 +4433,7 @@ Once <span class="notranslate"> PHP Selector </span> is enabled, you can find it
 **Configuring Alt-PHP modules loading**
 
 
-<span class="notranslate"> CloudLinux PHP Selector </span> and Alt-PHP can be used in conjunction with <span class="notranslate"> Plesk PHP Selector </span> and <span class="notranslate"> cPanel MultiPHP </span> . To be compatible, <span class="notranslate"> CloudLinux PHP Selector </span> works as follows: modules that are selected in <span class="notranslate"> CloudLinux PHP Selector </span> are loaded for Alt-PHP version selected in <span class="notranslate"> CloudLinux PHP Selector </span> only. For the rest Alt-PHP versions default module set is loaded <span class="notranslate"> ( _/opt/alt/phpXX/etc/php.d/default.ini_ ) </span> . Described above is default behavior.
+<span class="notranslate"> CloudLinux OS Shared PHP Selector </span> and Alt-PHP can be used in conjunction with <span class="notranslate"> Plesk PHP Selector </span> and <span class="notranslate"> cPanel MultiPHP </span> . To be compatible, <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> works as follows: modules that are selected in <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> are loaded for Alt-PHP version selected in <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> only. For the rest Alt-PHP versions default module set is loaded <span class="notranslate"> ( _/opt/alt/phpXX/etc/php.d/default.ini_ ) </span> . Described above is default behavior.
 
 ::: tip Note
 If system default PHP version selected in <span class="notranslate"> cPanel MultiPHP Manager is not ea-php, then default module set is loaded for all Alt-PHP versions by default (/opt/alt/phpXX/etc/php.d/default.ini). </span>
@@ -4444,7 +4444,7 @@ When <span class="notranslate"> "php.d.location = selector" option is in effect,
 
 This behavior is implemented in CageFS-6.1-10 and later.
 
-In <span class="notranslate"> LVE Manager </span> 1.0-9.40+ this behavior can be modified so that modules selected in <span class="notranslate"> CloudLinux PHP Selector </span> would be loaded for all Alt-PHP versions (with CageFS enabled), which can be quite useful if you use  ‘ <span class="notranslate"> per directory </span> ’ or ‘ <span class="notranslate"> per domain </span> ’ Alt-PHP configuration and want to select modules using <span class="notranslate"> CloudLinux PHP Selector </span> .
+In <span class="notranslate"> LVE Manager </span> 1.0-9.40+ this behavior can be modified so that modules selected in <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> would be loaded for all Alt-PHP versions (with CageFS enabled), which can be quite useful if you use  ‘ <span class="notranslate"> per directory </span> ’ or ‘ <span class="notranslate"> per domain </span> ’ Alt-PHP configuration and want to select modules using <span class="notranslate"> CloudLinux OS Shared PHP Selector </span> .
 
 To modify it, create a file <span class="notranslate"> _/etc/cl.selector/symlinks.rules_ </span> (read-only for regular users) with the following content: <span class="notranslate"> _php.d.location = selector_ </span>
 
@@ -4471,7 +4471,7 @@ And run the command to apply changes:
 
 #### FFmpeg
 
-Due to possible patent issues CloudLinux does not provide <span class="notranslate"> FFmpeg </span> libraries ( [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html) ). We highly recommend researching if you can legally install <span class="notranslate"> FFmpeg </span> extension on your server. This might differ based on where you and your servers are located. More information can be found on the link: [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html)
+Due to possible patent issues CloudLinux OS Shared does not provide <span class="notranslate"> FFmpeg </span> libraries ( [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html) ). We highly recommend researching if you can legally install <span class="notranslate"> FFmpeg </span> extension on your server. This might differ based on where you and your servers are located. More information can be found on the link: [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html)
 
 For your convenience we provide <span class="notranslate"> FFMPEG PHP </span> binding. For them to work, you need to install <span class="notranslate"> FFmpeg </span> package from the “ <span class="notranslate"> Nux Dextop </span> ” repository following the [instructions](http://li.nux.ro/repos.html).
 
@@ -4761,7 +4761,7 @@ $ cagefsctl --setup-cl-selector
 
 To add your own PHP version in <span class="notranslate"> PHP Selector </span> :
 
-* Create directory in (like:  /opt/alt/php51), and mimic directory structure inside to be similar to the one of PHP versions bundled by <span class="notranslate"> CloudLinux </span> .
+* Create directory in (like:  /opt/alt/php51), and mimic directory structure inside to be similar to the one of PHP versions bundled by <span class="notranslate"> CloudLinux OS Shared</span>.
 * Put all the ini files for all the modules into <span class="notranslate"> /opt/alt/php51/etc/php.d.all </span>
 * Create a symbolic link <span class="notranslate"> /opt/alt/php51/etc/php.d -> /etc/cl.php.d/alt-php51 </span>
 
@@ -5439,7 +5439,7 @@ This documentation is for the new version of Python Selector. You can find docum
 
 ### General information and requirements
 
-<span class="notranslate">Python Selector</span> is a CloudLinux component that allows each user to easily deploy and manage Python applications via application server.
+<span class="notranslate">Python Selector</span> is a CloudLinux OS Shared component that allows each user to easily deploy and manage Python applications via application server.
 
 * [Requirements](/cloudlinux_os_components/#requirements)
 
@@ -5450,13 +5450,13 @@ Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already mi
 :::
 
 * Python Selector supports the following Alt-Python versions:
-  * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux 6, CloudLinux 7
-  * <span class="notranslate">`alt-python33 3.3.7`</span>, supported by CloudLinux 6, CloudLinux 7
-  * <span class="notranslate">`alt-python34 3.4.9`</span>, supported by CloudLinux 6, CloudLinux 7
-  * <span class="notranslate">`alt-python35 3.5.6`</span>, supported by CloudLinux 6, CloudLinux 7
-  * <span class="notranslate">`alt-python36-3.6.8`</span>, supported by CloudLinux 6, CloudLinux 7
-  * <span class="notranslate">`alt-python36-3.7.2`</span>, supported by CloudLinux 6, CloudLinux 7
-* This feature is available for CloudLinux 7, CloudLinux 6 hybrid and CloudLinux 6.
+  * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+  * <span class="notranslate">`alt-python33 3.3.7`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+  * <span class="notranslate">`alt-python34 3.4.9`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+  * <span class="notranslate">`alt-python35 3.5.6`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+  * <span class="notranslate">`alt-python36-3.6.8`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+  * <span class="notranslate">`alt-python36-3.7.2`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
+* This feature is available for CloudLinux OS Shared 7, CloudLinux OS Shared 6 hybrid and CloudLinux OS Shared 6.
 * New Python Selector requires LVE Manager version 4.2 or later.
 * It supports cPanel and DirectAdmin servers. On DirectAdmin only on Apache. Plesk will not be supported.
 * Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/).
@@ -5507,7 +5507,7 @@ If you face any issue during the migration, please [contact our support team](ht
 
 ### Installation and update
 
-New clients can install Python Selector using the [CloudLinux Installation Wizard](/lve_manager/#cloudlinux-installation-wizard).
+New clients can install Python Selector using the [CloudLinux OS Shared Installation Wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard).
 
 * [cPanel](/cloudlinux_os_components/#cpanel-2)
 * [DirectAdmin](/cloudlinux_os_components/#directadmin)
@@ -5532,7 +5532,7 @@ To use Python Selector, it is required to install the following:
     ```
     </div>
     
-    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
+    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared OS 6. CloudLinux OS Shared OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
     
     :::tip Note
     ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
@@ -5748,14 +5748,14 @@ yum install alt-python27-devel --enablerepo=cloudlinux-updates-testing
 ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
 :::
 
-CloudLinux has <span class="notranslate"> Python Selector</span>, which allows creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
+CloudLinux OS Shared has <span class="notranslate"> Python Selector</span>, which allows creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
 
 * ```ea-ruby24-mod_passenger```
 * ```ea-ruby27-mod_passenger```
 
-```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
+```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared 6. CloudLinux OS Shared 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared 8, you can **only** use ```ea-ruby27-mod_passenger```.
 
-The <span class="notranslate">```ea-ruby2X-mod_passenger```</span> allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux Python Selector</span>.
+The <span class="notranslate">```ea-ruby2X-mod_passenger```</span> allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux OS Shared Python Selector</span>.
 
 To install run:
 <div class="notranslate">
@@ -5848,7 +5848,7 @@ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":fal
 </div>
  
 :::tip Note
-If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Ruby Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
+If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux OS Shared Ruby Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
 For that, you’d need to first uncheck <span class="notranslate">`Hide Ruby App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists.
 :::
 
@@ -5866,12 +5866,12 @@ You can find <span class="notranslate"> Redmine </span> version 2.6.0 and newer 
 
 Starting with cPanel/WHM version 66 provides <span class="notranslate">```ea-ruby24-mod_passenger```</span> (more information on the [link](https://documentation.cpanel.net/display/66Docs/Application+Manager)), this allows creating <span class="notranslate"> Ruby </span> applications with cPanel application manager.
 
-CloudLinux OS features its own <span class="notranslate">Python and  Ruby Selectors</span>, which allow creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
+CloudLinux OS Shared features its own <span class="notranslate">Python and  Ruby Selectors</span>, which allow creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
 
 * ```ea-ruby24-mod_passenger```
 * ```ea-ruby27-mod_passenger```
 
-```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
+```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared 6. CloudLinux OS Shared 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
 
 The <span class="notranslate"> ```ea-ruby2X-mod_passenger``` </span> allows you to run applications via <span class="notranslate"> cPanel application manager </span> and <span class="notranslate"> Ruby Selector</span>.
 
@@ -5903,7 +5903,7 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
 * [Requirements](/cloudlinux_os_components/#requirements-3)
 
-<span class="notranslate"> Node.js Selector </span>  is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
+<span class="notranslate"> Node.js Selector </span>  is a CloudLinux OS Shared component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
 
 #### **Requirements**
 
@@ -5936,7 +5936,7 @@ yum install lvemanager lve-utils
 ```
 </div>
 
-Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS 6. CloudLinux OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
+Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared 6. CloudLinux OS Shared 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared 8, you can **only** use ```ea-ruby27-mod_passenger```.
     
 :::tip Note
 ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
@@ -5962,7 +5962,7 @@ If during Node.js Selector usage on cPanel servers you get "ENOMEM npm ERR! errn
 :::
 
 
-CloudLinux 7:
+CloudLinux OS Shared 7:
 <div class="notranslate">
 
 ```
@@ -5970,7 +5970,7 @@ systemctl restart cpanel.service
 ```
 </div>
 
-CloudLinux 6:
+CloudLinux OS Shared 6:
 <div class="notranslate">
 ```
 service cpanel restart
@@ -6169,7 +6169,7 @@ Currently, the mod_lsapi is not compatible with:
 * Installed and configured mod_hostinglimitsfor Apache ( **recommended - higher security level** );
 * Installed mod_suexec for Apache and configured [SuExecUserGroup](https://httpd.apache.org/docs/2.4/mod/mod_suexec.html#page-header) directive for each virtual host ( **recommended - higher security level** );
 * Enabled CageFS for end-users ( **recommended - higher security level** );
-* PHP Selector with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux;
+* PHP Selector with alt-php - an easy way to select different PHP versions for each end-user provided by CloudLinux OS Shared;
 * ea-php - alternative to alt-php provided by cPanel (for cPanel only).
 
 ### Installation
@@ -6662,7 +6662,7 @@ Enable or disable output buffering on Apache level. Default value is On.
 
 **Description** :  
 If a new HTTP request is coming to LSPHP daemon when all LSPHP workers are still busy, it can process this situation in two different ways. In REJECT mode LSPHP daemon will reject such request immediately. Otherwise, in legacy mode, LSPHP daemon will put this request into infinite queue, until one or more LSPHP daemon becomes free. When HTTP request is rejected in REJECT mode, mod_lsapi will write into Apache error_log the following message: Connect to backend rejected, and the client will receive 507 HTTP response.
-By default LSPHP daemon in CloudLinux uses REJECT mode. It can be switched off with this option.
+By default LSPHP daemon in CloudLinux OS Shared uses REJECT mode. It can be switched off with this option.
 
 ---
 
@@ -7539,7 +7539,7 @@ See also mod_lsapi PRO FAQ [here](https://cloudlinux.zendesk.com/hc/articles/360
 
 
 :::tip Note
-<span class="notranslate"> CloudLinux </span> 7, <span class="notranslate"> CloudLinux </span> 7 Hybrid, and <span class="notranslate"> CloudLinux </span> 8 only
+<span class="notranslate"> CloudLinux OS Shared</span> 7, <span class="notranslate"> CloudLinux OS Shared</span> 7 Hybrid, and <span class="notranslate"> CloudLinux OS Shared</span> 8 only
 :::
 
 CRIU is <span class="notranslate"> _Checkpoint/Restore In Userspace_ </span> , (pronounced <span class="notranslate"> kree-oo </span> ), is a software tool for Linux operating system. Using this tool, you can freeze a running application (or part of it) and checkpoint it as a collection of files on disk. You can then use the files to restore the application and run it exactly as it was during the time of freeze (more information on the link [https://criu.org/Main_Page](https://criu.org/Main_Page) ).
@@ -7723,7 +7723,7 @@ This mode is enabled by default and creates a separate lsphp process for each vi
 
 ## Additional integration components
 
-CloudLinux uses various ways to integrate with existing system.
+CloudLinux OS Shared uses various ways to integrate with existing system.
 
 ### LVE PAM module
 
@@ -7855,7 +7855,7 @@ lve_suwrapper LVE_ID <command_to_run>
 
 ### MPM ITK
 
-CloudLinux <span class="notranslate">httpd RPM</span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
+CloudLinux OS Shared <span class="notranslate">httpd RPM</span> comes with <span class="notranslate"> MPM ITK </span> built in. Yet, if you would like to build your own Apache, you need to apply our patch for <span class="notranslate"> MPM ITK </span>
 
 * Download file: [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 * Extract: <span class="notranslate">apache2.2-mpm-itk-seculrelve12.patch</span>
@@ -8504,7 +8504,7 @@ Available for RPM based panels, EasyApache 4 and DirectAdmin.
 * [Manage reseller limits/users/packages via cPanel/WHM JSON API - JSONHandler](cloudlinux_os_components/#manage-reseller-limits-users-packages-via-cpanel-whm-json-api-jsonhandler)
 * [Using a WHM API token](/cloudlinux_os_components/#using-a-whm-api-token)
 
-CloudLinux offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
+CloudLinux OS Shared offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
 
 <div class="notranslate">
 
@@ -8731,7 +8731,7 @@ alt-suexec package brings suEXEC binaries pre-compiled for specific locations, l
 
 **How to switch suEXEC with alt-suexec**
 
-Based on httpd 2.2.16 basic for Cloudlinux 6, httpd 2.4.6 basic for CloudLinux 7 and httpd 2.4.37 basic for CloudLinux 8, the package brings to a server a set of suEXECs with different <span class="notranslate">DOCUMENT ROOTs</span> and <span class="notranslate">MIN_UID/MIN_GID</span> parameters. The first set of suEXECs is listed by such modes:
+Based on httpd 2.2.16 basic for Cloudlinux OS Shared 6, httpd 2.4.6 basic for CloudLinux OS Shared 7 and httpd 2.4.37 basic for CloudLinux OS Shared 8, the package brings to a server a set of suEXECs with different <span class="notranslate">DOCUMENT ROOTs</span> and <span class="notranslate">MIN_UID/MIN_GID</span> parameters. The first set of suEXECs is listed by such modes:
 
 <div class="notranslate">
 
@@ -8783,7 +8783,7 @@ USE_HOME
 ```
 </div>
 
-Here is standard suEXEC for CloudLinux 6 clean server:
+Here is standard suEXEC for CloudLinux OS Shared 6 clean server:
 <div class="notranslate">
 
 ``` 
@@ -8846,15 +8846,15 @@ If you need suEXEC with custom parameters absent in current set of alt-suexec, p
 
 Recently, cPanel added support for the [Nginx](https://documentation.cpanel.net/display/CKB/Nginx) web server and for [Python](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Python+WSGI+Application) and [Node.js](https://documentation.cpanel.net/display/CKB/How+to+Install+a+Node.js+Application) applications. 
 
-We have checked the compatibility of ea-nginx and cPanel application Selectors with CloudLinux LVE and CageFS.
+We have checked the compatibility of ea-nginx and cPanel application Selectors with CloudLinux OS Shared LVE and CageFS.
 All tests passed successfully and all processes started by ea-nginx and cPanel selectors are launched inside LVE and CageFS.
 
 
-Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux. Here you can find a large number of supported versions for Ruby/Python/Node.js applications.
+Don’t forget, you can use Ruby/Python/Node.js Selectors from CloudLinux OS Shared. Here you can find a large number of supported versions for Ruby/Python/Node.js applications.
 
-* [CloudLinux Python Selector](/cloudlinux_os_components/#python-selector)
-* [CloudLinux Ruby Selector](/cloudlinux_os_components/#ruby-selector)
-* [CloudLinux NodeJS Selector](/cloudlinux_os_components/#node-js-selector)
+* [CloudLinux OS Shared Python Selector](/cloudlinux_os_components/#python-selector)
+* [CloudLinux OS Shared Ruby Selector](/cloudlinux_os_components/#ruby-selector)
+* [CloudLinux OS Shared NodeJS Selector](/cloudlinux_os_components/#node-js-selector)
 
 :::tip Note
 Nginx support is currently experimental.
@@ -8869,7 +8869,7 @@ To run Certbot with <span class="notranslate">`alt-python36`</span>, follow the 
 
 **Example:**
 
-The old command to run Certbot on CentOS 6/Cloudlinux OS 6:
+The old command to run Certbot on CentOS 6/Cloudlinux OS Shared 6:
 
 <div class="notranslate">
 
@@ -8878,7 +8878,7 @@ The old command to run Certbot on CentOS 6/Cloudlinux OS 6:
 ```
 </div>
 
-The new command to run Certbot on CentOS 6/CloudLinux OS 6:
+The new command to run Certbot on CentOS 6/CloudLinux OS Shared 6:
 
 <div class="notranslate">
 
@@ -8891,18 +8891,18 @@ The new command to run Certbot on CentOS 6/CloudLinux OS 6:
 
 ### General information and requirements
 
-* [How does it work with CloudLinux?](/cloudlinux_os_components/#how-does-it-work-with-cloudlinux)
+* [How does it work with CloudLinux OS Shared?](/cloudlinux_os_components/#how-does-it-work-with-cloudlinux-os-shared)
 
 This module is used by the Apache HTTP Server to switch to another user before executing CGI programs. The suEXEC feature provides users of the Apache HTTP Server with the ability to run CGI and SSI programs under user IDs different from the user ID of the calling web server (<span class="notranslate">apache/nobody</span>). Normally, when a CGI or SSI program executes, it runs as the same user who is running the web server.
 
 If we are talking about shared hosting where different accounts are launched on the same server, the installation of this module is necessary to ensure security.
 
-#### How does it work with CloudLinux?
+#### How does it work with CloudLinux OS Shared?
 
-The DirectAdmin and CloudLinux (for httpd, httpd24-httpd and cPanel EasyApache 4) both provide a patched version of suexec. For other distributions you can use patches available here:
+The DirectAdmin and CloudLinux OS Shared (for httpd, httpd24-httpd and cPanel EasyApache 4) both provide a patched version of suexec. For other distributions you can use patches available here:
 [https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz](https://repo.cloudlinux.com/cloudlinux/sources/da/cl-apache-patches.tar.gz)
 
-1. Besides the ability to run CGI programs under user IDs, suexec with CloudLinux patch adds the ability to run that script under CageFS. 
+1. Besides the ability to run CGI programs under user IDs, suexec with CloudLinux OS Shared patch adds the ability to run that script under CageFS. 
   :::tip NOTE
   Therefore, this module is necessary for the proper work of PHP Selector.
   :::
@@ -8996,7 +8996,7 @@ This module is integrated into Apache for DirectAdmin control panel by default.
 
 #### Installing on servers with no control panel
 
-This module is integrated into httpd Apache rpm provided by Cloudlinux by default.
+This module is integrated into httpd Apache rpm provided by Cloudlinux OS Shared by default.
 
 If you are using an alternative Apache - [httpd24](https://www.cloudlinux.com/cloudlinux-os-blog/entry/httpd24-updated-for-cloudlinux-6), nothing has to be done as this module is also integrated into httpd24-httpd Apache rpm provided by Cloudlinux by default.
 

@@ -13,7 +13,7 @@
 * [Compatibility matrix](/limits/#compatibility-matrix)
 * [Reseller Limits](/limits/#reseller-limits)
 
-CloudLinux has support for the following limits:
+CloudLinux OS Shared has support for the following limits:
 
 | |  |  |  | |
 |--|---|--|--|--|
@@ -84,7 +84,7 @@ Each LVE limits amount of entry processes (Apache processes entering into LVE) t
 
 #### Checking if LVE is installed
 
-To use LVE you should have CloudLinux kernel installed, and LVE module loaded. You can check the kernel by running the following command:
+To use LVE you should have CloudLinux OS Shared kernel installed, and LVE module loaded. You can check the kernel by running the following command:
 
 <div class="notranslate">
 
@@ -207,10 +207,10 @@ Memory is controlled using virtual (VMEM) and physical (PMEM) memory limits.
 
 Virtual memory limit corresponds to the amount of memory processes can allocate within LVE. You can see individual process virtual memory usage by monitoring <span class="notranslate">VIRT</span> column in <span class="notranslate"> top </span> output for the process.
 
-When process tries to allocate more memory, CloudLinux checks if the new total virtual memory used by all processes within LVE is more then a limit set. In such case CloudLinux will prevent memory from being allocated and increments fVMEM counter. In most cases, but not all of them - this causes process to fail. For CGI/PHP scripts it will usually cause 500 and 503 error.
+When process tries to allocate more memory, CloudLinux OS Shared checks if the new total virtual memory used by all processes within LVE is more then a limit set. In such case CloudLinux OS Shared will prevent memory from being allocated and increments fVMEM counter. In most cases, but not all of them - this causes process to fail. For CGI/PHP scripts it will usually cause 500 and 503 error.
 
 :::tip Note
-It is recommended to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux 6 and 7 system and can cause unexpected issues.
+It is recommended to disable VMEM limits (set them to 0) in your system at all because they are deprecated in CloudLinux OS Shared 6 and 7 system and can cause unexpected issues.
 :::
 
 ### Physical memory limit
@@ -220,7 +220,7 @@ Physical memory limit corresponds to the amount of memory actually used by end c
 Additionally physical memory includes shared memory used by the customer, as well as disk cache.
 In case of disk cache – if a user is starting to lack physical memory, the memory used for disk cache will be freed up, without causing any memory faults.
 
-When LVE goes over physical memory limit, CloudLinux will first free up memory used for disk cache, and if that is not enough, it will kill some of the processes within that LVE, and increment fPMEM counter. This will usually cause web server to serve 500 and 503 errors. Physical memory limit is a much better way to limit memory for shared hosting.
+When LVE goes over physical memory limit, CloudLinux OS Shared will first free up memory used for disk cache, and if that is not enough, it will kill some of the processes within that LVE, and increment fPMEM counter. This will usually cause web server to serve 500 and 503 errors. Physical memory limit is a much better way to limit memory for shared hosting.
 
 ### Troubleshooting
 
@@ -228,7 +228,7 @@ When LVE goes over physical memory limit, CloudLinux will first free up memory u
 
 #### Checking personal users disk cache (If lveinfo shows memory usage but there are no processes there)
 
-If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there) for CloudLinux 6:
+If you see no processes under some user, but lve manager keeps telling it is using some memory, then most probably memory is taken by users disk cache. To check personal users disk cache (if lveinfo shows memory usage but not processes there) for CloudLinux OS Shared 6:
 
 <div class="notranslate">
 
@@ -237,7 +237,7 @@ cat /proc/bc/XXX/meminfo
 ```
 </div>
 
-On **CloudLinux 7 and CloudLinux 6 Hybrid** systems, the file is different:
+On **CloudLinux OS Shared 7 and CloudLinux OS Shared 6 Hybrid** systems, the file is different:
 
 <div class="notranslate">
 
@@ -248,7 +248,7 @@ cat /proc/bc/lveXXX/meminfo
 
 Look for this line: <span class="notranslate"> `Cached: 67300 kB` </span>
 
-On **CloudLinux 8 and CloudLinux 7 Hybrid** systems:
+On **CloudLinux OS Shared 8 and CloudLinux OS Shared 7 Hybrid** systems:
 
 <div class="notranslate">
 
@@ -334,7 +334,7 @@ End user can also see the usage inside resource usage menu.
 Requires kernel lve1.4.4.el6 or higher, or lve1.4.56.el7 or higher
 :::
 
-Network traffic bandwidth control and accounting systems in CloudLinux 6 allows for each LVE container:
+Network traffic bandwidth control and accounting systems in CloudLinux OS Shared 6 allows for each LVE container:
 
 * Limiting outgoing network traffic bandwidth
 * Accounting incoming and outgoing network traffic
@@ -348,7 +348,7 @@ The system supports IPv4 only protocol.
 All outgoing IP packets generated inside LVE container are marked with LVE identifier. Traffic control utility tc from iproute2 package uses this marker to set required bandwidth.
 
 :::tip Note
-CloudLinux doesn’t limit the network traffic itself, it only marks IP packets with specific LVE id.
+CloudLinux OS Shared doesn’t limit the network traffic itself, it only marks IP packets with specific LVE id.
 :::
 
 **Example 1:**
@@ -428,7 +428,7 @@ The data is also collected at <span class="notranslate">`/proc/lve/per-lve/<id>/
 * Current incoming traffic value
 
 :::tip Note
-The current version of CloudLinux network control system doesn’t limit network traffic volume for a specific period of time (for example 3GB per day), it limits only network bandwidth.
+The current version of CloudLinux OS Shared network control system doesn’t limit network traffic volume for a specific period of time (for example 3GB per day), it limits only network bandwidth.
 
 Network limits are supported only for processes inside LVE. By default it does not limit static content, but only PHP/cgi scripts processed by Apache and processes launched over ssh etc.
 :::
@@ -586,13 +586,13 @@ As you probably have already understood, the reseller will technically be able t
 
 ### Requirements
 
-1. CloudLinux OS should be [installed](/cloudlinux_installation/) on the server.
+1. CloudLinux OS Shared should be [installed](/cloudlinux_installation/) on the server.
 2. You also need to check that your kernel supports Reseller limits feature
-    * CloudLinux 6 and kernels **2.16+**: not supported, you need to [migrate to Hybrid](/cloudlinux_os_kernel/#how-to-migrate-from-the-normal-to-hybrid-channel-cl6h).
-    * CloudLinux 6 Hybrid: supported starting from **3.10.0-714.10.2.lve1.5.3.el6h** kernel.
-    * CloudLinux 7: supported starting from **3.10.0-714.10.2.lve1.5.3.el7** kernel.
-    * CloudLinux 7 Hybrid: supported
-    * CloudLinux 8: supported 
+    * CloudLinux OS Shared 6 and kernels **2.16+**: not supported, you need to [migrate to Hybrid](/cloudlinux_os_kernel/#how-to-migrate-from-the-normal-to-hybrid-channel-cl6h).
+    * CloudLinux OS Shared 6 Hybrid: supported starting from **3.10.0-714.10.2.lve1.5.3.el6h** kernel.
+    * CloudLinux OS Shared 7: supported starting from **3.10.0-714.10.2.lve1.5.3.el7** kernel.
+    * CloudLinux OS Shared 7 Hybrid: supported
+    * CloudLinux OS Shared 8: supported 
 3. lvemanager package version **3.0-18+** and later installed. If you don’t have it, update your system
 
 ### Configuration
@@ -601,7 +601,7 @@ As you probably have already understood, the reseller will technically be able t
 
 If you have decided to jump on board and enable Reseller limits for your resellers you should do the following:
 
-1. Make sure that you run CloudLinux with the kernel and lvemanager that meets the [necessary requirements](/limits/#requirements). 
+1. Make sure that you run CloudLinux OS Shared with the kernel and lvemanager that meets the [necessary requirements](/limits/#requirements). 
 2. Log in with a hoster access.
 3. You can create a new reseller account or configure an existing reseller account to have Reseller limits enabled. Consult your control panel documentation on how to do that.
 4. For cPanel servers when creating an account, make sure to tick two checkboxes **Make this account a reseller** and **Make the account own itself** in the _Reseller Settings_ box.
@@ -610,7 +610,7 @@ If you have decided to jump on board and enable Reseller limits for your reselle
 
 Selecting **Make the account own itself** makes the reseller full owner of all his accounts, including the end-user account with the same username. This option is integral to making reseller limits work for the reseller account. If you don’t select it, Reseller limits will not be applied. If the reseller account you want to limit with Reseller limits has already existed, you need to make sure it is properly owned. Go to _WHM_ -> _Modify account_ -> find the account with the same username as your reseller -> change the owner to the username of your reseller.
 
-5. Now that preparations are done, go to _CloudLinux LVE Manager_ -> _Users_ tab, choose a reseller and click on the pencil icon.
+5. Now that preparations are done, go to _CloudLinux OS Shared LVE Manager_ -> _Users_ tab, choose a reseller and click on the pencil icon.
 6. When the pop-up opens, move the slider _Manage Limits_ -> Click _AGREE_  when asked _Are you sure you want to enable limits_ -> assign the limits to that reseller. Finally, click _Save_.
 
 ![](/images/ResellerLimits-enabling.png)

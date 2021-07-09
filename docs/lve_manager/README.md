@@ -1,6 +1,6 @@
 # User interface (LVE Manager)
 
-* [CloudLinux installation wizard](/lve_manager/#cloudlinux-installation-wizard)
+* [CloudLinux OS Shared installation wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard)
 * [LVE Manager](/lve_manager/#lve-manager)
 * [inodes](/limits/#inodes)
 * [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
@@ -16,13 +16,13 @@ $ yum install lvemanager
 ```
 </div>
 
-## CloudLinux installation wizard
+## CloudLinux OS Shared installation wizard
 
 <div class="notranslate">
 
 * [Overview](/lve_manager/#overview)
 * [Set up](/lve_manager/#set-up)
-* [CloudLinux components](/lve_manager/#cloudlinux-components)
+* [CloudLinux OS Shared components](/lve_manager/#cloudlinux-os-shared-components)
   * [CageFS](/lve_manager/#cagefs)
   * [LSAPI](/lve_manager/#lsapi)
   * [MySQL Governor](/lve_manager/#mysql-governor)
@@ -35,15 +35,15 @@ $ yum install lvemanager
 
 #### Overview
 
-<span class="notranslate">CloudLinux Installation Wizard </span> allows you to easily install and set up CloudLinux OS components on your server with cPanel, Plesk or DirectAdmin.
+<span class="notranslate">CloudLinux OS Shared Installation Wizard </span> allows you to easily install and set up CloudLinux OS Shared components on your server with cPanel, Plesk or DirectAdmin.
 
 #### Set up
 
-As you have CloudLinux OS installed, navigate to <span class="notranslate"> CloudLinux LVE Manager </span> in your control panel. CloudLinux Installation Wizard starts automatically if <span class="notranslate"> `lvemanager` </span> package is installed for the first time (not updated).
+As you have CloudLinux OS Shared installed, navigate to <span class="notranslate"> CloudLinux OS Shared LVE Manager </span> in your control panel. CloudLinux OS Shared Installation Wizard starts automatically if `lvemanager` package is installed for the first time (not updated).
 
 ![](/images/installationwizardmain_zoom70.png)
 
-To start setting up your CloudLinux OS, click <span class="notranslate">_Start Wizard_</span>, otherwise click <span class="notranslate">_Skip Wizard_</span>, and you will be redirected to the <span class="notranslate"> LVE Manager Dashboard</span>.
+To start setting up your CloudLinux OS Shared, click <span class="notranslate">_Start Wizard_</span>, otherwise click <span class="notranslate">_Skip Wizard_</span>, and you will be redirected to the <span class="notranslate"> LVE Manager Dashboard</span>.
 
 :::tip Note
 Installation statuses of all components are duplicated inside their corresponding boxes on the <span class="notranslate">Dashboard</span>. All <span class="notranslate">Wizard</span> actions are available there as well. <span class="notranslate">Dashboard</span> will be automatically updated as soon as the installation process finishes.
@@ -56,9 +56,9 @@ The next step is selecting required components to be installed.
 
 Click <span class="notranslate">_Finish and Install_</span> to complete installation or click <span class="notranslate">_Skip Wizard_</span> to go back to the <span class="notranslate"> Dashboard</span>.
 
-You can find a complete description of the CloudLinux components below.
+You can find a complete description of the CloudLinux OS Shared components below.
 
-#### CloudLinux components
+#### CloudLinux OS Shared components
 </div>
 <div class="notranslate">
 
@@ -254,13 +254,13 @@ The following actions are available in the system notifications (information, wa
 Available starting from LVE Manager 4.0-26.8
 :::
 
-CloudLinux dashboard provides a quick overview of statistics and all administrative information for server administrators.
+CloudLinux OS Shared dashboard provides a quick overview of statistics and all administrative information for server administrators.
 
 Go to <span class="notranslate">LVE Manager | Dashboard</span>.
 
 ![](/images/dashboard_zoom70.png)
 
-The <span class="notranslate">Cloudlinux Dashboard</span> provides the following information:
+The <span class="notranslate">CloudLinux OS Shared Dashboard</span> provides the following information:
 
 * <span class="notranslate">End Users hitting limits</span> — number of users reaching their limit in any kind of resource. Data is within the last 24 hours.
 * <span class="notranslate">Resellers hitting limits</span> —  number of enrolled Resellers that are reaching their limit in any kind of resource. Data is within the last 24 hours.
@@ -711,7 +711,7 @@ Admin can filter the list:
 
 ![](/images/SelectorFilters.png)
 
-If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <span class="notranslate">_Action_</span> table, the PHP version for a domain in MultiPHP Selector is changed to the system default version and <span class="notranslate">`php-fpm`</span> is disabled. Users' websites will use the version set in CloudLinux PHP Selector (user interface). Group operation also can be used.
+If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <span class="notranslate">_Action_</span> table, the PHP version for a domain in MultiPHP Selector is changed to the system default version and <span class="notranslate">`php-fpm`</span> is disabled. Users' websites will use the version set in CloudLinux OS Shared PHP Selector (user interface). Group operation also can be used.
 
 ![](/images/UsePHPSelector.png)
 
@@ -759,7 +759,7 @@ The diagnostic tool allows to catch some issues. You can start diagnostic by cli
 
 The most popular errors and solutions:
 
-1. Your PHP Handler does not support CLoudLinux PHP Selector
+1. Your PHP Handler does not support CLoudLinux OS Shared PHP Selector
 
 ![](/images/Issue1.png)
    
@@ -878,7 +878,7 @@ It is impossible:
 #### Make a particular Python version as a default
 
 :::tip Note
-You can set a particular Python version as a default version in the CloudLinux [installation wizard](/lve_manager/#cloudlinux-installation-wizard) during the first installation.
+You can set a particular Python version as a default version in the CloudLinux OS Shared [installation wizard](/lve_manager/#cloudlinux-installation-wizard) during the first installation.
 :::
 
 To make a particular Python version as a default version, do the following:
@@ -1067,7 +1067,7 @@ See also: [Node.js Selector CLI tools](/command-line_tools/#node-js-selector).
 **PHP Slow Site analyzer** is a new tool that generates daily reports for the server administrator with information about the top N slow PHP-based domains and URLs. Slow Site analyzer tracks all PHP-based requests and selects slow ones by certain rules.   
 
 :::tip Note
-Slow Site analyzer is not available for CloudLinux 6.
+Slow Site analyzer is not available for CloudLinux OS Shared 6.
 :::
  
 **Installation**
@@ -1110,7 +1110,7 @@ Remember that report is created every 24 hours and all changes in configuration 
 #### PHP Slow Site analyzer
 
 :::tip Note
-The Slow Site analyzer is not available for CloudLinux 6.
+The Slow Site analyzer is not available for CloudLinux OS Shared 6.
 :::
 
 ![](/images/WebsiteMonitoringPHPSiteAnalyzer.png)
@@ -1140,7 +1140,7 @@ To enable or disable **Website monitoring**, use the following slider.
 To enable or disable the **Slow site analyzer**, use the following slider.
 
 :::tip Note
-Slow Site analyzer is not available for CloudLinux 6.
+Slow Site analyzer is not available for CloudLinux OS Shared 6.
 :::
 
 ![](/images/WebsiteMonitoringSlider1.png)
@@ -1583,7 +1583,7 @@ You can choose a date and a snapshot to display in the table.
 
 #### Server processes snapshots
 
-In case when a CloudLinux user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
+In case when a CloudLinux OS Shared user hits LVE limits, appropriate faults are generated and [lvestats](/deprecated/#lve-stats-0-x) package generates server processes snapshot. Snapshot is a list of running applications and a list of running MySQL queries right after the faults happened.
 
 Snapshots allow users to investigate the reason of account hitting its limits. Several snapshots are generated for each incident. An incident is a state when faults are generated in a close time period. The time period is configurable. By default, if faults are generated in 300 seconds time period, we consider them as a single incident.
 
@@ -1638,6 +1638,19 @@ Displays information on HTTP queries in the selected snapshot.
 
 ![](/images/RU-HTTP-queries.png)
 
+
+#### Turning On / Off email notifications per user
+
+:::warning The following packages are required:
+* lvemanager-7.3.0-1
+* lve-stats-4.1.4-1
+:::
+
+A user can disable LVE-Stats notifications about hitting LVE limits by himself.
+
+The feature is available via **Resource Usage client plugin** | **Options** | **LVE Stats Email Notifications**
+
+![](/images/TurningOnOffNotifications.png)
 
 ### Python Selector client plugin
 
@@ -1888,7 +1901,7 @@ The <span class="notranslate">_My Domains_</span> tab contains a list of user’
 
 ![](/images/MyDomainsTab.png)
 
-A user can configure a domain to use CloudLinux <span class="notranslate">PHP Selector</span>.
+A user can configure a domain to use CloudLinux OS Shared <span class="notranslate">PHP Selector</span>.
 
 1. Click <span class="notranslate">_Use PHP Selector_</span>
   
@@ -1913,7 +1926,7 @@ You can change LVE Manager settings for a server manually via cPanel/WHM or, if 
 
 ####  Changing settings manually
 
-* Log in to cPanel, go to WHM, choose CloudLinux and click <span class="notranslate">_Options_</span>.
+* Log in to cPanel, go to WHM, choose CloudLinux OS Shared and click <span class="notranslate">_Options_</span>.
 * Change settings.
 
 #### Changing settings in the config file
@@ -2011,7 +2024,7 @@ To edit package extensions, go to <span class="notranslate"> _Packages_</span> |
 
 <span class="notranslate">**LVE Manager**</span>
 
-To edit package extensions, go to <span class="notranslate">LVE Manager</span> | <span class="notranslate">Server Configuration</span> | <span class="notranslate"> CloudLinux LVE Manager</span> | <span class="notranslate"> Packages</span> and click pencil (edit) icon.
+To edit package extensions, go to <span class="notranslate">LVE Manager</span> | <span class="notranslate">Server Configuration</span> | <span class="notranslate"> CloudLinux OS Shared LVE Manager</span> | <span class="notranslate"> Packages</span> and click pencil (edit) icon.
 
 ![](/images/lve-extension_05.jpg)
 
@@ -2021,4 +2034,4 @@ To learn how to work with package extensions limits using WHM API, please read t
 
 #### Control panel integration guide
 
-[Here](/control_panel_integration/) you will find the instructions and common techniques used to integrate your software with CloudLinux.
+[Here](/control_panel_integration/) you will find the instructions and common techniques used to integrate your software with CloudLinux OS Shared.

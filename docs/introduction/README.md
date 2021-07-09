@@ -2,24 +2,24 @@
 
 [[toc]]
 
-### What is CloudLinux
+### What is CloudLinux OS Shared
 
-CloudLinux is designed for shared hosting providers. It isolates each customer into a separate “Lightweight Virtualized Environment” (LVE), which allocates and limits server resources, like memory, CPU and the number of simultaneous connections, for each web hosting tenant. This ensures that tenants cannot jeopardize the stability of your servers, causing all sites to slow down or even come to a halt. CloudLinux OS also “cages” tenants from one another to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, causing severe harm.
+CloudLinux OS Shared is designed for shared hosting providers. It isolates each customer into a separate “Lightweight Virtualized Environment” (LVE), which allocates and limits server resources, like memory, CPU and the number of simultaneous connections, for each web hosting tenant. This ensures that tenants cannot jeopardize the stability of your servers, causing all sites to slow down or even come to a halt. CloudLinux OS Shared also “cages” tenants from one another to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, causing severe harm.
 
-### CloudLinux life cycle
+### CloudLinux OS Shared life cycle
 
-CloudLinux supports the same life cycle policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
+CloudLinux OS Shared supports the same life cycle policy as RHEL. Using a supported operating system is critical to maintaining a stable server environment.
 
 Currently, the following version are supported:
 
 | |  | |
 |-|--|-|
 |Operating System | Release Date| End of Life and Support|
-|CloudLinux 8 | Mar 17, 2020 | May 31, 2029 |
-|CloudLinux 7 | Apr 1, 2015 | Jun 30, 2024 |
-|CloudLinux 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
+|CloudLinux OS Shared 8 | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
+|CloudLinux OS Shared 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
 
-### Description of CloudLinux components
+### Description of CloudLinux OS Shared components
 
 * **LVE Manager**
 
@@ -27,6 +27,7 @@ Currently, the following version are supported:
   LVE Manager allows you to maintain fine-tuned control over your resources, including CPU, IO rate, memory, inodes, numbers of processes, and concurrent connections, that any single account can use. Now you can limit resource abuse, while allowing good customers to use what they need.
 
   [See more](/lve_manager/).
+
 * **CageFS**
 
     CageFS is a virtualized, per-user file system that uniquely encapsulates each customer, preventing users from seeing each other and viewing sensitive information. CageFS prevents a large number of attacks, including most privilege escalation and information disclosure attacks. It is completely transparent to your customers, without any need for them to change their scripts.
@@ -54,7 +55,7 @@ Currently, the following version are supported:
     [See more](/cloudlinux_os_components/#python-selector).
 * <span class="notranslate"> **Node.js Selector** </span>
 
-    Node.js Selector is a CloudLinux component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
+    Node.js Selector is a CloudLinux OS Shared component that allows each user to easily create Node.js applications, choose Node.js version and other parameters for applications based on their needs.
 
     [See more](/cloudlinux_os_components/#node-js-selector).
 * **Apache mod_lsapi PRO**

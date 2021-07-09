@@ -75,7 +75,7 @@ module.exports = {
     "/": {
       lang: "en-US", // this will be set as the lang attribute on <html>
       title: "Documentation",
-      description: "CloudLinux Documentation"
+      description: "CloudLinux OS Shared Documentation"
     },
 //    "/ru/": {
 //      lang: "ru",

@@ -17,7 +17,7 @@ This documentation is for the old version of Python Selector. You can find docum
 
 We have the ability to deploy <span class="notranslate"> Python </span> applications via application server. <span class="notranslate"> Python Selector </span> uses <span class="notranslate"> mod_passenger </span> to host <span class="notranslate">Python</span>.
 
-This feature is available for CloudLinux 6 or later. It supports only cPanel servers.
+This feature is available for CloudLinux OS Shared 6 or later. It supports only cPanel servers.
 
 You can find a list of supported <span class="notranslate"> alt-python</span> versions using the following command.
 
@@ -161,7 +161,7 @@ cloudlinux-config set --json --data '{"options":{"uiSettings":{"hideRubyApp":fal
 </div>
  
 :::tip Note
-If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux Python Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
+If you are using cPanel/WHM, you can also configure hide/show <span class="notranslate">CloudLinux OS Shared Python Selectors</span> in <span class="notranslate">WHM | Feature Manager</span>.
 For that, you’d need to first uncheck <span class="notranslate">`Hide Python App in web-interface`</span> in the <span class="notranslate">LVE Manager</span>. This will make the menu appear for all accounts. After that, you are free to disable this app in <span class="notranslate">WHM | Feature Manager</span> for the required feature lists. 
 :::
 
@@ -379,7 +379,7 @@ $ yum install MySQL-python
 </div>
 
 
-If you have MySQL 5.3+ installed on CloudLinux 5 server, and there is no libmysqlclient_r.so.15 on the server, run:
+If you have MySQL 5.3+ installed on CloudLinux OS Shared 5 server, and there is no libmysqlclient_r.so.15 on the server, run:
 
 <div class="notranslate">
 
@@ -787,7 +787,7 @@ OPTIMUMCACHE IS NO LONGER SUPPORTED
 
 #### Requirements
 
-* 64bit CloudLinux 6.x or higher
+* 64bit CloudLinux OS Shared 6.x or higher
 * ext4 filesystem
 * kernel lve1.2.55 or later.
 
@@ -1784,9 +1784,9 @@ You can use [Control panel integration guide](/control_panel_integration/) inste
 
 **[lve-utils 1.4+]**
 
-CloudLinux can automatically detect the most popular control panels, like cPanel - and allows to set different limits for users in different packages. It simplifies management as you don't have to choose between one limit that fits all your customers on the server, or individual limits for the customers.
+CloudLinux OS Shared can automatically detect the most popular control panels, like cPanel - and allows to set different limits for users in different packages. It simplifies management as you don't have to choose between one limit that fits all your customers on the server, or individual limits for the customers.
 
-If you have a custom made control panel, with your own 'package' implementation, you can still use CloudLinux framework to manage limits for your packages.
+If you have a custom made control panel, with your own 'package' implementation, you can still use CloudLinux OS Shared framework to manage limits for your packages.
 
 To do that, you would need:
 
@@ -1860,10 +1860,10 @@ Edit or modify parameter <span class="notranslate">`CUSTOM_GETPACKAGE_SCRIPT`</s
 For the script example please check the following article: [https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels](https://cloudlinux.zendesk.com/hc/en-us/articles/115004529105-Integrating-LVE-limits-with-packages-for-unsupported-control-panels).
 
 
-### Detecting and working with CloudLinux
+### Detecting and working with CloudLinux OS Shared
 
 
-Detecting if system is running CloudLinux/CloudLinux kernel:
+Detecting if system is running CloudLinux OS Shared/CloudLinux kernel:
 
 
 <div class="notranslate">
@@ -1902,7 +1902,7 @@ Check for the presence of <span class="notranslate">`/var/.cagefs/.cagefs.token`
 ### Displaying CPU, memory & IO limits
 
 
-Most control panels choose to display CloudLinux usage & limits to end customers. To simplify that, we lve-stats exports a file that can be easily read and processed by a control panel to display the necessary information.
+Most control panels choose to display CloudLinux OS Shared usage & limits to end customers. To simplify that, we lve-stats exports a file that can be easily read and processed by a control panel to display the necessary information.
 
 The information is located in the <span class="notranslate">/var/lve/info </span> file. This information is updated every 5 minutes, and contains default limits (first line), as well as usage and limits for all customers. If a customer is not present in the file, it means that customer is not active (no scripts were executed recently for the customer), and a customer has default limits (so you can display no usage, and default limits in the control panel for that customer.
 
@@ -1929,7 +1929,7 @@ The data is stored in a form of one line per customer, with coma separated value
 |16 | <span class="notranslate"> IO </span> Usage|
 |17 | <span class="notranslate"> IO </span> Limit|
 
-With LVE version 4 (CloudLinux lve0.x) only the first 9 parameters are available. You can check the the version by reading the first byte of <span class="notranslate">/proc/lve/list. </span>
+With LVE version 4 (CloudLinux OS Shared lve0.x) only the first 9 parameters are available. You can check the the version by reading the first byte of <span class="notranslate">/proc/lve/list. </span>
 
 In the version 6 all 15 parameters should be available.
 

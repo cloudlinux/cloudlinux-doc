@@ -1,6 +1,6 @@
 # Command-line tools (CLI)
 
-The list of the commands (CLI) you can use to manage CloudLinux OS components.
+The list of the commands (CLI) you can use to manage CloudLinux OS Shared components.
 
 * [CageFS](/command-line_tools/#cagefs)
 * [LVE-stats 2](/command-line_tools/#lve-stats-2)
@@ -140,7 +140,7 @@ $ /sbin/cagefs_enter_user [--root] [--no-fork] $USERNAME _command_
 
 If you disable CageFS for a user, then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> `proxyexec` </span> .
 
-You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start via <span class="notranslate"> `proxyexec` </span> for all users (regardless if CageFS is enabled or disabled) by specifying the parameter <span class="notranslate"> _cagefs_enter_proxied=0_ in _/etc/sysconfig/cloudlinux_ </span> .
+You can forcibly disable <span class="notranslate"> `cagefs_enter` </span> start via <span class="notranslate"> `proxyexec` </span> for all users (regardless if CageFS is enabled or disabled) by specifying the parameter <span class="notranslate"> _cagefs_enter_proxied=0_ in _/etc/sysconfig/cloudlinux_ </span>.
 
 <span class="notranslate"> _/bin/cagefs_enter.proxied_ </span> can be executed instead of <span class="notranslate"> _/bin/cagefs_enter_ </span> to enter CageFS without <span class="notranslate"> `proxyexec` </span> . Note that starting <span class="notranslate"> `cagefs_enter` </span> via <span class="notranslate"> `proxyexec` </span> is necessary to enable sending local notification messages to users with enabled CageFS. <span class="notranslate"> `cagefs_enter` </span> is executed via <span class="notranslate"> `proxyexec` </span> by default.
 
@@ -2686,9 +2686,9 @@ Usage:
 | | |
 |--|--|
 |<span class="notranslate">`-h, --help`</span>|Print this message|
-|<span class="notranslate">`-k, --key &lt;key&gt;`</span>|Update your system to CloudLinux with activation key|
-|<span class="notranslate">`-i, --byip`</span>|Update your system to CloudLinux and register by IP|
-|<span class="notranslate">`-c, --uninstall`</span>|Convert CloudLinux back to CentOS|
+|<span class="notranslate">`-k, --key &lt;key&gt;`</span>|Update your system to CloudLinux OS Shared with activation key|
+|<span class="notranslate">`-i, --byip`</span>|Update your system to CloudLinux OS Shared and register by IP|
+|<span class="notranslate">`-c, --uninstall`</span>|Convert CloudLinux OS Shared back to CentOS|
 |<span class="notranslate">`--serverurl`</span>|Use non-default registration server (default is `https://xmlrpc.cln.cloudlinux.com/XMLRPC`)|
 |<span class="notranslate">`--components-only`</span>|Install control panel components only|
 |<span class="notranslate">`--conversion-only`</span>|Do not install control panel components after converting|
@@ -2696,12 +2696,12 @@ Usage:
 |<span class="notranslate">`--skip-kmod-check`</span>|Skip check for unsupported kmods|
 |<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
 |<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
-|<span class="notranslate">`--force-hybridize`</span>|Option allows to convert CloudLinux 7 to CloudLinux 7 Hybrid which has a newer kernel (from v1.61)|
+|<span class="notranslate">`--force-hybridize`</span>|Option allows to convert CloudLinux OS Shared 7 to CloudLinux OS Shared 7 Hybrid which has a newer kernel (from v1.61)|
 
 The script will install the following to the server:
 
 1. Register server with CLN.
-2. Install CloudLinux kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
+2. Install CloudLinux OS Shared kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
 3. It will attempt to detect control panel and do the following actions:
 *  _For cPanel_:
    * install mod_hostinglimits;
@@ -2921,7 +2921,7 @@ testuser5 0  2   2   1%    52   0    0
 <span class="notranslate">lve-utils 1.2-10+</span>
 :::
 
-**cldetect** is used to detect installed software, and adjust CloudLinux options accordingly.
+**cldetect** is used to detect installed software, and adjust CloudLinux OS Shared options accordingly.
 
 **Usage**:
 <div class="notranslate">
@@ -2948,7 +2948,7 @@ testuser5 0  2   2   1%    52   0    0
 |<span class="notranslate">`--set-securelinks-gid`</span>|changes `/etc/sysctl.conf` if apache gid != 48 (default)|
 |<span class="notranslate">`--set-nagios`</span>|do some adjustments to make nagios work correctly if it's installed. Called as a part of `--setup-supergids`|
 |<span class="notranslate">`--setup-supergids`</span>|do some adjustments to make special users/software (nagios, cPanel’s mailman) work correctly if it is installed to the system|
-|<span class="notranslate">`--cl-setup`</span>|check if CloudLinux is installing. Returns 0 if installing, 1 otherwise|
+|<span class="notranslate">`--cl-setup`</span>|check if CloudLinux OS Shared is installing. Returns 0 if installing, 1 otherwise|
 |<span class="notranslate">`--update-license`</span>|updates license|
 |<span class="notranslate">`--update-new-key`</span>|updates license with new key|
 |<span class="notranslate">`--check-license`</span>|check license. Returns OK if license is not older than 3 days, error message otherwise|
@@ -3042,7 +3042,7 @@ Currently implemented checkers:
 
 Checks control panel and its configuration (for DirectAdmin only).
 
-Checking control panel availability, thereby detecting it with our code. Displaying control panel name and version. Also, for DirectAdmin, checking if CloudLinux support is enabled in its config.
+Checking control panel availability, thereby detecting it with our code. Displaying control panel name and version. Also, for DirectAdmin, checking if CloudLinux OS Shared support is enabled in its config.
 
 Fails if <span class="notranslate">`/usr/local/directadmin/custombuild/options.conf`</span> does not contain <span class="notranslate">`cloudlinux=yes`</span> line (for DirectAdmin control panel).
 
@@ -3131,7 +3131,7 @@ Fails if <span class="notranslate">`/etc/cl.selector/php.conf`</span> has incorr
 
 Checks compatibility for the <span class="notranslate">PHP Selector</span>
 
-Detecting which PHP handler has been configured on the server and checking its compatibility with the <span class="notranslate">CloudLinux PHP Selector</span> according to [this table](/limits/#compatibility-matrix) and displaying the corresponding message with the link to the documentation in case of a problem detected. No checks are performed for EasyApache3.
+Detecting which PHP handler has been configured on the server and checking its compatibility with the <span class="notranslate">CloudLinux OS Shared PHP Selector</span> according to [this table](/limits/#compatibility-matrix) and displaying the corresponding message with the link to the documentation in case of a problem detected. No checks are performed for EasyApache3.
 
 Failure reasons:
   * The installed <span class="notranslate">`mod_ruid`</span> package is incompatible with the <span class="notranslate">PHP Selector</span>
@@ -3449,7 +3449,7 @@ You should not set soft limit higher than hard limit. cl-quota does not control 
 
 <span class="notranslate"> cl-quota </span> utility allows setting <span class="notranslate"> inodes </span> limits for users of the system.
 
-<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](/lve_manager/#detecting-and-working-with-cloudlinux) .
+<span class="notranslate"> cl-quota </span> integrates with the panels through a standard mechanism - [Integrating LVE Limits with Packages](/lve_manager/#detecting-and-working-with-cloudlinux).
 
 Panel users are such users whose UIDs are issued by the above panel integration mechanism. The list of panel packages and the information on the user's affiliation to a particular package is obtained from there as well.
 
@@ -3459,7 +3459,7 @@ When installing/reading the limits, the following peculiarities are applied:
 
 2. Limit value -1 for the packages (see below) is displayed as dash (-).
 
-3. If <span class="notranslate"> cl-quota </span> is running under <span class="notranslate"> root </span> , it will display the limits returned by <span class="notranslate"> repquota </span> utility with no changes. If it is running under some other user, it will return data from a special cache file, see [Quotas cache and synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
+3. If <span class="notranslate"> cl-quota </span> is running under <span class="notranslate"> root </span>, it will display the limits returned by <span class="notranslate"> repquota </span> utility with no changes. If it is running under some other user, it will return data from a special cache file, see [Quotas cache and synchronization](/lve_manager/#caching-and-synchronizing-the-limits).
 
 4. Limits setting only works for panel users, for all other users limits are not set (the command is ignored). The only exception - <span class="notranslate"> uid=0 </span> . The limits are never set for the <span class="notranslate"> root </span> user <span class="notranslate"> (uid=0) </span> , but they are stored in <span class="notranslate"> DB </span> file and are used by inheritance mechanism. See [Limits Inheritance](/command-line_tools/#limits-inheritance).
 
@@ -3519,7 +3519,7 @@ When installing <span class="notranslate"> LVE Manager </span> package, a specia
 
 Caching and synchronization can also be performed separately, see ["CLI Options"](/lve_manager/#cli-options-examples) section.
 
-To disable this feature add to the config file _/etc/sysconfig/cloudlinux_ .
+To disable this feature add to the config file _/etc/sysconfig/cloudlinux_.
 
 
 #### Quotas DB file
@@ -3682,7 +3682,7 @@ Quota disabled for user id 500 (home directory /home/cltest1); quotaon: Mountpoi
 * [Options](/command-line_tools/#options)
 * [Examples](/command-line_tools/#examples-5)
 
-<span class="notranslate">`cloudlinux-limits`</span> is an alternative to `lvectl` CLI tool for LVE management. <span class="notranslate">`cloudlinux-limits`</span> utility allows you to get/set any CloudLinux limits.
+<span class="notranslate">`cloudlinux-limits`</span> is an alternative to `lvectl` CLI tool for LVE management. <span class="notranslate">`cloudlinux-limits`</span> utility allows you to get/set any CloudLinux OS Shared limits.
 
 #### Usage:
 
