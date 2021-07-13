@@ -4471,9 +4471,13 @@ And run the command to apply changes:
 
 #### FFmpeg
 
+:::tip Note
+The PHP-FFmpeg project has not been renewed for the last few years and is not compatible with the RHEL 8 based systems. Since code for alt-PHP-FFmpeg is outdated and FFmpeg has a lot of third-party dependencies, this module is not available for CloudLinux OS Shared 8.
+:::
+
 Due to possible patent issues CloudLinux OS Shared does not provide <span class="notranslate"> FFmpeg </span> libraries ( [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html) ). We highly recommend researching if you can legally install <span class="notranslate"> FFmpeg </span> extension on your server. This might differ based on where you and your servers are located. More information can be found on the link: [https://ffmpeg.org/legal.html](https://ffmpeg.org/legal.html)
 
-For your convenience we provide <span class="notranslate"> FFMPEG PHP </span> binding. For them to work, you need to install <span class="notranslate"> FFmpeg </span> package from the “ <span class="notranslate"> Nux Dextop </span> ” repository following the [instructions](http://li.nux.ro/repos.html).
+For your convenience we provide <span class="notranslate"> FFMPEG PHP </span> binding. For them to work, you need to install <span class="notranslate"> FFmpeg </span> package from the “<span class="notranslate">Nux Dextop</span>” repository following the [instructions](http://li.nux.ro/repos.html).
 
 Once <span class="notranslate"> FFmpeg </span> is installed you can install PHP bindings, by running:
 <div class="notranslate">
