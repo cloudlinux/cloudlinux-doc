@@ -717,7 +717,7 @@ Note that the URL field supports wildcard matching and you can have a case when 
 
 ####  I started a tracing task and made requests to URL but did not see any results in the UI. What should I do?
 
-1. <span class="notranslate">X-Ray</span> may not send data if a site uses a caching plugin, as the caching plugin is outputting HTML, thus there are no PHP scripts to examine. We encountered such issues with sites that use <span class="notranslate">LSCache</span> and <span class="notranslate">WP Super Cache</span> plugins. Check that your site does not use caching plugins. If so, disable it while tracing a site to get information from <span class="notranslate">X-Ray</span>.
+1. <span class="notranslate">X-Ray</span> may not send data if a site uses a caching plugin, as the caching plugin is outputting HTML, thus there are no PHP scripts to examine. We encountered such issues with sites that use <span class="notranslate">LSCache</span> and <span class="notranslate">WP Super Cache</span> plugins. Check that your site does not use caching plugins. If so, disable it while tracing a site to get information from <span class="notranslate">X-Ray</span>. Moreover, it can also be because of caching on server side, for example NGINX Cache. Or when using CDN because requests are processed from another host. In such cases, during tracing, caching must also be disabled.
 2. If you set a client’s IP when creating the tracing task, check that your requests come to the server with this IP via phpinfo (since there may be NAT between your local machine and the server).
    
     ![](/images/XRayPHPInfoRemoteAddr.png)
@@ -727,7 +727,6 @@ Note that the URL field supports wildcard matching and you can have a case when 
     ![](/images/XRayPHPInfo.png)
 
 If you cannot see that section, try to restart PHP processes for that user (the simplest way is to restart Apache) and check that you can see the <span class="notranslate">**xray**</span> extension.
-
 
 4. If you can see the <span class="notranslate">**xray**</span> extension in the phpinfo, check that <span class="notranslate">X-Ray</span> agent service is running with the service xray-agent status command. If it is not running, start it with the <span class="notranslate">`service xray-agent start`</span> command.
 
