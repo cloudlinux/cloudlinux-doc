@@ -483,6 +483,14 @@ The following sections are available to set the required options:
 
 #### LVE Faults Email Notifications
 
+Starting from LVE Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
+
+To allow users to do so, the administrator should enable the _Notify Customers_ and _Notify Reseller’s Customers_ options.
+
+Unfortunately, it is not possible to disable LVE Faults Email Notifications for all users by default so that users can enable the feature themselves in their interface.
+
+But it is possible to enable LVE Faults Email Notifications for all users by default, so that users can disable the feature themselves in their interface.
+
 A hoster can set email notifications for panel administrator, reseller customer, and resellers’ customers in cases of limits faults. Choose <span class="notranslate">_Options_</span> tab to manage LVE Faults email notifications.
 
 ![](/images/lve-faults-email-notifications.png)
@@ -1329,6 +1337,15 @@ For example, 7 days period chart.
 Choose <span class="notranslate">_Options_</span> tab to set user email notifications for resellers’ end users.
 
 In <span class="notranslate">_LVE Faults email notifications_</span> section tick appropriate checkboxes to set the required type of notification.
+
+Starting from LVE Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
+
+To allow users to do so, the reseller should enable the _Notify Customers_ and _Notify Reseller’s Customers_ options.
+
+Unfortunately, it is not possible to disable LVE Faults Email Notifications for all users by default so that users can enable the feature themselves in their interface.
+
+But it is possible to enable LVE Faults Email Notifications for all users by default, so that users can disable the feature themselves in their interface.
+
 
 ![](/images/optionsresellernotify_zoom70.png)
 
