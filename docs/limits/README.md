@@ -290,6 +290,15 @@ This limit was created to prevent DoS attacks against web server. One of the fai
 
 To solve that, we have created entry processes (often called concurrent connections) limit. It will limit the number of concurrent connections to Apache, causing web server to serve error 508 page (<span class="notranslate"> Resource Limit Reached</span>), once there number of concurrent requests for the site goes above the limit.
 
+In the case of working with the LiteSpeed web server, the _Entry processes_ limit implementation differs from the one implemented in Apache.
+
+Therefore, when there is the same load with concurrent requests to Apache and LiteSpeed, the _Entry processes_ limit may differ depending on the web server.
+
+In the case of LiteSpeed the _Entry processes_ limit increases with the number of lsphp master processes, for example in workgroup mode, the web server only starts one lsphp master process, then this process will fork children processes to process requests without increasing the _Entry processes_ limit.
+
+If you'd like to set the concurrent connection limit with LiteSpeed, you can use the standard web server tools like [https://docs.litespeedtech.com/cp/cpanel/antiddos/#connection-throttling](https://docs.litespeedtech.com/cp/cpanel/antiddos/#connection-throttling).
+
+
 ## Number of processes
 
 <span class="notranslate"> NPROC </span> controls the total number of processes and threads within LVE. Once the limit is reached, no new process can be created (until another one dies). When that happens <span class="notranslate"> NPROC </span> counter is incremented. Apache might return 500 or 503 errors in such case.
