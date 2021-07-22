@@ -290,7 +290,7 @@ This limit was created to prevent DoS attacks against web server. One of the fai
 
 To solve that, we have created entry processes (often called concurrent connections) limit. It will limit the number of concurrent connections to Apache, causing web server to serve error 508 page (<span class="notranslate"> Resource Limit Reached</span>), once there number of concurrent requests for the site goes above the limit.
 
-In the case of working with the LiteSpeed web server, the _Entry processes_ limit implementation differs from the one implemented in Apache.
+**In the case of working with the LiteSpeed web server**, the _Entry processes_ limit implementation differs from the one implemented in Apache.
 
 Therefore, when there is the same load with concurrent requests to Apache and LiteSpeed, the _Entry processes_ limit may differ depending on the web server.
 
