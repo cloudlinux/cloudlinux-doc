@@ -6558,7 +6558,8 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_accept_notify](/cloudlinux_os_components/#lsapi-backend-accept-notify)
 * [lsapi_backend_pgrp_max_reqs](/cloudlinux_os_components/#lsapi-backend-pgrp-max-reqs)
 * [lsapi_backend_pgrp_max_crashes](/cloudlinux_os_components/#lsapi-backend-pgrp-max-crashes)
-* [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info) Beta
+* [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info)
+* [lsapi-server-tweak](/cloudlinux_os_components/#lsapi-server-tweak) Beta
  
 [Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
 * [lsapi_with_connection_pool](/cloudlinux_os_components/#lsapi-with-connection-pool)
@@ -6739,6 +6740,10 @@ Example: lsapi_set_env TMP "/var/lsphp-tmp"
 Note: PATH env var default "/usr/local/bin:/usr/bin:/bin" cannot be changed because of security reasons.  
 To change it, use explicitly lsapi_set_env_path option.
 
+:::tip Beta
+When the `lsapi_server_tweak` option is switched `On`, this option can be used in the virtualhost context.
+:::
+
 ---
 
 #### **lsapi_set_env_path**
@@ -6749,6 +6754,10 @@ To change it, use explicitly lsapi_set_env_path option.
 
 **Description** :  
 Change PATH variable in the environment of lsPHP processes. Default path /usr/local/bin:/usr/bin:/bin will be used if not set.
+
+:::tip Beta
+When the `lsapi_server_tweak` option is switched `On`, this option can be used in the virtualhost context.
+:::
 
 ---
 
@@ -6886,14 +6895,27 @@ Controls how many crashes of its worker processes a control process will detect 
 
 ---
 
-#### **lsapi_backend_loglevel_info** <Badge text="beta" />
+#### **lsapi_backend_loglevel_info**
 
-**Syntax** : lsapi_backend_loglevel_info [On/Off]
-**Default** : lsapi_backend_loglevel_info Off
-**Context** : httpd.conf, virtualhost
+**Syntax**: lsapi_backend_loglevel_info [On/Off]
 
-**Description** :  
-Controls which log level will be used to write PHP warnings and notices into Apache’s error_log. Optional, the default value is `Off`. In that case `LOG_WARNING` log level will be used. Otherwise, with `On` value, `LOG_INFO` log level will be used.
+**Default**: lsapi_backend_loglevel_info Off
+
+**Context**: httpd.conf, virtualhost
+
+**Description**:  Controls which log level will be used to write PHP warnings and notices into Apache’s error_log. Optional, the default value is `Off`. In that case `LOG_WARNING` log level will be used. Otherwise, with `On` value, `LOG_INFO` log level will be used.
+
+---
+
+#### **lsapi_server_tweak** <Badge text="beta" />
+
+**Syntax**: lsapi_server_tweak [On/Off]
+
+**Default**: lsapi_server_tweak Off
+
+**Context**: httpd.conf
+
+**Description**: This option, when switched on, allows the use of `lsapi_set_env` and `lsapi_set_env_path` config options in the virtualhost context.
 
 ---
 
