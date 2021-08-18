@@ -3429,14 +3429,14 @@ The "All" mode will be deprecated starting from September 1, 2021. You can read 
 
 **Active modes**
 
-* **abusers - Use LVE for a user to restrict queries (default mode)**: In that mode, once user goes over the limits specified in the MySQL Governor , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing fewer new queries being sent to MySQL. _Requires dbuser-map file_.
+* **abusers - Use LVE for a user to restrict queries (default mode)**: In that mode, once user goes over the limits specified in the MySQL Governor , all customer's queries will execute inside that user's LVE. We believe this mode will help with the condition when the site is still fast, but MySQL is slow (restricted) for that user. If someone abuses MySQL, it will cause queries to share LVE with PHP processes, and PHP processes will also be throttled, causing fewer new queries being sent to MySQL. _Requires [`dbuser-map` file](/cloudlinux_os_components/#mapping-a-user-to-a-database)_.
 * **off - Monitor Only**: In that mode MySQL Governor will not throttle customer's queries, instead it will let you monitor the MySQL usage to see the abusers at any given moment in time (and historically). This mode is good when you are just starting and want to see what is going on.
 
 ---
 
 **Deprecated modes**
 
-* **all - Always run queries inside user's LVE (will be deprecated on September 1, 2021)**: This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating MySQL Governor . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires dbuser-map file_.
+* **all - Always run queries inside user's LVE (will be deprecated on September 1, 2021)**: This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating MySQL Governor . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires [`dbuser-map` file](/cloudlinux_os_components/#mapping-a-user-to-a-database)_.
 * **single - Single restricted's LVE for all restricted customers (deprecated)**: In that mode once customer reaches the limits specified in the MySQL Governor , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing the same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available.
 
 :::warning Note
@@ -3451,7 +3451,6 @@ If the `dbuser-map` file is absent on the server, the `abusers` mode emulates th
 With the `single` and `abusers` mode, once user is restricted, the queries for that user will be limited as long as user is using more than limits specified. After a minute that user is using less, we will unrestricted that user.
 
 You can specify modes of operation using [dbctl](/command-line_tools/#dbctl) or by changing [configuration file](/cloudlinux_os_components/#configuration-3).
-<span class="notranslate"> dbuser-map </span> file is located in <span class="notranslate">`/etc/container/dbuser-map`</span>.
 
 #### MySQL Governor limits
 
@@ -3511,8 +3510,14 @@ $ service db_governor stop
 **[** <span class="notranslate"> **MySQL Governor** </span> **1.x]**
 
 Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span>, <span class="notranslate"> Plesk </span> and <span class="notranslate"> DirectAdmin </span> control panels.
+	
+The mapping file is recreated daily by cron. Mapping recreation is also triggered by events of user creation, modification and removal on cPanel servers. It also can be rebuilt manually with the help of the following command:
+	
+```
+/usr/share/lve/dbgovernor/mysqlgovernor.py --dbupdate
+```
 
-The mapping file is located in: <span class="notranslate"> /etc/container/dbuser-map </span>
+The mapping file is located in: <span class="notranslate"> `/etc/container/dbuser-map` </span>
 
 The format of the file:
 <div class="notranslate">
@@ -3542,10 +3547,10 @@ pupkin3a_12 pupkin3a 506
 
 This would specify that db users: <span class="notranslate"> pupkinas_us2, pupkinas_u1, pupkinas_u3 </span> belong to user <span class="notranslate"> pupkinas </span> with uid (lve id) 502
 db user <span class="notranslate"> pupkin2a_uuu1 </span> belongs to user <span class="notranslate"> pupkin2a </span> with uid 505, etc...
+	
+`db_governor` service checks this file for modifications every 5 minutes.
 
-This file is checked for modifications every 5 minutes.
-
-If you need to force reload of that file, run:
+If you need to force reload the mapping file, run:
 <div class="notranslate">
 
 ```
