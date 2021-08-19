@@ -37,6 +37,12 @@ With RHEL 8 (**CloudLinux OS Shared 8/CloudLinux OS Shared 7 Hybrid**), some dev
 
 It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS Shared. The process takes a few minutes and replaces just a handful of RPMs.
 
+:::warning Supported OS for conversion
+* CentOS 7
+* CentOS 8
+* AlmaLinux OS 8
+:::
+
 * [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
