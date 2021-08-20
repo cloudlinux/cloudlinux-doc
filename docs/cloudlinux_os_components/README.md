@@ -3511,7 +3511,15 @@ $ service db_governor stop
 
 Traditionally <span class="notranslate"> MySQL Governor </span> used prefixes to map user to database. With the latest version, we automatically generate <span class="notranslate"> user -> database user </span> mapping for <span class="notranslate"> cPanel </span>, <span class="notranslate"> Plesk </span> and <span class="notranslate"> DirectAdmin </span> control panels.
 	
-The mapping file is recreated daily by cron. Mapping recreation is also triggered by events of user creation, modification and removal on cPanel servers. It also can be rebuilt manually on cPanel, Plesk and DirectAdmin control panels with the help of the following command:
+The mapping file is recreated daily by cron.
+
+Mapping recreation is also triggered by the following events on cPanel servers:
+
+* creation of user
+* modification of user
+* removal of user
+	
+You can also rebuild the mapping file manually on cPanel, Plesk and DirectAdmin control panels by running the following command:
 	
 ```
 /usr/share/lve/dbgovernor/mysqlgovernor.py --dbupdate
