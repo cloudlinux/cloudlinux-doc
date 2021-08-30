@@ -2697,6 +2697,7 @@ Usage:
 |<span class="notranslate">`--skip-version-check`</span>|Do not check for script updates|
 |<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
 |<span class="notranslate">`--force-hybridize`</span>|Option allows to convert CloudLinux OS Shared 7 to CloudLinux OS Shared 7 Hybrid which has a newer kernel (from v1.61)|
+|<span class="notranslate">`--no-force-hybridize `</span>|Don't hybridize machine from CloudLinux 7 to CloudLinux 7 Hybrid automatically, even though machine has a new hardware|
 
 The script will install the following to the server:
 
