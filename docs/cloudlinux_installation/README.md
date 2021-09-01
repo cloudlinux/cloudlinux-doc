@@ -109,6 +109,8 @@ Automatic hybridization will be performed for the AMD processors with the follow
 * Zen / Zen+ / Zen 2 / Zen 3
 * Hygon Dhyana
 
+Automatic hybridization may be skipped by passing extra option '--no-force-hybridize'.
+
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
 
 :::tip Note
