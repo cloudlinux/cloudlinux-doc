@@ -137,6 +137,8 @@ $ /sbin/cagefs_enter_user [--root] [--no-fork] $USERNAME _command_
 
 * `--root` – tells the utility not to reset UID and GID to user ones. It might be dangerous to call untrusted commands.
 * `--no-fork` – do not create a child process for a called command. The called command will replace the cagefs_enter process with exec.
+* `--no-cpu-limit`- remove all CPU limits (requires `kmod-lve` >= 2.0.36)
+* `--no-io-and-memory-limit` - remove all limits of IO and Memory (requires `kmod-lve` >= 2.0.36)
 
 If you disable CageFS for a user, then <span class="notranslate"> `cagefs_enter` </span> will be executed without <span class="notranslate"> `proxyexec` </span> .
 

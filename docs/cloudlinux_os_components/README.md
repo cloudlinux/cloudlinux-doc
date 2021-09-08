@@ -7840,7 +7840,7 @@ $ yum install lve-wrappers
 ```
 </div>
 
-#### **Placing programs inside LVE**
+#### Placing programs inside LVE
 
 LVE Wrappers provide two tools for placing programs inside LVE: <span class="notranslate">`lve_wrapper`</span> and `lve_suwrapper`.
 
@@ -7890,6 +7890,7 @@ lve_suwrapper LVE_ID <command_to_run>
 
 * `-f` - force namespace
 * `-n` - without namespace
+* `-c` - remove CPU limits (requires `lve_wrapper` >= 2.1.2)
 
 ### MPM ITK
 
