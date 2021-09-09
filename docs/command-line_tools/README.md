@@ -2785,7 +2785,9 @@ $ cldeploy --hostinglimits                            # update httpd and install
 
 |  |  |
 |--|--|
-|<span class="notranslate"> `--cpu=N`   </span> |limit <span class="notranslate">`CPU`</span> usage; (deprecated. Use <span class="notranslate">`--speed`</span>)|
+| <span class="notranslate"> `--enter-count`   </span> |enable limit for enters count (by default disabled), use only with command "limit". Supported in lve-utils-6.1.2-1 or later. |
+| <span class="notranslate"> `--io-and-memory`   </span> |enable limit for IO and memory (by default disabled), use only with command "limit". Supported in lve-utils-6.1.2-1 or later. |
+| <span class="notranslate"> `--cpu=N`   </span> |limit <span class="notranslate">`CPU`</span> usage; (deprecated. Use <span class="notranslate">`--speed`</span>)|
 | <span class="notranslate"> `--speed=N%` </span> |limit <span class="notranslate">`CPU`</span> usage in percentage; 100% is one core|
 | <span class="notranslate"> `--speed=Nmhz\ghz` </span> |limit <span class="notranslate">`CPU`</span> usage in mhz\ghz|
 | <span class="notranslate"> `--ncpu=N` </span> |limit VCPU usage (deprecated)|
