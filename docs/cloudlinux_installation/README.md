@@ -202,7 +202,7 @@ $ /usr/sbin/rhnreg_ks --activationkey=<activation key>
 ```
 </div>
 
-Where activation key is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
+Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
 
 If you have IP based license, use <span class="notranslate">`clnreg_ks`</span> command:
 
