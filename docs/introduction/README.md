@@ -19,6 +19,27 @@ Currently, the following version are supported:
 |CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
 |CloudLinux OS Shared 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
 
+### CloudLinux OS editions comparison
+
+|**Features**|**CloudLinux OS Solo**|**CloudLinux OS Shared**|**CloudLinux OS Shared Pro**|
+|:-:|:-:|:-:|:-:|
+|Maximum amount of hosting accounts|1|unlimited|unlimited|
+|Limits (LVE Manager)|No|**Yes**|**Yes**|
+|Cage FS|No|**Yes**|**Yes**|
+|MySQL Governor|No|**Yes**|**Yes**|
+|Selectors (PHP, Python, Node.js, Ruby)|No|**Yes**|**Yes**|
+|HardenedPHP|No|**Yes**|**Yes**|
+|Apache mod_lsapi PRO|No|**Yes**|**Yes**|
+|SecureLinks|No|**Yes**|**Yes**|
+|Website monitoring tool|**Yes**|**Yes**|**Yes**|
+|Website monitoring alerts|**Yes**|No|No|
+|Slow Site analyzer|**Yes**|**Yes**|**Yes**|
+|PHP X-Ray|**Yes**|No|**Yes**|
+|Centralized Monitoring|No|No|**Yes**|
+|WordPress Optimization Suite|**Yes**|No|**Yes**|
+|Support 24/7|**Yes**|**Yes**|**Yes**|
+|Priority support|No|No|**Yes**|
+
 ### Description of CloudLinux OS Shared components
 
 * **LVE Manager**
