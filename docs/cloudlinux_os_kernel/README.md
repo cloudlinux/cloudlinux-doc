@@ -98,7 +98,11 @@ The system must be registered in CLN.
 :::
 
 
-1. Update <span class="notranslate"> rhn-client-tools rhn-check rhn-setup </span> from testing repository
+1. Update <span class="notranslate"> rhn-client-tools rhn-check rhn-setup </span> from testing repository.
+
+    :::tip Note
+    If you use `yum-plugin-protectbase`, please make sure it is disabled before stating the normal-to-hybrid script.
+    :::
 
 2. Run <span class="notranslate"> normal-to-hybrid </span> script.
 
@@ -112,6 +116,10 @@ normal-to-hybrid
 reboot
 ```
 </div>
+
+:::tip Note
+If you want to use the `yum-plugin-protectbase` on the CloudLinux OS 7 hybrid system, you should protect the `[cloudlinux-x86_64-server-7]` and `[cl7h]` repositories by adding them to the config file.
+:::
 
 #### How to migrate from hybrid to the normal channel (for both CloudLinux OS Shared 6 Hybrid and CloudLinux OS Shared 7 Hybrid):
 
