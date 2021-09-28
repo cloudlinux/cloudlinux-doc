@@ -7797,6 +7797,10 @@ In this line:
 It is crucial to place all users that su or sudo to root into that group. Otherwise, once such user gains root, user will be inside LVE, and all applications restarted by that user will be inside that user LVE as well.
 :::
 
+:::tip Warning
+Please do not add the `pam_lve.so` in the PAM configuration for sudo. It can affect user’s work with the resource usage plugin, and Python/Node.js/PHP selector plugins.
+:::
+
 For example, to enable LVE for SSH access, add that line to the `/etc/pam.d/sshd`. To enable LVE for SU, add that line to the `/etc/pam.d/su`.
 
 By default, module will not place users with group wheel into lve. If you want to use different group to define users that will not be placed into LVE by pam_lve - pass it as the 3rd argument.
