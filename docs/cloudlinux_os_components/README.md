@@ -1729,6 +1729,8 @@ You can also use [CageFS CLI](/command-line_tools/#cagefs)
   * [Per user virtual mount points](/cloudlinux_os_components/#per-user-virtual-mount-points)
 
   * [Split by username](/cloudlinux_os_components/#split-by-username)
+
+  * [Splitted by user’s UID mounts](/cloudlinux_os_components/#splitted-by-user-s-uid-mounts)
   
   * [Mounting user’s home directory inside CageFS](/cloudlinux_os_components/#mounting-users-home-directory-inside-cagefs)  
 
@@ -2043,6 +2045,35 @@ cagefsctl --remount-all
 </div>
 
 After that each subdirectory of <span class="notranslate"> _/home/httpd/fcgi-bin_ </span> will be mounted for appropriate user in CageFS: <span class="notranslate"> _/home/httpd/fcgi-bin/user1_ </span> will be mounted for <span class="notranslate"> user1 </span> and <span class="notranslate"> _/home/httpd/fcgi-bin/user2_ </span> will be mounted for <span class="notranslate"> user2 </span> .
+
+#### Splitted by user’s UID mounts
+
+:::tip Note
+Requires CageFS v.7.4.2-1 and later
+:::
+
+In addition to [splitted by username mounts](/cloudlinux_os_components/#split-by-username), there is an ability to “split” mounts by user’s UID. This feature is useful for systems with non-unique UIDs, i.e. when multiple users have the same UID.
+
+Using splitted by UID mounts is more preferable over splitted by username mounts, because you can mount the same directory for all users with the same UID. Also, splitted by UID mounts work fine with renaming of the users (when username changes but UID remains the same).
+
+For example if you have a directory structure like the following:
+
+```
+/data/uids/1000/data.db
+/data/uids/1001/data.db
+```
+
+Then you can add the following line to the `/etc/cagefs/cagefs.mp` file:
+
+```
+*/data/uids
+and execute
+cagefsctl --remount-all
+```
+
+After that each subdirectory of the `/data/uids` will be mounted for the appropriate user in CageFS. The `/data/uids/1000` directory will be mounted for the user with UID 1000 and the `/data/uids/1001` directory will be mounted for the user with UID 1001.
+
+
 
 #### **Mounting users home directory inside CageFS**
 
