@@ -1,13 +1,13 @@
-# User interface (LVE Manager)
+# User interface (CloudLinux Manager)
 
 * [CloudLinux OS Shared installation wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard)
-* [LVE Manager](/lve_manager/#lve-manager)
+* [CloudLinux Manager](/lve_manager/#cloudlinux-manager)
 * [inodes](/limits/#inodes)
 * [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
 
-<span class="notranslate">LVE Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
+<span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
 
-<span class="notranslate">LVE Manager</span> is installed by default on most servers. If it is missing you can always install it by running:
+<span class="notranslate">CloudLinux Manager</span> is installed by default on most servers. If it is missing you can always install it by running:
 
 <div class="notranslate">
 
@@ -39,11 +39,11 @@ $ yum install lvemanager
 
 #### Set up
 
-As you have CloudLinux OS Shared installed, navigate to <span class="notranslate"> CloudLinux OS Shared LVE Manager </span> in your control panel. CloudLinux OS Shared Installation Wizard starts automatically if `lvemanager` package is installed for the first time (not updated).
+As you have CloudLinux OS Shared installed, navigate to <span class="notranslate"> CloudLinux OS Shared CloudLinux Manager </span> in your control panel. CloudLinux OS Shared Installation Wizard starts automatically if `lvemanager` package is installed for the first time (not updated).
 
 ![](/images/installationwizardmain_zoom70.png)
 
-To start setting up your CloudLinux OS Shared, click <span class="notranslate">_Start Wizard_</span>, otherwise click <span class="notranslate">_Skip Wizard_</span>, and you will be redirected to the <span class="notranslate"> LVE Manager Dashboard</span>.
+To start setting up your CloudLinux OS Shared, click <span class="notranslate">_Start Wizard_</span>, otherwise click <span class="notranslate">_Skip Wizard_</span>, and you will be redirected to the <span class="notranslate"> CloudLinux Manager Dashboard</span>.
 
 :::tip Note
 Installation statuses of all components are duplicated inside their corresponding boxes on the <span class="notranslate">Dashboard</span>. All <span class="notranslate">Wizard</span> actions are available there as well. <span class="notranslate">Dashboard</span> will be automatically updated as soon as the installation process finishes.
@@ -146,13 +146,13 @@ Allows end users to select the specific version of PHP they need, with over 120 
 
 ![](/images/wizard_php_selector_zoom90.png)
 
-Go to <span class="notranslate">LVE Manager</span> settings to set up <span class="notranslate"> PHP Selector</span> options and parameters. Read more in the [PHP Selector documentation](/cloudlinux_os_components/#installation-and-update-4). 
+Go to <span class="notranslate">CloudLinux Manager</span> settings to set up <span class="notranslate"> PHP Selector</span> options and parameters. Read more in the [PHP Selector documentation](/cloudlinux_os_components/#installation-and-update-4). 
 
 :::tip Note
 CageFS should be enabled for PHP Selector to operate.
 :::
 
-When the components to be installed are selected and configured, and installation is started, you will be redirected to the <span class="notranslate">LVE Manager | Dashboard</span>.
+When the components to be installed are selected and configured, and installation is started, you will be redirected to the <span class="notranslate">CloudLinux Manager | Dashboard</span>.
 
 #### Installation process and possible errors
 
@@ -200,11 +200,11 @@ In case of a fatal error, you will see the following warning.
 You can contact our support team for further assistance anytime by [submitting a ticket in our helpdesk system](https://cloudlinux.zendesk.com/hc/requests/new).
 
 
-## LVE Manager
+## CloudLinux Manager
 
 * [Notifications color codes](/lve_manager/#notifications-color-codes)
 
-<span class="notranslate">cPanel LVE Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
+<span class="notranslate">cPanel CloudLinux Manager</span> administrator interface allows monitoring and managing limits for hosts end users, managing packages and monitoring statistics.
 
 Administrator credentials allow controlling limits for host users.
 
@@ -224,9 +224,9 @@ For more details, please go to the [ImunifyAV documentation](https://docs.imunif
 
 <div class="notranslate">
 
-#### Notifications color codes <sup><Badge text="LVE Manager 5.3.7-1+"/></sup>
+#### Notifications color codes <sup><Badge text="CloudLinux Manager 5.3.7-1+"/></sup>
 
-In the LVE Manager UI we use the following color codes for notifications:
+In the CloudLinux Manager UI we use the following color codes for notifications:
 
 * ![](/images/pic_warning.png) warning
 * ![](/images/pic_error.png) error
@@ -251,12 +251,12 @@ The following actions are available in the system notifications (information, wa
 ### Dashboard
 
 :::tip Note
-Available starting from LVE Manager 4.0-26.8
+Available starting from CloudLinux Manager 4.0-26.8
 :::
 
 CloudLinux OS Shared dashboard provides a quick overview of statistics and all administrative information for server administrators.
 
-Go to <span class="notranslate">LVE Manager | Dashboard</span>.
+Go to <span class="notranslate">CloudLinux Manager | Dashboard</span>.
 
 ![](/images/dashboard_zoom70.png)
 
@@ -269,35 +269,35 @@ The <span class="notranslate">CloudLinux OS Shared Dashboard</span> provides the
   
     * To manage <span class="notranslate">Node.js Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | Node.js Selector</span>.
 
-    * Click _Install_ to install <span class="notranslate">Node.js Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Node.js.Selector</span>.
+    * Click _Install_ to install <span class="notranslate">Node.js Selector</span>, you will be redirected to <span class="notranslate">CloudLinux Manager | Options | Node.js.Selector</span>.
   * Default version — the current default version of Node.js set in your system. Click <span class="notranslate">_Manage_</span> to change the default version account wide.
   * <span class="notranslate">Applications</span> —  number of installed/all applications for the account.
 * <span class="notranslate">Ruby Selector</span> block displays the following data:
   * <span class="notranslate">Ruby Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span>) — displays a current status of the Ruby Selector.
 
-    * To manage <span class="notranslate">Ruby Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | Ruby Selector</span>.
+    * To manage <span class="notranslate">Ruby Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">CloudLinux Manager | Options | Ruby Selector</span>.
 
-    * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Ruby Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Ruby Selector</span>.
+    * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Ruby Selector</span>, you will be redirected to <span class="notranslate">CloudLinux Manager | Options | Ruby Selector</span>.
 
   * <span class="notranslate">Applications</span> — number of installed/all applications for the account.
 * <span class="notranslate">[PHP Selector](/lve_manager/#php-selector-2)</span> block displays the following data:
   * <span class="notranslate">Default version</span> — the default version of PHP binaries.
-  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">LVE Manager | PHP Selector</span>.<br>
+  Click <span class="notranslate">_Manage_</span> to change the default version, enable or disable <span class="notranslate">PHP Selector</span>, change the list of supported versions, and choose default modules. You will be redirected to <span class="notranslate">CloudLinux Manager | PHP Selector</span>.<br>
   PHP Selector (cPanel) has malfunctions warnings about [the most common issues](/lve_manager/#errors).
   ![](/images/PHPSelectorDashboardMalfunction.png)
 * <span class="notranslate">[Python Selector](/lve_manager/#python-selector-2)</span> block displays the following data:
   * <span class="notranslate">Python Selector</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span> — displays a current status of the Python Selector.
   
-    * To manage <span class="notranslate">Python Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | Python Selector</span>.
+    * To manage <span class="notranslate">Python Selector</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">CloudLinux Manager | Options | Python Selector</span>.
 
-    * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Python Selector</span>, you will be redirected to <span class="notranslate">LVE Manager | Options | Python Selector</span>.
+    * Click <span class="notranslate">_Install_</span> to install <span class="notranslate">Python Selector</span>, you will be redirected to <span class="notranslate">CloudLinux Manager | Options | Python Selector</span>.
   * <span class="notranslate">Applications</span> —  number of installed/all applications for the account.
 * [Reseller Limits](/lve_manager/#reseller-interface) block displays the following data:
-  * <span class="notranslate">Reseller Limits</span> status (<span class="notranslate">Enabled/Disabled</span>). To manage <span class="notranslate">Reseller Limits</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Users</span> tab.
+  * <span class="notranslate">Reseller Limits</span> status (<span class="notranslate">Enabled/Disabled</span>). To manage <span class="notranslate">Reseller Limits</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">CloudLinux Manager | Users</span> tab.
   * Reseller’s accounts with Reseller Limits/all —  the number of Reseller accounts with Reseller Limits enabled versus the total number of Reseller accounts.
   * Reseller’s End Users with enabled Reseller Limits/all — the number of end users with Reseller Limits enabled versus all End Users that belong to all resellers.
 * <span class="notranslate">[MySQL Governor](/cloudlinux_os_components/#mysql-governor)</span> block displays the following data:
-  * <span class="notranslate">MySQL Governor</span> status (<span class="notranslate">Enabled/Disabled/Not installed/Skipped</span>). To manage <span class="notranslate">MySQL Governor</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | MySQL Governor Mode of Operation</span>. Click <span class="notranslate">_Install_</span> to install <span class="notranslate">MySQL Governor</span>.
+  * <span class="notranslate">MySQL Governor</span> status (<span class="notranslate">Enabled/Disabled/Not installed/Skipped</span>). To manage <span class="notranslate">MySQL Governor</span>, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">CloudLinux Manager | Options | MySQL Governor Mode of Operation</span>. Click <span class="notranslate">_Install_</span> to install <span class="notranslate">MySQL Governor</span>.
   * <span class="notranslate">[Mode](/cloudlinux_os_components/#modes-of-operation)</span> — displays the <span class="notranslate">MySQL Governor</span> mode of operation. Click <span class="notranslate">_Manage_</span> to change the mode.
     * <span class="notranslate">Single</span> — single LVE is used for all customers that go over their DB limits (deprecated).
     * <span class="notranslate">Off</span> — monitor Only, no DB query limits are applied.
@@ -305,7 +305,7 @@ The <span class="notranslate">CloudLinux OS Shared Dashboard</span> provides the
     * <span class="notranslate">Abusers</span> — only queries that go over DB limits are executed inside that user's LVE (this is the default mode).
   * <span class="notranslate">Database version</span> —  displays a current version of <span class="notranslate">MySQL/MariaDB/Percona</span> server installed in the system.
 * [CageFS](/cloudlinux_os_components/#cagefs) block displays the following data:
-  * <span class="notranslate">CageFS</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span>). To manage CageFS, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">LVE Manager | Options | CageFS</span>. Click <span class="notranslate">_Install_</span> to install CageFS.
+  * <span class="notranslate">CageFS</span> status (<span class="notranslate">Enabled/Disabled/Not installed</span>). To manage CageFS, click <span class="notranslate">_Manage_</span>. You will be redirected to <span class="notranslate">CloudLinux Manager | Options | CageFS</span>. Click <span class="notranslate">_Install_</span> to install CageFS.
   * <span class="notranslate">Mode</span> displays the current CageFS mode of operation.
   * <span class="notranslate">End users</span> — displays the number of users with CageFS enabled/all.
 * [ModLSAPI](/cloudlinux_os_components/#apache-mod-lsapi-pro) block displays the following data:
@@ -483,7 +483,7 @@ The following sections are available to set the required options:
 
 #### LVE Faults Email Notifications
 
-Starting from LVE Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
+Starting from CloudLinux Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
 
 To allow users to do so, the administrator should enable the _Notify Customers_ and _Notify Reseller’s Customers_ options.
 
@@ -676,9 +676,9 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 ### PHP Selector
 
 * [Selector tab](/lve_manager/#selector-tab)
-* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> LVE Manager 6.0.1-2</sup>
-  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)<sup> LVE Manager 6.0.1-2</sup>
-* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)<sup> LVE Manager 6.0.1-2</sup>
+* [Selector tab additional features (cPanel)](/lve_manager/#selector-tab-additional-features)<sup> CloudLinux Manager 6.0.1-2</sup>
+  * [PHP Selector troubleshooting (cPanel)](/lve_manager/#php-selector-troubleshooting)<sup> CloudLinux Manager 6.0.1-2</sup>
+* [PHP Selector diagnostic tool and notifications](/lve_manager/#php-selector-diagnostic-tool-and-notifications)<sup> CloudLinux Manager 6.0.1-2</sup>
 
 #### Selector tab
 
@@ -697,9 +697,9 @@ Choose default modules from the list for a proper PHP version or for native.
 You can also use [PHP Selector CLI](/command-line_tools/#php-selector)
 :::
 
-####  Selector tab additional features <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+####  Selector tab additional features <Badge text="cPanel" /> <Badge text="CloudLinux Manager 6.0.1-2" />
 
-Go to cPanel admin interface → LVE manager → Selector
+Go to cPanel admin interface → CloudLinux manager → Selector
 
 ![](/images/NewSelector.png)
 
@@ -723,7 +723,7 @@ If an admin clicks <span class="notranslate">_Use PHP selector_</span> in the <s
 
 ![](/images/UsePHPSelector.png)
 
-#### PHP Selector troubleshooting <Badge text="cPanel"/> <Badge text="LVE Manager 6.0.1-2" />
+#### PHP Selector troubleshooting <Badge text="cPanel"/> <Badge text="CloudLinux Manager 6.0.1-2" />
 
 
 You can see the following errors in the <span class="notranslate">_Domains_</span> tab.
@@ -759,7 +759,7 @@ Enable CageFS in the Users tab (see [installation instructions](/cloudlinux_os_c
 
 If you cannot see Diagnostic tool notifications, you can restart it. Then you can fix the issues using [these instructions](/lve_manager/#php-selector-diagnostic-tool-and-notifications).
 
-#### PHP Selector diagnostic tool and notifications <Badge text="LVE Manager 6.0.1-2" />
+#### PHP Selector diagnostic tool and notifications <Badge text="CloudLinux Manager 6.0.1-2" />
 
 The diagnostic tool allows to catch some issues. You can start diagnostic by clicking <span class="notranslate">_Run diagnostic_</span> button.
 
@@ -798,7 +798,7 @@ cagefsctl --force-update
 
 **Solution**: see [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users
 
-In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.
+In the CloudLinux Manager v.6.0.6-1 the diagnostic tool can not catch problems with CageFS. See [installation instructions](/cloudlinux_os_components/#installation-instructions-for-cpanel-users) for cPanel users.
 
 
 
@@ -814,7 +814,7 @@ In the LVE Manager v.6.0.6-1 the diagnostic tool can not catch problems with Cag
 
 Hoster interface allows to enable and disable Python Selector and manage individual Python versions.
 
-Go to <span class="notranslate">LVE Manager → Options Tab → Python Selector</span>.
+Go to <span class="notranslate">CloudLinux Manager → Options Tab → Python Selector</span>.
 
 A list of installed Python versions is displayed. There are several columns in the list.
 * <span class="notranslate">Version</span> — displays Python version.
@@ -939,7 +939,7 @@ See also: [Python Selector client plugin](/lve_manager/#python-selector-client-p
 
 Hoster interface allows to enable and disable Node.js, and manage individual Node.js versions.
 
-Go to <span class="notranslate"> _LVE Manager → Options Tab → Node.js Section_ </span>. A list of installed Node.js versions is displayed. There are several columns in the list.
+Go to <span class="notranslate"> _CloudLinux Manager → Options Tab → Node.js Section_ </span>. A list of installed Node.js versions is displayed. There are several columns in the list.
 
 * <span class="notranslate"> Version </span> — displays Node.js version.
 * <span class="notranslate"> Path </span> — Node.js package location.
@@ -1094,7 +1094,7 @@ You can turn off the _Website monitoring_, _PHP Sites Analyzer_ in the _[Setting
 
 #### Website monitoring tab
 
-You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the LVE Manager -> Website monitoring tab.
+You can configure the Website monitoring tool and Slow Site analyzer and view the daily reports in the CloudLinux Manager -> Website monitoring tab.
 
 There are Main, PHP Site analyzer, and Settings subtabs here.
 
@@ -1338,7 +1338,7 @@ Choose <span class="notranslate">_Options_</span> tab to set user email notifica
 
 In <span class="notranslate">_LVE Faults email notifications_</span> section tick appropriate checkboxes to set the required type of notification.
 
-Starting from LVE Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
+Starting from CloudLinux Manager v.7.3.0-1 and LVE-Stats v.4.1.4-1 users can disable in their Resource Usage plugin email notifications about hitting LVE limits by themselves.
 
 To allow users to do so, the reseller should enable the _Notify Customers_ and _Notify Reseller’s Customers_ options.
 
@@ -1391,12 +1391,12 @@ When limits are set click <span class="notranslate">_Save_</span> to apply chang
 ### LVE plugins branding
 
 :::tip Note
-Requires <span class="notranslate">LVE Manager</span> 2.0-33+
+Requires <span class="notranslate">CloudLinux Manager</span> 2.0-33+
 :::
 
 It is possible to apply branding to the LVE Plugins in cPanel end users’ interface. To brand the cPanel end users'  interface please do the following:
 
-* Create a script that will patch <span class="notranslate">LVE Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
+* Create a script that will patch <span class="notranslate">CloudLinux Manager</span> files (with branding data, for example, image and logo) after every update of <span class="notranslate">`lvemanager rpm`</span> package;
 
 * Locate this script in <span class="notranslate">`/usr/share/l.v.e-manager/branding_script`</span>;
 
@@ -1412,13 +1412,13 @@ chmod a+x /usr/share/l.v.e-manager/branding_script
 When done, the branding script will be executed while every update of <span class="notranslate">lvemanager</span> package and all branding changes will be applied in the end user’s interface.
 
 :::tip Note
-Modifying the <span class="notranslate">LVE Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
+Modifying the <span class="notranslate">CloudLinux Manager WHM</span> plugin (<span class="notranslate">`/usr/local/cpanel/whostmgr/docroot/cgi/CloudLinux.cgi`</span>) via <span class="notranslate">`branding_script`</span> is not allowed.
 :::
 
 
 ### User message for PHP version
 
-Since version 1.0-4 <span class="notranslate">LVE Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
+Since version 1.0-4 <span class="notranslate">CloudLinux Manager</span> acquired a feature of adding user messages to PHP versions*. To add a message, you should create a file in <span class="notranslate">`/opt/alt/phpXX/name_modifier`</span> with a message that you want to be shown to a user.
 
 For example, if you need to add the following message <span class="notranslate">`Don't use this PHP version`</span> to PHP version 4.4, you should create the following file:
 
@@ -1431,30 +1431,30 @@ echo 'Don`t use this php version' > /opt/alt/php44/name_modifier
 ```
 </div>
 
-As a result, <span class="notranslate">LVE Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
+As a result, <span class="notranslate">CloudLinux Manager</span> will automatically pick up this message and will show it in web-interface to administrator (see Figure 1.1 for cPanel, Figure 1.2 for DirectAdmin) and to user (see Figure 2.1 for cPanel, Figure 2.2 for DirectAdmin). You can add messages to other PHP versions this way as well.
 
 | |
 |:---:|
 |![](/images/PHP_version_message_cPanel_admin.png)|
-| Figure 1.1 cPanel LVE Manager (administrator)| 
+| Figure 1.1 cPanel CloudLinux Manager (administrator)| 
 
 
 | |
 |:---:|
 |![](/images/PHP_version_message_DirectAdmin_admin.png)|
-| Figure 1.2 DirectAdmin LVE Manager (administrator)| 
+| Figure 1.2 DirectAdmin CloudLinux Manager (administrator)| 
 
 
 | |
 |:---:|
 |![](/images/PHP_version_message_cPanel_user.png)|
-| Figure 2.1 cPanel LVE Manager (user)|
+| Figure 2.1 cPanel CloudLinux Manager (user)|
 
 
 | |
 |:---:|
 |![](/images/PHP_version_message_DirectAdmin_user.png)|
-| Figure 2.2 DirectAdmin LVE Manager (user)| 
+| Figure 2.2 DirectAdmin CloudLinux Manager (user)| 
 
 :::tip Note
 *For cPanel and DirectAdmin only.
@@ -1492,8 +1492,8 @@ As a result, <span class="notranslate">LVE Manager</span> will automatically pic
   * [Edit application](/lve_manager/#edit-application-2)
 * [Ruby Selector client plugin](/lve_manager/#ruby-selector-client-plugin)
 * [PHP Selector client plugin](/lve_manager/#php-selector-client-plugin)
-  * [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>LVE Manager 6.0.1-2</sup>
-* [LVE Manager options](/lve_manager/#lve-manager-options)
+  * [PHP Selector. My Domains tab (cPanel)](/lve_manager/#php-selector-my-domains-tab) <sup>CloudLinux Manager 6.0.1-2</sup>
+* [CloudLinux Manager options](/lve_manager/#cloudlinux-manager-options)
   * [Changing settings manually](/lve_manager/#changing-settings-manually)
   * [Changing settings in the config file](/lve_manager/#changing-settings-in-the-config-file)
 
@@ -1706,7 +1706,7 @@ There are several columns in the list:
     * <span class="notranslate">Application URL</span> —  HTTP/HTTPS link to your application (optional);
     * <span class="notranslate">Application startup file</span> — the file where WSGI callable object is located. It is required for application to run. Default is <span class="notranslate">`passenger_wsgi.py`</span>;
     * Application Entry point — WSGI callable object for your application (optional). Default is <span class="notranslate">`application`</span>;
-    * <span class="notranslate">Passenger log file</span> — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector utility](/command-line_tools/#new-python-selector)).
+    * <span class="notranslate">Passenger log file</span> — starting from CloudLinux Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector utility](/command-line_tools/#new-python-selector)).
 3. Optionally, add environment variable. To do so, click <span class="notranslate">_Add Variable_</span> and specify variable name and value, then click the <span class="notranslate">_Done_</span> or <span class="notranslate">_Cancel_</span> to close an adding form.
 
 To delete or edit environment variable, click <span class="notranslate">_Bin_</span> or <span class="notranslate">_Pencil_</span> for the required variable.
@@ -1764,7 +1764,7 @@ The following actions are available:
 * Open Application URL — click the <span class="notranslate">_Open_</span>.
 * Change Application startup file — specify as <span class="notranslate">`NAME.py`</span> file.
 * Change Application Entry point — specify WSGI callable object for your application.
-* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
+* Passenger log file — starting from CloudLinux Manager 5.1.0-2 you can set paths to Passenger logs for Python applications via UI (or using [cloudlinux-selector](/command-line_tools/#new-python-selector) utility).
 * Run pip install command — click <span class="notranslate">_Run pip install_</span> to install the package(s) described in the configuration file.
 * Add Configuration files — click <span class="notranslate">_Add_</span> and specify all required information.
 * Edit available configuration file — click <span class="notranslate">_Edit_</span>, the file opens in a new popup.
@@ -1851,7 +1851,7 @@ The following actions are available:
 * Application root — specify in a field a physical address to the application on a server that corresponds with its URI.
 * Application URL — specify in a field an HTTP/HTTPS link to the application.
 * Application startup file — specify as <span class="notranslate"> NAME.js file </span>.
-* Passenger log file — starting from LVE Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
+* Passenger log file — starting from CloudLinux Manager 5.1.0-2 you can set paths to Passenger logs for Node.js applications via UI (or using [cloudlinux-selector](/command-line_tools/#node-js-selector) utility).
 * Run <span class="notranslate"> npm install command </span> — click <span class="notranslate"> _Run npm install_ </span> button to install the package(s) described in the <span class="notranslate"> package.json </span> file.
 * Add Environment variables — click <span class="notranslate"> _Add Variable_ </span> and specify a name and a value.
 
@@ -1912,7 +1912,7 @@ All changes are saved automatically.
 * <span class="notranslate">`short_open_tag`</span>. Allows the short form of the PHP open tag.
 * <span class="notranslate">`upload_max_filesize`</span>. The maximum size in bytes of an uploaded file. Use shortcuts for byte values: K (kilo), M (mega), and G (giga). For example, 128M.
 
-#### PHP Selector. My Domains tab <Badge text="cPanel" /> <Badge text="LVE Manager 6.0.1-2" />
+#### PHP Selector. My Domains tab <Badge text="cPanel" /> <Badge text="CloudLinux Manager 6.0.1-2" />
 
 The <span class="notranslate">_My Domains_</span> tab contains a list of user’s domains to visualize which PHP Selector is used by domain.
 
@@ -1933,13 +1933,9 @@ If `php-fpm` is enabled for a domain the only administrator can set it to <span 
 :::
 
 
+### CloudLinux Manager options
 
-
-
-
-### LVE Manager options
-
-You can change LVE Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change LVE Manager settings for them in the config file.
+You can change CloudLinux Manager settings for a server manually via cPanel/WHM or, if you have many servers, you can change CloudLinux Manager settings for them in the config file.
 
 ####  Changing settings manually
 
@@ -1972,7 +1968,7 @@ cloudlinux-selector set --json --interpreter=python --selector-status=enabled
 ```
 </div>
 
-Or you can change it via <span class="notranslate">WHM -> LVE Manager -> Options -> Python Selector -> Python</span>
+Or you can change it via <span class="notranslate">WHM -> CloudLinux Manager -> Options -> Python Selector -> Python</span>
 
 After modifying the config files directly, you should execute the following command to apply changes:
 
@@ -1990,7 +1986,7 @@ After modifying the config files directly, you should execute the following comm
 * [Edit Package Extensions](/lve_manager/#edit-package-extensions)
 
 :::tip Note
-<span class="notranslate">LVE Manager</span> 1.0-9.8+
+<span class="notranslate">CloudLinux Manager</span> 1.0-9.8+
 :::
 
 <span class="notranslate"> cPanel LVE Extension </span> allows to control LVE limits for packages via cPanel hosting packages control interface and via <span class="notranslate"> cPanel WHM API </span> . It simplifies integration with existing billing systems for cPanel (like WHMCS for example).
@@ -2031,7 +2027,7 @@ Click <span class="notranslate">_Add_</span> to apply your changes.
 
 #### Edit Package Extensions
 
-You can edit limits in any convenient for you way - in <span class="notranslate">_Edit a Package_</span> section, in the  <span class="notranslate">LVE Manager </span> or even via WHM API.
+You can edit limits in any convenient for you way - in <span class="notranslate">_Edit a Package_</span> section, in the  <span class="notranslate">CloudLinux Manager </span> or even via WHM API.
 
 <span class="notranslate">**Edit a Package**</span>
 
@@ -2039,9 +2035,9 @@ To edit package extensions, go to <span class="notranslate"> _Packages_</span> |
 
 ![](/images/lve-extension_04.jpg)
 
-<span class="notranslate">**LVE Manager**</span>
+<span class="notranslate">**CloudLinux Manager**</span>
 
-To edit package extensions, go to <span class="notranslate">LVE Manager</span> | <span class="notranslate">Server Configuration</span> | <span class="notranslate"> CloudLinux OS Shared LVE Manager</span> | <span class="notranslate"> Packages</span> and click pencil (edit) icon.
+To edit package extensions, go to <span class="notranslate">CloudLinux Manager</span> | <span class="notranslate">Server Configuration</span> | <span class="notranslate"> CloudLinux OS Shared CloudLinux Manager</span> | <span class="notranslate"> Packages</span> and click pencil (edit) icon.
 
 ![](/images/lve-extension_05.jpg)
 
