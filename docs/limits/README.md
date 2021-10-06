@@ -460,6 +460,8 @@ also Apache processes/threads, SSH sessions and etc, which enter into LVE.
 ```
  </div>
 
+PMEM LVE limit should be lower than 512 MB.
+    
 Validation does not affect limits operation in any way. Even if invalid limits have been set, they will be applied for users/resellers.
 
 Commands that support validation:
