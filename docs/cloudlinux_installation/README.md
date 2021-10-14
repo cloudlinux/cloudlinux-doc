@@ -181,39 +181,38 @@ Use it to register your system or to convert CentOS server to CloudLinux OS Shar
 
 ### License activation
 
-To register your **CloudLinux OS Shared 6/7** server with CloudLinux Network using activation key, run the following command:
 
-<div class="notranslate">
+To register your **CloudLinux OS Shared 6/7** server with CloudLinux Network using activation key, run the following command:
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
 $ /usr/sbin/rhnreg_ks --activationkey=<activation key>
 ```
-</div>
-
-
-To register your **CloudLinux OS Shared 8** server with CloudLinux Network using activation key, run the following command:
-
-<div class="notranslate">
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
-```
-</div>
 
 Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
 
-If you have IP based license, use <span class="notranslate">`clnreg_ks`</span> command:
-
-<div class="notranslate">
+If you have IP based license, use the `clnreg_ks` command:
 
 ```
 $ yum install rhn-setup --enablerepo=cloudlinux-base
 $ /usr/sbin/clnreg_ks --force
 ```
-</div>
 
+To register your **CloudLinux OS Shared 8** server with CloudLinux Network using activation key, run the following command:
+
+```
+$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
+$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
+```
+
+Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
+
+If you have IP based license, use the `clnreg_ks` command:
+
+```
+$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
+$ /usr/sbin/clnreg_ks --force
+```
 
 ## Installing new servers
 
