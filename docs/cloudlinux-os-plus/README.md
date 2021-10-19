@@ -19,6 +19,7 @@
   * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
   * [FAQ](/cloudlinux-os-plus/#faq-2)
   * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
+* [WP Optimization Suite]()
 
 ## X-Ray
 
@@ -1318,3 +1319,353 @@ Use this logging with caution because when it is enabled, the size of the daemon
 * Sorting by MySQL Governor statistics ignores idle users
 * Sorting from the search result set does not work
 * Sorting by ratio for unlimited users works incorrectly
+
+
+## WP Optimization Suite
+
+
+In the current beta release the Object Cache Module is available for the WordPress optimization suite.
+
+An administrator has CloudLinux Manager -> WP Optimization Suite tab to manage modules that will be available for enabling on websites.
+
+:::warning Warning!
+* This is a beta release. By default WP Optimization suite is disabled in the current release. See [How to enable WP Optimization suite](/cloudlinux-os-plus/#how-to-enable-wp-optimization-suite).
+* Please turn on the Object Cache module if you are sure! Turning it ON can really increase performance, but in a limited scope of cases!
+* All operations which destroy LVE will clean the Object Cache! Such operations include operations with CageFS, but do not include operations with  setting LVE limits.
+:::
+
+### How to enable WP Optimization suite
+
+To enable WP Optimization suite, please do via SSH:
+
+```
+touch /var/lve/enable-wpos.flag
+```
+
+### Requirements
+
+* CloudLinux OS Shared Pro (6,7,8)
+* cPanel
+* WordPress version 3.7 and higher
+* Required any (ea-, alt-) php 5.6+ version with loaded redis extension 
+* PHP handlers: [php-fpm](/cloudlinux-os-plus/#how-to-set-up-a-php-fpm-handler-for-the-domain) or php-lsapi
+
+### How to install WP Optimization Suite
+
+Starting from lve-utils-6.2.1-3 and lvemanager-7.5.6-1 packages, WP Optimization Suit is available for CloudLinux OS Shared Pro
+
+To install, run the following command:
+
+```
+yum install lvemanager lve-utils --enablerepo=cloudlinux-updates-testing
+```
+
+To update, run the following command:
+
+```
+yum update lvemanager lve-utils --enablerepo=cloudlinux-updates-testing 
+```
+
+### Administrator interface
+
+Go to the CloudLinux Manager -> WP Optimization Suite
+
+![](/images/WPOSAdminUI.png)
+
+The “Users” tab consists of the following:
+
+* an information panel about WordPress websites on the server (total amount across all existing users) and the number of users  allowed using object the Cache Module
+* a list of current server users to Allow\Deny using the Object Cache Module for particular use
+
+Just added users will appear in the list during 10 min after adding. If you want to get an actual list of users, use the Rescan button.
+
+![](/images/RescanBtn.png)
+
+The **Allow** option will make all necessary changes to configuration so the end-user can start working with the WP Optimization suite successfully. To make WP Optimization suite icon visible in the user’s UI, please open the *Settings* tab and turn ON **Show WPOS** plugin icon to the end-users.
+
+:::tip Warning!
+End-users should enable the module in their interface for the particular website.
+:::
+
+The **Deny** option (means “suspend feature usage”) will make all necessary changes to configuration so all enabled WP caching plugins will be turned off.
+
+:::tip Warning!
+All users custom configurations will be saved, so they can be used in case the admin allows working with the module.
+:::
+
+Rescanning users websites helps to get the actual information about the amount of WordPress websites for each particular user.
+
+#### Filters
+
+![](/images/WPOSFilters.png)
+
+* **Users with WordPress sites only** will show the list of users which already have WordPress sites
+* **Users with Object Cache enabled only** will show the list of users with the Object Cache Module allowed by the admin (it is not a website with configured Object Cache Module by user) 
+
+In the second tab you can turn ON/OFF the visualization of the WP Optimization Suit icon in the end-user interface.
+
+#### WP Optimization suite log files
+
+The WP Optimization suite log files are located in:
+
+* `/var/log/clwpos/main.log`
+* `/var/log/clwpos/daemon.log`
+
+### Troubleshooting
+
+#### Configuring Redis extension for installed php versions
+
+Enabling the Object Cache module for a specific WordPress website requires a presence and loaded Redis extension for the PHP version chosen for the website. The Redis extension is configured for all installed and [supported](/cloudlinux-os-plus/#requirements) ea-php and alt-php versions automatically, right after system administrator allows WP Optimization suite for at least one end-user.
+
+Users will not be able to turn on the Object Cache module until Redis extension configuration is not completed. Corresponding incompatibility warning will be displayed in user`s plugin:
+
+![](/images/IncompatibilityWarning.png)
+
+To ensure PHP extension is configured correctly, do the following. 
+
+**For ea-php**
+
+Check Redis extension package is installed by running the following command:
+
+```
+rpm -q ea-phpXY-php-redis
+```
+
+Example:
+
+```
+rpm -q ea-php74-php-redis
+```
+
+Check Redis ini is present by running the following command:
+
+
+```
+ls /opt/cpanel/ea-phpXY/root/etc/php.d/ | grep 50-redis
+```
+
+Make sure Redis module is loaded under user by running the following command:
+
+```
+su -c "php -m | grep redis" <username>
+```
+
+Automatic Redis configurations for ea-php is triggered by cron once a day: `/etc/cron.d/clwpos_redis_extension_installer`.
+
+You can run utility for Redis configuration manually:
+
+```
+/usr/sbin/enable_redis_for_ea_php
+```
+
+All errors must be present in stdout or in the main log: `/var/log/clwpos/main.log`.
+
+
+**For alt-php**
+
+Redis will be configured for a specific alt-php version automatically, only if `redis.so` is present on the server.
+
+```
+ls /opt/alt/phpXY/usr/lib64/php/modules | grep redis.so
+```
+
+If the Redis module is present for php, but end-user is still facing incompatibility issue, re-check the following:
+
+
+* make sure the Redis module is loaded under user:
+
+    ```
+    su -c "php -m | grep redis" <username>
+    ```
+
+* check required extensions are enabled in php.ini:
+
+    ```
+    cat /opt/alt/phpXY/etc/php.ini | grep redis.so
+    cat /opt/alt/phpXY/etc/php.ini | grep json.so
+    cat /opt/alt/phpXY/etc/php.ini | grep igbinary.so
+    ```
+
+If the Redis module is not present, it is needed to install the `alt-phpXY-pecl-ext` package manually and run the Redis configuration script: `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py`.
+
+All errors must be present in stdout or in main log: `/var/log/clwpos/main.log`.
+
+### Allowing module for end-users
+
+Object Cache module is allowed:
+
+![](/images/ModuleAllowed.png)
+
+But the plugin is still unavailable for end-user:
+
+![](/images/PluginUnavailable.png)
+
+There could be several reasons.
+
+1. Ensure object cache is really allowed in configs:
+    
+    ```
+    id - u <username> # user uid
+    cat /var/clwpos/uids/<uid>/modules_allowed.json
+    ```
+
+    Check config as user:
+    
+    ```
+    su -c "cat /var/clwpos/uids/<uid>/modules_allowed.json" <username>
+    ```
+
+    If module is enabled, the file must contain the following:
+
+    ```
+    {"version": "1","modules": {"object_cache": true}}
+    ``` 
+
+    If file is not accessible under user and user is in CageFS, try to re-check CageFS mount points:
+
+    ```
+    cat /etc/cagefs/cagefs.mp | grep var/clwpos/uids
+    */var/clwpos/uids
+    ```
+
+    If there is no such mount point, try to fix it manually:
+
+    ```
+    echo '*/var/clwpos/uids' >> /etc/cagefs/cagefs.mp && cagefsctl --remount-all
+    ```
+
+2. Error happened during `clwpos-user` get command execution:
+
+    ![](/images/CLWPOSError.png)
+
+    Run manually the clwpos-user get command under corresponding user and check logs:
+    
+    ```
+    su -c “clwpos-user get” <username>
+    cat /home/<username>/.clwpos/main.log
+    ```
+
+
+Also, right after allowing module for user, ensure the WPOS icon displaying is turned on as well:
+
+![](/images/WPOSIconCheck.png)
+
+It allows to show WP Optimization suite for all users:
+
+![](/images/WPOSAllowTool.png)
+
+Check the `hideWPOSApp` setting is set to `false`
+
+```
+ cloudlinux-config get --json
+…..
+ "hideWPOSApp": false
+…..
+```
+
+Setting is stored in the `/usr/share/l.v.e-manager/lvemanager-config.json`.
+
+### Websites report in the Users tab
+
+The main *Users* tab shows all control panel users information.
+
+![](/images/MainUsersTab.png)
+
+This report is updated automatically by cron: `/etc/cron.d/clwpos_req_cron`.
+
+The actual report is stored here: `/var/clwpos/admin/scan_cache.json`.
+
+If the last scan time is too old (more than 1-2 days), check the logs: `/var/log/clwpos/main.log` and `/var/log/messages`.
+
+#### General PHP issues
+
+Both administrator and end-user may face some common PHP errors that are not related to WP Optimization suite. They could be caused by broken PHP binaries, missed PHP files, etc and may affect WP Optimization suite.
+
+For example, the error with loading library:
+
+```
+/opt/cpanel/ea-php70/root/usr/bin/php: error while loading shared libraries: libncurses.so.6: cannot open shared object file: No such file or directory
+```
+
+To check that this issue is caused by PHP, call any PHP command, e.g:
+
+```
+/opt/cpanel/ea-php70/root/usr/bin/php -i
+```
+And make sure that installed ea-php70 packages are not broken via `rpm -V <package_name>`. Reinstall broken packages if found.
+
+#### Monitoring user's Redises
+
+Redis process is started for each user after Object Cache has been enabled for at least one WordPress website. Also it is killed after object cache has been disabled for all sites. Look through the processes list to check Redis status for user:
+
+```
+ ps aux | grep redis
+username     107845  0.1  0.1 216712  4708 ?        Sl   07:15   0:00 /opt/alt/redis/bin/redis-server unixsocket:/home/<username>/.clwpos/redis.sock
+```
+
+Additionally, there is the daemon to manage user`s Redises: clwpos_monitoring. It checks Redises each 5 minutes, starts or kills the “garbage” Redises if needed. 
+
+Try to look at service status: `service clwpos_monitoring status` and main daemon log: `/var/log/clwpos/daemon.log`.
+
+
+### Uninstalling
+
+To uninstall WP Optimization suite, please execute the following command:
+
+```
+/usr/bin/clwpos-erase
+```
+
+Execute this command before both: complete lve-utils package uninstallation and for downgrading the system to the version that does not support WP Optimization suite.
+
+
+### FAQ
+
+#### With which panel can I use the CloudLinux Shared Pro WP Optimization suite?
+
+In the current release only  with cPanel. In the next releases it will be available for DirectAdmin.
+
+#### How will it help my customers?
+
+In the current version, the WP Optimization suite automatically configures the Object Cache module per website. In the next releases we will add modules to help automatically increase performance for the WordPress websites. 
+
+#### How to set up a php-fpm handler for the domain?
+
+Since the php-fpm handler is required to use WP Optimization suite, you may need to configure it manually.
+
+1. Ensure the php-fpm package for the current PHP version is installed or install it. 
+    * manual installation:
+    ```
+    yum -y install ea-phpXY-php-fpm
+    ```
+    XY - is you PHP version, for instance `ea-php74-php-fpm`
+    * via MultiPHP Manager:
+
+    ![](/images/ViaMultiPHPManager.png)
+
+2. Enable php-fpm handler for domain via MultiPHP Manager:
+
+![](/images/EnableMultiPHP.png)
+
+#### How to install php-lsapi for the domain?
+
+Please use the [documentation](https://docs.cloudlinux.com/cloudlinux_os_components/#apache-mod-lsapi-pro).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
