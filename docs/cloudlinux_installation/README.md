@@ -41,6 +41,7 @@ It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS 
 * CentOS 7
 * CentOS 8
 * AlmaLinux OS 8
+* RockyLinux (installation only, no uninstall option)
 * **CentOS Stream versions aren’t supported**
 :::
 
