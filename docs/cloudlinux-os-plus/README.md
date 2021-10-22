@@ -1348,7 +1348,7 @@ touch /var/lve/enable-wpos.flag
 * cPanel
 * WordPress version 3.7 and higher
 * Required any (ea-, alt-) php 5.6+ version with loaded redis extension 
-* PHP handlers: [php-fpm](/cloudlinux-os-plus/#how-to-set-up-a-php-fpm-handler-for-the-domain) or php-lsapi
+* PHP handlers: [php-fpm](/cloudlinux-os-plus/#how-to-set-up-a-php-fpm-handler-for-the-domain) or php-lsapi (Apache)
 * Apache only (LiteSpeed is coming soon)
 
 ### How to install WP Optimization Suite
