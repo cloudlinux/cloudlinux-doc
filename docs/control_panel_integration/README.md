@@ -16,7 +16,7 @@
 * [CloudLinux OS Shared LVE and CageFS patches](/control_panel_integration/#cloudlinux-os-shared-lve-and-cagefs-patches)
 * [Hardened PHP](/control_panel_integration/#hardened-php)
 * [CloudLinux OS Shared kernel set-up](/control_panel_integration/#cloudlinux-os-shared-kernel-set-up)
-* [How to integrate X-Ray with a conrol panel](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
+* [How to integrate X-Ray with a control panel](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 
 :::tip Note
 We encourage you to create a pull request with your feedback at the bottom of the page.
