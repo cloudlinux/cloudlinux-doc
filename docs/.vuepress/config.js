@@ -152,7 +152,7 @@ module.exports = {
           }
         },
         algolia: {
-          apiKey: "3990019335416f9a96a6a47d07e25187",
+          apiKey: "131c612738b150af9db8b98d8669e3ee",
           indexName: "cloudlinuxos",
           appId: "0TCNL6CGX8"
         },
