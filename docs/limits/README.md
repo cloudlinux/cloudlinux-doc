@@ -644,3 +644,25 @@ It is possible that you still have some questions left unanswered about Reseller
 
 - [FAQ section in our support knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/articles/115005515269-CloudLinux-Reseller-Limits-FAQ)
 - [Reseller limits UI explained](/lve_manager/#reseller-interface)
+
+
+## Limiting modes
+
+Ability to manage the limiting modes of user processes.
+
+To use it, add the `web_resource_limit_mode` parameter to the `/etc/sysconfig/cloudlinux` file.
+Possible parameter values:
+
+* `all`: The default option. All processes will run inside cagefs unchanged.
+* `heavy`: There is a list of processes that are considered lightweight. In this mode, they will be executed inside cagefs, but no resource limits: cpu, io, memory, numproc.
+    For example, this mode allows the user to execute the `cloudlinux-selector stop` process, even if the user hit the NUMPROC limit.
+* `unlimited`: All processes will run inside cagefs, but ignore cpu, io, memory, numproc limits.
+
+### Requirements:
+1. CloudLinux OS Shared should be installed on the server
+2. Packages:
+    * cagefs package installed
+    * lve-wrappers >= 0.7.2
+    * lvemanager >= 7.5.9
+    * kmod-lve >= 2.0.36
+    * lve >= 2.1.2
