@@ -6,6 +6,7 @@
   * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
   * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
   * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
+  * [X-Ray Autotracing](/cloudlinux-os-plus/#x-ray-autotracing)
   * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
   * [X-Ray automated throttling detection](/cloudlinux-os-plus/#x-ray-automated-throttling-detection)
   * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
@@ -359,6 +360,52 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 4. You can also view the detailed information about request:
 
     ![](/images/XRayContinuousTaskDaylyReportRequestDetails.png)
+
+
+### X-Ray Autotracing
+
+X-Ray Autotracing automatically creates tracing tasks for slow URLs that were found during a day by [PHP Slow Site Analyzer](/lve_manager/#website-monitoring-tool-and-slow-site-analyzer) (SSA).
+
+:::warning Warning
+To use X-Ray Autotracing, update your alt-php-ssa and alt-php-xray packages to versions alt-php-ssa-0.2-1 and alt-php-xray-0.4-1 or higher by running the following command:
+```
+# yum update alt-php-ssa alt-php-xray --enablerepo=cloudlinux-updates-testing
+```
+:::
+
+#### How to enable X-Ray Autotracing
+
+To enable X-Ray Autotracing , please do via SSH:
+```
+# /usr/sbin/cloudlinux-ssa-manager enable-ssa
+# /usr/sbin/cloudlinux-xray-autotracing enable --all
+```
+
+Check [link](/command-line_tools/#x-ray-autotracing) for more description of CLI `/usr/sbin/cloudlinux-xray-autotracing` utility.
+
+#### Requirements
+* Cloudlinux Shared Pro or CloudLinux Solo
+* alt-php-ssa > 0.2-1 version
+* alt-php-xray > 0.4-1 version
+* Enabled PHP SSA on the server
+
+#### Autotracing Interface
+
+A new tab for Autotracing tasks was added to X-Ray UI:
+
+
+![](/images/XRayAutotracingtaskstab.png)
+
+
+#### FAQ Autotracing
+Q: Why are the slow URLs in the Slow Site Analyzer report different from those on which the autotracing tasks were created?
+
+A: Because the autotracing decision module uses rules and thresholds different from Slow Site Analyzer, which are configured by the CloudLinux team.
+
+Q: How often autotracing tasks will be generated?
+
+A: Once a day at the same time as a Slow Site Analyzer report.
+
 
 ### End-user X-Ray plugin
 

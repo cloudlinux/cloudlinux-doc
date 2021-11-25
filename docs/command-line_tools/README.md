@@ -11,6 +11,7 @@ The list of the commands (CLI) you can use to manage CloudLinux OS Shared compon
 * [Node.js Selector](/command-line_tools/#node-js-selector)
 * [Apache mod_lsapi PRO](/command-line_tools/#apache-mod-lsapi-pro)
 * [Website monitoring tool and Slow Site analyzer](/command-line_tools/#website-monitoring-tool-and-slow-site-analyzer)
+* [X-Ray Autotracing](/command-line_tools/#x-ray-autotracing)
 * [Other CLI tools](/command-line_tools/#other-cli-tools)
 
 ## CageFS
@@ -2664,6 +2665,56 @@ Example of the `/usr/share/web-monitoring-tool/wmtbin/wmt-api` command usage:
 ```
 
 This way you can set all or only certain parameters.
+
+## X-Ray Autotracing
+
+### The cloudlinux-xray-autotracing utility
+
+The `cloudlinux-xray-autotracing` utility managing of X-Ray Autotracing via CLI.
+
+**Usage**
+
+```
+# /usr/sbin/cloudlinux-xray-autotracing [command] [--optional arguments]
+```
+
+**Commands**:
+
+| | |
+|-|-|
+|`enable`|Enable X-Ray Autotracing|
+|`disable`|Disable X-Ray Autotracing|
+|`status`|Get current status X-Ray autotracing|
+
+**Optional arguments**:
+
+| | |
+|-|-|
+|`-h`, `--help`|show help message and exit|
+|`--all`|Enable or disable for all users|
+|`{username}`|Enable/disable the specified user|
+|`--list-disabled`|Show list disabled users|
+
+You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
+
+**Example usage:**
+
+Disable user1:
+```
+# /usr/sbin/cloudlinux-xray-autotracing disable user1
+{"result": "success"}
+```
+
+Show list disabled:
+```
+# /usr/sbin/cloudlinux-xray-autotracing status --list-disabled
+{"result": "success", "disabled_users": ["user1"]}
+```
+Enable all:
+```
+# /usr/sbin/cloudlinux-xray-autotracing enable --all
+{"result": "success"}
+```
 
 ## Other CLI tools
 
