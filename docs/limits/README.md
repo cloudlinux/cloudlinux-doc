@@ -12,6 +12,7 @@
 * [Limits validation](/limits/#limits-validation)
 * [Compatibility matrix](/limits/#compatibility-matrix)
 * [Reseller Limits](/limits/#reseller-limits)
+* [Limiting modes](/limits/#limiting-modes)
 
 CloudLinux OS Shared has support for the following limits:
 
