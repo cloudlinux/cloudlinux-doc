@@ -12,7 +12,7 @@
 * [Limits validation](/limits/#limits-validation)
 * [Compatibility matrix](/limits/#compatibility-matrix)
 * [Reseller Limits](/limits/#reseller-limits)
-* [Limiting modes](/limits/#limiting-modes)
+* [WEB interface resource limiting modes](/limits/#web-interface-resource-limiting-modes)
 
 CloudLinux OS Shared has support for the following limits:
 
@@ -647,17 +647,17 @@ It is possible that you still have some questions left unanswered about Reseller
 - [Reseller limits UI explained](/lve_manager/#reseller-interface)
 
 
-## Limiting modes
+## WEB interface resource limiting modes
 
-Ability to manage the limiting modes of user processes.
+Ability to manage the limiting modes of user processes started from web interface (e.g. nodejs, ruby and python selectors). Configuration allows to disable lve limiting for part of commands or don't limit web commands at all.
 
 To use it, add the `web_resource_limit_mode` parameter to the `/etc/sysconfig/cloudlinux` file.
 Possible parameter values:
 
-* `all`: The default option. All processes will run inside cagefs unchanged.
-* `heavy`: There is a list of processes that are considered lightweight. In this mode, they will be executed inside cagefs, but no resource limits: cpu, io, memory, numproc.
+* `all`: The default option. All processes will run inside cagefs and with lve limits being applied.
+* `heavy`: There is a list of processes that are considered lightweight. In this mode, they will be executed inside cagefs, but no resource limits: cpu, io, memory, numproc. List of ligthweight processes is defined by CloudLinux and it's guarantied that user can't bypass lve limits for a long-term.
     For example, this mode allows the user to execute the `cloudlinux-selector stop` process, even if the user hit the NUMPROC limit.
-* `unlimited`: All processes will run inside cagefs, but ignore cpu, io, memory, numproc limits.
+* `unlimited`: All processes will run inside cagefs, but ignore cpu, io, memory, numproc limits. Not recommended for production usage.
 
 ### Requirements:
 1. CloudLinux OS Shared should be installed on the server
