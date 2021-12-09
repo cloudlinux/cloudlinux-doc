@@ -2670,7 +2670,7 @@ This way you can set all or only certain parameters.
 
 ### The cloudlinux-xray-autotracing utility
 
-The `cloudlinux-xray-autotracing` utility managing of X-Ray Autotracing via CLI.
+The `cloudlinux-xray-autotracing` utility allows to manage the X-Ray Autotracing via CLI.
 
 **Usage**
 
@@ -2684,33 +2684,37 @@ The `cloudlinux-xray-autotracing` utility managing of X-Ray Autotracing via CLI.
 |-|-|
 |`enable`|Enable X-Ray Autotracing|
 |`disable`|Disable X-Ray Autotracing|
-|`status`|Get current status X-Ray autotracing|
+|`status`|Get current status of the X-Ray Autotracing|
 
 **Optional arguments**:
 
 | | |
 |-|-|
-|`-h`, `--help`|show help message and exit|
+|`-h`, `--help`|Show help message and exit|
 |`--all`|Enable or disable for all users|
 |`{username}`|Enable/disable the specified user|
-|`--list-disabled`|Show list disabled users|
+|`--list-disabled`|Show list of disabled users|
 
 You can use the `-h`, `--help` option with commands to get a full list of available optional arguments for each command.
 
 **Example usage:**
 
 Disable user1:
+	
 ```
 # /usr/sbin/cloudlinux-xray-autotracing disable user1
 {"result": "success"}
 ```
 
-Show list disabled:
+Show list of disabled users:
+	
 ```
 # /usr/sbin/cloudlinux-xray-autotracing status --list-disabled
 {"result": "success", "disabled_users": ["user1"]}
 ```
+	
 Enable all:
+
 ```
 # /usr/sbin/cloudlinux-xray-autotracing enable --all
 {"result": "success"}
