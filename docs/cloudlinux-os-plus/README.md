@@ -364,7 +364,7 @@ To delete the continuous tracing task completely, see [Creating a new continuous
 
 ### X-Ray Autotracing
 
-X-Ray Autotracing automatically creates tracing tasks for slow URLs that were found during a day by [PHP Slow Site Analyzer](/lve_manager/#website-monitoring-tool-and-slow-site-analyzer) (SSA).
+X-Ray Autotracing automatically creates tracing tasks for slow URLs that were found during a day by the [PHP Slow Site Analyzer](/lve_manager/#website-monitoring-tool-and-slow-site-analyzer) (SSA).
 
 :::warning Warning
 To use X-Ray Autotracing, update your alt-php-ssa and alt-php-xray packages to versions alt-php-ssa-0.2-1 and alt-php-xray-0.4-1 or higher by running the following command:
@@ -375,29 +375,32 @@ To use X-Ray Autotracing, update your alt-php-ssa and alt-php-xray packages to v
 
 #### How to enable X-Ray Autotracing
 
-To enable X-Ray Autotracing , please do via SSH:
+To enable X-Ray Autotracing, run the following commands via SSH:
+
 ```
 # /usr/sbin/cloudlinux-ssa-manager enable-ssa
 # /usr/sbin/cloudlinux-xray-autotracing enable --all
 ```
 
-Check [link](/command-line_tools/#x-ray-autotracing) for more description of CLI `/usr/sbin/cloudlinux-xray-autotracing` utility.
+Check [CLI documentation](/command-line_tools/#x-ray-autotracing) for a description of the `/usr/sbin/cloudlinux-xray-autotracing` CLI utility.
 
 #### Requirements
-* Cloudlinux Shared Pro or CloudLinux Solo
+
+* CloudLinux OS Shared Pro or CloudLinux OS Solo
 * alt-php-ssa > 0.2-1 version
 * alt-php-xray > 0.4-1 version
 * Enabled PHP SSA on the server
 
 #### Autotracing Interface
 
-A new tab for Autotracing tasks was added to X-Ray UI:
+A new tab for Autotracing tasks was added to the X-Ray UI:
 
 
 ![](/images/XRayAutotracingtaskstab.png)
 
 
-#### FAQ Autotracing
+#### Autotracing FAQ
+
 Q: Why are the slow URLs in the Slow Site Analyzer report different from those on which the autotracing tasks were created?
 
 A: Because the autotracing decision module uses rules and thresholds different from Slow Site Analyzer, which are configured by the CloudLinux team.
