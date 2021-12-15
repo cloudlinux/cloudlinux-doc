@@ -418,6 +418,16 @@ tc filter add dev eth3 protocol ip parent 1: prio 1 handle 2121 fw flowid 1:20
 
 More info about `tc` and its syntax can be found on the link [http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html](http://tldp.org/HOWTO/Traffic-Control-HOWTO/index.html)
 
+#### CloudLinux OS 8 specific setup
+
+In order to apply 256 kbit/s limit to LVE 123 (0x7b) through enp0s3, one needs to run the following commands:
+
+```
+tc qdisc add dev enp0s3 root handle 1: htb
+tc class add dev enp0s3 parent 1: classid 1:7b htb rate 256kbit
+tc filter add dev enp0s3 parent 1: handle 1: cgroup
+```
+
 ### Traffic accounting
 
 Traffic accounting is performed for each LVE container. Network statistics is collected at <span class="notranslate">`/proc/lve/list`</span> file. Network-related data found at fields:
