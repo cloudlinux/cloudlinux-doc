@@ -12,6 +12,7 @@
 * [Limits validation](/limits/#limits-validation)
 * [Compatibility matrix](/limits/#compatibility-matrix)
 * [Reseller Limits](/limits/#reseller-limits)
+* [WEB interface resource limiting modes](/limits/#web-interface-resource-limiting-modes)
 
 CloudLinux OS Shared has support for the following limits:
 
@@ -654,3 +655,29 @@ It is possible that you still have some questions left unanswered about Reseller
 
 - [FAQ section in our support knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/articles/115005515269-CloudLinux-Reseller-Limits-FAQ)
 - [Reseller limits UI explained](/lve_manager/#reseller-interface)
+
+
+## WEB interface resource limiting modes
+
+Ability to manage the limiting modes of user processes started from web interface (e.g. Node.JS, Ruby and Python Selectors). The configuration allows to disable LVE limiting for some commands or don't limit web commands at all.
+    
+Also, there is a short list of processes, that runs without CageFS in every modes. They are not affecting security, but we are working on removing them from excludes.
+
+To use it, add the `web_resource_limit_mode` parameter to the `/etc/sysconfig/cloudlinux` file.
+    
+Possible parameter values:
+
+* `all`: the default option. All processes will run inside CageFS and with LVE limits being applied.
+* `heavy`: there is a list of processes that are considered lightweight. In this mode, they will be executed inside CageFS, but no resource limits: CPU, IO, memory, and NUMPROC. List of ligthweight processes is defined by CloudLinux and it's guarantied that user can't bypass LVE limits for a long-term.
+    For example, this mode allows a user to execute the `cloudlinux-selector stop` process, even if the user hits the NUMPROC limit.
+* `unlimited`: all processes will run inside CageFS, but ignore CPU, IO, memory, and NUMPROC limits. Not recommended for production usage.
+
+### Requirements:
+
+1. CloudLinux OS Shared should be installed on the server
+2. Packages:
+    * cagefs package installed
+    * lve-wrappers >= 0.7.2
+    * lvemanager >= 7.5.9
+    * kmod-lve >= 2.0.36
+    * lve >= 2.1.2
