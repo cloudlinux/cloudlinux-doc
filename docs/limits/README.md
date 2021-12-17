@@ -649,18 +649,21 @@ It is possible that you still have some questions left unanswered about Reseller
 
 ## WEB interface resource limiting modes
 
-Ability to manage the limiting modes of user processes started from web interface (e.g. nodejs, ruby and python selectors). Configuration allows to disable lve limiting for part of commands or don't limit web commands at all.
-Also, there is a short list of processes, that runs without cagefs in every modes below; they are not affecting security, but we are constantly working on removing them from excludes.
+Ability to manage the limiting modes of user processes started from web interface (e.g. Node.JS, Ruby and Python Selectors). The configuration allows to disable LVE limiting for some commands or don't limit web commands at all.
+    
+Also, there is a short list of processes, that runs without CageFS in every modes. They are not affecting security, but we are working on removing them from excludes.
 
 To use it, add the `web_resource_limit_mode` parameter to the `/etc/sysconfig/cloudlinux` file.
+    
 Possible parameter values:
 
-* `all`: The default option. All processes will run inside cagefs and with lve limits being applied.
-* `heavy`: There is a list of processes that are considered lightweight. In this mode, they will be executed inside cagefs, but no resource limits: cpu, io, memory, numproc. List of ligthweight processes is defined by CloudLinux and it's guarantied that user can't bypass lve limits for a long-term.
-    For example, this mode allows the user to execute the `cloudlinux-selector stop` process, even if the user hit the NUMPROC limit.
-* `unlimited`: All processes will run inside cagefs, but ignore cpu, io, memory, numproc limits. Not recommended for production usage.
+* `all`: the default option. All processes will run inside CageFS and with LVE limits being applied.
+* `heavy`: there is a list of processes that are considered lightweight. In this mode, they will be executed inside CageFS, but no resource limits: CPU, IO, memory, and NUMPROC. List of ligthweight processes is defined by CloudLinux and it's guarantied that user can't bypass LVE limits for a long-term.
+    For example, this mode allows a user to execute the `cloudlinux-selector stop` process, even if the user hits the NUMPROC limit.
+* `unlimited`: all processes will run inside CageFS, but ignore CPU, IO, memory, and NUMPROC limits. Not recommended for production usage.
 
 ### Requirements:
+
 1. CloudLinux OS Shared should be installed on the server
 2. Packages:
     * cagefs package installed
