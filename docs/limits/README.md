@@ -649,7 +649,8 @@ It is possible that you still have some questions left unanswered about Reseller
 
 ## WEB interface resource limiting modes
 
-Ability to manage the limiting modes of user processes started from web interface (e.g. nodejs, ruby and python selectors). Configuration allows to disable lve limiting for part of commands or don't limit web commands at all. Also, there is a short list of processes, that runs without cagefs in every modes below.
+Ability to manage the limiting modes of user processes started from web interface (e.g. nodejs, ruby and python selectors). Configuration allows to disable lve limiting for part of commands or don't limit web commands at all.
+Also, there is a short list of processes, that runs without cagefs in every modes below; they are not affecting security, but we are constantly working on removing them from excludes.
 
 To use it, add the `web_resource_limit_mode` parameter to the `/etc/sysconfig/cloudlinux` file.
 Possible parameter values:
