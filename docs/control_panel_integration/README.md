@@ -1426,6 +1426,10 @@ RPMs of Apache provided by CloudLinux OS Shared, if you are using:
 
 
 If you use custom Apache, follow this documentation on how to build a package for your Apache.
+	
+:::tip Note
+The supported Apache versions are 2.2 and 2.4.
+:::
 
 ### alt-mod-passenger
 
