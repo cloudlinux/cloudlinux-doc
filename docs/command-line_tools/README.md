@@ -2675,7 +2675,7 @@ The `cloudlinux-xray-autotracing` utility allows to manage the X-Ray Autotracing
 **Usage**
 
 ```
-# /usr/sbin/cloudlinux-xray-autotracing [command] [--optional arguments]
+# /usr/sbin/cloudlinux-autotracing [command] [--optional arguments]
 ```
 
 **Commands**:
@@ -2702,21 +2702,21 @@ You can use the `-h`, `--help` option with commands to get a full list of availa
 Disable user1:
 	
 ```
-# /usr/sbin/cloudlinux-xray-autotracing disable user1
+# /usr/sbin/cloudlinux-autotracing disable user1
 {"result": "success"}
 ```
 
 Show list of disabled users:
 	
 ```
-# /usr/sbin/cloudlinux-xray-autotracing status --list-disabled
+# /usr/sbin/cloudlinux-autotracing status --list-disabled
 {"result": "success", "disabled_users": ["user1"]}
 ```
 	
 Enable all:
 
 ```
-# /usr/sbin/cloudlinux-xray-autotracing enable --all
+# /usr/sbin/cloudlinux-autotracing enable --all
 {"result": "success"}
 ```
 
