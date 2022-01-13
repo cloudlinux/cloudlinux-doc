@@ -382,7 +382,7 @@ To enable X-Ray Autotracing, run the following commands via SSH:
 # /usr/sbin/cloudlinux-autotracing enable --all
 ```
 
-Check [CLI documentation](/command-line_tools/#x-ray-autotracing) for a description of the `/usr/sbin/cloudlinux-xray-autotracing` CLI utility.
+Check [CLI documentation](/command-line_tools/#x-ray-autotracing) for a description of the `/usr/sbin/cloudlinux-autotracing` CLI utility.
 
 #### Requirements
 
