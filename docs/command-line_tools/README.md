@@ -2668,9 +2668,9 @@ This way you can set all or only certain parameters.
 
 ## X-Ray Autotracing
 
-### The cloudlinux-xray-autotracing utility
+### The cloudlinux-autotracing utility
 
-The `cloudlinux-xray-autotracing` utility allows to manage the X-Ray Autotracing via CLI.
+The `cloudlinux-autotracing` utility allows to manage the X-Ray Autotracing via CLI.
 
 **Usage**
 
