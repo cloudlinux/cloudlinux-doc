@@ -1087,6 +1087,14 @@ echo $manager->insertPanel();
 
 Pass the plugin name to the class constructor to initialize the plugin (user name will be defined).
 At the time of the insertPanel method invocation, the SPA application with the specified Selector will be embedded.
+	
+`vendor_php` (optional for PHP integration only) - a full path to the `vendor.php` file. This option allows the vendor to implement specific logic before initializing the plugin (for example drop permission).
+	
+Example:
+	
+```
+vendor_php = /opt/cpvendor/etc/vendor.php
+```
 
 Queries to the backend are created separately in the points (PHP files) which are located in the LVE Manager catalog.
 
