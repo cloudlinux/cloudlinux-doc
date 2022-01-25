@@ -68,6 +68,17 @@ module.exports = {
         href: "/favicon.ico"
       }
     ],
+    [
+      "script",
+      {},
+      `(function(w) {
+var s = document.createElement('script');
+s.src = 'https://survey.survicate.com/workspaces/8e05b856a98802352b97e8fd3118de1f/web_surveys.js';
+s.async = true;
+var e = document.getElementsByTagName('script')[0];
+e.parentNode.insertBefore(s, e);
+})(window);`
+    ]
   ],
   locales: {
     // The key is the path for the locale to be nested under.
