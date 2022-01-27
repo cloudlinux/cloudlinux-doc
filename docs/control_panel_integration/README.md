@@ -1540,6 +1540,33 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 )
 ```
 </div>
+	
+Starting from mod_lsapi-1.1-57, you can use macros for custom paths to the Apache/APR includes/binaries.
+
+A custom Apache location can be defined via the `CUSTOM_APACHE_ROOT` variable. This implies the following structure under the `${CUSTOM_APACHE_ROOT}`:
+	
+	
+|     |     |
+| :---|:----|
+|`${CUSTOM_APACHE_ROOT}/bin`| Apache binary directory, apachectl location|
+|`${CUSTOM_APACHE_ROOT}/include`|Apache include directory, httpd.h location|
+|`${CUSTOM_APACHE_ROOT}/include`| apr include directory, apr.h location|
+|`${CUSTOM_APACHE_ROOT}/include`|apr-util include directory, apu.h location|
+|`${CUSTOM_APACHE_ROOT}/lib`|apr lib directory, libapr.so location|
+|`${CUSTOM_APACHE_ROOT}/lib`|apr-util lib directory, libaprutil.so location|
+|`${CUSTOM_APACHE_ROOT}/modules`|Apache modules directory, mod_alias.so location|
+	
+If the real structure of Apache root differs from the implied one, it's possible to define a custom location for every single component.
+	
+|     |     |
+| :---|:----|	
+|`CUSTOM_APACHE_BIN`|Apache binary directory, apachectl location|
+|`CUSTOM_APACHE_INC_HTTPD`|Apache include directory, httpd.h location|
+|`CUSTOM_APACHE_INC_APR`|apr include directory, apr.h location|
+|`CUSTOM_APACHE_INC_APU`|apr-util include directory, apu.h location|
+|`CUSTOM_APACHE_LIB_APR`|apr lib directory, libapr.so location|
+|`CUSTOM_APACHE_LIB_APU`|apr-util lib directory, libaprutil.so location|
+|`CUSTOM_APACHE_MODULES`|Apache modules directory, mod_alias.so location|       
 
 5. Rebuild the package again, if you set everything correctly, there shouldn't be any problems.
 
