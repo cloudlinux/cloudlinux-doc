@@ -142,7 +142,8 @@ e.parentNode.insertBefore(s, e);
             text: "Contact support",
             url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
           },
-          { text: "Blog", url: "https://blog.cloudlinux.com/" }
+          { text: "Blog", url: "https://blog.cloudlinux.com/" },
+          { text: "CloudLinux OS Solo Documentation", url: "https://docs.solo.cloudlinux.com/" }
         ],
 
         // text for the language dropdown title
