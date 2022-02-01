@@ -52,6 +52,7 @@ If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 * Convert CentOS 8 to AlmaLinux 8 using [almalinux-deploy](https://github.com/AlmaLinux/almalinux-deploy)
 * Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
 
+---
 
 * [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
 
