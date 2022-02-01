@@ -39,11 +39,19 @@ It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS 
 
 :::tip Supported OS for conversion
 * CentOS 7
-* CentOS 8
+* CentOS 8*
 * AlmaLinux OS 8
 * RockyLinux (installation only, no uninstall option)
 * **CentOS Stream versions aren’t supported**
 :::
+
+CentOS 8 reached End Of Life (EOL) on December 31st, 2021.
+
+If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
+
+* Convert CentOS 8 to AlmaLinux 8 using [almalinux-deploy](https://github.com/AlmaLinux/almalinux-deploy)
+* Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
+
 
 * [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
 
