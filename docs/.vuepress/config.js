@@ -65,7 +65,7 @@ module.exports = {
       "meta",
       {
         name: "referrer",
-        content: "no-referrer-when-downgrade"
+        content: "unsafe-url"
       }
     ],
     [
