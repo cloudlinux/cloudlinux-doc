@@ -62,6 +62,13 @@ module.exports = {
       }
     ],
     [
+      "meta",
+      {
+        name: "referrer",
+        content: "no-referrer-when-downgrade"
+      }
+    ],
+    [
       "link",
       {
         rel: "icon",
