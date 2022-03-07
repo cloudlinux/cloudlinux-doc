@@ -1386,11 +1386,7 @@ An administrator has CloudLinux Manager -> WP Optimization Suite tab to manage m
 
 ### How to enable WP Optimization suite
 
-To enable WP Optimization suite, please do via SSH:
-
-```
-touch /var/lve/enable-wpos.flag
-```
+If you wish to participate in the Beta program, please contact the vendor you purchased CloudLinux from.
 
 ### Requirements
 
