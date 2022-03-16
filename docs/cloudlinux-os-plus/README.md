@@ -6,6 +6,7 @@
   * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
   * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
   * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
+  * [X-Ray Smart Advice](/cloudlinux-os-plus/#x-ray-smart-advice)
   * [X-Ray Autotracing](/cloudlinux-os-plus/#x-ray-autotracing)
   * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
   * [X-Ray automated throttling detection](/cloudlinux-os-plus/#x-ray-automated-throttling-detection)
@@ -106,20 +107,14 @@
 
 ### How to manage X-Ray
 
-X-Ray provides two options for monitoring domain requests speed: Tracing task and Continuous task.
+X-Ray provides several options for monitoring domain requests speed: Manual Tracing task, X-Ray Autotracing and Continuous tracing.
 
-:::warning Warning
-To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to versions lvemanager-6.2.9-1 and alt-php-xray-0.2-1 by running the following command:
-```
-yum update lvemanager alt-php-xray
-```
-::: 
+* **Manual Tracing tasks** is a task that you can create for a specific URL to collect server requests. The task will end either after a specified number of requests to the URL or after a specified time (maximum after two days). It is not possible here to automatically email a report but it is possible to export the report in PDF and send to a user.
 
-* **Tracing task** is a task created manually for a specific URL to collect server requests. The task will end either after a specified number of requests to the URL or after a specified time (maximum after two days). It is not possible here to automatically email a report but it is possible to export the report in PDF and send to a user.
+* **Autotracing tasks** is a tasks that will be created automatically at the end of each day for slow URLs that were found during that day by [PHP Slow Site Analyzer](/lve_manager/#website-monitoring-tool-and-slow-site-analyzer) (SSA).
+Need to be enabled separately see [How to enable X-Ray Autotracing](/cloudlinux-os-plus/#how-to-enable-x-ray-autotracing).
 
-* **Continuous task** is a task that initiates a daily hourly tracing requests for a specified domain and email a monitoring report. Continuous task can't stop automatically, you need to stop it manually.
-
-In fact, continuous task allows to automatically create a tracing task for each new day, with the ability to get a report for the past day.
+* **Continuous tracing** is a task that initiates a daily hourly tracing requests for a specified domain and email a monitoring report. Continuous task can't stop automatically, you need to stop it manually. In fact, continuous task allows to automatically create a tracing task for each new day, with the ability to get a report for the past day.
 
 #### Tracing tasks tab
 
@@ -137,7 +132,7 @@ To use Continuous task, update your LVE Manager and alt-PHP-X-Ray packages to ve
 yum update lvemanager alt-php-xray
 ```
 ::: 
-  
+
 The *Continuous tracing* tab contains a list of continuous tasks for which tracing tasks will be created automatically for a new day for a specific domain.
 
 ![](/images/XRayContinuousTasksList.png)
@@ -409,6 +404,85 @@ Q: How often autotracing tasks will be generated?
 
 A: Once a day at the same time as a Slow Site Analyzer report.
 
+### X-Ray Smart Advice
+
+Smart advice is a new feature of X-Ray that is designed to find and propose solutions to fix performance issues and speed up the performance of a sites.
+
+:::tip Note
+Smart Advice will work only for CloudLinux OS Shared Pro servcers with cPanel Control Panel for now.
+
+At the moment, Smart Advise  focused only on WordPress sites.
+:::
+
+:::warning Warning
+To use X-Ray Smart Advice, update your alt-php-ssa and alt-php-xray packages to versions alt-php-ssa-0.2-3 and alt-php-xray-0.5-1 or higher by running the following command:
+```
+# yum update alt-php-ssa alt-php-xray lve-utils lvemanager --enablerepo=cloudlinux-updates-testing
+```
+:::
+
+#### How to enable X-Ray Smart Advice
+
+:::warning Attention!
+
+If you wish to participate in the Beta program, please contact the vendor you purchased CloudLinux from.
+:::
+
+#### Requirements
+
+* CloudLinux OS Shared Pro
+* cPanel Control Panel
+* alt-php-xray > 0.5-1 version
+* lve-utils > 6.3.2-1 version
+* lvemanager > 7.6.1-1 version
+* cloudlinux-site-optimization-module > 0.1-1 version
+
+We Recommend:
+* Enable [X-Ray Autotracing](cloudlinux-os-plus/#x-ray-autotracing) on the server
+* Use alt-php-ssa > 0.2-3 version
+
+#### How X-Ray Smart Advice works
+
+The main process of looking for advice is X-Ray tracing tasks. The best way for doing this is to enable X-Ray Autotracing. 
+This will allow you to most effectively find Smart Advice for sites that have performance issues without your manual participation. 
+How to enable X-Ray Autotracing is described [here](/cloudlinux-os-plus/#how-to-enable-x-ray-autotracing).
+On the other hand, you can create tracing tasks manually or use continuous X-Ray but we suggest you use X-Ray Autotracing for this purpose.
+
+:::tip Note
+Advice will not be generated by old tracing tasks.
+:::
+
+While the tracing task is running, X-Ray will look for places where advice can be applied. New advice will be displayed on the tab "Smart Advice". 
+
+![](/images/XRaySmartAdviceMainTab.png)
+
+After the X-Ray finds advice you will see new advice in the status "Review" on the "Smart Advice" tab. 
+Then you may use the "Details" button to see which URLs were found by X-Ray that will be sped up by that advice and use "Quick Action" to enable advice for a site.
+
+
+Example of details:
+
+![](/images/XRaySmartAdviceDetails.png)
+
+After you apply the advice by using "Quick Action", the status will change to "Applied".
+If a long time has passed since the last time the advice was updated for a site, it will be moved to the status "Outdated". 
+
+:::tip Note
+New X-Ray task may update "Outdated" advice if X-Ray finds performance issues that may be fixed by that advice. Then the status of advice become back to "Review".
+:::
+
+If the process of applying advice fails you will see an error log with a detailed error, you may try to fix it manually and try again or contact our support team for help. 
+
+Example when an error appears during advice applying:
+
+![](/images/XRaySmartAdviceError.png)
+
+#### Smart Advice FAQ
+
+Q: Why I don't see new advice on the “Smart Advice” tab?
+
+A: For the generating of advice, it is necessary to run X-Ray tracing tasks, the best way to do it without manual interaction is to use X-Ray Autoracing.
+See how to enable X-Ray Autotracing [here](/cloudlinux-os-plus/#how-to-enable-x-ray-autotracing).
 
 ### End-user X-Ray plugin
 
