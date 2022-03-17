@@ -1474,7 +1474,7 @@ An administrator has the *CloudLinux Manager → AccelerateWP* tab to manage mod
 ### How to enable AccelerateWP
 
 :::warning Attention!
-If you wish to participate in the Beta program, please contact the vendor you purchased CloudLinux from. Or you can join free beta [here](https://www.cloudlinux.com/wp-performance/).
+If you'd like to try Smart Advice and AccelerateWP you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details and terms of use.
 :::
 
 ### Requirements
