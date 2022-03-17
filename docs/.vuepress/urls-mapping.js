@@ -2542,5 +2542,8 @@ module.exports = {
   "/introduction/#what-is-cloudlinux": "/introduction/#what-is-cloudlinux-os-shared",
   "introduction/#cloudlinux-life-cycle": "/introduction/#cloudlinux-os-shared-life-cycle",
   "/introduction/#description-of-cloudlinux-components": "/introduction/#description-of-cloudlinux-os-shared-components",
-  "lve_manager/#cloudlinux-installation-wizard": "/lve_manager/#cloudlinux-os-shared-installation-wizard"
+  "lve_manager/#cloudlinux-installation-wizard": "/lve_manager/#cloudlinux-os-shared-installation-wizard",
+  "/cloudlinux-os-plus/#wp-optimization-suite": "/cloudlinux-os-plus/#acceleratewp",
+  "/cloudlinux-os-plus/#how-to-enable-wp-optimization-suite": "/cloudlinux-os-plus/#how-to-enable-acceleratewp",
+  "/cloudlinux-os-plus/#how-to-install-wp-optimization-suite": "/cloudlinux-os-plus/#how-to-install-acceleratewp"
 };
