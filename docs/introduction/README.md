@@ -36,7 +36,7 @@ Currently, the following version are supported:
 |Slow Site analyzer|**Yes**|**Yes**|**Yes**|
 |PHP X-Ray|**Yes**|No|**Yes**|
 |Centralized Monitoring|No|No|**Yes**|
-|WordPress Optimization Suite|**Yes**|No|**Yes**|
+|AccelerateWP|**Yes**|No|**Yes**|
 |Support 24/7|**Yes**|**Yes**|**Yes**|
 |Priority support|No|No|**Yes**|
 
