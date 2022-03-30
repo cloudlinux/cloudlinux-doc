@@ -1473,9 +1473,7 @@ An administrator has the *CloudLinux Manager → AccelerateWP* tab to manage mod
 
 ### How to enable AccelerateWP
 
-:::warning Attention!
-If you'd like to try Smart Advice and AccelerateWP you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details and terms of use.
-:::
+If you'd like to try Smart Advice and AccelerateWP you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions. 
 
 ### Requirements
 
@@ -1485,24 +1483,6 @@ If you'd like to try Smart Advice and AccelerateWP you should participate in the
 * Required any (ea-, alt-) php 5.6+ version with loaded redis extension 
 * PHP handlers: [php-fpm](/cloudlinux-os-plus/#how-to-set-up-a-php-fpm-handler-for-the-domain) or php-lsapi (Apache)
 * Apache only (LiteSpeed is not supported yet, coming soon)
-
-### How to install AccelerateWP
-
-Starting from lve-utils-6.2.1-3 and lvemanager-7.5.6-1 packages, **AccelerateWP: Object Cache Module** is available for CloudLinux OS Shared Pro.
-
-Starting from lve-utils- and lvemanager- packages, **AccelerateWP: Site Optimization Module** is available for CloudLinux OS Shared Pro.
-
-To install, run the following command:
-
-```
-yum install lvemanager lve-utils --enablerepo=cloudlinux-updates-testing
-```
-
-To update, run the following command:
-
-```
-yum update lvemanager lve-utils --enablerepo=cloudlinux-updates-testing 
-```
 
 ### Administrator interface
 
