@@ -126,6 +126,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     translationSource: 'docs.cloudlinux.com',
     defaultURL: "/introduction/",
+    submitRequestURL: "https://www.cloudlinux.com/support-portal/",
+    hideHeading: true,
     redirectionMapping: urls,
     sidebarDepth: 2,
     logo: "/logo.svg",
@@ -156,7 +158,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           },
           {
             text: "Contact support",
-            url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
+            url: "https://www.cloudlinux.com/contact/"
           },
           { text: "Blog", url: "https://blog.cloudlinux.com/" },
           { text: "CloudLinux OS Solo Documentation", url: "https://docs.solo.cloudlinux.com/" }
@@ -171,6 +173,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // text for the edit-on-github link
         editLinkText: "Edit this page",
         tryFree: "Try Free",
+        submitRequest: "Contact Support",
         search: "Search",
         // config for Service Worker
         serviceWorker: {
