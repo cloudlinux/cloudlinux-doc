@@ -641,6 +641,11 @@ Selecting **Make the account own itself** makes the reseller full owner of all h
 When you move a user from one reseller to another on DirectAdmin you need to manually change its package because the packages aren’t moved together with users. If you don’t reassign the package, the limits for the user you have moved will be reset to default. 
 :::
 
+:::tip Note
+DirectAdmin only: when reseller limits are enabled, reseller's enduser's package is replaced with a `DEFAULT` virtual package that inherits the `default` user's limits (lve and quotas) . \
+lve-utils > 6.3.7 provides a new configuration option - `cl_quota_inodes_inheritance`, which allows to keep the same quotas limits in this case. Add the `cl_quota_inodes_inheritance=1` flag to the `/etc/sysconfig/cloudlinux` configuration file to preserve reseller's enduser's inodes limits when reseller limits are enabled.
+:::
+
 #### How to disable Reseller limits
 
 1. Go to the _Users_ tab, choose a particular reseller and click on the pencil icon.
