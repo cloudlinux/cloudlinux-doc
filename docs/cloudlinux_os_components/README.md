@@ -2351,6 +2351,11 @@ If the path to the program being executed does not match any path specified in t
 * You cannot specify both white and black list (<span class="notranslate">`allow`</span> and <span class="notranslate">`deny`</span>).
 
 It is possible to verify that a path specified as a parameter for an option does not refer outside of the user’s home directory. This check is performed for options specified in the <span class="notranslate">`restrict_path`</span> list. All issues are reported in <span class="notranslate">`/var/log/secure`</span> log file.
+	
+By default, option filters only compare the starting parts of arguments with entries specified by lists.
+For instance, if option "-f" is forbidden, "-f /etc/list" will be forbidden, but "-vf /etc/list" will not.
+Specifying a "strict_options" switch enables an extended parsing mechanism where each short option from a cluster is parsed separately.
+It is recommended to enable this option by default, unless it causes issues with functionality.
 
 
 #### Executing by proxy
