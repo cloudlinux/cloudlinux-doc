@@ -2354,7 +2354,7 @@ It is possible to verify that a path specified as a parameter for an option does
 	
 By default, option filters only compare the starting parts of arguments with entries specified by lists.
 For instance, if option "-f" is forbidden, "-f /etc/list" will be forbidden, but "-vf /etc/list" will not.
-Specifying a "strict_options" switch enables an extended parsing mechanism where each short option from a cluster is parsed separately.
+Specifying a `"strict_options": true` switch inside the filter file enables an extended parsing mechanism where each short option from a cluster is parsed separately.
 It is recommended to enable this option by default, unless it causes issues with functionality.
 
 
