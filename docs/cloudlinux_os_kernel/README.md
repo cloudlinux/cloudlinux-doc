@@ -1019,7 +1019,7 @@ By defining <span class="notranslate"> IO latency, you can make sure that no pro
 
 This option is <span class="notranslate"> OFF by default. </span>
 
-_For CloudLinux OS Shared 6 and CloudLinux OS Shared 7 (since Hybrid kernel lve1.4.x.el5h):_
+_For CloudLinux OS Shared 6 , CloudLinux OS Shared 7, CloudLinux OS Shared 8 (kmodlve 2.1-2 and later):_
 
 To enable <span class="notranslate"> IO </span> Limits latency and set it to 10 seconds:
 <div class="notranslate">
