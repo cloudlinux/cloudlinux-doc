@@ -2354,9 +2354,27 @@ It is possible to verify that a path specified as a parameter for an option does
 	
 By default, option filters only compare the starting parts of arguments with entries specified by lists.
 For instance, if option "-f" is forbidden, "-f /etc/list" will be forbidden, but "-vf /etc/list" will not.
-Specifying a `"strict_options": true` switch inside the filter file enables an extended parsing mechanism where each short option from a cluster is parsed separately.
-It is recommended to enable this option by default, unless it causes issues with functionality.
+Starting from cagefs v. #7.4.12-1, specifying a `"strict_options": true` switch inside a filter file entry enables an extended parsing mechanism where each short option from a cluster is parsed separately.
+It is recommended to enable this option, unless it causes issues with the command's functionality.
+	
+<div class="notranslate">
 
+```
+{
+  "default": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ],
+    "strict_options": true
+  }
+}
+```
+</div>
 
 #### Executing by proxy
 
