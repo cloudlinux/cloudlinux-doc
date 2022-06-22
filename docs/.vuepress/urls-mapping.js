@@ -2552,5 +2552,8 @@ module.exports = {
   "/installation_mod_lsapi.html": "/cloudlinux_os_components/#installation-2",
   "/cloudlinux-os-plus/cloudlinux-os-plus/": "/cloudlinux-os-plus/",
   "/cloudlinux_os_components/cloudlinux_os_components/": "/cloudlinux_os_components/",
-  "/control_panel_integration/cloudlinux_os_components/": "/control_panel_integration/#control-panel-integration"
+  "/control_panel_integration/cloudlinux_os_components/": "/control_panel_integration/#control-panel-integration",
+  "/php_selector": "/cloudlinux_os_components/#php-selector",
+  "https://www.cloudlinux.com/docs/load_averages.php": "https://docs.cloudlinux.com/introduction/",
+  "https://www.cloudlinux.com/docs/hsphere35.php": "https://docs.cloudlinux.com/introduction/"
 };
