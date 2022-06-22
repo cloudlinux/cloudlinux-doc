@@ -2545,5 +2545,12 @@ module.exports = {
   "lve_manager/#cloudlinux-installation-wizard": "/lve_manager/#cloudlinux-os-shared-installation-wizard",
   "/cloudlinux-os-plus/#wp-optimization-suite": "/cloudlinux-os-plus/#acceleratewp",
   "/cloudlinux-os-plus/#how-to-enable-wp-optimization-suite": "/cloudlinux-os-plus/#how-to-enable-acceleratewp",
-  "/cloudlinux-os-plus/#how-to-install-wp-optimization-suite": "/cloudlinux-os-plus/#how-to-install-acceleratewp"
+  "/cloudlinux-os-plus/#how-to-install-wp-optimization-suite": "/cloudlinux-os-plus/#how-to-install-acceleratewp",
+  "/disabling_php.html": "/cloudlinux_os_components/#disabling-php-extension-globally",
+  "/getting_trial_license.html": "/cloudlinux_installation/#getting-trial-license",
+  "/installation4.html": "/cloudlinux_installation/#installation",
+  "/installation_mod_lsapi.html": "/cloudlinux_os_components/#installation-2",
+  "/cloudlinux-os-plus/cloudlinux-os-plus/": "/cloudlinux-os-plus/",
+  "/cloudlinux_os_components/cloudlinux_os_components/": "/cloudlinux_os_components/",
+  "/control_panel_integration/cloudlinux_os_components/": "/control_panel_integration/#control-panel-integration"
 };
