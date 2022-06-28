@@ -12,7 +12,7 @@ const slugifyLinks = (s) => {
 // set your global autometa options
 const autoMetaOptions = {
   site: {
-    name   : 'Cloudlinux OS Documentation',
+    name   : 'CloudLinux OS Documentation',
     // twitter: 'cl_docs',
   },
   canonical_base: 'https://docs.cloudlinux.com/',
@@ -157,7 +157,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
           },
           {
-            text: "Contact support",
+            text: "Contact us",
             url: "https://www.cloudlinux.com/contact/"
           },
           { text: "Blog", url: "https://blog.cloudlinux.com/" },
@@ -173,7 +173,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // text for the edit-on-github link
         editLinkText: "Edit this page",
         tryFree: "Try Free",
-        submitRequest: "Contact Support",
+        submitRequest: "Support Portal",
         search: "Search",
         // config for Service Worker
         serviceWorker: {
