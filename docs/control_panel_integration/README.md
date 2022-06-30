@@ -1181,6 +1181,14 @@ The commands above require root privileges. You can use the following command wh
 ```
 </div>
 
+### CageFS - temporary LVEs with lvectl options
+
+Starting from lve-wrappers 0.7.5-1, `cagefs_enter_user` accepts a subset of `lvectl` limit parameters as input. Using any of them will result in a creation of a temporary LVE with a unique ID. That LVE will have the provided limits set and will be destroyed after the given command is run.
+
+The following parameters are accepted: `speed`, `pmem`, `vmem`, `io`, `iops`, `nproc`, `maxEntryProcs`.
+
+Refer to [documentation on limits](https://docs.cloudlinux.com/limits/#understanding-limits) for more details on the provided parameters.
+
 ### Updating CageFS skeleton
 
 Updating CageFS skeleton is required after update of the system RPM packages. It may be also required after update of hosting control panel itself.
