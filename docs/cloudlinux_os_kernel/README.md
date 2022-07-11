@@ -1,4 +1,8 @@
-﻿# CloudLinux OS Shared kernel
+# CloudLinux OS Shared kernel
+ 
+:::tip Note
+Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
+:::
 
 * [CloudLinux OS Shared 8 kernel-related features and improvements](/cloudlinux_os_kernel/#cloudlinux-os-shared-8-kernel-related-features-and-improvements)
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
