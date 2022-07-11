@@ -2,6 +2,10 @@
 
 [[toc]]
 
+:::tip Note
+Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
+:::
+
 ### What is CloudLinux OS Shared
 
 CloudLinux OS Shared is designed for shared hosting providers. It isolates each customer into a separate “Lightweight Virtualized Environment” (LVE), which allocates and limits server resources, like memory, CPU and the number of simultaneous connections, for each web hosting tenant. This ensures that tenants cannot jeopardize the stability of your servers, causing all sites to slow down or even come to a halt. CloudLinux OS Shared also “cages” tenants from one another to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, causing severe harm.
