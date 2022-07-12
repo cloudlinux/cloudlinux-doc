@@ -878,15 +878,19 @@ timeout=5
 
 ## Uninstalling
 
-You can always uninstall CloudLinux OS Shared. In this case, the system will be converted back to CentOS (even if the original system was RHEL)
+You can always uninstall CloudLinux OS Shared. In this case, the system will be converted back to AlmaLinux or CentOS* (Depends on what system the conversion was done from).
+
+:::warning
+CentOS Linux 8 reached End Of Life (EOL) on December 31st, 2021. You can still uninstall CloudLinux and return to CentOS 8, but we don't guarantee stable operation of the system and its repositories after this action.
+:::
 
 The following actions will be taken:
 
 1. LVE related packages will be removed.
 2. CloudLinux OS Shared repositories & <span class="notranslate">yum</span> plugin will be removed.
-3. CentOS repositories will be set up.
+3. AlmaLinux or CentOS* repositories will be set up.
 
-In the end, the script will provide instructions on how to finish the conversion back to CentOS. That will require removal of CloudLinux OS Shared kernel (manual step), and installation of CentOS kernel (if needed).
+In the end, the script will provide instructions on how to finish the conversion back to AlmaLinux or CentOS*. That will require removal of CloudLinux OS Shared kernel (manual step), and installation of AlmaLinux or CentOS* kernel (if needed).
 
 :::warning
 Do not forget to free up a CloudLinux OS Shared license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers). After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed for it. 
@@ -902,18 +906,18 @@ $ sh cldeploy -c
 ```
 </div>
 
-Now you have converted back to CentOS and it is the time to install kernel.
+Now you have converted back to AlmaLinux or CentOS* and it is the time to install kernel.
 
 To delete CloudLinux OS Shared kernel, run (change the kernel package name to the one you've been using):
 
 <div class="notranslate">
 
 ```
-rpm -e --nodeps kernel-2.6.32-673.26.1.lve1.4.27.el6.x86_64
+rpm -e --nodeps $(rpm -qa | grep kernel | grep lve)
 ```
 </div>
 
-To install new CentOS kernel once you deleted CloudLinux OS Shared kernel, type <span class="notranslate">`yum install kernel`</span>.
+To install new AlmaLlinux or CentOS* kernel once you deleted CloudLinux OS Shared kernel, type <span class="notranslate">`yum install kernel`</span>.
 
 If <span class="notranslate">`yum`</span> says that the latest kernel is already installed, it is OK.
 
@@ -951,7 +955,7 @@ Before the reboot, the following command should be executed for restoring Apache
 </div>
 
 :::tip Note
-Some of the packages from CloudLinux OS Shared repo will still be present. They are the same as CentOS packages, and don't have to be removed. They will be updated in the future from CentOS repositories, as new versions come out.
+Some of the packages from CloudLinux OS Shared repo will still be present. They are the same as AlmaLinux or CentOS* packages, and don't have to be removed. They will be updated in the future from AlmaLinux or CentOS* repositories, as new versions come out.
 :::
 
 ## Migration to EasyApache 4
