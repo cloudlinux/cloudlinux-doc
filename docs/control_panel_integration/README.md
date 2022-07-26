@@ -1703,10 +1703,134 @@ If the real structure of Apache root differs from the implied one, it's possible
 |`CUSTOM_APACHE_LIB_APU`|apr-util lib directory, libaprutil.so location|
 |`CUSTOM_APACHE_MODULES`|Apache modules directory, mod_alias.so location|       
 	
-7. Rebuild the package again, if you set everything correctly, there shouldn't be any problems.
+7. Rebuild the package again, if you set everything correctly, there shouldn't be any problems. 
+
+To customize the switch_mod_lsapi script add into mod_lsapi spec custom script and its configuration file. Configuration file name should be custom.ini. Script file name can be arbitrary, because its name should be mentioned in config.ini  Both of them should be copied into */usr/share/lve/modlscapi/custom* in the *%install* section of the mod_lsapi.spec. For example, if script file name is custom.sh, you should add the following lines into %install section of mod_lsapi.spec file:
+
+```
+install -D -m 644 config.ini $RPM_BUILD_ROOT%{g_path}/custom/config.ini
+install -D -m 755 custom.sh $RPM_BUILD_ROOT%{g_path}/custom/custom.sh
+```
+
+Also you should add mentions of both files in the %files section of mod_lsapi.spec:
+
+```
+/usr/share/lve/modlscapi/custom/config.ini 
+/usr/share/lve/modlscapi/custom/custom.sh
+```
+
+The requirements to the *config.ini* file and script file are described in the following section {LINK_TO_THE_NEW_SECTION}
 
 8. Install the module, check that it is successfully loaded into Apache.
 
+#### How to integrate switch_mod_lsapi script with custom panels
+
+To be able to use switch_mod_lsapi you have to do the steps mentioned below.
+
+We assume that if the /usr/share/lve/modlscapi/custom/config.ini file exists, then it is a Custom Panel.
+
+1. Create config.ini file /usr/share/lve/mod_lsapi/custom/ directory. As an example we have created a config.ini.example file
+
+**All directives that are shown in example file needed in GLOBAL section.** Example:
+
+```
+[GLOBAL]
+VERSION = 1.0.0
+APACHECTL_BIN_LOCATION = /usr/sbin/apachectl
+DOC_URL = http://docs.cloudlinux.com/index.html?apache_mod_lsapi.html
+EXECUTABLE_BIN = custom.sh
+PANEL_NAME=CustomPanel
+```
+
+2. Create executable script in */usr/share/lve/mod_lsapi/custom/executable.sh*. Name it as you want and specify in the config.ini file. Set EXECUTABLE_BIN=executable.sh in the GLOBAL section of the ini file. **Script must be located in the /usr/share/lve/mod_lsapi/custom/ directory.**
+
+3. Custom script options correspond to the options of the switch_mod_lsapi. For more information use the link below.
+https://docs.cloudlinux.com/command-line_tools/#apache-mod-lsapi-pro
+
+##### What you need to write in your custom executable.sh file.
+
+You have to implement options in your script. Switch_mod_lsapi will call executable with corresponding arguments. Script must return exit code 0 as success or some integer in case of fail.
+
+**Supported options are:**
+
+```
+switch_mod_lsapi --setup
+/usr/share/lve/modlscapi/custom/executable.sh --setup
+
+switch_mod_lsapi --uninstall
+/usr/share/lve/modlscapi/custom/executable.sh --uninstall
+
+switch_mod_lsapi --enable-domain test.com
+/usr/share/lve/modlscapi/custom/executable.sh --enable-domain test.com
+```
+
+Script executable.sh executed with two arguments --disable-domain and domain name:
+
+```
+switch_mod_lsapi --disable-domain test.com. 
+/usr/share/lve/modlscapi/custom/executable.sh --disable-domain test.com
+```
+
+Script executable.sh executed with --enable-global argument:
+
+```
+switch_mod_lsapi --enable-global
+/usr/share/lve/modlscapi/custom/executable.sh --enable-global
+```
+
+Script executable.sh executed with --disable-global argument:
+
+```
+switch_mod_lsapi --disable-global
+/usr/share/lve/modlscapi/custom/executable.sh --disable-global
+```
+
+Сustom script executed with --verbose and --force arguments if switch_mod_lsapi are called with.
+
+**Not supported options are:**
+
+```
+--setup-light
+--build-native-lsphp
+--build-native-lsphp-cust
+--check-php
+--stat
+```
+
+**executable.sh script content as an example:**
+
+```
+#!/bin/bash
+ 
+CMD=$1
+ 
+if [ "$CMD" == "--setup" ]; then
+    echo "application/x-httpd-php-lsphp /usr/local/bin/lsphp"     >>/opt/ExamplePanel/etc/php.handlers
+fi 
+ 
+if [ "$CMD" == "--uninstall" ]; then
+    sed -i "#application/x-httpd-php-lsphp#d" /opt/ExamplePanel/etc/php.handlers
+fi
+ 
+if [ "$CMD" == "--enable-domain" ]; then
+    http_root=`/opt/ExamplePanel/domain2root $2`
+    if [ -e $http_root/.htaccess ]; then
+        sed -i '/lsphp/d' $http_root/.htaccess
+    fi
+fi 
+ 
+if [ "$CMD" == "--disable-domain" ]; then
+    http_root=`/opt/ExamplePanel/domain2root $2`
+    if [ -e $http_root/.htaccess ]; then
+        sed -i '/lsphp/d' $http_root/.htaccess
+    fi
+fi 
+ 
+# if command not supported
+if [ "$CMD" == "--enable-global" ]; then
+    echo "LSAPI enable global command is not supported by ExamplePanel"; exit 1
+fi 
+```
 
 ## MySQL Governor
 
