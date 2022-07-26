@@ -1725,13 +1725,9 @@ The requirements to the *config.ini* file and script file are described in the f
 
 #### How to integrate switch_mod_lsapi script with custom panels
 
-To be able to use switch_mod_lsapi you have to do the steps mentioned below.
+To be able to use switch_mod_lsapi you have to do the steps mentioned below. We assume that if the /usr/share/lve/modlscapi/custom/config.ini file exists, then it is a Custom Panel.
 
-We assume that if the /usr/share/lve/modlscapi/custom/config.ini file exists, then it is a Custom Panel.
-
-1. Create config.ini file /usr/share/lve/mod_lsapi/custom/ directory. As an example we have created a config.ini.example file
-
-**All directives that are shown in example file needed in GLOBAL section.** Example:
+1. Create config.ini file /usr/share/lve/mod_lsapi/custom/ directory. As an example we have created a config.ini.example file. **All directives that are shown in example file needed in GLOBAL section:**
 
 ```
 [GLOBAL]
@@ -1744,10 +1740,9 @@ PANEL_NAME=CustomPanel
 
 2. Create executable script in */usr/share/lve/mod_lsapi/custom/executable.sh*. Name it as you want and specify in the config.ini file. Set EXECUTABLE_BIN=executable.sh in the GLOBAL section of the ini file. **Script must be located in the /usr/share/lve/mod_lsapi/custom/ directory.**
 
-3. Custom script options correspond to the options of the switch_mod_lsapi. For more information use the link below.
-https://docs.cloudlinux.com/command-line_tools/#apache-mod-lsapi-pro
+3. Custom script options correspond to the options of the switch_mod_lsapi. For more information use the [this document](https://docs.cloudlinux.com/command-line_tools/#apache-mod-lsapi-pro).
 
-##### What you need to write in your custom executable.sh file.
+#### What you need to write in your custom executable.sh file.
 
 You have to implement options in your script. Switch_mod_lsapi will call executable with corresponding arguments. Script must return exit code 0 as success or some integer in case of fail.
 
