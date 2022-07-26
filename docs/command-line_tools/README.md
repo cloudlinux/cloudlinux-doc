@@ -3310,6 +3310,16 @@ Performs diagnostic checks from the list:
 * check_cmt_packages
 * check_lvestats_service
 
+#### doctor
+
+Attention! Available starting from lve-utils version 6.3.9-1. This option can be used instead of the following command:
+
+```
+wget -qq -O - https://repo.cloudlinux.com/cloudlinux/cldoctor/cldoctor.sh | bash
+```
+
+If this option is provided cldoctor script will be downloaded to a temp directory and executed by cldiag. Also the report will be automatically sent to our support team.  
+
 ### cloudlinux-config
 
 **cloudlinux-config** utility shows/sets various parameters related to [LVE Manager](/lve_manager/#lve-manager-options) UI, [MySQL Governor](/cloudlinux_os_components/#configuration-and-operation) and [faults notifications for LVE-Stats 2](/cloudlinux_os_components/#configuration)
