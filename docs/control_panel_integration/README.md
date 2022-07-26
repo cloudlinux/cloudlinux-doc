@@ -1762,7 +1762,7 @@ switch_mod_lsapi --enable-domain test.com
 Script executable.sh executed with two arguments --disable-domain and domain name:
 
 ```
-switch_mod_lsapi --disable-domain test.com. 
+switch_mod_lsapi --disable-domain test.com
 /usr/share/lve/modlscapi/custom/executable.sh --disable-domain test.com
 ```
 
@@ -1792,7 +1792,7 @@ switch_mod_lsapi --disable-global
 --stat
 ```
 
-**executable.sh script content as an example:**
+**An example of executable.sh script:**
 
 ```
 #!/bin/bash
