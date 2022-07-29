@@ -3312,7 +3312,11 @@ Performs diagnostic checks from the list:
 
 #### doctor
 
-Attention! Available starting from lve-utils version 6.3.9-1. This option can be used instead of the following command:
+:::tip Note
+Available starting from lve-utils version 6.3.9-1.
+:::
+
+This option can be used instead of the following command:
 
 ```
 wget -qq -O - https://repo.cloudlinux.com/cloudlinux/cldoctor/cldoctor.sh | bash
