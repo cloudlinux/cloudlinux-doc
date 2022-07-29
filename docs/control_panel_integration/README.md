@@ -1702,26 +1702,26 @@ If the real structure of Apache root differs from the implied one, it's possible
 |`CUSTOM_APACHE_LIB_APR`|apr lib directory, libapr.so location|
 |`CUSTOM_APACHE_LIB_APU`|apr-util lib directory, libaprutil.so location|
 |`CUSTOM_APACHE_MODULES`|Apache modules directory, mod_alias.so location|       
-	
-7. Rebuild the package again, if you set everything correctly, there shouldn't be any problems. 
 
-To customize the switch_mod_lsapi script add into mod_lsapi spec custom script and its configuration file. Configuration file name should be custom.ini. Script file name can be arbitrary, because its name should be mentioned in config.ini  Both of them should be copied into */usr/share/lve/modlscapi/custom* in the *%install* section of the mod_lsapi.spec. For example, if script file name is custom.sh, you should add the following lines into %install section of mod_lsapi.spec file:
+7. To customize the switch_mod_lsapi script add into `mod_lsapi.spec` custom script and its configuration file. Configuration file name should be `config.ini` file. Script file name can be arbitrary, because its name should be mentioned in `config.ini` file. Both of them should be copied into */usr/share/lve/modlscapi/custom* in the *%install* section of the `mod_lsapi.spec` file. For example, if script file name is `custom.sh`, you should add the following lines into *%install* section of `mod_lsapi.spec` file:
 
 ```
 install -D -m 644 config.ini $RPM_BUILD_ROOT%{g_path}/custom/config.ini
 install -D -m 755 custom.sh $RPM_BUILD_ROOT%{g_path}/custom/custom.sh
 ```
 
-Also you should add mentions of both files in the %files section of mod_lsapi.spec:
+Also you should add mentions of both files in the *%files* section of `mod_lsapi.spec`:
 
 ```
 /usr/share/lve/modlscapi/custom/config.ini 
 /usr/share/lve/modlscapi/custom/custom.sh
 ```
 
-The requirements to the *config.ini* file and script file are described in the following section {LINK_TO_THE_NEW_SECTION}
+The requirements to the `config.ini` file and script file are described in the following [section](#how-to-integrate-switch_mod_lsapi-script-with-custom-panels)
 
-8. Install the module, check that it is successfully loaded into Apache.
+8. Rebuild the package again, if you set everything correctly, there shouldn't be any problems. 
+
+9. Install the module, check that it is successfully loaded into Apache.
 
 #### How to integrate switch_mod_lsapi script with custom panels
 
