@@ -65,7 +65,7 @@ module.exports = {
       "meta",
       {
         "http-equiv": "Content-Security-Policy",
-        content: "script-src 'self' 'unsafe-inline' 'unsafe-inline' 'unsafe-eval' *.survicate.com *.googletagmanager.com *.google-analytics.com *.licdn.com *.hotjar.com *.twitter.com *.facebook.net *.kernelcare.info *.twitter.com;"
+        content: "script-src 'self' 'unsafe-inline' 'unsafe-inline' 'unsafe-eval' *.survicate.com *.googletagmanager.com *.google-analytics.com *.licdn.com *.hotjar.com *.twitter.com *.facebook.net *.kernelcare.info *.twitter.com *.ads-twitter.com;"
       }
     ],
     [
