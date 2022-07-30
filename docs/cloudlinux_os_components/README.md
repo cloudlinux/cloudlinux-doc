@@ -6727,11 +6727,11 @@ Switching mod_lsapi handler on or off.
 #### **lsapi_socket_path**
 
 **Syntax** : lsapi_socket_path [path]
-**Default** : lsapi_socket_path `/var/run/mod_lsapi`  
+**Default** : lsapi_socket_path `/var/mod_lsapi`  
 **Context** : httpd.conf  
 
 **Description:**  
-Path to backend lsphp sockets. By default `/var/run/mod_lsapi`
+Path to backend lsphp sockets. By default `/var/mod_lsapi`
 
 ---
 
@@ -7094,11 +7094,11 @@ Set path to socket for communication with criu service. Default: /var/run/criu/c
 #### **lsapi_criu_imgs_dir_path**
 
 **Syntax** : lsapi_criu_imgs_dir_path [path]  
-**Default** : lsapi_criu_imgs_dir_path /var/run/mod_lsapi/  
+**Default** : lsapi_criu_imgs_dir_path /var/mod_lsapi/  
 **Context** : httpd.conf  
 
 **Description** :  
-Path to folder where images of freezed PHP will be stored. Should be path. Default: /var/run/mod_lsapi/
+Path to folder where images of freezed PHP will be stored. Should be path. Default: /var/mod_lsapi/
 
 ---
 
@@ -7693,7 +7693,7 @@ mod_lsapi-1.1-1 is the first beta version with freezing PHP implemented. mod_lsa
 |lsapi_backend_semtimedwait | Enable/disable flag for notification about lsphp started. This method avoid cycles of waiting for lsphp start. | <span class="notranslate"> On/Off </span> | <span class="notranslate"> On </span>|
 |lsapi_backend_initial_start | Number of request when lsphp should be freezed. | [number] 0 - no freezing | 0|
 |lsapi_criu_use_shm | Method of requests counting. <span class="notranslate"> Off </span> - use shared memory. <span class="notranslate"> Signals </span> - use signals from child processes to parent. | <span class="notranslate"> Off/Signals </span> | <span class="notranslate"> Off </span>|
-|lsapi_criu_imgs_dir_path | Path to folder where imgs of freezed PHP will be stored. | [path] | <span class="notranslate"> /var/run/mod_lsapi/ </span>|
+|lsapi_criu_imgs_dir_path | Path to folder where imgs of freezed PHP will be stored. | [path] | <span class="notranslate"> /var/mod_lsapi/ </span>|
 |lsapi_criu_debug | Enable/Disable CRIU related debug logging. | <span class="notranslate"> On/Off </span> | <span class="notranslate"> Off </span>|
 
 Example:
@@ -7709,7 +7709,7 @@ lsapi_criu_debug Off
 ```
 </div>
 
-When Apache module mod_lsapi detects CRIU enabled (lsapi_criu On) it prepares a directory for images (on the first request of virtualhost) to store ( <span class="notranslate"> lsapi_criu_imgs_dir_path /var/run/mod_lsapi/[dir_name] </span> ), and starts lsphp process. Lsphp increases counter ( <span class="notranslate"> lsapi_criu_use_shm Off|Signals </span> ) via shared memory or signals, when counter reaches limit ( <span class="notranslate"> lsapi_backend_initial_start 15 </span> ), lsphp sends the request to CRIU for freezing. CRIU service makes images of requested processes. Lsphp will not be frozen if counter has not reached the limit. The next time when lsphp will be stopped, it will be unfrozen from the images.
+When Apache module mod_lsapi detects CRIU enabled (lsapi_criu On) it prepares a directory for images (on the first request of virtualhost) to store ( <span class="notranslate"> lsapi_criu_imgs_dir_path /var/mod_lsapi/[dir_name] </span> ), and starts lsphp process. Lsphp increases counter ( <span class="notranslate"> lsapi_criu_use_shm Off|Signals </span> ) via shared memory or signals, when counter reaches limit ( <span class="notranslate"> lsapi_backend_initial_start 15 </span> ), lsphp sends the request to CRIU for freezing. CRIU service makes images of requested processes. Lsphp will not be frozen if counter has not reached the limit. The next time when lsphp will be stopped, it will be unfrozen from the images.
 
 The images of the processes will be saved even if Apache is restarted. But all images will be deleted after server restart by default configuration. This can be modified by setting the new path <span class="notranslate"> lsapi_criu_imgs_dir_path </span> .
 
@@ -7815,7 +7815,7 @@ It can be enabled by writing <span class="notranslate">lsapi_reset_criu_on_apach
 
 Note that this option works only if <span class="notranslate">lsapi_terminate_backends_on_exit</span> is <span class="notranslate">  On  </span> (default value is <span class="notranslate"> On </span> , it is set in _lsapi.conf_ too).
 
-2. If you need to clean CRIU images for one user you can simply add file to the user's directory with CRIU images (default <span class="notranslate"> _/var/run/mod_lsapi/lsapi_ * _criu_imgs_ </span> ). On the next restart of lsphp the images will be cleaned.
+2. If you need to clean CRIU images for one user you can simply add file to the user's directory with CRIU images (default <span class="notranslate"> _/var/mod_lsapi/lsapi_ * _criu_imgs_ </span> ). On the next restart of lsphp the images will be cleaned.
 
 3. Global reset flag for cleaning all earlier saved images by CRIU.
 
