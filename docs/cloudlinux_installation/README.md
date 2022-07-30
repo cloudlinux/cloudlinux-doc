@@ -13,13 +13,13 @@
 
 ### Hardware compatibility
 
-CloudLinux OS Shared supports all the hardware supported by RHEL/CentOS, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+CloudLinux OS Shared supports all the hardware supported by RHEL/CentOS/AlmaLinux, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
 :::tip Note
-CloudLinux OS Shared does not support ARM-based CPUs (e.g. Graviton)
+CloudLinux OS Shared does not support ARM-based CPUs (e.g. Graviton).
 :::
 
-There are some incompatible devices with **CL 6**:
+There are some incompatible devices with **CL6**:
 
 | |  | |
 |-|--|-|
@@ -29,32 +29,42 @@ There are some incompatible devices with **CL 6**:
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 
-With RHEL 8 (**CloudLinux OS Shared 8/CloudLinux OS Shared 7 Hybrid**), some devices are no longer supported. You can check the entire list here:
-[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
+With RHEL8 (**CloudLinux OS Shared 8/CloudLinux OS Shared 7 Hybrid**), some devices are no longer supported.
+You can check the entire list here: [Hardware enablement considerations in adopting RHEL 8](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
 
 
 ## Converting existing servers
 
 It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS Shared. The process takes a few minutes and replaces just a handful of RPMs.
 
-:::tip Supported OS for conversion
+:::tip Supported OS for conversion:
 * CentOS 7
-* CentOS 8*
 * AlmaLinux OS 8
 * RockyLinux (installation only, no uninstall option)
-* **CentOS Stream versions aren’t supported**
+:::
+
+:::warning Unsupported OS for conversion:
+* CentOS 8
+* CentOS Stream
 :::
 
 CentOS 8 reached End Of Life (EOL) on December 31st, 2021.
-
 If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 
 * Convert CentOS 8 to AlmaLinux 8 using [almalinux-deploy](https://github.com/AlmaLinux/almalinux-deploy)
 * Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
 
+:::tip Supported control panels:
+* cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
+* Plesk
+* DirectAdmin
+* CyberPanel ([Documentation](https://community.cyberpanel.net/t/1-convert-cyberpanel-to-cloudlinux-os-and-install-cagefs/174))
+* InterWorx ([Documentation](https://appendix.interworx.com/current/nodeworx/plugins/install-use-cloudlinux-plugin-interworx.html))
+:::
+
 ---
 
-* [CLDeploy Explained](/cloudlinux_installation/#cldeploy-explained).
+* [cldeploy conversion script explained](/cloudlinux_installation/#cldeploy-explained).
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
 * Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
@@ -77,7 +87,7 @@ $ sh cldeploy -i
 ```
 </div>
 
-* Reboot by running the following command:
+* If there aren't any errors during the conversion - reboot your server by running the following command:
   
 <div class="notranslate">
 
@@ -86,33 +96,27 @@ $ reboot
 ```
 </div>
 
-Once you reboot, you are running CloudLinux OS Shared kernel with LVE enabled.
+Once you reboot - your server should be running with CloudLinux OS LVE kernel.
+
+You may check the booted kernel with the following command:
+
+<div class="notranslate">
+
+```
+$ uname -r
+```
+</div>
 
 * For CloudLinux OS Shared 6 — (RHEL) 2.6 kernel 
 * For CloudLinux OS Shared 6 hybrid — (RHEL) 3.10 kernel
 * For CloudLinux OS Shared 7 — (RHEL) 3.10 kernel
 * For CloudLinux OS Shared 7 hybrid —  (RHEL) 4.18 kernel
-* For CloudLinux OS Shared 8 —  CloudLinux OS Shared 8 follows the upstream (RHEL) 4.18 kernel mainline. All CloudLinux-specific features are added as a separate module (lve-kmod).
+* For CloudLinux OS Shared 8 —  CloudLinux OS Shared 8 follows the upstream (RHEL) 4.18 kernel mainline.
+All CloudLinux-specific features are added as a separate module (kmod-lve).
 
-The script automatically detects and supports the following control panels:
-* cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
-* Plesk
-* DirectAdmin
-* InterWorx <sup>*</sup>
-  
-It will install CloudLinux OS Shared kernel, [Apache module](/cloudlinux_os_components/#hostinglimits-module-for-apache), [PAM module](/cloudlinux_os_components/#pam-configuration), [command line tools](/command-line_tools/#command-line-tools-cli) as well as LVE Manager.
-
-:::tip Note 
-\* For InterWorx cldeploy script installs mod_hostinglimits, lve-utils, lve-stats packages. Find more about LVE Manager installation [here](https://www.interworx.com/support/faq/install-use-cloudlinux-plugin-interworx/)
+:::tip Note
+At the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 :::
-
-:::warning
-CloudLinux OS Shared 8 supports cPanel 11.94 and newer, Plesk Obsidian 18.0.33.0 and newer and DirectAdmin out of the box.
-:::
-
-ISPmanager 5 has native support for CloudLinux OS Shared. To deploy CloudLinux OS Shared on a server with ISPmanager 5, you would need to purchase CloudLinux OS Shared license directly from ISPSystems and follow ISPmanager's deployment guide.
-
-**Starting from version 1.61**, at the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 
 Automatic hybridization will be performed for the AMD processors with the following CPU families:
 
@@ -120,61 +124,58 @@ Automatic hybridization will be performed for the AMD processors with the follow
 * Hygon Dhyana
 
 Automatic hybridization may be skipped by passing extra option '--no-force-hybridize'.
-
-See also [advanced options for cldeploy](/command-line_tools/#cldeploy)
-
-:::tip Note
-We normally recommend to install `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.  
-But when you deploy CloudLinux OS Shared from the ISO image, these packages will be preinstalled. You can reinstall them after installing the control panel.
-:::
+See also [advanced options for cldeploy](/command-line_tools/#cldeploy).
 
 #### CLDeploy Explained
 
-By its design, CloudLinux OS Shared is very close to the upstream operating system, CentOS. This makes the conversion process relatively straightforward, requiring just one reboot. Here's what the cldeploy script does when you run it:
+By its design, CloudLinux OS Shared is very close to the upstream operating system - RHEL.
+This makes the conversion process relatively straightforward, requiring just one reboot. Here's what the cldeploy script does when you run it:
 
 * Backups the original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
 * Backups RHEL system ID into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
-* Installs CL repository settings & imports CL RPM key.
-* Replaces redhat/centos-release, redhat-release-notes, redhat-logos with CL version.
-* Removes cpuspeed RPM (as it conflicts with CPU limits).
-* Re-installs CL version of rhnlib/rhnplugin.
+* Installs CloudLinux repository settings & imports CloudLinux RPM key.
+* Replaces redhat/centos-release/almalinux-release, redhat-release-notes, redhat-logos with CloudLinux versions.
+* Removes cpuspeed RPM (as it conflicts with CloudLinux limits).
+* Reinstall CloudLinux version of rhnlib/rhnplugin.
 * Checks for binary kernel modules, finds replacement if needed.
-* Detects OVH servers and fixes mkinitrd issues.
+* Detects OVH servers and fixes mkinitrd and possible boot issues.
 * Detects Linode servers and fixes grub issues.
 * Checks if LES is installed.
 * Checks that <span class="notranslate">`/etc/fstab`</span> has correct <span class="notranslate">`/dev/root`</span>
-* Checks for efi.
-* Installs CL kernel, lve-utils, liblve, lve-stats RPMs.
-* Installs LVE Manager for cPanel, Plesk, DirectAdmin, and ISPManager<sup>*</sup>
+* Checks for EFI and performs the necessary configuration.
+* Installs CloudLinux kernel, lve-utils, liblve, lve-stats RPMs.
+* Installs CloudLinux Manager for the supported control panels.
 * Installs mod_hostinglimits Apache module <sup>*</sup>:
-  * RPM install for Plesk, ISPManager & InterWorx;
+  * RPM install for supported control panels;
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
-  * custombuild for DirectAdmin.
+  * Perform CustomBuild tool execution for DirectAdmin.
 
-#### CLDeploy Explained - reverting back to CentOS:
+#### CLDeploy Explained - Uninstallation:
 
-Here's what the cldeploy script does, if one runs it to revert the system back to CentOS:
+Here's what the cldeploy script does, if one runs it to uninstall CloudLinux:
 
-* Restores CentOS repositories, and centos-release/release-notes/logos.
-* Removes lve, mod_hostinglimits, lve-stats, lvemanager.
+* Restores CentOS/AlmaLinux repositories, and almalinux-release/centos-release/release-notes/logos.
+* Removes lve, mod_hostinglimits, lve-stats, lvemanager packages.
 * mod_hostinglimits RPM is removed.
 
-Note that **cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, we provide the instructions on how you could remove it manually later, when it is safe to do so.
+:::tip Note
+**cldeploy doesn't remove the kernel** to prevent condition when server has no kernels and wouldn't boot. Instead, script provide the instructions on how you could remove it manually later, when it is safe to do so.
+:::
 
 On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
-
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
+
+More information is also available here: [Uninstall CloudLinux](https://docs.cloudlinux.com/cloudlinux_installation/#uninstalling).
 
 #### Common issues and troubleshooting during conversion
 
-If you receive any troubles during the conversion process, most likely it is because of some licensing CLN (CloudLinux Network)-related issues. Check our troubleshooting guides here to resolve them:
-[https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919](https://cloudlinux.zendesk.com/hc/en-us/sections/360004626919)
+If you receive any troubles during the conversion process, please feel free to search our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us) or contact our support and attach the conversion log (/var/log/cldeploy.log).
 
 ## Activation
 
 ### Getting trial license
 
-You will need a trial activation key to be able to convert your CentOS server to CloudLinux OS Shared. The trial license subscription will work for 30 days.
+You will need a trial activation key to be able to convert your server to CloudLinux OS Shared. The trial license subscription will work for 30 days.
 
 If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
 
@@ -187,10 +188,9 @@ To get the activation key:
 
 You will get a key that looks like: `12314-d34463a182fede4f4d7e140f1841bcf2`
 
-Use it to register your system or to convert CentOS server to CloudLinux OS Shared server.
+Use it to register your system or to convert your server to CloudLinux OS Shared server.
 
 ### License activation
-
 
 To register your **CloudLinux OS Shared 6/7** server with CloudLinux Network using activation key, run the following command:
 
@@ -236,12 +236,10 @@ You can download the latest CloudLinux OS Shared ISO and use it to install Cloud
 
     * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/)
 
-
 * **Latest stable CloudLinux OS Shared 6 ISO**:
 
   * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
   * i386 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/i386/](https://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
-
 
 :::tip Note
 Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
@@ -271,9 +269,7 @@ Mount and boot the image, then follow the steps.
 
    ![](/images/software_selection.png)
 
-
 ## CloudLinux OS Shared images
-
 
 * [OpenStack QEMU/KVM](https://download.cloudlinux.com/cloudlinux/images/#kvm-tab)
 * [VMware](https://download.cloudlinux.com/cloudlinux/images/#vmware-tab)
@@ -312,7 +308,6 @@ To install CloudLinux 6 instead, use the following URL: [https://repo.cloudlinux
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
 
-
 ## Provider-specific guidelines
 
 * [Amazon Web Services](/cloudlinux_installation/#aws)
@@ -335,10 +330,8 @@ If you are going to use CloudLinux OS Shared with cPanel image, you may find use
 
 :::tip Note
 For H-Sphere 3.5+
-
 Please note, that CageFS and PHP Selector are not supported for H-Sphere
 :::
-
 
 #### Requirements
 
