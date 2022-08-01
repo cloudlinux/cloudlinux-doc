@@ -116,6 +116,10 @@ All CloudLinux-specific features are added as a separate module (kmod-lve).
 If after rebooting you do not see the CloudLinux kernel (the kernel has the abbreviation LVE in its name) then please consider check our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/) or contact [support](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
 :::
 
+:::warning Note
+SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
+:::
+
 :::tip Note
 At the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 :::
