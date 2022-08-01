@@ -8,7 +8,7 @@
 * [CPU limits](/deprecated/#cpu-limits)
 * [Package integration](/deprecated/#package-integration). You can use [Control panel integration guide](/control_panel_integration/) instead.
 * [Redis support for HostingLimits]()
-* [Migration to EA 4](/deprecated/#migration-to-easyapache-4)
+* [Migration to EA4](/deprecated/#migration-to-easyapache-4)
 
 ## Python Selector (Old)
 
@@ -2045,7 +2045,7 @@ LVERedisTimeout 120
 ```
 </div>
 
-## Migration to EasyApache 4
+## Migration to EA4
 
 * [Advices and limitations](/cloudlinux_installation/#advices-and-limitations)
 * [CentOS with EasyApache 4](/cloudlinux_installation/#centos-with-easyapache-4)
@@ -2053,7 +2053,7 @@ LVERedisTimeout 120
 * [CloudLinux OS Shared without EasyApache 4](/cloudlinux_installation/#cloudlinux-os-shared-without-easyapache-4)
 * [More about cloudlinux_ea3_to_ea4 script](/cloudlinux_installation/#more-about-cloudlinux-ea3-to-ea4-script)
 
-#### Advices and limitations
+### Advices and limitations
 
 * Use cPanel 11.55.999.66(55.999.66) or higher version.
 * <span class="notranslate">Hardened EA4</span> limitations:
@@ -2061,7 +2061,7 @@ LVERedisTimeout 120
 
 Follow the instructions [here](/cloudlinux_os_components/#installation-3) to install and configure mod_lsapi.
 
-#### CentOS with EasyApache 4
+### CentOS with EasyApache 4
 
 If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux OS Shared:
 
@@ -2069,7 +2069,7 @@ If EasyApache 4 was installed earlier on your CentOS server and you would like t
 
 2. Restart Apache service.
 
-#### CentOS without EasyApache 4
+### CentOS without EasyApache 4
 
 If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux OS Shared:
 
@@ -2086,7 +2086,7 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 
 (Find examples of <span class="notranslate">`cloudlinux_ea3_to_ea4`</span> script usage below).
 
-#### CloudLinux OS Shared without EasyApache 4
+### CloudLinux OS Shared without EasyApache 4
 
 Install EasyApache4 on clean CloudLinux OS Shared from ISO image or migrate to EasyApache4 on existings CloudLinux OS Shared servers:
 
@@ -2103,7 +2103,7 @@ cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4;
 (Find examples of `cloudlinux_ea3_to_ea4` script usage below).
 
 
-#### More about cloudlinux_ea3_to_ea4 script
+### More about cloudlinux_ea3_to_ea4 script
 
 About `cloudlinux_ea3_to_ea4` migration script parameters:
 
