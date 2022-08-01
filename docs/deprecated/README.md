@@ -1,4 +1,4 @@
-﻿# Deprecated
+# Deprecated
 
 * [Python Selector (Old)](/deprecated/#python-selector-old)
 * [Git for cPanel](/deprecated/#git-for-cpanel)
@@ -8,6 +8,7 @@
 * [CPU limits](/deprecated/#cpu-limits)
 * [Package integration](/deprecated/#package-integration). You can use [Control panel integration guide](/control_panel_integration/) instead.
 * [Redis support for HostingLimits]()
+* [Migration to EasyApache 4](/deprecated/#Migration-to-EasyApache-4)
 
 ## Python Selector (Old)
 
@@ -2043,3 +2044,126 @@ Number of seconds to wait before attempting to reconnect to Redis after the last
 LVERedisTimeout 120
 ```
 </div>
+
+## Migration to EasyApache 4
+
+* [Advices and limitations](/cloudlinux_installation/#advices-and-limitations)
+* [CentOS with EasyApache 4](/cloudlinux_installation/#centos-with-easyapache-4)
+* [CentOS without EasyApache 4](/cloudlinux_installation/#centos-without-easyapache-4)
+* [CloudLinux OS Shared without EasyApache 4](/cloudlinux_installation/#cloudlinux-os-shared-without-easyapache-4)
+* [More about cloudlinux_ea3_to_ea4 script](/cloudlinux_installation/#more-about-cloudlinux-ea3-to-ea4-script)
+
+#### Advices and limitations
+
+* Use cPanel 11.55.999.66(55.999.66) or higher version.
+* <span class="notranslate">Hardened EA4</span> limitations:
+  * **ea-php51** and **ea-php52** have no PHP-FPM support. Please use **mod_lsapi** instead.
+
+Follow the instructions [here](/cloudlinux_os_components/#installation-3) to install and configure mod_lsapi.
+
+#### CentOS with EasyApache 4
+
+If EasyApache 4 was installed earlier on your CentOS server and you would like to migrate to CloudLinux OS Shared:
+
+1. Convert server from CentOS  to CloudLinux (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+
+2. Restart Apache service.
+
+#### CentOS without EasyApache 4
+
+If EasyApache 4 was not installed earlier on your CentOS server and you would like to migrate to CloudLinux OS Shared:
+
+1. Convert server from CentOS to CloudLinux OS Shared (see [these instructions](/cloudlinux_installation/#converting-existing-servers)).
+
+2. Run:
+   
+<div class="notranslate">
+
+```
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --convert
+```
+</div>
+
+(Find examples of <span class="notranslate">`cloudlinux_ea3_to_ea4`</span> script usage below).
+
+#### CloudLinux OS Shared without EasyApache 4
+
+Install EasyApache4 on clean CloudLinux OS Shared from ISO image or migrate to EasyApache4 on existings CloudLinux OS Shared servers:
+
+1. Install cPanel.
+2. Run:
+
+<div class="notranslate">
+
+```
+cd ~; wget https://repo.cloudlinux.com/cloudlinux/sources/cloudlinux_ea3_to_ea4; sh cloudlinux_ea3_to_ea4 --convert
+```
+</div>
+
+(Find examples of `cloudlinux_ea3_to_ea4` script usage below).
+
+
+#### More about cloudlinux_ea3_to_ea4 script
+
+About `cloudlinux_ea3_to_ea4` migration script parameters:
+
+<div class="notranslate">
+
+```
+cloudlinux_ea3_to_ea4 [ADDITIONS] ACTIONS
+```
+</div>
+
+
+Usage:
+
+| | |
+|-|-|
+|<span class="notranslate">-h, --help</span>  | Print this message|
+
+`Actions` (required parameter, shows what should script do):
+
+| | |
+|-|-|
+|<span class="notranslate"> -c, --convert </span>  | Convert EA3 to EA4|
+|<span class="notranslate"> -r, --revert </span> | Revert to EA3|
+
+`Additions` (optional parameter, adds to action installation of extra components):
+
+| | |
+|-|-|
+|<span class="notranslate"> -m, --mod_lsapi </span> | Install mod_lsapi|
+|<span class="notranslate"> -p, --mod_passenger </span> | Install alt-mod-passenger|
+|<span class="notranslate"> -a, --altphp </span> | Install/Update alt-php|
+
+
+**Examples:**
+
+* If you want to install EA4 with mod_lsapi and update/install alt-php:
+  
+<div class="notranslate">
+
+```
+sh cloudlinux_ea3_to_ea4 --convert --mod_lsapi --altphp 
+```
+</div>
+
+* If you want to install EA4 with mod_lsapi, alt_mod_passenger and update/install alt-php:
+  
+<div class="notranslate">
+
+```
+sh cloudlinux_ea3_to_ea4 --convert --mod_lsapi --altphp --mod_passenger
+```
+</div>
+
+* To restore EA3 with mod_lsapi:
+
+<div class="notranslate">
+
+```
+sh cloudlinux_ea3_to_ea4 --revert --mod_lsapi
+```
+</div>
+
+See also: [FAQ](https://cloudlinux.zendesk.com/hc/articles/360025827914-CloudLinux-OS-Installation-FAQ)
