@@ -8,7 +8,7 @@
 * [CPU limits](/deprecated/#cpu-limits)
 * [Package integration](/deprecated/#package-integration). You can use [Control panel integration guide](/control_panel_integration/) instead.
 * [Redis support for HostingLimits]()
-* [Migration to EasyApache 4](/deprecated/#Migration-to-EasyApache-4)
+* [Migration to EA 4](/deprecated/#migration-to-easyapache-4)
 
 ## Python Selector (Old)
 
