@@ -2805,7 +2805,7 @@ After that directories <span class="notranslate">`/dir1`</span> and <span class=
 
 Note that actual location of those directories in real file system is <span class="notranslate">`$USER_HOME/.cagefs/dir1`</span> and <span class="notranslate">`$USER_HOME/.cagefs/dir2`</span>.
 
-**Cleanup PHP sessions**
+**Cleanup PHP sessions in cPanel**
 
 For cPanel servers, CageFS version 6.0-42 or higher performs cleaning of PHP sessions based on <span class="notranslate">`session.gc_maxlifetime`</span> and <span class="notranslate">`session.save_path`</span> directives specified in proper <span class="notranslate">`php.ini`</span> files.
 
@@ -2829,11 +2829,15 @@ This applies to the following <span class="notranslate"> Alt-PHP </span> version
 * alt-php71-7.1.9-5;
 * alt-php72-7.2.0-0.rc.2.2.
 
-When using EasyApache 3, <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/var/cpanel/php/sessions/ea3_ </span> or <span class="notranslate"> _/tmp_ </span> . Seettings for EasyApache 3 are usualy taken from the file <span class="notranslate"> _/usr/local/lib/php.ini_ . </span>
+When using EasyApache 3, <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/var/cpanel/php/sessions/ea3_ </span> or <span class="notranslate"> _/tmp_ </span> . Settings for EasyApache 3 are usualy taken from the file <span class="notranslate"> _/usr/local/lib/php.ini_ . </span>
 
 When using EasyApache 4, <span class="notranslate"> _session.save_path_ </span> value is normally <span class="notranslate"> _/var/cpanel/php/sessions/ea-phpXX_ ,  </span> where <span class="notranslate"> _XX_ </span> corresponds to PHP version.
 
 Cleaning is started by cron <span class="notranslate"> _/etc/cron.d/cpanel_php_sessions_cron_ </span> , which starts the script <span class="notranslate"> _/usr/share/cagefs/clean_user_php_sessions_ </span> twice within one hour.
+
+::: tip Note
+Script <span class="notranslate"> _clean_user_php_sessions_ </span> deletes only files which names match mask <span class="notranslate">`sess_[a-z0-9]*`</span>. If php was configured to use non-standart session file prefix in some custom save_handler, these session files wouldn't be managed by <span class="notranslate"> _clean_user_php_sessions_ </span>.
+:::
 
 The settings for ea-php are located in <span class="notranslate"> _/opt/cpanel/ea-phpXX/root/etc/php.d/local.ini_ </span> or in <span class="notranslate"> _/opt/cpanel/ea-phpXX/root/etc/php.ini_ </span> , where <span class="notranslate"> _XX_ </span> corresponds to the PHP version.
 
