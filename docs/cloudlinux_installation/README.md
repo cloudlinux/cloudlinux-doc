@@ -67,8 +67,7 @@ If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 * [cldeploy conversion script explained](/cloudlinux_installation/#cldeploy-explained).
 
 * Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
-* Download the conversion script: <span class="notranslate">[cldeploy](https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy)</span>.
-* If you have an activation key, run the following commands:
+* Run the following commands in order to download conversion script and run the installation:
   
 <div class="notranslate">
 
@@ -113,6 +112,10 @@ $ uname -r
 * For CloudLinux OS Shared 7 hybrid —  (RHEL) 4.18 kernel
 * For CloudLinux OS Shared 8 —  CloudLinux OS Shared 8 follows the upstream (RHEL) 4.18 kernel mainline.
 All CloudLinux-specific features are added as a separate module (kmod-lve).
+
+:::warning Note
+If after rebooting you do not see the CloudLinux kernel (the kernel has the abbreviation LVE in its name) then please consider check our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/) or contact [support](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
+:::
 
 :::tip Note
 At the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
