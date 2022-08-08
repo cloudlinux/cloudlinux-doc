@@ -6028,7 +6028,7 @@ See also [Ruby Selector CLI tools](/command-line_tools/#ruby-selector).
 
 #### **Requirements**
 
-* <span class="notranslate"> Node.js Selector </span>  supports Node.js versions 6.x, 8.x, 9.x, 10.x, 11.x, 12.x and 14.x.
+* <span class="notranslate"> Node.js Selector </span>  supports Node.js versions 6.x, 8.x, 9.x, 10.x, 11.x, 12.x, 14.x, and 16.x.
 * <span class="notranslate"> Node.js Selector requires LVE Manager 4.0 </span> or later.
 * It supports cPanel and DirectAdmin servers as well as non-panel installations (Plesk is not supported as it already has Node.js support.) For more details, please go to Plesk & Node.js documentation [here](https://www.plesk.com/blog/product-technology/node-js-plesk-onyx/) and [here](https://docs.plesk.com/en-US/onyx/administrator-guide/website-management/nodejs-support.76652/) .
 * For more details about <span class="notranslate"> mod_passenger </span>  and Node.js, please read documentation  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/)  and  [here](https://www.phusionpassenger.com/library/walkthroughs/deploy/nodejs/ownserver/apache/oss/el7/deploy_app.html) .
