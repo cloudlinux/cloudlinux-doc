@@ -59,6 +59,12 @@ If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 * DirectAdmin
 * CyberPanel ([Documentation](https://community.cyberpanel.net/t/1-convert-cyberpanel-to-cloudlinux-os-and-install-cagefs/174))
 * InterWorx ([Documentation](https://appendix.interworx.com/current/nodeworx/plugins/install-use-cloudlinux-plugin-interworx.html))
+* Webuzo ([Documentation](https://webuzo.com/docs/installing-webuzo/install-cloudlinux-os/))
+:::
+
+::warning Other control panels:
+Control panels not mentioned in the list of supported panels have native integration or integration by the developer of such a panel.
+We cannot guarantee the stability or correct operation of CloudLinux components on such panels.
 :::
 
 ---
