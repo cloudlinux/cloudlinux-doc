@@ -54,7 +54,7 @@ If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 * Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
 
 :::tip Supported control panels:
-* cPanel with EA4 ([EA3 is not supported](https://blog.cpanel.com/its-been-a-long-road-but-it-will-be-time-to-say-goodbye-soon/))
+* cPanel ([Documentation](https://docs.cpanel.net/installation-guide/system-requirements-cloudlinux/))
 * Plesk
 * DirectAdmin
 * CyberPanel ([Documentation](https://community.cyberpanel.net/t/1-convert-cyberpanel-to-cloudlinux-os-and-install-cagefs/174))
@@ -65,6 +65,11 @@ If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 :::warning Other control panels:
 Control panels not mentioned in the list of supported panels have native integration or integration by the developer of such a panel.
 We cannot guarantee the stability or correct operation of CloudLinux components on such panels.
+:::
+
+:::warning Warning:
+Some CloudLinux components may be unsupported depending on the control panel.
+You can verify this information when reviewing the system requirements for installing a particular component.
 :::
 
 ---
