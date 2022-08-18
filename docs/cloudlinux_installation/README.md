@@ -68,8 +68,8 @@ We cannot guarantee the stability or correct operation of CloudLinux components 
 :::
 
 :::warning Warning:
-Some CloudLinux components may be unsupported depending on the control panel.
-You can verify this information when reviewing the system requirements for installing a particular component.
+Some CloudLinux components may not be supported by the control panel itself or the control panel has its own analog of such a component.
+You can verify this information when reviewing the system requirements for installing a particular CloudLinux component.
 :::
 
 ---
