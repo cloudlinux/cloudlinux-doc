@@ -3690,18 +3690,6 @@ cPanel does not officially support MariaDB 10.4, that is why we don’t recommen
 MariaDB version 10.4 is not available for CloudLinux OS Shared 6 yet.
 :::
 
-::: tip Note
-Starting from cPanel & WHM version 70, cPanel supports MySQL 5.7: https://blog.cpanel.com/being-a-good-open-source-community-member-why-we-hesitated-on-mysql-5-7/
-:::
-
-::: tip Note
-Starting from cPanel & WHM version 78, cPanel supports MariaDB 10.3: https://documentation.cpanel.net/display/78Docs/MySQL+or+MariaDB+Upgrade 
-:::
-
-::: tip Note
-cPanel does not officially support MySQL 8.0, that is why we don’t recommend to use it on cPanel servers. Use on your own risk for <span class="notranslate"> DirectAdmin and Plesk </span> servers, because downgrade can corrupt your databases.
-:::
-
 :::tip Note
 See also MySQL Governor [CLI](/command-line_tools/#mysql-governor)
 :::
