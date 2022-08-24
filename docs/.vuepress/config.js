@@ -164,8 +164,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             url: "https://www.cloudlinux.com/getting-started-with-cloudlinux-os"
           },
           {
-            text: "Contact us",
-            url: "https://www.cloudlinux.com/contact/"
+            text: "Submit request",
+            url: "https://cloudlinux.zendesk.com/hc/en-us/requests/new"
           },
           { text: "Blog", url: "https://blog.cloudlinux.com/" },
           { text: "CloudLinux OS Solo Documentation", url: "https://docs.solo.cloudlinux.com/" }
