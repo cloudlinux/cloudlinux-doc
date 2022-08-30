@@ -3592,7 +3592,7 @@ pupkin3a_12 pupkin3a 506
 ```
 </div>
 
-This would specify that db users: <span class="notranslate"> pupkinas_us2, pupkinas_u1, pupkinas_u3 </span> belong to user <span class="notranslate"> pupkinas </span> with uid (lve id) 502
+This would specify that db users: <span class="notranslate"> pupkinas_u2, pupkinas_u1, pupkinas_u3 </span> belong to user <span class="notranslate"> pupkinas </span> with uid (lve id) 502
 db user <span class="notranslate"> pupkin2a_uuu1 </span> belongs to user <span class="notranslate"> pupkin2a </span> with uid 505, etc...
 	
 `db_governor` service checks this file for modifications every 5 minutes.
