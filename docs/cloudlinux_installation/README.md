@@ -751,40 +751,130 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 
 ### Virtuozzo and OpenVZ
 
-* [Installation](/cloudlinux_installation/#installation-2)
+* [Virtuozzo 7 and OpenVZ 7](/cloudlinux_installation/#virtuozzo-7-and-openvz-7)
+* [Virtuozzo 6 and OpenVZ 6](/cloudlinux_installation/#virtuozzo-6-and-openvz-6)
 
-:::warning Note
-Starting from November 1st, 2019, we do not support Virtuozzo and OpenVZ **containers**.
-However, you can run CloudLinux OS Shared on OpenVZ 6 and Virtuozzo 6 **hypervisors**. The hypervisor virtualization is the same as for **Xen/KVM/VMware**. Check how to run hypervisors [here](/cloudlinux_installation/#cloudlinux-os-images).
-:::
+
+#### Virtuozzo 7 and OpenVZ 7
+
+
+To use CloudLinux Shared Pro in Virtuozzo container, please update the next packages to the specified versions:  
+
+* alt-python27-cllib #3.2.31-1
+* lve-utils #6.4.2-1
+* lve-stats #4.1.20-1
+* lvemanager #7.7.3-1
+* alt-php-ssa-0.3-4
+* alt-php-xray-0.5-8
+* cloudlinux-linksafe-1-5.2
+* accelerate-wp-1.0-11
+
+#### Requirements
+
+* [Virtuozzo 7](https://wiki.openvz.org/Virtuozzo) as server system
+* Virtuozzo container with CloudLinux Shared Pro 8 
+* cloudlinux-updates-testing repo is enabled (+ `yum clean all`)
+
+#### How to install 
+
+1. repare Virtuozzo container with ostemplate almalinux-8-x86_64
+2. Enter to the container 
+3. Install cPanel:
+```
+cd /home && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest
+```
+4. Download and start cldeploy:
+```
+wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+chmod 775  cldeploy
+./cldeploy -k SHARED_PRO_CLN_KEY_HERE --testing-repo
+```
+5. You don't need to restart the container after the cldeploy script finished execution.
+
+
+#### Available functionality
+
+* Lsapi 
+* WP Accelerate
+* [Hardened PHP](https://docs.cloudlinux.com/control_panel_integration/#hardened-php)
+* [Website monitoring and Slow Site Analyzer](https://docs.cloudlinux.com/lve_manager/#website-monitoring-tool-and-slow-site-analyzer)
+* [X-Ray](https://docs.cloudlinux.com/cloudlinux-os-plus/#x-ray)
+* Wizard
+* Dashboard
+
+#### CloudLinux Wizard
+
+Wizard is a tool to set up CloudLinux OS Shared components.
+
+In the current version only the lsapi module can be installed.
+
+![](/images/WizardVZ.png)
+
+#### Dashboard
+
+CloudLinux OS Shared dashboard provides a quick overview of statistics and all administrative information for server administrators.
+
+In the current version only statistics about the lsapi module is available.
+
+![](/images/DashboardVZ.png)
+
+#### Lsapi 
+
+To install Lsapi via CloudLinux Wizard, please turn off mod_ruid2 in EasyApache 4 -> Apache Modules.
 
 :::tip Note
-* Virtuozzo 6 and OpenVZ 6 are supported.
-* Virtuozzo 7 and OpenVZ 7 are not supported.
+For EasyApache select `Currently Installed Packages`.
 :::
+
+![](/images/LsapiVZ1.png)
+
+![](/images/LsapiVZ2.png)
+
+![](/images/LsapiVZ3.png)
+
 
 :::tip Note
-Kernel 2.6.32-042stab088.4 or later required
+Currently mod_suexec is not available in containers and will be released in future versions. Just ignore this message, click "ok" and continue installing lsapi via the Wizard.
 :::
 
-CloudLinux OS Shared provides limited support for OpenVZ and Virtuozzo. At this stage only the following functionality works:
+You can find the complete lsapi documentation [here](https://docs.cloudlinux.com/cloudlinux_os_components/#apache-mod-lsapi-pro).
 
-* CageFS
-* PHP Selector
-* max entry processes
-* mod_lsapi
-* MySQL Governor
+#### AccelerateWP 
+
+If you'd like to try Smart Advice and AccelerateWP you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions.
+
+All additional information can be found [here](https://docs.cloudlinux.com/cloudlinux-os-plus/#acceleratewp).
+
+
+#### FAQ
+
+Q: My CloudLinux Manager-> options menu is empty.
+
+A: You don't have AccelerateWP enabled and PHP X-Ray enabled, so there is nothing to configure. Install and enable any of those features to see settings. This minor UI issue will be fixed in future updates.
+
+Q: Dashboard says both: that data is updated and that I need to refresh it and both panels never disappear.
+
+A: Just click the refresh button and reload the page, data will be loaded soon.
+
+Q: Website monitoring does not appear enabled after clicking the toggle.
+
+A: Just reload the page, the feature will be displayed as active.
+
+Q: Website monitoring proposes me to enable autotracing while I disable it.
+
+A: Issue is known and will be fixed soon.
+
+
+### Virtuozzo 6 and OpenVZ 6
 
 #### Installation
 
-VZ Node (needs to be done once for the server):
-
 :::tip Note
-Make sure all containers are stopped prior to doing this operation. Or reboot the server after the install.
+Make sure all containers are stopped prior to doing this operation. Or reboot the server after the installation.
 :::
 
 :::tip Note
-Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed. If no - install them with `yum`
+Please make sure you have <span class="notranslate">`vzkernel-headers`</span> and <span class="notranslate">`vzkernel-devel`</span> packages installed.
 :::
 
 <div class="notranslate">
@@ -798,11 +888,13 @@ $ yum install lve-kernel-module
 
 </div>
 
+
 This will setup LVE module for VZ kernel, as well as DKMS to update that module each time VZ kernel is updated.
 
 After this is done, you can add LVE support for any container on a node, at any time.
 
 To make CloudLinux OS Shared work inside VZ container, VZ node has to be enabled. This should be done for any container where LVE support needs to be added:
+
 
 <div class="notranslate">
 
@@ -822,7 +914,7 @@ $ vzctl set CT_ID --devnodes lve:none --save
 
 </div>
 
-Inside container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers).
+Inside the container, follow [standard CloudLinux installation procedures](/cloudlinux_installation/#converting-existing-servers).
 
 CloudLinux OS Shared license is required for each VZ container.
 
@@ -834,9 +926,21 @@ To increase `fs.ve-mount-nr`, on a host node:
 
 1. add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;
 
-2. apply it with <span class="notranslate">`sysctl -p`</span> command.
+2. apply it with the <span class="notranslate">`sysctl -p`</span> command.
 
 In very rare cases the value should be increased higher, up to 50000.
+
+#### Available functionality
+
+* CageFS
+* PHP Selector
+* max entry processes
+* mod_lsapi
+* MySQL Governor
+
+
+
+
 
 ## LILO boot loader
 
