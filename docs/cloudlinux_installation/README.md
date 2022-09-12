@@ -777,7 +777,7 @@ To use CloudLinux Shared Pro in Virtuozzo container, please update the next pack
 
 #### How to install 
 
-1. repare Virtuozzo container with ostemplate almalinux-8-x86_64
+1. Prepare Virtuozzo container with ostemplate almalinux-8-x86_64
 2. Enter to the container 
 3. Install cPanel:
 ```
