@@ -1,34 +1,6 @@
 # CloudLinux OS Shared Pro
 
-* [X-Ray](/cloudlinux-os-plus/#x-ray)
-  * [Description](/cloudlinux-os-plus/#description)
-  * [Installation](/cloudlinux-os-plus/#installation)
-  * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
-  * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
-  * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
-  * [X-Ray Smart Advice](/cloudlinux-os-plus/#x-ray-smart-advice)
-  * [X-Ray Autotracing](/cloudlinux-os-plus/#x-ray-autotracing)
-  * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
-  * [X-Ray automated throttling detection](/cloudlinux-os-plus/#x-ray-automated-throttling-detection)
-  * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
-  * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
-  * [FAQ](/cloudlinux-os-plus/#faq)
-* [Centralized Monitoring](/cloudlinux-os-plus/#centralized-monitoring)
-  * [Description](/cloudlinux-os-plus/#description-2)
-  * [Installation](/cloudlinux-os-plus/#installation-2)
-  * [Centralized Monitoring: mode without session expired](/cloudlinux-os-plus/#centralized-monitoring-mode-without-session-expired)
-  * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
-  * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
-  * [FAQ](/cloudlinux-os-plus/#faq-2)
-  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
-* [AccelerateWP](/cloudlinux-os-plus/#acceleratewp)
-  * [How to enable AccelerateWP](/cloudlinux-os-plus/#how-to-enable-acceleratewp)
-  * [Requirements](/cloudlinux-os-plus/#requirements-3)
-  * [How to install AccelerateWP](/cloudlinux-os-plus/#how-to-install-acceleratewp)
-  * [Administrator interface](/cloudlinux-os-plus/#administrator-interface)
-  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting-2)
-  * [Uninstalling](/cloudlinux-os-plus/#uninstalling)
-  * [FAQ](/cloudlinux-os-plus/#faq-3)
+[[toc]]
 
 ## X-Ray
 
@@ -1533,15 +1505,6 @@ You may use the following filters to browse AccelerateWP statistics slices.
 * `Users with AccelerateWP Premium only` filter will show statistics for users who utilizes AccelerateWP Premium (Object Caching) feature; users who did not activated AccelerateWP Premium feature will be hidden
 
 
-### Logs
-The main AccelerateWP log is located at
-* `/var/log/clwpos/main.log`
-
-
-In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwpos_monitoring` is also activated. Its log is located at
-* `/var/log/clwpos/daemon.log`
-
-
 ### Disable AccelerateWP for a particular user
 Use CLI commands to disable undesired optimization suites for a single user.
 
@@ -1569,6 +1532,15 @@ This operation will:
 * disable AccelerateWP tab in users' cPanel interface
 * disable all AccelerateWP optimization suites
 * deactivate all optimization features for all users
+
+
+### Logs
+The main AccelerateWP log is located at
+* `/var/log/clwpos/main.log`
+
+
+In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwpos_monitoring` is also activated. Its log is located at
+* `/var/log/clwpos/daemon.log`
 
 
 ### FAQ
