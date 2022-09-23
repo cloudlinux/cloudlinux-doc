@@ -1,34 +1,6 @@
 # CloudLinux OS Shared Pro
 
-* [X-Ray](/cloudlinux-os-plus/#x-ray)
-  * [Description](/cloudlinux-os-plus/#description)
-  * [Installation](/cloudlinux-os-plus/#installation)
-  * [How to manage <span class="notranslate">X-Ray</span>](/cloudlinux-os-plus/#how-to-manage-x-ray)
-  * [Managing tracing task](/cloudlinux-os-plus/#managing-tracing-task)
-  * [Managing continuous tasks](/cloudlinux-os-plus/#managing-continuous-tasks)
-  * [X-Ray Smart Advice](/cloudlinux-os-plus/#x-ray-smart-advice)
-  * [X-Ray Autotracing](/cloudlinux-os-plus/#x-ray-autotracing)
-  * [End-user X-Ray plugin](/cloudlinux-os-plus/#end-user-x-ray-plugin)
-  * [X-Ray automated throttling detection](/cloudlinux-os-plus/#x-ray-automated-throttling-detection)
-  * [<span class="notranslate">X-Ray</span> client](/cloudlinux-os-plus/#x-ray-client)
-  * [<span class="notranslate">X-Ray</span> service](/cloudlinux-os-plus/#x-ray-agent)
-  * [FAQ](/cloudlinux-os-plus/#faq)
-* [Centralized Monitoring](/cloudlinux-os-plus/#centralized-monitoring)
-  * [Description](/cloudlinux-os-plus/#description-2)
-  * [Installation](/cloudlinux-os-plus/#installation-2)
-  * [Centralized Monitoring: mode without session expired](/cloudlinux-os-plus/#centralized-monitoring-mode-without-session-expired)
-  * [Centralized Monitoring user interface](/cloudlinux-os-plus/#centralized-monitoring-user-interface)
-  * [Alert Manager](/cloudlinux-os-plus/#alert-manager)
-  * [FAQ](/cloudlinux-os-plus/#faq-2)
-  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting)
-* [AccelerateWP](/cloudlinux-os-plus/#acceleratewp)
-  * [How to enable AccelerateWP](/cloudlinux-os-plus/#how-to-enable-acceleratewp)
-  * [Requirements](/cloudlinux-os-plus/#requirements-3)
-  * [How to install AccelerateWP](/cloudlinux-os-plus/#how-to-install-acceleratewp)
-  * [Administrator interface](/cloudlinux-os-plus/#administrator-interface)
-  * [Troubleshooting](/cloudlinux-os-plus/#troubleshooting-2)
-  * [Uninstalling](/cloudlinux-os-plus/#uninstalling)
-  * [FAQ](/cloudlinux-os-plus/#faq-3)
+[[toc]]
 
 ## X-Ray
 
@@ -1453,322 +1425,272 @@ Use this logging with caution because when it is enabled, the size of the daemon
 
 ## AccelerateWP
 
-AccelerateWP is an improved and updated WP Optimization Suite. AccelerateWP is a suite of optimization modules which can be enabled and automatically configured for the end-user site.  
+### Overview
+AccelerateWP carries suites of optimization features which can be enabled and automatically configured for the end-user's site.
 
-There are Object Cache and Site Optimization modules.
+There are AccelerateWP and AccelerateWP Premium feature suites.
 
-:::warning Attention!
-The Site Optimization module will be free forever.
-The Object Cache module will be free only during the testing period and after that it will be charged.
+#### AccelerateWP suite
+This is a free suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
+
+#### AccelerateWP Premium suite
+:::tip Note
+If you'd like to try AccelerateWP Premium suite, you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/).  Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions.
 :::
 
-An administrator has the *CloudLinux Manager → AccelerateWP* tab to manage modules that will be available for enabling on websites.
+This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
 
+The Object Caching mechanism stores database query results in additional storage for quick access. This mechanism is really helpful in case if website needs to process multiple pages per second as requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
 
-:::warning Warning!
-* This is a beta release. By default AccelerateWP suite is disabled in the current release. See [How to enable AccelerateWP](/cloudlinux-os-plus/#how-to-enable-acceleratewp).
-* Please turn on the Object Cache module if you are sure! Turning it ON can really increase performance, but in a limited scope of cases!
-* All operations which destroy LVE will clean the Object Cache! Such operations include operations with CageFS, but do not include operations with  setting LVE limits.
+:::warning Attention
+This feature is free of charge only during the beta testing period. Afterwards it will be charged.
 :::
 
-### How to enable AccelerateWP
+**Premium suite limitations**
 
-If you'd like to try Smart Advice and AccelerateWP you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions. 
+* the websites must be served with Apache web server;
+* the websites must use one of the following PHP handlers:
+  * [php-fpm](https://blog.cpanel.com/how-to-use-php-fpm-with-cpanel/)
+  * [lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro)
 
-### Requirements
+### Limitations
+There are the following requirements to use AccelerateWP:
+* the server must have CloudLinux Shared PRO license;
+* the server must be powered with cPanel.
 
-* CloudLinux OS Shared Pro (6,7,8)
-* cPanel
-* WordPress version 3.7 and higher
-* Required any (ea-, alt-) php 5.6+ version with loaded redis extension 
-* PHP handlers: [php-fpm](/cloudlinux-os-plus/#how-to-set-up-a-php-fpm-handler-for-the-domain) or php-lsapi (Apache)
-* Apache only (LiteSpeed is not supported yet, coming soon)
 
 ### Administrator interface
 
-Go to the *CloudLinux Manager → AccelerateWP*
+#### Overview
+In the _CloudLinux Manager → AccelerateWP_ tab Administrator has the opportunity to provide end-users with suites of features, which on its turn could be activated by end-users.
 
-![](/images/AccelerateWPMain.png)
+![](/images/AWPAdmin.png)
 
-An administrator can enable the AccelerateWP feature and it’s icon visualization by the *Enable this feature and show plugin icon for all users* slider.
+By toggling the `Enable AccelerateWP for all users` administrator provides end-users with AccelerateWP feature.
+Once the feature suite is enabled by administrator, end-users will see an AccelerateWP tab in their cPanel interface and be able to activate the optimization feature.
 
-:::tip Warning!
-End-users should enable the module in their interface for the particular website.
-:::
+#### Suites usage statistics
+Once at least one feature suite is enabled, the AccelerateWP usage statistics is shown.
 
-Just added users will appear in the list during 10 min after adding. If you want to get an actual list of users, use the Rescan button.
+![](/images/AWPStats.png)
 
-![](/images/RescanBtn.png)
+It includes:
+* `Active Users` block with total number of users and number of users who has activated the optimization feature/total users
+* `Wordpress sites on server` block with total number of WordPress sites and WordPress sites optimized by the feature
+* statistics table
 
-To allow using modules for all users, you can use the following buttons:
+Each row in the statistics table represents a particular user.
 
-![](/images/AllowBtns.png)
+First column `#of Wordpress sites` shows total number of user's WordPress sites.
 
+Second column `AccelerateWP` shows number of user's WordPress sites, optimized by the feature.
 
-The **Allow** option will make all necessary changes to configuration so the end-user can start working with the AccelerateWP successfully.
+In case if both AccelerateWP and AccelerateWP Premium feature suites are enabled, the statistics is extended with AccelerateWP Premium metrics.
 
-The **Deny** option (means “suspend feature usage”) will make all necessary changes to configuration so all enabled WP caching plugins will be turned off.
+![](/images/AWPStatsPremium.png)
 
-:::tip Warning!
-All users custom configurations will be saved, so they can be used in case the admin allows working with the module.
+Please, notice `AccelerateWP Premium` rows in `Active Users` and `Wordpress sites on server` blocks, and also an `AccelerateWP Premium` column in statistics table.
+
+:::tip Note
+Newly created users will be accounted during 10 min after adding. If  you want to get updated statistics immediately, use the "Rescan users websites" button
 :::
 
 #### Filters
+You may use the following filters to browse AccelerateWP statistics slices.
 
-![](/images/WPOSFilters.png)
+![](/images/AWPFilters.png)
 
-* Users with **WordPress sites only** will show the list of users which already have WordPress sites
-* Users with **Object Cache enabled only** will show the list of users with the Object Cache Module allowed by the admin (it is not a website with configured Object Cache Module by user)
-* Users with **Site Optimization enabled only**  will show the list of users with the Site Optimization Module allowed by the admin (it is not a website with configured Site Optimization by user)
+* `Users with WordPress sites only` filter will show statistics for users which already have WordPress sites; users without WordPress installations will be hidden
+* `Users with AccelerateWP only` filter will show statistics for users who utilizes the AccelerateWP optimization feature; users who did not activated AccelerateWP feature will be hidden
+* `Users with AccelerateWP Premium only` filter will show statistics for users who utilizes AccelerateWP Premium (Object Caching) feature; users who did not activated AccelerateWP Premium feature will be hidden
 
-#### AccelerateWP suite log files
 
-The  AccelerateWP suite log files are located in:
+### Disable AccelerateWP for a particular user
+Use CLI commands to disable undesired optimization suites for a single user.
 
+To disable AccelerateWP suite:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp --disallowed --users=<username>
+```
+
+To disable AccelerateWP Premium suite:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --disallowed --users=<username>
+```
+
+To disable both suites:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
+```
+
+### Disable AccelerateWP
+If you would like to stop using AccelerateWP, toggle the `Enable AccelerateWP for all users` back.
+
+![](/images/AWPDisable.png)
+
+This operation will:
+* disable AccelerateWP tab in users' cPanel interface
+* disable all AccelerateWP optimization suites
+* deactivate all optimization features for all users
+
+
+### Logs
+The main AccelerateWP log is located at
 * `/var/log/clwpos/main.log`
+
+
+In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwpos_monitoring` is also activated. Its log is located at
 * `/var/log/clwpos/daemon.log`
+
+
+### FAQ
+
+#### With which panel can I use AccelerateWP?
+Currently AccelerateWP is compatible with cPanel only.
+
+If you are interested in supporting Plesk or DirectAdmin control panels, please record your demand on our feature portal respectively:
+* [AccelerateWP for Plesk](https://features.cloudlinux.com/c/13-acceleratewp-for-plesk?utm_medium=social&utm_source=portal_share)
+* [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share)
+
+#### Does WP Accelerate tool support the DirectAdmin control panel? Do you plan to integrate it with Plesk?
+Currently AccelerateWP is compatible with cPanel only.
+
+If you are interested in supporting Plesk or DirectAdmin control panels, please record your demand on our feature portal respectively:
+* [AccelerateWP for Plesk](https://features.cloudlinux.com/c/13-acceleratewp-for-plesk?utm_medium=social&utm_source=portal_share)
+* [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share)
+
+#### Is it possible to use AccelerateWP on a non-control panel server?
+No, AccelerateWP is compatible with cPanel only.
+
+#### Do you plan to enable support of Nginx server?
+This is a part of our very long term plans, thus not expected in the nearest future.
+
+#### How will it help my customers?
+AccelerateWP is a complex solution to help your customers increase their WordPress site performance. AccelerateWP brings number of optimization features, like object caching, css and js preprocessing and website preloading.
+
+#### How could I monitor Redis instances while using AccelerateWP Premium suite?
+Redis process is started for a user after activating AccelerateWP Premium Object Caching feature for at least one Wordpress site.
+It is killed after AccelerateWP Premium Object Caching has been deactivated for all user's websites.
+
+Look through the processes list to check Redis status for a particular user:
+```
+ $ ps aux | grep redis
+ awpuser  2662517  0.0  0.5 101096  8512 ?        Sl   15:33   0:00 /opt/alt/redis/bin/redis-server unixsocket:/home/awpuser/.clwpos/redis.sock
+```
+In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwpos_monitoring` is also activated. It checks Redis instances each 5 minutes, starts new instances, restart failed ones and kills the “garbage” instances if needed.
+Check daemon status using `service clwpos_monitoring status` and its main log: `/var/log/clwpos/daemon.log`.
+
 
 ### Troubleshooting
 
-#### Configuring Redis extension for installed PHP versions
+#### End-users of AccelerateWP Premium feature encounter Redis extension is not installed for selected php version
+In order to make use of AccelerateWP Premium Object Caching feature, the loaded Redis extension is required for the end-user's website.
+End-users will not be able to activate the Object Caching feature until Redis extension configuration is incomplete.
 
-Enabling the Object Cache module for a specific WordPress website requires a presence and loaded Redis extension for the PHP version chosen for the website. The Redis extension is configured for all installed and [supported](/cloudlinux-os-plus/#requirements) ea-php and alt-php versions automatically, right after system administrator allows WP Optimization suite for at least one end-user.
+Corresponding incompatibility warning will be displayed in cPanel User interface:
 
-Users will not be able to turn on the Object Cache module until Redis extension configuration is not completed. Corresponding incompatibility warning will be displayed in user`s plugin:
+![](/images/AWPNoRedis.png)
 
-![](/images/IncompatibilityWarning.png)
+The Redis extensions are configured for all installed and supported PHP versions automatically:
+* right after the AccelerateWP Premium suite is enabled
+* by cron once a day
 
-To ensure PHP extension is configured correctly, do the following. 
-
-**For ea-php**
-
-Check Redis extension package is installed by running the following command:
-
-```
-rpm -q ea-phpXY-php-redis
-```
-
-Example:
-
-```
-rpm -q ea-php74-php-redis
-```
-
-Check Redis ini is present by running the following command:
-
-
-```
-ls /opt/cpanel/ea-phpXY/root/etc/php.d/ | grep 50-redis
-```
-
-Make sure Redis module is loaded under user by running the following command:
-
-```
-su -c "php -m | grep redis" <username>
-```
-
-Automatic Redis configurations for ea-php is triggered by cron once a day: `/etc/cron.d/clwpos_redis_extension_installer`.
-
-You can run utility for Redis configuration manually:
-
+or you can trigger the utility manually:
 ```
 /usr/sbin/enable_redis_for_ea_php
 ```
 
-All errors must be present in stdout or in the main log: `/var/log/clwpos/main.log`.
+All errors will be displayed in standard output and logged into `/var/log/clwpos/main.log`.
 
 
-**For alt-php**
+**Ensuring the EA-PHP Redis extension is configured correctly**
 
-Redis will be configured for a specific alt-php version automatically, only if `redis.so` is present on the server.
+1. Check Redis extension package is installed by running the following command
 
-```
-ls /opt/alt/phpXY/usr/lib64/php/modules | grep redis.so
-```
-
-If the Redis module is present for php, but end-user is still facing incompatibility issue, re-check the following:
-
-
-* make sure the Redis module is loaded under user:
-
+    ```
+    rpm -q ea-phpXY-php-redis
+    ```
+    Install the corresponding extension if it is not present:
+    ```
+    yum install ea-phpXY-php-redis
+    ```
+    Consider the example for checking out and installing Redis extension for `ea-php74`: 
+    ```
+    rpm -q ea-php74-php-redis
+    yum install ea-php74-php-redis
+    ```
+8. Check Redis `ini` file is present by running the following command:
+    ```
+    ls /opt/cpanel/ea-phpXY/root/etc/php.d/ | grep 50-redis
+    ```
+    Consider the example for checking out Redis extension for `ea-php74`: 
+    ```
+    ls /opt/cpanel/ea-php74/root/etc/php.d/ | grep 50-redis
+    ```
+    Try reinstalling the package if `ini` file is missing.
+13. Make sure Redis module is loaded under specific user by running the following command:
     ```
     su -c "php -m | grep redis" <username>
     ```
 
-* check required extensions are enabled in php.ini:
 
+**Ensuring the ALT-PHP Redis extension is configured correctly**
+
+1. Check if `redis.so` is present for a particular alt-php version:
+    ```
+    ls /opt/alt/phpXY/usr/lib64/php/modules | grep redis.so
+    ```
+    Consider the example for checking alt-php74 redis.so:
+    ```
+    ls /opt/alt/php74/usr/lib64/php/modules | grep redis.so
+    redis.so
+    ```
+6. If the Redis module is missing:
+   7. install the `alt-phpXY-pecl-ext` package manually
+   8. run the Redis configuration script `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py` 
+      
+      All errors will be displayed in standard output and logged into `/var/log/clwpos/main.log`.
+10. If the Redis module is present for a particular php version, but the incompatibility issue persists, re-check the following:
+    11. make sure the Redis module is loaded under user:
+    ```
+    su -c "php -m | grep redis" <username>
+    ```
+    13. check the required extensions are enabled in `php.ini`:
     ```
     cat /opt/alt/phpXY/etc/php.ini | grep redis.so
     cat /opt/alt/phpXY/etc/php.ini | grep json.so
     cat /opt/alt/phpXY/etc/php.ini | grep igbinary.so
     ```
-
-If the Redis module is not present, it is needed to install the `alt-phpXY-pecl-ext` package manually and run the Redis configuration script: `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py`.
-
-All errors must be present in stdout or in main log: `/var/log/clwpos/main.log`.
-
-#### Allowing module for end-users
-
-Object Cache module is allowed:
-
-![](/images/ModuleAllowed.png)
-
-But the plugin is still unavailable for the end-user:
-
-![](/images/PluginUnavailable.png)
-
-There could be several reasons.
-
-1. Ensure object cache is really allowed in configs:
     
-    ```
-    id - u <username> # user uid
-    cat /var/clwpos/uids/<uid>/modules_allowed.json
-    ```
-
-    Check config as user:
-    
-    ```
-    su -c "cat /var/clwpos/uids/<uid>/modules_allowed.json" <username>
-    ```
-
-    If module is enabled, the file must contain the following:
-
-    ```
-    {"version": "1","modules": {"object_cache": true}}
-    ``` 
-
-    If file is not accessible under user and user is in CageFS, try to re-check CageFS mount points:
-
-    ```
-    cat /etc/cagefs/cagefs.mp | grep var/clwpos/uids
-    */var/clwpos/uids
-    ```
-
-    If there is no such mount point, try to fix it manually:
-
-    ```
-    echo '*/var/clwpos/uids' >> /etc/cagefs/cagefs.mp && cagefsctl --remount-all
-    ```
-
-2. Error happened during `clwpos-user` get command execution:
-
-    Run manually the clwpos-user get command under corresponding user and check logs:
-    
-    ```
-    su -c “clwpos-user get” <username>
-    cat /home/<username>/.clwpos/main.log
-    ```
+    Enable missing extensions manually.
 
 
-Also, right after allowing module for user, ensure the AccelerateWP icon displaying is turned on as well:
+#### End-users of AccelerateWP encounter PHP-related issues during feature activation
+End-users may encounter PHP-related errors while activating the AccelerateWP features.
 
-![](/images/WPOSIconCheck.png)
+![](/images/AWPBrokenPHP.png)
 
-It allows to show the AccelerateWP suite for all users:
+The general examples of possible reasons are:
+* broken PHP binaries
+* missed PHP files
+* etc.
 
-![](/images/WPOSAllowTool.png)
-
-Check the `hideWPOSApp` setting is set to `false`
-
+To check that this issue is caused by PHP itself, call any PHP command, for example:
 ```
- cloudlinux-config get --json
-…..
- "hideWPOSApp": false
-…..
+/opt/cpanel/ea-php80/root/usr/bin/php -i
 ```
+And make sure that installed `ea-php80` packages are not broken using
+`rpm -V <package_name>`.
 
-Settings are stored in the `/usr/share/l.v.e-manager/lvemanager-config.json`.
+Reinstall broken packages if found.
 
-#### General PHP issues
-
-Both administrator and end-user may face some common PHP errors that are not related to the AccelerateWP suite. They could be caused by broken PHP binaries, missed PHP files, etc and may affect the AccelerateWP suite.
-
-For example, the error with loading library:
-
+Consider the example issue (presented at the picture above) with broken `mbstring.so` for `ea-php80`:
 ```
-/opt/cpanel/ea-php70/root/usr/bin/php: error while loading shared libraries: libncurses.so.6: cannot open shared object file: No such file or directory
+# /opt/cpanel/ea-php80/root/usr/bin/php -i
+Segmentation fault (core dumped)
+# rpm -V ea-php80
+# rpm -V ea-php80-php-mbstring
+S.5....T.    /opt/cpanel/ea-php80/root/usr/lib64/php/modules/mbstring.so
+......G..  a /usr/lib/.build-id/9c/38ed78a6d401ff6dce059ccea51c95870d98c5
+# yum reinstall ea-php80-php-mbstring
 ```
-
-To check that this issue is caused by PHP, call any PHP command, e.g:
-
-```
-/opt/cpanel/ea-php70/root/usr/bin/php -i
-```
-And make sure that installed ea-php70 packages are not broken via `rpm -V <package_name>`. Reinstall broken packages if found.
-
-#### Monitoring user's Redises
-
-Redis process is started for each user after Object Cache has been enabled for at least one WordPress website. Also it is killed after object cache has been disabled for all sites. Look through the processes list to check Redis status for user:
-
-```
- ps aux | grep redis
-username     107845  0.1  0.1 216712  4708 ?        Sl   07:15   0:00 /opt/alt/redis/bin/redis-server unixsocket:/home/<username>/.clwpos/redis.sock
-```
-
-Additionally, there is the daemon to manage user`s Redises: clwpos_monitoring. It checks Redises each 5 minutes, starts or kills the “garbage” Redises if needed. 
-
-Try to look at service status: `service clwpos_monitoring status` and main daemon log: `/var/log/clwpos/daemon.log`.
-
-
-### Uninstalling
-
-To uninstall the AccelerateWP suite, run the following command:
-
-```
-/usr/bin/clwpos-erase
-```
-
-Execute this command before both: complete lve-utils package uninstallation and for downgrading the system to the version that does not support the AccelerateWP suite.
-
-
-### FAQ
-
-#### With which panel can I use the CloudLinux Shared Pro AccelerateWP suite?
-
-In the current release only  with cPanel. In the next releases it will be available for DirectAdmin.
-
-#### How will it help my customers?
-
-In the current version, the AccelerateWP suite automatically configures the Object Cache module per website. In the next releases we will add modules to help automatically increase performance for the WordPress websites. 
-
-#### How to set up a php-fpm handler for the domain?
-
-Since the php-fpm handler is required to use the AccelerateWP suite, you may need to configure it manually.
-
-1. Ensure the php-fpm package for the current PHP version is installed or install it. 
-    * manual installation:
-    ```
-    yum -y install ea-phpXY-php-fpm
-    ```
-    XY - is you PHP version, for instance `ea-php74-php-fpm`
-    * via MultiPHP Manager:
-
-    ![](/images/ViaMultiPHPManager.png)
-
-2. Enable php-fpm handler for domain via MultiPHP Manager:
-
-![](/images/EnableMultiPHP.png)
-
-#### How to install php-lsapi for the domain?
-
-Please use the [documentation](https://docs.cloudlinux.com/cloudlinux_os_components/#apache-mod-lsapi-pro).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
