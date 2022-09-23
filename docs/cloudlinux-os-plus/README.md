@@ -1426,7 +1426,8 @@ Use this logging with caution because when it is enabled, the size of the daemon
 ## AccelerateWP
 
 ### Overview
-AccelerateWP carries suites of optimization features which can be enabled and automatically configured for the end-user's site.
+
+AccelerateWP carries a suite of optimization features that can be enabled and automatically configured for the end-user's site.
 
 There are AccelerateWP and AccelerateWP Premium feature suites.
 
@@ -1435,7 +1436,7 @@ This is a free suite which includes [AccelerateWP base feature](https://user-doc
 
 #### AccelerateWP Premium suite
 :::tip Note
-If you'd like to try AccelerateWP Premium suite, you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/).  Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions.
+If you'd like to try AccelerateWP Premium suite, you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions.
 :::
 
 This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
@@ -1462,11 +1463,11 @@ There are the following requirements to use AccelerateWP:
 ### Administrator interface
 
 #### Overview
-In the _CloudLinux Manager → AccelerateWP_ tab Administrator has the opportunity to provide end-users with suites of features, which on its turn could be activated by end-users.
+In the _CloudLinux Manager → AccelerateWP_ tab an administrator has the opportunity to provide end-users with a suite of features, which on its turn could be activated by end-users.
 
 ![](/images/AWPAdmin.png)
 
-By toggling the `Enable AccelerateWP for all users` administrator provides end-users with AccelerateWP feature.
+By toggling the `Enable AccelerateWP for all users` an administrator provides end-users with AccelerateWP feature.
 Once the feature suite is enabled by administrator, end-users will see an AccelerateWP tab in their cPanel interface and be able to activate the optimization feature.
 
 #### Suites usage statistics
@@ -1481,18 +1482,18 @@ It includes:
 
 Each row in the statistics table represents a particular user.
 
-First column `#of Wordpress sites` shows total number of user's WordPress sites.
+The first column `#of Wordpress sites` shows total number of user's WordPress sites.
 
-Second column `AccelerateWP` shows number of user's WordPress sites, optimized by the feature.
+The second column `AccelerateWP` shows number of user's WordPress sites, optimized by the feature.
 
 In case if both AccelerateWP and AccelerateWP Premium feature suites are enabled, the statistics is extended with AccelerateWP Premium metrics.
 
 ![](/images/AWPStatsPremium.png)
 
-Please, notice `AccelerateWP Premium` rows in `Active Users` and `Wordpress sites on server` blocks, and also an `AccelerateWP Premium` column in statistics table.
+Please notice the `AccelerateWP Premium` rows in the `Active Users` and the `Wordpress sites on server` blocks, and also the `AccelerateWP Premium` column in statistics table.
 
 :::tip Note
-Newly created users will be accounted during 10 min after adding. If  you want to get updated statistics immediately, use the "Rescan users websites" button
+Newly created users will be accounted for 10 min after adding. If you want to get updated statistics immediately, use the "Rescan users websites" button.
 :::
 
 #### Filters
