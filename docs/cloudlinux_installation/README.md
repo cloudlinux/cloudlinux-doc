@@ -758,16 +758,34 @@ In case if you will migrate to KVM later you will need only switch the boot sett
 #### Virtuozzo 7 and OpenVZ 7
 
 
-To use CloudLinux Shared Pro in Virtuozzo container, please update the next packages to the specified versions:  
+To use CloudLinux Shared Pro in Virtuozzo container, please update the next packages to the specified versions (or higher):  
 
-* alt-python27-cllib #3.2.31-1
-* lve-utils #6.4.2-1
-* lve-stats #4.1.20-1
-* lvemanager #7.7.3-1
 * alt-php-ssa-0.3-4
 * alt-php-xray-0.5-8
 * cloudlinux-linksafe-1-5.2
 * accelerate-wp-1.0-11
+* lvemanager-7.7.5-2
+* alt-python27-cllib-3.2.32-1
+* pam_lve-0.4-3	
+* lve-wrappers-0.7.7-1
+* lve-utils-6.4.3-1
+* cagefs-7.5.1-1
+* liblve-2.1-11
+* tuned-profiles-cloudlinux-0.2-3
+
+
+#### Available functionality
+ 
+* [Lsapi](/cloudlinux_installation/#lsapi)
+* [AccelerateWP](/cloudlinux_installation/#acceleratewp)
+* [Hardened PHP](/control_panel_integration/#hardened-php)
+* [Website monitoring and Slow Site Analyzer](/lve_manager/#website-monitoring-tool-and-slow-site-analyzer)
+* [X-Ray](/cloudlinux-os-plus/#x-ray)
+* [CageFS](/cloudlinux_installation/#cagefs)
+* [PHP Selector](/cloudlinux_installation/#php-selector)
+* [Wizard](/cloudlinux_installation/#cloudlinux-wizard)
+* [Dashboard](/cloudlinux_installation/#dashboard)
+
 
 #### Requirements
 
@@ -791,16 +809,6 @@ chmod 775  cldeploy
 ```
 5. You don't need to restart the container after the cldeploy script finished execution.
 
-
-#### Available functionality
-
-* Lsapi 
-* WP Accelerate
-* [Hardened PHP](https://docs.cloudlinux.com/control_panel_integration/#hardened-php)
-* [Website monitoring and Slow Site Analyzer](https://docs.cloudlinux.com/lve_manager/#website-monitoring-tool-and-slow-site-analyzer)
-* [X-Ray](https://docs.cloudlinux.com/cloudlinux-os-plus/#x-ray)
-* Wizard
-* Dashboard
 
 #### CloudLinux Wizard
 
@@ -846,6 +854,55 @@ If you'd like to try Smart Advice and AccelerateWP you should participate in the
 All additional information can be found [here](https://docs.cloudlinux.com/cloudlinux-os-plus/#acceleratewp).
 
 
+#### CageFS
+
+You can fing CageFS documentation [here](/cloudlinux_os_components/#cagefs).
+
+:::warning Attention!
+[Kernel config variables](/cloudlinux_os_kernel/#kernel-config-variables) are not available for the Virtuozzo container!
+:::
+
+
+#### PHP Selector
+
+#### How to install
+
+1. To install via SSH, update your packages in the container:
+   ```sh
+   yum update alt-python27-cllib pam_lve lve-wrappers lve-utils liblve tuned-profiles-cloudlinux lvemanager
+   ```
+2. The following commands can be executed via SSH or via CloudLinux Wizard 
+   **Via SSH:**
+   ```sh
+   yum install cagefs
+   yum groupinstall alt-php
+   cagefsctl –init
+   ```
+   **Via CloudLinux Wizard (cPanel only):**
+   ![](/images/CLWizardInstallation.png)
+3. Make sure compatible handlers are installed:
+   **Via SSH:**
+   ```
+   yum install ea-apache24-mod_suexec
+   yum install ea-apache24-mod_suphp
+   ```
+   **Or**<br>
+   [Install lsapi](/cloudlinux_os_components/#installing-on-cpanel-servers-with-easyapache-4)<br>
+   **It's also possible to install via CloudLinux Wizard:**<br>
+   The `mod_suexec` and `mod_suphp` can be installed via cPanel EasyApache4 installation tool.<br><br>
+4. Make sure users are enabled in the CageFS:
+   ![](/images/UsersEnabled.png)
+
+Useful links:
+
+* [General information and requirements](/cloudlinux_os_components/#general-information-and-requirements-5)
+	* [Installation and update](/cloudlinux_os_components/#installation-and-update-4)
+	* [Installation instructions for cPanel users](/cloudlinux_os_components/#installation-instructions-for-cpanel-users)
+* [Uninstalling](/cloudlinux_os_components/#uninstalling-3)
+	* [Configuration and using](/cloudlinux_os_components/#configuration-and-using)
+	* [Bundled PHP extensions](/cloudlinux_os_components/#bundled-php-extensions)
+
+
 #### FAQ
 
 Q: My CloudLinux Manager-> options menu is empty.
@@ -865,7 +922,21 @@ Q: Website monitoring proposes me to enable autotracing while I disable it.
 A: Issue is known and will be fixed soon.
 
 
-### Virtuozzo 6 and OpenVZ 6
+#### Known restrictions and issues
+
+1. We do not recommend using [disk quota](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/ch-disk-quotas) inside of containers - PHP Selector may be not functional for a user when disk quota is exceeded for the user.
+
+2. The following systemd directives may break CageFS inside containers:
+   * PrivateDevices
+   * PrivateMounts
+   * PrivateTmp
+   * ProtectSystem
+   * ReadOnlyDirectories
+   * ReadWriteDirectories
+   * InaccessibleDirectories
+   * ProtectHome
+
+#### Virtuozzo 6 and OpenVZ 6
 
 #### Installation
 
