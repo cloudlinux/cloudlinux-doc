@@ -1432,7 +1432,7 @@ AccelerateWP carries a suite of optimization features that can be enabled and au
 There are AccelerateWP and AccelerateWP Premium feature suites.
 
 #### AccelerateWP suite
-This is a free suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
+This is a basic suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
 
 #### AccelerateWP Premium suite
 :::tip Note
