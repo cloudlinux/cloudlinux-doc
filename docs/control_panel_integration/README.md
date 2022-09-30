@@ -42,7 +42,7 @@ Most of the integration is done within a few steps:
 
 ## General
 
-* [Example of the integration config](/control_panel_integration/#example-of-the-integration-config)
+* [of the integration config](/control_panel_integration/#example-of-the-integration-config)
 
 To integrate CloudLinux OS Shared into a control panel, you should implement the following interfaces required by the CloudLinux OS Shared utilities:
 * [CPAPI](/control_panel_integration/#control-panel-api-integration) — a small scripts/files-type interface to get the required information from the control panel
@@ -377,6 +377,7 @@ Returns the information about the control panel in the specified format.
 			"nodejs_selector": false,
 			"mod_lsapi": true,
 			"mysql_governor": true,
+			"lve": true,
 			"cagefs": true,
 			"reseller_limits": true,
 			"xray": false
@@ -2171,6 +2172,7 @@ PHP interpreter configuration for each domain is to be placed in the nested key-
 			"mod_lsapi": true,
 			"mysql_governor": true,
 			"cagefs": true,
+			"lve": true,
 			"reseller_limits": true,
 			"xray": true
 		}
