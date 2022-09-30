@@ -42,7 +42,7 @@ Most of the integration is done within a few steps:
 
 ## General
 
-* [of the integration config](/control_panel_integration/#example-of-the-integration-config)
+* [Example of the integration config](/control_panel_integration/#example-of-the-integration-config)
 
 To integrate CloudLinux OS Shared into a control panel, you should implement the following interfaces required by the CloudLinux OS Shared utilities:
 * [CPAPI](/control_panel_integration/#control-panel-api-integration) — a small scripts/files-type interface to get the required information from the control panel
