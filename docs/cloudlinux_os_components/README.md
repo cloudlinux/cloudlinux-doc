@@ -5542,82 +5542,39 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
 
 ## Python Selector
 
-:::tip Note
-This documentation is for the new version of Python Selector. You can find documentation for the old Python Selector [here](/deprecated/#python-selector-old)
-:::
+### General information
 
+<span class="notranslate">Python Selector</span> is a CloudLinux OS Shared component that allows each user to easily deploy and manage Python applications. Users can manage applications at the control panel interface level or from the command line (CLI).
 
-### General information and requirements
+### Requirements
 
-<span class="notranslate">Python Selector</span> is a CloudLinux OS Shared component that allows each user to easily deploy and manage Python applications via application server.
+* cPanel or DirectAdmin control panel. Plesk isn't supported.
+* Apache or LiteSpeed webserver. Apache + Nginx (as a reverse proxy) combination is also supported.
+* Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/). The needed version will be installed along with Python Selector.
 
-* [Requirements](/cloudlinux_os_components/#requirements)
+### Supported versions
 
-#### Requirements
+* Python Selector supports the following alt-python versions for all actual CloudLinux OS Shared versions:
 
-:::danger Important!
-Do not downgrade LVE Manager to versions lower than 4.2.2 if you have already migrated Python applications because it will break migrated applications.
-:::
+  * <span class="notranslate">`alt-python 2.7`</span>
+  * <span class="notranslate">`alt-python 3.3`</span>
+  * <span class="notranslate">`alt-python 3.4`</span>
+  * <span class="notranslate">`alt-python 3.5`</span>
+  * <span class="notranslate">`alt-python 3.6`</span>
+  * <span class="notranslate">`alt-python 3.7`</span>
+  * <span class="notranslate">`alt-python 3.8`</span>
+  * <span class="notranslate">`alt-python 3.9`</span>
+  * <span class="notranslate">`alt-python 3.10`</span>
 
-* Python Selector supports the following Alt-Python versions:
-  * <span class="notranslate">`alt-python27 2.7.16`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-  * <span class="notranslate">`alt-python33 3.3.7`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-  * <span class="notranslate">`alt-python34 3.4.9`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-  * <span class="notranslate">`alt-python35 3.5.6`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-  * <span class="notranslate">`alt-python36-3.6.8`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-  * <span class="notranslate">`alt-python36-3.7.2`</span>, supported by CloudLinux OS Shared 6, CloudLinux OS Shared 7
-* This feature is available for CloudLinux OS Shared 7, CloudLinux OS Shared 6 hybrid and CloudLinux OS Shared 6.
-* New Python Selector requires LVE Manager version 4.2 or later.
-* It supports cPanel and DirectAdmin servers. On DirectAdmin only on Apache. Plesk will not be supported.
-* Python Selector uses <span class="notranslate">`mod_passenger`</span> to host Python. For more details about <span class="notranslate">`mod_passenger`</span>, please read [documentation](https://www.phusionpassenger.com/).
-* Python Selector works with EasyApache 3 (note EOL on September 1, 2019), EasyApache 4 and LiteSpeed Web Server. Or Apache on DirectAdmin. 
+### Installation
 
+You can install Python Selector using the [CloudLinux OS Shared Installation Wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard).
 
-### Migration to the new Python Selector 
+After installation, please make sure that you have set appropriate checkboxes in CloudLinux Manager Options tab to show Python App in the web-interface.
 
-* [How to migrate an application to the new Python Selector](/cloudlinux_os_components/#how-to-migrate-an-application-to-the-new-python-selector)
+#### Manual installation
 
-The new Python Selector has a bunch of new features:
-
-* the ability to set environment variables for the application
-* the ability to set dependencies from the file requirements
-* the ability to start and stop applications as in Node.js Selector
-* the ability to add and edit custom configurations
-* the ability to install modules from the custom configurations
-
-All existing Python applications (created before the update of LVE Manager to version 5.0.1-1) will work the same as before. You do not need to migrate them unless you’d like to use new features. These applications we define as old applications.
-
-:::warning Important!
-There are some risks during the migration process and the migration can fail. To avoid such issues and make it possible to solve them if any, only user who created a particular application is allowed to initiate the migration process.
-:::
-
-You do not need to migrate the new applications that will be created after the update to the LVE Manager 5.0.1-1. All new features are available for them.
-
-:::warning Important!
-You cannot migrate back to the old application. If you face any issue during the migration, please [contact our support team](https://cloudlinux.zendesk.com/hc/requests/new).
-:::
-
-#### How to migrate an application to the new Python Selector
-
-:::tip Note
-Only user who created an application can migrate it.
-:::
-
-To migrate a Python application:
-* Log in to your control panel.
-* Open Python Selector user interface.
-    ![](/images/Python_general.png)
-* Choose an application to migrate and click ![](/images/Migrate-btn.png) in the <span class="notranslate">_Actions_</span> section. You will see the popup.
-    ![](/images/Python-migration.png)
-* Click <span class="notranslate">_Migrate_</span> in the popup.
-* After successful migration, you will see the confirmation popup.
-
-If you face any issue during the migration, please [contact our support team](https://cloudlinux.zendesk.com/hc/requests/new).
-
-
-### Installation and update
-
-New clients can install Python Selector using the [CloudLinux OS Shared Installation Wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard).
+Here you can find the installation steps for supported control panels:
 
 * [cPanel](/cloudlinux_os_components/#cpanel-2)
 * [DirectAdmin](/cloudlinux_os_components/#directadmin)
@@ -5625,40 +5582,35 @@ New clients can install Python Selector using the [CloudLinux OS Shared Installa
 #### cPanel
 
 To use Python Selector, it is required to install the following:
+
 * alternative Python packages by running the following command:
   
-    <div class="notranslate">
-
-    ```
-    yum groupinstall alt-python
-    ```
-    </div>
-* LVE Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
-
-    <div class="notranslate">
-
-    ```
-    yum install lvemanager lve-utils alt-python-virtualenv
-    ```
-    </div>
-    
-    Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared OS 6. CloudLinux OS Shared OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
-    
-    :::tip Note
-    ```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
-    :::
- 
-__For EasyApache 3:__
-
 <div class="notranslate">
-
 ```
-yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
+yum groupinstall alt-python
 ```
 </div>
 
-* CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
+* CloudLinux Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
 
+<div class="notranslate">
+```
+yum install lvemanager lve-utils alt-python-virtualenv
+```
+</div>
+    
+Phusion Passenger could be installed by using **either** ```ea-ruby24-mod_passenger``` **or** ```ea-ruby27-mod_passenger```. ```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared OS 6. CloudLinux OS Shared OS 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared OS 8, you can **only** use ```ea-ruby27-mod_passenger```.
+
+Adding Python module requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries.
+Please enable compilers in Compiler Access section of WHM, then run:
+
+<div class="notranslate">
+```
+cagefsctl --force-update
+```
+</div>
+
+* We recommend use CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
 
 #### DirectAdmin
  
@@ -5666,225 +5618,25 @@ To use Python Selector, it is required to install the following:
 
 * alternative Python packages by running the following command:
 
-    <div class="notranslate">
-
-    ```
-    yum groupinstall alt-python
-    ```
-    </div>
- 
-* LVE Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
-
-    <div class="notranslate">
-
-    ```
-    yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
-    ```
-    </div>
-
-* CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
-
-:::tip Note
-After installation, please make sure that you have unmarked appropriate checkboxes in LVE Manager Options tab to show Python App in the web-interface.
-:::
- 
-:::tip Note
-Adding Python module requires executing permissions to <span class="notranslate">`gcc/make`</span> binaries. Please enable compilers in Compiler Access section of WHM, then run:
-
 <div class="notranslate">
-
 ```
-cagefsctl --force-update
+yum groupinstall alt-python
 ```
 </div>
-:::
+ 
+* CloudLinux Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
+
+<div class="notranslate">
+```
+yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
+```
+</div>
+
+* We recommend use CageFS for better security. See [CageFS documentation for details](/cloudlinux_os_components/#cagefs).
 
 
 * See also [Python Selector UI](/lve_manager/#python-selector-2).
 * See also [Python Selector CLI](/command-line_tools/#python-selector).
-
-### Deploying Trac using Python Selector
-
-* [Trac with MySQL](/cloudlinux_os_components/#trac-with-mysql)
-* [EasyApache 4](/cloudlinux_os_components/#easyapache-4)
-
-1. In <span class="notranslate">**Setup Python App**</span> create an application. <span class="notranslate">Trac</span> project <span class="notranslate">WSGI</span> script will be located in <span class="notranslate">**App Directory**</span> (e.g. <span class="notranslate">`trac`</span>).
-
-<span class="notranslate">App URI</span> – is a <span class="notranslate">URL</span> where web-interface is located (e.g. <span class="notranslate">Trac</span> – web-interface is located in <span class="notranslate">`YOUR_DOMAIN/trac`</span>).
-
-<span class="notranslate">Trac</span> needs <span class="notranslate">Python</span> version from **2.5** to **3.0,** in the actual example version 2.7 is used.
-
-2. When the App is created, add the following modules: <span class="notranslate">`Trac`, `Genshi`, `MySQL-python`</span>.
-
-2.1. Alternatively, connect to the server via SSH and perform the following steps:
-
-<div class="notranslate"> 
-
-```
-source ~/virtualenv/trac/2.7/bin/activate
-```
-</div>
-
-then:
-
-<div class="notranslate"> 
-
-```
-~/virtualenv/trac/2.7/bin/easy_install Trac mysql-python (using easy_install)
-```
-</div>
-
-or
-
-<div class="notranslate">
-
-```
-~/virtualenv/trac/2.7/bin/pip install trac mysql-python
-```
-</div> 
-
-(using <span class="notranslate">`pip`</span>).
-
-3. In cPanel create MySQL database and a user. Add user to database.
-
-![](/images/Python_trac1.png)
-
-In this example DB <span class="notranslate">`tractest_trac`</span> and user <span class="notranslate">`tractest_trac`</span> were created.
-
-4. Connect to the server via SSH using your cPanel account.
-
-Create <span class="notranslate">Trac</span> project:
-
- <div class="notranslate">
- 
- ```
- ~/virtualenv/trac/2.7/bin/trac-admin
- ~/trac_project initenv
- ```
- </div>
-
-For the <span class="notranslate">`Database connection string`</span> parameter enter the following: <span class="notranslate">`mysql://user:password@localhost/database_name`</span> – here the data for connecting MySQL database are specified.
-
-::: tip Note
-In case of `... The charset and collation of database are 'latin1' and 'latin1_swedish_ci' error the database must be created with one of (('utf8', 'utf8_bin'), ('utf8mb4', 'utf8mb4_bin')) ...`  while creating the project, you should change database encoding.
-:::
-
-To change encoding, in cPanel run <span class="notranslate">phpMyAdmin</span>, choose <span class="notranslate">`DB`</span>, go to <span class="notranslate">`Operations`</span>, choose the necessary encoding in <span class="notranslate">`Collation`</span> section and click <span class="notranslate">`Go`</span>.
-
-![](/images/trac2.jpg)
-
-After that you have to repeat the procedure of creating a project. When done, the <span class="notranslate">`Trac`</span> project must appear: <span class="notranslate">`~/trac_project`</span>
-
-5. To create project frontend run the following:
-
-<div class="notranslate">
-
-```
-~/virtualenv/trac/2.7/bin/trac-admin ~/track_project deploy ~/trac
-```
-</div>
-
-<span class="notranslate">`~/track_project`</span> — is the path to the project,
-<span class="notranslate">`~/trac`</span> — is the path, that was specified while setting <span class="notranslate">`App Directory`</span>.
-
-Create topic directory by default:
-
-<div class="notranslate">
-
-```
-cd ~/public_html/trac
-mkdir chrome 
-cp -R ~/trac/htdocs/ ~/public_html/trac/chrome/
-```
-</div>
-
-All project static files are located in this directory; the changes can be added here as well.
-
-6. To add path to <span class="notranslate">WSGI</span> file in the created application:
-
-Go back to <span class="notranslate">_cPanel Setup Python App_</span>, change <span class="notranslate">`WSGI file location`</span> for your application to <span class="notranslate">`cgi-bin/trac.wsgi`</span>, click <span class="notranslate">`Update`</span> to apply changes and then click <span class="notranslate">`Restart`</span>.
-
-Your existing application now must look like the following:
-
-![](/images/Python_trac2.png)
-
-7. Adding authorization:
-
-In <span class="notranslate">`~/public_html/trac/.htaccess`</span> after <span class="notranslate">`CLOUDLINUX PASSENGER CONFIGURATION`</span> section add the following lines:
-
-<div class="notranslate">
-
-```
-AuthType Basic
-AuthName "trac"
-AuthUserFile /home/tractest/trac/passwd
-Require valid-user
-```
-</div>
-
-8. Add new user and create password file <span class="notranslate">`/usr/local/apache/bin/htpasswd`</span> with <span class="notranslate">`~/trac/passwd`</span> admin.
-
-Enter password.
-
-<div class="notranslate">
-
-```
-~/virtualenv/trac/2.7/bin/trac-admin  ~/track_project permission add admin TRAC_ADMIN
-```
-</div>
-
-Add admin user to <span class="notranslate">`TRAC_ADMIN`</span> group.
-
-Here the path <span class="notranslate">`trac`</span> directory is equal to <span class="notranslate">`App Directory`</span> in your project.
-
-Now <span class="notranslate">`Trac`</span> is available via <span class="notranslate">`YOUR_DOMAIN/trac`</span>.
-
-
-#### Trac with MySQL
-
-To use <span class="notranslate">Trac</span> with MySQL database you should install <span class="notranslate"> alt-python27-devel </span> package.
-
-To install run:
-<div class="notranslate">
-
-```
-yum install alt-python27-devel --enablerepo=cloudlinux-updates-testing 
-```
-</div>
-
-#### EasyApache 4
-  
-:::tip Note
-```ea-apache24-mod-alt-passenger``` is deprecated in favor of ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```
-:::
-
-CloudLinux OS Shared has <span class="notranslate"> Python Selector</span>, which allows creating applications with one of <span class="notranslate">```mod_passenger```</span> Apache modules:
-
-* ```ea-ruby24-mod_passenger```
-* ```ea-ruby27-mod_passenger```
-
-```ea-ruby27-mod_passenger``` is **not** compatible with systems running CloudLinux OS Shared 6. CloudLinux OS Shared 7 supports **both** ```ea-ruby24-mod_passenger``` and ```ea-ruby27-mod_passenger```. If your system runs CloudLinux OS Shared 8, you can **only** use ```ea-ruby27-mod_passenger```.
-
-The <span class="notranslate">```ea-ruby2X-mod_passenger```</span> allows you to run applications via <span class="notranslate"> cPanel application manager</span> and <span class="notranslate">CloudLinux OS Shared Python Selector</span>.
-
-To install run:
-<div class="notranslate">
-
-```
-# yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby24-mod_passenger
-```
-</div>
-
-or:
-
-<div class="notranslate">
-
-```
-# yum install lvemanager alt-python-virtualenv
-# yum install ea-ruby27-mod_passenger
-```
-</div>
 
 ## Ruby Selector
 
