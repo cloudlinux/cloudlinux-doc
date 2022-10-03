@@ -5565,7 +5565,7 @@ You can find more info about <span class="notranslate">New Relic License Key</sp
   * <span class="notranslate">`alt-python 3.8`</span>
   * <span class="notranslate">`alt-python 3.9`</span>
   * <span class="notranslate">`alt-python 3.10`</span>
-
+  
 ### Installation
 
 You can install Python Selector using the [CloudLinux OS Shared Installation Wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard).
@@ -5586,6 +5586,7 @@ To use Python Selector, it is required to install the following:
 * alternative Python packages by running the following command:
   
 <div class="notranslate">
+
 ```
 yum groupinstall alt-python
 ```
@@ -5594,6 +5595,7 @@ yum groupinstall alt-python
 * CloudLinux Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
 
 <div class="notranslate">
+
 ```
 yum install lvemanager lve-utils alt-python-virtualenv
 ```
@@ -5605,6 +5607,7 @@ Adding Python module requires executing permissions to <span class="notranslate"
 Please enable compilers in Compiler Access section of WHM, then run:
 
 <div class="notranslate">
+
 ```
 cagefsctl --force-update
 ```
@@ -5619,6 +5622,7 @@ To use Python Selector, it is required to install the following:
 * alternative Python packages by running the following command:
 
 <div class="notranslate">
+
 ```
 yum groupinstall alt-python
 ```
@@ -5627,6 +5631,7 @@ yum groupinstall alt-python
 * CloudLinux Manager, LVE Utils and Phusion Passenger to create isolated Python environments by running the following command:
 
 <div class="notranslate">
+
 ```
 yum install lve-utils lvemanager alt-python-virtualenv alt-mod-passenger
 ```
