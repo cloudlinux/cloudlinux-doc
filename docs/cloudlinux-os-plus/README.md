@@ -21,6 +21,10 @@
 
 <span class="notranslate">X-Ray</span> can gather and visualize information about top N slowest system functions, external requests, software modules and database queries of the client’s website.
 
+### Known limitations
+<span class="notranslate">X-Ray</span> is not compatible with Opcahce JIT optimization.
+Once <span class="notranslate">X-Ray</span> tracing task is running for the site the Opcache JIT optimization will be disabled until tracing task completed.
+
 ### Installation
 
 1. Make sure you have CloudLinux OS Shared Pro subscription (only non-reseller accounts apply)
