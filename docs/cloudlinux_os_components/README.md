@@ -5185,7 +5185,7 @@ Result:
 </div>
 
 +: enabled  
-~: included in php binary (cannot be disabled)  
+~: included in php binary (cannot be disabled) or enabled in php global config file <span class="notranslate">_/opt/alt/phpXX/etc/php.ini_</span>  
 -: disabled
 
 **Select default extensions (enable comma-separated list of extensions globally for a version):**
