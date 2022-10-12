@@ -1,4 +1,4 @@
-# For CloudLinux OS Shared partners
+# For CloudLinux OS partners
 
 * [License portal (CLN)](/for_cloudlinux_partners/#license-portal-cln)
 * [CloudLinux WHMCS plugin](/for_cloudlinux_partners/#cloudlinux-whmcs-plugin)

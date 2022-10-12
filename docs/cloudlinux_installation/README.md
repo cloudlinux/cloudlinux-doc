@@ -12,10 +12,10 @@
 
 ### Hardware compatibility
 
-CloudLinux OS Shared supports all the hardware supported by RHEL/CentOS/AlmaLinux, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+CloudLinux OS supports all the hardware supported by RHEL/CentOS/AlmaLinux, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
 :::tip Note
-CloudLinux OS Shared does not support ARM-based CPUs (e.g. Graviton).
+CloudLinux OS does not support ARM-based CPUs (e.g. Graviton).
 :::
 
 There are some incompatible devices with **CL6**:
@@ -28,13 +28,13 @@ There are some incompatible devices with **CL6**:
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 
-With RHEL8 (**CloudLinux OS Shared 8/CloudLinux OS Shared 7 Hybrid**), some devices are no longer supported.
+With RHEL8 (**CloudLinux OS 8/CloudLinux OS 7 Hybrid**), some devices are no longer supported.
 You can check the entire list here: [Hardware enablement considerations in adopting RHEL 8](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
 
 
 ## Converting existing servers
 
-It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS Shared. The process takes a few minutes and replaces just a handful of RPMs.
+It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS. The process takes a few minutes and replaces just a handful of RPMs.
 
 :::tip Supported OS for conversion:
 * CentOS 7
@@ -87,12 +87,23 @@ $ sh cldeploy -k <activation_key>
 ```
 </div>
 
+Your CloudLinux OS edition license will be detected automatically.
+
 * If you have an IP-based license, run the following commands:
   
 <div class="notranslate">
 
 ```
 $ sh cldeploy -i
+```
+</div>
+
+If you want to convert your server into CloudLinux OS Admin edition, use following command:
+
+<div class="notranslate">
+
+```
+$ sh cldeploy -i --to-admin-edition
 ```
 </div>
 
@@ -116,11 +127,11 @@ $ uname -r
 ```
 </div>
 
-* For CloudLinux OS Shared 6 — (RHEL) 2.6 kernel 
-* For CloudLinux OS Shared 6 hybrid — (RHEL) 3.10 kernel
-* For CloudLinux OS Shared 7 — (RHEL) 3.10 kernel
-* For CloudLinux OS Shared 7 hybrid —  (RHEL) 4.18 kernel
-* For CloudLinux OS Shared 8 —  CloudLinux OS Shared 8 follows the upstream (RHEL) 4.18 kernel mainline.
+* For CloudLinux OS 6 — (RHEL) 2.6 kernel 
+* For CloudLinux OS 6 hybrid — (RHEL) 3.10 kernel
+* For CloudLinux OS 7 — (RHEL) 3.10 kernel
+* For CloudLinux OS 7 hybrid —  (RHEL) 4.18 kernel
+* For CloudLinux OS 8 —  CloudLinux OS 8 follows the upstream (RHEL) 4.18 kernel mainline.
 All CloudLinux-specific features are added as a separate module (kmod-lve).
 
 :::warning Note

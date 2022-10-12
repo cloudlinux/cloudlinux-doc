@@ -364,7 +364,7 @@ Check [CLI documentation](/command-line_tools/#x-ray-autotracing) for a descript
 
 #### Requirements
 
-* CloudLinux OS Shared Pro or CloudLinux OS Solo
+* CloudLinux OS Shared Pro or CloudLinux OS Solo or CloudLinux OS Admin
 * alt-php-ssa > 0.2-1 version
 * alt-php-xray > 0.4-1 version
 * Enabled PHP SSA on the server
