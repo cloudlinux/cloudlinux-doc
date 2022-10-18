@@ -205,6 +205,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               "/limits/",
               "/lve_manager/",
               "/cloudlinux-os-plus/",
+              "/cloudlinux-os-admin/",
               "/cloudlinux_os_components/",
               "/command-line_tools/",
               "/control_panel_integration/",
