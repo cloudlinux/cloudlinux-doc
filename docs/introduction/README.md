@@ -26,7 +26,7 @@
 1. Limits are disabled by default.
 
 ### CloudLinux OS Solo
-CloudLinux OS Shared is designed for installation on VPS or VDS servers. 
+CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
 This edition has major difference agains all other, so you should look for the detailed docs 
 [here](https://docs.solo.cloudlinux.com/introduction/).
 

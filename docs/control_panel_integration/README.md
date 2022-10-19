@@ -35,7 +35,7 @@ There are several possible ways of integration with CloudLinux OS OS:
 The goal of the new API is to shift all complexity for controlling CloudLinux OS components from a control panel to the CloudLinux OS web UI and utils.
 Most of the integration is done within a few steps:
 1. A control panel vendor implements 7 simple scripts (any language) and specifies them in a special config file. All Cloudlinux OS components will look up and call them with some arguments to get all needed information from the control panel (e.g. users list, their hosting plans, domains, etc.)
-2. Control panel should call hooks described below in a response to Admin/Users actions (e.g. changing end-user’s domain, creating new end-user, etc.). CloudLinux OS utils will do their stuff to reconfigure itself according to these events. There is no need to worry about what exactly they do because it will be related only to CloudLinux OS Shared components and control panel will not be affected.
+2. Control panel should call hooks described below in a response to Admin/Users actions (e.g. changing end-user’s domain, creating new end-user, etc.). CloudLinux OS utils will do their stuff to reconfigure itself according to these events. There is no need to worry about what exactly they do because it will be related only to CloudLinux OS components and control panel will not be affected.
 3. Configure the control panel and CageFS to work together by changing some configs.
 4. Optionally embed CloudLinux OS web UI into the control panel. It is highly recommended because it does all you may need. You can use PHP scripts to embed SPA application to the specially prepared pages (with your menus) for LVE Manager and Selectors.
 
@@ -1828,6 +1828,10 @@ fi
 ```
 
 ## MySQL Governor
+
+:::Warning
+MySQL Governor is not available in CloudLinux OS Admin edition.
+:::
 
 1. Install MySQL Governor
 

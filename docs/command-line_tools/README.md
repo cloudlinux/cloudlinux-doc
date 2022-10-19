@@ -1,6 +1,6 @@
 # Command-line tools (CLI)
 
-The list of the commands (CLI) you can use to manage CloudLinux OS Shared components.
+The list of the commands (CLI) you can use to manage CloudLinux OS components.
 
 * [CageFS](/command-line_tools/#cagefs)
 * [LVE-stats 2](/command-line_tools/#lve-stats-2)

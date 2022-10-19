@@ -1,4 +1,4 @@
-#  CloudLinux OS Shared components
+#  CloudLinux OS components
 
 * [Reseller limits](/limits/#reseller-limits)
 * [LVE-Stats 2](/cloudlinux_os_components/#lve-stats-2)
@@ -4190,7 +4190,7 @@ These commands can affect PHP version of your clients’ web sites. Use them wit
 :::
 
 :::tip Note
-It is possible to manually uninstall the integral parts of PHP Selector - **alt-php** packages. However, since CloudLinux OS Shared components heavily rely on them, we do not recommend doing so. Proceed with caution and keep an eye on yum dependencies if you decide to uninstall the packages.
+It is possible to manually uninstall the integral parts of PHP Selector - **alt-php** packages. However, since CloudLinux OS components heavily rely on them, we do not recommend doing so. Proceed with caution and keep an eye on yum dependencies if you decide to uninstall the packages.
 :::
 
 #### Disabling PHP extension globally

@@ -16,13 +16,13 @@ $ yum install lvemanager
 ```
 </div>
 
-## CloudLinux OS Shared installation wizard
+## CloudLinux OS installation wizard
 
 <div class="notranslate">
 
 * [Overview](/lve_manager/#overview)
 * [Set up](/lve_manager/#set-up)
-* [CloudLinux OS Shared components](/lve_manager/#cloudlinux-os-shared-components)
+* [CloudLinux OS components](/lve_manager/#cloudlinux-os-components)
   * [CageFS](/lve_manager/#cagefs)
   * [LSAPI](/lve_manager/#lsapi)
   * [MySQL Governor](/lve_manager/#mysql-governor)
@@ -35,7 +35,7 @@ $ yum install lvemanager
 
 #### Overview
 
-<span class="notranslate">CloudLinux OS Shared Installation Wizard </span> allows you to easily install and set up CloudLinux OS Shared components on your server with cPanel, Plesk or DirectAdmin.
+<span class="notranslate">CloudLinux OS Shared Installation Wizard </span> allows you to easily install and set up CloudLinux OS components on your server with cPanel, Plesk or DirectAdmin.
 
 #### Set up
 
@@ -56,9 +56,9 @@ The next step is selecting required components to be installed.
 
 Click <span class="notranslate">_Finish and Install_</span> to complete installation or click <span class="notranslate">_Skip Wizard_</span> to go back to the <span class="notranslate"> Dashboard</span>.
 
-You can find a complete description of the CloudLinux OS Shared components below.
+You can find a complete description of the CloudLinux OS components below.
 
-#### CloudLinux OS Shared components
+#### CloudLinux OS components
 </div>
 <div class="notranslate">
 

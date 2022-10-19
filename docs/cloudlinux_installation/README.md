@@ -920,7 +920,7 @@ chmod 775  cldeploy
 
 #### CloudLinux Wizard
 
-Wizard is a tool to set up CloudLinux OS Shared components.
+Wizard is a tool to set up CloudLinux OS components.
 
 In the current version only the lsapi module can be installed.
 
