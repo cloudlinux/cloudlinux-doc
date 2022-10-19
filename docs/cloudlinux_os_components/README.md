@@ -3434,6 +3434,7 @@ user_max_connections="30"/>
 <!-- Time to kill slow SELECT queries for account, can be different for accounts in seconds(but unit can be specified) -->
 <!-- enabled only when slow_queries run="on" -->
 <!-- s -- seconds, m -- minutes, h -- hours, d -- days -->
+<!-- Requests are checked at 15 second intervals, so a request will be canceled after a timeout + 15 seconds maximum -->
 <limit name="slow" current="30"/>
 </default>
 <!-- name will matched account name, as extracted via prefix extraction --> 
@@ -3630,6 +3631,10 @@ _timestamp_ _username_ LIMIT_ENFORCED _limit_setting_ __current_value_          
 * <span class="notranslate"> SERVER_LOAD </span> = load averages followed by output of <span class="notranslate"> vmstat </span>
 * <span class="notranslate"> TRACKED_VALUES_DUMP </span> is available with <span class="notranslate"> MEDIUM & LONG </span> format
 * <span class="notranslate"> SERVER_LOAD </span> is available with <span class="notranslate"> LONG </span> format
+
+<span class="notranslate"> **Kill_log** </span>
+
+<span class="notranslate"> MySQL Governor </span> kill log is optional log located in <span class="notranslate"> /var/log/dbgovernor-kill.log </span> Kill log is used to track all killed queries
 
 #### Change MySQL version
 
