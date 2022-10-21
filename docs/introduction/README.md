@@ -23,7 +23,7 @@
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
 |Priority support|No|No|No|**Yes**|
 
-*. Limits are disabled by default.
+\* Limits are disabled by default.
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
