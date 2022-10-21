@@ -7,7 +7,7 @@
 |**Features**|**CloudLinux OS Solo**|**CloudLinux OS Admin**|**CloudLinux OS Shared**|**CloudLinux OS Shared Pro**|
 |:-:|:-:|:-:|:-:|:-:|
 |Maximum amount of hosting accounts|1|5|unlimited|unlimited|
-|Limits (LVE Manager)|No|**Yes** (1)|**Yes**|**Yes**|
+|Limits (LVE Manager)|No|**Yes***|**Yes**|**Yes**|
 |Cage FS|No|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
 |Selectors (PHP, Python, Node.js, Ruby)|No|**Yes**|**Yes**|**Yes**|
@@ -23,7 +23,7 @@
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
 |Priority support|No|No|No|**Yes**|
 
-1. Limits are disabled by default.
+*. Limits are disabled by default.
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
@@ -45,6 +45,9 @@ for each web hosting tenant. This ensures that tenants cannot jeopardize the sta
 causing all sites to slow down or even come to a halt. CloudLinux OS Shared also “cages” tenants from one another 
 to avoid security breaches. This way, unstable scripts or malware are not able to sprawl across your customer sites, 
 causing severe harm.
+
+Purchasing CloudLinux OS Shared Pro license extends your CloudLinux OS Shared 
+functionality with even more useful [features](/cloudlinux-os-plus/). 
 
 
 ## Description of CloudLinux OS Shared and CloudLinux OS Admin components
