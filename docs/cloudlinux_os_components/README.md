@@ -3634,7 +3634,7 @@ _timestamp_ _username_ LIMIT_ENFORCED _limit_setting_ __current_value_          
 
 <span class="notranslate"> **Kill_log** </span>
 
-<span class="notranslate"> MySQL Governor </span> kill log is optional log located in <span class="notranslate"> /var/log/dbgovernor-kill.log </span> Kill log is used to track all killed queries
+<span class="notranslate"> MySQL Governor </span> kill log is optional log located in the <span class="notranslate">/var/log/dbgovernor-kill.log</span>. Kill log is used to track all killed queries
 
 #### Change MySQL version
 
