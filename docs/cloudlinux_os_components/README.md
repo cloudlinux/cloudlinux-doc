@@ -3132,9 +3132,11 @@ The "All" mode will be deprecated starting from September 1, 2021. You can read 
 
 <span class="notranslate"> MySQL Governor </span> is software to monitor and restrict MySQL usage in shared hosting environment. The monitoring is done via resource usage statistics per each MySQL thread.
 
-<span class="notranslate"> MySQL Governor </span> can also kill off slow <span class="notranslate"> SELECT </span> queries.
+<span class="notranslate"> MySQL Governor </span> has two active modes of operations:
+* **off** - In this mode MySQL Governor will not throttle customer's queries, instead it will let you monitor the MySQL usage.
+* **abusers** - In this mode, once user goes over the limits specified in the MySQL Governor, all customer's queries will execute inside that user's LVE. 
 
-<span class="notranslate"> MySQL Governor </span> has multiple modes of operations, depending on the configuration. It can work in monitor-only mode, or it can use different throttling scenarious.
+More details of the governor operation modes are described in the [Modes of operation](/cloudlinux_os_components/#modes-of-operation) section
 
 <span class="notranslate"> MySQL Governor </span> allows to restrict customers who use too much resources. It supports following limits:
 
@@ -3146,7 +3148,7 @@ The "All" mode will be deprecated starting from September 1, 2021. You can read 
 
 You can set different limits for different periods: current, short, med, long. By default those periods are defined as 1 second, 5 seconds, 1 minute and 5 minutes. They can be re-defined using [configuration file](/cloudlinux_os_components/#configuration-and-operation). The idea is to use larger acceptable values for shorter periods. Like you could allow a customer to use two cores (200%) for one second, but only 1 core (on average) for 1 minute, and only 70% within 5 minutes. That would make sure that customer can burst for short periods of time.
 
-When customer is restricted, the customer will be placed into special LVE with ID 3. All restricted customers will be placed into that LVE, and you can control amount of resources available to restricted customers. Restricted customers will also be limited to only 30 concurrent connections. This is done so they wouldn't use up all the MySQL connections to the server.
+Customers will also be limited to a finite number of concurrent connections, this number is 30 by default and can be changed. This is done so they wouldn't use up all the MySQL connections to the server. <span class="notranslate"> MySQL Governor </span> can also kill off slow <span class="notranslate"> SELECT </span> queries.
 
 
 ### Installation and update
@@ -3479,6 +3481,7 @@ The "All" mode will be deprecated starting from September 1, 2021. You can read 
 
 * **all - Always run queries inside user's LVE (will be deprecated on September 1, 2021)**: This way there is no need for separate limits for MySQL. Depending on overhead we see in the future, we might decide to use it as a primary way of operating MySQL Governor . The benefit of this approach is that limits are applied to both PHP & MySQL at the same time, all the time, preventing any spikes whatsoever. _Requires [`dbuser-map` file](/cloudlinux_os_components/#mapping-a-user-to-a-database)_.
 * **single - Single restricted's LVE for all restricted customers (deprecated)**: In that mode once customer reaches the limits specified in the MySQL Governor , all customer's queries will be running inside LVE with id 3. This means that when you have 5 customers restricted at the same time, all queries for all those 5 customers will be sharing the same LVE. The larger the number of restricted customers - the less resources per restricted customer will be available.
+* **on** - Synonym for **single** mode
 
 :::warning Note
 After the `all` mode will be deprecated on September 1, 2021:
