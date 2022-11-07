@@ -1074,7 +1074,7 @@ The [Leapp utility](https://leapp.readthedocs.io/) is the main tool used to perf
 
 ### Available migration paths
 
-At the moment, only migrating from CloudLinux 7 to CloudLinux 8 is supported.
+At the moment, only migrating from CloudLinux 7 to CloudLinux 8 on no-panel systems is supported.
 
 ### Contribution
 
@@ -1089,10 +1089,15 @@ You can find more information and FAQ about the AlmaLinux ELevate this project i
 CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
 
 It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration worked as expected before you attempt to migrate a production system.
+
+We disclaim responsibility for incorrect or improper use of the tool. The support team will not be able to help you if you have not followed all the steps described in the documentation or converted a server with a control panel present.
 :::
 
 :::tip Note
 The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of will not be upgraded.
+
+In particular, machines with panels present are highly likely to encounter problems after the upgrade.
+
 Please check the (Third-party integration)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration] section in the linked README for instructions on integrating external repositories.
 :::
 
@@ -1102,7 +1107,7 @@ First of all, make sure that your CloudLinux 7 is fully upgraded and on the late
 
 After that, download the elevate-testing.repo file with the project testing repo.
 
-sudo curl https://repo.almalinux.org/elevate/testing/elevate-testing.repo -o /etc/yum.repos.d/elevate-testing.repo
+<span class="notranslate">`sudo curl https://repo.almalinux.org/elevate/testing/elevate-testing.repo -o /etc/yum.repos.d/elevate-testing.repo`</span>
 
 Import the ELevate GPG key
 
