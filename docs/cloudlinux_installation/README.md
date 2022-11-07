@@ -8,7 +8,7 @@
 * [Net install](/cloudlinux_installation/#net-install)
 * [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
 * [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
-* [Elevation](/cloudlinux_installation/#elevation)
+* [Upgrade between major distributions (Elevation)](/cloudlinux_installation/#elevation)
 * [Uninstalling](/cloudlinux_installation/#uninstalling)
 
 ### Hardware compatibility
@@ -1062,7 +1062,7 @@ timeout=5
 
 6. Reboot and check that you are running CloudLinux OS Shared. <span class="notranslate">`uname -r`</span> should show something like: <span class="notranslate">`2.6.18-294.8.1.el5.lve0.7.33`</span>.
 
-## Elevation
+## Upgrade between major distributions (Elevation)
 
 ### About the project
 
@@ -1076,7 +1076,7 @@ The [Leapp utility](https://leapp.readthedocs.io/) is the main tool used to perf
 
 At the moment, only migrating from CloudLinux 7 to CloudLinux 8 is supported.
 
-### How to Contribute
+### Contribution
 
 ELevate is developed and built as a tool for RHEL-based distributives, not just CloudLinux specifically.
 ELevate supports migrating to/from other distributions and is open for all to contribute to and enhance.
