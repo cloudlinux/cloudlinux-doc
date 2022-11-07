@@ -1062,9 +1062,14 @@ timeout=5
 
 6. Reboot and check that you are running CloudLinux OS Shared. <span class="notranslate">`uname -r`</span> should show something like: <span class="notranslate">`2.6.18-294.8.1.el5.lve0.7.33`</span>.
 
-## Upgrade between major distributions (Elevation)
+## Upgrade between major distributions (Elevation) [beta]
 
 ### About the project
+
+:::warning
+CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
+We don't recommend to use or test this tool on your production servers unless you completely sure about your actions.
+:::
 
 The ELevate project is an initiative to support migrations between major version of RHEL-derivatives.
 
@@ -1089,14 +1094,16 @@ You can find more information and FAQ about the AlmaLinux ELevate this project i
 CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
 
 It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration worked as expected before you attempt to migrate a production system.
+:::
 
-We disclaim responsibility for incorrect or improper use of the tool. The support team will not be able to help you if you have not followed all the steps described in the documentation or converted a server with a control panel present.
+:::warning
+We disclaim responsibility for incorrect or improper use of the tool. The support team will not be able to help you if you have not followed all the steps described in the documentation or converted a server with a control panel present. Also, support will not be provided if you have any third-party utilities that do not work after the upgrade according to [Support policy](https://www.cloudlinux.com/CloudLinux-and-Imunify-support-policy.pdf). Examples: webserver, dns server, mail server, database server and other utilities that do not belong to our products.
 :::
 
 :::tip Note
-The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of will not be upgraded.
+The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of will not be upgraded. This can cause your utilities and services to stop working completely after the update.
 
-In particular, machines with panels present are highly likely to encounter problems after the upgrade.
+*In particular, machines with control panels present are highly likely to encounter problems after the upgrade.*
 
 Please check the (Third-party integration)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration] section in the linked README for instructions on integrating external repositories.
 :::
