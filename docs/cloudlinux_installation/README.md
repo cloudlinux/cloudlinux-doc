@@ -1088,7 +1088,7 @@ You can find more information and FAQ about the AlmaLinux ELevate this project i
 :::warning
 CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
 
-It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration worked as expected before you attempt to migrate a production system. Please report any issues encountered to the AlmaLinux Bug Tracker.
+It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration worked as expected before you attempt to migrate a production system.
 :::
 
 :::tip Note
