@@ -1103,113 +1103,113 @@ Please check the (Third-party integration)[https://github.com/AlmaLinux/leapp-re
 
 This guide contains steps on how to upgrade CloudLinux 7 to CloudLinux 8.
 
-First of all, make sure that your CloudLinux 7 is fully upgraded and on the latest kernel version.
+1. First of all, make sure that your CloudLinux 7 is fully upgraded and on the latest kernel version.
 
-After that, download the elevate-testing.repo file with the project testing repo.
+2. After that, download the elevate-testing.repo file with the project testing repo:
 
-<span class="notranslate">`sudo curl https://repo.almalinux.org/elevate/testing/elevate-testing.repo -o /etc/yum.repos.d/elevate-testing.repo`</span>
+```
+sudo curl https://repo.almalinux.org/elevate/testing/elevate-testing.repo -o /etc/yum.repos.d/elevate-testing.repo
+```
 
-Import the ELevate GPG key
-
-<div class="notranslate">
+3. Import the ELevate GPG key:
 
 ```
 sudo rpm --import https://repo.almalinux.org/elevate/RPM-GPG-KEY-ELevate
 ```
-</div>
 
-Install leapp packages and migration data for the CloudLinux OS.
-
-<div class="notranslate">
+4. Install leapp packages and migration data for the CloudLinux OS.
 
 ```
 sudo yum install -y leapp-upgrade leapp-data-cloudlinux
 ```
-</div>
 
 #### Preupgrade
 
 Start a preupgrade check. In the meanwhile, the Leapp utility creates a special `/var/log/leapp/leapp-report.txt` file that contains possible problems and recommended solutions. No rpm packages will be installed at this phase.
 
-:::tip Note
-> WARNING: The preupgrade check will likely fail as the default CloudLinux 7 doesn't meet all requirements for migration. That is expected.
+:::danger WARNING
+The preupgrade check will likely fail as the default CloudLinux 7 doesn't meet all requirements for migration. That is expected.
 :::
-
-<div class="notranslate">
 
 ```
 sudo leapp preupgrade
 ```
-</div>
+
 
 This summary report will help you get a picture of whether it is possible to continue the upgrade.
 
 The preupgrade process may stall with the following message:
-<span class="notranslate">`Inhibitor: Newest installed kernel not in use`</span>
+
+```
+Inhibitor: Newest installed kernel not in use
+```
 
 Make sure your system is running the latest kernel before proceeding with the upgrade. If you updated the system recently, a reboot may be sufficient to do so. Otherwise, edit your Grub configuration accordingly.
 
 :::tip Note
-In certain configurations, Leapp generates <span class="notranslate">`/var/log/leapp/answerfile`</span> with true/false questions. Leapp utility requires answers to all these questions in order to proceed with the upgrade.
+In certain configurations, Leapp generates `/var/log/leapp/answerfile` with true/false questions. Leapp utility requires answers to all these questions in order to proceed with the upgrade.
 :::
 
-Once the preupgrade process completes, the results will be contained in the file <span class="notranslate">`/var/log/leapp/leapp-report.txt`</span>.
+Once the preupgrade process completes, the results will be contained in the file `/var/log/leapp/leapp-report.txt`.
 It's advised to review the report and consider how the changes will affect your system.
 
-##### Common upgrade inhibitors
+#### Common upgrade inhibitors
 
-The following actions from the /var/log/leapp/leapp-report.txt file are seen most often:
+The following actions from the `/var/log/leapp/leapp-report.txt` file are seen most often:
 
-###### Kernel modules
+#### Kernel modules
 
 Some kernel modules are deprecated in the CloudLinux 8 major versions. To proceed with the upgade, unload them.
 Leapp will advise on the list of modules to be removed.
 
+```
+rmmod floppy pata_acpi btrfs
+```
 
-<span class="notranslate">`rmmod floppy pata_acpi btrfs`</span>
-
-###### SSHD config default mismatch
+#### SSHD config default mismatch
 
 If your OpenSSH configuration file does not explicitly state the option PermitRootLogin in sshd_config file, this upgrade inhibitor will apperar.
 The option's default is "yes" in RHEL7, but will change in RHEL8 to "prohibit-password", which may affect your ability to log onto this machine after the upgrade.
 
 To prevent this from occuring, set the PermitRootLogin option explicity to preserve the default behaivour after migration:
 
-<span class="notranslate">`echo PermitRootLogin yes | sudo tee -a /etc/ssh/sshd_config`</span>
+```
+echo PermitRootLogin yes | sudo tee -a /etc/ssh/sshd_config
+```
 
 or configure the SSHD so that the option is present explicitly, without leaving it to the default behaviour.
 
-###### Disabling PAM modules
+#### Disabling PAM modules
 
 PAM module pam_pkcs11 is no longer available in RHEL-8 since it was replaced by SSSD.
 Leaving this module in PAM configuration may lock out the system.
 
 Allow Leapp to disable the pam_pkcs11 module in PAM configuration by adding an entry to the Leapp answerfile:
 
-<span class="notranslate">`sudo leapp answer --section remove_pam_pkcs11_module_check.confirm=True`</span>
+```
+sudo leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+```
 
 #### Upgrade
 
 Start an upgrade. You’ll be offered to reboot the system after this process is completed.
 
-<div class="notranslate">
 
 ```bash
 sudo leapp upgrade
 sudo reboot
 ```
-</div>
+
 
 :::tip Note
 The upgrade process after the reboot may take a long time, up to 40-50 minutes, depending on the machine resources. If the machine remains unresponsive for more than 2 hours, assume that the upgrade process has failed during the post-reboot phase.
-If it's still possible to access the machine in some way, for example, through remote VNC access, the logs containing the information on what went wrong are located in this folder: <span class="notranslate">`/var/log/leapp`</span>
+If it's still possible to access the machine in some way, for example, through remote VNC access, the logs containing the information on what went wrong are located in this folder: `/var/log/leapp`.
 :::
 
 A new entry in GRUB called ELevate-Upgrade-Initramfs will appear. The system will be automatically booted into it. Observe the update process in the console.
 
 After the reboot, login into the system and check the migration report. Verify that the current OS is the one you need.
 
-<div class="notranslate">
 
 ```bash
 cat /etc/redhat-release
@@ -1218,7 +1218,6 @@ rpm -qa | grep el7 # check if there are unupgraded packages present
 cat /var/log/leapp/leapp-report.txt
 cat /var/log/leapp/leapp-upgrade.log
 ```
-</div>
 
 In addition, check the leapp logs for .rpmnew configuration files that may have been created during the upgrade process. In some cases os-release or yum package files may not be replaced automatically, requiring the user to rename the .rpmnew files manually.
 
@@ -1245,61 +1244,51 @@ Do not forget to free up a CloudLinux OS Shared license by removing the server f
 
 To uninstall CloudLinux OS Shared, run:
 
-<div class="notranslate">
-
 ```
 $ wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
 $ sh cldeploy -c
 ```
-</div>
 
 Now you have converted back to AlmaLinux or CentOS* and it is the time to install kernel.
 
 To delete CloudLinux OS Shared kernel, run (change the kernel package name to the one you've been using):
 
-<div class="notranslate">
 
 ```
 rpm -e --nodeps $(rpm -qa | grep kernel | grep lve)
 ```
-</div>
 
-To install new AlmaLlinux or CentOS* kernel once you deleted CloudLinux OS Shared kernel, type <span class="notranslate">`yum install kernel`</span>.
+To install new AlmaLlinux or CentOS* kernel once you deleted CloudLinux OS Shared kernel, run the following command:
 
-If <span class="notranslate">`yum`</span> says that the latest kernel is already installed, it is OK.
+```
+yum install kernel
+```
+
+If `yum` says that the latest kernel is already installed, it is OK.
 
 Please check your bootloader configuration before rebooting the system.
 
-To remove unused kmods and lve libs run:
-
-<div class="notranslate">
+To remove unused kmods and lve libs, run:
 
 ```
 yum remove lve kmod*lve*
 ```
-</div>
 
 Kernel package and related LVE packages should be deleted and the required kernel will be installed.
 
-Before the reboot, the following command should be executed for restoring Apache and httpd.conf without <span clas="notranslate">mod_hostinglimits</span>:
+Before the reboot, the following command should be executed for restoring Apache and httpd.conf without mod_hostinglimits.
 
 **For EasyApache 3:**
-
-<div class="notranslate">
 
 ```
 /scripts/easyapache --build
 ```
-</div>
 
 **For EasyApache 4:**
-
-<div class="notranslate">
 
 ```
 /usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/cpanel/default.json
 ```
-</div>
 
 :::tip Note
 Some of the packages from CloudLinux OS Shared repo will still be present. They are the same as AlmaLinux or CentOS* packages, and don't have to be removed. They will be updated in the future from AlmaLinux or CentOS* repositories, as new versions come out.
