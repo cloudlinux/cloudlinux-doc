@@ -1068,7 +1068,7 @@ timeout=5
 
 The ELevate project is an initiative to support migrations between major version of RHEL-derivatives.
 
-The CloudLinux Elevate variant, built on top of the [AlmaLinux ELevate project](https://wiki.almalinux.org/elevate/), it aims to provide a streamlined method of upgrading CloudLinux 7 systems to CloudLinux 8 in-place.
+The CloudLinux Elevate variant, built on top of the [AlmaLinux ELevate project](https://wiki.almalinux.org/elevate/), aims to provide a streamlined method of upgrading CloudLinux 7 systems to CloudLinux 8 in-place.
 
 The [Leapp utility](https://leapp.readthedocs.io/) is the main tool used to perform the upgrade.
 
@@ -1080,7 +1080,7 @@ At the moment, only migrating from CloudLinux 7 to CloudLinux 8 on *no-panel* sy
 
 ELevate is developed and built as a tool for RHEL-based distributives, not just CloudLinux specifically.
 ELevate supports migrating to/from other distributions and is open for all to contribute to and enhance.
-You can find more information and FAQ about the AlmaLinux ELevate this project is built upon at [almalinux.org/elevate](https://almalinux.org/elevate) and [Migration SIG](https://wiki.almalinux.org/sigs/Migration) and contribute using the ELevate Contribution Guide.
+You can find more information and FAQ about the AlmaLinux ELevate this project is built upon at [almalinux.org/elevate](https://almalinux.org/elevate) and [Migration SIG](https://wiki.almalinux.org/sigs/Migration), as well as contribute using the ELevate Contribution Guide.
 
 
 ### ELevate Quickstart Guide
