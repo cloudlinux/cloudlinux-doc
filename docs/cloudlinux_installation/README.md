@@ -8,7 +8,7 @@
 * [Net install](/cloudlinux_installation/#net-install)
 * [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
 * [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
-* [Upgrade between major distributions (Elevation)](/cloudlinux_installation/#upgrade-between-major-distributions-elevation-beta)
+* [Upgrade between major distributions (Elevation) [beta]](/cloudlinux_installation/#upgrade-between-major-distributions-elevation-beta)
 * [Uninstalling](/cloudlinux_installation/#uninstalling)
 
 ### Hardware compatibility
