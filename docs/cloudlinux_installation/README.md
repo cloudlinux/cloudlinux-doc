@@ -295,6 +295,23 @@ Mount and boot the image, then follow the steps.
 * [Amazon Web Services](https://download.cloudlinux.com/cloudlinux/images/#aws-tab)
 * [Alibaba Cloud](https://download.cloudlinux.com/cloudlinux/images/#ali-tab)
 * [Xen](/cloudlinux_installation/#installing-new-servers)
+* [CloudLinux Azure Images](/cloudlinux_installation/#cloudlinux-azure-images)
+
+### CloudLinux Azure Images
+
+We build and release CloudLinux 7.9 and CloudLinux 8.6 for Azure and upload to the [Mircosoft Azure Community Galleries](https://learn.microsoft.com/en-us/azure/virtual-machines/share-gallery-community?tabs=cli).
+
+Images are built in both types Azure supports: *gen1 (BIOS based)* and *gen2 (UEFI based)*. CloudLinux Images could be found in the following regions: *West Europe, Germany West Central, Southeast Asia, East US, West US 2*. A publisher of CloudLinux Images in Azure is *cloudlinux*. Community gallery name is *cloudlinux-cbc76afd-63bc-4f6e-b801-65bd2f1ab0a0*.
+
+How to use CloudLinux Image in Azure:
+
+* When creating Virtual Machine, while choosing what OS should be used, click See al images.
+   ![](/images/AzureVirt.png)
+* Switch from Marketplace to Community images.
+   ![](/images/AzureSwitch.png)
+* Search by typing *cloudlinux* or filter by *Publisher* which is also *cloudlinux* or *Azure Compute Gallery* which is *cloudlinux-cbc76afd-63bc-4f6e-b801-65bd2f1ab0a0*.
+   ![](/images/AzureSearch.png)
+* Choose a suitable image. Check that the Publisher of the selected images is *cloudlinux* and Public Gallery Name is *cloudlinux-cbc76afd-63bc-4f6e-b801-65bd2f1ab0a0*.
 
 #### Xen images
 
@@ -325,6 +342,8 @@ Alternatively, you can configure your PXE server using following folder as refer
 To install CloudLinux 6 instead, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/)
 
 Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
+
+
 
 ## Provider-specific guidelines
 
