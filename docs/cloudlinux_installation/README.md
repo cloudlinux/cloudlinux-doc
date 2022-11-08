@@ -8,7 +8,7 @@
 * [Net install](/cloudlinux_installation/#net-install)
 * [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
 * [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
-* [Upgrade between major distributions (Elevation)](/cloudlinux_installation/#upgrade-between-major-distributions-elevation)
+* [Upgrade between major distributions (Elevation)](/cloudlinux_installation/#upgrade-between-major-distributions-elevation-beta)
 * [Uninstalling](/cloudlinux_installation/#uninstalling)
 
 ### Hardware compatibility
@@ -1068,7 +1068,7 @@ timeout=5
 
 :::warning
 CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
-We don't recommend to use or test this tool on your production servers unless you completely sure about your actions.
+We don't recommend to use or test this tool on your production servers unless you're completely sure about what you're doing.
 :::
 
 The ELevate project is an initiative to support migrations between major version of RHEL-derivatives.
@@ -1093,18 +1093,23 @@ You can find more information and FAQ about the AlmaLinux ELevate this project i
 :::warning
 CloudLinux ELevate project is currently in beta. Expect potenital issues, in particular with third-party packages and/or repositories.
 
-It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration worked as expected before you attempt to migrate a production system.
+It is **highly** recommended to ensure you have a backup and/or a snapshot of your system before proceeding with the upgrade. Ideally, perform a trial run in a sandbox to verify that migration functions as expected before you attempt to migrate a system.
 :::
 
 :::warning
-We disclaim responsibility for incorrect or improper use of the tool. The support team will not be able to help you if you have not followed all the steps described in the documentation or converted a server with a control panel present. Also, support will not be provided if you have any third-party utilities that do not work after the upgrade according to [Support policy](https://www.cloudlinux.com/CloudLinux-and-Imunify-support-policy.pdf). Examples: webserver, dns server, mail server, database server and other utilities that do not belong to our products.
+We disclaim responsibility for incorrect or improper use of the tool. The support team will not be able to help you if you have not followed all the steps described in the documentation or converted a server with a control panel present.
+
+In addition, support will not be provided if you have any third-party utilities that do not function after the upgrade, according to [Support policy](https://www.cloudlinux.com/CloudLinux-and-Imunify-support-policy.pdf). Examples: webserver, DNS server, mail server, database server and other utilities that do not belong to our product line.
 :::
 
 :::tip Note
 The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of will not be upgraded. This can cause your utilities and services to stop working completely after the update.
 
+This can cause your utilities and services to stop working completely on the post-upgrade machine.
+
 *In particular, machines with control panels present are highly likely to encounter problems after the upgrade.*
 
+CloudLinux does not provide support related to integrating third-party repositories or packages into the upgrade process. However, you can add the aforementioned components to the Leapp database yourself.
 Please check the (Third-party integration)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration] section in the linked README for instructions on integrating external repositories.
 :::
 
@@ -1160,7 +1165,11 @@ In certain configurations, Leapp generates `/var/log/leapp/answerfile` with true
 Once the preupgrade process completes, the results will be contained in the file `/var/log/leapp/leapp-report.txt`.
 It's advised to review the report and consider how the changes will affect your system.
 
-#### Common upgrade inhibitors
+Should any packages or package repositories that are unknown to Leapp be detected, they will also be listed in the report. Consider how leaving the listed items unupgraded will affect the stability of your system.
+
+If the packages listed as unknown in the report are critical for your system, consider adding the associated repositories to Leapp's database, as described (here)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration].
+
+##### Common upgrade inhibitors
 
 The following actions from the `/var/log/leapp/leapp-report.txt` file are seen most often:
 
