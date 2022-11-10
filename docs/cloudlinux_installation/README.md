@@ -1122,14 +1122,15 @@ In addition, support will not be provided if you have any third-party utilities 
 :::
 
 :::tip Note
-The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of will not be upgraded. This can cause your utilities and services to stop working completely after the update.
+The ELevate project only supports a subset of package repositories it's aware of. It doesn't support external repositories that aren't present in its *list of vendors*. Packages from repositories Leapp is unaware of **will not be upgraded**.
 
 This can cause your utilities and services to stop working completely on the post-upgrade machine.
 
 *In particular, machines with control panels present are highly likely to encounter problems after the upgrade.*
 
 CloudLinux does not provide support related to integrating third-party repositories or packages into the upgrade process. However, you can add the aforementioned components to the Leapp database yourself.
-Please check the (Third-party integration)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration] section in the linked README for instructions on integrating external repositories.
+
+Please check the [Third-party integration](https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration) section in the linked README for instructions on integrating external repositories.
 :::
 
 This guide contains steps on how to upgrade CloudLinux 7 to CloudLinux 8.
@@ -1182,11 +1183,14 @@ In certain configurations, Leapp generates `/var/log/leapp/answerfile` with true
 :::
 
 Once the preupgrade process completes, the results will be contained in the file `/var/log/leapp/leapp-report.txt`.
+
 It's advised to review the report and consider how the changes will affect your system.
 
 Should any packages or package repositories that are unknown to Leapp be detected, they will also be listed in the report. Consider how leaving the listed items unupgraded will affect the stability of your system.
 
-If the packages listed as unknown in the report are critical for your system, consider adding the associated repositories to Leapp's database, as described (here)[https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration].
+If the packages listed as unknown in the report are critical for your system, proceeding with the upgrade is **extremely likely** to damage its functionality, up to making the machine unaccessible.
+
+If you'd like to perform an upgrade on a system with unknown packages/repositories reported, and you're confident about all the potential risks, consider first adding the unknown repositories to Leapp's database, as described [here](https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration).
 
 ##### Common upgrade inhibitors
 
@@ -1204,6 +1208,7 @@ rmmod floppy pata_acpi btrfs
 #### SSHD config default mismatch
 
 If your OpenSSH configuration file does not explicitly state the option PermitRootLogin in sshd_config file, this upgrade inhibitor will apperar.
+
 The option's default is "yes" in RHEL7, but will change in RHEL8 to "prohibit-password", which may affect your ability to log onto this machine after the upgrade.
 
 To prevent this from occuring, set the PermitRootLogin option explicity to preserve the default behaivour after migration:
