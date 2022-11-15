@@ -3823,6 +3823,19 @@ The command updates credentials in MySQL <span class="notranslate">Governor</spa
 
 After applying the command MySQL <span class="notranslate">Governor</span> successfully connects to MySQL.
 
+### Known limitations
+
+#### I/O LVE limits don't work for user’s SQL queries
+
+In the MySQL Governor default mode, once users go over the limits, all their SQL queries will execute inside that user's LVE.
+
+This technique was provided with the early 1.1.5 version of MySQL Governor.
+
+It turned out that memory limitation for MySQLrequests causes the OOM (Out Of Memory) issues and as a result database corruptions. So, it was decided not to apply LVE memory limits for SQL queries supplied by MySQL Governor. But the internal implementation of LVE is such that I/O and memory limits work together. That’s why the I/O LVE limits do not apply for user’s SQL queries now.
+
+Nevertheless, SQL queries inside LVE are restricted by CPU limit which indirectly limits I/O usage, too.
+
+
 ## PHP Selector
 
 ### General information and requirements
