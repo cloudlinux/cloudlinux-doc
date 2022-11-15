@@ -7776,6 +7776,7 @@ Directives which can be used by Apache with <span class="notranslate"> ITK </spa
 
 ### HostingLimits module for Apache
 
+* [Errors](/cloudlinux_os_components/#errors)
 * [Additional notes](/cloudlinux_os_components/#additional-notes)
 * [Installation](/cloudlinux_os_components/#installation-4)
 * [Directives](/cloudlinux_os_components/#directives)
@@ -7828,6 +7829,39 @@ LoadModule hostinglimits_module modules/mod_hostinglimits.so
 </IfModule>
 ```
 </div>
+
+#### **Errors**
+
+**mod_hostinglimits** can report errors via logging. This section lists all possible errors reported in mod_hostinglimits error messages.
+* **MHL-EPERM** In most cases, this error means that Apache is running inside single LVE.
+This is an error condition that should be resolve as soon as possible.
+This happens if you have have pam_lve or CageFS enabled, and user who restarted Apache last time around logged in as regular user (and got into LVE due to pam_lve), then su or sudo to root. If user restarts Apache after that, Apache will run inside that's user LVE.
+To solve that issue, login as root directly, and restart Apache web server.
+If sshd server was restarted before by same user -- it will run inside LVE as well, so you would have to restart it via console or by setting up a cron job. Rebooting server should also restart SSH & Apache outside of LVE.
+To make sure that the issue doesn't happen again, make sure that user ids of users that have sudo and su priviledges are bellow 500 (or the number specified as minimum uid in /etc/pam.d/sshd for pam_lve)
+
+* **MHL-E2BIG** This error will report itself to end user as 508 error, "Resource Limit Reached". This happens due to customer hitting entry processes limit. Entry processes limit restricts the number of concurrent connections to dynamic (php & cgi) scripts for the customer. Otherwise, one site could use up all Apache slots, and cause all the sites to go down.
+You can diagnose the issue by running:
+```
+# lveinfo --period=1d --by-fault=mep --display-username
+```
+You can also monitor the user by running:
+```
+# lvetop
+```
+You can always increase entry processes limit by running:
+```
+# lvectl set USER_ID -–maxEntryProcs NEW_LIMIT save
+```
+If you also see that user is hitting CPU limit at the same time at the same time as entry processes limit, raising just entry processes limit will not help.User is using too much resources, and you should either increase both, CPU and entry process limits, or user should optimize their script, or user should be upgraded to VPS or something similar.
+Be careful adjusting entry processes limit, as it can adversely affect overall system stability.
+
+* **MHL-ENOMEM** This is an internal error in kmod-lve that occurs when memory cannot be allocated for a new lve
+* **MHL-EFAULT** This is an internal error in kmod-lve that occurs when data cannot be transferred between the user and the kernel
+* **MHL-EINVAL** This is an internal error in kmod-lve that occurs when a function lve_enter is called with invalid parameters
+* **MHL-EBUSY** This is an internal error in kmod-lve that occurs when OS resources cannot be allocated
+* **MHL-ENOSPC** This is an internal error in kmod-lve that occurs when there is no free memory for a new lve
+* **MHL-ENOENT** This is an internal error in kmod-lve that occurs when OS resources cannot be initialized
 
 #### **Additional notes**
 
