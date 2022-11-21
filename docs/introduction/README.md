@@ -12,7 +12,7 @@
 |MySQL Governor|No|No|**Yes**|**Yes**|
 |Selectors (PHP, Python, Node.js, Ruby)|No|**Yes**|**Yes**|**Yes**|
 |HardenedPHP|No|**Yes**|**Yes**|**Yes**|
-|Apache mod_lsapi PRO|No|**Yes**|**Yes**|**Yes**|
+|Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
 |Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
 |Website monitoring alerts|**Yes**|No|No|No|
