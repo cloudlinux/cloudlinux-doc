@@ -1,22 +1,13 @@
 # Installation
 
-* [Hardware compatibility](/cloudlinux_installation/#hardware-compatibility)
-* [Converting existing servers](/cloudlinux_installation/#converting-existing-servers)
-* [Activation](/cloudlinux_installation/#activation)
-* [Installing new servers](/cloudlinux_installation/#installing-new-servers)
-* [CloudLinux OS Shared images](/cloudlinux_installation/#cloudlinux-os-shared-images)
-* [Net install](/cloudlinux_installation/#net-install)
-* [Provider-specific guidelines](/cloudlinux_installation/#provider-specific-guidelines)
-* [LILO boot loader](/cloudlinux_installation/#lilo-boot-loader)
-* [Upgrade between major distributions (Elevation) [beta]](/cloudlinux_installation/#upgrade-between-major-distributions-elevation-beta)
-* [Uninstalling](/cloudlinux_installation/#uninstalling)
+[[toc]]
 
-### Hardware compatibility
+## Hardware compatibility
 
-CloudLinux OS Shared supports all the hardware supported by RHEL/CentOS/AlmaLinux, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
+CloudLinux OS supports all the hardware supported by RHEL/CentOS/AlmaLinux, with few exceptions. Exceptions are usually hardware that require binary drivers, and that doesn't have any open source alternatives.
 
 :::tip Note
-CloudLinux OS Shared does not support ARM-based CPUs (e.g. Graviton).
+CloudLinux OS does not support ARM-based CPUs (e.g. Graviton).
 :::
 
 There are some incompatible devices with **CL6**:
@@ -29,39 +20,68 @@ There are some incompatible devices with **CL6**:
 |<span class="notranslate"> SanDisk DAS Cache </span> |  | [https://www.dell.com/en-us/work/learn/server-technology-components-caching](https://www.dell.com/en-us/work/learn/server-technology-components-caching)|
 
 
-With RHEL8 (**CloudLinux OS Shared 8/CloudLinux OS Shared 7 Hybrid**), some devices are no longer supported.
+With RHEL8 (**CloudLinux OS 8/CloudLinux OS 7 Hybrid**), some devices are no longer supported.
 You can check the entire list here: [Hardware enablement considerations in adopting RHEL 8](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/considerations_in_adopting_rhel_8/hardware-enablement_considerations-in-adopting-rhel-8#removed-hardware-support_hardware-enablement)
+
+## Getting license
+
+You will need a trial or payed activation key to be able to use your CloudLinux OS Solo server.
+
+### Getting trial license
+
+The trial activation key can be used to convert your server to CloudLinux OS. 
+
+:::tip Note
+The trial license subscription will work for 30 days.
+:::
+
+If you have any issues getting activation key or if you have any questions regarding using your 
+trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
+
+To get the activation key:
+
+1. Register with CloudLinux Network: [https://cln.cloudlinux.com/console/register/customer](https://cln.cloudlinux.com/console/register/customer) (skip it if you already registered)
+2. You will receive an email with activation link
+3. Login at [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
+4. Choose the appropriate [CloudLinux edition](/introduction/) that fits your needs.
+5. Click on `Get Trial Activation Key`
+
+You will get a key that looks like: `12314-d34463a182fede4f4d7e140f1841bcf2`
 
 
 ## Converting existing servers
 
-It is easy to convert your existing CentOS or AlmaLinux server to CloudLinux OS Shared. The process takes a few minutes and replaces just a handful of RPMs.
+Sometimes it is required to convert already existing servers with `CentOS` or `AlmaLinux` and make them `CloudLinux OS`.
 
-:::tip Supported OS for conversion:
+It is easy to convert your existing installation by cldeploy script. The process takes a few minutes and replaces just a handful of RPMs.
+
+:::warning
+Unlike [Fresh installation](./#fresh-installation), converting immediately requires CloudLinux OS license. 
+Please refer to the [guide](#license-activation) to get activation key.
+:::
+
+### Requirements
+
+Currently supported OS for conversion:
 * CentOS 7
 * AlmaLinux OS 8
 * RockyLinux (installation only, no uninstall option)
-:::
+
 
 :::warning Unsupported OS for conversion:
 * CentOS 8
 * CentOS Stream
 :::
 
-CentOS 8 reached End Of Life (EOL) on December 31st, 2021.
-If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
 
-* Convert CentOS 8 to AlmaLinux 8 using [almalinux-deploy](https://github.com/AlmaLinux/almalinux-deploy)
-* Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
-
-:::tip Supported control panels:
+Supported control panels:
 * cPanel ([Documentation](https://docs.cpanel.net/installation-guide/system-requirements-cloudlinux/))
 * Plesk
 * DirectAdmin
 * CyberPanel ([Documentation](https://community.cyberpanel.net/t/1-convert-cyberpanel-to-cloudlinux-os-and-install-cagefs/174))
 * InterWorx ([Documentation](https://appendix.interworx.com/current/nodeworx/plugins/install-use-cloudlinux-plugin-interworx.html))
 * Webuzo ([Documentation](https://webuzo.com/docs/installing-webuzo/install-cloudlinux-os/))
-:::
+
 
 :::warning Other control panels:
 Control panels not mentioned in the list of supported panels have native integration or integration by the developer of such a panel.
@@ -73,67 +93,74 @@ Some CloudLinux components may not be supported by the control panel itself or t
 You can verify this information when reviewing the system requirements for installing a particular CloudLinux component.
 :::
 
----
 
-* [cldeploy conversion script explained](/cloudlinux_installation/#cldeploy-explained).
+#### Note: CentOS 8 is EOL
 
-* Get <span class="notranslate">`<activation_key>`</span> either by getting [trial subscription](/cloudlinux_installation/#getting-trial-license) or by [purchasing subscription](https://cln.cloudlinux.com/clweb/buy.html).
-* Run the following commands in order to download conversion script and run the installation:
-  
-<div class="notranslate">
+CentOS 8 reached End Of Life (EOL) on December 31st, 2021.
+If you would like to convert from CentOS 8 to CloudLinux OS 8, do the following:
+
+* Convert CentOS 8 to AlmaLinux 8 using [almalinux-deploy](https://github.com/AlmaLinux/almalinux-deploy)
+* Convert AlmaLinux 8 to CloudLinux 8 using [cldeploy](/cloudlinux_installation/#cldeploy-explained)
+
+
+### Downloading and running conversion script
+
+#### Key-based activation
+
+If you want to use your activation key for activation, run the following commands:
 
 ```
-$ wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
-$ sh cldeploy -k <activation_key>
+yum install wget -y
+wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+bash cldeploy -k ACTIVATION_KEY
 ```
-</div>
 
-* If you have an IP-based license, run the following commands:
-  
-<div class="notranslate">
+Where `ACTIVATION_KEY` is the one that you got on previous step. 
+Your CloudLinux OS edition will be detected automatically based on the `ACTIVATION_KEY` 
 
+#### IP-based activation
+
+If your reseller provides you ip-based license, run the following commands:
+
+To convert server into the CloudLinux OS Shared edition:
 ```
 $ sh cldeploy -i
 ```
-</div>
 
-* If there aren't any errors during the conversion - reboot your server by running the following command:
-  
-<div class="notranslate">
+To convert server into the CloudLinux OS Admin edition:
+```
+$ sh cldeploy -i --to-admin-edition
+```
+
+### Next steps
+After successful conversion, reboot your system by running the following command:
 
 ```
-$ reboot
+reboot
 ```
-</div>
 
 Once you reboot - your server should be running with CloudLinux OS LVE kernel.
 
 You may check the booted kernel with the following command:
 
-<div class="notranslate">
-
 ```
 $ uname -r
 ```
-</div>
-
-* For CloudLinux OS Shared 6 — (RHEL) 2.6 kernel 
-* For CloudLinux OS Shared 6 hybrid — (RHEL) 3.10 kernel
-* For CloudLinux OS Shared 7 — (RHEL) 3.10 kernel
-* For CloudLinux OS Shared 7 hybrid —  (RHEL) 4.18 kernel
-* For CloudLinux OS Shared 8 —  CloudLinux OS Shared 8 follows the upstream (RHEL) 4.18 kernel mainline.
-All CloudLinux-specific features are added as a separate module (kmod-lve).
 
 :::warning Note
-If after rebooting you do not see the CloudLinux kernel (the kernel has the abbreviation LVE in its name) then please consider check our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/) or contact [support](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
+If after rebooting you do not see the CloudLinux kernel (the kernel has the abbreviation LVE in its name)
+then please consider check our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us/) or 
+contact [support](https://cloudlinux.zendesk.com/hc/en-us/requests/new).
 :::
 
 :::warning Note
-SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
+SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+,
+but might not work or be compatible with control panels and various components.
 :::
 
 :::tip Note
-At the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
+At the end of conversion from CentOS 7.x to CloudLinux OS Shared 7, 
+the cldeploy script converts CloudLinux OS Shared 7 to [CloudLinux OS Shared 7 Hybrid](/cloudlinux_os_kernel/#hybrid-kernels).
 :::
 
 Automatic hybridization will be performed for the AMD processors with the following CPU families:
@@ -144,10 +171,20 @@ Automatic hybridization will be performed for the AMD processors with the follow
 Automatic hybridization may be skipped by passing extra option '--no-force-hybridize'.
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy).
 
-#### CLDeploy Explained
+### Troubleshooting 
+
+If you receive any troubles during the conversion process,
+please feel free to search our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us) 
+or contact our support and attach the conversion log (/var/log/cldeploy.log).
+
+### Technical details: cldeploy
 
 By its design, CloudLinux OS Shared is very close to the upstream operating system - RHEL.
-This makes the conversion process relatively straightforward, requiring just one reboot. Here's what the cldeploy script does when you run it:
+This makes the conversion process relatively straightforward, requiring just one reboot. 
+
+#### Installation process
+
+Here's what the cldeploy script does when you run it:
 
 * Backups the original repository settings into <span class="notranslate">`/etc/cl-convert-saved`</span>.
 * Backups RHEL system ID into <span class="notranslate">`/etc/cl-convert-saved`</span> (RHEL systems only).
@@ -168,7 +205,7 @@ This makes the conversion process relatively straightforward, requiring just one
   * On Plesk, replaces psa-mod_fcgid* with mod_fcgid;
   * Perform CustomBuild tool execution for DirectAdmin.
 
-#### CLDeploy Explained - Uninstallation:
+#### Uninstallation process
 
 Here's what the cldeploy script does, if one runs it to uninstall CloudLinux:
 
@@ -183,111 +220,205 @@ Here's what the cldeploy script does, if one runs it to uninstall CloudLinux:
 On cPanel servers, rebuild of Apache with EasyApache will complete the conversion back, but doesn't have to be performed immediately.<sup> *</sup>
 On DirectAdmin servers, rebuild of Apache with custombuild will complete the conversion back, but doesn't have to be performed immediately.
 
-More information is also available here: [Uninstall CloudLinux](https://docs.cloudlinux.com/cloudlinux_installation/#uninstalling).
+More information is also available here: [Uninstall CloudLinux](/cloudlinux_installation/#uninstalling).
 
-#### Common issues and troubleshooting during conversion
-
-If you receive any troubles during the conversion process, please feel free to search our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us) or contact our support and attach the conversion log (/var/log/cldeploy.log).
-
-## Activation
-
-### Getting trial license
-
-You will need a trial activation key to be able to convert your server to CloudLinux OS Shared. The trial license subscription will work for 30 days.
-
-If you have any issues getting activation key or if you have any questions regarding using your trial subscription – contact [sales@cloudlinux.com](mailto:sales@cloudlinux.com) and we will help.
-
-To get the activation key:
-
-1. Register with CloudLinux Network: [https://cln.cloudlinux.com/console/register/customer](https://cln.cloudlinux.com/console/register/customer) (skip it if you already registered)
-2. You will receive an email with activation link
-3. Login at [https://cln.cloudlinux.com/console/auth/login](https://cln.cloudlinux.com/console/auth/login)
-4. Click on `Get Trial Activation Key`
-
-You will get a key that looks like: `12314-d34463a182fede4f4d7e140f1841bcf2`
-
-Use it to register your system or to convert your server to CloudLinux OS Shared server.
-
-### License activation
-
-To register your **CloudLinux OS Shared 6/7** server with CloudLinux Network using activation key, run the following command:
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
-```
-
-Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
-
-If you have IP based license, use the `clnreg_ks` command:
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-base
-$ /usr/sbin/clnreg_ks --force
-```
-
-To register your **CloudLinux OS Shared 8** server with CloudLinux Network using activation key, run the following command:
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
-$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
-```
-
-Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
-
-If you have IP based license, use the `clnreg_ks` command:
-
-```
-$ yum install rhn-setup --enablerepo=cloudlinux-BaseOS
-$ /usr/sbin/clnreg_ks --force
-```
 
 ## Installing new servers
 
-You can download the latest CloudLinux OS Shared ISO and use it to install CloudLinux OS Shared on your server:
+All CloudLinux OS editions may be installed using one ISO and source.
 
-* **Latest stable CloudLinux OS Shared 8 ISO**:
+### Downloading ISO
 
-* [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/) - network/DVD installation ISOs
+You can download the latest CloudLinux OS ISO and use it to install CloudLinux OS on your server:
 
-* **Latest stable CloudLinux OS Shared 7 ISO**:
+* CloudLinux OS 8
 
-    * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/)
+  * x86_64 version: [https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/8/iso/x86_64/)
 
-* **Latest stable CloudLinux OS Shared 6 ISO**:
+* CloudLinux OS 7
+
+  * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/)
+
+* CloudLinux OS 6
 
   * x86_64 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/iso/x86_64/)
   * i386 version: [https://repo.cloudlinux.com/cloudlinux/6/iso/i386/](https://repo.cloudlinux.com/cloudlinux/6/iso/i386/)
 
+
+There are multiple ISO types available:
+
+* `CloudLinux-*-boot.iso` - this ISO is made specifically for network installation and does not contain any packages inside.
+* `CloudLinux-*-dvd1.iso` - this one contains all packages from network installation repository, 
+  so you can set up any possible configuration without network access.
+* `CloudLinux-*-minimal.iso` - this one contains only minimal set of packages to set up light server without GUI and Development tools.
+
+### Installing using the Graphical User Interface
+
+The graphical installation interface is the preferred method of manually installing CloudLinux OS. 
+It allows you to have full control over all available settings, including disk partitioning and storage configuration.
+
+The graphical mode is used by default when you boot the system from the local media. Mount and boot the image, then follow the steps.
+
+#### Language selection
+
+The first screen displayed is the language selection page.
+
+![Welcome page screenshot](./images/welcome_page.png)
+
+First, find your preferred language in the left column and than select locale in the right one.
+Selected language will be used during installation and also as a default language of the installed system.
+
+After you select your language and locale, click `Continue` to confirm your selection 
+and proceed to the [Installation Summary](#installation-summary). 
+
+#### Installation summary
+
+The Installation summary screen is the main dashboard of your installation parameters. 
+Most of the options which can be configured during the installation can be accessed from here.
+
+![Welcome page screenshot](./images/installation_summary.png)
+
+The summary screen displays links to other configuration screens, those links can be in 
+several different states, which are graphically indicated:
+
+- Grayed out link means that the installer is currently updating this sections. 
+  Please wait a little before accessing this section. 
+
+- A warning symbol next to an icon means that a screen requires your attention before you start the installation.
+
+- Links without warning symbol mean that screen does not require your attention. 
+  You can still change your settings in these screens, but it is not required to start installation.
+
+#### Choosing the installation source
+
+The first thing that you should define is where the system will be installed from.
+There are basically two options:
+
+- ISO file
+- On the network
+
+
+#### On the network source
+
+Use this option to download packages to be installed from a network location. 
+This is the preferred way as you automatically receive all critical bug fixes that may affect installation.
+
 :::tip Note
-Once you install server from the ISO, make sure you [register your system](/cloudlinux_installation/#license-activation) and then run `yum update`.
+Most likely your network is not configured by default, 
+so you can see the URL configuration field greyed out, like on the screenshot below. Please refer to the Network Configuration screen first to set up a network connection.
 :::
 
-:::warning Note
-We recommend to reinstall `lvemanager`, `lve-utils`, `lve-stats`, and `cagefs` packages after installing a control panel.
+![Unavailable network source](./images/installation_source_gray_network.png)
+
+The correct installation URL for CloudLinux OS is
+
+```text
+https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/kickstart/
+```
+
+Type in installation URL in the corresponding field, configure proxy if needed and press the `Done` button.
+
+![](./images/installation_source_network_address.png)
+
+
+#### ISO file source
+
+This option is primary used as an alternative when you don't have internet connection on a target server.
+It is only available if you downloaded Minimal or DVD ISO which contains some bundled packages in.
+
+![](./images/installation_iso_source.png)
+
+Tick the `ISO file` checkbox and press the `Done` button.
+
+#### Next steps
+
+After clicking `Done`, you will be redirected to the [Installation Summary](./#installation-summary) screen
+where [Installation source](./#installation-source) and [Software Selection](./#software-selection) links
+will be greyed and the `Downloading package metadata` message wll be shown. 
+
+![](./images/installation_source_gray_working.png)
+
+Please hold on while that message disappears and proceed to the [Software Selection](./#software-selection) section.
+
+![](./images/installation_source_gray_done.png)
+
+
+#### Software Selection
+
+The Software Selection screen allows you to choose a Base Environment and Add-ons. 
+These options control which software packages will be installed on your system during the installation process.
+
+This screen is only available if Installation Source is properly configured and only after the installer 
+has downloaded package metadata from the source.
+
+It is not possible to select specific packages during a manual installation, you can only select pre-defined environments and add-ons.
+
+You should choose the CloudLinux edition that matches your license on this stage:
+ ![](/images/software_selection.png)
+
+
+The available options are:
+* to install CloudLinux OS Shared, choose the `CloudLinux OS Shared (minimal)` environment on the left of the screen.
+* to install CloudLinux OS Admin, choose the `CloudLinux OS admin (minimal)` environment on the left of the screen.
+* to install CloudLinux OS Solo, choose the `CloudLinux OS Solo (minimal)` environment on the left of the screen.
+
+
+Then, on the right side of the screen, select one or more add-ons which you want to install by ticking the
+check boxes next to each add-on.
+
+#### Final preparations
+
+Installation is almost done, all you need to do is to [configure your installation target](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-disk-partitioning-setup-x86)
+using the `Installation Destination` menu and create your [Root Password](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-configuration-progress-menu-x86#sect-account-configuration-x86).
+
+Doing that, the `Begin installation` button becomes blue, so click it.
+
+![](./images/installation_available.png) 
+
+After this point, the installation process actually starts and changes are being made to your selected disks.
+It is not possible to go back to the Installation Summary and change any settings configured there; 
+if you need to do so, you must wait for the installation process to finish, reboot your system, log in and change your settings 
+on the installed system.
+
+The bottom of the screen shows a progress bar and a message informing you of the current progress of the installation. 
+When the installation finishes, you can press the Finish installation button
+to reboot your computer and log in to your newly installed system.
+
+:::warning Warning
+Before you finish the installation and reboot, either remove the media
+which you used to start the installation, or make sure that your system tries to boot 
+from the hard drive before trying removable media. Otherwise, your computer will start the installer again instead of the installed system.
 :::
 
-Mount and boot the image, then follow the steps.
+![](./images/installation_done.png)
 
-1. Configure a network connection as shown below.
-    * the network name depends on your operating system
-    * you can specify your hostname
+#### Next steps
 
-   ![](/images/network_settings.png)
+Reboot your system, login and check EULA which is located in the `/usr/share/cloudlinux-release/EULA`.
 
-2. Configure installation sources:
-   * select the <span class="notranslate">_On the network_</span> installation source and enter the following repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/os/x86_64/Packages/`</span> for CloudLinux OS Shared 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/os/x86_64/Packages/`</span> for CloudLinux OS Shared 7 <span
-   class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/BaseOS/x86_64/os`</span> for CloudLinux OS Shared 8.
-   * also, in case you'd like to get the latest packages from the **Update** repository, add the additional **Update** repository URL: <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/6/updates/x86_64/Packages/`</span> for CloudLinux OS Shared 6 <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/7/updates/x86_64/Packages/`</span> for CloudLinux OS Shared 7 and
-   <span class="notranslate">`https://repo.cloudlinux.com/cloudlinux/8/AppStream/x86_64/os/`</span> for CloudLinux OS Shared 8.   
+Next, [activate your installation](#license-activation) in order to get updates.
 
-   ![](/images/repository_settings.png)
 
-3. Select software: select the <span class="notranslate">_Minimal install_</span> environment.
+### License activation
 
-   ![](/images/software_selection.png)
+To register your **CloudLinux OS** server with CloudLinux Network using activation key, run the following command:
 
-## CloudLinux OS Shared images
+```
+$ yum install rhn-setup
+$ /usr/sbin/rhnreg_ks --activationkey=<activation key>
+```
+
+Where &lt;activation key&gt; is like `1231-2b48feedf5b5a0e0609ae028d9275c93`
+
+If you have IP based license, use the `clnreg_ks` command instead:
+
+```
+$ yum install rhn-setup
+$ /usr/sbin/clnreg_ks --force
+```
+
+
+## Cloud provider images (CloudLinux OS Shared only)
 
 * [OpenStack QEMU/KVM](https://download.cloudlinux.com/cloudlinux/images/#kvm-tab)
 * [VMware](https://download.cloudlinux.com/cloudlinux/images/#vmware-tab)
@@ -313,39 +444,14 @@ How to use CloudLinux Image in Azure:
    ![](/images/AzureSearch.png)
 * Choose a suitable image. Check that the Publisher of the selected images is *cloudlinux* and Public Gallery Name is *cloudlinux-cbc76afd-63bc-4f6e-b801-65bd2f1ab0a0*.
 
-#### Xen images
+
+### Xen images
 
 :::tip Note
 We do not provide Xen images of CloudLinux OS Shared anymore, use [ISO images](#installing-new-servers) instead 
 :::
 
-## Net install
-
-To install CloudLinux OS Shared over network:
-
-1. Download & boot using the netboot image from: 
-
-**For CloudLinux OS Shared 8**: [https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.5-x86_64-boot.iso](https://repo.cloudlinux.com/cloudlinux/8/iso/x86_64/CloudLinux-8.5-x86_64-boot.iso).
-
-Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/images/pxeboot/)
-
-**For CloudLinux OS Shared 7**: [https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso](https://repo.cloudlinux.com/cloudlinux/7/iso/x86_64/CloudLinux-netinst-x86_64-7.9.iso). It will boot into CloudLinux installer.
-
-Alternatively, you can configure your PXE server using following folder as reference: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/images/pxeboot/)
-
-2. During the CloudLinux OS Shared installation, select URL as installation source and enter URL: 
-
-**For CloudLinux OS Shared 8**: [https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/](https://repo.cloudlinux.com/cloudlinux/8/install/x86_64/os/) and continue with installation. 
-
-**For CloudLinux OS Shared 7**: [https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/7/install/x86_64/) and continue with installation.
-
-To install CloudLinux 6 instead, use the following URL: [https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/](https://repo.cloudlinux.com/cloudlinux/6/install/x86_64/)
-
-Same URLs can be used to install para-virtualized Xen using either command-line or virt manager.
-
-
-
-## Provider-specific guidelines
+## Provider-specific guidelines (CloudLinux OS Shared only)
 
 * [Amazon Web Services](/cloudlinux_installation/#aws)
 * [H-Sphere](/cloudlinux_installation/#h-sphere)
@@ -832,7 +938,7 @@ chmod 775  cldeploy
 
 #### CloudLinux Wizard
 
-Wizard is a tool to set up CloudLinux OS Shared components.
+Wizard is a tool to set up CloudLinux OS components.
 
 In the current version only the lsapi module can be installed.
 
@@ -1035,7 +1141,7 @@ In very rare cases the value should be increased higher, up to 50000.
 
 ## LILO boot loader
 
-CloudLinux OS Shared can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
+CloudLinux OS can be deployed on servers that don't have grub installed, by installing <span class="notranslate">`хороgrub`</span> first.
 
 To do that:
 
@@ -1259,7 +1365,7 @@ In addition, check the leapp logs for .rpmnew configuration files that may have 
 
 ## Uninstalling
 
-You can always uninstall CloudLinux OS Shared. In this case, the system will be converted back to AlmaLinux or CentOS* (Depends on what system the conversion was done from).
+You can always uninstall CloudLinux OS. In this case, the system will be converted back to AlmaLinux or CentOS* (Depends on what system the conversion was done from).
 
 :::warning
 CentOS Linux 8 reached End Of Life (EOL) on December 31st, 2021. You can still uninstall CloudLinux and return to CentOS 8, but we don't guarantee stable operation of the system and its repositories after this action.
@@ -1277,7 +1383,7 @@ In the end, the script will provide instructions on how to finish the conversion
 Do not forget to free up a CloudLinux OS Shared license by removing the server from the [Servers section of your CLN account](https://docs.cln.cloudlinux.com/dashboard/#servers). After that, if you don't intend to use the license anymore, you can [remove it](https://docs.cln.cloudlinux.com/dashboard/#cloudlinux-os-activation-keys) to avoid being billed for it. 
 :::
 
-To uninstall CloudLinux OS Shared, run:
+To uninstall CloudLinux OS, run:
 
 ```
 $ wget -O cldeploy https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
@@ -1286,7 +1392,7 @@ $ sh cldeploy -c
 
 Now you have converted back to AlmaLinux or CentOS* and it is the time to install kernel.
 
-To delete CloudLinux OS Shared kernel, run (change the kernel package name to the one you've been using):
+To delete CloudLinux OS kernel, run (change the kernel package name to the one you've been using):
 
 
 ```
@@ -1326,5 +1432,5 @@ Before the reboot, the following command should be executed for restoring Apache
 ```
 
 :::tip Note
-Some of the packages from CloudLinux OS Shared repo will still be present. They are the same as AlmaLinux or CentOS* packages, and don't have to be removed. They will be updated in the future from AlmaLinux or CentOS* repositories, as new versions come out.
+Some of the packages from CloudLinux OS repo will still be present. They are the same as AlmaLinux or CentOS* packages, and don't have to be removed. They will be updated in the future from AlmaLinux or CentOS* repositories, as new versions come out.
 :::

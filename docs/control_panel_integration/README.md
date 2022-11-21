@@ -10,12 +10,12 @@
 * [Web UI integration](/control_panel_integration/#web-ui-integration)
 * [PHP-based integration of WEB UI with the control panel](/control_panel_integration/#php-based-integration-of-web-ui-with-the-control-panel)
 * [How to integrate CageFS with a control panel](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel)
-* [Integrating CloudLinux OS Shared PHP Selector](/control_panel_integration/#integrating-cloudlinux-os-shared-php-selector)
+* [Integrating CloudLinux OS Shared and Admin PHP Selector](/control_panel_integration/#integrating-cloudlinux-os-shared-php-selector)
 * [Integration of Apache modules in control panels](/control_panel_integration/#integration-of-apache-modules-in-control-panels)
 * [MySQL Governor](/control_panel_integration/#mysql-governor)
-* [CloudLinux OS Shared LVE and CageFS patches](/control_panel_integration/#cloudlinux-os-shared-lve-and-cagefs-patches)
+* [CloudLinux OS Shared and Admin LVE and CageFS patches](/control_panel_integration/#cloudlinux-os-shared-lve-and-cagefs-patches)
 * [Hardened PHP](/control_panel_integration/#hardened-php)
-* [CloudLinux OS Shared kernel set-up](/control_panel_integration/#cloudlinux-os-shared-kernel-set-up)
+* [CloudLinux OS kernel set-up](/control_panel_integration/#cloudlinux-os-shared-kernel-set-up)
 * [How to integrate X-Ray with a conrol panel](/control_panel_integration/#how-to-integrate-x-ray-with-a-control-panel)
 
 :::tip Note
@@ -24,34 +24,34 @@ We encourage you to create a pull request with your feedback at the bottom of th
 
 ### Introduction
 
-There are several possible ways of integration with CloudLinux OS Shared OS:
+There are several possible ways of integration with CloudLinux OS OS:
 
-* **Complete integration using new API** - exactly what is described in this document. This way a panel vendor will get all CloudLinux OS Shared features (current and future) and maximum support. It’s recommended.
-* **Manually Ad-hoc** - using low-level CLI utils. It is not recommended. It’s kind of “do it yourself way” - a control panel might use low-level utils like `lvectl` to set limits directly to a raw LVE by ID and control everything (including edge-cases) in its own code. There are many downsides of such approach e.g. only a small number of features can be implemented this way and any new changes in CloudLinux OS Shared will require more and more updates to the control panel code, and can possibly even introduce bugs, etc. And although this way looks easier at first, it will become more and more difficult to maintain it over time.
-* **Old API for CloudLinux OS Shared limits** - described [here](/deprecated/#package-integration). It’s deprecated. It still works but will not get any updates.
+* **Complete integration using new API** - exactly what is described in this document. This way a panel vendor will get all CloudLinux OS features (current and future) and maximum support. It’s recommended.
+* **Manually Ad-hoc** - using low-level CLI utils. It is not recommended. It’s kind of “do it yourself way” - a control panel might use low-level utils like `lvectl` to set limits directly to a raw LVE by ID and control everything (including edge-cases) in its own code. There are many downsides of such approach e.g. only a small number of features can be implemented this way and any new changes in CloudLinux OS will require more and more updates to the control panel code, and can possibly even introduce bugs, etc. And although this way looks easier at first, it will become more and more difficult to maintain it over time.
+* **Old API for CloudLinux OS limits** - described [here](/deprecated/#package-integration). It’s deprecated. It still works but will not get any updates.
 
 ### New API in a nutshell
 
-The goal of the new API is to shift all complexity for controlling CloudLinux OS Shared components from a control panel to the CloudLinux OS Shared web UI and utils.
+The goal of the new API is to shift all complexity for controlling CloudLinux OS components from a control panel to the CloudLinux OS web UI and utils.
 Most of the integration is done within a few steps:
-1. A control panel vendor implements 7 simple scripts (any language) and specifies them in a special config file. All Cloudlinux OS Shared components will look up and call them with some arguments to get all needed information from the control panel (e.g. users list, their hosting plans, domains, etc.)
-2. Control panel should call hooks described below in a response to Admin/Users actions (e.g. changing end-user’s domain, creating new end-user, etc.). CloudLinux OS Shared utils will do their stuff to reconfigure itself according to these events. There is no need to worry about what exactly they do because it will be related only to CloudLinux OS Shared components and control panel will not be affected.
+1. A control panel vendor implements 7 simple scripts (any language) and specifies them in a special config file. All Cloudlinux OS components will look up and call them with some arguments to get all needed information from the control panel (e.g. users list, their hosting plans, domains, etc.)
+2. Control panel should call hooks described below in a response to Admin/Users actions (e.g. changing end-user’s domain, creating new end-user, etc.). CloudLinux OS utils will do their stuff to reconfigure itself according to these events. There is no need to worry about what exactly they do because it will be related only to CloudLinux OS components and control panel will not be affected.
 3. Configure the control panel and CageFS to work together by changing some configs.
-4. Optionally embed CloudLinux OS Shared web UI into the control panel. It is highly recommended because it does all you may need. You can use PHP scripts to embed SPA application to the specially prepared pages (with your menus) for LVE Manager and Selectors.
+4. Optionally embed CloudLinux OS web UI into the control panel. It is highly recommended because it does all you may need. You can use PHP scripts to embed SPA application to the specially prepared pages (with your menus) for LVE Manager and Selectors.
 
 
 ## General
 
 * [Example of the integration config](/control_panel_integration/#example-of-the-integration-config)
 
-To integrate CloudLinux OS Shared into a control panel, you should implement the following interfaces required by the CloudLinux OS Shared utilities:
+To integrate CloudLinux OS into a control panel, you should implement the following interfaces required by the CloudLinux OS utilities:
 * [CPAPI](/control_panel_integration/#control-panel-api-integration) — a small scripts/files-type interface to get the required information from the control panel
-* [CP Hooks Integration](/control_panel_integration/#control-panel-hooks-integration) — a set of the CloudLinux OS Shared scripts/commands. Control panel calls this set in response to its internal events
+* [CP Hooks Integration](/control_panel_integration/#control-panel-hooks-integration) — a set of the CloudLinux OS scripts/commands. Control panel calls this set in response to its internal events
 * [Web UI Integration(optional)](/control_panel_integration/#web-ui-integration) — various configuration parameters and scripts to embed interface SPA application into the control panel native interface. Optional, if CLI is enough
 * [CageFS Integration](/control_panel_integration/#how-to-integrate-cagefs-with-a-control-panel) — some changes may be required in the config files to work and integrate with CageFS as well as additional support from a control panel
-* [CloudLinux OS Shared kernel set-up](/control_panel_integration/#cloudlinux-os-shared-kernel-set-up)
+* [CloudLinux OS kernel set-up](/control_panel_integration/#cloudlinux-os-shared-kernel-set-up)
 
-Files related to integration (integration config file, CPAPI integration scripts and all their dependencies) as well as parent directories to place them (e.g. <span class="notranslate">`/opt/cpvendor/etc/`</span>) should be delivered/managed by the control panel vendor. They don't exist by default and should be created to activate integration mechanism. Most likely, they should be bundled with the control panel or installed with some CloudLinux OS Shared support module (if CloudLinux OS Shared support is not built-in).
+Files related to integration (integration config file, CPAPI integration scripts and all their dependencies) as well as parent directories to place them (e.g. <span class="notranslate">`/opt/cpvendor/etc/`</span>) should be delivered/managed by the control panel vendor. They don't exist by default and should be created to activate integration mechanism. Most likely, they should be bundled with the control panel or installed with some CloudLinux OS support module (if CloudLinux OS Shared support is not built-in).
 
 Configuration related to integration should be placed in a valid INI file (further “integration config file”):
 
@@ -62,9 +62,9 @@ Configuration related to integration should be placed in a valid INI file (furth
 ```
 </div>
 
-All users (and in CageFS too) should have read access to this file because some CPAPI methods have to work from end-user too. CloudLinux OS Shared components only read this file and never write/create it.
+All users (and in CageFS too) should have read access to this file because some CPAPI methods have to work from end-user too. CloudLinux OS components only read this file and never write/create it.
 
-The control panel vendor decides where to put CPAPI scripts (CloudLinux OS Shared utils will read path to scripts from the integration file) but we recommend to put them into <span class="notranslate">`/opt/cpvendor/bin/`</span> (should be created by the vendor first) because <span class="notranslate">`/opt/*`</span> is mounted to CageFS by default and the standard location will save some time during possible support incidents.
+The control panel vendor decides where to put CPAPI scripts (CloudLinux OS utils will read path to scripts from the integration file) but we recommend to put them into <span class="notranslate">`/opt/cpvendor/bin/`</span> (should be created by the vendor first) because <span class="notranslate">`/opt/*`</span> is mounted to CageFS by default and the standard location will save some time during possible support incidents.
 
 We recommend to deliver a set of scripts for CPAPI and integration file as a separate RPM package. This can greatly simplify support for vendors as they will be able to release any updates and compatibility fixes separately from the panel updates and use dependencies/conflicts management provided by a package manager.
 
@@ -87,7 +87,7 @@ Summary: ability to integrate X-Ray added.
 
 Version 1.1
 1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
-2. New `supported_cl_features` key added to [`panel_info` script](/control_panel_integration/#panel-info). You can specify CloudLinux OS Shared features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
+2. New `supported_cl_features` key added to [`panel_info` script](/control_panel_integration/#panel-info). You can specify CloudLinux OS features that you want to show in LVE Manager, Wizard, Dashboard and other UI and hide others.
 :::
 
 
@@ -135,8 +135,8 @@ You can use different scripts for different CPAPI methods or only one script and
 * Scripts run from the end-user should also work from inside CageFS. You can find details on how to implement this [here](/control_panel_integration/#working-with-cpapi-cagefs)
 
 #### Legend
-* Necessity <span class="notranslate">`always`</span> means it’s required nearly by all CloudLinux OS Shared code and should be implemented no matter what features you are interested in. Other methods might not be implemented and this will affect only some CloudLinux OS Shared features leaving others to work fine.
-* <span class="notranslate">`All UNIX users`</span> means any Linux system account (from <span class="notranslate">`/etc/passwd`</span>) that is able to execute CloudLinux OS Shared utilities directly or indirectly.
+* Necessity <span class="notranslate">`always`</span> means it’s required nearly by all CloudLinux OS code and should be implemented no matter what features you are interested in. Other methods might not be implemented and this will affect only some CloudLinux OS Shared features leaving others to work fine.
+* <span class="notranslate">`All UNIX users`</span> means any Linux system account (from <span class="notranslate">`/etc/passwd`</span>) that is able to execute CloudLinux OS utilities directly or indirectly.
 
 
 | | | | |
@@ -247,7 +247,7 @@ When data is temporarily unavailable due to internal errors in the integration s
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|message|False|Error message for an administrator printed by CloudLinux OS Shared utility|
+|message|False|Error message for an administrator printed by CloudLinux OS utility|
 
 #### Restricted access
 
@@ -271,7 +271,7 @@ When data is unavailable due to restricted access of a user that called the scri
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|message|False|Error message for an administrator printed by CloudLinux OS Shared utility|
+|message|False|Error message for an administrator printed by CloudLinux OS utility|
 
 
 :::tip Info
@@ -305,7 +305,7 @@ The output is as follows:
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|message|False|Error message for an administrator printed by CloudLinux OS Shared utility|
+|message|False|Error message for an administrator printed by CloudLinux OS utility|
 
 
 #### Nonexistent entities
@@ -335,7 +335,7 @@ This kind of error should be used only in the filtering case. In case when some 
 | | | |
 |-|-|-|
 |Key|Nullable|Description|
-|message|False|Error message for an administrator printed by CloudLinux OS Shared utility|
+|message|False|Error message for an administrator printed by CloudLinux OS utility|
 
 ### The list of the integration scripts
 
@@ -396,8 +396,8 @@ Returns the information about the control panel in the specified format.
 |Key|Nullable|Description|
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
-|<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux OS Shared utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux OS Shared utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
-|<span class="notranslate">supported_cl_features</span>|False|Available since API v1.1 (see [versioning](/control_panel_integration/#versioning)) <br> Object that describes which CloudLinux OS Shared features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li></ul> Available since API v1.2 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul>|
+|<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux OS utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux OS Shared utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
+|<span class="notranslate">supported_cl_features</span>|False|Available since API v1.1 (see [versioning](/control_panel_integration/#versioning)) <br> Object that describes which CloudLinux OS features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li></ul> Available since API v1.2 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul>|
 
 
 
@@ -406,7 +406,7 @@ Returns the information about the control panel in the specified format.
 Returns the information about databases that are available to the control panel users and are managed by the control panel.
 
 :::warning WARNING!
-For now, CloudLinux OS Shared supports control panels only with MySQL databases.
+For now, CloudLinux OS supports control panels only with MySQL databases.
 :::
 
 Integration script is optional, when there is no script, [lve-stats won’t collect SQL snapshots](cloudlinux_os_components/#plugins).
@@ -545,7 +545,7 @@ If a reseller user or administrator user has a corresponding UNIX-user in the sy
 |<span class="notranslate">--package-owner</span>|False|Used in pair with package.name. Set the owner of the specified package.|
 |<span class="notranslate">--username</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
 |<span class="notranslate">--unix-id</span>|False|Used for filtering. When the parameter is set, output the information about this UNIX user only.|
-|<span class="notranslate">--fields</span>|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.<br><br>The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux OS Shared will work more slowly.|
+|<span class="notranslate">--fields</span>|False|List fields to output. Fields are divided with a comma; when there is no key, output all available fields.<br><br>The key is used to reduce the data size for the large systems. You can ignore the key and always output the full set of data. Note that in this case, CloudLinux OS will work more slowly.|
 
 **Output example**
 
@@ -854,7 +854,7 @@ Gives information about panel’s administrators, output information about all p
 
 ## Control panel hooks integration
 
-For proper CloudLinux OS Shared operation, you should implement a hooks mechanism. Hooks are scripts that control panel invokes with the exact arguments at a specific time. The control panel is responsible for executing these scripts as a system root user.
+For proper CloudLinux OS operation, you should implement a hooks mechanism. Hooks are scripts that control panel invokes with the exact arguments at a specific time. The control panel is responsible for executing these scripts as a system root user.
 
 ### Managing administrators
 
@@ -896,7 +896,7 @@ After removing the administrator, the following command should be called by the 
 
 ### Managing users
 
-To manage user limits properly, CloudLinux OS Shared utilities need information about the following control panel events.
+To manage user limits properly, CloudLinux OS utilities need information about the following control panel events.
 
 After creating a new user, the following script should be called:
 
@@ -1043,7 +1043,7 @@ A user can run standalone services to provide access to LVE Manager without UI i
 
 These services have some issues:
 
-* The ability to download log files from <span class="notranslate">CloudLinux OS Shared Wizard</span> is missed
+* The ability to download log files from <span class="notranslate">CloudLinux OS Wizard</span> is missed
 * Incorrect layout for some UI forms (Node.js Selector/Python Selector)
 * Some errors are not displayed
 
@@ -1112,7 +1112,7 @@ CageFS documentation can be found here: [CageFS](/cloudlinux_os_components/#cage
 
 ### CageFS MIN_UID  
 
-CageFS has MIN_UID setting. Users with UIDs < MIN_UID will not be limited by CageFS. This setting is configured based on UID_MIN setting from <span class="notranslate">`/etc/login.defs`</span> file by default. So, typically MIN_UID is 500 on CloudLinux OS Shared 6 and 1000 on CloudLinux OS Shared 7.
+CageFS has MIN_UID setting. Users with UIDs < MIN_UID will not be limited by CageFS. This setting is configured based on UID_MIN setting from <span class="notranslate">`/etc/login.defs`</span> file by default. So, typically MIN_UID is 500 on CloudLinux OS 6 and 1000 on CloudLinux OS Shared 7.
 
 You can obtain current MIN_UID value by executing the following command:
 
@@ -1828,6 +1828,10 @@ fi
 ```
 
 ## MySQL Governor
+
+:::Warning
+MySQL Governor is not available in CloudLinux OS Admin edition.
+:::
 
 1. Install MySQL Governor
 

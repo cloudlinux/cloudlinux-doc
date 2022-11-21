@@ -1,10 +1,10 @@
-# CloudLinux OS Shared kernel
+# CloudLinux OS kernel
  
 :::tip Note
 Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
 :::
 
-* [CloudLinux OS Shared 8 kernel-related features and improvements](/cloudlinux_os_kernel/#cloudlinux-os-shared-8-kernel-related-features-and-improvements)
+* [CloudLinux OS 8 kernel-related features and improvements](/cloudlinux_os_kernel/#cloudlinux-os-shared-8-kernel-related-features-and-improvements)
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
 * [SecureLinks](/cloudlinux_os_kernel/#securelinks)
 * [File change API](/cloudlinux_os_kernel/#file-change-api)
@@ -22,7 +22,7 @@ Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is s
 * [Enter LVE when using cPanel utilities](/cloudlinux_os_kernel/#enter-lve-when-using-cpanel-utilities)
 * [Proactive reporting kernel crash events with Sentry and Kernel Panic Receiver](/cloudlinux_os_kernel/#proactive-reporting-kernel-crash-events-with-sentry-and-kernel-panic-receiver)
 
-## CloudLinux OS Shared 8 kernel-related features and improvements
+## CloudLinux OS 8 kernel-related features and improvements
 
 * [Memory](/cloudlinux_installation/#memory)
 * [Security](/cloudlinux_installation/#security)
@@ -69,9 +69,9 @@ You can find more information on 4.18 kernel branch using this link:
 
 [https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel)
 
-<span class="notranslate"> **CloudLinux OS Shared 8 kernel** </span>
+<span class="notranslate"> **CloudLinux OS 8 kernel** </span>
 
-You can find more information about CloudLinux OS Shared 8 kernel features [here](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
+You can find more information about CloudLinux OS 8 kernel features [here](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
 
 #### How to migrate from the normal to hybrid channel (**CloudLinux OS Shared 6 Hybrid**): 
 
@@ -171,7 +171,8 @@ Find more details on [symlink owner match protection](/cloudlinux_os_kernel/#sec
 ## SecureLinks
 
 
-CloudLinux OS Shared provides comprehensive protection against symbolic link attacks popular in shared hosting environment.
+CloudLinux OS Shared and CloudLinux OS Admin provides comprehensive protection against 
+symbolic link attacks popular in shared hosting environment.
 
 The protection requires setting multiple kernel options to be enabled.
 
