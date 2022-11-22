@@ -18,6 +18,10 @@ Most of the features of CloudLinux OS Shared are available in this edition, with
 - MySQL Governor is not available in this edition
 - the license itself does not allow more than 5 users to be hosted on server.
 
+:::tip Note
+The CloudLinux OS Admin plan does not include the NodeJS, Python and Ruby selectors as well as the MySQL Governor.
+:::
+
 
 ## Installation
 
