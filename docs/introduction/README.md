@@ -17,7 +17,7 @@
 |Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
 |Website monitoring alerts|**Yes**|No|No|No|
 |Slow Site analyzer|**Yes**|**Yes**|**Yes**|**Yes**|
-|PHP X-Ray|**Yes**|No|**Yes**|**Yes**|
+|PHP X-Ray|**Yes**|**Yes**|No|**Yes**|
 |Centralized Monitoring|No|No|No|**Yes**|
 |AccelerateWP|**Yes**|**Yes**|No|**Yes**|
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
