@@ -358,8 +358,8 @@ You should choose the CloudLinux edition that matches your license on this stage
 
 
 The available options are:
-* to install CloudLinux OS Shared, choose the `CloudLinux OS Shared (minimal)` environment on the left of the screen.
-* to install CloudLinux OS Admin, choose the `CloudLinux OS admin (minimal)` environment on the left of the screen.
+* to install CloudLinux OS Shared or Shared Pro, choose the `CloudLinux OS Shared/Pro (minimal)` environment on the left of the screen.
+* to install CloudLinux OS Admin, choose the `CloudLinux OS Admin (minimal)` environment on the left of the screen.
 * to install CloudLinux OS Solo, choose the `CloudLinux OS Solo (minimal)` environment on the left of the screen.
 
 
