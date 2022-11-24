@@ -56,7 +56,7 @@ Sometimes it is required to convert already existing servers with `CentOS` or `A
 It is easy to convert your existing installation by cldeploy script. The process takes a few minutes and replaces just a handful of RPMs.
 
 :::warning
-Unlike [Fresh installation](./#fresh-installation), converting immediately requires CloudLinux OS license. 
+Unlike [Fresh installation](#installing-new-servers), converting immediately requires CloudLinux OS license. 
 Please refer to the [guide](#license-activation) to get activation key.
 :::
 
@@ -308,7 +308,7 @@ Most likely your network is not configured by default,
 so you can see the URL configuration field greyed out, like on the screenshot below. Please refer to the Network Configuration screen first to set up a network connection.
 :::
 
-![Unavailable network source](./images/installation_source_gray_network.png)
+![Unavailable network source](./images/installation_source_gray_network_old.png)
 
 The correct installation URL for CloudLinux OS is
 
