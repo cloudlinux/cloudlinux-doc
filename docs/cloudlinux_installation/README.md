@@ -308,7 +308,7 @@ Most likely your network is not configured by default,
 so you can see the URL configuration field greyed out, like on the screenshot below. Please refer to the Network Configuration screen first to set up a network connection.
 :::
 
-![Unavailable network source](./images/installation_source_gray_network_old.png)
+![Unavailable network source](./images/installation_source_gray_network.png)
 
 The correct installation URL for CloudLinux OS is
 
@@ -354,7 +354,7 @@ has downloaded package metadata from the source.
 It is not possible to select specific packages during a manual installation, you can only select pre-defined environments and add-ons.
 
 You should choose the CloudLinux edition that matches your license on this stage:
- ![](/images/software_selection.png)
+ ![](./images/software_selection.png)
 
 
 The available options are:
