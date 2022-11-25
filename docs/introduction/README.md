@@ -145,11 +145,14 @@ functionality with even more useful [features](/cloudlinux-os-plus/).
 CloudLinux OS follows the life cycle policy of RHEL. 
 Using a supported operating system is critical to maintaining a stable server environment.
 
-Currently, the following version are supported:
+Currently, the following versions are available and supported:
 
 | |  | |
 |-|--|-|
 |Operating System | Release Date| End of Life and Support|
-|CloudLinux OS Shared, CloudLinux OS Admin, CloudLinux OS Solo 8 | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Shared 6 | Feb 1, 2011 | Nov 30, 2020 ([ELS until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
 |CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
-|CloudLinux OS Shared 6 | Feb 1, 2011 | Nov 30, 2020 ([Extended Support until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
+|CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
+|CloudLinux OS Shared 8 | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Solo (8) | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Admin (8) | Mar 17, 2020 | May 31, 2029 |
