@@ -4,7 +4,7 @@ This documentation describes specific features of the CloudLinux kernel. In othe
 More information about the actual kernel changes and releases can be obtained from our [changelog](https://changelog.cloudlinux.com/).
 
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
-* [SecureLinks](/cloudlinux_os_kernel/#securelinks)
+* [SecureLinks and Link Traversal Protection](/cloudlinux_os_kernel/#securelinks-and-link-traversal-protection)
 * [File change API](/cloudlinux_os_kernel/#file-change-api)
 * [Tuned-profiles-cloudlinux](/cloudlinux_os_kernel/#tuned-profiles-cloudlinux)
 * [Kernel config variables](/cloudlinux_os_kernel/#kernel-config-variables)
