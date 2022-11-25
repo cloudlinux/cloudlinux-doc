@@ -1,10 +1,8 @@
 # CloudLinux OS kernel
- 
-:::tip Note
-Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is supported on CloudLinux OS 8+, but might not work or be compatible with control panels and various components.
-:::
 
-* [CloudLinux OS 8 kernel-related features and improvements](/cloudlinux_os_kernel/#cloudlinux-os-shared-8-kernel-related-features-and-improvements)
+This documentation describes specific features of the CloudLinux kernel. In other cases the kernel has the same features and innovations as any similar RHEL kernel.
+More information about the actual kernel changes and releases can be obtained from our [changelog](https://changelog.cloudlinux.com/)
+
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
 * [SecureLinks](/cloudlinux_os_kernel/#securelinks)
 * [File change API](/cloudlinux_os_kernel/#file-change-api)
@@ -22,127 +20,27 @@ Please note that SELinux is not supported on CloudLinux OS 6 and 7. SELinux is s
 * [Enter LVE when using cPanel utilities](/cloudlinux_os_kernel/#enter-lve-when-using-cpanel-utilities)
 * [Proactive reporting kernel crash events with Sentry and Kernel Panic Receiver](/cloudlinux_os_kernel/#proactive-reporting-kernel-crash-events-with-sentry-and-kernel-panic-receiver)
 
-## CloudLinux OS 8 kernel-related features and improvements
-
-* [Memory](/cloudlinux_installation/#memory)
-* [Security](/cloudlinux_installation/#security)
-* [Performance](/cloudlinux_installation/#performance)
-* [Common issues and troubleshooting during conversion](/cloudlinux_installation/#common-issues-and-troubleshooting-during-conversion)
-
-#### Memory
-
-* Memory management supports 5-level page tables, increasing the physical memory upper limit to 64 TB.
-* Non-Uniform Memory Access (NUMA) node count has been increased from 4 NUMA nodes to 8 NUMA nodes, for even bigger servers.
-
-#### Security
-
-* Code implementing the ext4 file system has been cleaned up, making it better at preventing malicious file system images.
-* The TCP listener handling is now completely lockless, making TCP servers faster and more scalable, and improving protection against DDoS attacks.
-
-#### Performance
-
-* Spectre V2 mitigation default changed from IBRS to Retpolines for better performance.
-* Intel Omni-Path Architecture (OPA) provides Host Fabric Interface (HFI) hardware with initialization and setup for high-performance data transfers. This gives you high bandwidth, high message rates, and low latency between compute and I/O nodes in clustered environments.
-* IOMMU passthrough is now enabled by default. This is beneficial for customers who want to pass-through hardware devices to virtual machines.
-* A new writecache module has been implemented for the Device Mapper, allowing SSD drives or other persistent memory to be used as a cache for block write operations. (Note, Caching of read operations is not implemented, since such operations are cached in the RAM pages cache.)
-* A flexible process flow control mode (cgroup.type threaded) was added to the cgroup mode to allow process threads to be managed as a single entity. With this mode, threads in the same process don’t have to belong to the same group. They can be separated into different groups, but they must be threaded and placed in the same cgroup hierarchy.
-* Improvements were made to on-the-fly resizing of file systems that use bigalloc.
-* On ext4 file systems, inode generation scalability on SMP systems is improved.
-
 ## Hybrid Kernels
 
-<span class="notranslate">**CloudLinux OS Shared 6 Hybrid kernel**</span>
+Hybrid kernels give you the ability to take advantage of the benefits and features available in newer kernels without having to completely upgrade to another version of the operating system. Example - for the CloudLinux 7 kernel, based on version 3.10, you can install a hybrid kernel (same as on CloudLinux 8), which is based on version 4.18. This provides more kernel options, memory and overall optimization, as well as a positive impact on system performance.
 
-<span class="notranslate"> CloudLinux </span> OS Shared 6 Hybrid Kernel is <span class="notranslate"> CloudLinux OS Shared</span> 7 (3.10.0) kernel compiled for CloudLinux OS Shared 6. New 3.10 kernel features a set of performance and scalability improvements related to  <span class="notranslate"> IO </span> , networking and memory management, available in  <span class="notranslate"> CloudLinux OS Shared 7 </span> . It also features improved  <span class="notranslate"> CPU </span>  scheduler for better overall system throughput and latency.
-
-Please find information on the main features of 3.10 kernel branch on the links:
-
-[https://kernelnewbies.org/Linux_3.10#head-e740f930dfd021616cc42e8abf21c79d0b07e217](https://kernelnewbies.org/Linux_3.10#head-e740f930dfd021616cc42e8abf21c79d0b07e217)
-
-[https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1](https://www.kernel.org/pub/linux/kernel/v3.0/ChangeLog-3.10.1)
-
-<span class="notranslate"> **CloudLinux OS Shared 7 Hybrid kernel** </span>
-
-<span class="notranslate"> CloudLinux OS Shared</span> 7 Hybrid Kernel is essentially EL8-based (4.18) kernel compiled for CloudLinux OS Shared 7.
-
-You can find more information on 4.18 kernel branch using this link:
-
-[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/new-features#kernel)
-
-<span class="notranslate"> **CloudLinux OS 8 kernel** </span>
-
-You can find more information about CloudLinux OS 8 kernel features [here](/cloudlinux_installation/#cloudlinux-8-kernel-related-features-and-improvements)
-
-#### How to migrate from the normal to hybrid channel (**CloudLinux OS Shared 6 Hybrid**): 
+#### How to migrate from the normal kernel to hybrid one
 
 ::: tip Note
-The system must be registered in CLN.
+The system must have an active CloudLinux OS license
 :::
 
+:::tip Warning
+If you use `yum-plugin-protectbase`, please make sure it is disabled before stating the normal-to-hybrid script.
+:::
 
-1. Update <span class="notranslate"> rhn-client-tools </span> from production
-
-2. Run <span class="notranslate"> normal-to-hybrid </span> script.
-
-3. Reboot after script execution is completed.
-
-<div class="notranslate">
+You should perform the following commands:
 
 ```
-yum update rhn-client-tools
+yum update
 normal-to-hybrid
-reboot
 ```
-</div>
-
-#### How to migrate from the normal to hybrid channel (**CloudLinux OS Shared 7 Hybrid**): 
-
-::: tip Note
-The system must be registered in CLN.
-:::
-
-
-1. Update <span class="notranslate"> rhn-client-tools rhn-check rhn-setup </span> from testing repository.
-
-    :::tip Note
-    If you use `yum-plugin-protectbase`, please make sure it is disabled before stating the normal-to-hybrid script.
-    :::
-
-2. Run <span class="notranslate"> normal-to-hybrid </span> script.
-
-3. Reboot after script execution is completed.
-
-<div class="notranslate">
-
-```
-yum update rhn-client-tools rhn-check rhn-setup
-normal-to-hybrid
-reboot
-```
-</div>
-
-:::tip Note
-If you want to use the `yum-plugin-protectbase` on the CloudLinux OS 7 hybrid system, you should protect the `[cloudlinux-x86_64-server-7]` and `[cl7h]` repositories by adding them to the config file.
-:::
-
-#### How to migrate from hybrid to the normal channel (for both CloudLinux OS Shared 6 Hybrid and CloudLinux OS Shared 7 Hybrid):
-
-::: tip Note
-The system should be registered in CLN.
-:::
-
-
-1. Run <span class="notranslate"> hybrid-to-normal </span> script.
-
-2. Reboot after script execution is completed.
-
-<div class="notranslate">
-
-```
-hybrid-to-normal
-reboot
-```
-</div>
+Then if the script execution is completed without errors - perform the server reboot.
 
 **Known limitations and issues of CloudLinux OS Shared 6 Hybrid kernel**
 
@@ -167,9 +65,7 @@ sysctl -w fs.enforce_symlinksifowner=0
 
 Find more details on [symlink owner match protection](/cloudlinux_os_kernel/#securelinks).
 
-
 ## SecureLinks
-
 
 CloudLinux OS Shared and CloudLinux OS Admin provides comprehensive protection against 
 symbolic link attacks popular in shared hosting environment.
@@ -243,7 +139,7 @@ $ sysctl -p
 ```
 </div>  
 
-::: danger
+::: Warning
 /proc/sys/fs/global_root_enable [CloudLinux OS Shared 7 and 7 hybrid kernels only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+ and CloudLinux OS Shared 7 Hybrid with lve-kmod 2.0-11+ ]
 :::
 
@@ -278,8 +174,6 @@ To disable the protection for CloudLinux OS Shared 7 hybrid, set the <span class
 fs.process_symlinks_by_task=0
 ```
 </div>
-
-
 
 ### Link traversal protection
 
@@ -407,7 +301,6 @@ Starting from lvemanager 4.0-25.5, if there is no /etc/sysctl.d/cloudlinux-links
 
 **General description**
 
-
 One of the main problems on a shared hosting system for file backup operations is to figure out which files have changed. Using <span class="notranslate"> INOTIFY </span> on a 1T drive with a large number of small files and directories guarantees slow startup times, and a lot of context switching between kernel and userspace - generating additional load. On the other hand scanning disk for newly modified files is very <span class="notranslate"> IO </span> intensive, and can kill the performance of the fastest disks.
 
 **CloudLinux OS Shared approach**
@@ -419,7 +312,6 @@ After that - any software (with enough permissions) can get a list of files that
 The software is very simple to use and produces the  list of modified files. As such we expect file backup software, including integrated cPanel backup system to integrate with this <span class="notranslate"> API </span> soon.
 
 ### Usage and integration
-
 
 **Userland utilities**
 
