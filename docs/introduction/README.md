@@ -61,7 +61,7 @@ Purchasing CloudLinux OS Shared Pro license extends your CloudLinux OS Shared
 functionality with even more useful [features](/cloudlinux-os-plus/). 
 
 
-## CloudLinux OS Editions components
+## CloudLinux OS components
 
 * **CloudLinux Manager**
 
@@ -82,9 +82,9 @@ functionality with even more useful [features](/cloudlinux-os-plus/).
     [See more](/cloudlinux_os_components/#cagefs).
 * **MySQL Governor**
 
-    :::warning Warning
-        This component is not available in CloudLinux OS Admin edition.
-    :::
+:::tip Note
+This component is not available in CloudLinux OS Admin edition.
+:::
 
     MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using LVE limits. 
     By using the [dbtop](/command-line_tools/#dbtop) utility, it is possible to see the database usage on a per-customer basis, 
@@ -152,7 +152,6 @@ Currently, the following versions are available and supported:
 |Operating System | Release Date| End of Life and Support|
 |CloudLinux OS Shared 6 | Feb 1, 2011 | Nov 30, 2020 ([ELS until June 30, 2024](https://docs.cln.cloudlinux.com/billing/#cloudlinux-os-6-extended-lifecycle-support)) |
 |CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
-|CloudLinux OS Shared 7 | Apr 1, 2015 | Jun 30, 2024 |
-|CloudLinux OS Shared 8 | Mar 17, 2020 | May 31, 2029 |
+|CloudLinux OS Shared (Pro) 8 | Mar 17, 2020 | May 31, 2029 |
 |CloudLinux OS Solo (8) | Mar 17, 2020 | May 31, 2029 |
 |CloudLinux OS Admin (8) | Mar 17, 2020 | May 31, 2029 |
