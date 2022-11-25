@@ -1,4 +1,4 @@
-# User interface (CloudLinux Manager)
+# CloudLinux Manager UI
 
 * [CloudLinux OS Shared installation wizard](/lve_manager/#cloudlinux-os-shared-installation-wizard)
 * [CloudLinux Manager](/lve_manager/#cloudlinux-manager)
@@ -16,7 +16,7 @@ $ yum install lvemanager
 ```
 </div>
 
-## CloudLinux OS installation wizard
+## Installation wizard
 
 <div class="notranslate">
 
