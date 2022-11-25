@@ -1,7 +1,7 @@
 # CloudLinux OS kernel
 
 This documentation describes specific features of the CloudLinux kernel. In other cases the kernel has the same features and innovations as any similar RHEL kernel.
-More information about the actual kernel changes and releases can be obtained from our [changelog](https://changelog.cloudlinux.com/)
+More information about the actual kernel changes and releases can be obtained from our [changelog](https://changelog.cloudlinux.com/).
 
 * [Hybrid Kernels](/cloudlinux_os_kernel/#hybrid-kernels)
 * [SecureLinks](/cloudlinux_os_kernel/#securelinks)
@@ -24,13 +24,13 @@ More information about the actual kernel changes and releases can be obtained fr
 
 Hybrid kernels give you the ability to take advantage of the benefits and features available in newer kernels without having to completely upgrade to another version of the operating system. Example - for the CloudLinux 7 kernel, based on version 3.10, you can install a hybrid kernel (same as on CloudLinux 8), which is based on version 4.18. This provides more kernel options, memory and overall optimization, as well as a positive impact on system performance.
 
-#### How to migrate from the normal kernel to hybrid one
+### How to migrate from the normal kernel to hybrid one
 
 ::: tip Note
 The system must have an active CloudLinux OS license
 :::
 
-:::tip Warning
+:::warning Warning
 If you use `yum-plugin-protectbase`, please make sure it is disabled before stating the normal-to-hybrid script.
 :::
 
@@ -42,124 +42,131 @@ normal-to-hybrid
 ```
 Then if the script execution is completed without errors - perform the server reboot.
 
-**Known limitations and issues of CloudLinux OS Shared 6 Hybrid kernel**
+### Known limitations and issues of hybrid kernels
 
-1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux OS Shared</span> 6 does not allow to remove the package of currently running kernel. Proper removal procedure will be implemented, but for now, we should warn users _not to boot Hybrid kernel if they have migrated to normal channel_.
+**CloudLinux OS Shared 6 Hybrid kernel**
 
-2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CL6 cannot detect signatures created in such way. The solution will be implemented.
+1. We do not remove Hybrid kernel after migration from Hybrid to the normal channel, but we remove <span class="notranslate"> linux-firmware </span> package which is needed to boot Hybrid kernel. This is because <span class="notranslate"> CloudLinux OS Shared</span> 6 does not allow to remove the package of currently running kernel. Thus please don't reboot the server back to Hybrid kernel after you remove it.
 
-**Known limitations and issues of CloudLinux OS Shared 7 Hybrid kernel**
+2. Kernel module signature isn't checking for now, as 3.10 kernel is using x509 certificates to generate keys and CloudLinux OS Shared 6 cannot detect signatures created in such way.
 
-Features that are absent in the current kernel build:
+## SecureLinks and Link Traversal Protection
 
-* Per LVE traffic accounting
-
-Note that Symlink Owner Match Protection is enabled by default in CL7 Hybrid kernel. To disable it, use `sysctl` utility:
-
-<div class="notranslate">
-
-```
-sysctl -w fs.enforce_symlinksifowner=0
-```
-</div>
-
-Find more details on [symlink owner match protection](/cloudlinux_os_kernel/#securelinks).
-
-## SecureLinks
+::: tip Note
+Link Traversal Protection is disabled by default for the CloudLinux OS Shared.
+:::
 
 CloudLinux OS Shared and CloudLinux OS Admin provides comprehensive protection against 
 symbolic link attacks popular in shared hosting environment.
 
-The protection requires setting multiple kernel options to be enabled.
+The protection requires setting multiple kernel parameters to be enabled:
 
-### Symlink owner match protection
-
+**SecureLinks:**
 * [fs.enforce_symlinksifowner](/cloudlinux_os_kernel/#fs-enforce-symlinksifowner)
 * [fs.symlinkown_gid](/cloudlinux_os_kernel/#fs-symlinkown-gid)
+
+**Link Traversal Protection**
+* [fs.protected_symlinks_create](/cloudlinux_os_kernel/#fs-protected-symlinks-create)
 * [fs.process_symlinks_by_task](/cloudlinux_os_kernel/#fs-process-symlinks-by-task)
 
+Please reffer to [this article](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/configuring-kernel-parameters-at-runtime_managing-monitoring-and-updating-the-kernel#doc-wrapper) in order to know how to setup these parameters.
 
-#### fs.enforce_symlinksifowner
+### fs.enforce_symlinksifowner
 
 To protect against symlink attack where attacker tricks Apache web server to read some other user PHP config files, or other sensitive file, enable:
-<div class="notranslate">
 
 ```
 fs.enforce_symlinksifowner=1
 ```
-</div>
 
-Setting this option will deny any process running under gid _fs.symlinkown_gid_ to follow the symlink if owner of the link doesn’t match the owner of the target file.
+Setting this parameter will deny any process running under gid _fs.symlinkown_gid_ to follow the symlink if owner of the link doesn’t match the owner of the target file.
 
 Defaults:
-<div class="notranslate">
 
 ```
 fs.enforce_symlinksifowner = 1
 fs.symlinkown_gid = 48
 ```
-</div>
 
 | | |
 |-|-|
 |<span class="notranslate"> _fs.enforce_symlinksifowner = 0_ </span> | do not check <span class="notranslate"> symlink </span> ownership|
-|<span class="notranslate"> _fs.enforce_symlinksifowner = 1_ </span> | deny if <span class="notranslate"> symlink </span> ownership doesn’t match target, and process <span class="notranslate"> gid </span> matches <span class="notranslate"> _symlinkown_gid _ </span>|
+|<span class="notranslate"> _fs.enforce_symlinksifowner = 1_ </span> | deny if <span class="notranslate"> symlink </span> ownership doesn’t match target, and process <span class="notranslate"> gid </span> matches <span class="notranslate"> _symlinkown_gid</span>|
 
 When <span class="notranslate"> _fs.enforce_symlinksifowner_ </span> set to 1, processes with <span class="notranslate"> GID </span> 48 will not be able to follow <span class="notranslate"> symlinks </span> if they are owned by <span class="notranslate"> user1 </span> , but point to file owned <span class="notranslate"> user2 </span> .
 
-Please, note that <span class="notranslate"> _fs.enforce_symlinksifowner = 2_ </span> is deprecated and can cause issues for the system operation.
-<span class="notranslate"> </span>
+:::tip Note
+_fs.enforce_symlinksifowner = 2_ is deprecated and can cause issues for the system operation.
+:::
 
 #### fs.symlinkown_gid
 
-On standard <span class="notranslate"> RPM Apache </span> installation, <span class="notranslate"> Apache </span> is usually running under <span class="notranslate"> GID </span> 48.
-On <span class="notranslate"> cPanel </span> servers, <span class="notranslate"> Apache </span> is running under user nobody, <span class="notranslate"> GID </span> 99.
+On standard Apache installation, this webserver is usually running under GID 48.
+On cPanel servers, Apache is running under user nobody, GID 99.
 
-To change <span class="notranslate"> GID </span> of processes that cannot follow <span class="notranslate"> symlink </span> , edit the file <span class="notranslate"> _/etc/sysctl.conf_ </span> , add the line:
-<div class="notranslate">
+To change GID of processes that cannot follow symlink, edit the file _/etc/sysctl.conf_ , add the line:
 
 ```
 fs.symlinkown_gid = XX
 ```
-</div>
+
 And execute:
-<div class="notranslate">
 
 ```
 $ sysctl -p
 ```
-</div>
 
-To disable <span class="notranslate"> symlink </span> owner match protection feature, set <span class="notranslate"> _fs.enforce_symlinksifowner = 0_ </span> in <span class="notranslate"> _/etc/sysctl.conf_ </span> , and execute
-
-<div class="notranslate">
+To disable symlink owner match protection feature, set  _fs.enforce_symlinksifowner = 0_ in _/etc/sysctl.conf_ , and execute:
 
 ```
 $ sysctl -p
+```
+
+::: tip Note
+_fs.symlinkown_gid_ parameter values for httpd service user and _fs.proc_super_gid_ for nagios service user is written to _/etc/sysctl.d/90-cloudlinux.conf_.
+:::
+
+### fs.protected_symlinks_create <Badge text="cPanel"/>
+
+:::warning Warning
+When used outside CageFS (from cPanel tools for instance), <span class="notranslate">`fs.protected_symlinks_create`</span> isn't sufficient for symlink protection.
+To fully protect symlink access in this case, use <span class="notranslate">`fs.process_symlinks_by_task=1`</span> in addition to <span class="notranslate">`fs.protected_symlinks_create=1`</span>.
+:::
+
+<span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
+
+Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
+
+This allows an attacker to create symlink or hardlink to a sensitive file like <span class="notranslate"> _/etc/passwd_ </span> and then use <span class="notranslate"> WebDAV </span> , filemanager, or webmail to read the content of that file.
+
+You can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
+
+This is done by set following kernel options to 1:
+<div class="notranslate">
+
+```
+fs.protected_symlinks_create = 1
+fs.protected_hardlinks_create = 1
 ```
 </div>  
 
-::: Warning
-/proc/sys/fs/global_root_enable [CloudLinux OS Shared 7 and 7 hybrid kernels only] [applicable for kernels 3.10.0-427.36.1.lve1.4.42+ and CloudLinux OS Shared 7 Hybrid with lve-kmod 2.0-11+ ]
+::: danger
+We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
+Please read the known issues section before enabling this feature.
 :::
 
-<span class="notranslate"> _proc/sys/fs/global_root_enable_ </span> flag enables following the <span class="notranslate"> symlink </span> with root ownership. If <span class="notranslate"> _global_root_enable=0_ </span> , then <span class="notranslate"> Symlink Owner Match Protection </span> does not verify the <span class="notranslate"> symlink </span> owned by <span class="notranslate"> root.  </span>
+* [Known issues with fs.protected_symlinks_create=1 on cPanel servers](/cloudlinux_os_kernel/#known-issues-with-fs-protected-symlinks-create-1-on-cpanel-servers)
 
-For example, in the path <span class="notranslate"> _/proc/self/fd_ ,  _self_ </span> is a <span class="notranslate"> symlink </span> , which leads to a process directory.  The <span class="notranslate"> symlink </span> owner is <span class="notranslate"> root </span> . When <span class="notranslate"> _global_root_enable=0_ , Symlink Owner Match Protection </span> excludes this element from the verification. When <span class="notranslate"> _global_root_enable=1_ </span> , the verification will be performed, which could block the access to _fd_ and cause violation of web site performance.
-
-It is recommended to set _/proc/sys/fs/global_root_enable=0_ by default. If needed, set _/proc/sys/fs/global_root_enable=1_ to increase the level of protection. 
+### fs.process_symlinks_by_task <Badge text="cPanel"/>
 
 ::: tip Note
-Starting from lve-utils 3.0-21.2, fs.symlinkown_gid parameter values for httpd service user and fs.proc_super_gid for nagios service user is written to /etc/sysctl.d/90-cloudlinux.conf.
+This option only available on CloudLinux 7 Hybrid or on CloudLinux 8 Shared and Admin editions.
+Also please note that this feature is available for cPanel only.
 :::
 
-#### fs.process_symlinks_by_task <Badge text="CloudLinux OS Shared 7 hybrid"/> <Badge text="cPanel"/> 
+This parameter is needed to protect against symlink vulnerability where an attacker might get access to files out of the CageFS via cPanel tools: File Manager, WebDAV, Webmail, etc. When a symlink is accessed from cPanel tools (non-root user case) we check whether the current process UID matches the symlink target UID.
 
-To protect against symlink vulnerability where an attacker might get access to files out of the CageFS via cPanel tools: File Manager, WebDAV, Webmail, etc.
-
-When a symlink is accessed from cPanel tools (non-root user case) we check whether the current process UID matches the symlink target UID.
-
-To enable (the default value) the protection for CloudLinux OS Shared 7 hybrid, set the <span class="notranslate">`fs.process_symlinks_by_task`</span> parameter to 1:
+To enable the protection for CloudLinux OS Shared , set the <span class="notranslate">`fs.process_symlinks_by_task`</span> parameter to 1:
 <div class="notranslate">
 
 ```
@@ -174,42 +181,6 @@ To disable the protection for CloudLinux OS Shared 7 hybrid, set the <span class
 fs.process_symlinks_by_task=0
 ```
 </div>
-
-### Link traversal protection
-
-* [Known issues with fs.protected_symlinks_create=1 on cPanel servers](/cloudlinux_os_kernel/#known-issues-with-fs-protected-symlinks-create-1-on-cpanel-servers)
-
-
-:::warning Warning
-When used outside CageFS (from cPanel tools for instance), <span class="notranslate">`fs.protected_symlinks_create`</span> isn't sufficient for symlink protection.
-To fully protect symlink access in this case, use <span class="notranslate">`fs.process_symlinks_by_task=1`</span> in addition to <span class="notranslate">`fs.protected_symlinks_create=1`</span>.
-:::
-
-:::tip Note
-<span class="notranslate">`fs.process_symlinks_by_task`</span> is only available for CloudLinux OS Shared 7 Hybrid for now and supports cPanel only. 
-:::
-
-
-<span class="notranslate"> [CageFS](/cloudlinux_os_components/#cagefs) </span> is extremely powerful at stopping most information disclosure attacks, where a hacker could read sensitive files like <span class="notranslate">_/etc/passwd_</span> .
-
-Yet, <span class="notranslate"> CageFS </span> does not work in each and every situation. For example, on <span class="notranslate"> cPanel </span> servers, it is not enabled in <span class="notranslate"> WebDAV </span> server, <span class="notranslate"> cPanel </span> file manager and webmail, as well as some FTP servers don’t include proper change rooting.
-
-This allows an attacker to create symlink or hardlink to a sensitive file like <span class="notranslate"> _/etc/passwd_ </span> and then use <span class="notranslate"> WebDAV </span> , filemanager, or webmail to read the content of that file.
-
-Starting with CL6 _kernel 2.6.32-604.16.2.lve1.3.45_, you can prevent such attacks by preventing user from creating symlinks and hardlinks to files that they don’t own.
-
-This is done by set following kernel options to 1:
-<div class="notranslate">
-
-```
-fs.protected_symlinks_create = 1
-fs.protected_hardlinks_create = 1
-```
-</div>  
-
-::: danger
-We do not recommend to use protected_symlinks option for cPanel users as it might break some of the cPanel functionality.
-:::   
 
 #### Known issues with fs.protected_symlinks_create=1 on cPanel servers
 
@@ -238,7 +209,7 @@ Permission denied. /bin/tar: .cagefs/tmp/.s.PGSQL.5432: Cannot create symlink to
 ```
 </div> 
 
- Any backup for accounts (including cPanel backup) cannot be extracted.
+Any backup for accounts (including cPanel backup) cannot be extracted.
 
 * `dmesg` is flooded with the <span class="notranslate">`may_create_sym_link`</span> messages like:
 
@@ -247,53 +218,10 @@ Permission denied. /bin/tar: .cagefs/tmp/.s.PGSQL.5432: Cannot create symlink to
 ```
 may_create_sym_link: can't find ea-phpXX in cron
 may_create_sym_link: can't find ea-phpXX in ea-php-cli
-etc
 ```
 </div> 
 
- It's popping up each second and may increase the size of the <span class="notranslate">`/var/log/messages`</span> file.
-
-
-::: tip Note
-Link Traversal Protection is disabled by default for the new CloudLinux OS Shared installations/convertations.
-:::
-
-<div class="notranslate"> 
-
-```
-fs.protected_symlinks_create = 0
-fs.protected_hardlinks_create = 0
-```
-</div>
-Then setup:
-<div class="notranslate">
-
-```
-fs.protected_symlinks_allow_gid = id_of_group_linksafe
-fs.protected_hardlinks_allow_gid = id_of_group_linksafe
-```
-</div>
-This is for example needed by PHP Selector to work (new versions of Alt-PHP can already correctly configure those settings).
-
-To manually adjust the settings, edit: _/etc/sysctl.d/cloudlinux-linksafe.conf_
-and execute:
-<div class="notranslate">
- 
-```
-sysctl -p /etc/sysctl.d/cloudlinux-linksafe.conf
-```
-</div>
- or:
-<div class="notranslate"> 
-
-```
-sysctl --system
-```
-</div>
- 
-:::tip Note
-Starting from lvemanager 4.0-25.5, if there is no /etc/sysctl.d/cloudlinux-linksafe.conf config file, selectorctl for PHP with --setup-without-cagefs and --revert-to-cagefs keys writes fs.protected_symlinks_create and fs.protected_hardlinks_create parameters to /etc/sysctl.d/90-cloudlinux.conf.
-:::
+It's popping up each second and may increase the size of the <span class="notranslate">`/var/log/messages`</span> file.
 
 ## File change API
 
