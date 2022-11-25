@@ -63,82 +63,86 @@ functionality with even more useful [features](/cloudlinux-os-plus/).
 
 ## CloudLinux OS components
 
-* **CloudLinux Manager**
+**CloudLinux Manager**
 
-  LVE is a Lightweight Virtualized Environment.
-  CloudLinux Manager allows you to maintain fine-tuned control over your resources, 
-  including CPU, IO rate, memory, inodes, numbers of processes, and concurrent connections, 
-  that any single account can use. Now you can limit resource abuse, while allowing good customers to use what they need.
+LVE is a Lightweight Virtualized Environment.
+CloudLinux Manager allows you to maintain fine-tuned control over your resources, 
+including CPU, IO rate, memory, inodes, numbers of processes, and concurrent connections, 
+that any single account can use. Now you can limit resource abuse, while allowing good customers to use what they need.
 
-  [See more](/lve_manager/).
+[See more](/lve_manager/).
 
-* **CageFS**
+**CageFS**
 
-    CageFS is a virtualized, per-user file system that uniquely encapsulates each customer, 
-    preventing users from seeing each other and viewing sensitive information. CageFS prevents a large number of attacks, 
-    including most privilege escalation and information disclosure attacks. It is completely transparent to your customers, 
-    without any need for them to change their scripts.
+CageFS is a virtualized, per-user file system that uniquely encapsulates each customer, 
+preventing users from seeing each other and viewing sensitive information. CageFS prevents a large number of attacks, 
+including most privilege escalation and information disclosure attacks. It is completely transparent to your customers, 
+without any need for them to change their scripts.
 
-    [See more](/cloudlinux_os_components/#cagefs).
-* **MySQL Governor**
+[See more](/cloudlinux_os_components/#cagefs).
+
+**MySQL Governor**
 
 :::tip Note
 This component is not available in CloudLinux OS Admin edition.
 :::
 
-    MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using LVE limits. 
-    By using the [dbtop](/command-line_tools/#dbtop) utility, it is possible to see the database usage on a per-customer basis, 
-    ensuring that the system admin always know what is going on.
+MySQL Governor tracks CPU and disk IO usage for every user in real time and throttles MySQL queries by using LVE limits. By using the [dbtop](/command-line_tools/#dbtop) utility, it is possible to see the database usage on a per-customer basis, ensuring that the system admin always know what is going on.
 
-    [See more](/cloudlinux_os_components/#mysql-governor).
-* **PHP Selector**
+[See more](/cloudlinux_os_components/#mysql-governor).
 
-    PHP Selector allows end users to select the specific version of PHP they need. It allows ultimate flexibility by offering all 
-    popular versions of PHP, with more than 120 PHP extensions to choose from.
+**PHP Selector**
 
-    [See more](/cloudlinux_os_components/#php-selector).
-* **Ruby Selector**
+PHP Selector allows end users to select the specific version of PHP they need. It allows ultimate flexibility by offering all 
+popular versions of PHP, with more than 120 PHP extensions to choose from.
 
-    Ruby Selector allows end users to choose the Ruby version for applications and install additional modules 
-    to the application environment. Ruby Selector uses `mod_passenger` for delivering optimum performance.
+[See more](/cloudlinux_os_components/#php-selector).
 
-    [See more](/cloudlinux_os_components/#ruby-selector).
-* **Python Selector**
+**Ruby Selector**
 
-    Python Selector allows end users to choose the Python version for applications and install additional modules. 
-    Python Selector uses `mod_passenger` to get the best performance from Python applications.
+Ruby Selector allows end users to choose the Ruby version for applications and install additional modules 
+to the application environment. Ruby Selector uses `mod_passenger` for delivering optimum performance.
 
-    [See more](/cloudlinux_os_components/#python-selector).
-* <span class="notranslate"> **Node.js Selector** </span>
+[See more](/cloudlinux_os_components/#ruby-selector).
 
-    Node.js Selector is a CloudLinux OS Shared component that allows each user to easily create Node.js applications, 
-    choose Node.js version and other parameters for applications based on their needs.
+**Python Selector**
 
-    [See more](/cloudlinux_os_components/#node-js-selector).
-* **Apache mod_lsapi PRO**
+Python Selector allows end users to choose the Python version for applications and install additional modules. 
+Python Selector uses `mod_passenger` to get the best performance from Python applications.
 
-    Mod_lsapi PRO is the fastest PHP handler for Apache. It is a drop-in replacement for SuPHP, FCGID, RUID2, and ITK. 
-    It has a low memory footprint and understands `.htaccess` PHP directives.
+[See more](/cloudlinux_os_components/#python-selector).
 
-    [See more](/cloudlinux_os_components/#apache-mod-lsapi-pro).
-* **Reseller limits**
+<span class="notranslate">**Node.js Selector** </span>
 
-    Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. 
-    Server admin also provides controls on what resources each end user will have. Reseller limits set by a hoster 
-    limit the total amount of resources resellers’ end users can consume altogether.
+Node.js Selector is a CloudLinux OS Shared component that allows each user to easily create Node.js applications, 
+choose Node.js version and other parameters for applications based on their needs.
 
-    When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to 
-    set limits for his end users within the Reseller Interface.
+[See more](/cloudlinux_os_components/#node-js-selector).
 
-    [See more](/cloudlinux_os_components/#reseller-limits).
-* <span class="notranslate"> **LVE-stats 2** </span>
+**Apache mod_lsapi PRO**
 
-    <span class="notranslate"> LVE-stats 2 </span> collects LVE usage statistics (CPU, memory, disk space usage) 
-   and allows to collect the usage data.
+Mod_lsapi PRO is the fastest PHP handler for Apache. It is a drop-in replacement for SuPHP, FCGID, RUID2, and ITK. 
+It has a low memory footprint and understands `.htaccess` PHP directives.
 
-    [See more](/cloudlinux_os_components/#lve-stats-2).
+[See more](/cloudlinux_os_components/#apache-mod-lsapi-pro).
 
+**Reseller limits**
 
+Reseller limits is a feature that allows hosters to set limits for the resources each Reseller can operate with. 
+Server admin also provides controls on what resources each end user will have. Reseller limits set by a hoster 
+limit the total amount of resources resellers’ end users can consume altogether.
+
+When a hoster has set reseller limits for the particular reseller he provides the reseller with an ability to 
+set limits for his end users within the Reseller Interface.
+
+[See more](/cloudlinux_os_components/#reseller-limits).
+
+<span class="notranslate"> **LVE-stats 2** </span>
+
+<span class="notranslate"> LVE-stats 2 </span> collects LVE usage statistics (CPU, memory, disk space usage) 
+and allows to collect the usage data.
+
+[See more](/cloudlinux_os_components/#lve-stats-2).
 
 ## CloudLinux OS life cycle
 
