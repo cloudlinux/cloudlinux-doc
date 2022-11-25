@@ -65,13 +65,13 @@ The protection requires setting multiple kernel parameters to be enabled:
 * [fs.enforce_symlinksifowner](/cloudlinux_os_kernel/#fs-enforce-symlinksifowner)
 * [fs.symlinkown_gid](/cloudlinux_os_kernel/#fs-symlinkown-gid)
 
-**Link Traversal Protection**
+**Link Traversal Protection:**
 * [fs.protected_symlinks_create](/cloudlinux_os_kernel/#fs-protected-symlinks-create)
 * [fs.process_symlinks_by_task](/cloudlinux_os_kernel/#fs-process-symlinks-by-task)
 
 Please reffer to [this article](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/configuring-kernel-parameters-at-runtime_managing-monitoring-and-updating-the-kernel#doc-wrapper) in order to know how to setup these parameters.
 
-### fs.enforce_symlinksifowner
+#### **fs.enforce_symlinksifowner**
 
 To protect against symlink attack where attacker tricks Apache web server to read some other user PHP config files, or other sensitive file, enable:
 
@@ -99,7 +99,7 @@ When <span class="notranslate"> _fs.enforce_symlinksifowner_ </span> set to 1, p
 _fs.enforce_symlinksifowner = 2_ is deprecated and can cause issues for the system operation.
 :::
 
-#### fs.symlinkown_gid
+##### **fs.symlinkown_gid**
 
 On standard Apache installation, this webserver is usually running under GID 48.
 On cPanel servers, Apache is running under user nobody, GID 99.
@@ -126,7 +126,7 @@ $ sysctl -p
 _fs.symlinkown_gid_ parameter values for httpd service user and _fs.proc_super_gid_ for nagios service user is written to _/etc/sysctl.d/90-cloudlinux.conf_.
 :::
 
-### fs.protected_symlinks_create <Badge text="cPanel"/>
+#### **fs.protected_symlinks_create** <Badge text="cPanel"/>
 
 :::warning Warning
 When used outside CageFS (from cPanel tools for instance), <span class="notranslate">`fs.protected_symlinks_create`</span> isn't sufficient for symlink protection.
@@ -157,7 +157,7 @@ Please read the known issues section before enabling this feature.
 
 * [Known issues with fs.protected_symlinks_create=1 on cPanel servers](/cloudlinux_os_kernel/#known-issues-with-fs-protected-symlinks-create-1-on-cpanel-servers)
 
-### fs.process_symlinks_by_task <Badge text="cPanel"/>
+#### **fs.process_symlinks_by_task** <Badge text="cPanel"/>
 
 ::: tip Note
 This option only available on CloudLinux 7 Hybrid or on CloudLinux 8 Shared and Admin editions.
