@@ -24,7 +24,7 @@ More information about the actual kernel changes and releases can be obtained fr
 
 Hybrid kernels give you the ability to take advantage of the benefits and features available in newer kernels without having to completely upgrade to another version of the operating system. Example - for the CloudLinux 7 kernel, based on version 3.10, you can install a hybrid kernel (same as on CloudLinux 8), which is based on version 4.18. This provides more kernel options, memory and overall optimization, as well as a positive impact on system performance.
 
-### How to migrate from the normal kernel to hybrid one
+#### How to migrate from the normal kernel to hybrid one
 
 ::: tip Note
 The system must have an active CloudLinux OS license
@@ -42,7 +42,7 @@ normal-to-hybrid
 ```
 Then if the script execution is completed without errors - perform the server reboot.
 
-### Known limitations and issues of hybrid kernels
+#### Known limitations and issues of hybrid kernels
 
 **CloudLinux OS Shared 6 Hybrid kernel**
 
