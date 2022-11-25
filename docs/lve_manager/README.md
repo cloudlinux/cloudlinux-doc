@@ -1,6 +1,6 @@
 # CloudLinux Manager UI
 
-* [CloudLinux OS Shared installation wizard](/lve_manager/#installation-wizard)
+* [Installation wizard](/lve_manager/#installation-wizard)
 * [CloudLinux Manager](/lve_manager/#cloudlinux-manager)
 * [inodes](/limits/#inodes)
 * [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
