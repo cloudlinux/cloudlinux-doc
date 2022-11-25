@@ -61,7 +61,7 @@ Purchasing CloudLinux OS Shared Pro license extends your CloudLinux OS Shared
 functionality with even more useful [features](/cloudlinux-os-plus/). 
 
 
-## Description of CloudLinux OS Shared and CloudLinux OS Admin components
+## CloudLinux OS Editions components
 
 * **CloudLinux Manager**
 
