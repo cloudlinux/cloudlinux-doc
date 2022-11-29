@@ -21,7 +21,6 @@
 |Centralized Monitoring|No|No|No|**Yes**|
 |AccelerateWP|**Yes**|**Yes**|No|**Yes**|
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
-|Priority support|No|No|No|**Yes**|
 
 \* Limits are disabled by default.
 
