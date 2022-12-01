@@ -10,7 +10,7 @@
 |Limits (LVE Manager)|No|**Yes***|**Yes**|**Yes**|
 |Cage FS|No|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
-|PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|
+|PHP Selector|**No, coming soone**|**Yes**|**Yes**|**Yes**|
 |Other Selectors (Python, Node.js, Ruby)|No|No|**Yes**|**Yes**|
 |HardenedPHP|No|**Yes**|**Yes**|**Yes**|
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
