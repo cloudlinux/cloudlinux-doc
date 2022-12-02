@@ -8,11 +8,11 @@
 |:-:|:-:|:-:|:-:|:-:|
 |Maximum amount of hosting accounts|1|5|unlimited|unlimited|
 |Resource Limits (LVE)|No|**Yes***|**Yes**|**Yes**|
-|Cage FS|No, coming soone|**Yes**|**Yes**|**Yes**|
+|Cage FS|No, coming soon|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
-|PHP Selector|No, coming soone|**Yes**|**Yes**|**Yes**|
+|PHP Selector|No, coming soon|**Yes**|**Yes**|**Yes**|
 |Other Selectors (Python, Node.js, Ruby)|No|No|**Yes**|**Yes**|
-|HardenedPHP|No, coming soone|**Yes**|**Yes**|**Yes**|
+|HardenedPHP|No, coming soon|**Yes**|**Yes**|**Yes**|
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
 |Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
@@ -24,7 +24,7 @@
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
 
 \* Limits are disabled by default.
-\** Turned of by default.
+\** Turned on by default.
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
