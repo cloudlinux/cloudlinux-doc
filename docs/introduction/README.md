@@ -16,7 +16,7 @@
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
 |Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
-|Website monitoring alerts|**Yes****|**Yes**|**Yes***|**Yes***|
+|Website monitoring alerts|**Yes****|**Yes**|**Yes**|**Yes**|
 |Slow Site analyzer|**Yes**|**Yes**|**Yes**|**Yes**|
 |PHP X-Ray|**Yes**|**Yes**|No|**Yes**|
 |Centralized Monitoring|No|No|No|**Yes**|
