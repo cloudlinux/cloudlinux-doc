@@ -24,6 +24,7 @@
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
 
 \* Limits are disabled by default.
+
 \** Turned on by default.
 
 ### CloudLinux OS Solo
