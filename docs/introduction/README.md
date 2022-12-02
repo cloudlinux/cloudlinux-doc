@@ -25,8 +25,6 @@
 
 \* Limits are disabled by default.
 
-\** Turned on by default.
-
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
 This edition has major difference agains all other, so you should look for the detailed docs 
