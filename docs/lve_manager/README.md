@@ -679,11 +679,13 @@ It's possible to manage MySQL Governor package limits for hosting packages and t
 
 The possibility to manage MySQL Governor package limits was added starting from:
 
->> governor-mysql - 1.2-80
->> lvemanager - 7.8.3-1
->> lve-utils - 6.4.6-1
->> alt-python27-cllib - 3.2.40-1
- 
+```
+governor-mysql - 1.2-80
+lvemanager - 7.8.3-1
+lve-utils - 6.4.6-1
+alt-python27-cllib - 3.2.40-1
+```
+
 This can be done via CloudLinux Manager or via a command line.
 **All principles** of working with MySQL Governor package limits are the same as for LVE limits:
 
