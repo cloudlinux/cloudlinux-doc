@@ -8063,7 +8063,7 @@ SkipErrors Off
 |-|-|
 |**Description**| List of handlers that should be placed into LVE, support regexp|
 |**Syntax**|`AllowedHandlers cgi-script %^php%  my-script`|
-|**Default**| none|
+|**Default**| cgi-script %php% fcgid-script application/x-miva-compiled|
 |**Context**| server config|
 
 This directive allows to list handlers which will be intercepted and placed into LVE.
@@ -8104,6 +8104,34 @@ This directive allows to list handlers which will be intercepted and placed into
   AllowedHandlers %^php%
   ```
   </div>
+
+The default modhostinglimits module configuration only handles cgi scripts and ignores static content like html files and images.
+With the default configuration, an Apache server denial of service situation can occur when there are many requests for large html files and images. But on the other hand, processing all static files is unprofitable, since when processing many small files, the load average will increase significantly due to the overhead of entering/exiting lve. Therefore, it is better to enable processing only for a subset of static files based on criteria such as file location or file name extension using Apache directives as Location, Directory and Files.
+
+This functionality is available since version 1.0-40.
+
+In the following example, the module hostinglimits will process files for a URLs starting with weightcontent, for files with an .avi extension, and for files from the video subdirectory.
+
+  ```
+<IfModule mod_hostinglimits.c>
+
+   SkipErrors Off
+   AllowedHandlers cgi-script %php% fcgid-script application/x-miva-compiled
+
+  <LocationMatch "^/weigthcontent/">
+   AllowedHandlers *
+  </LocationMatch>
+
+  <Files "*.avi">
+   AllowedHandlers *
+  </Files>
+
+  <DirectoryMatch "/home/user[0-5]/public_html/video/">
+   AllowedHandlers *
+  </DirectoryMatch>
+
+</IfModule>
+  ```
 
 ***
 
