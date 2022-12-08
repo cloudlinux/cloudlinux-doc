@@ -673,20 +673,30 @@ To modify package limits click on a pencil symbol in <span class="notranslate">_
 
 When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
 
-### MySQL Governor
+#### MySQL Governor package limits
 
-It's possible to manage MySQL Governor package limits for hosting packages and this will increase the convenience of administration.
-
-The possibility to manage MySQL Governor package limits was added starting from:
-
+Starting from the:
 ```
 governor-mysql - 1.2-80
 lvemanager - 7.8.3-1
 lve-utils - 6.4.6-1
 alt-python27-cllib - 3.2.40-1
 ```
+The possibility to manage Mysql Governor package limits was added. This can be done via CloudLinux Manager or via command line.
 
-This can be done via CloudLinux Manager or via a command line.
+#### How to install
+```
+yum update governor-mysql lvemanager lve-utils alt-python27-cllib  --enablerepo=cloudlinux-updates-testing
+```
+
+#### Meaning
+
+In all previous versions admin had possibility to manage individual MySQL Governor limits like:
+- SPEED MYSQL
+- MySQL IO
+
+Now admin can manage all those limits for hosting packages and this will increase the convenience of administration.
+
 **All principles** of working with MySQL Governor package limits are the same as for LVE limits:
 
 - Initial limits for package can be settled from the the LVE extension (cPanel only) or they are inherited from the DEFAULT package (user).
@@ -695,7 +705,7 @@ This can be done via CloudLinux Manager or via a command line.
 - Individual user limits can be reseted to the package’s limits.
 - In case of reseller’s packages and users Mysql Governor limits can be managed only by admin.
 
-#### How to manage MySQL Governor limits
+#### Manage MySQL Governor limits
 
 To view the package limits open this page:
 
@@ -704,12 +714,6 @@ To view the package limits open this page:
 To manage the package limits edit the needed package:
 
 ![](/images/mysql_packages_limits_edit.png)
-
-#### How to install
-
-```
-yum update governor-mysql lvemanager lve-utils alt-python27-cllib  --enablerepo=cloudlinux-updates-testing
-```
 
 ### PHP Selector
 
