@@ -2,7 +2,7 @@
 
 * [Installation wizard](/lve_manager/#installation-wizard)
 * [CloudLinux Manager](/lve_manager/#cloudlinux-manager)
-* [inodes](/limits/#inodes)
+* [Inodes limits](/limits/#inodes)
 * [Control panel integration guide](/lve_manager/#control-panel-integration-guide)
 
 <span class="notranslate">CloudLinux Manager</span> is a plugin for most popular control panels including cPanel, Plesk, DirectAdmin and ISPmanager (InterWorx coming soon). It allows you to control and monitor limits, and set limits on per package bases.
@@ -672,6 +672,42 @@ To modify package limits click on a pencil symbol in <span class="notranslate">_
 * <span class="notranslate"> INODES (hard and soft)</span> (for end users and resellers’ end users (with no Reseller Limits), if a hoster has enabled <span class="notranslate">_Initial quotas_</span> in cPanel settings.)
 
 When limits are set click <span class="notranslate">_Save_</span> to apply changes or <span class="notranslate">_Cancel_</span> to close the window.
+
+### MySQL Governor
+
+It's possible to manage MySQL Governor package limits for hosting packages and this will increase the convenience of administration.
+
+The possibility to manage MySQL Governor package limits was added starting from:
+
+>> governor-mysql - 1.2-80
+>> lvemanager - 7.8.3-1
+>> lve-utils - 6.4.6-1
+>> alt-python27-cllib - 3.2.40-1
+ 
+This can be done via CloudLinux Manager or via a command line.
+**All principles** of working with MySQL Governor package limits are the same as for LVE limits:
+
+- Initial limits for package can be settled from the the LVE extension (cPanel only) or they are inherited from the DEFAULT package (user).
+- Non default (updated) package limits will not be  changed in case DEFAULT limits are changed.
+- Users in the package inherit package’s limits  or have individual limits.
+- Individual user limits can be reseted to the package’s limits.
+- In case of reseller’s packages and users Mysql Governor limits can be managed only by admin.
+
+#### How to manage MySQL Governor limits
+
+To view the package limits open this page:
+
+![](/images/mysql_packages_limits.png)
+
+To manage the package limits edit the needed package:
+
+![](/images/mysql_packages_limits_edit.png)
+
+#### How to install
+
+```
+yum update governor-mysql lvemanager lve-utils alt-python27-cllib  --enablerepo=cloudlinux-updates-testing
+```
 
 ### PHP Selector
 
