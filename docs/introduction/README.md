@@ -8,11 +8,11 @@
 |:-:|:-:|:-:|:-:|:-:|
 |Maximum amount of hosting accounts|1|5|unlimited|unlimited|
 |Resource Limits (LVE)|No|**Yes***|**Yes**|**Yes**|
-|Cage FS|No, coming soon|**Yes**|**Yes**|**Yes**|
+|Cage FS|**Yes**|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
-|PHP Selector|No, coming soon|**Yes**|**Yes**|**Yes**|
+|PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|
 |Other Selectors (Python, Node.js, Ruby)|No|No|**Yes**|**Yes**|
-|HardenedPHP|No, coming soon|**Yes**|**Yes**|**Yes**|
+|HardenedPHP|**Yes**|**Yes**|**Yes**|**Yes**|
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
 |Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
