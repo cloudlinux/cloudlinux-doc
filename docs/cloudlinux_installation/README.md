@@ -15,12 +15,12 @@ In cases where your server hardware is incompatible with any version of RHEL/Cen
 :::
 
 :::tip Note
-Replacing the hardware installed on the server affects specifications and support for that hardware from CloudLinux OS end.
+Replacing the server hardware affects specifications and support for such hardware from CloudLinux OS end.
 It is most likely that the CloudLinux OS will stop working if you replace any hardware component on the server.
 
 Example: the same HDD/SSD/NVMe model will have a new UUID and CloudLinux OS is mapped to old UUID which break the boot procedure.
 
-In this case, we are not responsible for the CloudLinux OS operation and cannot assist you to restore the server it or adapt CloudLinux OS installation to the new hardware.
+In this case, we are not responsible for the CloudLinux OS operation and cannot assist you in restoring the server or adapting CloudLinux OS installation to the new hardware.
 :::
 
 There are some incompatible devices with **CL6**:
