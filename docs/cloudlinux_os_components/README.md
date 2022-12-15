@@ -3770,6 +3770,38 @@ This operation may take some time.
 
 See also [MySQL Governor CLI tools](/command-line_tools/#mysql-governor).
 
+### MySQL Governor improvements  for  CPU calculation
+
+In MySQL Governor version 1.2-81, we provide improvements in the algorithm of calculation user CPU usage. New behavior helps to increase precision of resource distribution between server users. By default the new type of CPU usage calculation is tuned on.
+
+Server administrator can turn on/off the new type of CPU usage calculation by using the following command:
+
+```
+dbctl --lve-improved-accuracy off
+```
+
+#### What is the impact of improvements?
+
+The calculation of CPU usage has become more accurate, so the `dbtop` utility provides more correct information to the MySQL Governor and it places user’s requests to the LVE in a proper moment. And as a result, such improvements reduce the possibility of absorbing whole server resources by one user.
+
+One mpre possible outcome of calculation improvements is that some server users will become in need of MySQL Governor limits reconfiguration.
+
+#### How to view the impact of improvements?
+
+Let’s check the CPU usage charts from CloudLinux statistics (lve-stats).
+
+**The new type of  CPU usage calculation is turned off**.
+
+In this case, CPU usage by database could be less than LVE average CPU usage (blue chart is lower than green chart):
+
+![](/images/NewTurnedOff.png)
+
+**The new type of  CPU usage calculation is turned on**.
+
+In this case, CPU usage by database become more similar to LVE average CPU usage (blue chart and green chart on the sceen):
+
+![](/images/NewTurnedOn.png)
+
 ### Troubleshooting
 
 **MariaDB 5.5 and MariaDB 10.0: How to set LimitNOFILE correctly for systemd.**
