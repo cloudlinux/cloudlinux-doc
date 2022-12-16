@@ -3150,6 +3150,57 @@ You can set different limits for different periods: current, short, med, long. B
 
 Customers will also be limited to a finite number of concurrent connections, this number is 30 by default and can be changed. This is done so they wouldn't use up all the MySQL connections to the server. <span class="notranslate"> MySQL Governor </span> can also kill off slow <span class="notranslate"> SELECT </span> queries.
 
+### MySQL Governor limits interaction with LVE limits
+
+#### How is interaction between MySQL Governor and LVE organized?
+
+The main purpose of MySQL Governor is to monitor how many common resources are used by each user for working with MySQL/MariaDB and to manage usage restrictions for such resources by LVE containers.
+
+Before any SQL request, MySQL Governor determines which user sent the request and if this user exceed limits, the MySQL Governor pushes the request to appropriate LVE container.
+
+This is how common server resources can be managed. 
+
+#### Why the СPU/IO charts are different for database and LVE usage?
+
+SQL requests are not limited inside LVE, so there are not any calculations for IO usage there. It can be clearly viewed via the lve-stats charts:
+
+![](/images/Chart1.png)
+
+**Blue chart (database)**:
+
+This is the user’s real IO Database usage which was calculated by MySQL Governor. 
+
+**Green chart (LVE)**:
+
+This is the user’s IO Database usage which was calculated by lve-stats.
+
+Also for different types of database load (for example in case, there is a huge amount of shot requests), CPU usage charts for LVE and database can be different.
+
+Take a look on this chart:
+
+![](/images/Chart2.png)
+
+**Blue (database) CPU usage**:
+
+It is calculated by MYSQL Governor and the value is identical with top/htop values.
+
+**Green (LVE) CPU usage**:
+
+It is calculated by lve-stats. The values are less on the LVE CPU usage chart because user requests are placed in the LVE only for part of the time.
+
+#### For what purpose are the IO limits of MySQL Governor used?
+
+MySQL Governor uses its limits as triggers to place user’s requests to the LVE. If user’s requests exceed MySQL Governor limits they are placed to the LVE, which already limits resource usage. After some timeout (which can be configured in the MySQL Governor config file requests will not be placed to the LVE. The next placing of the SQL requests to the LVE will occur after the next limits are exceeded.
+
+#### How exactly does IO limiting work for MySQL/MariaDB requests?
+
+There is no direct IO limitation for database treads. But in case of exceeding governor IO user limits, their requests will be placed into the LVE and CPU LVE limitation will be applied to the requests. And it’s clear that any IO load causes CPU load. So by CPU limits IO usage will be limited indirectly.
+
+Take a look at the next chart. The I/O load is synchronous with the CPU load.
+
+![](/images/Chart3.png)
+
+
 
 ### Installation and update
 
@@ -3801,6 +3852,58 @@ In this case, CPU usage by database could be less than LVE average CPU usage (bl
 In this case, CPU usage by database become more similar to LVE average CPU usage (blue chart and green chart on the sceen):
 
 ![](/images/NewTurnedOn.png)
+
+### FAQ
+
+#### How is interaction between MySQL Governor and LVE organized?
+
+The main purpose of MySQL Governor is to monitor how many common resources are used by each user for working with MySQL/MariaDB and to manage usage restrictions for such resources by LVE containers.
+
+Before any SQL request, MySQL Governor determines which user sent the request and if this user exceed limits, the MySQL Governor pushes the request to appropriate LVE container.
+
+This is how common server resources can be managed. 
+
+#### Why the СPU/IO charts are different for database and LVE usage?
+
+SQL requests are not limited inside LVE, so there are not any calculations for IO usage there. It can be clearly viewed via the lve-stats charts:
+
+![](/images/Chart1.png)
+
+**Blue chart (database)**:
+
+This is the user’s real IO Database usage which was calculated by MySQL Governor. 
+
+**Green chart (LVE)**:
+
+This is the user’s IO Database usage which was calculated by lve-stats.
+
+Also for different types of database load (for example in case, there is a huge amount of shot requests), CPU usage charts for LVE and database can be different.
+
+Take a look on this chart:
+
+![](/images/Chart2.png)
+
+**Blue (database) CPU usage**:
+
+It is calculated by MYSQL Governor and the value is identical with top/htop values.
+
+**Green (LVE) CPU usage**:
+
+It is calculated by lve-stats. The values are less on the LVE CPU usage chart because user requests are placed in the LVE only for part of the time.
+
+#### For what purpose are the IO limits of MySQL Governor used?
+
+MySQL Governor uses its limits as triggers to place user’s requests to the LVE. If user’s requests exceed MySQL Governor limits they are placed to the LVE, which already limits resource usage. After some timeout (which can be configured in the MySQL Governor config file requests will not be placed to the LVE. The next placing of the SQL requests to the LVE will occur after the next limits are exceeded.
+
+#### How exactly does IO limiting work for MySQL/MariaDB requests?
+
+There is no direct IO limitation for database treads. But in case of exceeding governor IO user limits, their requests will be placed into the LVE and CPU LVE limitation will be applied to the requests. And it’s clear that any IO load causes CPU load. So by CPU limits IO usage will be limited indirectly.
+
+Take a look at the next chart. The I/O load is synchronous with the CPU load.
+
+![](/images/Chart3.png)
+
+
 
 ### Troubleshooting
 
