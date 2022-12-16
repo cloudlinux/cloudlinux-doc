@@ -6596,6 +6596,7 @@ For installation guide mod_lsapi PRO please visit [Installation](/cloudlinux_os_
 * [lsapi_backend_pgrp_max_reqs](/cloudlinux_os_components/#lsapi-backend-pgrp-max-reqs)
 * [lsapi_backend_pgrp_max_crashes](/cloudlinux_os_components/#lsapi-backend-pgrp-max-crashes)
 * [lsapi_backend_loglevel_info](/cloudlinux_os_components/#lsapi-backend-loglevel-info)
+* [lsapi_backend_oom_score_adj](/cloudlinux_os_components/#lsapi-backend-oom-score-adj)
 * [lsapi-server-tweak](/cloudlinux_os_components/#lsapi-server-tweak) Beta
  
 [Connection pool mode](/cloudlinux_os_components/#connection-pool-mode):
@@ -6941,6 +6942,20 @@ Controls how many crashes of its worker processes a control process will detect 
 **Context**: httpd.conf, virtualhost
 
 **Description**:  Controls which log level will be used to write PHP warnings and notices into Apache’s error_log. Optional, the default value is `Off`. In that case `LOG_WARNING` log level will be used. Otherwise, with `On` value, `LOG_INFO` log level will be used.
+
+---
+
+#### **lsapi_backend_oom_score_adj**
+
+**Syntax**: lsapi_backend_oom_score_adj [number]
+
+**Default**: lsapi_backend_oom_score_adj 0
+
+**Context**: httpd.conf, virtualhost
+
+**Description**:  This option can be used to apply **oom_score_adj** values for PHP processes created by mod_lsapi. Value is an integer in the -1000 to 1000 range. The lower the value, the lower the chance that the process will be killed.
+When your server becomes low on free memory and an OOM killer is invoked then desirable that lsphp processes are sacrificed to free up memory. To do this, you need to set oom_score_adj to a large value.
+For more information on setting value **oom_score_adj**, see the page [https://man7.org/linux/man-pages/man5/proc.5.html](https://man7.org/linux/man-pages/man5/proc.5.html)
 
 ---
 
