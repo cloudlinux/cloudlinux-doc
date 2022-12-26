@@ -11,7 +11,7 @@
 |Cage FS|**Yes**|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
 |PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|
-|Other Selectors (Python, Node.js, Ruby)|No|No|**Yes**|**Yes**|
+|Other Selectors (Python, Node.js, Ruby)|No|No|**Yes****|**Yes****|
 |HardenedPHP|**Yes**|**Yes**|**Yes**|**Yes**|
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
@@ -24,6 +24,8 @@
 |Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
 
 \* Limits are disabled by default.
+
+\** Python/Node.js/Ruby selector available only for cPanel and DA servers
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
