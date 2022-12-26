@@ -25,7 +25,7 @@
 
 \* Limits are disabled by default.
 
-\** Python/Node.js/Ruby selector available only for cPanel and DA servers
+\** Python/Node.js/Ruby Selectors are available only for cPanel, DirectAdmin servers, and servers with custom panel with own integration.
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
