@@ -42,6 +42,14 @@ normal-to-hybrid
 ```
 Then if the script execution is completed without errors - perform the server reboot.
 
+::: tip Note
+You can always migrate from the hybrid kernel to normal one with the following commands:
+```
+yum update
+hybrid-to-normal
+```
+:::
+
 #### Known limitations and issues of hybrid kernels
 
 **CloudLinux OS Shared 6 Hybrid kernel**
