@@ -1339,7 +1339,7 @@ The global options modify settings in <span class="notranslate"> /etc/cl.selecto
 | |<span class="notranslate"> $ selectorctl --replace-extensions=pdo,phar --version=5.2 </span>|
 |<span class="notranslate"> --list-extensions (-G): </span> | lists extensions for an alternative for a particular version. Requires <span class="notranslate"> --version </span> . Example:|
 | |<span class="notranslate"> $ selectorctl --list-extensions --version=5.3 <br>~ xml <br>- xmlreader <br>- xmlrpc <br>- xmlwriter <br>- xrange <br>+ xsl </span>|
-| |Plus sign (+) stands for 'enabled', minus (–) for 'disabled', tilde (~) means compiled into interpreter. Enabled and disabled state relates to presence in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_</span> file.|
+| |Plus sign (+) stands for 'enabled', minus (–) for 'disabled', tilde (~) means compiled into interpreter or enabled in php global config file <span class="notranslate">_/opt/alt/phpXX/etc/php.ini_</span>. Enabled and disabled state relates to presence in <span class="notranslate"> _/etc/cl.selector/defaults.cfg_</span> file.|
 
 **End user options**
 
