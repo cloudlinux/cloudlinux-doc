@@ -4,28 +4,37 @@
 
 ## CloudLinux OS editions
 
-|**Features**|**CloudLinux OS Solo**|**CloudLinux OS Admin**|**CloudLinux OS Shared**|**CloudLinux OS Shared Pro**|
-|:-:|:-:|:-:|:-:|:-:|
-|Maximum amount of hosting accounts|1|5|unlimited|unlimited|
-|Resource Limits (LVE)|No|**Yes***|**Yes**|**Yes**|
-|Cage FS|**Yes**|**Yes**|**Yes**|**Yes**|
-|MySQL Governor|No|No|**Yes**|**Yes**|
-|PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|
-|Other Selectors (Python, Node.js, Ruby)|No|No|**Yes****|**Yes****|
-|HardenedPHP|**Yes**|**Yes**|**Yes**|**Yes**|
-|Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
-|SecureLinks|No|**Yes**|**Yes**|**Yes**|
-|Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|
-|Website monitoring alerts|**Yes**|No|No|No|
-|Slow Site analyzer|**Yes**|**Yes**|**Yes**|**Yes**|
-|PHP X-Ray|**Yes**|**Yes**|No|**Yes**|
-|Centralized Monitoring|No|No|No|**Yes**|
-|AccelerateWP|**Yes**|**Yes**|No|**Yes**|
-|Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|
+|**Features**|**CloudLinux OS Solo**|**CloudLinux OS Admin**|**CloudLinux OS Shared**|**CloudLinux OS Shared Pro**|**CloudLinux OS 9 beta**|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|Maximum amount of hosting accounts|1|5|unlimited|unlimited|unlimited|
+|Resource Limits (LVE)|No|**Yes***|**Yes**|**Yes**|**Yes**|
+|Cage FS|**Yes**|**Yes**|**Yes**|**Yes**|**Yes**|
+|MySQL Governor|No|No|**Yes**|**Yes**|**Yes**|
+|PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|**Yes**|
+|Other Selectors (Python, Node.js, Ruby)|No|No|**Yes****|**Yes****|No**|
+|HardenedPHP|**Yes**|**Yes**|**Yes**|**Yes**|**Yes**|
+|Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|**Yes**|
+|SecureLinks|No|**Yes**|**Yes**|**Yes**|**Yes**|
+|Website monitoring tool|**Yes**|**Yes**|**Yes**|**Yes**|No|
+|Website monitoring alerts|**Yes**|No|No|No|No|
+|Slow Site analyzer|**Yes**|**Yes**|**Yes**|**Yes**|No|
+|PHP X-Ray|**Yes**|**Yes**|No|**Yes**|No|
+|Centralized Monitoring|No|No|No|**Yes**|No|
+|AccelerateWP|**Yes**|**Yes**|No|**Yes**|No|
+|Support 24/7|**Yes**|**Yes**|**Yes**|**Yes**|**Yes**|
 
 \* Limits are disabled by default.
 
 \** Python/Node.js/Ruby Selectors are available only for cPanel, DirectAdmin servers, and servers with custom panel with own integration.
+
+### CloudLinux 9 beta
+The first release of CloudLinux 9 is available as Shared edition for non-panel installations.\
+Admin and Solo editions temporarily unavailable to install or activate.
+
+:::tip Note
+Due to non-panel limitations available feature set is differs for cl9\
+Please check table above
+:::
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
