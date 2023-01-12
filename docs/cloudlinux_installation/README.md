@@ -305,7 +305,7 @@ You can download the latest CloudLinux OS ISO and use it to install CloudLinux O
 
 * CloudLinux OS 9
 
-  * x86_64 version: Work In Progress
+  * x86_64 version: [https://www.repo.cloudlinux.com/cloudlinux/9/iso/x86_64/](https://www.repo.cloudlinux.com/cloudlinux/9/iso/x86_64/)
 
 * CloudLinux OS 8
 
