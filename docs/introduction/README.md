@@ -205,4 +205,4 @@ Currently, the following versions are available and supported:
 |CloudLinux OS Shared (Pro) 8 | Mar 17, 2020 | May 31, 2029 |
 |CloudLinux OS Solo (8) | Mar 17, 2020 | May 31, 2029 |
 |CloudLinux OS Admin (8) | Mar 17, 2020 | May 31, 2029 |
-|CloudLinux OS Shared (Pro) 9 | Jan 12, 2023 | May 31, 2032 |
+|CloudLinux OS Shared (Pro) 9 | Jan 17, 2023 | May 31, 2032 |
