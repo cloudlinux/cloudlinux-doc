@@ -191,14 +191,17 @@ please feel free to search our [knowledgebase](https://cloudlinux.zendesk.com/hc
 or contact our support and attach the conversion log (/var/log/cldeploy.log).
 
 ### Technical details: How to enable secure boot for cl9
+
 #### Overview
 CloudLinux 9 uses non-modified AlmaLinux 9 kernel.\
 To make secure boot work with CloudLinux's kernel module you need to enroll CloudLinux secure boot key tou your server.\
 This procedure shows how to do it
+
 #### Requirements
 * UEFI support
 * mokutil package installed
 * Access to server's BIOS options menu and boot screen
+
 #### Procedure
 1. Download CloudLinux key
     1. `wget https://repo.cloudlinux.com/cloudlinux/SECURE-BOOT-KEY-cloudlinux-kmod.der`
@@ -231,6 +234,20 @@ Select `Reboot` (Older versions may say `Continue boot`)\
 ![Step 6](./images/cl9_secureboot/6.png)
 
 Now you can enable Secure Boot in BIOS options menu
+
+#### Useful commands
+* `mokutil --sb-state` to check current Secure Boot state
+* `mokutil --list-enrolled` to show list of enrolled keys
+
+#### If you wish to remove the CloudLinux key from the MOK list, follow the instructions below
+:::warning Warning
+Do not delete the key when secure boot is enabled - server will be unable to boot
+:::
+
+1. Disable Secure Boot
+2. `mokutil --delete SECURE-BOOT-KEY-cloudlinux-kmod.der`
+3. `mokutil --list-delete` (to check the key to be deleted)
+4. Reboot the system and go through the MOK management process to complete the deletion from the MOK list.
 
 ### Technical details: cldeploy
 
