@@ -194,7 +194,7 @@ or contact our support and attach the conversion log (/var/log/cldeploy.log).
 
 #### Overview
 CloudLinux 9 uses non-modified AlmaLinux 9 kernel.\
-To make secure boot work with CloudLinux's kernel module you need to enroll CloudLinux secure boot key tou your server.\
+To make secure boot work with CloudLinux's kernel module you need to enroll CloudLinux secure boot key to your server.\
 This procedure shows how to do it
 
 #### Requirements
