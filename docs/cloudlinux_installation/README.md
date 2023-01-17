@@ -190,7 +190,7 @@ If you receive any troubles during the conversion process,
 please feel free to search our [knowledgebase](https://cloudlinux.zendesk.com/hc/en-us) 
 or contact our support and attach the conversion log (/var/log/cldeploy.log).
 
-### Technical details: How to enable secure boot for cl9
+### How to enable secure boot for CloudLinux 9
 
 #### Overview
 CloudLinux 9 uses non-modified AlmaLinux 9 kernel.\
