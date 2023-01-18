@@ -1429,27 +1429,39 @@ Use this logging with caution because when it is enabled, the size of the daemon
 
 ## AccelerateWP
 
-### Overview
+### Get started
 
 AccelerateWP carries a suite of optimization features that can be enabled and automatically configured for the end-user's site.
 
 There are AccelerateWP and AccelerateWP Premium feature suites.
 
+AccelerateWP suite is always enabled when AccelerateWP is turned on. Choose whether you want to offer AccelerateWP Premium 
+for your users and click "Turn on" to start exploring AccelerateWP. 
+
+![](./images/awp/AWPGettingStarted.png)
+
+Once the AccelerateWP suite is enabled by administrator,
+end-users will see an AccelerateWP tab in their cPanel interface and be able to activate the optimization feature.
+
+When AccelerateWP Premium suite enabled by administrator, 
+end-users will see the Object Caching feature in their interface, 
+but cannot install the plugin unless they purchase the feature using [WHMCS or 3'd party billing](#billing-integration).
+
 #### AccelerateWP suite
-This is a basic suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
+This is a basic suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): 
+a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
 
 #### AccelerateWP Premium suite
-:::tip Note
-If you'd like to try AccelerateWP Premium suite, you should participate in the Beta tester program. To become a beta tester, please send your request at our Beta program page with the signup form [here](https://www.cloudlinux.com/wp-performance/). Once you submit the request, we will send you a confirmation email with program details, terms of use, and installation instructions.
-:::
-
-This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
-
-The Object Caching mechanism stores database query results in additional storage for quick access. This mechanism is really helpful in case if website needs to process multiple pages per second as requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
 
 :::warning Attention
 This feature is free of charge only during the beta testing period. Afterwards it will be charged.
 :::
+
+This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
+
+The Object Caching mechanism stores database query results in additional storage for quick access. 
+This mechanism is really helpful in case if website needs to process multiple pages per second as 
+requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
 
 **Premium suite limitations**
 
@@ -1457,6 +1469,8 @@ This feature is free of charge only during the beta testing period. Afterwards i
 * the websites must use one of the following PHP handlers:
   * [php-fpm](https://blog.cpanel.com/how-to-use-php-fpm-with-cpanel/)
   * [lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro)
+
+
 
 ### Limitations
 There are the following requirements to use AccelerateWP:
@@ -1467,17 +1481,12 @@ There are the following requirements to use AccelerateWP:
 ### Administrator interface
 
 #### Overview
-In the _CloudLinux Manager → AccelerateWP_ tab an administrator has the opportunity to provide end-users with a suite of features, which on its turn could be activated by end-users.
-
-![](/images/AWPAdmin.png)
-
-By toggling the `Enable AccelerateWP for all users` an administrator provides end-users with AccelerateWP feature.
-Once the feature suite is enabled by administrator, end-users will see an AccelerateWP tab in their cPanel interface and be able to activate the optimization feature.
+In the _CloudLinux Manager → AccelerateWP_ tab an administrator provides the information about active features and users.
 
 #### Suites usage statistics
-Once at least one feature suite is enabled, the AccelerateWP usage statistics is shown.
+When AccelerateWP is enabled, the AccelerateWP usage statistics is shown.
 
-![](/images/AWPStats.png)
+![](./images/awp/AWPStats.png)
 
 It includes:
 * `Active Users` block with total number of users and number of users who has activated the optimization feature/total users
@@ -1490,20 +1499,23 @@ The first column `#of Wordpress sites` shows total number of user's WordPress si
 
 The second column `AccelerateWP` shows number of user's WordPress sites, optimized by the feature.
 
-In case if both AccelerateWP and AccelerateWP Premium feature suites are enabled, the statistics is extended with AccelerateWP Premium metrics.
+In case if both AccelerateWP and AccelerateWP Premium feature suites are enabled, 
+the statistics is extended with AccelerateWP Premium metrics.
 
-![](/images/AWPStatsPremium.png)
+![](./images/awp/AWPStatsPremium.png)
 
-Please notice the `AccelerateWP Premium` rows in the `Active Users` and the `Wordpress sites on server` blocks, and also the `AccelerateWP Premium` column in statistics table.
+Please notice the `AccelerateWP Premium` rows in the `Active Users` and the `Wordpress sites on server` 
+blocks, and also the `AccelerateWP Premium` column in statistics table.
 
 :::tip Note
-Newly created users will be accounted for 10 min after adding. If you want to get updated statistics immediately, use the "Rescan users websites" button.
+Newly created users will be accounted for 10 min after adding. 
+If you want to get updated statistics immediately, use the "Rescan users websites" button.
 :::
 
 #### Filters
 You may use the following filters to browse AccelerateWP statistics slices.
 
-![](/images/AWPFilters.png)
+![](./images/awp/AWPFilters.png)
 
 * `Users with WordPress sites only` filter will show statistics for users which already have WordPress sites; users without WordPress installations will be hidden
 * `Users with AccelerateWP only` filter will show statistics for users who utilizes the AccelerateWP optimization feature; users who did not activated AccelerateWP feature will be hidden
@@ -1528,15 +1540,65 @@ To disable both suites:
 cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
 ```
 
+### Billing integration
+
+:::warning Attention
+Check our WHMCS plugin which provides you AccelerateWP billing integration our of the box.
+:::
+
+As AccelerateWP Premium is the feature that works on subscription basis, 
+we made it possible for hosters to integrate their existing billing systems with our plugin and sell the 
+feature for their users.
+
+When AccelerateWP Premium is enabled in admin interface, users get proposal to upgrade their subscription.
+
+![](./images/awp/AWPUpgradeNoLink.png)
+
+When user upgrades the subscription to the plan with AccelerateWP support, 
+billing must execute the following command on the server:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --allowed --users=<username>
+```
+
+This command makes two things:
+- allow user to install plugin, bypassing the upgrade window;
+- reports premium as being used to CLN, starting the billing cycle for hoster.
+
+
+When user terminates or downgrades plan, the following command must be exetured:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --default --users=<username>
+```
+
+### Setup upgrade URL for AccelerateWP Premium
+
+The upgrade window can be customized with link to the plan upgrade page, which can be set using CLI command:
+
+```
+cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
+```
+
+![](./images/awp/AWPUpgradeLink.png)
+
+
+In order to remove the link, just set upgrade url to the empty one.
+
+```
+cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
+```
+
 ### Disable AccelerateWP
 If you would like to stop using AccelerateWP, toggle the `Enable AccelerateWP for all users` back.
 
-![](/images/AWPDisable.png)
+![](./images/awp/AWPDisable.png)
 
 This operation will:
 * disable AccelerateWP tab in users' cPanel interface
 * disable all AccelerateWP optimization suites
 * deactivate all optimization features for all users
+
+This operation will NOT:
+* cancel the subscription made by user in WHMCS or other billing
 
 
 ### Logs
@@ -1551,21 +1613,13 @@ In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwp
 ### FAQ
 
 #### With which panel can I use AccelerateWP?
-Currently AccelerateWP is compatible with cPanel only.
+Currently AccelerateWP is compatible with cPanel and Plesk only.
 
-If you are interested in supporting Plesk or DirectAdmin control panels, please record your demand on our feature portal respectively:
-* [AccelerateWP for Plesk](https://features.cloudlinux.com/c/13-acceleratewp-for-plesk?utm_medium=social&utm_source=portal_share)
-* [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share)
-
-#### Does WP Accelerate tool support the DirectAdmin control panel? Do you plan to integrate it with Plesk?
-Currently AccelerateWP is compatible with cPanel only.
-
-If you are interested in supporting Plesk or DirectAdmin control panels, please record your demand on our feature portal respectively:
-* [AccelerateWP for Plesk](https://features.cloudlinux.com/c/13-acceleratewp-for-plesk?utm_medium=social&utm_source=portal_share)
+If you are interested in supporting DirectAdmin control panel, please record your demand on our feature portal respectively:
 * [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share)
 
 #### Is it possible to use AccelerateWP on a non-control panel server?
-No, AccelerateWP is compatible with cPanel only.
+No, AccelerateWP is compatible with cPanel and Plesk only.
 
 #### Do you plan to enable support of Nginx server?
 This is a part of our very long term plans, thus not expected in the nearest future.
@@ -1594,7 +1648,7 @@ End-users will not be able to activate the Object Caching feature until Redis ex
 
 Corresponding incompatibility warning will be displayed in cPanel User interface:
 
-![](/images/AWPNoRedis.png)
+![](./images/awp/AWPNoRedis.png)
 
 The Redis extensions are configured for all installed and supported PHP versions automatically:
 * right after the AccelerateWP Premium suite is enabled
@@ -1673,7 +1727,7 @@ All errors will be displayed in standard output and logged into `/var/log/clwpos
 #### End-users of AccelerateWP encounter PHP-related issues during feature activation
 End-users may encounter PHP-related errors while activating the AccelerateWP features.
 
-![](/images/AWPBrokenPHP.png)
+![](./images/awp/AWPBrokenPHP.png)
 
 The general examples of possible reasons are:
 * broken PHP binaries
