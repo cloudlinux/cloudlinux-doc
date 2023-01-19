@@ -1540,11 +1540,13 @@ To disable both suites:
 cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
 ```
 
-### Billing integration
+### WHMCS billing
 
-:::warning Attention
-Check our WHMCS plugin which provides you AccelerateWP billing integration our of the box.
-:::
+CloudLinux developed it's own WHMCS plugin 
+which provides you AccelerateWP billing integration our of the box. 
+Check out [the documentation](WHMCS_DOCS_URL_HERE) to find how to install and use the plugin.
+
+### Other billing integration
 
 As AccelerateWP Premium is the feature that works on subscription basis, 
 we made it possible for hosters to integrate their existing billing systems with our plugin and sell the 
