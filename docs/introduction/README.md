@@ -27,50 +27,6 @@
 
 \** Python/Node.js/Ruby Selectors are available only for cPanel, DirectAdmin servers, and servers with custom panel with own integration.
 
-### CloudLinux 9 beta
-The first release of CloudLinux 9 is available as Shared and Shared Pro editions.\
-Admin and Solo editions temporarily unavailable to install or activate because of no panel/custom panel release only.\
-Other editions support will be extended once major control panels add support of CL9.
-
-<details>
-<summary>CloudLinux 9 beta limitations</summary>
-In the non-panel environment, for now, we can guarantee all of the following CloudLinux Shared components functionality:
-
-* LVE limits
-* LVE Stats
-* MySQL Governor
-* CageFS
-* PHP Selector
-* HardenedPHP
-* Apache mod_lsapi PRO
-
-Due to integration restrictions with some panels, we are unable to retrieve panel-related information
-(e.g. a list of domains or handlers used).\
-As a result, we are currently unable to provide the following components:
-
-* PHP X-Ray
-* Slow Site Analyzer
-* Website Monitoring Tool
-* Ruby selector
-* Centralized Monitoring
-
-For the custom panel installations, once integration with the CloudLinux components is set, the following components
-will work in the CloudLinux OS 9 environment:
-
-* LVE limits
-* LVE Stats
-* MySQL Governor
-* CageFS
-* PHP Selector
-* HardenedPHP
-* Python Selector
-* NodeJS Selector
-* Apache mod_lsapi PRO
-* PHP X-Ray
-* Slow Site Analyzer
-* Reseller limits
-</details>
-
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
 This edition has major difference agains all other, so you should look for the detailed docs 
@@ -189,6 +145,50 @@ set limits for his end users within the Reseller Interface.
 and allows to collect the usage data.
 
 [See more](/cloudlinux_os_components/#lve-stats-2).
+
+## CloudLinux 9 beta
+The first release of CloudLinux 9 is available as Shared and Shared Pro editions.\
+Admin and Solo editions temporarily unavailable to install or activate because of no panel/custom panel release only.\
+Other editions support will be extended once major control panels add support of CL9.
+
+<details>
+<summary>CloudLinux 9 beta limitations</summary>
+In the non-panel environment, for now, we can guarantee all of the following CloudLinux Shared components functionality:
+
+* LVE limits
+* LVE Stats
+* MySQL Governor
+* CageFS
+* PHP Selector
+* HardenedPHP
+* Apache mod_lsapi PRO
+
+Due to integration restrictions with some panels, we are unable to retrieve panel-related information
+(e.g. a list of domains or handlers used).\
+As a result, we are currently unable to provide the following components:
+
+* PHP X-Ray
+* Slow Site Analyzer
+* Website Monitoring Tool
+* Ruby selector
+* Centralized Monitoring
+
+For the custom panel installations, once integration with the CloudLinux components is set, the following components
+will work in the CloudLinux OS 9 environment:
+
+* LVE limits
+* LVE Stats
+* MySQL Governor
+* CageFS
+* PHP Selector
+* HardenedPHP
+* Python Selector
+* NodeJS Selector
+* Apache mod_lsapi PRO
+* PHP X-Ray
+* Slow Site Analyzer
+* Reseller limits
+</details>
 
 ## CloudLinux OS life cycle
 
