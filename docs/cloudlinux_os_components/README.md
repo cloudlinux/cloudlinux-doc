@@ -6869,7 +6869,7 @@ Should be more or equal to 0.
 
 **Syntax** : lsapi_backend_use_own_log On/Off  
 **Default** : lsapi_backend_use_own_log Off  
-**Context** : httpd.conf, virtualhost, htaccess  
+**Context** : httpd.conf, virtualhost  
 
 **Description** :  
 Redirecting log output of backend processes from Apache error_log to dedicated log file or files, depending on value of lsapi_backend_common_own_log option. If Off, use Apache error log file for backend output, or separate file otherwise.
@@ -6880,7 +6880,7 @@ Redirecting log output of backend processes from Apache error_log to dedicated l
 
 **Syntax** : lsapi_backend_common_own_log On/Off  
 **Default** : lsapi_backend_common_own_log Off  
-**Context** : httpd.conf, virtualhost, htaccess  
+**Context** : httpd.conf, virtualhost 
 
 **Description** :  
 It will be used only when lsapi_backend_use_own_log set to On. On - backend processes of the all virtual hosts will share the common log file. Off - every virtual host will have its own backend log file.
