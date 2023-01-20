@@ -2555,5 +2555,6 @@ module.exports = {
   "/control_panel_integration/cloudlinux_os_components/": "/control_panel_integration/#control-panel-integration",
   "/php_selector": "/cloudlinux_os_components/#php-selector",
   "https://www.cloudlinux.com/docs/load_averages.php": "https://docs.cloudlinux.com/introduction/",
-  "https://www.cloudlinux.com/docs/hsphere35.php": "https://docs.cloudlinux.com/introduction/"
+  "https://www.cloudlinux.com/docs/hsphere35.php": "https://docs.cloudlinux.com/introduction/",
+  "/cloudlinux_installation/#upgrade-between-major-distributions-elevation-beta":"/elevate/"
 };

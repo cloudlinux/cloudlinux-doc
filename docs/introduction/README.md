@@ -29,7 +29,7 @@
 
 ### CloudLinux OS Solo
 CloudLinux OS Solo is designed for installation on VPS or VDS servers. 
-This edition has major difference agains all other, so you should look for the detailed docs 
+This edition has major difference against all other, so you should look for the detailed docs 
 [here](https://docs.solo.cloudlinux.com/introduction/).
 
 
@@ -114,7 +114,7 @@ Python Selector uses `mod_passenger` to get the best performance from Python app
 
 [See more](/cloudlinux_os_components/#python-selector).
 
-<span class="notranslate">**Node.js Selector** </span>
+**Node.js Selector**
 
 Node.js Selector is a CloudLinux OS Shared component that allows each user to easily create Node.js applications, 
 choose Node.js version and other parameters for applications based on their needs.
@@ -139,20 +139,21 @@ set limits for his end users within the Reseller Interface.
 
 [See more](/cloudlinux_os_components/#reseller-limits).
 
-<span class="notranslate"> **LVE-stats 2** </span>
+**LVE-stats 2**
 
-<span class="notranslate"> LVE-stats 2 </span> collects LVE usage statistics (CPU, memory, disk space usage) 
+VE-stats 2 collects LVE usage statistics (CPU, memory, disk space usage) 
 and allows to collect the usage data.
 
 [See more](/cloudlinux_os_components/#lve-stats-2).
 
 ## CloudLinux 9 beta
+
 The first release of CloudLinux 9 is available as Shared and Shared Pro editions.\
 Admin and Solo editions temporarily unavailable to install or activate because of no panel/custom panel release only.\
 Other editions support will be extended once major control panels add support of CL9.
 
-<details>
-<summary>CloudLinux 9 beta limitations</summary>
+### CloudLinux 9 beta limitations
+
 In the non-panel environment, for now, we can guarantee all of the following CloudLinux Shared components functionality:
 
 * LVE limits
@@ -188,7 +189,7 @@ will work in the CloudLinux OS 9 environment:
 * PHP X-Ray
 * Slow Site Analyzer
 * Reseller limits
-</details>
+
 
 ## CloudLinux OS life cycle
 
