@@ -1589,8 +1589,18 @@ In order to remove the link, just set upgrade url to the empty one.
 cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
 ```
 
+### Disable AccelerateWP Premium
+
+If you would like to stop using AccelerateWP Premium, 
+click on the `manage` link and remove `Premium Features` checkbox.
+AccelerateWP will be still available for your users.
+
+![](./images/awp/AWPDisablePremiumOnly.png)
+
 ### Disable AccelerateWP
-If you would like to stop using AccelerateWP, toggle the `Enable AccelerateWP for all users` back.
+
+If you would like to stop using AccelerateWP completely, toggle the `AccelerateWP` back.
+Both AccelerateWP and AccelerateWP Premium will be turned off.
 
 ![](./images/awp/AWPDisable.png)
 
