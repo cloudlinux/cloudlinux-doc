@@ -1543,7 +1543,7 @@ cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --dis
 ### WHMCS billing
 
 CloudLinux developed it's own WHMCS plugin 
-which provides you AccelerateWP billing integration our of the box. 
+which provides you AccelerateWP billing integration out of the box. 
 Check out [the documentation](WHMCS_DOCS_URL_HERE) to find how to install and use the plugin.
 
 ### Other billing integration
@@ -1567,7 +1567,7 @@ This command makes two things:
 - reports premium as being used to CLN, starting the billing cycle for hoster.
 
 
-When user terminates or downgrades plan, the following command must be exetured:
+When user terminates or downgrades plan, the following command must be executed by the billing system:
 ```
 cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --default --users=<username>
 ```
@@ -1586,7 +1586,7 @@ cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
 In order to remove the link, just set upgrade url to the empty one.
 
 ```
-cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
+cloudlinux-awp-admin set-options --upgrade-url ''
 ```
 
 ### Disable AccelerateWP Premium
