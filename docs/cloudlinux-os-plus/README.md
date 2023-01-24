@@ -1454,7 +1454,8 @@ a WordPress optimization plugin that provides full page caching, GZIP compressio
 #### AccelerateWP Premium suite
 
 :::warning Attention
-This feature is free of charge only during the beta testing period. Afterwards it will be charged.
+This feature is free of charge only during the beta testing period. 
+Afterwards it will be charged. Beta testing period ends no earlier than March 2023.
 :::
 
 This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
@@ -1643,7 +1644,8 @@ This operation will:
 * deactivate all optimization features for all users
 
 This operation will NOT:
-* cancel the subscription made by user in WHMCS or other billing
+* cancel the subscription made by user in WHMCS or other billing. User's subscription stays 
+  alive and user will still be charged in billing system unless hoster manually makes a refund
 
 
 ### Logs
