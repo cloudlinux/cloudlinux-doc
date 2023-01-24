@@ -1519,6 +1519,10 @@ scans a server for all WP sites and activates the AccelerateWP
 feature suite. CLI command skips activation for WP sites with
 page caching or feature incompatibilities.
 
+:::tip Note
+Please make sure your AccelerateWP version is >= 1.2-2 before proceed.
+:::
+
 Scan the server in background mode and activate AccelerateWP
 on those WP sites where it is possible:
 ```
