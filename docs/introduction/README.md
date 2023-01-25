@@ -11,7 +11,7 @@
 |Cage FS|**Yes**|**Yes**|**Yes**|**Yes**|
 |MySQL Governor|No|No|**Yes**|**Yes**|
 |PHP Selector|**Yes**|**Yes**|**Yes**|**Yes**|
-|Other Selectors (Python, Node.js, Ruby)|No|No|**Yes****|**Yes****|
+|Other Selectors (Python, Node.js, Ruby)|No|**Yes****|**Yes****|**Yes****|
 |HardenedPHP|**Yes**|**Yes**|**Yes**|**Yes**|
 |Apache mod_lsapi PRO|**Yes**|**Yes**|**Yes**|**Yes**|
 |SecureLinks|No|**Yes**|**Yes**|**Yes**|
