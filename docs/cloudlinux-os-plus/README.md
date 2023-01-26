@@ -1593,7 +1593,7 @@ When AccelerateWP Premium is enabled in admin interface, users get proposal to u
 When user upgrades the subscription to the plan with AccelerateWP support, 
 billing must execute the following command on the server:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --allowed --users=<username>
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --allowed --source=BILLING_OVERRIDE --users=<username>
 ```
 
 This command makes two things:
@@ -1603,7 +1603,7 @@ This command makes two things:
 
 When user terminates or downgrades plan, the following command must be executed by the billing system:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --default --users=<username>
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --default --source=BILLING_OVERRIDE --users=<username>
 ```
 
 ### Setup upgrade URL for AccelerateWP Premium
