@@ -1455,7 +1455,7 @@ This feature is free of charge only during the beta testing period. Afterwards i
 
 * the websites must be served with Apache web server;
 * the websites must use one of the following PHP handlers:
-  * [php-fpm](https://blog.cpanel.com/how-to-use-php-fpm-with-cpanel/)
+  * php-fpm
   * [lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro)
 
 ### Limitations
@@ -1674,11 +1674,13 @@ All errors will be displayed in standard output and logged into `/var/log/clwpos
     redis.so
     ```
 2. If the Redis module is missing:
+   
    Install the `alt-phpXY-pecl-ext` package manually
    Run the Redis configuration script `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py` 
       
       All errors will be displayed in standard output and logged into `/var/log/clwpos/main.log`.
 3. If the Redis module is present for a particular php version, but the incompatibility issue persists, re-check the following:
+    
     Make sure the Redis module is loaded under user:
     ```
     su -c "php -m | grep redis" <username>
