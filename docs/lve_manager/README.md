@@ -686,7 +686,7 @@ The possibility to manage Mysql Governor package limits was added. This can be d
 
 #### How to install
 ```
-yum update governor-mysql lvemanager lve-utils alt-python27-cllib  --enablerepo=cloudlinux-updates-testing
+yum update governor-mysql lvemanager lve-utils alt-python27-cllib
 ```
 
 #### Meaning
