@@ -412,8 +412,7 @@ If you'd like to try Smart Advice and AccelerateWP you should participate in the
 
 #### Requirements
 
-* CloudLinux OS Shared Pro
-* cPanel or Plesk Control Panel
+* CloudLinux OS Shared Pro or CloudLinux OS Solo
 * alt-php-xray > 0.5-1 version
 * lve-utils > 6.3.2-1 version
 * lvemanager > 7.6.1-1 version
@@ -1583,12 +1582,14 @@ In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwp
 ### FAQ
 
 #### With which panel can I use AccelerateWP?
-For now, AccelerateWP is compatible with cPanel and Plesk.
+Currently AccelerateWP is compatible with cPanel and Plesk.
 
-If you want DirectAdmin to be supported, please submit your request to our feature portal [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share).
+If you are interested in supporting DirectAdmin control panel, please record your demand on our feature portal:
+
+* [AccelerateWP for DirectAdmin](https://features.cloudlinux.com/c/15-acceleratewp-for-directadmin?utm_medium=social&utm_source=portal_share)
 
 #### Is it possible to use AccelerateWP on a non-control panel server?
-No, AccelerateWP is compatible only with cPanel and Plesk.
+No, AccelerateWP is compatible with cPanel and Plesk.
 
 #### Do you plan to enable support of Nginx server?
 This is a part of our very long term plans, thus not expected in the nearest future.
@@ -1647,7 +1648,7 @@ All errors will be displayed in standard output and logged into `/var/log/clwpos
     rpm -q ea-php74-php-redis
     yum install ea-php74-php-redis
     ```
-2. Check Redis `ini` file is present by running the following command (example for cPanel):
+2. Check Redis `ini` file is present by running the following command:
     ```
     ls /opt/cpanel/ea-phpXY/root/etc/php.d/ | grep 50-redis
     ```
@@ -1675,24 +1676,24 @@ All errors will be displayed in standard output and logged into `/var/log/clwpos
     ```
 2. If the Redis module is missing:
    
-   Install the `alt-phpXY-pecl-ext` package manually
-   Run the Redis configuration script `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py` 
+   a. Install the `alt-phpXY-pecl-ext` package manually
+   b. Run the Redis configuration script `/usr/share/cloudlinux/wpos/enable_redis_for_alt_php.py`
       
-      All errors will be displayed in standard output and logged into `/var/log/clwpos/main.log`.
+   All errors will be displayed in standard output and logged into `/var/log/clwpos/main.log`.
 3. If the Redis module is present for a particular php version, but the incompatibility issue persists, re-check the following:
     
-    Make sure the Redis module is loaded under user:
+    a. Make sure the Redis module is loaded under user:
     ```
     su -c "php -m | grep redis" <username>
     ```
-    Check the required extensions are enabled in `php.ini`:
+    b. Check the required extensions are enabled in `php.ini`:
     ```
     cat /opt/alt/phpXY/etc/php.ini | grep redis.so
     cat /opt/alt/phpXY/etc/php.ini | grep json.so
     cat /opt/alt/phpXY/etc/php.ini | grep igbinary.so
     ```
     
-    Enable missing extensions manually.
+    c. Enable missing extensions manually.
 
 
 #### End-users of AccelerateWP encounter PHP-related issues during feature activation
