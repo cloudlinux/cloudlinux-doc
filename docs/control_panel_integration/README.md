@@ -1562,7 +1562,7 @@ FIND_PATH (APACHE2_2_HTTPD_INCLUDE_DIR
 
 ### mod_lsapi
 
-1. Install the packages needed to build mod_lsapi from the source
+1. Install the packages needed to build mod_lsapi from the source. Some packages may be missing on some platforms, this is not critical
 
 <div class="notranslate">
 
@@ -1574,12 +1574,21 @@ yum install -y python-lxml pytest python-mock
 ```
 </div>
 
-On CloudLinux OS Shared 7 you also should install criu related packages
+On CloudLinux OS Shared 7 and above you also should install criu related packages
 
 <div class="notranslate">
 
 ```
 yum install -y criu-lve python-criu-lve criu-lve-devel crit-lve
+```
+</div>
+
+On CloudLinux OS Shared 8 and above you also should install next packages
+
+<div class="notranslate">
+
+```
+yum install -y alt-python37-mock alt-python37-pytest httpd-devel
 ```
 </div>
 
@@ -1600,6 +1609,11 @@ yumdownloader --source mod_lsapi --enablerepo=*source
 rpmbuild --rebuild mod_lsapi-ver.el7.cloudlinux.src.rpm
 ```
 </div>
+
+:::tip Note
+This command will fail, but it will create a ~/rpmbuild/SPECS/mod_lsapi.spec file.
+This ~/rpmbuild/SPECS/mod_lsapi.spec file will need to be modified.
+:::
 
 4. Remove building dependency from `httpd-devel` in the <span class="notranslate">`mod_lsapi.spec`</span> spec file located in the <span class="notranslate">`~/rpmbuild/SPECS/`</span> directory.
 
@@ -1649,8 +1663,16 @@ Also you should add mentions of both module and config files in the <span class=
 ```
 </div>
 
-6. Rebuild the package again, this time you should get to the compilation stage. During compilation, you may encounter some errors:
+6. Rebuild the package again, this time you should get to the compilation stage.
 
+Use this command to rebuild a package
+<div class="notranslate">
+```
+rpmbuild -bb ~/rpmbuild/SPECS/mod_lsapi.spec
+```
+</div>
+
+During compilation, you may encounter some errors:
 <div class="notranslate">
 
 ```
@@ -1720,6 +1742,13 @@ Also you should add mentions of both files in the *%files* section of `mod_lsapi
 The requirements to the `config.ini` file and script file are described in the following [section](#how-to-integrate-switch_mod_lsapi-script-with-custom-panels)
 
 8. Rebuild the package again, if you set everything correctly, there shouldn't be any problems. 
+
+Use this command to rebuild a package
+<div class="notranslate">
+```
+rpmbuild -bb ~/rpmbuild/SPECS/mod_lsapi.spec
+```
+</div>
 
 9. Install the module, check that it is successfully loaded into Apache.
 
