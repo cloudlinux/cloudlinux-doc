@@ -1616,6 +1616,40 @@ cloudlinux-awp-admin set-options --upgrade-url https://plan.upgrade/splash
 
 ![](./images/awp/AWPUpgradeLink.png)
 
+AccelerateWP automatically appends GET parameters when the link is displayed.
+
+```
+https://plan.upgrade/splash/?m=acceleratewp&action=provisioning&username=democom&domain=demo.com&server_ip=10.51.0.10
+```
+
+| Parameter | Value        | Description                                              |
+|-----------|--------------|----------------------------------------------------------|
+| m         | acceleratewp | Constant.                                                |
+| action    | provisioning | Constant.                                                |
+| username  | democom      | Customer's account name.                                 |
+| domain    | demo.com     | Customer's account primary domain.                       |
+| server_ip | 10.51.0.10   | Primary IP of the server where AccelerateWP is installed |
+
+Parameters can be used to determine the billing account of the user in order to display proper page. 
+WHMCS plugin already has automatic redirect to upgrade page, there is only needed to set upgrade-url 
+to the root of your WHMCS instance.
+
+```
+cloudlinux-awp-admin set-options --upgrade-url https://whmcs.mydomain.zone/
+```
+
+Upgrade URL is opened in modal browser window and will be automatically closed
+when AccelerateWP receives callback about successful upgrade.
+
+Callback is already implemented in WHMCS plugin, but if you are using some other billing,
+you should add the following code on the page which appears when user successfully upgrades subscription.
+
+    <script>
+    if(window.opener && !window.opener.closed) {
+        window.opener.postMessage('PAYMENT_SUCCESS', '*');
+    }
+    </script>
+
 
 In order to remove the link, just set upgrade url to the empty one.
 
