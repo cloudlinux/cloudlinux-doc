@@ -1515,7 +1515,7 @@ You may use the following filters to browse AccelerateWP statistics slices.
 Use the `cloudlinux-awp-admin enable-feature` CLI command to
 ensure the best performance for every end-user. CLI command
 scans a server for all WordPress sites and activates the AccelerateWP
-feature suite. It can take up to 2 munites for a single site. CLI command skips activation for WordPress sites with
+feature suite. It can take up to 2 minutes for a single site. CLI command skips activation for WordPress sites with
 page caching or feature incompatibilities.
 
 :::tip Note
