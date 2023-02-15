@@ -1451,6 +1451,13 @@ but cannot install the plugin unless they purchase the feature using [WHMCS or 3
 This is a basic suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): 
 a WordPress optimization plugin that provides full page caching, GZIP compression and some other useful optimizations.
 
+**AccelerateWP suite limitations**
+* the website must be served with Apache web server;
+* the website must use PHP version 7.0 or higher.
+* the WordPress version must be 5.4 and higher.
+* the other WordPress Caching plugins must not be installed.
+* the WordPress should not run in Multisite mode.
+
 #### AccelerateWP Premium suite
 
 :::warning Attention
@@ -1466,11 +1473,15 @@ requests come in and may be helpful in case when full page caching cannot be use
 
 **Premium suite limitations**
 
-* the websites must be served with Apache web server;
-* the websites must use one of the following PHP handlers:
+* the website must be served with Apache web server;
+* the website must use one of the following PHP handlers:
   * [php-fpm](https://blog.cpanel.com/how-to-use-php-fpm-with-cpanel/)
   * [lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro)
-
+* the website must use ea-PHP version 7.4 or 8.0.
+* the WordPress version must be 3.7 and higher.
+* the other WordPress Caching plugins must not be installed.
+* the [Snuffleupagus](https://snuffleupagus.readthedocs.io/) must be turned off.
+* the WordPress should not run in Multisite mode.
 
 
 ### Limitations
