@@ -1736,7 +1736,7 @@ This can be caused by several reasons. Either your customer's website was detect
 or there was an issue with environment when feature was installed 
 (e.g. bad internet connectivity with wordpress market).
 
-First, try to enable feature manually using Accelerate WP interface. 
+First, try to enable feature manually using AccelerateWP interface. 
 Most likely you will find human-readable error message there.
 
 Next, you can try to dive into `/var/log/clwpos/daemon.log` and find the reason why the `enable` command failed.
