@@ -1720,6 +1720,29 @@ Look through the processes list to check Redis status for a particular user:
 In case if AccelerateWP Premium is active, the auxiliary monitoring daemon `clwpos_monitoring` is also activated. It checks Redis instances each 5 minutes, starts new instances, restart failed ones and kills the “garbage” instances if needed.
 Check daemon status using `service clwpos_monitoring status` and its main log: `/var/log/clwpos/daemon.log`.
 
+### My users are complaining that their feature are not installed automatically after subscription upgrade
+This can be caused by several reasons. Either your customer's website was detected to have malfunctions
+or there was an issue with environment when feature was installed 
+(e.g. bad internet connectivity with wordpress market).
+
+First, try to enable feature manually using Accelerate WP interface. 
+Most likely you will find human-readable error message there.
+
+Next, you can try to dive into `/var/log/clwpos/daemon.log` and find the reason why the `enable` command failed.
+Here is an example of successful feature installation for reference:
+
+
+    2023-02-14 11:01:14,696: (clwpos.daemon_base) [INFO] Running cloudlinux-awp-user enable --feature object_cache --domain wpujj.com --wp-path
+    2023-02-14 11:01:15,081: (clwpos.daemon_base) [INFO] Command succeded with output:
+    `CompletedProcess(args=['/bin/cagefs_enter.proxied', 'cloudlinux-awp-user', 'enable', '--feature', 'object_cache', '--domain', 'wpujj.com', '--wp-path', ''], returncode=0, stdout='{\n    "context": {\n        "domain": "wpujj.com",\n        "feature": "object_cache"\n    },\n    "result": "success",\n    "timestamp": 1676372475.044419,\n \n}\n', stderr='')`
+    2023-02-14 11:01:15,086: (clwpos.daemon_base) [INFO] background process finished: pid=415368
+
+Also, some useful notes may be present in user's log located at `/home/<username>/.clwpos/main.log`.
+
+If the issue persists, or you cannot resolve it yourself, 
+contact CloudLinux support and attach `/var/log/clwpos/daemon.log` and `/home/<username>/.clwpos/main.log` 
+for further investigation.
+
 
 ### Troubleshooting
 
