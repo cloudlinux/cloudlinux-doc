@@ -1523,7 +1523,7 @@ Please make sure your AccelerateWP version is >= 1.2-2 before proceed.
 :::
 
 Scan the server in background mode and activate AccelerateWP
-on those WP sites where it is possible:
+on those WordPress sites where it is possible:
 ```
 cloudlinux-awp-admin enable-feature --all
 ```
@@ -1537,8 +1537,8 @@ cloudlinux-awp-admin enable-feature --status
 The output will be either:
 * Activation is still in progress,
 * Activation is done. The message will state how many users
-were initially for the scan, a number of WP sites with
-successfully activated suite, and the total number of WP sites
+were initially for the scan, a number of WordPress sites with
+successfully activated suite, and the total number of WordPress sites
 scanned.
 
 ### Disable AccelerateWP for a particular user
