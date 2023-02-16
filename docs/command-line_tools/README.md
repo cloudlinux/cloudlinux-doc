@@ -3134,11 +3134,15 @@ Fails if CageFS is not enabled for suphp binary.
 
 #### check-usepam
 
-Checks UsePAM in <span class="notranslate">`/etc/ssh/sshd_config`</span>.
+Checks usepam setting in <span class="notranslate">`sshd -T`</span> output.
 
-Checking if <span class="notranslate">`/etc/ssh/sshd_config`</span> config file contains <span class="notranslate">`UsePAM yes`</span> line, which is required for pam_lve correct work with sshd.
+Checking if <span class="notranslate">`sshd -T`</span> output contains <span class="notranslate">`usepam yes`</span> line, which is required for pam_lve correct work with sshd.
  
-Fails if <span class="notranslate">`/etc/ssh/sshd_config`</span> contains <span class="notranslate">`UsePAM no`</span> line. 
+Fails if <span class="notranslate">`sshd -T`</span> output contains <span class="notranslate">`usepam no`</span>. You could specify `UsePAM yes` in `/etc/ssh/sshd_config`
+
+::: tip Note
+Cldiag checks `sshd -T` output in <span class="notranslate">**lve-utils >= 6.4.8**</span>. Lower versions check whether `/etc/ssh/sshd_config` file contains `UsePAM yes` line.
+:::
 
 #### check-symlinkowngid
 
