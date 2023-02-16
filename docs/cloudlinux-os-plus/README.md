@@ -1540,11 +1540,11 @@ You may use the following filters to browse AccelerateWP statistics slices.
 * `Users with AccelerateWP Premium only` filter will show statistics for users who utilizes AccelerateWP Premium (Object Caching) feature; users who did not activated AccelerateWP Premium feature will be hidden
 
 
-### Activate free AccelerateWP for all WP sites on the server
+### Activate free AccelerateWP for all WordPress sites on the server
 Use the `cloudlinux-awp-admin enable-feature` CLI command to
 ensure the best performance for every end-user. CLI command
-scans a server for all WP sites and activates the AccelerateWP
-feature suite. CLI command skips activation for WP sites with
+scans a server for all WordPress sites and activates the AccelerateWP
+feature suite. It can take up to 2 minutes for a single site. CLI command skips activation for WordPress sites with
 page caching or feature incompatibilities.
 
 :::tip Note
@@ -1552,7 +1552,7 @@ Please make sure your AccelerateWP version is >= 1.2-2 before proceed.
 :::
 
 Scan the server in background mode and activate AccelerateWP
-on those WP sites where it is possible:
+on those WordPress sites where it is possible:
 ```
 cloudlinux-awp-admin enable-feature --all
 ```
@@ -1566,8 +1566,8 @@ cloudlinux-awp-admin enable-feature --status
 The output will be either:
 * Activation is still in progress,
 * Activation is done. The message will state how many users
-were initially for the scan, a number of WP sites with
-successfully activated suite, and the total number of WP sites
+were initially for the scan, a number of WordPress sites with
+successfully activated suite, and the total number of WordPress sites
 scanned.
 
 ### Disable AccelerateWP for a particular user
