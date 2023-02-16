@@ -3200,8 +3200,6 @@ Take a look at the next chart. The I/O load is synchronous with the CPU load.
 
 ![](/images/Chart3.png)
 
-
-
 ### Installation and update
 
 * [Installation](/cloudlinux_os_components/#installation)
@@ -3357,6 +3355,10 @@ See also [MySQL Governor CLI](/command-line_tools/#mysql-governor)
 
 ::: danger Important
 Upgrade from MySQL 8 to MariaDB 10.x isn't supported due to compatibility issues between these database server versions and will break your database server completely. You can find more information about the compatibility issues [here](https://mariadb.com/kb/en/upgrading-from-mysql-to-mariadb/)
+:::
+
+:::warning Warning
+Please note that DB Governor is capable of upgrading your database to a newer version, including sequential upgrades, but we make no guarantee that such upgrades do not affect the operation of the database, its components, control panel operation and other functions of database. Always create a backup copy of your data.
 :::
 
 In order to change MySQL version you should run the following commands:
