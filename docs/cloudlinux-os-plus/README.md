@@ -1592,7 +1592,7 @@ cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --dis
 
 CloudLinux developed it's own WHMCS plugin 
 which provides you AccelerateWP billing integration out of the box. 
-Check out [the documentation](WHMCS_DOCS_URL_HERE) to find how to install and use the plugin.
+Check out [the documentation](https://docs.cln.cloudlinux.com/whmcs_awp_plugin/) to find how to install and use the plugin.
 
 ### Other billing integration
 
