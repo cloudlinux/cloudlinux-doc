@@ -1196,6 +1196,10 @@ cagefs_enter_user --pmem=512M --speed=70% <user> <command>
 
 Refer to [documentation on limits](https://docs.cloudlinux.com/limits/#understanding-limits) for more details on the provided parameters.
 
+:::tip Note
+Temporary LVE is destroyed after the process terminates unless the option `--no-fork` passed.
+:::
+
 ### Updating CageFS skeleton
 
 Updating CageFS skeleton is required after update of the system RPM packages. It may be also required after update of hosting control panel itself.
