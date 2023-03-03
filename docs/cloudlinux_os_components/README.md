@@ -2351,7 +2351,32 @@ If the path to the program being executed does not match any path specified in t
 * You cannot specify both white and black list (<span class="notranslate">`allow`</span> and <span class="notranslate">`deny`</span>).
 
 It is possible to verify that a path specified as a parameter for an option does not refer outside of the user’s home directory. This check is performed for options specified in the <span class="notranslate">`restrict_path`</span> list. All issues are reported in <span class="notranslate">`/var/log/secure`</span> log file.
+	
+> NOTE: By default, option filters only compare the starting parts of arguments with entries specified by lists.
+For instance, if option "-f" is forbidden, "-f /etc/list" will be forbidden, but "-vf /etc/list" will not.
 
+Starting from cagefs v. #7.4.12-1, specifying a `"strict_options": true` switch inside a filter file entry enables an extended parsing mechanism where each short option from a cluster is parsed separately.
+
+It is recommended to enable this option, unless it causes issues with the restricted command's functionality.
+	
+<div class="notranslate">
+
+```
+{
+  "default": {
+    "deny": [
+      "-be",
+      "-bem"
+    ],
+    "restrict_path": [
+      "-C",
+      "-D"
+    ],
+    "strict_options": true
+  }
+}
+```
+</div>
 
 #### Executing by proxy
 
