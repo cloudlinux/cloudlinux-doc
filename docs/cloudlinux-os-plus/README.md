@@ -1063,6 +1063,8 @@ In the current version, we collect these metrics only for Apache (NOT for LiteSp
 
 ![](/images/CMMySQLQueries.png)
 
+MySQL queries collector gets number of queries executed on the server per minute. It takes data from the MySQL server variable "Questions". You may manually check variable value by executing query `SHOW GLOBAL STATUS LIKE 'Questions';`. For more information about MySQL server variables - please, see MySQL documentation.
+
 #### The most loaded server users for the last minute
 
 ![](/images/CMMostLoadedUsers.png)
