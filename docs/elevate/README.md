@@ -250,7 +250,7 @@ These issues can occur during the upgrade on CloudLinux 7 + cPanel systems.
 
 #### Post-reboot dnf upgrade error
 
-In some system configurations, you may encounter the following issue during the [stage 4](#stage-4) of the upgrade:
+In some system configurations, you may encounter an issue with the [stage 4](#stage-4) of the upgrade halting with a message similar to the following:
 
 ```
 [INFO] Running: /usr/bin/dnf -y --allowerasing update
@@ -263,9 +263,12 @@ In some system configurations, you may encounter the following issue during the 
 [ERROR]     /usr/local/cpanel/scripts/elevate-cpanel --continue
 ```
 
-Try continuing the process without modifying anything. The error may resolve itself upon the second run.
+This most commonly occurs in two cases:
+* When a package repository configuration file not associated with any RPM packages can no longer be accessed on the post-upgrade system due to the changes in Yum variables;
+* When a package repository configuration file associated with a RPM package was modified manually, and thus, not upgraded automatically during the process.
 
-If not, check the URL/mirrorlist of the mentioned YUM repository. Make sure it's accessible from the machine.
+Check the URL/mirrorlist of the mentioned Yum repository. Make sure it's accessible from the machine.
+If there's a related `.rpmnew` file present, consider replacing the repository config file with it.
 
 #### Outdated cPanel version
 
