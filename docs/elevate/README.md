@@ -394,6 +394,8 @@ Make sure your system is fully updated before starting the upgrade process.
 sudo yum -y update
 ```
 
+In addition, make sure your system is running the latest available version of cPanel.
+
 Download the cPanel ELevate script.
 
 `wget -O /scripts/elevate-cpanel https://raw.githubusercontent.com/cpanel/elevate/release/elevate-cpanel`
