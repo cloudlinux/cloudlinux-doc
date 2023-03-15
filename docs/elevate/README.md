@@ -62,7 +62,7 @@ It's possible to add missing repositories and packages to Elevate yourself, if y
 
 Yes.
 
-One of the major steps of the upgrade process involves rebooting into a special `initramfs` environment, from which your system's software will be upgraded. During that period of time, the system will be mostly non-functional and inaccessible.
+One of the major steps of the upgrade process involves rebooting into a special `initramfs` environment, from which the system's software is upgraded. During that period of time, the system will be mostly non-functional and inaccessible.
 
 This stage may take **up to an hour**, so schedule the upgrade accordingly.
 
@@ -225,7 +225,7 @@ If not, enable the corresponding package repository (e.g. `centos-extras`) and i
 
 #### DNF transaction failure
 
-The main upgrade transaction is performed while the system is booted into a custom InitRamFS. In there, all the prepared package operations are performed.
+The main upgrade transaction is performed while the system is booted into a custom InitRamFS. From there, all the package operations prepared during the previous steps are performed.
 
 While in this state, the system is inaccessble remotely via SSH. However, it can still be accessed through tools such as VNC.
 
