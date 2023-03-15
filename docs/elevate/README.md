@@ -60,11 +60,15 @@ It's possible to add missing repositories and packages to Elevate yourself, if y
 
 ### Will it interrupt my server's functionality?
 
-Yes. One of the major steps of the upgrade process involves rebooting into a special environment, from which your system's software will be upgraded. During that period of time, the system will be mostly non-functional and inaccessible.
+Yes.
 
-This stage may take **up to an hour**, so plan the upgrade accordingly.
+One of the major steps of the upgrade process involves rebooting into a special `initramfs` environment, from which your system's software will be upgraded. During that period of time, the system will be mostly non-functional and inaccessible.
 
-During the preparation stages, however - that is, when the upgrade process is first *initiated* and before the system is rebooted - the system's services will function normally.
+This stage may take **up to an hour**, so schedule the upgrade accordingly.
+
+During the preparation stages - that is, when the upgrade process is first *initiated* and before the system is rebooted - the system's services will function normally.
+
+CloudLinux 7 no panel/custom panel and cPanel upgrade scenarios behave somewhat differently during the preparation stage. The cPanel scenario will disable the site functionality during this stage, while the no-panel/custom panel scenario will not.
 
 
 ### How long does it take?
