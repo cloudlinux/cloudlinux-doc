@@ -36,11 +36,11 @@ In particular, systems with configurations and packages that substantially diffe
 
 ### Can it break something on my system?
 
-**Yes.**
+**<font color="Red">Yes.</font>**
 
 A full system upgrade is an inherently invasive procedure In some cases, due to different system configurations, package errors or even power failures, you may encounter issues during the upgrade process that can't be automatically recovered from.
 
-Said issues may be severe, **up to and including rendering the system completely inaccessible**.
+Said issues may be severe, **<font color="Red">up to and including rendering the system completely inaccessible.</font>**
 
 To that end, we **highly recommend never running Elevate on a system without a backup ready**.
 
