@@ -68,7 +68,7 @@ This stage may take **up to an hour**, so schedule the upgrade accordingly.
 
 During the preparation stages - that is, when the upgrade process is first *initiated* and before the system is rebooted - the system's services will function normally.
 
-CloudLinux 7 no panel/custom panel and cPanel upgrade scenarios behave somewhat differently during the preparation stage. The cPanel scenario will disable the site functionality during this stage, while the no-panel/custom panel scenario will not.
+CloudLinux 7 no panel/custom panel and cPanel upgrade scenarios behave somewhat differently during the preparation stage. The cPanel scenario will disable the site functionality from this stage up until completion, while the no-panel/custom panel scenario will not.
 
 
 ### How long does it take?
