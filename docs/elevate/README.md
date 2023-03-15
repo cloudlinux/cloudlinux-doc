@@ -122,6 +122,24 @@ If the packages listed as unknown in the report are critical for your system, pr
 
 If you'd like to perform an upgrade on a system with unknown packages/repositories reported, and you're confident about all the potential risks, consider first adding the unknown repositories to Leapp's database, as described [here](https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration).
 
+
+### Transaction Configuration Files
+
+If you want to manually override the framework's upgrade actions for specific packages, you may do so by editing the files contained in `/etc/leapp/transaction/`.
+
+These configuration files have priority over automatic package upgrade resolutions and Package Elevation Service data.
+
+The configuration files are as follows:
+* to_install
+  * Install these packages. Don't remove them or preserve them as-is.
+* to_remove
+  * Remove these packages. Do not attempt to keep them or upgrade them.
+* to_keep
+  * Do not upgrade these packages. Keep them as they are on the system.
+* to_reinstall
+  * Remove these packages during the update, then reinstall them. Mostly useful for packages that have the same version string between major versions, and thus won't be upgraded automatically.
+
+
 ### Common upgrade inhibitors
 
 The following actions from the `/var/log/leapp/leapp-report.txt` file are seen frequently:
@@ -300,6 +318,19 @@ To resolve this problem, ensure that the dnf config-manager plugin is installed 
 If not, enable the corresponding package repository (e.g. `centos-extras`) and install it.
 
 `dnf install 'dnf-command(config-manager)'`
+
+
+#### DNF transaction failure
+
+The main upgrade transaction is performed while the system is booted into a custom InitRamFS. In there, all the prepared package operations are performed.
+
+While in this state, the system is inaccessble remotely via SSH. However, it can still be accessed through tools such as VNC.
+
+In some cases, the upgrade may encounter an unrecoverable error while running the transaction, which can result in the system remaining in a halfway-upgraded, unusable and partially inaccessible state.
+
+For example, if a package encounters a fatal error inside its `%preun` or `%prein` scriptlets during the upgrade, the transaction and the upgrade process may halt, leaving the system in an unusable state.
+
+It is recommended to remove such packages prior to the upgrade, or, alternatively, add them to the `to_keep` list (see *Transaction Configuration Files* section) to prevent Leapp from attempting to upgrade them.
 
 
 #### EasyApache 4 packages
