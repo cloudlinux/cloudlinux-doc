@@ -38,7 +38,7 @@ In particular, systems with configurations and packages that substantially diffe
 
 **Yes.**
 
-A full system upgrade is an inherently invasive procedure, and due to different system configurations, package errors or even power failures, you may encounter issues during the upgrade process.
+A full system upgrade is an inherently invasive procedure In some cases, due to different system configurations, package errors or even power failures, you may encounter issues during the upgrade process that can't be automatically recovered from.
 
 Said issues may be severe, **up to and including rendering the system completely inaccessible**.
 
