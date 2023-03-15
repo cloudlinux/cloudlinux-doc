@@ -251,6 +251,8 @@ This installation of cPanel *YOUR_CPANEL_VERSION* does not appear to be up to da
 You need to have an updated cPanel installation to proceed with the upgrade.
 Please refer to the [Latest cPanel & WHM Builds (All Architectures)](http://httpupdate.cpanel.net/) and ensure you have a cPanel updated to a version from one of the following tiers: STABLE, RELEASE, CURRENT or EDGE.
 
+LTS versions are not supported.
+
 
 #### EasyApache 4 packages
 
@@ -287,6 +289,15 @@ It's recommended to follow the provided suggestion and remove the repositories a
 
 If you'd like to add the configuration data for new repositories and packages to Leapp, please refer to the **Contribution** section of the manual for information on the proper procedure for doing so.
 
+
+## Known issues
+
+### Web servers
+Litespeed web server's installation scheme is currently incompatible with Elevate.
+
+It can be updated *after* the upgrade is complete, but won't be automatically upgraded with the rest of the system during the Elevate process.
+
+The same limitation applies to NGINX installations not provided through cPanel or CloudLinux mechanisms.
 
 ## Contribution
 
