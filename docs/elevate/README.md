@@ -15,47 +15,51 @@ In addition, support will not be provided if you have any third-party utilities 
 
 ## FAQ
 
-### What is Elevate?
+### What is ELevate?
 The ELevate project is an initiative to support migrations between major version of RHEL-derivatives.
 
-The CloudLinux Elevate variant, built on top of the [AlmaLinux ELevate project](https://wiki.almalinux.org/elevate/), aims to provide a streamlined method of upgrading CloudLinux 7 systems to CloudLinux 8 in-place.
+The CloudLinux ELevate variant, built on top of the [AlmaLinux ELevate project](https://wiki.almalinux.org/elevate/), aims to provide a streamlined method of upgrading CloudLinux 7 systems to CloudLinux 8 in-place.
 
 The [Leapp utility](https://leapp.readthedocs.io/) is the main tool used to perform the upgrade.
+
+The [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenario---cloudlinux-7-with-cpanel) uses a modified version of the [cPanel ELevate](https://github.com/cpanel/elevate) project as an additional layer of the upgrade process.
 
 ELevate is a project aimed to provide the ability to migrate between major versions of RHEL-based distributions from 7.x to 8.x. It combines Red Hat's Leapp framework with a community created library and service for the migration metadata set required for it.
 
 
 ### Is it ready for production use?
 
-Not entirely.
+While the ELevate project and its surrounding ecosystem is mature, support for CloudLinux has been introduced quite recently.
 
-While the Elevate project and its surrounding ecosystem is mature, support for CloudLinux has been introduced quite recently, and as such, hasn't been thoroughy tested and verified yet.
+We guarantee functionality of CloudLinux products and services on the post-upgrade system. You are welcome to contact CloudLinux Support with any issues that occur with said products.
 
-In particular, systems with configurations and packages that substantially differ from a typical CloudLinux 7 installation could encounter issues previously not seen before.
+However, we cannot guarantee that the third-party software and RPM packages will be updated correctly on all system configurations. [See below](#will-it-upgrade-everything-i-have-on-my-system).
+
+Systems with configurations and packages that substantially differ from a typical CloudLinux 7 installation could encounter issues previously not seen before.
 
 
 ### Can it break something on my system?
 
-**<font color="Red">Yes.</font>**
+It can.
 
-A full system upgrade is an inherently invasive procedure In some cases, due to different system configurations, package errors or even power failures, you may encounter issues during the upgrade process that can't be automatically recovered from.
+A full system upgrade is an inherently invasive procedure. In some cases, due to different system configurations, package errors or even power failures, you may encounter issues during the upgrade process that can't be automatically recovered from.
 
 Said issues may be severe, **<font color="Red">up to and including rendering the system completely inaccessible.</font>**
 
-To that end, we **highly recommend never running Elevate on a system without a backup ready**.
+To that end, we **highly recommend never running ELevate on a system without a backup ready**.
 
 Ideally, perform a trial run in a disposable environment, like a VM or a sandbox, to verify that migration functions as expected before you attempt to migrate a system.
 
 
 ### Will it upgrade everything I have on my system?
 
-It depends. It's possible that Elevate will not upgrade some software, especially one that isn't related to CloudLinux or a supported panel.
+It depends. ELevate will not upgrade arbitrary software, especially one that isn't related to CloudLinux or a supported panel.
 
 The ELevate project only supports a subset of package repositories it's aware of - that is, package repositories that are included in its configuration files.
 
 Packages from repositories Leapp is unaware of **will not be upgraded**.
 
-It's possible to add missing repositories and packages to Elevate yourself, if you're so inclined. Please check the [Contribution](/elevate/#contribution) section for more information on how to do so.
+It's possible to add missing repositories and packages to ELevate yourself, if you're so inclined. Please check the [Contribution](/elevate/#contribution) section for more information on how to do so.
 
 
 ### Will it interrupt my server's functionality?
@@ -68,21 +72,21 @@ This stage may take **up to an hour**, so schedule the upgrade accordingly.
 
 During the preparation stages - that is, when the upgrade process is first *initiated* and before the system is rebooted - the system's services will function normally.
 
-CloudLinux 7 no panel/custom panel and cPanel upgrade scenarios behave somewhat differently during the preparation stage. The cPanel scenario will disable the site functionality from this stage up until completion, while the no-panel/custom panel scenario will not.
+Note that CloudLinux 7 no panel/custom panel and cPanel upgrade scenarios behave somewhat differently during the preparation stage. The cPanel scenario will disable the site functionality from this stage up until completion, while the no-panel/custom panel scenario will not.
 
 
 ### How long does it take?
 
 Depending on the amount and size of the packages that need to be updated, the upgrade process may take a long time, up to several hours. This time also varies with the machine's resources and the speed of internet connection.
 
-If the machine remains unresponsive for more than 2 hours after rebooting, assume the upgrade process failed during the post-reboot phase.
+If the machine remains unresponsive for more than 2 hours after rebooting, assume the upgrade process failed during the post-reboot phase, and the machine cannot return to normal functionality automatically.
 
 
 ### How do I use it?
 
 Depending on the web panel you have installed on your system, the upgrade process will require different steps.
 
-At the moment, Elevate migration from CloudLinux 7 to CloudLinux 8 is supported on:
+At the moment, ELevate migration from CloudLinux 7 to CloudLinux 8 is supported on:
 
 * *no panel/custom panel* systems;
 * *cPanel* systems.
@@ -102,7 +106,7 @@ Please refer to the [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenari
 
 #### I have a CL7 system with DirectAdmin/Plesk/another panel installed, how do I upgrade to CL8?
 
-Unfortunately, CloudLinux Elevate doesn't support these system configurations yet.
+Unfortunately, CloudLinux ELevate doesn't support these system configurations yet.
 
 Instead, you can create a new machine with CloudLinux 8 and migrate your system's license and configuration to it.
 
@@ -119,7 +123,11 @@ Please check the Troubleshooting section directly below.
 
 ### The Troubleshooting section doesn't have an issue that I'm having. What now?
 
-Please contact CloudLinux Support with a description of your issue.
+First, try to narrow down the most probable source of the issue you've encountered.
+
+For cPanel-specific issues, [cPanel ELevate issue tracker](https://github.com/cpanel/elevate/issues) is the most appropriate place to report them.
+
+For CloudLinux-specific issues, report them in the [CloudLinux ELevate issue tracker](https://github.com/cloudlinux/elevate/issues) or contact CloudLinux Support with a description of the encountered problem.
 
 When filing an issue, include:
 - Steps to reproduce the issue
@@ -143,7 +151,7 @@ Here is a list of problems you may encounter during the upgrade attempt.
 
 ### Common issues
 
-These issues may be encountered during any Elevate Scenario.
+These issues may be encountered during any ELevate Scenario.
 
 #### Newest kernel
 
@@ -236,7 +244,7 @@ For example, if a package encounters a fatal error inside its `%preun` or `%prei
 It is recommended to remove such packages prior to the upgrade, or, alternatively, add them to the `to_keep` list (see *Transaction Configuration Files* section) to prevent Leapp from attempting to upgrade them.
 
 
-### Elevate cPanel Scenario issues
+### ELevate cPanel Scenario issues
 
 These issues can occur during the upgrade on CloudLinux 7 + cPanel systems.
 
@@ -293,9 +301,9 @@ If you'd like to add the configuration data for new repositories and packages to
 ## Known issues
 
 ### Web servers
-Litespeed web server's installation scheme is currently incompatible with Elevate.
+Litespeed web server's installation scheme is currently incompatible with ELevate.
 
-It can be updated *after* the upgrade is complete, but won't be automatically upgraded with the rest of the system during the Elevate process.
+It can be updated *after* the upgrade is complete, but won't be automatically upgraded with the rest of the system during the ELevate process.
 
 The same limitation applies to NGINX installations not provided through cPanel or CloudLinux mechanisms.
 
