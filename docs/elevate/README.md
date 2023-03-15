@@ -71,7 +71,7 @@ During the preparation stages, however - that is, when the upgrade process is fi
 
 Depending on the amount and size of the packages that need to be updated, the upgrade process may take a long time, up to several hours. This time also varies with the machine's resources and the speed of internet connection.
 
-If the machine remains unresponsive for more than 2 hours, assume the upgrade process failed during the post-reboot phase.
+If the machine remains unresponsive for more than 2 hours after rebooting, assume the upgrade process failed during the post-reboot phase.
 
 
 ### How do I use it?
