@@ -162,6 +162,20 @@ Leapp will advise on the list of modules to be removed.
 rmmod floppy pata_acpi btrfs
 ```
 
+
+#### Package repository defined multiple times
+
+You may encounter the following error message when attempting to upgrade:
+
+```
+Inhibitor: A YUM/DNF repository defined multiple times
+```
+
+Refer to the `/var/log/leapp/leapp-report.txt` for the details on the repository in question.
+
+To correct the issue, examine your yum reposiory configuration and clear out any dupicate entries before restarting the upgrade process.
+
+
 #### SSHD config default mismatch
 
 If your OpenSSH configuration file does not explicitly state the option PermitRootLogin in sshd_config file, this upgrade inhibitor will apperar.
