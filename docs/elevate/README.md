@@ -326,9 +326,13 @@ Once the preupgrade process completes, the results will be contained in the file
 
 It's advised to review the report and consider how the changes will affect your system.
 
-Should any packages or package repositories that are unknown to Leapp be detected, they will also be listed in the report. Consider how leaving the listed items unupgraded will affect the stability of your system.
+:::danger WARNING
+In particular, pay attention to the packages that will not be upgraded during the transaction.
+
+Should any packages or package repositories that are unknown to Leapp be detected, they will be listed in the report. Consider how leaving the listed items unupgraded will affect the stability of your system.
 
 If the packages listed as unknown in the report are critical for your system, proceeding with the upgrade is **extremely likely** to damage its functionality, up to making the machine unaccessible.
+:::
 
 If you'd like to perform an upgrade on a system with unknown packages/repositories reported, and you're confident about all the potential risks, consider first adding the unknown repositories to Leapp's database, as described [here](https://github.com/AlmaLinux/leapp-repository/tree/almalinux#third-party-integration).
 
@@ -413,8 +417,16 @@ It's advised to check the aforementioned files for possible problems and recomme
 :::
 
 Once the preupgrade process completes, the results will be contained in `/var/log/leapp/leapp-report.txt` file.
+
 It's advised to review the report and consider how the changes will affect your system.
 
+:::danger WARNING
+In particular, pay attention to the packages that will not be upgraded during the transaction.
+
+Should any packages or package repositories that are unknown to Leapp be detected, they will be listed in the report. Consider how leaving the listed items unupgraded will affect the stability of your system.
+
+If the packages listed as unknown in the report are critical for your system, proceeding with the upgrade is **extremely likely** to damage its functionality, up to making the machine unaccessible.
+:::
 
 ### Running
 
