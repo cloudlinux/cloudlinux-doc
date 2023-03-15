@@ -248,6 +248,25 @@ It is recommended to remove such packages prior to the upgrade, or, alternativel
 
 These issues can occur during the upgrade on CloudLinux 7 + cPanel systems.
 
+#### Post-reboot dnf upgrade error
+
+In some system configurations, you may encounter the following issue during the [stage 4](#stage-4) of the upgrade:
+
+```
+[INFO] Running: /usr/bin/dnf -y --allowerasing update
+[INFO] Error: Failed to download metadata for repo 'cloudlinux-base': Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried
+[INFO] Sending notification: Fail to update to CloudLinux 8
+[ERROR] The elevation process failed during stage 4.
+[ERROR]
+[ERROR] You can continue the process after fixing the errors by running:
+[ERROR]
+[ERROR]     /usr/local/cpanel/scripts/elevate-cpanel --continue
+```
+
+Try continuing the process without modifying anything. The error may resolve itself upon the second run.
+
+If not, check the URL/mirrorlist of the mentioned YUM repository. Make sure it's accessible from the machine.
+
 #### Outdated cPanel version
 
 You may encounter the following error message when attempting to upgrade:
@@ -438,6 +457,51 @@ In addition, check the leapp logs for .rpmnew configuration files that may have 
 ## ELevate Scenario - CloudLinux 7 with cPanel
 
 This scenario contains steps on how to upgrade CloudLinux 7 to CloudLinux 8 on systems with cPanel present.
+
+It uses an additional tool to assist with migration of cPanel-related features - a modified version of [elevate-cpanel](https://github.com/cpanel/elevate).
+
+### Upgrade process overview
+
+The elevate process is divided in multiple `stages`.
+Each `stage` is responsible for one part of the upgrade.
+Between stages, a `reboot` is performed, with one last reboot at the end of the final stage.
+
+#### Stage 1
+
+Start the elevation process by installing the `elevate-cpanel` service responsible for controlling the upgrade process between multiple reboots.
+
+#### Stage 2
+
+Update the current distro packages.
+Disable cPanel services and setup the custom upgrade MOTD.
+
+#### Stage 3
+
+Setup the Leapp ELevate package repository and install Leapp packages.
+Prepare the cPanel packages for the update.
+
+Remove some known conflicting packages and back up some existing configurations. These packages will be reinstalled later.
+
+Provide answers to a few leapp questions.
+
+Attempt to perform the `leapp` upgrade.
+
+In case of failure you probably want to reply to a few extra questions or remove some conflicting packages.
+
+#### Stage 4
+
+At this stage we should now run CloudLinux 8.
+Update cPanel product for the new distro.
+
+Restore the packages that were removed during the previous stage.
+
+#### Stage 5
+
+This is the final stage of the upgrade process.
+Perform some sanity checks and cleanup.
+Remove the `elevate-cpanel` service used during the upgrade process.
+
+A final reboot is performed at the end of this stage.
 
 ### Preparing
 
