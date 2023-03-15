@@ -222,6 +222,18 @@ It is recommended to remove such packages prior to the upgrade, or, alternativel
 
 These issues can occur during the upgrade on CloudLinux 7 + cPanel systems.
 
+#### Outdated cPanel version
+
+You may encounter the following error message when attempting to upgrade:
+
+```
+This installation of cPanel *YOUR_CPANEL_VERSION* does not appear to be up to date. Please upgrade cPanel to a most recent version.
+```
+
+You need to have an updated cPanel installation to proceed with the upgrade.
+Please refer to the [Latest cPanel & WHM Builds (All Architectures)](http://httpupdate.cpanel.net/) and ensure you have a cPanel updated to a version from one of the following tiers: STABLE, RELEASE, CURRENT or EDGE.
+
+
 #### EasyApache 4 packages
 
 You may encounter the following error message when attempting to upgrade:
