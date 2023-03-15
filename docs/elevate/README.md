@@ -3,7 +3,7 @@
 [[toc]]
 
 :::warning Beta
-CloudLinux ELevate project is currently in beta. It allows you to upgrade between major distributions easily.
+CloudLinux ELevate project is currently in beta. It allows you to upgrade between major OS versions in-place.
 :::
 
 ## About the project
