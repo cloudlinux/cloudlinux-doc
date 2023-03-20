@@ -270,6 +270,39 @@ This most commonly occurs in two cases:
 Check the URL/mirrorlist of the mentioned Yum repository. Make sure it's accessible from the machine.
 If there's a related `.rpmnew` file present, consider replacing the repository config file with it.
 
+#### Missing EA packages after the upgrade
+
+You may discover that some, or all EasyApache packages (with `ea-*` naming scheme) on your post-upgrade system are missing.
+
+This outcome will be accompanied by an error message in the upgrade log (/var/log/elevate-cpanel.log) akin to the following:
+
+```
+* 2023-03-20 15:10:03 (4265) INFO Running: /usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/custom/current_state_at_2023-03-20_12:22:49.json
+* 2023-03-20 15:10:03 (4266) INFO
+* 2023-03-20 15:10:17 (4280) INFO  Problem: package ea-apache24-mod_lsapi-1:1.1-64.el8.cloudlinux.x86_64 requires liblsapi < 1:1.1-65, but none of the providers can be installed
+* 2023-03-20 15:10:17 (4280) INFO   - cannot install both liblsapi-1:1.1-64.el8.cloudlinux.x86_64 and liblsapi-1:1.1-65.el8.cloudlinux.x86_64
+* 2023-03-20 15:10:17 (4280) INFO   - cannot install the best candidate for the job
+* 2023-03-20 15:10:17 (4280) INFO The entire output was logged to: /usr/local/cpanel/logs/packman/errors/2023-03-20_15:10:17-1
+```
+
+This happens most frequently when one or more testing repositories were enabled on the pre-upgrade system.
+
+The Leapp framework attempts to upgrade all packages to their latest available versions - which includes versions available from testing repositories.
+
+EasyApache packages are not included in Leapp upgrade procedures - they're removed from the system during the initial upgrade stage and are installed again after Leapp completes the main upgrade transaction. EasyApache packages have strict dependency version requirements, which means that if the installed dependency's version is too recent, it'll need to be downgraded.
+
+However, the tool used to restore the EA packages, `ea_install_profile`, does not perform downgrades automatically and will instead interrupt the restoration process.
+
+To resolve the issue:
+* First, install the packages listed in the log as problematic manually while downgrading their dependencies as needed.
+* Then, run the `ea_install_profile` command with the exact same arguments as shown in the log.
+
+In the above example, you'd need to run:
+```
+dnf -y install ea-apache24-mod_lsapi
+/usr/local/bin/ea_install_profile --install /etc/cpanel/ea4/profiles/custom/current_state_at_2023-03-20_12:22:49.json
+```
+
 #### Outdated cPanel version
 
 You may encounter the following error message when attempting to upgrade:
@@ -323,7 +356,7 @@ If you'd like to add the configuration data for new repositories and packages to
 ## Known issues
 
 ### Web servers
-Litespeed web server's installation scheme is currently incompatible with ELevate.
+The Litespeed web server installation scheme is currently incompatible with ELevate.
 
 It can be updated *after* the upgrade is complete, but won't be automatically upgraded with the rest of the system during the ELevate process.
 
