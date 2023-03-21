@@ -1893,6 +1893,11 @@ And check that the command shows <span class="notranslate">`Disabled`</span>.
 
 #### Mount points
 
+:::tip Note
+Please do not mount the entire `/var` directory into CageFS (i.e. do not add the `/var` to the `cagefs.mp`). This will break CageFS.
+:::
+
+
 
 CageFS creates individual namespace for each user, making it impossible for users to see each other's files and creating high level of isolation. The way namespace is organized:
 
