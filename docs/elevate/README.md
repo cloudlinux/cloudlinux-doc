@@ -123,11 +123,13 @@ Please check the Troubleshooting section directly below.
 
 ### The Troubleshooting section doesn't have an issue that I'm having. What now?
 
-First, try to narrow down the most probable source of the issue you've encountered.
+First, try to narrow down the most probable source of the issue you've encountered, if possible.
 
 For cPanel-specific issues, [cPanel ELevate issue tracker](https://github.com/cpanel/elevate/issues) is the most appropriate place to report them.
 
 For CloudLinux-specific issues, report them in the [CloudLinux ELevate issue tracker](https://github.com/cloudlinux/elevate/issues) or contact CloudLinux Support with a description of the encountered problem.
+
+For issues with the underlying Leapp framework, report them in the [AlmaLinux Leapp repository issue tracker](https://github.com/AlmaLinux/leapp-repository/issues).
 
 When filing an issue, include:
 - Steps to reproduce the issue
@@ -272,7 +274,7 @@ If there's a related `.rpmnew` file present, consider replacing the repository c
 
 #### Missing EA packages after the upgrade
 
-You may discover that some, or all EasyApache packages (with `ea-*` naming scheme) on your post-upgrade system are missing.
+You may discover that some, or all EasyApache packages (with the `ea-*` naming scheme) on your post-upgrade system are missing.
 
 This outcome will be accompanied by an error message in the upgrade log (/var/log/elevate-cpanel.log) akin to the following:
 
@@ -498,44 +500,42 @@ It uses an additional tool to assist with migration of cPanel-related features -
 
 ### Upgrade process overview
 
-The elevate process is divided in multiple `stages`.
+The cPanel upgrade process is divided into multiple `stages`.
 Each `stage` is responsible for one part of the upgrade.
 Between stages, a `reboot` is performed, with one last reboot at the end of the final stage.
 
 #### Stage 1
 
-Start the elevation process by installing the `elevate-cpanel` service responsible for controlling the upgrade process between multiple reboots.
+The elevation process is initiated by installing the `elevate-cpanel` service responsible for controlling the upgrade process between multiple reboots.
 
 #### Stage 2
 
-Update the current distro packages.
-Disable cPanel services and setup the custom upgrade MOTD.
+The current distro packages are updated.
+cPanel services are disabled and the custom upgrade MOTD is set up.
 
 #### Stage 3
 
-Setup the Leapp ELevate package repository and install Leapp packages.
-Prepare the cPanel packages for the update.
+The Leapp ELevate package repository is set up and Leapp packages are installed.
+The cPanel packages are prepared for the update.
 
-Remove some known conflicting packages and back up some existing configurations. These packages will be reinstalled later.
+Some known conflicting packages are removed and some existing configurations are backed up. These packages will be reinstalled later.
 
-Provide answers to a few leapp questions.
-
-Attempt to perform the `leapp` upgrade.
-
-In case of failure you probably want to reply to a few extra questions or remove some conflicting packages.
+The main `leapp upgrade` process is executed.
 
 #### Stage 4
 
-At this stage we should now run CloudLinux 8.
-Update cPanel product for the new distro.
+At this stage the machine should be running CloudLinux 8.
 
-Restore the packages that were removed during the previous stage.
+cPanel products for the new distro are updated.
+
+The packages that were removed during the previous stage are restored.
 
 #### Stage 5
 
 This is the final stage of the upgrade process.
-Perform some sanity checks and cleanup.
-Remove the `elevate-cpanel` service used during the upgrade process.
+Some sanity checks and cleanup tasks are performed.
+
+The `elevate-cpanel` service used during the upgrade process is removed.
 
 A final reboot is performed at the end of this stage.
 
