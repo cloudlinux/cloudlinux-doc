@@ -549,6 +549,8 @@ sudo yum -y update
 
 In addition, make sure your system is running the latest available version of cPanel.
 
+Ensure that you have the package `ea-cpanel-tools` >= 1.0-67.el7.cloudlinux installed. You may need to activate the `cloudlinux-ea4-testing` package repository for that version to become accessible. By default, it is located at `/etc/yum.repos.d/cloudlinux-ea4-testing.repo`.
+
 Download the cPanel ELevate script.
 
 `wget -O /scripts/elevate-cpanel https://raw.githubusercontent.com/cpanel/elevate/release/elevate-cpanel`
