@@ -1489,6 +1489,11 @@ You can also use [LVE-stats 2 CLI](/command-line_tools/#lve-stats-2)
 
 There is <span class="notranslate">`/var/log/lve-stats.log`</span> file with additional information (warnings, tracebacks for errors).
 
+To see which letters were sent via lves-tats notifier in the logs, do the following:
+
+1. In the `/etc/sysconfig/lvestats2`, specify `logging_level=debug`;
+2. Execute the `service lvestats restart` command.
+
 ## CageFS
 
 ### General information and requirements
