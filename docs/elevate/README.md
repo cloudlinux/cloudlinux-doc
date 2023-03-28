@@ -96,13 +96,13 @@ At the moment, ELevate migration from CloudLinux 7 to CloudLinux 8 is supported 
 
 In such case, you can upgrade through the Leapp tool directly.
 
-Please refer to the [CloudLinux 7 with no panel/custom panel ELevate Scenario](#elevate-scenario---cloudlinux-7-with-no-panel-or-a-custom-panel) for step-by-step instructions.
+Please refer to the [CloudLinux 7 with no panel/custom panel ELevate Scenario](#elevate-scenario-cloudlinux-7-with-no-panel-or-a-custom-panel) for step-by-step instructions.
 
 #### I have a CL7 system with cPanel installed, how do I upgrade to CL8?
 
 With cPanel present on the machine, you need to run the upgrade process through the `elevate-cpanel` tool.
 
-Please refer to the [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenario---cloudlinux-7-with-cpanel) for step-by-step instructions.
+Please refer to the [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenario-cloudlinux-7-with-cpanel) for step-by-step instructions.
 
 #### I have a CL7 system with DirectAdmin/Plesk/another panel installed, how do I upgrade to CL8?
 
@@ -136,6 +136,7 @@ When filing an issue, include:
 - All files in `/var/log/leapp`
 - `/var/lib/leapp/leapp.db`
 - journalctl
+- If using the CloudLinux 7 with cPanel scenario, `/var/log/elevate-cpanel.log`
 - If you want, you can also send anything else would you like to provide (e.g. storage info)
 
 **For your convenience you can pack all logs with this command:**
@@ -549,7 +550,7 @@ sudo yum -y update
 
 In addition, make sure your system is running the latest available version of cPanel.
 
-Ensure that you have the package `ea-cpanel-tools` >= 1.0-67.el7.cloudlinux installed. You may need to activate the `cloudlinux-ea4-testing` package repository for that version to become accessible. By default, it is located at `/etc/yum.repos.d/cloudlinux-ea4-testing.repo`.
+Ensure that you have the package `ea-cpanel-tools >= 1.0-67.el7.cloudlinux` installed. You may need to activate the `cloudlinux-ea4-testing` package repository for that version to become accessible. By default, it is located at `/etc/yum.repos.d/cloudlinux-ea4-testing.repo`.
 
 Download the cPanel ELevate script.
 
@@ -562,7 +563,7 @@ Run a preupgrade check. No rpm packages will be installed during this phase.
 
 
 :::tip Note
-In addition to Leapp-created log files and reports, contained in `/var/log/leapp`, cPanel ELevate also creates an additional log file - `/var/log/elevate-cpanel.log`
+In addition to Leapp-created log files and reports, contained in `/var/log/leapp`, cPanel ELevate also creates an additional log file: `/var/log/elevate-cpanel.log`
 
 It's advised to check the aforementioned files for possible problems and recommended solutions.
 :::
@@ -639,5 +640,5 @@ cat /etc/redhat-release
 cat /etc/os-release
 ```
 
-Check the leapp logs for .rpmnew configuration files that may have been created during the upgrade process. In some cases  files like `/etc/os-release` or yum package files may not be replaced automatically - in particular, when said files were modified - requiring the user to rename the .rpmnew files manually.
+Check the leapp logs for `.rpmnew` configuration files that may have been created during the upgrade process. In some cases files like `/etc/os-release` or yum package files may not be replaced automatically - in particular, when said files were modified - requiring the user to rename the `.rpmnew` files manually.
 
