@@ -22,7 +22,7 @@ The CloudLinux ELevate variant, built on top of the [AlmaLinux ELevate project](
 
 The [Leapp utility](https://leapp.readthedocs.io/) is the main tool used to perform the upgrade.
 
-The [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenario---cloudlinux-7-with-cpanel) uses a modified version of the [cPanel ELevate](https://github.com/cpanel/elevate) project as an additional layer of the upgrade process.
+The [CloudLinux 7 with cPanel ELevate Scenario](#elevate-scenario-cloudlinux-7-with-cpanel) uses a modified version of the [cPanel ELevate](https://github.com/cpanel/elevate) project as an additional layer of the upgrade process.
 
 ELevate is a project aimed to provide the ability to migrate between major versions of RHEL-based distributions from 7.x to 8.x. It combines Red Hat's Leapp framework with a community created library and service for the migration metadata set required for it.
 
@@ -145,7 +145,7 @@ When filing an issue, include:
 
 Then you may attach only the `leapp-logs.tgz` file.
 
-Before gathering data, if possible, re-run the *leapp* command that encountered an issue with the `--debug` flag, e.g.: `leapp upgrade --debug`.
+For the no-panel scenario: before gathering data, if possible, re-run the *leapp* command that encountered an issue with the `--debug` flag, e.g.: `leapp upgrade --debug`.
 
 
 ## Troubleshooting
@@ -554,7 +554,7 @@ Ensure that you have the package `ea-cpanel-tools >= 1.0-67.el7.cloudlinux` inst
 
 Download the cPanel ELevate script.
 
-`wget -O /scripts/elevate-cpanel https://raw.githubusercontent.com/cpanel/elevate/release/elevate-cpanel`
+`wget -O /scripts/elevate-cpanel https://raw.githubusercontent.com/cloudlinux/elevate/cloudlinux-release/elevate-cpanel`
 `chmod 700 /scripts/elevate-cpanel`
 
 Run a preupgrade check. No rpm packages will be installed during this phase.
