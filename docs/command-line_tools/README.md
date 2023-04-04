@@ -540,7 +540,7 @@ Utility provides information about current MySQL and LVE usage of a running syst
 <div class="notranslate">
 
 ```
-cloudlinux_top [-h] [-v] [-j] [--hide-mysql]
+cloudlinux-top [-h] [-v] [-j] [--hide-mysql]
                [-u USERNAME | -r FOR_RESELLER] [-d DOMAIN] [-m MAX]
                [-o ORDER_BY]
 ```
