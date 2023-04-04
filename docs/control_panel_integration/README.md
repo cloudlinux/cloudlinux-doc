@@ -134,6 +134,12 @@ You can use different scripts for different CPAPI methods or only one script and
 * Some scripts are run from both root and end-user. If the script is run from end-user it should return information related to this user only, filtering the irrelevant data for security/isolation purposes or return <span class="notranslate">`PermissionDenied`</span> if script is not intended to be run as this user at all.
 * Scripts run from the end-user should also work from inside CageFS. You can find details on how to implement this [here](/control_panel_integration/#working-with-cpapi-cagefs)
 
+:::warning IMPORTANT
+When a user employs CloudLinux utilities through a user interface, it is important to take note that integration scripts may be executed prior to entering CageFS. Certain interpreters, such as Python, have the [capability](https://docs.python.org/3/library/site.html#site.USER_SITE) to execute arbitrary code during interpreter startup before the main code is executed. This presents a potential security risk for servers that utilize Python as an interpreter for executing integration scripts, as users may gain an ability to run their code outside of CageFS. This could lead to unauthorized access and exposure of sensitive system files.
+To prevent such incidents, it is crucial to ensure that your integration scripts do not possess similar capabilities or to take necessary measures to eliminate such risks prior to utilization.
+In case of any uncertainty, it is recommended to seek assistance from CloudLinux support.
+:::
+
 #### Legend
 * Necessity <span class="notranslate">`always`</span> means it’s required nearly by all CloudLinux OS code and should be implemented no matter what features you are interested in. Other methods might not be implemented and this will affect only some CloudLinux OS Shared features leaving others to work fine.
 * <span class="notranslate">`All UNIX users`</span> means any Linux system account (from <span class="notranslate">`/etc/passwd`</span>) that is able to execute CloudLinux OS utilities directly or indirectly.
