@@ -465,6 +465,79 @@ Q: Why I can't see new advice on the *Smart Advice* tab?
 
 A: For the generating of advice, it is necessary to run X-Ray tracing tasks, the best way to do it without manual interaction is to use X-Ray Autoracing. You can find more information on how to enable X-Ray Autotracing [here](/cloudlinux-os-plus/#how-to-enable-x-ray-autotracing).
 
+#### Useful Smart Advice CLI commands
+
+To obtain the full list of advice generated for your server use the following CLI command:
+
+```
+cl-smart-advice list
+```
+
+For each advice in the list the CLI command returns the following information:
+* `metadata`, which includes information about `username`, `domain` and `website` for which the advice is issued
+* `advice` information:
+  * its identifier `id`
+  * its `type`
+  * its `status` -- `review` or `applied`
+  * if advice is Premium `is_premium`
+  * other internal informational fields
+
+The example output is given below:
+
+```
+{
+  "data": [
+    {
+      "created_at": "2023-04-11T07:33:48.191870+00:00",
+      "updated_at": "2023-04-11T07:33:48.191870+00:00",
+      "metadata": {
+        "username": "user16",
+        "domain": "user16.com",
+        "website": "/wordpress"
+      },
+      "advice": {
+        "id": 23484,
+        "type": "OBJECT_CACHE",
+        "status": "review",
+        "description": "Turn on Object Caching",
+        "is_premium": true,
+        "module_name": "object_cache",
+        "subscription": {
+          "status": "no",
+          "upgrade_url": null
+        },
+        "total_stages": 0,
+        "completed_stages": 0,
+        "detailed_description": "To improve site performance, enable the Object Caching We recommend applying the advice if you see it frequen
+tly for the most valuable URLs of your site."
+      }
+    },
+    {
+      "created_at": "2023-04-11T07:33:48.297784+00:00",
+      "updated_at": "2023-04-11T08:51:42.362117+00:00",
+      "metadata": {
+        "username": "user16",
+        "domain": "user16.com",
+        "website": "/wordpress"
+      },
+      "advice": {
+        "id": 23485,
+        "type": "SITE_OPTIMIZATION",
+        "status": "applied",
+        "description": "Turn on AccelerateWP feature",
+        "is_premium": false,
+        "module_name": "accelerate_wp",
+        "total_stages": 0,
+        "completed_stages": 0,
+        "detailed_description": "To improve site performance, enable the AccelerateWP optimization feature. We recommend applying the advice if you see it frequently for the most valuable URLs of your site."
+      }
+    }
+  ],
+  "result": "success",
+  "timestamp": 1681203110
+}
+```
+
 ### End-user X-Ray plugin
 
 :::warning Warning
@@ -1577,17 +1650,230 @@ Use CLI commands to disable undesired optimization suites for a single user.
 
 To disable AccelerateWP suite:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp --disallowed --users=<username>
+cloudlinux-awp-admin set-suite --suites=accelerate_wp --disallowed --users=<username>
 ```
 
 To disable AccelerateWP Premium suite:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --disallowed --users=<username>
+cloudlinux-awp-admin set-suite --suites=accelerate_wp_premium --disallowed --users=<username>
 ```
 
 To disable both suites:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
+cloudlinux-awp-admin set-suite --suites=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
+```
+
+### Useful AccelerateWP CLI commands
+Use CLI commands to check AccelerateWP features status.
+
+If you are also interested in Smart Advice CLI command, they could be found [here](/cloudlinux-os-plus/#useful-smart-advice-cli-commands).
+
+#### AccelerateWP suites statistics
+
+Get suites statistics for all users:
+```
+cloudlinux-awp-admin get-report --all
+```
+
+or for a particular user:
+```
+cloudlinux-awp-admin get-report --users=<username>
+```
+
+This CLI command returns the following information:
+* total number of users in the report -- `total_users_count`
+* total number of websites in the report -- `total_wordpress_count`
+* total number of users with particular suite enabled -- `total_users_count_active`
+* total number of websites with particular suite enabled -- `total_sites_count_active`
+* number of websites with particular suite enabled per each user in the report -- `*_sites_count` in the `users` list
+* suites visibility status per each user in the report -- `suites` in the `users` list
+  * possible values for visibility status are: `visible`, `allowed`, `disabled`
+
+The example output for a single user is given below:
+
+```
+{
+    "last_scan_time": 1681198804,
+    "result": "success",
+    "timestamp": 1681203383.3503218,
+    "total_sites_count_active": {
+        "accelerate_wp": 1,
+        "accelerate_wp_premium": 0
+    },
+    "total_users_count": 1,
+    "total_users_count_active": {
+        "accelerate_wp": 1,
+        "accelerate_wp_premium": 0
+    },
+    "total_wordpress_count": 2,
+    "users": [
+        {
+            "accelerate_wp_active_sites_count": 1,
+            "accelerate_wp_premium_sites_count": 0,
+            "suites": {
+                "accelerate_wp": {
+                    "source": "manual",
+                    "status": "allowed"
+                },
+                "accelerate_wp_premium": {
+                    "source": "default",
+                    "status": "visible"
+                }
+            },
+            "username": "user16",
+            "wp_sites_count": 2
+        }
+    ]
+}
+```
+
+#### AccelerateWP features statistics
+
+Get overall AccelerateWP features usage statistics for a server with:
+
+```
+cloudlinux-awp-admin get-stat
+```
+
+This CLI command returns the following information:
+* number of `allowed_users` in `total` and per feature
+* number of sites with enabled features in `total` and per feature -- `enabled_sites`
+* number of users with visible features in `total` and per feature -- `visible_users`
+* features which are currently allowed -- `features_allowed_by_default`
+* features which are currently visible -- `features_visible_by_default`
+
+The example output is given below:
+
+```
+{
+    "allowed_users": {
+        "object_cache": 0,
+        "site_optimization": 1,
+        "total": 1
+    },
+    "enabled_sites": {
+        "object_cache": 0,
+        "site_optimization": 1,
+        "total": 1
+    },
+    "features_allowed_by_default": [
+        "site_optimization"
+    ],
+    "features_visible_by_default": [
+        "object_cache",
+        "site_optimization"
+    ],
+    "is_accelerate_wp_flag_enabled": false,
+    "is_accelerate_wp_icon_enabled": true,
+    "result": "success",
+    "timestamp": 1681208259.19426,
+    "visible_users": {
+        "object_cache": 22,
+        "site_optimization": 22,
+        "total": 23
+    }
+}
+```
+
+#### AccelerateWP features detailed statistics
+
+AccelerateWP features detailed statistics is available in user's environment only.
+
+Use the following CLI command **_on behalf of a user_**:
+
+```
+cloudlinux-awp-user get
+```
+
+The command reports:
+* features allowed for a user -- `allowed_features`
+* all user's websites `docroots` with features information per each `wps`, which includes:
+  * status of each feature -- if the feature is `enabled`, if the feature is `visible`
+  * issues detected (if any) for each feature
+* subscription status (for premium features) -- `subscription`
+* features visible for a user -- `visible_features`
+
+The example output is given below:
+
+```
+{
+    "allowed_features": {
+        "accelerate_wp": [],
+        "accelerate_wp_premium": []
+    },
+    "docroots": [
+        {
+            "domains": [
+                "user0.com"
+            ],
+            "php_handler": "fastcgi",
+            "php_version": "plesk-php73-fastcgi",
+            "wps": [
+                {
+                    "features": {
+                        "accelerate_wp": {
+                            "enabled": false,
+                            "issues": [
+                                {
+                                    "context": {
+                                        "plugins": "WP Rocket"
+                                    },
+                                    "description": "Found conflicting plugins: %(plugins)s.",
+                                    "fix_tip": "Deactivate and uninstall the conflicting plugin using the WordPress administration interface.",
+                                    "header": "Conflicting plugins are enabled",
+                                    "type": "incompatibility"
+                                }
+                            ],
+                            "visible": true
+                        },
+                        "object_cache": {
+                            "enabled": false,
+                            "issues": [
+                                {
+                                    "context": {
+                                        "blog_url": "https://blog.cloudlinux.com/",
+                                        "supported_handlers": "php-fpm, lsapi"
+                                    },
+                                    "description": "Website uses unsupported PHP handler. Currently supported handler(s): %(supported_handlers)s.",
+                                    "fix_tip": "Please, set or ask your system administrator to set one of the supported PHP handlers for the domain: %(supported_handlers)s. Or keep watching our blog: %(blog_url)s for supported handlers list updates.",
+                                    "header": "Unsupported PHP handler",
+                                    "type": "incompatibility"
+                                }
+                            ],
+                            "visible": true
+                        }
+                    },
+                    "path": "wordpress",
+                    "version": "6.2"
+                }
+            ]
+        },
+        {
+            "domains": [
+                "sub.user0.com"
+            ],
+            "php_handler": "fastcgi",
+            "php_version": "plesk-php73-fastcgi",
+            "wps": []
+        }
+    ],
+    "max_cache_memory": "64mb",
+    "result": "success",
+    "subscription": {
+        "object_cache": "no"
+    },
+    "timestamp": 1681200081.765476,
+    "upgrade_url": null,
+    "used_memory": null,
+    "visible_features": {
+        "accelerate_wp": [
+            "accelerate_wp"
+        ],
+        "accelerate_wp_premium": [
+            "object_cache"
+        ]
+    }
+}
 ```
 
 ### WHMCS billing
@@ -1609,7 +1895,7 @@ When AccelerateWP Premium is enabled in admin interface, users get proposal to u
 When user upgrades the subscription to the plan with AccelerateWP support, 
 billing must execute the following command on the server:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --allowed --source=BILLING_OVERRIDE --users=<username>
+cloudlinux-awp-admin set-suite --suites=accelerate_wp_premium --allowed --source=BILLING_OVERRIDE --users=<username>
 ```
 
 This command makes two things:
@@ -1619,7 +1905,7 @@ This command makes two things:
 
 When user terminates or downgrades plan, the following command must be executed by the billing system:
 ```
-cloudlinux-awp-admin set-suite --suite=accelerate_wp_premium --default --source=BILLING_OVERRIDE --users=<username>
+cloudlinux-awp-admin set-suite --suites=accelerate_wp_premium --default --source=BILLING_OVERRIDE --users=<username>
 ```
 
 ### Setup upgrade URL for AccelerateWP Premium
