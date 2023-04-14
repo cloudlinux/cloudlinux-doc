@@ -987,6 +987,8 @@ To use CloudLinux Shared Pro in Virtuozzo container, please update the next pack
 * [PHP Selector](/cloudlinux_installation/#php-selector)
 * [Wizard](/cloudlinux_installation/#cloudlinux-wizard)
 * [Dashboard](/cloudlinux_installation/#dashboard)
+* [Python Selector](/cloudlinux_installation/#python-selector)
+* [Node.js Selector](/cloudlinux_installation/#node-js-selector)
 
 
 #### Requirements
@@ -1103,6 +1105,61 @@ Useful links:
 * [Uninstalling](/cloudlinux_os_components/#uninstalling-3)
 	* [Configuration and using](/cloudlinux_os_components/#configuration-and-using)
 	* [Bundled PHP extensions](/cloudlinux_os_components/#bundled-php-extensions)
+
+
+#### Python Selector 
+
+The installation of Python Selector is available via CloudLinux Wizard. Aslo, the information about manual installation can be found [here](/cloudlinux_os_components/#cpanel-2).
+
+Information about working with Python Selector via GUI can be found [here](/lve_manager/#python-selector-2).
+
+#### Node.js Selector
+
+#### General information 
+
+General information can be found [here](cloudlinux_os_components/#general-information-and-requirements-7). 
+
+#### Requirements  
+
+Information about Requirements can be found [here](/cloudlinux_os_components/#requirements-2).
+
+#### Limitations 
+
+Information about limitations can be found [here](/cloudlinux_os_components/#limitations). 
+
+#### Installation for cPanel
+
+To use Node.js Selector, install Node.js packages by running the following command:
+
+```
+yum groupinstall alt-nodejs
+```
+
+CloudLinux OS Shared 7 supports both `ea-ruby24-mod_passenger` and `ea-ruby27-mod_passenger`.
+
+:::tip Note
+The `ea-apache24-mod-alt-passenger` is deprecated in favor of `ea-ruby24-mod_passenger` and `ea-ruby27-mod_passenger`.
+:::
+
+
+If during Node.js Selector usage on cPanel servers you get "ENOMEM npm ERR! errno-12" error, try to increase Memory limit in cPanel WHM → Server Configuration → Tweak Settings → System → Max cPanel process memory, then restart cPanel service with the following command to apply changes:
+
+```
+systemctl restart cpanel.service
+```
+
+#### Node.js deployment 
+
+Information about Node.js deployment can be found [here](/cloudlinux_os_components/#node-js-deployment).
+
+#### Remote usage of Node.js interpreters 
+
+Information about Remote usage of Node.js interpreters can be found [here](/cloudlinux_os_components/#remote-usage-of-node-js-interpreters).
+
+#### Node.js Selector UI
+
+Information about working with Node.js Selector via UI can be found [here](/lve_manager/#node-js-selector-2).
+
 
 
 #### FAQ
