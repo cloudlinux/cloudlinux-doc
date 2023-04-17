@@ -1113,6 +1113,19 @@ The installation of Python Selector is available via CloudLinux Wizard. Aslo, th
 
 Information about working with Python Selector via GUI can be found [here](/lve_manager/#python-selector-2).
 
+Python selector for Virtuozzo is available starting from the following packages version:
+
+* lve-2.1-14
+* alt-python27-cllib-3.2.47-1
+* lvemanager-7.8.8-1
+* cagefs-7.5.5-1
+
+Please update or install the packages mentioned above using the following command:
+
+```
+yum update lve alt-python27-cllib lvemanager cagefs --enablerepo=cloudlinux-updates-testing
+```
+
 #### Node.js Selector
 
 #### General information 
