@@ -1109,7 +1109,7 @@ Useful links:
 
 #### Python Selector 
 
-Python selector for Virtuozzo is available starting from the following packages version:
+Python Ыelector for Virtuozzo is available starting from the following packages version:
 
 * lve-2.1-14
 * alt-python27-cllib-3.2.47-1
@@ -1128,6 +1128,19 @@ Information about working with Python Selector via GUI can be found [here](/lve_
 
 
 #### Node.js Selector
+
+Node.js Selector for Virtuozzo is available starting from the following packages version:
+
+* lve-2.1-14
+* alt-python27-cllib-3.2.47-1
+* lvemanager-7.8.8-1
+* cagefs-7.5.5-1
+
+Please update or install the packages mentioned above using the following command:
+
+```
+yum update lve alt-python27-cllib lvemanager cagefs --enablerepo=cloudlinux-updates-testing
+```
 
 #### Installation for cPanel
 
