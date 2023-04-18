@@ -1109,10 +1109,6 @@ Useful links:
 
 #### Python Selector 
 
-The installation of Python Selector is available via CloudLinux Wizard. Aslo, the information about manual installation can be found [here](/cloudlinux_os_components/#cpanel-2).
-
-Information about working with Python Selector via GUI can be found [here](/lve_manager/#python-selector-2).
-
 Python selector for Virtuozzo is available starting from the following packages version:
 
 * lve-2.1-14
@@ -1126,19 +1122,12 @@ Please update or install the packages mentioned above using the following comman
 yum update lve alt-python27-cllib lvemanager cagefs --enablerepo=cloudlinux-updates-testing
 ```
 
+The installation of Python Selector is available via CloudLinux Wizard. Aslo, the information about manual installation can be found [here](/cloudlinux_os_components/#cpanel-2).
+
+Information about working with Python Selector via GUI can be found [here](/lve_manager/#python-selector-2).
+
+
 #### Node.js Selector
-
-#### General information 
-
-General information can be found [here](cloudlinux_os_components/#general-information-and-requirements-7). 
-
-#### Requirements  
-
-Information about Requirements can be found [here](/cloudlinux_os_components/#requirements-2).
-
-#### Limitations 
-
-Information about limitations can be found [here](/cloudlinux_os_components/#limitations). 
 
 #### Installation for cPanel
 
@@ -1154,6 +1143,17 @@ CloudLinux OS Shared 7 supports both `ea-ruby24-mod_passenger` and `ea-ruby27-mo
 The `ea-apache24-mod-alt-passenger` is deprecated in favor of `ea-ruby24-mod_passenger` and `ea-ruby27-mod_passenger`.
 :::
 
+#### General information 
+
+General information can be found [here](cloudlinux_os_components/#general-information-and-requirements-7). 
+
+#### Requirements  
+
+Information about Requirements can be found [here](/cloudlinux_os_components/#requirements-2).
+
+#### Limitations 
+
+Information about limitations can be found [here](/cloudlinux_os_components/#limitations). 
 
 If during Node.js Selector usage on cPanel servers you get "ENOMEM npm ERR! errno-12" error, try to increase Memory limit in cPanel WHM → Server Configuration → Tweak Settings → System → Max cPanel process memory, then restart cPanel service with the following command to apply changes:
 
