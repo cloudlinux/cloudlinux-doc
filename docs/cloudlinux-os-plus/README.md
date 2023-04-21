@@ -468,7 +468,7 @@ A: For the generating of advice, it is necessary to run X-Ray tracing tasks, the
 #### Useful Smart Advice CLI commands
 
 :::warning Warning!
-Command Line Interfaces are designed for internal usage only. The backwards compatiblity is not guaranteed.
+Command Line Interfaces are designed for internal usage only. The backwards compatibility is not guaranteed.
 :::
 
 To obtain the full list of advice generated for your server use the following CLI command:
@@ -1673,7 +1673,7 @@ Use CLI commands to check AccelerateWP features status.
 If you are also interested in Smart Advice CLI command, they could be found [here](/cloudlinux-os-plus/#useful-smart-advice-cli-commands).
 
 :::warning Warning!
-Command Line Interfaces are designed for internal usage only. The backwards compatiblity is not guaranteed.
+Command Line Interfaces are designed for internal usage only. The backwards compatibility is not guaranteed.
 :::
 
 
