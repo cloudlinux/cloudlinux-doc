@@ -2755,12 +2755,17 @@ Usage:
 |<span class="notranslate">`--skip-registration`</span>|Don't register on CLN if already have access to CL repository|
 |<span class="notranslate">`--force-hybridize`</span>|Option allows to convert CloudLinux OS Shared 7 to CloudLinux OS Shared 7 Hybrid which has a newer kernel (from v1.61)|
 |<span class="notranslate">`--no-force-hybridize `</span>|Don't hybridize machine from CloudLinux 7 to CloudLinux 7 Hybrid automatically, even though machine has a new hardware|
+|<span class="notranslate">`--to-solo-edition `</span>|Convert to CloudLinux Solo edition (only allowed with --skip-registration option)|
+|<span class="notranslate">`--to-admin-edition `</span>|Convert to CloudLinux Admin edition (only allowed with --skip-registration option)|
+|<span class="notranslate">`--to-container-environment `</span>|Convert to CloudLinux which supports working inside containers|
+|<span class="notranslate">`--force-packages-installation `</span>|Automatically resolve dependencies and remove conflicting packages|
+|<span class="notranslate">`--allow-lower-version `</span>|Convert to lower minor version (Almalinux x.y to CL x.y-1) if current version (CL x.y) is not available|
 
-The script will install the following to the server:
+The script will perform the following actions:
 
 1. Register server with CLN.
 2. Install CloudLinux OS Shared kernel, lve libraries, lve-utils, lve-stats and pam_lve packages.
-3. It will attempt to detect control panel and do the following actions:
+3. Attempt to detect control panel and do the following actions:
 *  _For cPanel_:
    * install mod_hostinglimits;
    * install LVE Manager.

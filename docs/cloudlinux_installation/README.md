@@ -38,7 +38,7 @@ You can check the entire list here: [Hardware enablement considerations in adopt
 
 ## Getting license
 
-You will need a trial or payed activation key to be able to use your CloudLinux OS Solo server.
+You will need a valid activation key - trial or paid - to be able to use your CloudLinux OS Solo server.
 
 ### Getting trial license
 
@@ -70,7 +70,7 @@ It is easy to convert your existing installation by cldeploy script. The process
 
 :::warning
 Unlike [Fresh installation](#installing-new-servers), converting immediately requires CloudLinux OS license. 
-Please refer to the [guide](#license-activation) to get activation key.
+Please refer to the [guide](#license-activation) to get an activation key.
 :::
 
 ### Requirements
@@ -102,7 +102,7 @@ We cannot guarantee the stability or correct operation of CloudLinux components 
 :::
 
 :::warning Warning:
-Some CloudLinux components may not be supported by the control panel itself or the control panel has its own analog of such a component.
+Some CloudLinux components may not be supported by the control panel itself or the control panel can have its own analog of such a component.
 You can verify this information when reviewing the system requirements for installing a particular CloudLinux component.
 :::
 
@@ -133,7 +133,7 @@ Your CloudLinux OS edition will be detected automatically based on the `ACTIVATI
 
 #### IP-based activation
 
-If your reseller provides you ip-based license, run the following commands:
+If your reseller provides you with an IP-based license, run the following commands:
 
 To convert server into the CloudLinux OS Shared edition:
 ```
@@ -183,6 +183,28 @@ Automatic hybridization will be performed for the AMD processors with the follow
 
 Automatic hybridization may be skipped by passing extra option '--no-force-hybridize'.
 See also [advanced options for cldeploy](/command-line_tools/#cldeploy).
+
+### Minor version step-down
+
+If you are attempting to convert an AlmaLinux machine of a minor version higher than the most recent CloudLinux minor version, you won't be able to perform a standard conversion, since the required packages will be missing.
+
+If you cannot wait until the corresponding CloudLinux release, you have an option of performing a step-down conversion, in which cldeploy will install the previous CloudLinux OS minor version on your system.
+
+For instance, AlmaLinux 8.8 can be converted to CloudLinux 8.7 in such a scenario.
+
+To allow for a conversion like this, pass `--allow-lower-version` to cldeploy's list of arguments.
+
+#### Updating systems from a step-down conversion
+
+Once the previously missing minor CloudLinux release becomes available, you will likely want to upgrade to it from a step-down conversion.
+
+To do so, you need to do the following:
+
+* Remove the automatically created excludes for MySQL and MariaDB packages from `/etc/yum.conf`
+   * Specifically, the line `exclude=mysql* mariadb*`
+* Install the newest available cloudlinux-release package over the previous one.
+   * Make sure the new files replace the old ones - check for presence of `.rpmnew` files.
+* Update the system normally.
 
 ### Troubleshooting 
 
