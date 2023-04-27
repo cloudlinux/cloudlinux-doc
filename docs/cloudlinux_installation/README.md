@@ -215,7 +215,8 @@ Once the previously missing minor CloudLinux release becomes available, you will
 To do so, you need to do the following:
 
 * Remove the automatically created excludes for MySQL and MariaDB packages from `/etc/yum.conf`
-   * Specifically, the line `exclude=mysql* mariadb*`
+   * Specifically, remove `mysql* mariadb*` from excludes in your `yum.conf`.
+   * Any other excluded packages except mysql and mariadb are unrelated to cldeploy and should remain in the configuration.
 * Install the newest available `cloudlinux-release` package over the previous one.
    * This will replace the AlmaLinux and CloudLinux package repository configuration files that were modified by cldeploy step-down conversion.
    * Make sure the new files replace the old ones - check for presence of `.rpmnew` files.
