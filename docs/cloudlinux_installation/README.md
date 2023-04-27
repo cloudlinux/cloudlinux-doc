@@ -194,6 +194,8 @@ For instance, AlmaLinux 8.8 can be converted to CloudLinux 8.7 in such a scenari
 
 To allow for a conversion like this, pass `--allow-lower-version` to cldeploy's list of arguments.
 
+cldeploy will automatically detect the latest available CloudLinux version and, depending on the result, will either proceed normally or perform the step-down conversion.
+
 #### Updating systems from a step-down conversion
 
 Once the previously missing minor CloudLinux release becomes available, you will likely want to upgrade to it from a step-down conversion.
