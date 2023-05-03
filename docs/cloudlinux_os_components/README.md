@@ -3251,7 +3251,7 @@ Please make full database backup (including system tables) before you upgrade My
 :::
 	
 :::danger IMPORTANT
-Please note that MySQL 8 is not supported on CloudLinux OS 6.
+Please note that MySQL 8 and MariaDB 10.6 are not supported on CloudLinux OS 6.
 :::
 
 **_MySQL Governor is compatible only with MySQL 5.x, 8.0; MariaDB & Percona Server 5.6._**
