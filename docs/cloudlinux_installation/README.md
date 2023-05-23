@@ -206,6 +206,10 @@ If you want to update these packages on a step-down converted system, make sure 
 
 To allow for a conversion like this, pass `--allow-lower-version` to cldeploy's list of arguments.
 
+:::tip Note
+The conversion with `--allow-lower-version` is supported on cPanel-based servers only for now. Other panels and non-panel options will be added soon.
+:::
+
 cldeploy will automatically detect the latest available CloudLinux version and, depending on the result, will either proceed normally or perform the step-down conversion.
 
 #### Updating systems from a step-down conversion
