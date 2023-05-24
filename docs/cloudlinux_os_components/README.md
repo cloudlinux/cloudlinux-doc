@@ -3249,10 +3249,6 @@ Please note that MariaDB 10.4 release isn’t supported by cPanel, thus you can�
 ::: danger IMPORTANT
 Please make full database backup (including system tables) before you upgrade MySQL or switch to MariaDB. This action will prevent data loss in case if something goes wrong.
 :::
-	
-:::danger IMPORTANT
-Please note that MySQL 8 and MariaDB 10.6 are not supported on CloudLinux OS 6.
-:::
 
 **_MySQL Governor is compatible only with MySQL 5.x, 8.0; MariaDB & Percona Server 5.6._**
 
@@ -3285,7 +3281,7 @@ Please make sure to specify your current MySQL version instead of XX as follows:
 * 55 — MySQL v5.5
 * 56 — MySQL v5.6
 * 57 — MySQL v5.7
-* 80 — MySQL v8.0 (requires MySQL Governor 1.2-37+, not supported on CloudLinux OS 6)
+* 80 — MySQL v8.0 (requires MySQL Governor 1.2-37+)
 
 If you are installing <span class="notranslate"> CloudLinux OS Shared </span> on a server running <span class="notranslate"> MariaDB </span> already, do instead:
 
