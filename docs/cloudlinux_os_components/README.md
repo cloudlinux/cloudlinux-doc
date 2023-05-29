@@ -8667,12 +8667,13 @@ Available for RPM based panels, EasyApache 4 and DirectAdmin.
 * [Manage reseller limits/users/packages via cPanel/WHM JSON API - JSONHandler](cloudlinux_os_components/#manage-reseller-limits-users-packages-via-cpanel-whm-json-api-jsonhandler)
 * [Using a WHM API token](/cloudlinux_os_components/#using-a-whm-api-token)
 
-CloudLinux OS Shared offers JSON API for [lvectl](/command-line_tools/#lvectl) via WHM. You can access it using the following URL:
+CloudLinux OS Shared offers JSON API for [lvectl](/command-line_tools/#lvectl) and [cloudlinux-limits](/command-line_tools/#cloudlinux-limits) via WHM. You can access it using the following URL:
 
 <div class="notranslate">
 
 ```
-https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=list
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=lvectl&handler=list
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=cloudlinux-limits&handler=get
 ```
 </div>
 
@@ -8690,7 +8691,8 @@ The output will look as follows:
 |||
 |-|-|
 |<span class="notranslate">`cgiaction`</span>|always <span class="notranslate">`jsonhandler`</span>|
-|<span class="notranslate">`handler`</span>|should match [lvectl](/command-line_tools/#lvectl) command|
+|<span class="notranslate">`command`</span>|<span class="notranslate">`lvectl`</span> or <span class="notranslate">`cloudlinux-limits`</span> (default <span class="notranslate">`lvectl`</span>)|
+|<span class="notranslate">`handler`</span>|should match [lvectl](/command-line_tools/#lvectl) or [cloudlinux-limits](/command-line_tools/#cloudlinux-limits) command|
 
 For commands like <span class="notranslate">`set`, `destroy`</span> & <span class="notranslate">`delete`</span>, where you need to specify LVE (user) ID, like `lveid=500` (matches user ID 500).
 
@@ -8699,11 +8701,13 @@ For commands like <span class="notranslate">`set`, `destroy`</span> & <span clas
 <div class="notranslate">
 
 ```
-https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=30%&io=2048
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=lvectl&handler=set&lveid=500&speed=30%&io=2048
 
-https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=300Mhz&io=2048
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=lvectl&handler=set&lveid=500&speed=300Mhz&io=2048
 
-https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set&lveid=500&speed=3Ghz&io=2048
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=lvectl&handler=set&lveid=500&speed=3Ghz&io=2048
+
+https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=cloudlinux-limits&handler=set&lveid=500&inodes=9090,8989
 ```
 </div>
 
@@ -8762,7 +8766,7 @@ If the limits for users are set with <span class="notranslate"> cPanel LVE Exten
 |set limits for package, created by reseller|<span class="notranslate">`lvectl package-set res1_pack1 --reseller res1 --speed=88%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=package-set&lveid=res1_pack1&reseller=res1&speed=30%`|
 |set limits for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --speed=77%`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&speed=30%`|
 |set unlimited for user, created by reseller|<span class="notranslate">`lvectl set-user r1user1 --reseller res1 --unlimited`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi/CloudLinux.cgi?cgiaction=jsonhandler&handler=set-user&lveid=r1user1&reseller=res1&unlimited`|
-
+|set inodes limit|<span class="notranslate">`cloudlinux-limits set --username=r1user1 --inodes=9090,8989`</span>|`https://IP:2087/cpsess_YOURTOKEN/cgi/CloudLinux.cgi?cgiaction=jsonhandler&command=cloudlinux-limits&handler=set&username=r1user1&inodes=9090,8989`|
 #### Using a WHM API token
 
 You can use a WHM API token with curl as follows:
