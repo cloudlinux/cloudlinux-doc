@@ -197,20 +197,22 @@ If you cannot wait until the corresponding CloudLinux release, you have an optio
 For instance, AlmaLinux 8.8 can be converted to CloudLinux 8.7 in such a scenario.
 
 :::tip Note
+At the moment, the step-down conversion is only supported on systems with no panel, cPanel or Plesk.
+:::
+
+:::tip Note
 When performing a step-down conversion, cldeploy will add MySQL and MariaDB RPM packages to the Yum exclude list, in order to avoid downgrading them to CloudLinux-modified versions.
 
 Not doing so would risk rendering the databases non-functional, since MySQL explicitly does not support minor-version downgrades of its packages.
 
 If you want to update these packages on a step-down converted system, make sure to exclude/disable the CloudLinux package repositories while doing so.
-:::
 
-To allow for a conversion like this, pass `--allow-lower-version` to cldeploy's list of arguments.
-
-:::tip Note
-The conversion with `--allow-lower-version` is supported on cPanel-based servers only for now. Other panels and non-panel options will be added soon.
+In addition, on CloudLinux 9 the kernel packages are downgraded and excluded from updates in order to maintain parity with the CloudLinux kernel modules.
 :::
 
 cldeploy will automatically detect the latest available CloudLinux version and, depending on the result, will either proceed normally or perform the step-down conversion.
+
+If a normal conversion is not possible, it will request confirmation (yes/no) from the user. To implicitly respond "yes" to this and other questions, running script non-interacively, pass the `-y` option to the cldeploy script.
 
 #### Updating systems from a step-down conversion
 
@@ -219,8 +221,8 @@ Once the previously missing minor CloudLinux release becomes available, you will
 To do so, you need to do the following:
 
 * Remove the automatically created excludes for MySQL and MariaDB packages from `/etc/yum.conf`
-   * Specifically, remove `mysql* mariadb*` from excludes in your `yum.conf`.
-   * Any other excluded packages except mysql and mariadb are unrelated to cldeploy and should remain in the configuration.
+   * Specifically, remove `mysql* mariadb*`, and `kernel*` if present, from excludes in your `yum.conf`.
+   * Any other excluded packages except the above are unrelated to cldeploy and should remain in the configuration.
 * Install the newest available `cloudlinux-release` package over the previous one.
    * This will replace the AlmaLinux and CloudLinux package repository configuration files that were modified by cldeploy step-down conversion.
    * Make sure the new files replace the old ones - check for presence of `.rpmnew` files.
