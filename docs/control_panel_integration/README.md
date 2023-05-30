@@ -73,7 +73,7 @@ Assumed that this package contains a list of paths to the integration scripts (o
 ### Versioning
 We provide information about the current version of the API in the form of rpm package capability (`Provides public_cp_vendors_api = VERSION`) added to our packages. While improving integration API, we may add new features and scripts and change `VERSION`.
 
-That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the spec of rpm package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
+That means that you can add `Conflicts: public_cp_vendors_api < VERSION` to the spec of rpm package with your integration scripts and that will force yum to search and update our packages in order to support `public_cp_vendors_api` that your scripts require. It also means that you can protect your Control Panel from situations when your scripts and our API version are incompatible.
 
 ### Changelog
 ::: tip Changelog
