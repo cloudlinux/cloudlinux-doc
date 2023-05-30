@@ -78,12 +78,19 @@ That means that you can add `Conficts: public_cp_vendors_api < VERSION` to the s
 ### Changelog
 ::: tip Changelog
 
+Version 1.3
+
+Summary: added two new features, AccelerateWP and CloudLinux Wizard integrations.
+1. `Provides public_cp_vendors_api = 1.3` added to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
+2. New feature `wpos` added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). This feature defines if your panel supports AccelerateWP integration.
+3. New feature `wizard` added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now you can define if your panel supports the CloudLinux Wizard integration.
+
 Version 1.2
 
 Summary: ability to integrate X-Ray added.
 1. `Provides public_cp_vendors_api = 1.2` added to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
 2. [`domains` integration script](https://docs.cloudlinux.com/control_panel_integration/#domains) updated: new optional flag `--with-php` added. This option is required for X-Ray integration only.
-4. New X-Ray feature added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now the X-Ray UI tab is hidden by default until the panel makes the support clear by setting the `xray` feature to `true`.
+3. New X-Ray feature added to `supported_cl_features` of [`panel_info` script](/control_panel_integration/#panel-info). Now the X-Ray UI tab is hidden by default until the panel makes the support clear by setting the `xray` feature to `true`.
 
 Version 1.1
 1. Added `Provides public_cp_vendors_api = 1.1` to rpm spec of alt-python27-cllib package (see [versioning](/control_panel_integration/#versioning)).
@@ -403,7 +410,7 @@ Returns the information about the control panel in the specified format.
 |name|False|Control panel name|
 |<span class="notranslate">version</span>|False|Control panel version|
 |<span class="notranslate">user_login_url_template</span>|False|URL template for a user entering to control panel. Used in the lve-stats default templates reporting that user is exceeding server load. You can use the following placeholders in the template: <span class="notranslate">`{domain}`</span>. CloudLinux OS utility automatically replaces  placeholders to the real values. **Example**:<span class="notranslate">`“user_login_url_template”: “https://{domain}:2087/login”`</span> CloudLinux OS Shared utility automatically replaces <span class="notranslate">`{domain}`</span>, and the link will look like <span class="notranslate">`https://domain.zone:2087/login`</span>|
-|<span class="notranslate">supported_cl_features</span>|False|Available since API v1.1 (see [versioning](/control_panel_integration/#versioning)) <br> Object that describes which CloudLinux OS features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li></ul> Available since API v1.2 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul>|
+|<span class="notranslate">supported_cl_features</span>|False|Available since API v1.1 (see [versioning](/control_panel_integration/#versioning)) <br> Object that describes which CloudLinux OS features are supported by your control panel and which must be hidden in web interface.<br>When `supported_cl_features` is omitted, we assume that all modules are supported. When `supported_cl_features` is empty object, all modules will be hidden. All features that are not listed in `supported_cl_features` are considered to be disabled. <br>We recommend you to always return object as we can add more features in the future and you will be able to test them and make them visible after checking and tuning.<br><br>Features that you currently can disable:<ul><li><a href="/cloudlinux_os_components/#php-selector">php_selector</a></li>    <li><a href="/cloudlinux_os_components/#ruby-selector">ruby_selector</a></li>    <li><a href="/cloudlinux_os_components/#python-selector">python_selector</a></li>    <li><a href="/cloudlinux_os_components/#node-js-selector">nodejs_selector</a></li>    <li><a href="/cloudlinux_os_components/#apache-mod-lsapi-pro">mod_lsapi</a></li>    <li><a href="/cloudlinux_os_components/#mysql-governor">mysql_governor</a></li>    <li><a href="/cloudlinux_os_components/#cagefs">cagefs</a></li>    <li><a href="/cloudlinux_os_components/#reseller-limits">reseller_limits</a></li></ul> Available since API v1.2 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#x-ray">xray</a> (CloudLinuxOS+ license only)</li></ul> Available since API v1.3 (see [versioning](/control_panel_integration/#versioning))  <ul><li><a href="/cloudlinux-os-plus/#acceleratewp">wpos</a> (AccelerateWP)</li><li><a href="/lve_manager/#installation-wizard">wizard</a> </li></ul>|
 
 
 
@@ -1287,6 +1294,8 @@ rm -rf /var/cagefs/`/usr/sbin/cagefsctl --getprefix $username`/$username/etc/cl.
 
 :::warning IMPORTANT
 You should create <span class="notranslate">`/etc/cagefs/enable.duplicate.uids`</span> empty file when your control panel creates users with duplicate UIDs. It is required for CageFS to operate properly.
+
+While this file is present, CageFS will always associate the UIDs with the first passwd entry in order of appearance. Without it, this behaviour is not guaranteed.
 :::
 
 ### Modifying user accounts
