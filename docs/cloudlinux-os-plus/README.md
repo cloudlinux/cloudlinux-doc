@@ -1596,6 +1596,10 @@ The first column `#of Wordpress sites` shows total number of user's WordPress si
 
 The second column `AccelerateWP` shows number of user's WordPress sites, optimized by the feature.
 
+To enable premium features, click on the "Activate premium features" link and select the options you want. To integrate functions with billing, you must specify the base URL for the purchase of the function by end users.
+
+![](./images/awp/AWPPremiumManage.png)
+
 In case if both AccelerateWP and AccelerateWP Premium feature suites are enabled, 
 the statistics is extended with AccelerateWP Premium metrics.
 
@@ -1617,6 +1621,8 @@ You may use the following filters to browse AccelerateWP statistics slices.
 * `Users with WordPress sites only` filter will show statistics for users which already have WordPress sites; users without WordPress installations will be hidden
 * `Users with AccelerateWP only` filter will show statistics for users who utilizes the AccelerateWP optimization feature; users who did not activated AccelerateWP feature will be hidden
 * `Users with AccelerateWP Premium only` filter will show statistics for users who utilizes AccelerateWP Premium (Object Caching) feature; users who did not activated AccelerateWP Premium feature will be hidden
+* `Users with CDN Free only` filter will show statistics for users who utilizes AccelerateWP CDN feature
+* `Users with CDN Pro only` filter will show statistics for users who utilize AccelerateWP CDN Pro feature
 
 
 ### Activate free AccelerateWP for all WordPress sites on the server
@@ -1649,6 +1655,18 @@ were initially for the scan, a number of WordPress sites with
 successfully activated suite, and the total number of WordPress sites
 scanned.
 
+### Enable AccelerateWP CDN Pro
+
+To enable CDN Pro for all users:
+```
+cloudlinux-awp-admin set-suite --suites accelerate_wp_cdn_pro --users all --allowed-for-all
+```
+
+To enable CDN Pro for a particular user:
+```
+cloudlinux-awp-admin set-suite --suites accelerate_wp_cdn_pro --allowed --users=<username>
+```
+
 ### Disable AccelerateWP for a particular user
 Use CLI commands to disable undesired optimization suites for a single user.
 
@@ -1662,9 +1680,19 @@ To disable AccelerateWP Premium suite:
 cloudlinux-awp-admin set-suite --suites=accelerate_wp_premium --disallowed --users=<username>
 ```
 
-To disable both suites:
+To disable AccelerateWP CDN suite:
 ```
-cloudlinux-awp-admin set-suite --suites=accelerate_wp,accelerate_wp_premium --disallowed --users=<username>
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_cdn --disallowed --users=<username>
+```
+
+To disable AccelerateWP CDN Pro suite:
+```
+cloudlinux-awp-admin set-suite --suite=accelerate_wp_cdn_pro --disallowed --users=<username>
+```
+
+To disable all suites:
+```
+cloudlinux-awp-admin set-suite --suites=accelerate_wp,accelerate_wp_premium,accelerate_wp_cdn,accelerate_wp_cdn_pro --disallowed --users=<username>
 ```
 
 ### Useful AccelerateWP CLI commands
