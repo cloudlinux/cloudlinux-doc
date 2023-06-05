@@ -1265,6 +1265,16 @@ A: Issue is known and will be fixed soon.
    * InaccessibleDirectories
    * ProtectHome
 
+3. Some servers require increasing `fs.ve-mount-nr` on the host node. If it wasn't done, then:
+   * CageFS will throw errors.
+   * on a host host node (but not in the container!) there will be errors `reached the limit on mounts` in `/var/log/messages` throwed by kernel
+
+   To increase `fs.ve-mount-nr`, on a host node:
+   * add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;<br/>
+   * apply it with the <span class="notranslate">`sysctl -p`</span> command.
+
+   In very rare cases the value should be increased higher, up to 50000.
+
 #### Virtuozzo 6 and OpenVZ 6
 
 #### Installation
@@ -1319,16 +1329,8 @@ Inside the container, follow [standard CloudLinux installation procedures](/clou
 CloudLinux OS Shared license is required for each VZ container.
 
 :::tip Note
-Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors.
+Some servers require increasing `fs.ve-mount-nr` on host node, otherwise CageFS will throw errors. Look for details [here](/cloudlinux_installation/#known-restrictions-and-issues)
 :::
-
-To increase `fs.ve-mount-nr`, on a host node:
-
-1. add <span class="notranslate">`fs.ve-mount-nr = 15000`</span> to <span class="notranslte">`/etc/sysctl.conf`</span>;
-
-2. apply it with the <span class="notranslate">`sysctl -p`</span> command.
-
-In very rare cases the value should be increased higher, up to 50000.
 
 #### Available functionality
 
