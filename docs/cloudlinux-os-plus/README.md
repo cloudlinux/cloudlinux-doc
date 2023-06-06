@@ -1511,19 +1511,24 @@ Use this logging with caution because when it is enabled, the size of the daemon
 
 AccelerateWP carries a suite of optimization features that can be enabled and automatically configured for the end-user's site.
 
-There are AccelerateWP and AccelerateWP Premium feature suites.
+There are AccelerateWP, AccelerateWP Premium and AccelerateWP CDN features suites.
 
 AccelerateWP suite is always enabled when AccelerateWP is turned on. Choose whether you want to offer AccelerateWP Premium 
-for your users and click "Turn on" to start exploring AccelerateWP. 
+ or Content Network Delivery CDN for your users (by opting in) and click "Turn on" to start exploring AccelerateWP. 
 
 ![](./images/awp/AWPGettingStarted.png)
 
 Once the AccelerateWP suite is enabled by administrator,
-end-users will see an AccelerateWP tab in their cPanel interface and be able to activate the optimization feature.
+end-users will see an AccelerateWP tab in their control panel interface and be able to activate the optimization feature.
+
+When AccelerateWP CDN suite enabled by administrator, end-users will get 1 GB of CDN traffic and be able to activate
+feature to use until limit is reached. Once 1GB limit is reached - end-user will be suggested to extend CDN limit by
+purchasing CDN plan using [WHMCS or 3'd party billing](#billing-integration) 
 
 When AccelerateWP Premium suite enabled by administrator, 
-end-users will see the Object Caching feature in their interface, 
-but cannot install the plugin unless they purchase the feature using [WHMCS or 3'd party billing](#billing-integration).
+end-users will see the Object Caching, Image Optimization and Critical CSS features in their interface, 
+but cannot activate the feature unless they purchase the feature using [WHMCS or 3'd party billing](#billing-integration).
+
 
 #### AccelerateWP suite
 This is a basic suite which includes [AccelerateWP base feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-feature-wordpress-optimization-plugin): 
@@ -1538,16 +1543,15 @@ a WordPress optimization plugin that provides full page caching, GZIP compressio
 
 #### AccelerateWP Premium suite
 
-:::warning Attention
-This feature is free of charge only during the beta testing period. 
-Afterwards it will be charged. Beta testing period ends no earlier than March 2023.
-:::
-
 This is a premium suite which includes [Object Caching feature](https://user-docs.cloudlinux.com/wpos-plugin/#acceleratewp-premium-object-caching-feature).
 
 The Object Caching mechanism stores database query results in additional storage for quick access. 
 This mechanism is really helpful in case if website needs to process multiple pages per second as 
 requests come in and may be helpful in case when full page caching cannot be used, e.g. on personalized pages.
+
+[Image Optimization feature](https://user-docs.cloudlinux.com/wpos-plugin/#image-optimization)
+
+[Critical CSS feature](https://user-docs.cloudlinux.com/wpos-plugin/#css-files)
 
 **Premium suite limitations**
 
@@ -1562,6 +1566,14 @@ requests come in and may be helpful in case when full page caching cannot be use
 * the WordPress should not run in Multisite mode.
 
 
+#### AccelerateWP Premium CDN suite
+
+This suite includes [CDN feature](https://user-docs.cloudlinux.com/wpos-plugin/#cdn)
+
+CDN (Content Delivery Network) is the feature which speeds up resource loading for WordPress site customers.
+[CDN suite limitations](#acceleratewp-suite) are the same as for AccelerateWP feature.
+
+
 ### Limitations
 There are the following requirements to use AccelerateWP:
 * the server must have CloudLinux Shared PRO license;
@@ -1572,12 +1584,9 @@ There are the following requirements to use AccelerateWP:
 
 #### Overview
 In the _CloudLinux Manager → AccelerateWP_ tab an administrator has the opportunity to provide end-users with a suite of features, which on its turn could be activated by end-users.
-To provide best experience,
-[activate free features for all end-users](/cloudlinux-os-plus/#activate-free-acceleratewp-for-all-wp-sites-on-the-server).
 
-![](/images/AWPAdmin.png)
+![](./images/awp/AWPAdmin.png)
 
-By toggling the `Enable AccelerateWP for all users` an administrator provides end-users with AccelerateWP feature.
 Once the feature suite is enabled by administrator, end-users will see an AccelerateWP tab in their control panel interface and be able to activate the optimization feature.
 
 #### Suites usage statistics
