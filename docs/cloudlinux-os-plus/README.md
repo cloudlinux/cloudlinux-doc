@@ -1514,7 +1514,7 @@ AccelerateWP carries a suite of optimization features that can be enabled and au
 There are AccelerateWP, AccelerateWP Premium and AccelerateWP CDN features suites.
 
 AccelerateWP suite is always enabled when AccelerateWP is turned on. Choose whether you want to offer AccelerateWP Premium 
- or Content Network Delivery CDN for your users (by opting in) and click "Turn on" to start exploring AccelerateWP. 
+ or CDN (Content Delivery Network) for your users (by opting in) and click "Turn on" to start exploring AccelerateWP. 
 
 ![](./images/awp/AWPGettingStarted.png)
 
