@@ -12,3 +12,4 @@ selenium-debug.log
 .env
 .idea
 docs/.vuepress/dist
+.DS_Store
