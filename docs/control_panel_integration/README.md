@@ -1831,6 +1831,23 @@ switch_mod_lsapi --disable-global
 --stat
 ```
 
+mod_lsapi uses one predefined lsphp handler *application/x-httpd-lsphp*, which relates to */usr/local/bin/lsphp* binary. All other lsphp handlers should be added by custom script into */etc/container/php.handler* file.
+
+**An example of /etc/container/php.handler file**
+
+```
+application/x-lsphp52 /opt/alt/php52/usr/bin/lsphp
+application/x-lsphp53 /opt/alt/php53/usr/bin/lsphp
+application/x-lsphp54 /opt/alt/php54/usr/bin/lsphp
+application/x-lsphp55 /opt/alt/php55/usr/bin/lsphp
+application/x-lsphp56 /opt/alt/php56/usr/bin/lsphp
+application/x-lsphp70 /opt/alt/php70/usr/bin/lsphp
+application/x-lsphp71 /opt/alt/php71/usr/bin/lsphp
+application/x-lsphp72 /opt/alt/php72/usr/bin/lsphp
+
+application/x-httpd-php81-lsphp /usr/local/apps/php81/bin/lsphp
+```
+
 **An example of executable.sh script:**
 
 ```
@@ -1839,11 +1856,11 @@ switch_mod_lsapi --disable-global
 CMD=$1
  
 if [ "$CMD" == "--setup" ]; then
-    echo "application/x-httpd-php-lsphp /usr/local/bin/lsphp"     >>/opt/ExamplePanel/etc/php.handlers
+    echo "application/x-httpd-php81-lsphp /usr/local/apps/php81/bin/lsphp"     >>/etc/container/php.handler
 fi 
  
 if [ "$CMD" == "--uninstall" ]; then
-    sed -i "#application/x-httpd-php-lsphp#d" /opt/ExamplePanel/etc/php.handlers
+    sed -i #application/x-httpd-php81-lsphp#d" /etc/container/php.handler
 fi
  
 if [ "$CMD" == "--enable-domain" ]; then
