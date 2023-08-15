@@ -998,6 +998,25 @@ After renaming a domain (or any equivalent domain removal operation with transfe
 |<span class="notranslate">--new-domain</span>|Yes | - |A new domain name |
 |<span class="notranslate">--include-subdomains</span>|No |False |If set, all subdomains are renamed as well, i.e. when renaming domain.com → domain.eu the corresponding subdomain will be renamed as well test.domain.com → test.domain.eu.|
 
+### Managing packages (hosting plans)
+
+To manage packages limits properly, CloudLinux OS utilities need information about the following control panel events.
+
+After renaming a package, the following command should be run:
+
+<div class="notranslate">
+
+```
+/usr/share/cloudlinux/hooks/post_modify_package.py rename --name package_name --new_name new_package_name
+```
+</div>
+
+| | | | |
+|-|-|-|-|
+|Argument |Mandatory |Default |Description |
+|<span class="notranslate">--name</span>|Yes | - |The package name to be changed |
+|<span class="notranslate">--new-name</span>|No | - |A new package name |
+
 ## Web UI integration
 
 ### ui-user-info script
