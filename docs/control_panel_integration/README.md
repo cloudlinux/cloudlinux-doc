@@ -1007,7 +1007,7 @@ After renaming a package, the following command should be run:
 <div class="notranslate">
 
 ```
-/usr/share/cloudlinux/hooks/post_modify_package.py rename --name package_name --new_name new_package_name
+/usr/share/cloudlinux/hooks/post_modify_package.py rename --name package_name --new-name new_package_name
 ```
 </div>
 
