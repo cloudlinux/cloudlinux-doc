@@ -1532,7 +1532,7 @@ a WordPress optimization plugin that provides full page caching, GZIP compressio
 **AccelerateWP suite limitations**
 * the website must be served with Apache web server;
 * the website must use PHP version 7.2 or higher.
-* the WordPress version must be 5.6 and higher.
+* the WordPress version must be 5.7 and higher.
 * the other WordPress Caching plugins must not be installed.
 * the WordPress should not run in Multisite mode.
 
@@ -1555,7 +1555,7 @@ requests come in and may be helpful in case when full page caching cannot be use
 * the website must use one of the following PHP handlers:
   * [php-fpm](https://blog.cpanel.com/how-to-use-php-fpm-with-cpanel/)
   * [lsapi](/cloudlinux_os_components/#apache-mod-lsapi-pro)
-* the website must use ea-PHP version 7.4 or 8.0.
+* the website must use PHP version 7.2 or higher.
 * the WordPress version must be 3.7 and higher.
 * the other WordPress Caching plugins must not be installed.
 * the [Snuffleupagus](https://snuffleupagus.readthedocs.io/) must be turned off.
